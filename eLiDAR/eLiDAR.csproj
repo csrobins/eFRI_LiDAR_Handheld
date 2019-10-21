@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
-    <PackageReference Include="LiveXAML" Version="2.1.72" />
+    <PackageReference Include="FluentValidation" Version="8.5.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.819712-pre2" />
+    <PackageReference Include="LiveXAML" Version="2.1.73" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="FlyoutHeader.xaml.cs" />
@@ -16,24 +17,33 @@
     <EmbeddedResource Remove="FlyoutHeader.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Images\lidar.jpg" />
     <None Remove="Images\photo.png" />
+    <None Remove="Images\pine.jpg" />
     <None Remove="Images\shells_01.jpg" />
     <None Remove="Images\shell_01.jpg" />
     <None Remove="Images\snail_01.jpg" />
     <None Remove="ViewModels\CameraViewModel.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Images\lidar.jpg" />
     <EmbeddedResource Include="Images\photo.png" />
+    <EmbeddedResource Include="Images\pine.jpg" />
     <EmbeddedResource Include="Images\shells_01.jpg" />
     <EmbeddedResource Include="Images\shell_01.jpg" />
     <EmbeddedResource Include="Images\snail_01.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Styles\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Pages\CameraPage.xaml">
+    <EmbeddedResource Update="MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MainShell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CameraPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PlotEdit.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -43,8 +53,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="AppShell.xaml.cs">
-      <DependentUpon>AppShell.xaml</DependentUpon>
+    <Compile Update="Views\PlotTypePage.xaml.cs">
+      <DependentUpon>PlotTypePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PlotList.xaml.cs">
+      <DependentUpon>PlotList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PlotDetailsPage.xaml.cs">
+      <DependentUpon>PlotDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TreeView.xaml.cs">
+      <DependentUpon>TreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PlotView.xaml.cs">
+      <DependentUpon>PlotView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

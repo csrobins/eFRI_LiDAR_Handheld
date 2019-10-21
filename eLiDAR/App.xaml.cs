@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using eLiDAR.Views;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace eLiDAR
@@ -11,8 +13,10 @@ namespace eLiDAR
         {
             InitializeComponent();
 
-            MainPage = new eLiDAR.AppShell();
+                //   MainPage = new eLiDAR.AppShell();
+             MainPage = new MainShell();       
         }
+       
 
         protected override void OnStart()
         {
@@ -35,81 +39,6 @@ namespace eLiDAR
                 },
                 new Seashell {
                     Text = "Abalone"
-                },
-                new Seashell {
-                    Text = "Babylon"
-                },
-                new Seashell {
-                    Text = "Bonnet"
-                },
-                new Seashell {
-                    Text = "Clam"
-                },
-                new Seashell {
-                    Text = "Conch"
-                },
-                new Seashell {
-                    Text = "Cone"
-                },
-                new Seashell {
-                    Text = "Cowrie"
-                },
-                new Seashell {
-                    Text = "Drupe"
-                },
-                new Seashell {
-                    Text = "Egg"
-                },
-                new Seashell {
-                    Text = "Fig"
-                },
-                new Seashell {
-                    Text = "Frog"
-                },
-                new Seashell {
-                    Text = "Harp"
-                },
-                new Seashell {
-                    Text = "Helmet"
-                },
-                new Seashell {
-                    Text = "Land Snail"
-                },
-                new Seashell {
-                    Text = "Limpet"
-                },
-                new Seashell {
-                    Text = "Melon"
-                },
-                new Seashell {
-                    Text = "Melongina"
-                },
-                new Seashell {
-                    Text = "Mitre"
-                },
-                new Seashell {
-                    Text = "Moon Shells"
-                },
-                new Seashell {
-                    Text = "Murex"
-                },
-                new Seashell {
-                    Text = "Nassa"
-                },
-                new Seashell {
-                    Text = "Nautilus"
-                },
-                new Seashell {
-                    Text = "Olive"
-                },
-                new Seashell {
-                    Text = "Operculum"
-                },
-                new Seashell {
-                    Text = "Scallop"
-                },
-                new Seashell {
-                    Text = "Spindle"
                 },
                 new Seashell {
                     Text = "Strombus"
@@ -142,5 +71,92 @@ namespace eLiDAR
                     Text = "Volute"
                 }
             };
+
+        public static ObservableCollection<PlotType> PlotTypes = new ObservableCollection<PlotType>{
+                new PlotType {
+                    Text = "Type A",
+                    Description = "Simple Plot",
+                    ImageName = "pine.jpg"
+                },
+                new PlotType {
+                    Text = "Type B",
+                    Description = "A detailed plot",
+                    ImageName = "spruce.png"
+                },
+             };
+        public static ObservableCollection<FakeTree> FakeTrees = new ObservableCollection<FakeTree>{
+                new FakeTree {
+                    TreeID = 1,
+                    TreeNum = 1,
+                    Spp = "Pw",
+                    Dbh = 56.5,
+                    Ht = 25.6,
+                    Status = "L"
+                },
+                new FakeTree {
+                    TreeID = 2,
+                    TreeNum = 2,
+                    Spp = "Pr",
+                    Dbh = 54.5,
+                    Ht = 21.6,
+                    Status = "L"
+                },
+                new FakeTree {
+                    TreeID = 3,
+                    TreeNum = 3,
+                    Spp = "Pw",
+                    Dbh = 66.5,
+                    Ht = 31.6,
+                    Status = "L"
+                },
+                new FakeTree {
+                    TreeID = 4,
+                    TreeNum = 4,
+                    Spp = "Pj",
+                    Dbh = 34.5,
+                    Ht = 18.6,
+                    Status = "L"
+                },
+                new FakeTree {
+                    TreeID = 5,
+                    TreeNum = 5,
+                    Spp = "Sb",
+                    Dbh = 28.6,
+                    Status = "D"
+                },
+             };
+        public static ObservableCollection<FakePlot> FakePlots = new ObservableCollection<FakePlot>{
+                new FakePlot {
+                    PlotID = 1,
+                    PlotNum = 1,
+                    PlotType = "A",
+                    Crew = "Jim and Craig",
+                },
+                new FakePlot {
+                    PlotID = 2,
+                    PlotNum = 2,
+                    PlotType = "A",
+                    Crew = "John and Craig",
+                },
+                new FakePlot {
+                    PlotID = 3,
+                    PlotNum = 4,
+                    PlotType = "B",
+                    Crew = "Craig. Christine",
+                },
+                new FakePlot {
+                    PlotID = 4,
+                    PlotNum = 5,
+                    PlotType = "A,B",
+                    Crew = "Jim and Craig",
+                },
+                new FakePlot {
+                    PlotID = 5,
+                    PlotNum = 10,
+                    PlotType = "A",
+                    Crew = "Jim and Christine",
+                },
+             };
+
     }
 }

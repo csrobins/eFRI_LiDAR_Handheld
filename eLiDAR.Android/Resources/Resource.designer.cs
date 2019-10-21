@@ -5536,26 +5536,26 @@ namespace eLiDAR.Droid
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f020076
-			public const int avd_hide_password_1 = 2130837622;
-			
-			// aapt resource value: 0x7f020077
-			public const int avd_hide_password_2 = 2130837623;
-			
 			// aapt resource value: 0x7f020078
-			public const int avd_hide_password_3 = 2130837624;
+			public const int avd_hide_password_1 = 2130837624;
+			
+			// aapt resource value: 0x7f020079
+			public const int avd_hide_password_2 = 2130837625;
+			
+			// aapt resource value: 0x7f02007a
+			public const int avd_hide_password_3 = 2130837626;
 			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
 			
-			// aapt resource value: 0x7f020079
-			public const int avd_show_password_1 = 2130837625;
-			
-			// aapt resource value: 0x7f02007a
-			public const int avd_show_password_2 = 2130837626;
-			
 			// aapt resource value: 0x7f02007b
-			public const int avd_show_password_3 = 2130837627;
+			public const int avd_show_password_1 = 2130837627;
+			
+			// aapt resource value: 0x7f02007c
+			public const int avd_show_password_2 = 2130837628;
+			
+			// aapt resource value: 0x7f02007d
+			public const int avd_show_password_3 = 2130837629;
 			
 			// aapt resource value: 0x7f020056
 			public const int design_bottom_navigation_item_background = 2130837590;
@@ -5632,11 +5632,11 @@ namespace eLiDAR.Droid
 			// aapt resource value: 0x7f02006e
 			public const int notification_icon_background = 2130837614;
 			
-			// aapt resource value: 0x7f020074
-			public const int notification_template_icon_bg = 2130837620;
+			// aapt resource value: 0x7f020076
+			public const int notification_template_icon_bg = 2130837622;
 			
-			// aapt resource value: 0x7f020075
-			public const int notification_template_icon_low_bg = 2130837621;
+			// aapt resource value: 0x7f020077
+			public const int notification_template_icon_low_bg = 2130837623;
 			
 			// aapt resource value: 0x7f02006f
 			public const int notification_tile_bg = 2130837615;
@@ -5648,10 +5648,16 @@ namespace eLiDAR.Droid
 			public const int photo = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int tooltip_frame_dark = 2130837618;
+			public const int pine = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int tooltip_frame_light = 2130837619;
+			public const int spruce = 2130837619;
+			
+			// aapt resource value: 0x7f020074
+			public const int tooltip_frame_dark = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int tooltip_frame_light = 2130837621;
 			
 			static Drawable()
 			{
