@@ -34,4 +34,26 @@ namespace eLiDAR.Validator
             return false;
         }
     }
+    public class TreeValidator : AbstractValidator<TREE>
+    {
+        public TreeValidator()
+        {
+            RuleFor(c => c.TREENUM).Must(n => ValidateIntEmpty(n)).WithMessage("Tree number should not be empty.");
+            RuleFor(c => c.SPECIES).Must(a => ValidateIntEmpty(a)).WithMessage("Species should not be empty.");
+            RuleFor(c => c.TAG_TYPE).Must(d => ValidateStringEmpty(d.ToString())).WithMessage("Tree Tag Type should not be empty.");
+        }
+
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+    }
 }

@@ -24,7 +24,7 @@ namespace eLiDAR.ViewModels {
         }
 
        async Task ShowProjectList(){ 
-            await _navigation.PushAsync(new FeedPage());
+            await _navigation.PushAsync(new PlotList());
         }
         async Task AddProject()
         {

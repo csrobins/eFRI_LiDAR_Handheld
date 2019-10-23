@@ -5,15 +5,18 @@ using System.Linq;
 using eLiDAR.Models;
 using System;
 
-namespace eLiDAR.Helpers {
-    public class DatabaseHelper {
-        
+namespace eLiDAR.Helpers
+{
+    public class DatabaseHelper
+    {
+
         static SQLiteConnection sqliteconnection;
         public const string DbFileName = "eLiDAR.sqlite";
 
-        public DatabaseHelper() {
+        public DatabaseHelper()
+        {
             sqliteconnection = DependencyService.Get<ISQLite>().GetConnection();
-           // sqliteconnection.CreateTable<ContactInfo>();
+            // sqliteconnection.CreateTable<ContactInfo>();
         }
         // Get All project data 
         public List<PROJECT> GetAllProjectData()
@@ -22,34 +25,39 @@ namespace eLiDAR.Helpers {
                     select data).ToList();
         }
 
-		//Get Specific Project data
-        public PROJECT GetProjectData(String id) {
+        //Get Specific Project data
+        public PROJECT GetProjectData(String id)
+        {
             return sqliteconnection.Table<PROJECT>().FirstOrDefault(t => t.PROJECTID == id);
         }
 
         // Delete all Project Data
-        public void DeleteAllProjects() {
+        public void DeleteAllProjects()
+        {
             sqliteconnection.DeleteAll<PROJECT>();
         }
 
         // Delete Specific Contact
-        public void DeleteProject(String id) {
+        public void DeleteProject(String id)
+        {
             sqliteconnection.Delete<PROJECT>(id);
         }
 
         // Insert new Project to DB 
-        public void InsertProject(PROJECT project) {
+        public void InsertProject(PROJECT project)
+        {
             sqliteconnection.Insert(project);
         }
 
         // Update Project Data
-        public void UpdateProject(PROJECT project) {
+        public void UpdateProject(PROJECT project)
+        {
             sqliteconnection.Update(project);
         }
-/// <summary>
-/// /PLOT VM's start here
-/// </summary>
-/// <returns></returns>
+        /// <summary>
+        /// /PLOT VM's start here
+        /// </summary>
+        /// <returns></returns>
         // Get All Plot Data 
         public List<PLOT> GetAllPlotData()
         {
@@ -83,6 +91,43 @@ namespace eLiDAR.Helpers {
         public void UpdatePlot(PLOT plot)
         {
             sqliteconnection.Update(plot);
+        }
+        /// /TREE VM's start here
+        /// </summary>
+        /// <returns></returns>
+        // Get All Tree Data 
+        public List<TREE> GetAllTreeData()
+        {
+            return (from data in sqliteconnection.Table<TREE>()
+                    select data).ToList();
+        }
+
+        //Get Specific data
+        public TREE GetTreeData(string id)
+        {
+            return sqliteconnection.Table<TREE>().FirstOrDefault(t => t.TREEID == id);
+        }
+
+        // Delete all Data
+        public void DeleteAllTrees()
+        {
+            sqliteconnection.DeleteAll<TREE>();
+        }
+
+        // Delete Specific
+        public void DeleteTree(string id)
+        {
+            sqliteconnection.Delete<TREE>(id);
+        }
+        // Insert new to DB 
+        public void InsertTree(TREE tree)
+        {
+            sqliteconnection.Insert(tree);
+        }
+        // Update Tree Data
+        public void UpdateTree(TREE tree)
+        {
+            sqliteconnection.Update(tree);
         }
     }
 }

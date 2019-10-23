@@ -33,6 +33,20 @@ namespace eLiDAR.Servcies
         // Update Data
         void UpdatePlot(PLOT plot);
     }
+    public interface ITreeRepository
+    {
+        List<TREE> GetAllData();
+        //Get Specific data
+        TREE GetTreeData(string TREEID);
+        // Delete all Data
+        void DeleteAllTrees();
+        // Delete Specific
+        void DeleteTree(string TREEID);
+        // Insert new to DB 
+        void InsertTree(TREE tree);
+        // Update Data
+        void UpdateTree(TREE tree);
+    }
     public class ProjectRepository : IProjectRepository
     {
         DatabaseHelper _databaseHelper;
@@ -78,7 +92,7 @@ namespace eLiDAR.Servcies
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeletePlots(string ID)
+        public void DeletePlot(string ID)
         {
             _databaseHelper.DeletePlot(ID);
         }
@@ -106,6 +120,44 @@ namespace eLiDAR.Servcies
         public void UpdatePlot(PLOT Plot)
         {
             _databaseHelper.UpdatePlot(Plot);
+        }
+    }
+
+    public class TreeRepository : ITreeRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public TreeRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteTree(string ID)
+        {
+            _databaseHelper.DeleteTree(ID);
+        }
+        public void DeleteAllTrees()
+        {
+            _databaseHelper.DeleteAllTrees();
+        }
+
+        public List<TREE> GetAllData()
+        {
+            return _databaseHelper.GetAllTreeData();
+        }
+
+        public TREE GetTreeData(string TreeID)
+        {
+            return _databaseHelper.GetTreeData(TreeID);
+        }
+
+        public void InsertTree(TREE Tree)
+        {
+            Tree.TREEID = Guid.NewGuid().ToString();
+            _databaseHelper.InsertTree(Tree);
+        }
+
+        public void UpdateTree(TREE Tree)
+        {
+            _databaseHelper.UpdateTree(Tree);
         }
     }
 

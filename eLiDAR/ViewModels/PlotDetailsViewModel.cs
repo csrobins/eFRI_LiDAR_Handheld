@@ -37,6 +37,11 @@ namespace eLiDAR.ViewModels {
                     _plotRepository.UpdatePlot(_plot);
                     await _navigation.PopAsync();
                 }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Add Plot", validationResults.Errors[0].ErrorMessage, "Ok");
+            }
         }
 
         async Task DeletePlot() {

@@ -30,18 +30,18 @@ namespace eLiDAR.ViewModels {
         }
 
         async Task UpdateProject() {
-        //    var validationResults = _contactValidator.Validate(_contact);
+            var validationResults = _projectValidator.Validate(_project);
 
-          //  if (validationResults.IsValid) {
+            if (validationResults.IsValid) {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Project Details", "Update Project Details", "OK", "Cancel");
                 if (isUserAccept) {
                     _projectRepository.UpdateProject(_project);
                     await _navigation.PopAsync();
                 }
-          //  }
-          //  else {
-          //      await Application.Current.MainPage.DisplayAlert("Add Contact", validationResults.Errors[0].ErrorMessage, "Ok");
-          //  }
+            }
+            else {
+                await Application.Current.MainPage.DisplayAlert("Add Project", validationResults.Errors[0].ErrorMessage, "Ok");
+            }
         }
 
         async Task DeleteProject() {

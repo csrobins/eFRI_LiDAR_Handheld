@@ -53,6 +53,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AddPlot.xaml.cs">
+      <DependentUpon>AddPlot.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PlotTypePage.xaml.cs">
       <DependentUpon>PlotTypePage.xaml</DependentUpon>
     </Compile>
