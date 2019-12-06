@@ -1,25 +1,10 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.ProjectView">
     <StackLayout Spacing="12">
+        <Label Text="Project" FontAttributes="None"  HorizontalOptions="Start" />
         <Entry x:Name="txtProject" Text="{Binding PROJECT}" HeightRequest="40" BackgroundColor="White" Placeholder="Project Name" HorizontalOptions="FillAndExpand"/>
+        <Label Text="Description" FontAttributes="None"  HorizontalOptions="Start" />
         <Entry  x:Name="txtDescription" Text="{Binding DESCRIPTION}" BackgroundColor="White" HeightRequest="40" Placeholder="Description" HorizontalOptions="FillAndExpand"/>
-        <StackLayout Orientation="Horizontal">
-            <DatePicker x:Name="txtDate" Date="{Binding DATE}" HeightRequest="40" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
-            <!--<Picker x:Name="pkr"                 SelectedItem="{Binding SelectedForest_District}" >
-                <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Baboon</x:String>
-                    <x:String>Capuchin Monkey</x:String>
-                    <x:String>Blue Monkey</x:String>
-                    <x:String>Squirrel Monkey</x:String>
-                    <x:String>Golden Lion Tamarin</x:String>
-                    <x:String>Howler Monkey</x:String>
-                    <x:String>Japanese Macaque</x:String>
-                </x:Array>
-                </Picker.ItemsSource> 
-                </Picker>-->
-
-            <!--<Label Text="{Binding SelectedForest_District}"  />-->
-        </StackLayout>
-        
-    </StackLayout>
+        <Label Text="Date" FontAttributes="None"  HorizontalOptions="Start" />
+        <DatePicker x:Name="txtDate" Date="{Binding DATE, StringFormat='{0:MMMM dd, yyyy}'}" HeightRequest="40" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
+     </StackLayout>
 </ContentView>

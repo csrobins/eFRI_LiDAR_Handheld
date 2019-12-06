@@ -7,6 +7,7 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Servcies;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace eLiDAR.ViewModels
 {
@@ -16,7 +17,7 @@ namespace eLiDAR.ViewModels
         public INavigation _navigation;
         public IValidator _plotValidator;
         public IPlotRepository _plotRepository;
-
+        public string _selectedprojectid;
         public string PLOTID
         {
             get => _plot.PLOTID;
@@ -266,6 +267,23 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("NOTES");
             }
         }
+
+
+        ObservableCollection<PLOT> _yourList = new ObservableCollection<PLOT>();
+        public ObservableCollection<PLOT> YourList
+        {
+            get
+            {
+                return _yourList;
+            }
+            set
+            {
+                _yourList = value;
+                //RaisePropertyChanged();
+                NotifyPropertyChanged("YourList");
+            }
+        }
+
 
         List<PLOT> _plotList;
         public List<PLOT> PlotList

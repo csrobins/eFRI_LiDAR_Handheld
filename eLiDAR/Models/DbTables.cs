@@ -83,5 +83,51 @@ namespace eLiDAR.Models
         public double CROWN_WIDTH2 { get; set; }
 
     }
+    [Table("STEMMAP")]
+    public class STEMMAP
+    {
+        [PrimaryKey]
+        public string STEMMAPID { get; set; }
+        public string TREEID { get; set; }
+        public int AZIMUTH { get; set; }
+        public double DISTANCE { get; set; }
+        public double CROWN_AXIS_LONG { get; set; }
+        public double CROWN_AXIS_SHORT { get; set; }
+    }
+    [Table("ECOSITE")]
+    public class ECOSITE
+    {
+        [PrimaryKey]
+        public string ECOSITEID { get; set; }
+        public string PLOTID { get; set; }
+        public int HUMUS_FORM { get; set; }
+        public int DRAINAGE { get; set; }
+        public string STRATIFIED { get; set; }
+        public int EFFECTIVE_PORE_PATTERN { get; set; }
+        public string ELC_SUBSTRATE_TYPE { get; set; }
+        public int DEPTH_TO_DISTINCT_MOTTLES { get; set; }
+        public int DEPTH_TO_PROMINENT_MOTTLES { get; set; }
+        public int DEPTH_TO_GLEY { get; set; }
+        public int DEPTH_TO_BEDROCK { get; set; }
+        public int DEPTH_TO_CARBONATES { get; set; }
+        public int MOISTURE_REGIME_DEPTH_CLASS { get; set; }
+        public int MOISTURE_REGIME { get; set; }
+        public string MODE_OF_DEPOSITION1 { get; set; }
+        public string MODE_OF_DEPOSITION2 { get; set; }
+        public int FUNCTIONAL_ROOTING_DEPTH { get; set; }
+        public int MAXIMUM_ROOTING_DEPTH { get; set; }
+        public int DEPTH_TO_ROOT_RESTRICTION { get; set; }
+        public int DEPTH_TO_WATER_TABLE { get; set; }
+        public int DEPTH_TO_COARSE_FRAGS { get; set; }
+        public int PROBLEMATIC_SITE_PROTOCOL_CLASS { get; set; }
+        public string SEEPAGE { get; set; }
+        public string SOIL_PIT_PHOTO { get; set; }
+        public string PRI_ECO { get; set; }
+        public int PRI_ECO_PCT { get; set; }
+        public string SEC_ECO { get; set; }
+        public int SEC_ECO_PCT { get; set; }
+        public int AZIMUTH { get; set; }
+        public int DISTANCE { get; set; }
+    }
 }
 

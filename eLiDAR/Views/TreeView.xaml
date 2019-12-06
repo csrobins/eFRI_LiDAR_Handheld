@@ -1,37 +1,120 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="eLiDAR.Views.TreeView">
-  <ListView x:Name="MyListView"
-            ItemsSource="{Binding FakeTrees}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding Spp }" d:Text="{Binding Dbh}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   d:Text="{Binding .}"
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   d:Text="Detail"
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
-</ContentPage>
+    <ContentView.Content>
+        <Grid  Padding="10" ColumnSpacing=" 1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0" Grid.Row="0">
+                <Label Text="Tree Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Tree Number" FontAttributes="None"  HorizontalOptions="Start" />
+                <Entry x:Name="txtTreenum" Text="{Binding TREENUM}"  Placeholder="Tree number" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="Species" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtSpecies" ItemsSource="{Binding ListSpecies}" SelectedItem="{Binding SelectedSpecies, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Species"/>
+                <Label Text="Origin" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtOrigin" SelectedItem="{Binding ORIGIN, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Origin">
+                    <Picker.Items>
+                        <x:String>N</x:String>
+                        <x:String>P</x:String>
+                        <x:String>C</x:String>
+                        <x:String>L</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Status" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtStatus" SelectedItem="{Binding STATUS, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Status">
+                    <Picker.Items>
+                        <x:String>L</x:String>
+                        <x:String>D</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Vigour" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtVigour" ItemsSource="{Binding ListVigour, Mode=TwoWay}" SelectedItem="{Binding SelectedVigour}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Vigour"/>
+                <Label Text="Ht to DBH (m)" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtHt2DBH" Text="{Binding HT_TO_DBH}"  Placeholder="Ht to DBH (m)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="DBH (cm)" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtDBH" Text="{Binding DBH}"  Placeholder="DBH (cm)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="Ht (m)" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtHt" Text="{Binding HT}"  Placeholder="Ht (m)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="DBH In?" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtDBHIn" SelectedItem="{Binding DBH_IN, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="DBH In?">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Crown In?" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtCrownIn" SelectedItem="{Binding CROWN_IN, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Crown In?">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Age" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtAge" Text="{Binding AGE}"  Placeholder="Age (yrs)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column=" 1" Grid.Row="0">
+                <Label Text="Live Tree Fields" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Crown Class" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtCrwonClass" SelectedItem="{Binding CROWN_CLASS, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Crown Class">
+                    <Picker.Items>
+                        <x:String>E</x:String>
+                        <x:String>D</x:String>
+                        <x:String>CD</x:String>
+                        <x:String>I</x:String>
+                        <x:String>S</x:String>
+                        <x:String>U</x:String>
+                        <x:String>A</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Crown Damage" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtCrownDamage" ItemsSource="{Binding ListCrownDamage, Mode=TwoWay}" SelectedItem="{Binding SelectedCrownDamage}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Crown Damage"/>
+                <Label Text="Defoliating Insect" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtDefoliatingInsect" ItemsSource="{Binding ListDefoliatingInsect, Mode=TwoWay}" SelectedItem="{Binding SelectedDefoliatingInsect}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Defoliating Insect"/>
+                <Label Text="Foliar Disease" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtFoliarDisease" ItemsSource="{Binding ListFoliarDisease, Mode=TwoWay}" SelectedItem="{Binding SelectedFoliarDisease}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Foliar Disease"/>
+                <Label Text="Stem Quality" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtStemQuality" SelectedItem="{Binding STEM_QUALITY, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Stem Quality">
+                    <Picker.Items>
+                        <x:String>A</x:String>
+                        <x:String>B</x:String>
+                        <x:String>C</x:String>
+                        <x:String>D</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Bark Retention" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtBarkRetention" ItemsSource="{Binding ListBarkRetention, Mode=TwoWay}" SelectedItem="{Binding SelectedBarkRetention}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Bark Retention"/>
+                <Label Text="Wood Condition" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtWoodCondition" ItemsSource="{Binding ListWoodCondition, Mode=TwoWay}" SelectedItem="{Binding SelectedWoodCondition}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Wood Condition"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="2"  Grid.Row="0">
+                <Label Text="Dead Tree Fields" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Decay Class" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtDecayClass" ItemsSource="{Binding ListDecayClass, Mode=TwoWay}" SelectedItem="{Binding SelectedDecayClass}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Decay Class"/>
+                <Label Text="Mortality Cause" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtMortalityCause" ItemsSource="{Binding ListMortalityCause, Mode=TwoWay}" SelectedItem="{Binding SelectedMortalityCause}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Mortality Cause"/>
+                <Label Text="Broken Top" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtBrokenTop" SelectedItem="{Binding BROKEN_TOP, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Broken Top">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+            
+        </Grid>
+    </ContentView.Content>
+</ContentView>

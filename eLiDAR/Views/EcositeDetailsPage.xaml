@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" BackgroundColor="#D5E7FA"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:eLiDAR.Views" x:Class="eLiDAR.Views.EcositeDetailsPage">
+    <ScrollView>
+    <StackLayout Padding="20" Spacing="12">
+            <Grid  Padding="10" ColumnSpacing=" 1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0" Grid.Row="0">
+                    <Label Text="Soil/Site Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="Plot Number" FontAttributes="None"  HorizontalOptions="Start" />
+                    <Picker x:Name="txtHumusForm" ItemsSource="{Binding ListHumusForm}" SelectedItem="{Binding SelectedHumusForm, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Humus Form"/>
+                    <Label Text="Drainage" FontAttributes="None"  HorizontalOptions="Start" />
+                    <Picker x:Name="txtDrainage" ItemsSource="{Binding ListDrainage}" SelectedItem="{Binding SelectedDrainage, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Drainage"/>
+                    <Label Text="Stratified" FontAttributes="None" HorizontalOptions="Start" />
+                    <Picker x:Name="txtStratified" SelectedItem="{Binding STRATIFIED}" HorizontalOptions="FillAndExpand"  Title="Stratified">
+                        <Picker.Items>
+                            <x:String>Y</x:String>
+                            <x:String>N</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label Text="Pore Pattern" FontAttributes="None"  HorizontalOptions="Start" />
+                    <Picker x:Name="txtPorePattern" ItemsSource="{Binding ListPorePattern}" SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Pore Pattern"/>
+                    <Label Text="Soil - from 0 cm" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Label Text="Depth to Distinct Mottles" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtDistintMottle" Text="{Binding DEPTH_TO_DISTINCT_MOTTLES}"  Placeholder="Depth to Distinct Mottles (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Depth to Prominient Mottles" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtProminentMottle" Text="{Binding DEPTH_TO_PROMINENT_MOTTLES}"  Placeholder="Depth to Prominent Mottles (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Depth to Gley" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtDeothtoGley" Text="{Binding DEPTH_TO_GLEY}"  Placeholder="Depth to Gley (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Depth to Bedrock" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtDepthToBedrock" Text="{Binding DEPTH_TO_BEDROCK}"  Placeholder="Depth to Bedrock (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Depth to Carbonates" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtDepthToCarbonates" Text="{Binding DEPTH_TO_CARBONATES}"  Placeholder="Depth to Carbonates (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Grid.Column=" 1" Grid.Row="0">
+                    <Label Text="Soil/Site Attributes Continued..." FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="Depth Class" FontAttributes="None" HorizontalOptions="Start" />
+                    <Picker x:Name="txtDepthClass" SelectedItem="{Binding MOISTURE_REGIME_DEPTH_CLASS}" HorizontalOptions="FillAndExpand"  Title="Depth Class">
+                        <Picker.Items>
+                            <x:String>R</x:String>
+                            <x:String>VS</x:String>
+                            <x:String>S</x:String>
+                            <x:String>M</x:String>
+                            <x:String>MD</x:String>
+                            <x:String>D</x:String>
+                            <x:String>SF</x:String>
+                            <x:String>DF</x:String>
+                            <x:String>SP</x:String>
+                            <x:String>DP</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label Text="Moisture Regime" FontAttributes="None"  HorizontalOptions="Start" />
+                    <Picker x:Name="txtMoistureRegime" ItemsSource="{Binding ListMoistureRegime}" SelectedItem="{Binding SelectedMoistureRegime, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Moisture Regime"/>
+                    <Label Text="Mode of Deposition 1" FontAttributes="None" HorizontalOptions="Start" />
+                    <Picker x:Name="txtModeOfdepostion" SelectedItem="{Binding MODE_OF_DEPOSITION1}" HorizontalOptions="FillAndExpand"  Title="Mode of Deposition 1">
+                        <Picker.Items>
+                            <x:String>MO</x:String>
+                            <x:String>FL</x:String>
+                            <x:String>GF</x:String>
+                            <x:String>LA</x:String>
+                            <x:String>GL</x:String>
+                            <x:String>WA</x:String>
+                            <x:String>GW</x:String>
+                            <x:String>EO</x:String>
+                            <x:String>OP</x:String>
+                            <x:String>OF</x:String>
+                            <x:String>CO</x:String>
+                            <x:String>RO</x:String>
+                            <x:String>AN</x:String>
+                            <x:String>CX</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label Text="Mode of Deposition 2" FontAttributes="None" HorizontalOptions="Start" />
+                    <Picker x:Name="txtModeOfdepostion2" SelectedItem="{Binding MODE_OF_DEPOSITION2}" HorizontalOptions="FillAndExpand"  Title="Mode of Deposition 2">
+                        <Picker.Items>
+                            <x:String>MO</x:String>
+                            <x:String>FL</x:String>
+                            <x:String>GF</x:String>
+                            <x:String>LA</x:String>
+                            <x:String>GL</x:String>
+                            <x:String>WA</x:String>
+                            <x:String>GW</x:String>
+                            <x:String>EO</x:String>
+                            <x:String>OP</x:String>
+                            <x:String>OF</x:String>
+                            <x:String>CO</x:String>
+                            <x:String>RO</x:String>
+                            <x:String>AN</x:String>
+                            <x:String>CX</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label Text="Soil - from Surface (cm)" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Label Text="Functional Rooting Depth (cm)" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtFunctionalrootingDepth" Text="{Binding FUNCTIONAL_ROOTING_DEPTH}"  Placeholder="Functional Rooting Depth (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Maximum Rooting Depth (cm)" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtMaximumRootingDepth" Text="{Binding MAXIMUM_ROOTING_DEPTH}"  Placeholder="Maximum Rooting Depth (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Depth to Root Restriction (cm)" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtDepthToRootRestriction" Text="{Binding DEPTH_TO_ROOT_RESTRICTION}"  Placeholder="Depth to Root Restriction (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Depth to Impassable Coarse Frags (cm)" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtDepthToCoarseFrags" Text="{Binding DEPTH_TO_COARSE_FRAGS}"  Placeholder="Depth to Impassable Coarse Frags (cm)" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Seepage?" FontAttributes="None" HorizontalOptions="Start" />
+                    <Picker x:Name="txtSeepage" SelectedItem="{Binding SEEPAGE}" HorizontalOptions="FillAndExpand"  Title="Seepage">
+                        <Picker.Items>
+                            <x:String>Y</x:String>
+                            <x:String>N</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label Text="Soil Pit Photo Frame" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtSoilPit"  Text="{Binding SOIL_PIT_PHOTO}"  HorizontalOptions="FillAndExpand"  Placeholder="Soil Pit Photo"/>
+                </StackLayout>
+
+                <StackLayout Grid.Column="2"  Grid.Row="0">
+                    <Label Text="Ecosite Fields" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="Primary Ecosite" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtPriEco"  Text="{Binding PRI_ECO}" HorizontalOptions="FillAndExpand"  Placeholder="Primary Ecosite"/>
+                    <Label Text="Primary Eco (%)" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtPriEcoPct"  Text="{Binding PRI_ECO_PCT}" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"  Placeholder="Primary Eco (%)"/>
+                    <Label Text="Secondary Ecosite" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtSecEco"  Text="{Binding SEC_ECO}" HorizontalOptions="FillAndExpand"  Placeholder="Secondary Ecosite"/>
+                    <Label Text="Secondary Eco (%)" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtSecEcoPct"  Text="{Binding SEC_ECO_PCT}" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"  Placeholder="Secondary Eco (%)"/>
+                    <Label Text="Soil Pit Location" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="Azimuth" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtAzimuth"  Text="{Binding AZIMUTH}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" Placeholder="Azimuth"/>
+                    <Label Text="Distance (m)" FontAttributes="None" HorizontalOptions="Start" />
+                    <Entry x:Name="txtDistance"  Text="{Binding DISTANCE}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" Placeholder="Distance (m)"/>
+                </StackLayout>
+            </Grid>
+            <Button Text="Save" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding UpdateCommand}" HorizontalOptions="Center" />  
+            <Button Text="Delete" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteCommand}" HorizontalOptions="Center"/>  
+    </StackLayout>
+    </ScrollView>
+</ContentPage>

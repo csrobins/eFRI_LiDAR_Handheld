@@ -1,39 +1,102 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="eLiDAR.Views.PlotView"
-             Title="Plots">
-  
-  <ListView x:Name="MyListView"
-            ItemsSource="{Binding FakePlots}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement"
-            RowHeight="100 ">
-    
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <Grid >
+             x:Class="eLiDAR.Views.PlotView">
+    <ContentView.Content>
+        <Grid  Padding="10" ColumnSpacing=" 1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-             </Grid.ColumnDefinitions>
-             <Button Text=" Edit" Grid.Row = "1" Grid.Column=" 2" Grid.RowSpan=" 2" Pressed="Edit_Plot"/>
-             <Button Text=" Trees" Grid.Row="1" Grid.Column="3" Grid.RowSpan=" 2" Pressed= "View_Trees"/>
-             <Label Text="{Binding PlotNum, StringFormat='Plot : {0:0.}'}" Grid.Row=" 1" Grid.Column=" 1" FontSize="Medium" FontAttributes="Bold"/>
-             <Label Text="{Binding PlotType, StringFormat='Plot Type : {0:N}'}" Grid.Row=" 2" Grid.Column="1" FontSize="Subtitle" />
-          </Grid>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    
-  </ListView>
-</ContentPage>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0" Grid.Row="0">
+                <Label Text="Plot Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Plot Number" FontAttributes="None"  HorizontalOptions="Start" />
+                <Entry x:Name="txtPlotnum" Text="{Binding PLOTNUM}"  Placeholder="Plot number" HorizontalOptions="FillAndExpand"/>
+                <Label Text="Plot Type" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtPlotType" SelectedItem="{Binding PLOT_TYPE}" HorizontalOptions="FillAndExpand"  Title="Plot type">
+                   <Picker.Items>
+                        <x:String>A</x:String>
+                        <x:String>B</x:String>
+                   </Picker.Items>
+                </Picker>
+                <Label Text="Measurement Tupe" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtMeasurementType" SelectedItem="{Binding MEASUREMENT_TYPE}" HorizontalOptions="FillAndExpand"  Title="Measurement Type">
+                    <Picker.Items>
+                        <x:String>A</x:String>
+                        <x:String>B</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Label Text="Administrative" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtAdminstrative" SelectedItem="{Binding ADMINISTRATIVE}" HorizontalOptions="FillAndExpand"  Title="Administrative">
+                    <Picker.Items>
+                        <x:String>A</x:String>
+                        <x:String>B</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Forest District" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtDistrict" SelectedItem="{Binding FOREST_DISTRICT}" HorizontalOptions="FillAndExpand"  Title="Forest District">
+                    <Picker.Items>
+                        <x:String>Nipigon</x:String>
+                        <x:String>Thunder Bay</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="FMU" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtFMU" SelectedItem="{Binding FMU}" HorizontalOptions="FillAndExpand"  Title="FMU">
+                    <Picker.Items>
+                        <x:String>Kenogami Forest</x:String>
+                        <x:String>Nipigon Forest</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Plot Date" FontAttributes="None" HorizontalOptions="Start" />
+                <DatePicker x:Name="txtDate" Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand"/>
+                <Label Text="Crew 1" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtCrew1"  Text="{Binding FIELD_CREW1}" HorizontalOptions="FillAndExpand"  Placeholder="Crew 1"/>
+                <Label Text="Crew 2" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtCrew2"  Text="{Binding FIELD_CREW2}" HorizontalOptions="FillAndExpand"  Placeholder="Crew 2"/>
+                </StackLayout>
+
+            <StackLayout Grid.Column=" 1" Grid.Row="0">
+                <Label Text="Location Fields" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Declination" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtDeclination"  Text="{Binding DECLINATION}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Declination"/>
+                <Label Text="UTM Zone" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtUTM"  Text="{Binding UTM_ZONE}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="UTM Zone"/>
+                <Label Text="Easting (m)" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtEasting"  Text="{Binding UTM_EASTING}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Easting"/>
+                <Label Text="Northing (m)" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtNorthing"  Text="{Binding UTM_NORTHING}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Northing"/>
+                <Label Text="Datum" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtDatum"  Text="{Binding DATUM}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Datum"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="2"  Grid.Row="0">
+                <Label Text="Calculated Fields" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Leading Spp" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtLeadSpp"  Text="{Binding LEAD_SPP}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Lead Species"/>
+                <Label Text="Origin" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtOrigin"  Text="{Binding ORIGIN}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Origin"/>
+                <Label Text="Canopy Structure" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtCanopyStructure"  Text="{Binding CANOPY_STRUCTURE}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Canopy Structure"/>
+                <Label Text="Maturity" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtMaturity"  Text="{Binding MATURITY}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Maturity"/>
+                <Label Text="Crown Closure" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtCrownClosure"  Text="{Binding CROWN_CLOSURE}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Crown Closure"/>
+            </StackLayout>
+            <StackLayout Grid.Column="1" Grid.Row=" 1" Grid.ColumnSpan="2">
+                <Label Text="Plot Notes" FontAttributes="None" HorizontalOptions="Start" />
+                <Editor x:Name="txtNotes"  Text="{Binding NOTES}" HorizontalOptions="FillAndExpand"  Placeholder="Plot Notes"/>
+            </StackLayout>
+        </Grid>
+       
+    </ContentView.Content>
+</ContentView>

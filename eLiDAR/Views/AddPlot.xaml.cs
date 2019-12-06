@@ -8,5 +8,10 @@ namespace eLiDAR.Views
             InitializeComponent();
             BindingContext = new AddPlotViewModel(Navigation);
         }
+        public AddPlot(string fk)
+        {
+            InitializeComponent();
+            BindingContext = new AddPlotViewModel(Navigation, fk);
+        }
     }
 }

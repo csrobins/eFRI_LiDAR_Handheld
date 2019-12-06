@@ -3,6 +3,7 @@
  x:Class="eLiDAR.Views.AddProject" xmlns:local="clr-namespace:eLiDAR.Views" BindingContext="AddProjectViewModel">
     <StackLayout Padding="20" Spacing="12">
         <local:ProjectView />
+
         <Button x:Name="SubmitButton" Command="{Binding AddProjectCommand}" BorderRadius="0" Text="Save Project" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5"/>
         <Label Text="View All Projects" IsVisible="{Binding IsViewAll}" x:Name="ViewLbl" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15">  
         <Label.GestureRecognizers>  

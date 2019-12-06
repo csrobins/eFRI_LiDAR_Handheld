@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.0" />
+    <PackageReference Include="FluentValidation" Version="8.5.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.819712-pre2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
     <PackageReference Include="LiveXAML" Version="2.1.73" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +43,9 @@
     <EmbeddedResource Update="Views\CameraPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\PlotView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\PlotEdit.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -53,8 +56,29 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AddTree.xaml.cs">
+      <DependentUpon>AddTree.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddPlot.xaml.cs">
       <DependentUpon>AddPlot.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EcositeDetailsPage.xaml.cs">
+      <DependentUpon>EcositeDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StemMapDetailsPage.xaml.cs">
+      <DependentUpon>StemMapDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TreeDetailsPage.xaml.cs">
+      <DependentUpon>TreeDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TreeView.xaml.cs">
+      <DependentUpon>TreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TreeList.xaml.cs">
+      <DependentUpon>TreeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PlotView.xaml.cs">
+      <DependentUpon>PlotView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\PlotTypePage.xaml.cs">
       <DependentUpon>PlotTypePage.xaml</DependentUpon>
@@ -64,12 +88,6 @@
     </Compile>
     <Compile Update="Views\PlotDetailsPage.xaml.cs">
       <DependentUpon>PlotDetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\TreeView.xaml.cs">
-      <DependentUpon>TreeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\PlotView.xaml.cs">
-      <DependentUpon>PlotView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

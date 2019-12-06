@@ -13,23 +13,25 @@
         </Grid.ColumnDefinitions> 
         <Button Text="New Project" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" BorderRadius="0" HeightRequest="40" BorderColor="Black" BackgroundColor="Transparent" BorderWidth="1"  TextColor="Black"  Command="{Binding AddCommand}" />  
         </Grid>  
-        <ListView x:Name="ProjectListView" HasUnevenRows="true" Grid.Row="1" SeparatorColor="Black" ItemsSource="{Binding ProjectList}"
+        <ListView x:Name="MyListView" HasUnevenRows="true" Grid.Row="1" SeparatorColor="Black" ItemsSource="{Binding ProjectList}"
          SelectedItem="{Binding SelectedProjectItem, Mode=TwoWay}">  
             <ListView.ItemTemplate>  
                 <DataTemplate>  
                     <ViewCell>  
-                            <Grid  Padding="10">  
+                            <Grid  Padding="10" x:Name="Item">  
                                 <Grid.RowDefinitions>  
-                                    <RowDefinition Height="Auto" />  
-                                    <RowDefinition Height="Auto" />  
+                                    <!--<RowDefinition Height="Auto" />-->  
                                 </Grid.RowDefinitions>  
                                 <Grid.ColumnDefinitions>  
-                                    <ColumnDefinition Width="Auto" />  
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />  
-                                </Grid.ColumnDefinitions>  
-                                <Label Text="{Binding PROJECT}" Grid.Row="0" Font="20" TextColor="Black" /> 
-                                <Label Text="{Binding DESCRIPTION}" Grid.Row="0" Font="20" Grid.Column="1" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End" TextColor="Black" />  
-                                <Label Text="{Binding DATE}" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" TextColor="Black" />  
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column=" 0">
+                                    <Label Text="{Binding PROJECT}" FontAttributes="Bold"  TextColor="Black" HorizontalOptions="Start"  /> 
+                                    <Label Text="{Binding DESCRIPTION}" TextColor="Black" HorizontalOptions="Start" />  
+                                </StackLayout>
+                            <Button Grid.Column="1" Text="Plots" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  HorizontalOptions="End"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" ></Button>
+
                         </Grid>  
                     </ViewCell>  
                 </DataTemplate>  

@@ -4,6 +4,7 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Servcies;
 using eLiDAR.Validator;
+using FluentValidation.Results;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
@@ -30,7 +31,10 @@ namespace eLiDAR.ViewModels {
         }
 
         async Task UpdateProject() {
-            var validationResults = _projectValidator.Validate(_project);
+            //  var validationResults = _projectValidator.Validate(_project);
+            ProjectValidator _projectValidator = new ProjectValidator();
+            ValidationResult validationResults = _projectValidator.Validate(_project);
+
 
             if (validationResults.IsValid) {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Project Details", "Update Project Details", "OK", "Cancel");

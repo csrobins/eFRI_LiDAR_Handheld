@@ -14,7 +14,7 @@
     </ShellItem>-->
     <TabBar>
         <Tab Title=" Plots">
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotView}"/>
+            <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotList}"/>
         </Tab>
         <Tab Title="Projects">
             <ShellContent ContentTemplate=" {DataTemplate pages:Views.ProjectList}"/>

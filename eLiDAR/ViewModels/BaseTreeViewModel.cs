@@ -16,7 +16,23 @@ namespace eLiDAR.ViewModels
         public INavigation _navigation;
         public IValidator _treeValidator;
         public ITreeRepository _treeRepository;
+        public string _fk;
 
+        public event PropertyChangedEventHandler PropertyChanged2;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyname = null)
+        {
+            PropertyChanged2?.Invoke(this, new PropertyChangedEventArgs(propertyname));
+        }
+        protected bool SetProperty<T>(ref T backfield, T value, [CallerMemberName]string propertyName =null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backfield, value))
+            {
+                return false;
+            }
+            backfield = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
         public string TREEID
         {
             get => _tree.TREEID;

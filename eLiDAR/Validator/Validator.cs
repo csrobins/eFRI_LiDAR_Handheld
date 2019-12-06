@@ -40,7 +40,7 @@ namespace eLiDAR.Validator
         {
             RuleFor(c => c.TREENUM).Must(n => ValidateIntEmpty(n)).WithMessage("Tree number should not be empty.");
             RuleFor(c => c.SPECIES).Must(a => ValidateIntEmpty(a)).WithMessage("Species should not be empty.");
-            RuleFor(c => c.TAG_TYPE).Must(d => ValidateStringEmpty(d.ToString())).WithMessage("Tree Tag Type should not be empty.");
+            //RuleFor(c => c.TAG_TYPE).Must(d => ValidateStringEmpty(d.ToString())).WithMessage("Tree Tag Type should not be empty.");
         }
 
         bool ValidateStringEmpty(string stringValue)
@@ -56,4 +56,58 @@ namespace eLiDAR.Validator
             return false;
         }
     }
+    public class StemMapValidator : AbstractValidator<STEMMAP>
+    {
+        public StemMapValidator()
+        {
+            RuleFor(c => c.AZIMUTH).Must(n => ValidateIntEmpty(n)).WithMessage("Azimuth should not be empty.");
+            RuleFor(c => c.DISTANCE).Must(a => ValidateDblEmpty(a)).WithMessage("Distance should not be empty.");
+        }
+
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+    }
+    public class EcositeValidator : AbstractValidator<ECOSITE>
+    {
+        public EcositeValidator()
+        {
+           // RuleFor(c => c.PRI_ECO).Must(n => ValidateStringEmpty(n)).WithMessage("Primary ecosite should not be empty.");
+            RuleFor(c => c.MOISTURE_REGIME).Must(a => ValidateIntEmpty(a)).WithMessage("Moisture Regime should not be empty.");
+        }
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+    }
+
 }

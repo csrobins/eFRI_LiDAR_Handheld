@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Add Project" BackgroundColor="#D5E7FA" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Add Plot" BackgroundColor="#D5E7FA" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
  x:Class="eLiDAR.Views.AddPlot" xmlns:local="clr-namespace:eLiDAR.Views" BindingContext="AddPlotViewModel">
+    <ScrollView>
     <StackLayout Padding="20" Spacing="12">
-        <local:PlotView />
-        <Button x:Name="SubmitButton" Command="{Binding AddPlotCommand}" BorderRadius="0" Text="Save Project" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5"/>
-        <Label Text="View All Projects" IsVisible="{Binding IsViewAll}" x:Name="ViewLbl" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15">  
+        <!--<StackLayout Spacing="12">
+            <Entry x:Name="txtPlotnum" Text="{Binding PLOTNUM}" HeightRequest="40" BackgroundColor="White" Placeholder="Plot number" HorizontalOptions="FillAndExpand"/>
+            <Entry  x:Name="txtPLot_Type" Text="{Binding PLOT_TYPE}" BackgroundColor="White" HeightRequest="40" Placeholder="Plot type" HorizontalOptions="FillAndExpand"/>
+            <DatePicker x:Name="txtDate" Date="{Binding PLOT_DATE}" HeightRequest="40" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
+
+        </StackLayout>-->
+        <local:PlotView/>
+        <Button x:Name="SubmitButton" Command="{Binding AddCommand}" BorderRadius="0" Text="Save Plot" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5"/>
+        <Label Text="View All Plots" IsVisible="{Binding IsViewAll}" x:Name="ViewLbl" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15">  
         <Label.GestureRecognizers>  
-        <TapGestureRecognizer Command="{Binding ViewAllPlotsCommand}" NumberOfTapsRequired="1" />  
+        <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />  
         </Label.GestureRecognizers>  
         </Label>  
     </StackLayout>
+    </ScrollView>
 </ContentPage>

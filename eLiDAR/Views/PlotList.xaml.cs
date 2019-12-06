@@ -8,10 +8,13 @@ namespace eLiDAR.Views {
     public partial class PlotList : ContentPage {
         public PlotList() {
             InitializeComponent();
+            this.BindingContext = new PlotListViewModel(Navigation);
         }
 
-		protected override void OnAppearing() {
-            this.BindingContext = new PlotListViewModel(Navigation);
-		}
+        public PlotList(string projectID)
+        {
+            InitializeComponent();
+            this.BindingContext = new PlotListViewModel(Navigation, projectID);
+        } 
+        }
     }
-}
