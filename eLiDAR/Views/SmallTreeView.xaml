@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="eLiDAR.Views.SmallTreeView">
+    <ContentView.Content>
+        <Grid  Padding="10" ColumnSpacing=" 1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0" Grid.Row="0">
+                <Label Text="Small Tree Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Species" FontAttributes="None"  HorizontalOptions="Start" />
+                <Picker x:Name="txtSpecies" ItemsSource="{Binding ListSpecies}" SelectedItem="{Binding SelectedSpecies, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Species"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column=" 1" Grid.Row="0">
+                <Label Text="Small Trees Continued" FontAttributes="Bold" HorizontalOptions="Start" />
+                 <Label Text="Ht 1.30-2.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass1}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass1" Maximum="100" Value="{Binding HT_CLASS1_COUNT, Mode=TwoWay } "/>
+                </StackLayout>
+                <Label Text="Ht 2.01-3.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass2}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass2" Maximum="100" Value="{Binding HT_CLASS2_COUNT, Mode=TwoWay }" />
+                </StackLayout>
+                <Label Text="Ht 3.01-4.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass3}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass3" Maximum="100" Value="{Binding HT_CLASS3_COUNT, Mode=TwoWay }"/>
+                </StackLayout>
+                <Label Text="Ht 4.01-5.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass4}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass4" Maximum="100" Value="{Binding HT_CLASS4_COUNT, Mode=TwoWay }"/>
+                </StackLayout >
+            </StackLayout>
+            <StackLayout Grid.Column="2" Grid.Row="0">
+                <Label Text="Small Trees Continued" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Ht 5.01-6.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass5}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass5" Maximum="100" Value="{Binding HT_CLASS5_COUNT, Mode=TwoWay } "/>
+                </StackLayout>
+                <Label Text="Ht 6.01-7.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass6}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass6" Maximum="100" Value="{Binding HT_CLASS6_COUNT, Mode=TwoWay }" />
+                </StackLayout>
+                <Label Text="Ht 7.01-8.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass7}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass7" Maximum="100" Value="{Binding HT_CLASS7_COUNT, Mode=TwoWay }"/>
+                </StackLayout>
+                <Label Text="Ht 8.01-9.00m" FontAttributes="None"  HorizontalOptions="Start" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Source={x:Reference stpHtClass8}, Path=Value}" FontSize="20" FontAttributes="Bold"  HorizontalOptions="Start" />
+                    <Stepper x:Name="stpHtClass8" Maximum="100" Value="{Binding HT_CLASS8_COUNT, Mode=TwoWay }"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

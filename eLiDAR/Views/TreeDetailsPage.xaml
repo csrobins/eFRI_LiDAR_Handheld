@@ -4,15 +4,8 @@
     <ScrollView>
     <StackLayout Padding="20" Spacing="12">
         <local:TreeView />
-        <!--<StackLayout Spacing="12">
-            <Entry x:Name="txtPlotnum" Text="{Binding PLOTNUM}" HeightRequest="40" BackgroundColor="White" Placeholder="Plot number" HorizontalOptions="FillAndExpand"/>
-            <Entry  x:Name="txtPLot_Type" Text="{Binding PLOT_TYPE}" BackgroundColor="White" HeightRequest="40" Placeholder="Plot type" HorizontalOptions="FillAndExpand"/>
-            <StackLayout>
-                <DatePicker x:Name="txtDate" Date="{Binding PLOT_DATE}" HeightRequest="40" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
-                <Picker x:Name="picker" Title="Select a monkey" TitleColor="Red" ItemsSource="{Binding my_list}"/>
-            </StackLayout>
-        </StackLayout>-->
-            <Button Text="Update" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding UpdateTreeCommand}" HorizontalOptions="Center" />  
+
+        <Button Text="Update" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding UpdateTreeCommand}" HorizontalOptions="Center" />  
         <Button Text="Delete" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteTreeCommand}" HorizontalOptions="Center"/>  
     </StackLayout>
     </ScrollView>

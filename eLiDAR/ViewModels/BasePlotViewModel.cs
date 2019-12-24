@@ -18,6 +18,22 @@ namespace eLiDAR.ViewModels
         public IValidator _plotValidator;
         public IPlotRepository _plotRepository;
         public string _selectedprojectid;
+
+        public event PropertyChangedEventHandler PropertyChanged2;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyname = null)
+        {
+            PropertyChanged2?.Invoke(this, new PropertyChangedEventArgs(propertyname));
+        }
+        protected bool SetProperty<T>(ref T backfield, T value, [CallerMemberName]string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backfield, value))
+            {
+                return false;
+            }
+            backfield = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
         public string PLOTID
         {
             get => _plot.PLOTID;
@@ -58,7 +74,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public string ADMINISTRATIVE
+        public int ADMINISTRATIVE
         {
             get => _plot.ADMINISTRATIVE;
             set
@@ -78,7 +94,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public string FMU
+        public int FMU
         {
             get => _plot.FMU;
             set
@@ -88,7 +104,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public string MANAGEMENT_UNIT
+        public int MANAGEMENT_UNIT
         {
             get => _plot.MANAGEMENT_UNIT;
             set
@@ -269,22 +285,6 @@ namespace eLiDAR.ViewModels
         }
 
 
-        ObservableCollection<PLOT> _yourList = new ObservableCollection<PLOT>();
-        public ObservableCollection<PLOT> YourList
-        {
-            get
-            {
-                return _yourList;
-            }
-            set
-            {
-                _yourList = value;
-                //RaisePropertyChanged();
-                NotifyPropertyChanged("YourList");
-            }
-        }
-
-
         List<PLOT> _plotList;
         public List<PLOT> PlotList
         {
@@ -295,6 +295,7 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("PlotList");
             }
         }
+
 
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;

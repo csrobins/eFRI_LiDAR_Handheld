@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}"  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.SoilList">
+   <Grid Padding="10,10,10,10">  
+        <Grid.RowDefinitions>  
+            <RowDefinition Height="Auto" />  
+            <RowDefinition Height="*" />  
+            <RowDefinition Height="Auto" />  
+        </Grid.RowDefinitions>  
+        <Grid Grid.Row="0">  
+        <Grid.ColumnDefinitions>  
+        <ColumnDefinition Width="*" />  
+        <ColumnDefinition Width="*" />  
+        </Grid.ColumnDefinitions> 
+            <Button Text="New Layer" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" BorderRadius="0" HeightRequest="40" BorderColor="Black" BackgroundColor="Transparent" BorderWidth="1"  TextColor="Black"  Command="{Binding AddCommand}" />  
+        </Grid>  
+        <ListView x:Name="MyListView" VerticalScrollBarVisibility="Default"  HasUnevenRows="true" Grid.Row="1" SeparatorColor="Black" ItemsSource="{Binding SoilList}" IsPullToRefreshEnabled="True"
+         SelectedItem="{Binding SelectedSoilItem, Mode=TwoWay}">  
+            <ListView.ItemTemplate>  
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid  Padding="10" x:Name="Item">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Spacing="1">
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="Layer "  TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding LAYER}"  Font="20" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="From "  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding FROM}"   TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                    <Label Text="To "  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding TO}"   TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                    <Label Text="cm"   TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" Spacing="1">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label Text="Horizon"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding HORIZON}"  Font="20" TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Label Text="Texture"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding TEXTURE}"  Font="20" TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <!--<Button Grid.Column="2" Text="Stem Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>-->
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate> 
+            </ListView.ItemTemplate>  
+        </ListView> 
+        <Button Text="Delete All Soils" Grid.Row="2" BorderRadius="0" VerticalOptions="EndAndExpand" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteAllCommand}" />  
+    </Grid>  
+</ContentPage>  

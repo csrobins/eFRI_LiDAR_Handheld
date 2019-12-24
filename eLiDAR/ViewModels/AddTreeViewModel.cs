@@ -199,7 +199,7 @@ namespace eLiDAR.ViewModels {
 
 
         async Task ShowList(){ 
-            await _navigation.PushAsync(new TreeList(_fk));
+            await _navigation.PushAsync(new TreeListPage(_fk));
         }
         async Task AddTree(string _fk)
         {
@@ -212,7 +212,9 @@ namespace eLiDAR.ViewModels {
                 if (isUserAccept)
                     {
                     _treeRepository.InsertTree(_tree, _fk);
-                    await _navigation.PushAsync(new TreeList(_fk));
+                    await _navigation.PopAsync();
+
+//                    await _navigation.PushAsync(new TreeListPage(_fk));
                     }
             }
             else

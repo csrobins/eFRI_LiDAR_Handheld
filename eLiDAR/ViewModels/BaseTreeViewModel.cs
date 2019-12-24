@@ -322,17 +322,25 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("CROWN_WIDTH2");
             }
         }
-        List<TREE> _treeList;
-        public List<TREE> TreeList
+        List<TREE> _treeListFull;
+        public List<TREE> TreeListFull
         {
-            get => _treeList;
+            //get => _treeList;
+            get
+            {
+                if (_fk == "")
+                    return _treeRepository.GetAllData();
+                else
+                    return _treeRepository.GetFilteredData(_fk);
+            }
             set
             {
-                _treeList = value;
-                NotifyPropertyChanged("TreeList");
+                _treeListFull = value;
+                NotifyPropertyChanged("TreeListFull");
             }
         }
-
+        
+     
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = ""){

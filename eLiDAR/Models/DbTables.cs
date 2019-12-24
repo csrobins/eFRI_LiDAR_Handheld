@@ -25,10 +25,10 @@ namespace eLiDAR.Models
         public string PROJECTID { get; set; }
         public string PLOT_TYPE { get; set; }
         public string PLOTNUM { get; set; }
-        public string ADMINISTRATIVE { get; set; }
+        public int ADMINISTRATIVE { get; set; }
         public string FOREST_DISTRICT { get; set; }
-        public string FMU { get; set; }
-        public string MANAGEMENT_UNIT { get; set; }
+        public int FMU { get; set; }
+        public int MANAGEMENT_UNIT { get; set; }
         public string IMAGE_ANNOTATION { get; set; }
         public string PLOTKEY { get; set; }
         public DateTime PLOT_DATE { get; set; }
@@ -128,6 +128,42 @@ namespace eLiDAR.Models
         public int SEC_ECO_PCT { get; set; }
         public int AZIMUTH { get; set; }
         public int DISTANCE { get; set; }
+    }
+    [Table("SOIL")]
+    public class SOIL
+    {
+        [PrimaryKey]
+        public string SOILID { get; set; }
+        public string PLOTID { get; set; }
+        public int LAYER { get; set; }
+        public int FROM { get; set; }
+        public int TO { get; set; }
+        public string HORIZON { get; set; }
+        public string VON_POST { get; set; }
+        public string TEXTURE { get; set; }
+        public int PORE_PATTERN { get; set; }
+        public int STRUCTURE { get; set; }
+        public string COLOUR { get; set; }
+        public int MOTTLE_COLOUR { get; set; }
+        public int PERCENT_GRAVEL { get; set; }
+        public int PERCENT_COBBLE { get; set; }
+        public int PERCENT_STONE { get; set; }
+    }
+    [Table("SMALLTREE")]
+    public class SMALLTREE
+    {
+        [PrimaryKey]
+        public string SMALLTREEID { get; set; }
+        public string PLOTID { get; set; }
+        public int SPECIES { get; set; }
+        public int HT_CLASS1_COUNT { get; set; }
+        public int HT_CLASS2_COUNT { get; set; }
+        public int HT_CLASS3_COUNT { get; set; }
+        public int HT_CLASS4_COUNT { get; set; }
+        public int HT_CLASS5_COUNT { get; set; }
+        public int HT_CLASS6_COUNT { get; set; }
+        public int HT_CLASS7_COUNT { get; set; }
+        public int HT_CLASS8_COUNT { get; set; }
     }
 }
 

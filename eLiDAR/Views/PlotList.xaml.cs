@@ -6,15 +6,31 @@ using Xamarin.Forms;
 
 namespace eLiDAR.Views {
     public partial class PlotList : ContentPage {
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            // Do your thing
+            //this.BindingContext.  
+            MyListView.ItemsSource = null;
+            _viewmodel.FetchPlots();
+
+            MyListView.ItemsSource = _viewmodel.PlotList;
+        }
+        private PlotListViewModel _viewmodel;
         public PlotList() {
             InitializeComponent();
-            this.BindingContext = new PlotListViewModel(Navigation);
+            _viewmodel = new PlotListViewModel(Navigation);
+            this.BindingContext = _viewmodel;
+            _viewmodel.FetchPlots(); 
         }
 
         public PlotList(string projectID)
         {
             InitializeComponent();
-            this.BindingContext = new PlotListViewModel(Navigation, projectID);
-        } 
+            _viewmodel = new PlotListViewModel(Navigation, projectID);
+            this.BindingContext = _viewmodel;
+            _viewmodel.FetchPlots();
+
         }
+    }
     }

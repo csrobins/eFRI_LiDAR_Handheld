@@ -9,7 +9,8 @@ using eLiDAR.Servcies;
 using eLiDAR.Views;
 
 using Xamarin.Forms;
-
+using eLiDAR.Utilities;
+using eLiDAR.Services;
 
 namespace eLiDAR.ViewModels {
     public class PlotListViewModel : BasePlotViewModel {
@@ -18,6 +19,9 @@ namespace eLiDAR.ViewModels {
         public ICommand DeleteAllCommand { get; private set; }
         public ICommand ShowFilteredCommand { get; private set; }
         public ICommand ShowSiteCommand { get; private set; }
+        public ICommand ShowSmallTreeCommand { get; private set; }
+        public ICommand ShowSoilCommand { get; private set; }
+
 
         public PlotListViewModel(INavigation navigation) {
             _navigation = navigation;
@@ -27,6 +31,8 @@ namespace eLiDAR.ViewModels {
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<PLOT>(async (x) => await ShowTrees(x));
             ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
+            ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
+            ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
             FetchPlots();
         }
         public PlotListViewModel(INavigation navigation,string selectedprojectid )
@@ -39,12 +45,15 @@ namespace eLiDAR.ViewModels {
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<PLOT>(async (x) => await ShowTrees(x));
             ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
+            ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
+            ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
 
             FetchPlots();
         }
 
-        void FetchPlots(){
+        public void FetchPlots(){
             if (_selectedprojectid == "")
+              //  PlotList = "No project selected";
                 PlotList = _plotRepository.GetAllData();
             else
                 PlotList = _plotRepository.GetFilteredData(_selectedprojectid);
@@ -71,6 +80,26 @@ namespace eLiDAR.ViewModels {
             await _navigation.PushAsync(new PlotDetailsPage(selectedPlotID));
         }
 
+        bool _isselected;
+        public bool IsSelected
+        {
+            get
+            {
+                if (_selectedprojectid.Length > 1)
+                {
+                    _isselected = true;
+                    return _isselected;
+                }
+                else { return false; }
+            }
+            set
+            {
+               _isselected = value;
+                NotifyPropertyChanged("IsSelected");
+                
+            }
+        }
+
         PLOT _selectedPlotItem;
         public PLOT SelectedPlotItem {
             get => _selectedPlotItem;
@@ -85,19 +114,54 @@ namespace eLiDAR.ViewModels {
         async Task ShowTrees(PLOT _plot)
         {
             // launch the form - filtered to a specific projectid
-            await _navigation.PushAsync(new TreeList(_plot.PLOTID));
+            await _navigation.PushAsync(new TreeListPage(_plot.PLOTID));
         }
         async Task ShowSite(PLOT _plot)
         {
             // launch the form - filtered to a specific projectid
             await _navigation.PushAsync(new EcositeDetailsPage(_plot.PLOTID));
         }
+        async Task ShowSoil(PLOT _plot)
+        {
+            // launch the form - filtered to a specific projectid
+            await _navigation.PushAsync(new SoilList(_plot.PLOTID));
+        }
+        async Task ShowSmallTree(PLOT _plot)
+        {
+            await _navigation.PushAsync(new SmallTreeList(_plot.PLOTID));
+        }
+
 
         public string Title
         {
             get => "Plot List for " + _plotRepository.GetProjectTitle(_selectedprojectid);
             set
             {
+            }
+        }
+        public List<PROJECT> ProjectList
+        {
+            get => _plotRepository.GetProjectList();
+            set
+            {
+            }
+        }
+        private PROJECT _selectedproject ;
+        public PROJECT SelectedProject
+        {
+            get
+            {
+                _selectedproject = PickerService.GetProjectItem(ProjectList, _selectedprojectid);
+                return _selectedproject;
+            }
+            set
+            {
+                SetProperty(ref _selectedproject, value);
+                _selectedprojectid = _selectedproject.PROJECTID ;
+                NotifyPropertyChanged("PlotList");
+                NotifyPropertyChanged("Title");
+                FetchPlots();
+                IsSelected = true;
             }
         }
     }

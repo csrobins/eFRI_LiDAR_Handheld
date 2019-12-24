@@ -31,7 +31,7 @@ namespace eLiDAR.ViewModels {
             FetchProjects();
         }
 
-        void FetchProjects(){
+        public void FetchProjects(){
             ProjectList = _projectRepository.GetAllProjectData();
         }
 

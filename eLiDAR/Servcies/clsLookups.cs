@@ -55,14 +55,101 @@ namespace eLiDAR.Services
             x.NAME = "";
             return x;
         }
-
+        public static PROJECT GetProjectItem(List<PROJECT> list, string val)
+        {
+            foreach (var PROJECT in list)
+            {
+                if (PROJECT.PROJECTID  == val)
+                {
+                    return PROJECT;
+                }
+            };
+            PROJECT x = new PROJECT();
+            x.PROJECTID  = "";
+            x.NAME = "";
+            return x;
+        }
 
         public static List<PickerItems> SpeciesItems() {
             var list = new List<PickerItems>()
             {
-                new PickerItems() {ID = 1, NAME = "White Pine"},
-                new PickerItems() {ID = 2, NAME = "Red Pine"},
-                new PickerItems() {ID = 3, NAME = "Jack Pine"}
+                new PickerItems() {ID = 1, NAME = "White pine"},
+                new PickerItems() {ID = 44, NAME = "American beech"},
+                new PickerItems() {ID = 2, NAME = "Red pine"},
+                new PickerItems() {ID = 50, NAME = "American elm"},
+                new PickerItems() {ID = 3, NAME = "Jack pine"},
+                new PickerItems() {ID = 20, NAME = "Balsam fir"},
+                new PickerItems() {ID = 11, NAME = "Black spruce"},
+                new PickerItems() {ID = 73, NAME = "Balsam poplar"},
+                new PickerItems() {ID = 12, NAME = "White spruce"},
+                new PickerItems() {ID = 51, NAME = "Basswood"},
+                new PickerItems() {ID = 15, NAME = "Norway spruce"},
+                new PickerItems() {ID = 45, NAME = "Black ash"},
+                new PickerItems() {ID = 19, NAME = "Eastern hemlock"},
+                new PickerItems() {ID = 25, NAME = "Larch"},
+                new PickerItems() {ID = 37, NAME = "Yellow birch"},
+                new PickerItems() {ID = 22, NAME = "Northern white cedar"},
+                new PickerItems() {ID = 139, NAME = "Pin cherry"},
+                new PickerItems() {ID = 32, NAME = "Red (soft) maple"},
+                new PickerItems() {ID = 41, NAME = "Red oak"},
+                new PickerItems() {ID = 46, NAME = "White ash"},
+                new PickerItems() {ID = 30, NAME = "Sugar maple"},
+                new PickerItems() {ID = 56, NAME = "Ironwood"},
+                new PickerItems() {ID = 46, NAME = "White ash"},
+                new PickerItems() {ID = 58, NAME = "Black cherry"},
+                new PickerItems() {ID = 38, NAME = "White birch"},
+                new PickerItems() {ID = 70, NAME = "Largetooth aspen"},
+                new PickerItems() {ID = 40, NAME = "White oak"},
+                new PickerItems() {ID = 74, NAME = "Trembling aspen"},
+                new PickerItems() {ID = 99, NAME = "Unknown species"},
+                new PickerItems() {ID = 1086, NAME = "Willow"}
+            };
+            return list;
+        }
+        public static List<PickerItems> ForestItems()
+        {
+            var list = new List<PickerItems>()
+            {
+                new PickerItems() {ID=110 ,  NAME = "Abitibi River Forest"},
+                new PickerItems() {ID=615 ,  NAME = "Algoma Forest"},
+                new PickerItems() {ID=451 ,  NAME = "Algonquin Park Forest"},
+                new PickerItems() {ID=220 ,  NAME = "Bancroft-Minden Forest"},
+                new PickerItems() {ID=35 ,  NAME = "Black Spruce Forest"},
+                new PickerItems() {ID=175 ,  NAME = "Caribou Forest"},
+                new PickerItems() {ID=405 ,  NAME = "Crossroute Forest"},
+                new PickerItems() {ID=177 ,  NAME = "Dog River-Matawin Forest"},
+                new PickerItems() {ID=535 ,  NAME = "Dryden Forest"},
+                new PickerItems() {ID=230 ,  NAME = "English River Forest"},
+                new PickerItems() {ID=360 ,  NAME = "French-Severn Forest"},
+                new PickerItems() {ID=438 ,  NAME = "Gordon Cosens Forest"},
+                new PickerItems() {ID=601 ,  NAME = "Hearst Forest"},
+                new PickerItems() {ID=350 ,  NAME = "Kenogami Forest"},
+                new PickerItems() {ID=644 ,  NAME = "Kenora Forest"},
+                new PickerItems() {ID=702 ,  NAME = "Lac Seul Forest"},
+                new PickerItems() {ID=815 ,  NAME = "Lake Nipigon"},
+                new PickerItems() {ID=796 ,  NAME = "Lakehead Forest"},
+                new PickerItems() {ID=565 ,  NAME = "Magpie Forest"},
+                new PickerItems() {ID=509 ,  NAME = "Martel Forest"},
+                new PickerItems() {ID=140 ,  NAME = "Mazinaw-Lanark Forest"},
+                new PickerItems() {ID=390 ,  NAME = "Nagagami Forest"},
+                new PickerItems() {ID=754 ,  NAME = "Nipissing Forest"},
+                new PickerItems() {ID=680 ,  NAME = "Northshore Forest"},
+                new PickerItems() {ID=415 ,  NAME = "Ogoki Forest"},
+                new PickerItems() {ID=780 ,  NAME = "Ottawa Valley Forest"},
+                new PickerItems() {ID=966 ,  NAME = "Pic Forest"},
+                new PickerItems() {ID=421 ,  NAME = "Pineland Forest"},
+                new PickerItems() {ID=840 ,  NAME = "Red Lake Forest"},
+                new PickerItems() {ID=930 ,  NAME = "Romeo Malette Forest"},
+                new PickerItems() {ID=853 ,  NAME = "Sapawe Forest"},
+                new PickerItems() {ID=210 ,  NAME = "Spanish Forest"},
+                new PickerItems() {ID=889 ,  NAME = "Sudbury Forest"},
+                new PickerItems() {ID=898 ,  NAME = "Temagami"},
+                new PickerItems() {ID=280 ,  NAME = "Timiskaming Forest"},
+                new PickerItems() {ID=120 ,  NAME = "Trout Lake Forest"},
+                new PickerItems() {ID=130 ,  NAME = "Wabigoon Forest"},
+                new PickerItems() {ID=490 ,  NAME = "Whiskey Jack Forest"},
+                new PickerItems() {ID=60 ,  NAME = "White River Forest"},
+                new PickerItems() {ID=994 ,  NAME = "Whitefeather Forest"},
             };
             return list;
         }

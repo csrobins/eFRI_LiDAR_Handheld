@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.PlotList">
-   <Grid Padding="10,20,10,40">  
+   <Grid Padding="10,10,10,5">  
         <Grid.RowDefinitions>  
             <RowDefinition Height="Auto" />  
             <RowDefinition Height="*" />  
@@ -14,13 +14,13 @@
             <Button Text="New Plot" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" BorderRadius="0" HeightRequest="40" BorderColor="Black" BackgroundColor="Transparent" BorderWidth="1"  TextColor="Black"  Command="{Binding AddCommand}" />  
         </Grid>  
         <ListView x:Name="MyListView" HasUnevenRows="true" Grid.Row="1" SeparatorColor="Black" ItemsSource="{Binding PlotList}"
-         SelectedItem="{Binding SelectedPlotItem, Mode=TwoWay}">  
+         SelectedItem="{Binding SelectedPlotItem, Mode=TwoWay}" >  
             <ListView.ItemTemplate>  
                 <DataTemplate>  
                     <ViewCell>
                         <Grid  Padding="10" x:Name="Item">  
                                 <Grid.RowDefinitions>  
-                                    <RowDefinition Height="75*" />                                      
+                                    <RowDefinition Height="50" />                                      
                                 </Grid.RowDefinitions>  
                                 <Grid.ColumnDefinitions>  
                                     <ColumnDefinition Width="1*" />  
@@ -36,7 +36,7 @@
                                     <Label Text="Plot Type"  TextColor="Black" HorizontalTextAlignment="End"/>
                                     <Label Text="{Binding PLOT_TYPE}"  Font="20" TextColor="Black" HorizontalTextAlignment="End" />
                                 </StackLayout>
-                                <StackLayout Grid.Column="2" Orientation="Horizontal" >
+                                <StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="End" >
                                     <Button Text="Trees" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
                                     <Button Text="Site" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSiteCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
                                     <Button Text="Soil" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSoilCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
@@ -46,7 +46,8 @@
                     </ViewCell>  
                 </DataTemplate>  
             </ListView.ItemTemplate>  
-        </ListView> 
-        <Button Text="Delete All Plots" Grid.Row="2" BorderRadius="0" VerticalOptions="EndAndExpand" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteAllPlotsCommand}" />  
-    </Grid>  
+        </ListView>
+        <Button Text="Delete All Plots" Grid.Row="2" BorderRadius="0" VerticalOptions="EndAndExpand" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteAllPlotsCommand}" />
+    </Grid>
+   
 </ContentPage>  

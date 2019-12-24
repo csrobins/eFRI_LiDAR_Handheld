@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -17,12 +18,12 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteAllCommand { get; private set; }
         public ICommand ShowFilteredCommand { get; private set; }
-  
+
         public TreeListViewModel(INavigation navigation) {
             _navigation = navigation;
             _treeRepository = new TreeRepository();
             _fk = "";
-            AddCommand = new Command(async () => await ShowAdd("")); 
+            AddCommand = new Command(async () => await ShowAdd(""));
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
             FetchTrees();
@@ -38,13 +39,13 @@ namespace eLiDAR.ViewModels {
             FetchTrees();
         }
 
-        void FetchTrees(){
+        public void FetchTrees() {
             if (_fk == "")
-                TreeList = _treeRepository.GetAllData();
+                TreeStemList = _treeRepository.GetAllData();
             else
-                TreeList = _treeRepository.GetFilteredData(_fk);
+                TreeStemList = _treeRepository.GetFilteredTreeStemData(_fk);
         }
-
+       
         async Task ShowAdd(string _fk) {
             if (_fk == "")
             {
@@ -60,7 +61,21 @@ namespace eLiDAR.ViewModels {
                 await _navigation.PushAsync(new AddPlot());
             }
         }
-
+        private List<TREE> _treeStemList;
+        public List<TREE> TreeStemList
+        {
+            get
+            {
+                if (_fk == "")
+                    return _treeRepository.GetAllData();
+                else
+                    return _treeRepository.GetFilteredTreeStemData(_fk);
+            }
+            set
+            {
+                _treeStemList = value;
+            }
+        }
         async void ShowDetails(string selectedTreeID){
             await _navigation.PushAsync(new TreeDetailsPage(selectedTreeID));
         }
@@ -88,27 +103,28 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-        public int GetAzimuth
+        public Int32 GetAzimuth
         {
             get => _treeRepository.GetAzimuth(_tree.TREEID);
             set
             {
             }
         }
-        public  double GetDistance
+        public Double GetDistance
         {
-            get =>  _treeRepository.GetDistance(_tree.TREEID);
+            get => _treeRepository.GetDistance(_tree.TREEID);
             set
             {
             }
         }
-        public string GetLocation
+        public String GetLocation
         {
-            get  {
-                double dist = GetDistance;
-                if (dist != 0)
+            get
+            {
+                //   double dist = GetDistance;
+                if (GetDistance != 0)
                 {
-                    return "Az: " + GetAzimuth.ToString() + "\nDist: " + dist.ToString();
+                    return "Az: " + GetAzimuth.ToString() + "\nDist: " + GetDistance.ToString();
                 }
                 else
                 {

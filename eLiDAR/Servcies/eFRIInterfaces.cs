@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using eLiDAR.Models;
 using eLiDAR.Helpers;
+using System.Threading.Tasks;
 
 namespace eLiDAR.Servcies
 {
@@ -36,12 +37,14 @@ namespace eLiDAR.Servcies
         void UpdatePlot(PLOT plot);
 
         String GetProjectTitle(string projectid);
-    
+        List<PROJECT> GetProjectList();
     }
     public interface ITreeRepository
     {
         List<TREE> GetAllData();
         List<TREE> GetFilteredData(string fk);
+
+        List<TREE> GetFilteredTreeStemData(string fk);
 
         //Get Specific data
         TREE GetTreeData(string TREEID);
@@ -56,6 +59,7 @@ namespace eLiDAR.Servcies
         String GetPlotTitle(string plotid);
         int GetAzimuth(string treeid);
         double GetDistance(string treeid);
+
 
     }
     public interface IStemMapRepository
@@ -95,6 +99,44 @@ namespace eLiDAR.Servcies
         void UpdateEcosite(ECOSITE ecosite);
         String GetTitle(string plotid);
         bool IsEcositeExists(string plotid);
+
+    }
+    public interface ISoilRepository
+    {
+        List<SOIL> GetAllData();
+        List<SOIL> GetFilteredData(string fk);
+
+        //Get Specific data
+        SOIL GetSoilData(string SOILID);
+        // Delete all Data
+        void DeleteAllSoil();
+        // Delete Specific
+        void DeleteSoil(string SOILID);
+        // Insert new to DB 
+        void InsertSoil(SOIL soil, string fk);
+        // Update Data
+        void UpdateSoil(SOIL soil);
+        String GetTitle(string plotid);
+    
+
+    }
+    public interface ISmallTreeRepository
+    {
+        List<SMALLTREE> GetAllData();
+        List<SMALLTREE> GetFilteredData(string fk);
+
+        //Get Specific data
+        SMALLTREE GetSmallTreeData(string SMALLTREEID);
+        // Delete all Data
+        void DeleteAllSmallTree();
+        // Delete Specific
+        void DeleteSmallTree(string SMALLTREEID);
+        // Insert new to DB 
+        void InsertSmallTree(SMALLTREE smalltree, string fk);
+        // Update Data
+        void UpdateSmallTree(SMALLTREE smalltree);
+        String GetTitle(string plotid);
+    
 
     }
     public class ProjectRepository : IProjectRepository
@@ -154,6 +196,10 @@ namespace eLiDAR.Servcies
         public List<PLOT> GetAllData()
         {
             return _databaseHelper.GetAllPlotData();
+        }
+        public List<PROJECT> GetProjectList()
+        {
+            return _databaseHelper.GetAllProjectData();
         }
         public List<PLOT> GetFilteredData(string id)
         {
@@ -216,7 +262,10 @@ namespace eLiDAR.Servcies
         {
             return _databaseHelper.GetFilteredTreeData(fk);
         }
-
+        public List<TREE> GetFilteredTreeStemData(string fk)
+        {
+            return _databaseHelper.GetFilteredTreeStemList(fk);
+        }
         public TREE GetTreeData(string TreeID)
         {
             return _databaseHelper.GetTreeData(TreeID);
@@ -386,5 +435,116 @@ namespace eLiDAR.Servcies
         }
     }
 
+    public class SoilRepository : ISoilRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public SoilRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteSoil(string ID)
+        {
+            _databaseHelper.DeleteSoil(ID);
+        }
+        public void DeleteAllSoil()
+        {
+            _databaseHelper.DeleteAllSoil();
+        }
+
+        public List<SOIL> GetAllData()
+        {
+            return _databaseHelper.GetAllSoilData();
+        }
+
+        public List<SOIL> GetFilteredData(string fk)
+        {
+            return _databaseHelper.GetFilteredSoilData(fk);
+        }
+
+        public SOIL GetSoilData(string SoilID)
+        {
+            return _databaseHelper.GetSoilData(SoilID);
+        }
+
+        public void InsertSoil(SOIL soil, string fk)
+        {
+            soil.SOILID  = Guid.NewGuid().ToString();
+            soil.PLOTID = fk;
+            _databaseHelper.InsertSoil(soil);
+        }
+
+        public void UpdateSoil(SOIL soil)
+        {
+            _databaseHelper.UpdateSoil(soil);
+        }
+        public String GetTitle(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+   
+    }
+
+    public class SmallTreeRepository : ISmallTreeRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public SmallTreeRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteSmallTree(string ID)
+        {
+            _databaseHelper.DeleteSmallTree(ID);
+        }
+        public void DeleteAllSmallTree()
+        {
+            _databaseHelper.DeleteAllSmallTree();
+        }
+
+        public List<SMALLTREE> GetAllData()
+        {
+            return _databaseHelper.GetAllSmallTreeData();
+        }
+
+        public List<SMALLTREE> GetFilteredData(string fk)
+        {
+            return _databaseHelper.GetFilteredSmallTreeData(fk);
+        }
+
+        public SMALLTREE GetSmallTreeData(string SmallTreeID)
+        {
+            return _databaseHelper.GetSmallTreeData(SmallTreeID);
+        }
+
+        public void InsertSmallTree(SMALLTREE smalltree, string fk)
+        {
+            smalltree.SMALLTREEID = Guid.NewGuid().ToString();
+            smalltree.PLOTID = fk;
+            _databaseHelper.InsertSmallTree(smalltree);
+        }
+
+        public void UpdateSmallTree(SMALLTREE smalltree)
+        {
+            _databaseHelper.UpdateSmallTree(smalltree);
+        }
+        public String GetTitle(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+       
+    }
 
 }

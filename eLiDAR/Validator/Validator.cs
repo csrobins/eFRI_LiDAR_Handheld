@@ -109,5 +109,57 @@ namespace eLiDAR.Validator
             return false;
         }
     }
+    public class SoilValidator : AbstractValidator<SOIL>
+    {
+        public SoilValidator()
+        {
+            // RuleFor(c => c.PRI_ECO).Must(n => ValidateStringEmpty(n)).WithMessage("Primary ecosite should not be empty.");
+        //    RuleFor(c => c.FROM).Must(a => ValidateIntEmpty(a)).WithMessage("From should not be empty.");
+        }
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+    }
+    public class SmallTreeValidator : AbstractValidator<SMALLTREE>
+    {
+        public SmallTreeValidator()
+        {
+            // RuleFor(c => c.PRI_ECO).Must(n => ValidateStringEmpty(n)).WithMessage("Primary ecosite should not be empty.");
+            RuleFor(c => c.SPECIES).Must(a => ValidateIntEmpty(a)).WithMessage("Species should not be empty.");
+        }
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+    }
 
 }

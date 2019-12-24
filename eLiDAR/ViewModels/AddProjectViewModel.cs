@@ -36,7 +36,8 @@ namespace eLiDAR.ViewModels {
                 if (isUserAccept)
                 {
                     _projectRepository.InsertProject(_project);
-                    await _navigation.PushAsync(new ProjectList());
+                    await _navigation.PopAsync();
+ //                   await _navigation.PushAsync(new ProjectList());
                 }
             }
             else

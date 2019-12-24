@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="eLiDAR.Views.SoilView">
+    <ContentView.Content>
+        <Grid  Padding="10" ColumnSpacing=" 1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0" Grid.Row="0">
+                <Label Text="Soil Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Layer Number" FontAttributes="None"  HorizontalOptions="Start" />
+                <Entry x:Name="txtLayer" Text="{Binding LAYER}"  Placeholder="Layer" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="From (cm)" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtFrom" Text="{Binding FROM}"  Placeholder="From" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="To (cm)" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtTo" Text="{Binding TO}"  Placeholder="To" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="Horizon" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtHorizon" SelectedItem="{Binding HORIZON, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Origin">
+                    <Picker.Items>
+                        <x:String>L</x:String>
+                        <x:String>F</x:String>
+                        <x:String>H</x:String>
+                        <x:String>Ah</x:String>
+                        <x:String>Ap</x:String>
+                        <x:String>Ae</x:String>
+                        <x:String>Bt</x:String>
+                        <x:String>Btgj</x:String>
+                        <x:String>Bm</x:String>
+                        <x:String>Bf</x:String>
+                        <x:String>Bhf</x:String>
+                        <x:String>Bg</x:String>
+                        <x:String>C</x:String>
+                        <x:String>Ck</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="von Post" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtvonpost" SelectedItem="{Binding VON_POST, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="von Post">
+                    <Picker.Items>
+                        <x:String>vP1</x:String>
+                        <x:String>vP2</x:String>
+                        <x:String>vP3</x:String>
+                        <x:String>vP4</x:String>
+                        <x:String>vP5</x:String>
+                        <x:String>vP6</x:String>
+                        <x:String>vP7</x:String>
+                        <x:String>vP8</x:String>
+                        <x:String>vP9</x:String>
+                        <x:String>vP10</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Text="Mineral Texture" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txttexture" SelectedItem="{Binding TEXTURE, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Mineral Texture">
+                    <Picker.Items>
+                        <x:String>S</x:String>
+                        <x:String>LS</x:String>
+                        <x:String>SiS</x:String>
+                        <x:String>SL</x:String>
+                        <x:String>SCL</x:String>
+                        <x:String>SC</x:String>
+                        <x:String>Si</x:String>
+                        <x:String>SiL</x:String>
+                        <x:String>L</x:String>
+                        <x:String>CL</x:String>
+                        <x:String>SiCL</x:String>
+                        <x:String>SiC</x:String>
+                        <x:String>C</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+            <StackLayout Grid.Column=" 1" Grid.Row="0">
+                <Label Text="Soil Attributes Continued" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Pore Pattern" FontAttributes="None"  HorizontalOptions="Start" />
+                <Picker x:Name="txtPorePattern" ItemsSource="{Binding ListPorePattern}" SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Pore Pattern"/>
+                <Label Text="Structure" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtStructure" Text="{Binding STRUCTURE}"  Placeholder="Structure" HorizontalOptions="FillAndExpand"/>
+                <Label Text="Colour" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtColour" Text="{Binding COLOUR}"  Placeholder="Colour" HorizontalOptions="FillAndExpand"/>
+                <Label Text="Mottle Colour" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtMottleColour" Text="{Binding MOTTLE_COLOUR}"  Placeholder="Colour" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="2"  Grid.Row="0">
+                <Label Text="Soil Attributes Continued" FontAttributes="Bold" HorizontalOptions="Start" />
+                <Label Text="Percent Gravel" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtPercentGravel" Text="{Binding PERCENT_GRAVEL}"  Placeholder="Percent Gravel" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="Percent COBBLE" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtPercentCobble" Text="{Binding PERCENT_COBBLE}"  Placeholder="Percent Cobble" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label Text="Percent Stone" FontAttributes="None" HorizontalOptions="Start" />
+                <Entry x:Name="txtPercentStone" Text="{Binding PERCENT_STONE}"  Placeholder="Percent Stone" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            
+        </Grid>
+    </ContentView.Content>
+</ContentView>

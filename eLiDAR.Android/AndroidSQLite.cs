@@ -11,7 +11,13 @@ namespace eLiDAR.Droid {
 			string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 			// Documents folder
             var path = Path.Combine(documentsPath, DatabaseHelper.DbFileName);
-            //var plat = new SQLite.Platform.XamarinAndroid.SQLitePlatformAndroid();
+
+            // Use this if I need to reset the datbase
+            bool Isdebug = false;
+            if (Isdebug == true)
+                {
+                File.Delete(path);
+                }
 
             if ((!File.Exists(path)))
             {

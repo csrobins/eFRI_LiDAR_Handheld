@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Servcies;
+using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation.Results;
 using Xamarin.Forms;
@@ -12,6 +15,7 @@ namespace eLiDAR.ViewModels {
 
         public ICommand UpdatePlotCommand { get; private set; }
         public ICommand DeletePlotCommand { get; private set; }
+        public List<PickerItems> ListFMU { get; set; }
 
         public PlotDetailsViewModel(INavigation navigation, string selectedPlotID)
         {
@@ -22,11 +26,26 @@ namespace eLiDAR.ViewModels {
 
             UpdatePlotCommand = new Command(async () => await UpdatePlot());
             DeletePlotCommand = new Command(async () => await DeletePlot());
-
+            ListFMU = PickerService.ForestItems().OrderBy(c => c.NAME).ToList();
             FetchPlotDetails();
-        } 
+        }
 
-
+        private PickerItems _selectedFMU = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedFMU
+        {
+            get
+            {
+                //_selectedSpecies.ID = PickerService.GetIndex(ListSpecies, _tree.SPECIES);
+                //_selectedSpecies.NAME = PickerService.GetValue(ListSpecies, _tree.SPECIES);
+                _selectedFMU = PickerService.GetItem(ListFMU, _plot.FMU);
+                return _selectedFMU;
+            }
+            set
+            {
+                SetProperty(ref _selectedFMU, value);
+                _plot.FMU = (int)_selectedFMU.ID;
+            }
+        }
         void FetchPlotDetails(){
             _plot = _plotRepository.GetPlotData(_plot.PLOTID);
         }

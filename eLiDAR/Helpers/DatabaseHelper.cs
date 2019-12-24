@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using eLiDAR.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace eLiDAR.Helpers
 {
@@ -164,6 +165,24 @@ namespace eLiDAR.Helpers
             return (from data in sqliteconnection.Table<TREE>().OrderBy(t => t.TREENUM).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
+        public List<TREE> GetFilteredTreeStemList(string plotid)
+        {
+            string qry = "select TREE.TREEID, PLOTID, TREENUM, SPECIES, ORIGIN, STATUS, DBH, HT, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' ORDER BY TREENUM";
+            try
+            {
+                var tree = sqliteconnection.Query<TREE>(qry).ToList();
+                return tree;
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return null;
+            }
+
+
+            
+          
+        }
         //Get Specific data
         public TREE GetTreeData(string id)
         {
@@ -221,11 +240,8 @@ namespace eLiDAR.Helpers
         {
             sqliteconnection.Update(stemmap);
         }
-        //public string GetTreeTitle(String id)
-        //{
-        //    var tree = sqliteconnection.Query<TREE>("select TREENUM from Tree where TREEID = " + id).FirstOrDefault();
-        //    return tree.TREENUM.ToString();
-        //}
+
+        // Ecosite helpers
         // Delete Specific
         public void DeleteEcosite(string id)
         {
@@ -260,6 +276,77 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<ECOSITE>().FirstOrDefault(t => t.PLOTID == id);
         }
+   // SOIL Helpers
+        public void DeleteSoil(string id)
+        {
+            sqliteconnection.Delete<SOIL>(id);
+        }
+        // Insert new to DB 
+        public void  InsertSoil(SOIL soil)
+        {
+            sqliteconnection.Insert(soil);
+           
+        }
+        // Update Tree Data
+        public void UpdateSoil(SOIL soil)
+        {
+            sqliteconnection.Update(soil);
+        }
+
+        public void DeleteAllSoil()
+        {
+            sqliteconnection.DeleteAll<SOIL>();
+        }
+        public List<SOIL> GetAllSoilData()
+        {
+            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.FROM)
+                    select data).ToList();
+        }
+        public List<SOIL> GetFilteredSoilData(string plotid)
+        {
+            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.FROM).Where(t => t.PLOTID == plotid)
+                    select data).ToList();
+        }
+        public SOIL GetSoilData(string id)
+        {
+            return sqliteconnection.Table<SOIL>().FirstOrDefault(t => t.SOILID == id);
+        }
+
+        // Small Tree Helpers
+        public void DeleteSmallTree(string id)
+        {
+            sqliteconnection.Delete<SMALLTREE>(id);
+        }
+        // Insert new to DB 
+        public void InsertSmallTree(SMALLTREE smalltree)
+        {
+            sqliteconnection.Insert(smalltree);
+        }
+        // Update Tree Data
+        public void UpdateSmallTree(SMALLTREE smalltree)
+        {
+            sqliteconnection.Update(smalltree);
+        }
+
+        public void DeleteAllSmallTree()
+        {
+            sqliteconnection.DeleteAll<SMALLTREE>();
+        }
+        public List<SMALLTREE> GetAllSmallTreeData()
+        {
+            return (from data in sqliteconnection.Table<SMALLTREE>().OrderBy(t => t.SPECIES)
+                    select data).ToList();
+        }
+        public List<SMALLTREE> GetFilteredSmallTreeData(string plotid)
+        {
+            return (from data in sqliteconnection.Table<SMALLTREE>().OrderBy(t => t.SPECIES).Where(t => t.PLOTID == plotid)
+                    select data).ToList();
+        }
+        public SMALLTREE GetSmallTreeData(string id)
+        {
+            return sqliteconnection.Table<SMALLTREE>().FirstOrDefault(t => t.SMALLTREEID == id);
+        }
+
 
     }
 }

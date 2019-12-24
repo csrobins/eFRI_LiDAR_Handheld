@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.1" />
+    <PackageReference Include="FluentValidation" Version="8.6.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="LiveXAML" Version="2.1.73" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +43,9 @@
     <EmbeddedResource Update="Views\CameraPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Main.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\PlotView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -56,6 +59,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AddSmallTree.xaml.cs">
+      <DependentUpon>AddSmallTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddSoil.xaml.cs">
+      <DependentUpon>AddSoil.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddTree.xaml.cs">
       <DependentUpon>AddTree.xaml</DependentUpon>
     </Compile>
@@ -65,11 +74,32 @@
     <Compile Update="Views\EcositeDetailsPage.xaml.cs">
       <DependentUpon>EcositeDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PlotFilterList.xaml.cs">
+      <DependentUpon>PlotFilterList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SmallTreeList.xaml.cs">
+      <DependentUpon>SmallTreeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SmallTreeDetailsPage.xaml.cs">
+      <DependentUpon>SmallTreeDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SmallTreeView.xaml.cs">
+      <DependentUpon>SmallTreeView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StemMapDetailsPage.xaml.cs">
       <DependentUpon>StemMapDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\SoilDetailsPage.xaml.cs">
+      <DependentUpon>SoilDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TreeDetailsPage.xaml.cs">
       <DependentUpon>TreeDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SoilList.xaml.cs">
+      <DependentUpon>SoilList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SoilView.xaml.cs">
+      <DependentUpon>SoilView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\TreeView.xaml.cs">
       <DependentUpon>TreeView.xaml</DependentUpon>

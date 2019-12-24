@@ -13,14 +13,14 @@
         </ShellContent>
     </ShellItem>-->
     <TabBar>
-        <Tab Title=" Plots">
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotList}"/>
+        <Tab Title="Main">
+            <ShellContent ContentTemplate=" {DataTemplate pages:Views.Main}"/>
         </Tab>
         <Tab Title="Projects">
             <ShellContent ContentTemplate=" {DataTemplate pages:Views.ProjectList}"/>
         </Tab>
-        <Tab Title=" Test2">
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.CameraPage}"/>
+        <Tab Title="Plots" >
+            <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotFilterList}"/>
         </Tab>
 
         <!--<Tab Title=" Plot View">

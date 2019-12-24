@@ -31,16 +31,10 @@
                 <Label Text="Measurement Tupe" FontAttributes="None" HorizontalOptions="Start" />
                 <Picker x:Name="txtMeasurementType" SelectedItem="{Binding MEASUREMENT_TYPE}" HorizontalOptions="FillAndExpand"  Title="Measurement Type">
                     <Picker.Items>
-                        <x:String>A</x:String>
-                        <x:String>B</x:String>
-                    </Picker.Items>
-                </Picker>
-
-                <Label Text="Administrative" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtAdminstrative" SelectedItem="{Binding ADMINISTRATIVE}" HorizontalOptions="FillAndExpand"  Title="Administrative">
-                    <Picker.Items>
-                        <x:String>A</x:String>
-                        <x:String>B</x:String>
+                        <x:String>New</x:String>
+                        <x:String>Remeasure</x:String>
+                        <x:String>Internal Audit</x:String>
+                        <x:String>Ministry Audit</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label Text="Forest District" FontAttributes="None" HorizontalOptions="Start" />
@@ -48,17 +42,69 @@
                     <Picker.Items>
                         <x:String>Nipigon</x:String>
                         <x:String>Thunder Bay</x:String>
+                        <x:String>Dryden</x:String>
+                        <x:String>Kenora</x:String>
+                        <x:String>Red Lake</x:String>
+                        <x:String>Fort Frances</x:String>
+                        <x:String>Sioux Lookout</x:String>
+                        <x:String>Chapleau</x:String>
+                        <x:String>Cochrane</x:String>
+                        <x:String>Hearst</x:String>
+                        <x:String>Kirkland lake</x:String>
+                        <x:String>North Bay</x:String>
+                        <x:String>Sudbury</x:String>
+                        <x:String>Timmins</x:String>
+                        <x:String>Wawa</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="FMU" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtFMU" SelectedItem="{Binding FMU}" HorizontalOptions="FillAndExpand"  Title="FMU">
+                <Label Text="Forest Management Unit" FontAttributes="None" HorizontalOptions="Start" />
+                <Picker x:Name="txtFMU" ItemsSource="{Binding ListFMU}" SelectedItem="{Binding SelectedFMU, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Forest Management Unit"/>
+                <!--<Picker x:Name="txtFMU" SelectedItem="{Binding FMU}" HorizontalOptions="FillAndExpand"  Title="FMU">
                     <Picker.Items>
+                        <x:String>Abitibi River Forest</x:String>
+                        <x:String>Algoma Forest</x:String>
+                        <x:String>Algonquin Park Forest</x:String>
+                        <x:String>Bancroft-Minden Forest</x:String>
+                        <x:String>Black Spruce Forest</x:String>
+                        <x:String>Caribou Forest</x:String>
+                        <x:String>Crossroute Forest</x:String>
+                        <x:String>Dog River-Matawin Forest</x:String>
+                        <x:String>Dryden Forest</x:String>
+                        <x:String>English River Forest</x:String>
+                        <x:String>French-Severn Forest</x:String>
+                        <x:String>Gordon Cosens Forest</x:String>
+                        <x:String>Hearst Forest</x:String>
                         <x:String>Kenogami Forest</x:String>
-                        <x:String>Nipigon Forest</x:String>
+                        <x:String>Kenora Forest</x:String>
+                        <x:String>Lac Seul Forest</x:String>
+                        <x:String>Lake Nipigon</x:String>
+                        <x:String>Lakehead Forest</x:String>
+                        <x:String>Magpie Forest</x:String>
+                        <x:String>Martel Forest</x:String>
+                        <x:String>Mazinaw-Lanark Forest</x:String>
+                        <x:String>Nagagami Forest</x:String>
+                        <x:String>Nipissing Forest</x:String>
+                        <x:String>Northshore Forest</x:String>
+                        <x:String>Ogoki Forest</x:String>
+                        <x:String>Ottawa Valley Forest</x:String>
+                        <x:String>Pic Forest</x:String>
+                        <x:String>Pineland Forest</x:String>
+                        <x:String>Red Lake Forest</x:String>
+                        <x:String>Romeo Malette Forest</x:String>
+                        <x:String>Sapawe Forest</x:String>
+                        <x:String>Spanish Forest</x:String>
+                        <x:String>Sudbury Forest</x:String>
+                        <x:String>Temagami</x:String>
+                        <x:String>Timiskaming Forest</x:String>
+                        <x:String>Trout Lake Forest</x:String>
+                        <x:String>Wabigoon Forest</x:String>
+                        <x:String>Whiskey Jack Forest</x:String>
+                        <x:String>White River Forest</x:String>
+                        <x:String>Whitefeather Forest</x:String>
                     </Picker.Items>
-                </Picker>
+                </Picker>-->
                 <Label Text="Plot Date" FontAttributes="None" HorizontalOptions="Start" />
-                <DatePicker x:Name="txtDate" Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand"/>
+                <DatePicker x:Name="txtDate" Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand" MinimumDate="01-Jan-2020"/>
                 <Label Text="Crew 1" FontAttributes="None" HorizontalOptions="Start" />
                 <Entry x:Name="txtCrew1"  Text="{Binding FIELD_CREW1}" HorizontalOptions="FillAndExpand"  Placeholder="Crew 1"/>
                 <Label Text="Crew 2" FontAttributes="None" HorizontalOptions="Start" />

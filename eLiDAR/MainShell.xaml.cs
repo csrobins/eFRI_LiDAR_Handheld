@@ -15,7 +15,14 @@ namespace eLiDAR
     {
         public MainShell()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            { var error = ex.Message;
+            }
+
         }
     }
 }

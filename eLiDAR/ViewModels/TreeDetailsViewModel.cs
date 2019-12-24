@@ -196,6 +196,7 @@ namespace eLiDAR.ViewModels {
                     if (isUserAccept)
                     {
                         _treeRepository.UpdateTree(_tree);
+                        NotifyPropertyChanged("TreeListFull"); 
                         await _navigation.PopAsync();
                     }
                 }

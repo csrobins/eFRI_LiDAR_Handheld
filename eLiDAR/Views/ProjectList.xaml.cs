@@ -6,12 +6,17 @@ using Xamarin.Forms;
 
 namespace eLiDAR.Views {
     public partial class ProjectList : ContentPage {
+
         public ProjectList() {
             InitializeComponent();
         }
-
-		protected override void OnAppearing() {
-            this.BindingContext = new ProjectListViewModel(Navigation);
+        private ProjectListViewModel _viewmodel;
+        protected override void OnAppearing() {
+            _viewmodel = new ProjectListViewModel(Navigation);
+            this.BindingContext = _viewmodel;
+            MyListView.ItemsSource = null;
+            MyListView.ItemsSource = _viewmodel.ProjectList;
+            _viewmodel.FetchProjects(); 
 		}
     }
 }
