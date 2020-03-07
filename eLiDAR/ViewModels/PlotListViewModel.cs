@@ -21,6 +21,7 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowSiteCommand { get; private set; }
         public ICommand ShowSmallTreeCommand { get; private set; }
         public ICommand ShowSoilCommand { get; private set; }
+        public ICommand ShowVegetationCommand { get; private set; }
 
 
         public PlotListViewModel(INavigation navigation) {
@@ -33,6 +34,8 @@ namespace eLiDAR.ViewModels {
             ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
             ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
             ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
+            ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
+
             FetchPlots();
         }
         public PlotListViewModel(INavigation navigation,string selectedprojectid )
@@ -47,7 +50,7 @@ namespace eLiDAR.ViewModels {
             ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
             ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
             ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
-
+            ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
             FetchPlots();
         }
 
@@ -131,6 +134,10 @@ namespace eLiDAR.ViewModels {
             await _navigation.PushAsync(new SmallTreeList(_plot.PLOTID));
         }
 
+        async Task ShowVegetation(PLOT _plot)
+        {
+            await _navigation.PushAsync(new VegetationList(_plot.PLOTID));
+        }
 
         public string Title
         {

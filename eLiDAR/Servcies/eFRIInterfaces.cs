@@ -139,6 +139,25 @@ namespace eLiDAR.Servcies
     
 
     }
+    public interface IVegetationRepository
+    {
+        List<VEGETATION> GetAllData();
+        List<VEGETATION> GetFilteredData(string fk);
+
+        //Get Specific data
+        VEGETATION GetVegetationData(string VEGETATIONID);
+        // Delete all Data
+        void DeleteAllVegetation();
+        // Delete Specific
+        void DeleteVegetation(string VEGETATIONID);
+        // Insert new to DB 
+        void InsertVegetation(VEGETATION vegetation, string fk);
+        // Update Data
+        void UpdateVegetation(VEGETATION vegetation);
+        String GetTitle(string plotid);
+
+
+    }
     public class ProjectRepository : IProjectRepository
     {
         DatabaseHelper _databaseHelper;
@@ -545,6 +564,60 @@ namespace eLiDAR.Servcies
             }
         }
        
+    }
+    public class VegetationRepository : IVegetationRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public VegetationRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteVegetation(string ID)
+        {
+            _databaseHelper.DeleteVegetation(ID);
+        }
+        public void DeleteAllVegetation()
+        {
+            _databaseHelper.DeleteAllVegetation();
+        }
+        public List<VEGETATION> GetAllData()
+        {
+            return _databaseHelper.GetAllVegetationData();
+        }
+
+        public List<VEGETATION> GetFilteredData(string fk)
+        {
+            return _databaseHelper.GetFilteredVegetationData(fk);
+        }
+
+        public VEGETATION GetVegetationData(string VegetationID)
+        {
+            return _databaseHelper.GetVegetationData(VegetationID);
+        }
+
+        public void InsertVegetation(VEGETATION vegetation, string fk)
+        {
+            vegetation.VEGETATIONID = Guid.NewGuid().ToString();
+            vegetation.PLOTID = fk;
+            _databaseHelper.InsertVegetation(vegetation);
+        }
+
+        public void UpdateVegetation(VEGETATION vegetation)
+        {
+            _databaseHelper.UpdateVegetation(vegetation);
+        }
+        public String GetTitle(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+
     }
 
 }

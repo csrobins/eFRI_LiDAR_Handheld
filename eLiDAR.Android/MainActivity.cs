@@ -6,7 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-
+using SupportWidgetXF.Droid;
 
 namespace eLiDAR.Droid
 {
@@ -22,6 +22,7 @@ namespace eLiDAR.Droid
 
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            SupportWidgetXFSetup.Initialize(this, bundle);
             LoadApplication(new App());
         }
     }

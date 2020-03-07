@@ -19,13 +19,15 @@ namespace eLiDAR.Views {
         private PlotListViewModel _viewmodel;
         public PlotFilterList() {
             InitializeComponent();
-            this.BindingContext = new PlotListViewModel(Navigation);
+            _viewmodel = new PlotListViewModel(Navigation);
+            this.BindingContext = _viewmodel;
         }
 
         public PlotFilterList(string projectID)
         {
             InitializeComponent();
-            this.BindingContext = new PlotListViewModel(Navigation, projectID);
+            _viewmodel = new PlotListViewModel(Navigation);
+            this.BindingContext = _viewmodel;
         } 
         }
 

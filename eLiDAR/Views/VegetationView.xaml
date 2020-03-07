@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="eLiDAR.Views.VegetationView"
+             xmlns:behaviors="clr-namespace:SupportWidgetXF.Behaviors;assembly=SupportWidgetXF"
+             xmlns:widget="clr-namespace:SupportWidgetXF.Widgets;assembly=SupportWidgetXF"
+             xmlns:dm="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"        >
+    <ContentView.Content>
+       
+            <StackLayout Grid.Column="0" Grid.Row="0">
+                <Label Text="Single title" />
+            <!--<widget:SupportAutoComplete x:Name="singleTitle"--><!--
+                                        HeightRequest="40"
+                                        HorizontalOptions="FillAndExpand"
+                                        CornerColor="Green"
+                                        CornerRadius="5"
+                                        CornerWidth="1"
+                                        DropMode="SingleTitle"
+                                        FocusCornerColor="Purple"
+                                        ItemsSource="{Binding ItemDemo}"--> 
+                                        <!--Placeholder="type here" Text="{Binding Test, Mode=TwoWay}" IsValid="True" />-->
+            <!--<Entry Text=" {Binding SPECIES, Mode=TwoWay}"/>-->
+
+            <Label Text="Simple Test using a static list of results, and filtering them dynamically based on input" HorizontalOptions="Start" />
+            <dm:AutoSuggestBox x:Name="SuggestBox1" 
+                           PlaceholderText="Enter a country"
+                           TextChanged="SuggestBox_TextChanged" 
+                           QuerySubmitted="SuggestBox_QuerySubmitted"
+                           Text=" {Binding SPECIES, Mode=TwoWay}"/>
+            <Label Text="" x:Name="status" />
+            <dm:AutoSuggestBox x:Name="SuggestBox2"
+                           PlaceholderText="Enter another country"
+                           TextChanged="SuggestBox_TextChanged"
+                           QuerySubmitted="SuggestBox_QuerySubmitted" />
+
+        </StackLayout>
+            
+    
+    </ContentView.Content>
+</ContentView>

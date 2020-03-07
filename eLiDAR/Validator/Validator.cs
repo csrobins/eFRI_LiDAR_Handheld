@@ -161,5 +161,29 @@ namespace eLiDAR.Validator
             return false;
         }
     }
-
+    public class VegetationValidator : AbstractValidator<VEGETATION>
+    {
+        public VegetationValidator()
+        {
+            RuleFor(c => c.SPECIES).Must(a => ValidateStringEmpty(a)).WithMessage("Species should not be empty.");
+        }
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+    }
 }

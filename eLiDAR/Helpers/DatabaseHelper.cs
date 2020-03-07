@@ -347,6 +347,39 @@ namespace eLiDAR.Helpers
             return sqliteconnection.Table<SMALLTREE>().FirstOrDefault(t => t.SMALLTREEID == id);
         }
 
+        // Vegetation Helpers
+        public void DeleteVegetation(string id)
+        {
+            sqliteconnection.Delete<VEGETATION>(id);
+        }
+        // Insert new to DB 
+        public void InsertVegetation(VEGETATION vegetation)
+        {
+            sqliteconnection.Insert(vegetation);
+        }
+        // Update Data
+        public void UpdateVegetation(VEGETATION vegetation)
+        {
+            sqliteconnection.Update(vegetation);
+        }
+        public void DeleteAllVegetation()
+        {
+            sqliteconnection.DeleteAll<VEGETATION>();
+        }
+        public List<VEGETATION> GetAllVegetationData()
+        {
+            return (from data in sqliteconnection.Table<VEGETATION>().OrderBy(t => t.SPECIES)
+                    select data).ToList();
+        }
+        public List<VEGETATION> GetFilteredVegetationData(string plotid)
+        {
+            return (from data in sqliteconnection.Table<VEGETATION>().OrderBy(t => t.SPECIES).Where(t => t.PLOTID == plotid)
+                    select data).ToList();
+        }
+        public VEGETATION GetVegetationData(string id)
+        {
+            return sqliteconnection.Table<VEGETATION>().FirstOrDefault(t => t.VEGETATIONID == id);
+        }
 
     }
 }

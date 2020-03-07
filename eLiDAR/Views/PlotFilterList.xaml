@@ -39,6 +39,8 @@
                                     <Button Text="Site" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSiteCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
                                     <Button Text="Soil" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSoilCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
                                     <Button Text="Small" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSmallTreeCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
+                                    <Button Text="Vegetation" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowVegetationCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
+
                                 </StackLayout>
                             </Grid>
                         </ViewCell>

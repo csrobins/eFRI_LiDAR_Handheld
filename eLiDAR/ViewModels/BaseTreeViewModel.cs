@@ -143,7 +143,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public bool DBH_IN
+        public String DBH_IN
         {
             get => _tree.DBH_IN;
             set
@@ -153,7 +153,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public bool CROWN_IN
+        public String CROWN_IN
         {
             get => _tree.CROWN_IN;
             set
@@ -263,7 +263,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public bool BROKEN_TOP
+        public String BROKEN_TOP
         {
             get => _tree.BROKEN_TOP;
             set

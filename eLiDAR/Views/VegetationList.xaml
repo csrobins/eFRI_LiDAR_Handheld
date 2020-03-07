@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.VegetationList">
+   <Grid Padding="10,10,10,10">  
+        <Grid.RowDefinitions>  
+            <RowDefinition Height="Auto" />  
+            <RowDefinition Height="*" />  
+            <RowDefinition Height="Auto" />  
+        </Grid.RowDefinitions>  
+        <Grid Grid.Row="0">  
+        <Grid.ColumnDefinitions>  
+        <ColumnDefinition Width="*" />  
+        <ColumnDefinition Width="*" />  
+        </Grid.ColumnDefinitions> 
+            <Button Text="New Vegetation" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" BorderRadius="0" HeightRequest="40" BorderColor="Black" BackgroundColor="Transparent" BorderWidth="1"  TextColor="Black"  Command="{Binding AddCommand}" />  
+        </Grid>  
+        <ListView x:Name="MyListView" HasUnevenRows="true" Grid.Row="1" SeparatorColor="Black" ItemsSource="{Binding VegetationList}"
+         SelectedItem="{Binding SelectedVegetationItem, Mode=TwoWay}">  
+            <ListView.ItemTemplate>  
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid  Padding="10" x:Name="Item">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Spacing="1">
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="Tree"  TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding TREENUM}"  Font="20" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="Species"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding SPECIES}"  Font="20" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" Spacing="1">
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="DBH(cm)"  TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding DBH}"   TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="Ht(m)"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding HT}"   TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="2" Spacing="1">
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="Status"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding STATUS}"   TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="3" Spacing="1">
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="Dist(m)"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding DISTANCE}"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="Azm"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                    <Label Text="{Binding AZIMUTH}"   TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <Button Grid.Column="4" Text="Stem Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate> 
+            </ListView.ItemTemplate>  
+        </ListView> 
+        <Button Text="Delete All Trees" Grid.Row="2" BorderRadius="0" VerticalOptions="EndAndExpand" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteAllCommand}" />  
+    </Grid>  
+</ContentPage>  

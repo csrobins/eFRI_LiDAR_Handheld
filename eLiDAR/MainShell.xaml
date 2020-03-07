@@ -22,6 +22,9 @@
         <Tab Title="Plots" >
             <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotFilterList}"/>
         </Tab>
+        <Tab Title="TEST" >
+            <ShellContent ContentTemplate=" {DataTemplate pages:Views.DemoAutoCompletePage}"/>
+        </Tab>
 
         <!--<Tab Title=" Plot View">
             <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotView}"/>

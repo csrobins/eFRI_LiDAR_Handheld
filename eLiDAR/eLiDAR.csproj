@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.6.0" />
+    <PackageReference Include="FluentValidation" Version="8.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+    <PackageReference Include="SupportWidgetXF" Version="1.3.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
     <PackageReference Include="LiveXAML" Version="2.1.73" />
+    <PackageReference Include="Xamarin.RisePlugin.AutoCompleteTextView" Version="1.0.9" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="FlyoutHeader.xaml.cs" />
@@ -17,6 +19,8 @@
     <EmbeddedResource Remove="FlyoutHeader.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Data\Countries.txt" />
+    <None Remove="Data\USCities.txt" />
     <None Remove="Images\lidar.jpg" />
     <None Remove="Images\photo.png" />
     <None Remove="Images\pine.jpg" />
@@ -26,6 +30,12 @@
     <None Remove="ViewModels\CameraViewModel.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\Countries.txt">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\USCities.txt">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\lidar.jpg" />
     <EmbeddedResource Include="Images\photo.png" />
     <EmbeddedResource Include="Images\pine.jpg" />
@@ -59,8 +69,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoSuggestBox\dotMorten.Xamarin.Forms.AutoSuggestBox.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Views\AddSmallTree.xaml.cs">
       <DependentUpon>AddSmallTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddVegetation.xaml.cs">
+      <DependentUpon>AddVegetation.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\AddSoil.xaml.cs">
       <DependentUpon>AddSoil.xaml</DependentUpon>
@@ -85,6 +101,15 @@
     </Compile>
     <Compile Update="Views\SmallTreeView.xaml.cs">
       <DependentUpon>SmallTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VegetationList.xaml.cs">
+      <DependentUpon>VegetationList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VegetationView.xaml.cs">
+      <DependentUpon>VegetationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VegetationDetailsPage.xaml.cs">
+      <DependentUpon>VegetationDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StemMapDetailsPage.xaml.cs">
       <DependentUpon>StemMapDetailsPage.xaml</DependentUpon>

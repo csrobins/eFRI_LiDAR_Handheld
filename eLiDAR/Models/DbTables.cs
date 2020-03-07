@@ -63,8 +63,8 @@ namespace eLiDAR.Models
         public Single HT_TO_DBH { get; set; }
         public Single DBH { get; set; }
         public Single HT { get; set; }
-        public Boolean DBH_IN { get; set; }
-        public Boolean CROWN_IN { get; set; }
+        public string DBH_IN { get; set; }
+        public string CROWN_IN { get; set; }
         public int LIVE_CROWN_RATIO { get; set; }
         public string CROWN_CLASS { get; set; }
         public int CROWN_DAMAGE { get; set; }
@@ -75,7 +75,7 @@ namespace eLiDAR.Models
         public int WOOD_CONDITION { get; set; }
         public int DECAY_CLASS { get; set; }
         public int MORT_CAUSE { get; set; }
-        public Boolean BROKEN_TOP { get; set; }
+        public string BROKEN_TOP { get; set; }
         public int AGE { get; set; }
         public double AZIMUTH { get; set; }
         public double DISTANCE { get; set; }
@@ -164,6 +164,23 @@ namespace eLiDAR.Models
         public int HT_CLASS6_COUNT { get; set; }
         public int HT_CLASS7_COUNT { get; set; }
         public int HT_CLASS8_COUNT { get; set; }
+    }
+    [Table("VEGETATION")]
+    public class VEGETATION
+    {
+        [PrimaryKey]
+        public string VEGETATIONID { get; set; }
+        public string PLOTID { get; set; }
+        public string SPECIES { get; set; }
+        public int QUAD1 { get; set; }
+        public int QUAD2 { get; set; }
+        public int QUAD3 { get; set; }
+        public int QUAD4 { get; set; }
+        public int ELCLAYER3 { get; set; }
+        public int ELCLAYER4 { get; set; }
+        public int ELCLAYER5 { get; set; }
+        public int ELCLAYER6 { get; set; }
+        public int ELCLAYER7 { get; set; }
     }
 }
 

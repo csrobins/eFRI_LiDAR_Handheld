@@ -50,11 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac">
+      <Version>5.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Glide.Xamarin">
+      <Version>4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.2.0.223</Version>
+    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.5.231</Version>
+      <Version>1.6.292</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.4.0.991265</Version>
+      <Version>4.5.0.356</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>4.5.0.356</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +117,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\photo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoSuggestBox\dotMorten.Xamarin.Forms.AutoSuggestBox.csproj">
+      <Project>{51866945-b641-45ff-a42a-b62d0d0a0154}</Project>
+      <Name>dotMorten.Xamarin.Forms.AutoSuggestBox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eLiDAR\eLiDAR.csproj">
       <Project>{3c01266d-b4c5-44bb-a86c-a61141a25e49}</Project>
       <Name>eLiDAR</Name>

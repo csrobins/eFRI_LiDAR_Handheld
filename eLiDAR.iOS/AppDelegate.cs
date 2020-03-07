@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using SupportWidgetXF.iOS;
 using UIKit;
 
 namespace eLiDAR.iOS
@@ -24,6 +25,8 @@ namespace eLiDAR.iOS
         {
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
+            SupportWidgetXFSetup.Initialize(this);
+            Xamarin.RisePlugin.AutoCompleteTextView.iOS.AutoCompleteTextViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
