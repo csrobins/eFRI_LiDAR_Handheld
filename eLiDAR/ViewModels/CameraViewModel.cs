@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eLiDAR.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,7 @@ namespace eLiDAR.ViewModels
     [QueryProperty("Payload", "payload")]
     public class CameraViewModel : INotifyPropertyChanged
     {
-        public CameraViewModel()
+        public CameraViewModel(ECOSITE _ecosite)
         {
         }
 

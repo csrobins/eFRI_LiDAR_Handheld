@@ -116,7 +116,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int PORE_PATTERN
+        public string PORE_PATTERN
         {
             get => _soil.PORE_PATTERN;
             set
@@ -126,7 +126,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int STRUCTURE
+        public string STRUCTURE
         {
             get => _soil.STRUCTURE;
             set
@@ -146,7 +146,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int MOTTLE_COLOUR
+        public string MOTTLE_COLOUR
         {
             get => _soil.MOTTLE_COLOUR;
             set

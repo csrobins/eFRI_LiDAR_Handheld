@@ -1,77 +1,198 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.TreeListPage">
-   <Grid Padding="10,10,10,10">  
-        <Grid.RowDefinitions>  
-            <RowDefinition Height="Auto" />  
-            <RowDefinition Height="*" />  
-            <RowDefinition Height="Auto" />  
-        </Grid.RowDefinitions>  
-        <Grid Grid.Row="0">  
-        <Grid.ColumnDefinitions>  
-        <ColumnDefinition Width="*" />  
-        <ColumnDefinition Width="*" />  
-        </Grid.ColumnDefinitions> 
-            <Button Text="New Tree" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" BorderRadius="0" HeightRequest="40" BorderColor="Black" BackgroundColor="Transparent" BorderWidth="1"  TextColor="Black"  Command="{Binding AddCommand}" />  
-        </Grid>  
-        <ListView x:Name="MyListView" HasUnevenRows="true" Grid.Row="1" SeparatorColor="Black" ItemsSource="{Binding TreeStemList}"
-         SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}">  
-            <ListView.ItemTemplate>  
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.TreeListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}">
+    <Grid Padding="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <SearchBar
+                Grid.Row=" 0"
+                Grid.ColumnSpan=" 2"
+                CancelButtonColor="Orange"
+                FontAttributes="Italic"
+                FontSize="Small"
+                HorizontalTextAlignment="Center"
+                Keyboard="Numeric"
+                Placeholder="Search trees..."
+                PlaceholderColor="DarkBlue"
+                TextChanged="SearchBar_OnTextChanged"
+                TextColor="DarkBlue" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                BorderColor="Black"
+                BorderRadius="0"
+                BorderWidth="1"
+                Command="{Binding AddCommand}"
+                FontAttributes="Bold"
+                HeightRequest="30"
+                Text="New Tree"
+                TextColor="Black" />
+        </Grid>
+        <ListView
+            x:Name="MyListView"
+            Grid.Row="2"
+            HasUnevenRows="true"
+            ItemsSource="{Binding TreeStemListFull}"
+            SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}"
+            SeparatorColor="Black">
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid  Padding="10" x:Name="Item">
+                        <Grid x:Name="Item" Padding="10">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="65*" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20*" />
-                                <ColumnDefinition Width="20*" />
-                                <ColumnDefinition Width="20*" />
-                                <ColumnDefinition Width="20*" />
-                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
 
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0" Spacing="1">
-                                <StackLayout  Orientation="Horizontal">
-                                    <Label Text="Tree"  TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
-                                    <Label Text="{Binding TREENUM}"  Font="20" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="Tree"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding TREENUM}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
                                 </StackLayout>
-                                <StackLayout  Orientation="Horizontal">
-                                    <Label Text="Species"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"/>
-                                    <Label Text="{Binding SPECIES}"  Font="20" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="Species"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding SPECIES}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout Grid.Column="1" Spacing="1">
-                                <StackLayout  Orientation="Horizontal">
-                                    <Label Text="DBH(cm)"  TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
-                                    <Label Text="{Binding DBH}"   TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="DBH(cm)"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding DBH}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
                                 </StackLayout>
-                                <StackLayout  Orientation="Horizontal">
-                                    <Label Text="Ht(m)"  TextColor="Black" HorizontalTextAlignment="Start"  VerticalTextAlignment="Center"/>
-                                    <Label Text="{Binding HT}"   TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="Ht(m)"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding HT}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="Status"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding STATUS}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout Grid.Column="2" Spacing="1">
-                                <StackLayout  Orientation="Horizontal">
-                                    <Label Text="Status"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                                    <Label Text="{Binding STATUS}"   TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="Dist(m)"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding DISTANCE}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="Azm"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding AZIMUTH}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
-                            <StackLayout Grid.Column="3" Spacing="1">
-                                <StackLayout  Orientation="Horizontal">
-                                    <Label Text="Dist(m)"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                                    <Label Text="{Binding DISTANCE}"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                                </StackLayout>
-                                <StackLayout  Orientation="Horizontal">
-                                    <Label Text="Azm"  TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                                    <Label Text="{Binding AZIMUTH}"   TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
-                                </StackLayout>
-                            </StackLayout>
-                            <Button Grid.Column="4" Text="Stem Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
+                            <FlexLayout
+                                Grid.Column=" 3"
+                                AlignContent="End"
+                                FlowDirection="LeftToRight"
+                                HorizontalOptions="End"
+                                JustifyContent="End"
+                                Wrap="Wrap">
+                                <Button
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowFilteredCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                    HeightRequest=" 50"
+                                    HorizontalOptions="End"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
+                                    Text="Stem Map"
+                                    WidthRequest="90" />
+                                <Button
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowDeformityCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                    HeightRequest=" 50"
+                                    HorizontalOptions="End"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
+                                    Text="Deformity"
+                                    WidthRequest="90" />
+                            </FlexLayout>
                         </Grid>
                     </ViewCell>
-                </DataTemplate> 
-            </ListView.ItemTemplate>  
-        </ListView> 
-        <Button Text="Delete All Trees" Grid.Row="2" BorderRadius="0" VerticalOptions="EndAndExpand" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteAllCommand}" />  
-    </Grid>  
-</ContentPage>  
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<Button
+            Grid.Row="2"
+            BackgroundColor="#5989B5"
+            BorderRadius="0"
+            Command="{Binding DeleteAllCommand}"
+            FontAttributes="Bold"
+            Text="Delete All Trees"
+            TextColor="White"
+            VerticalOptions="EndAndExpand" />-->
+    </Grid>
+</ContentPage>

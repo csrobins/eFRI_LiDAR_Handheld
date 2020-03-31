@@ -81,7 +81,7 @@ namespace eLiDAR.ViewModels {
         }
         public string Title
         {
-            get => "Vegetation details for plot " + _vegetationRepository.GetTitle(_fk);
+            get => "Vegetation details for plot " + _vegetationRepository.GetTitle(_fk) + ".  " + VegetationList.Count.ToString() + " veg species.";
             set
             {
             }

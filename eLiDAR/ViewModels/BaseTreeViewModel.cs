@@ -33,6 +33,33 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+        private bool _islivetree;
+        public bool IsLiveTree
+        {
+            get
+            {
+                return _islivetree;
+            }
+            set { 
+                _islivetree = value;
+                _isnotlivetree = !value;
+                NotifyPropertyChanged("IsLiveTree");
+                NotifyPropertyChanged("IsNotLiveTree");
+            }
+        }
+        private bool _isnotlivetree;
+        public bool IsNotLiveTree
+        {
+            get
+            {
+                return _isnotlivetree;
+            }
+            set
+            {
+                _isnotlivetree = value;
+                NotifyPropertyChanged("IsLiveNotTree");
+            }
+        }
         public string TREEID
         {
             get => _tree.TREEID;
@@ -58,8 +85,26 @@ namespace eLiDAR.ViewModels
             get => _tree.TREENUM;
             set
             {
-                _tree.TREENUM = value;
+                _tree.TREENUM = (int)value;
                 NotifyPropertyChanged("TREENUM");
+            }
+        }
+        public int SECTION
+        {
+            get => _tree.SECTION;
+            set
+            {
+                _tree.SECTION = (int)value;
+                NotifyPropertyChanged("SECTION");
+            }
+        }
+        public int CROWN_POSITION
+        {
+            get => _tree.CROWN_POSITION;
+            set
+            {
+                _tree.CROWN_POSITION = value;
+                NotifyPropertyChanged("CRWON_POSITION");
             }
         }
 
@@ -99,6 +144,11 @@ namespace eLiDAR.ViewModels
             set
             {
                 _tree.STATUS = value;
+                if (STATUS == "L" || STATUS == "V" || STATUS == "M" || STATUS == "E")
+                {
+                    IsLiveTree = true;
+                }
+                else { IsLiveTree = false; }
                 NotifyPropertyChanged("STATUS");
             }
         }
@@ -112,7 +162,15 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("VIGOUR");
             }
         }
-
+        public Single LENGTH
+        {
+            get => _tree.LENGTH;
+            set
+            {
+                _tree.LENGTH = value;
+                NotifyPropertyChanged("LENGTH");
+            }
+        }
         public float HT_TO_DBH
         {
             get => _tree.HT_TO_DBH;
@@ -143,7 +201,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public String DBH_IN
+        public string DBH_IN
         {
             get => _tree.DBH_IN;
             set
@@ -153,7 +211,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public String CROWN_IN
+        public string CROWN_IN
         {
             get => _tree.CROWN_IN;
             set
@@ -168,7 +226,7 @@ namespace eLiDAR.ViewModels
             get => _tree.LIVE_CROWN_RATIO;
             set
             {
-                _tree.LIVE_CROWN_RATIO = value;
+                _tree.LIVE_CROWN_RATIO = (int)value;
                 NotifyPropertyChanged("LIVE_CROWN_RATIO");
             }
         }
@@ -263,7 +321,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public String BROKEN_TOP
+        public string BROKEN_TOP
         {
             get => _tree.BROKEN_TOP;
             set
@@ -278,7 +336,7 @@ namespace eLiDAR.ViewModels
             get => _tree.AGE;
             set
             {
-                _tree.AGE = value;
+                _tree.AGE = (int)value;
                 NotifyPropertyChanged("AGE");
             }
         }
@@ -322,25 +380,18 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("CROWN_WIDTH2");
             }
         }
-        List<TREE> _treeListFull;
-        public List<TREE> TreeListFull
+        public string COMMENTS
         {
-            //get => _treeList;
-            get
-            {
-                if (_fk == "")
-                    return _treeRepository.GetAllData();
-                else
-                    return _treeRepository.GetFilteredData(_fk);
-            }
+            get => _tree.COMMENTS;
             set
             {
-                _treeListFull = value;
-                NotifyPropertyChanged("TreeListFull");
+                _tree.COMMENTS  = value;
+                NotifyPropertyChanged("COMMENTS");
             }
         }
-        
-     
+
+
+
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = ""){

@@ -1,42 +1,85 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Project List" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.ProjectList">
-   <Grid Padding="10,10,10,5">  
-        <Grid.RowDefinitions>  
-            <RowDefinition Height="Auto" />  
-            <RowDefinition Height="*" />  
-            <RowDefinition Height="Auto" />  
-        </Grid.RowDefinitions>  
-        <Grid Grid.Row="0">  
-        <Grid.ColumnDefinitions>  
-        <ColumnDefinition Width="*" />  
-        <ColumnDefinition Width="*" />  
-        </Grid.ColumnDefinitions> 
-        <Button Text="New Project" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" BorderRadius="0" HeightRequest="40" BorderColor="Black" BackgroundColor="Transparent" BorderWidth="1"  TextColor="Black"  Command="{Binding AddCommand}" />  
-        </Grid>  
-        <ListView x:Name="MyListView" HasUnevenRows="true" Grid.Row="1" SeparatorColor="Black" ItemsSource="{Binding ProjectList}"
-         SelectedItem="{Binding SelectedProjectItem, Mode=TwoWay}">  
-            <ListView.ItemTemplate>  
-                <DataTemplate>  
-                    <ViewCell>  
-                            <Grid  Padding="10" x:Name="Item">  
-                                <Grid.RowDefinitions>  
-                                    <!--<RowDefinition Height="Auto" />-->  
-                                </Grid.RowDefinitions>  
-                                <Grid.ColumnDefinitions>  
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />  
-                                </Grid.ColumnDefinitions>
-                                <StackLayout Grid.Column=" 0">
-                                    <Label Text="{Binding PROJECT}" FontAttributes="Bold"  TextColor="Black" HorizontalOptions="Start"  /> 
-                                    <Label Text="{Binding DESCRIPTION}" TextColor="Black" HorizontalOptions="Start" />  
-                                </StackLayout>
-                            <Button Grid.Column="1" Text="Plots" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  HorizontalOptions="End"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" ></Button>
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.ProjectList"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Project List">
+    <Grid Padding="10,10,10,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                BorderColor="Black"
+                BorderRadius="0"
+                BorderWidth="1"
+                Command="{Binding AddCommand}"
+                FontAttributes="Bold"
+                HeightRequest="40"
+                Text="New Project"
+                TextColor="Black" />
+        </Grid>
+        <ListView
+            x:Name="MyListView"
+            Grid.Row="1"
+            HasUnevenRows="true"
+            ItemsSource="{Binding ProjectList}"
+            SelectedItem="{Binding SelectedProjectItem, Mode=TwoWay}"
+            SeparatorColor="Black">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:Name="Item" Padding="10">
+                            <Grid.RowDefinitions>
+                                <!--<RowDefinition Height="Auto" />-->
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column=" 0" Orientation="Vertical">
+                                <Label
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding NAME}"
+                                    TextColor="Black" />
+                                <Label
+                                    HorizontalOptions="Start"
+                                    Text="{Binding DESCRIPTION}"
+                                    TextColor="Black" />
+                            </StackLayout>
+                            <Button
+                                Grid.Column="1"
+                                BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                Command="{Binding ShowFilteredCommand}"
+                                CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                HeightRequest=" 50"
+                                HorizontalOptions="End"
+                                Text="Plots"
+                                WidthRequest=" 75" />
 
-                        </Grid>  
-                    </ViewCell>  
-                </DataTemplate>  
-            </ListView.ItemTemplate>  
-        </ListView> 
-        <Button Text="Delete All Projects" Grid.Row="2" BorderRadius="0" VerticalOptions="EndAndExpand" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteAllProjectsCommand}" />  
-    </Grid>  
-</ContentPage>  
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button
+            Grid.Row="2"
+            BackgroundColor="#5989B5"
+            BorderRadius="0"
+            Command="{Binding DeleteAllProjectsCommand}"
+            FontAttributes="Bold"
+            Text="Delete All Projects"
+            TextColor="White"
+            VerticalOptions="EndAndExpand" />
+    </Grid>
+</ContentPage>

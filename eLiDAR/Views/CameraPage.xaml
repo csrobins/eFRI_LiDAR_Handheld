@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="Take a Photo"
-             x:Class="eLiDAR.Views.CameraPage">
+<ContentPage
+    x:Class="eLiDAR.Views.CameraPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Take a Photo">
     <ContentPage.Content>
-        <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="Center" AlignContent="Center"> 
+        <FlexLayout
+            AlignContent="Center"
+            AlignItems="Center"
+            Direction="Column"
+            JustifyContent="Center">
             <Label Text="CameraView Coming Soon!" />
-            <Label x:Name="PayloadLabel"
-                   Text="{Binding Payload, FallbackValue=Broken}"
-                   TextColor="Red" FontSize="34"/>
+            <Label
+                x:Name="PayloadLabel"
+                FontSize="34"
+                Text="{Binding Payload, FallbackValue=Broken}"
+                TextColor="Red" />
         </FlexLayout>
     </ContentPage.Content>
 </ContentPage>

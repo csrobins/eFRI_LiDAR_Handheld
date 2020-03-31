@@ -16,7 +16,14 @@ namespace eLiDAR.ViewModels {
 
         public ICommand AddCommand { get; private set; }
         public ICommand ViewAllCommand { get; private set; }
+        public ICommand CommentsCommand { get; private set; }
         public List<PickerItems> ListFMU { get; set; }
+        public List<PickerItems> ListSpecies { get; set; }
+        public List<PickerItems> ListCanopyOrigin { get; set; }
+        public List<PickerItemsString> ListCanopyStructure {get; set; }
+        public List<PickerItemsString> ListMaturityClass { get; set; }
+        public List<PickerItems> ListNonStandardType { get; set; }
+
         public AddPlotViewModel(INavigation navigation){
             _navigation = navigation;
             _plotValidator = new PlotValidator();
@@ -37,7 +44,74 @@ namespace eLiDAR.ViewModels {
             AddCommand = new Command(async () => await AddPlot(_selectedprojectid));
             ViewAllCommand = new Command(async () => await ShowList());
             ListFMU = PickerService.ForestItems().OrderBy(c => c.NAME).ToList();
+            ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
+            ListCanopyOrigin= PickerService.CanopyOriginItems().OrderBy(c => c.NAME).ToList();
+            ListCanopyStructure = PickerService.CanopyStructureItems().OrderBy(c => c.NAME).ToList();
+            ListMaturityClass = PickerService.MaturityClassItems().OrderBy(c => c.NAME).ToList();
 
+            CommentsCommand = new Command(async () => await ShowComments());
+
+        }
+        async Task ShowComments()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new PlotComments(_plot));
+        }
+        private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedSpecies
+        {
+            get
+            {
+                _selectedSpecies = PickerService.GetItem(ListSpecies, _plot.LEAD_SPP);
+                return _selectedSpecies;
+            }
+            set
+            {
+                SetProperty(ref _selectedSpecies, value);
+                _plot.LEAD_SPP = (int)_selectedSpecies.ID;
+            }
+        }
+        private PickerItems _selectedCanopyOrigin = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedCanopyOrigin
+        {
+            get
+            {
+                _selectedCanopyOrigin = PickerService.GetItem(ListCanopyOrigin, _plot.ORIGIN);
+                return _selectedCanopyOrigin;
+            }
+            set
+            {
+                SetProperty(ref _selectedCanopyOrigin, value);
+                _plot.ORIGIN = (int)_selectedCanopyOrigin.ID;
+            }
+        }
+        private PickerItemsString _selectedMaturityClass = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedMaturityClass
+        {
+            get
+            {
+                _selectedMaturityClass = PickerService.GetItem(ListMaturityClass, _plot.MATURITY);
+                return _selectedMaturityClass;
+            }
+            set
+            {
+                SetProperty(ref _selectedMaturityClass, value);
+                _plot.MATURITY  = _selectedMaturityClass.ID;
+            }
+        }
+        private PickerItemsString _selectedCanopyStructure = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCanopyStructure
+        {
+            get
+            {
+                _selectedCanopyStructure = PickerService.GetItem(ListCanopyStructure, _plot.CANOPY_STRUCTURE);
+                return _selectedCanopyStructure;
+            }
+            set
+            {
+                SetProperty(ref _selectedCanopyStructure, value);
+                _plot.CANOPY_STRUCTURE  = _selectedCanopyStructure.ID;
+            }
         }
 
         private PickerItems _selectedFMU = new PickerItems { ID = 0, NAME = "" };
@@ -62,6 +136,7 @@ namespace eLiDAR.ViewModels {
         }
         async Task AddPlot(string fk)
         {
+            _plot.PROJECTID = fk;
             var validationResults = _plotValidator.Validate(_plot);
 
             if (validationResults.IsValid)
@@ -69,6 +144,7 @@ namespace eLiDAR.ViewModels {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Plot", "Do you want to save plot details?", "OK", "Cancel");
                 if (isUserAccept)
                 {
+
                     _plotRepository.InsertPlot(_plot, fk);
                     
                     await _navigation.PopAsync(); 

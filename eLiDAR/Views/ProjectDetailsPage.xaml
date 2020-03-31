@@ -1,9 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Project Details" BackgroundColor="#D5E7FA"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:eLiDAR.Views" x:Class="eLiDAR.Views.ProjectDetailsPage">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.ProjectDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="Project Details"
+    BackgroundColor="#D5E7FA">
     <StackLayout Padding="20" Spacing="12">
         <local:ProjectView />
-         <Button Text="Update" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding UpdateProjectCommand}" />  
-        <Button Text="Delete" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteProjectCommand}" />  
+        <Button
+            Margin="0,30,0,0"
+            BackgroundColor="#5989B5"
+            BorderRadius="0"
+            Command="{Binding UpdateProjectCommand}"
+            FontAttributes="Bold"
+            Text="Update"
+            TextColor="White" />
+        <Button
+            Margin="0,30,0,0"
+            BackgroundColor="#5989B5"
+            BorderRadius="0"
+            Command="{Binding DeleteProjectCommand}"
+            FontAttributes="Bold"
+            Text="Delete"
+            TextColor="White" />
     </StackLayout>
 </ContentPage>

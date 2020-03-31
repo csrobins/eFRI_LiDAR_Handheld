@@ -18,7 +18,8 @@ namespace eLiDAR.ViewModels {
 
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
-
+        public List<PickerItemsString> ListVeg { get; set; }
+       // public string GetScientific { get; set; }
         public AddVegetationViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _vegetation = new VEGETATION();
@@ -27,25 +28,7 @@ namespace eLiDAR.ViewModels {
             _fk = selectedID;
             AddCommand = new Command(async () => await Update());
             DeleteCommand = new Command(async () => await Delete());
-  
-
-            // Added to handle the autocomplete picker as s check
-//            ImageItems = new ObservableCollection<GalleryImageXF>();
- //           ImageItemsSet = new ObservableCollection<string>();
-
-            ItemDemo = new List<IAutoDropItem>();
-            ItemDemo.Add(new YourClass("Robert Downey Jr.", "Iron Man - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Chris Evans", "Captain America - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Scarlett Johansson", "Black Widow - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Tom Hiddleston", "Loki - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Mark Ruffalo", "The Hulk - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Ben Affleck", "BatMan - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Henry Cavill", "Superman - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Gal Gadot", "Wonder Woman - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Ezra Miller", "The Flash - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Jason Momoa", "Aquaman - DC Universe", "dc"));
-
-
+            ListVeg = PickerService.VegItems().ToList();
         }
         private bool _IsValidSingle;
         public bool IsValidSingle
@@ -57,6 +40,21 @@ namespace eLiDAR.ViewModels {
                 OnPropertyChanged();
             }
         }
+        private PickerItemsString _selectedVeg = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedVeg
+        {
+            get
+            {
+                _selectedVeg = PickerService.GetItem(ListVeg, _vegetation.SPECIES);
+                return _selectedVeg ;
+            }
+            set
+            {
+                SetProperty(ref _selectedVeg, value);
+                
+                _vegetation.SPECIES  = _selectedVeg.ID;
+            }
+        }
         void FetchDetails(string fk){
             _vegetation = _vegetationRepository.GetVegetationData(fk);
         }
@@ -64,6 +62,7 @@ namespace eLiDAR.ViewModels {
             try
             {
                 VegetationValidator _vegetationValidator = new VegetationValidator();
+                _vegetation.PLOTID = _fk;
                 ValidationResult validationResults = _vegetationValidator.Validate(_vegetation);
 
                 if (validationResults.IsValid)
@@ -71,6 +70,7 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Vegetation Details", "Save Vegetation Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
+  
                      _vegetationRepository.InsertVegetation(_vegetation,_fk);
                         //  This is just to slow down the database
                      _vegetationRepository.GetVegetationData(_vegetation.VEGETATIONID );
@@ -102,15 +102,6 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-        private List<IAutoDropItem> _ItemDemo;
-        public List<IAutoDropItem> ItemDemo
-        {
-            get => _ItemDemo;
-            set
-            {
-                _ItemDemo = value;
-                OnPropertyChanged();
-            }
-        }
+       
     }
 }

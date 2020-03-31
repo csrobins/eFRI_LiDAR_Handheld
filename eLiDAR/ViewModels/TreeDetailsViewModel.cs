@@ -8,15 +8,18 @@ using eLiDAR.Models;
 using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
+using eLiDAR.Views;
 using FluentValidation;
 using FluentValidation.Results;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
-    public class TreeDetailsViewModel: BaseTreeViewModel {
+    public class TreeDetailsViewModel : BaseTreeViewModel {
 
         public ICommand UpdateTreeCommand { get; private set; }
         public ICommand DeleteTreeCommand { get; private set; }
+        public ICommand CommentsCommand { get; private set; }
+
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListVigour { get; set; }
         public List<PickerItems> ListCrownDamage { get; set; }
@@ -26,6 +29,8 @@ namespace eLiDAR.ViewModels {
         public List<PickerItems> ListWoodCondition { get; set; }
         public List<PickerItems> ListMortalityCause { get; set; }
         public List<PickerItems> ListDecayClass { get; set; }
+        public List<PickerItems> ListCrownPosition { get; set; }
+
         public TreeDetailsViewModel(INavigation navigation, string selectedTreeID) {
             _navigation = navigation;
             _tree = new TREE();
@@ -34,6 +39,8 @@ namespace eLiDAR.ViewModels {
 
             UpdateTreeCommand = new Command(async () => await UpdateTree());
             DeleteTreeCommand = new Command(async () => await DeleteTree());
+            CommentsCommand = new Command(async () => await ShowComments());
+
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
             ListVigour = PickerService.VigourItems().ToList();
             ListCrownDamage = PickerService.CrownDamageItems().ToList();
@@ -43,7 +50,29 @@ namespace eLiDAR.ViewModels {
             ListWoodCondition = PickerService.WoodConditionItems().ToList();
             ListMortalityCause = PickerService.MortalityCauseItems().ToList();
             ListDecayClass = PickerService.DecayClassItems().ToList();
+            ListCrownPosition = PickerService.CrownPositionItems().ToList();
+
             FetchTreeDetails();
+        }
+
+        async Task ShowComments()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new TreeComments(_tree));
+        }
+        private PickerItems _selectedCrownPosition = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems CrownPosition
+        {
+            get
+            {
+                _selectedCrownPosition = PickerService.GetItem(ListCrownPosition, _tree.CROWN_POSITION);
+                return _selectedCrownPosition;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrownPosition, value);
+                _tree.CROWN_POSITION = (int)_selectedCrownPosition.ID;
+            }
         }
 
         private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
@@ -175,6 +204,7 @@ namespace eLiDAR.ViewModels {
                 _tree.DECAY_CLASS = (int)_selectedDecayClass.ID;
             }
         }
+
 
         void FetchTreeDetails(){
             _tree = _treeRepository.GetTreeData(_tree.TREEID);

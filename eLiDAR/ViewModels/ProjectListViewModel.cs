@@ -26,8 +26,6 @@ namespace eLiDAR.ViewModels {
             AddCommand = new Command(async () => await ShowAddProject()); 
             DeleteAllProjectsCommand = new Command(async () => await DeleteAllProjects());
             ShowFilteredCommand = new Command<PROJECT>(async (x) =>  await ShowPlots(x));
-
-
             FetchProjects();
         }
 

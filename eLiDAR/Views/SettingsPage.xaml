@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.SettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Settings"
+    BindingContext="BaseSettingsViewModel"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="CenterAndExpand"
+                Text="Welcome to eLiDAR Settings!"
+                VerticalOptions="Start" />
+            <StackLayout Margin="10" Orientation="Horizontal">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Use Boreal Species List" />
+                <Switch
+                    x:Name="swchBorealSpecies"
+                    HorizontalOptions="EndAndExpand"
+                    IsToggled="{Binding IsBoreal}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

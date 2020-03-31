@@ -1,12 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding PlotTitle}" BackgroundColor="#D5E7FA"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:eLiDAR.Views" x:Class="eLiDAR.Views.PlotDetailsPage">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.PlotDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="{Binding PlotTitle}"
+    BackgroundColor="#D5E7FA">
     <ScrollView>
-    <StackLayout Padding="20" Spacing="12">
-        <local:PlotView />
-  
-            <Button Text="Update" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding UpdatePlotCommand}" HorizontalOptions="Center" />  
-        <Button Text="Delete" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeletePlotCommand}" HorizontalOptions="Center"/>  
-    </StackLayout>
+        <StackLayout Padding="20" Spacing="12">
+            <local:PlotView />
+
+            <Button
+                Margin="0,30,0,0"
+                BackgroundColor="#5989B5"
+                BorderRadius="0"
+                Command="{Binding UpdatePlotCommand}"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="Update"
+                TextColor="White" />
+            <Button
+                Margin="0,30,0,0"
+                BackgroundColor="#5989B5"
+                BorderRadius="0"
+                Command="{Binding DeletePlotCommand}"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="Delete"
+                TextColor="White" />
+        </StackLayout>
     </ScrollView>
 </ContentPage>

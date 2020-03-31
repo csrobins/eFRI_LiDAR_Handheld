@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eLiDAR.Models;
 using eLiDAR.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -12,10 +13,10 @@ namespace eLiDAR.Views
 {
     public partial class CameraPage : ContentPage
     {
-        public CameraPage()
+        public CameraPage(ECOSITE _ecosite)
         {
             InitializeComponent();
-            BindingContext = new CameraViewModel();
+            BindingContext = new CameraViewModel(_ecosite);
         }
 
 

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.DeformityList"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}">
+    <Grid Padding="10,10,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                BorderColor="Black"
+                BorderRadius="0"
+                BorderWidth="1"
+                Command="{Binding AddCommand}"
+                FontAttributes="Bold"
+                HeightRequest="40"
+                Text="New Deformity"
+                TextColor="Black" />
+        </Grid>
+        <ListView
+            x:Name="MyListView"
+            Grid.Row="1"
+            HasUnevenRows="true"
+            IsPullToRefreshEnabled="True"
+            ItemsSource="{Binding DeformityList}"
+            SelectedItem="{Binding SelectedDeformityItem, Mode=TwoWay}"
+            SeparatorColor="Black"
+            VerticalScrollBarVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:Name="Item" Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Spacing="1">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="Type "
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding TYPE}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text=" Cause "
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding CAUSE}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="From "
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding HT_FROM}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="To "
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding HT_TO}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="m"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" Spacing="1">
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="Quadrant"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding QUAD}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="Extent"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding EXTENT}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </StackLayout>
+
+                            <!--<Button Grid.Column="2" Text="Stem Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>-->
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button
+            Grid.Row="2"
+            BackgroundColor="#5989B5"
+            BorderRadius="0"
+            Command="{Binding DeleteAllCommand}"
+            FontAttributes="Bold"
+            Text="Delete All Deformities"
+            TextColor="White"
+            VerticalOptions="EndAndExpand" />
+    </Grid>
+</ContentPage>

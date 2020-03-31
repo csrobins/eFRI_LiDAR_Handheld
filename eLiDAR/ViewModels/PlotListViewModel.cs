@@ -11,6 +11,8 @@ using eLiDAR.Views;
 using Xamarin.Forms;
 using eLiDAR.Utilities;
 using eLiDAR.Services;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace eLiDAR.ViewModels {
     public class PlotListViewModel : BasePlotViewModel {
@@ -22,7 +24,10 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowSmallTreeCommand { get; private set; }
         public ICommand ShowSoilCommand { get; private set; }
         public ICommand ShowVegetationCommand { get; private set; }
+        public ICommand ShowDWDCommand { get; private set; }
+       // public ICommand SearchCommand { get; private set; }
 
+        //   public bool IsPlotTypeB { get; private set; }
 
         public PlotListViewModel(INavigation navigation) {
             _navigation = navigation;
@@ -35,6 +40,7 @@ namespace eLiDAR.ViewModels {
             ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
             ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
             ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
+            ShowDWDCommand = new Command<PLOT>(async (x) => await ShowDWD(x));
 
             FetchPlots();
         }
@@ -51,17 +57,23 @@ namespace eLiDAR.ViewModels {
             ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
             ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
             ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
+            ShowDWDCommand = new Command<PLOT>(async (x) => await ShowDWD(x));
+          //  SearchCommand = new Command<string>(async (text) => await Search(text));
             FetchPlots();
         }
 
+ 
         public void FetchPlots(){
             if (_selectedprojectid == "")
               //  PlotList = "No project selected";
                 PlotList = _plotRepository.GetAllData();
             else
-                PlotList = _plotRepository.GetFilteredData(_selectedprojectid);
-        }
+         //       PlotList = _plotRepository.GetFilteredData(_selectedprojectid);
+                PlotListFull = _plotRepository.GetFilteredDataFull(_selectedprojectid);
 
+        }
+       
+     
         async Task ShowAdd() {
             await _navigation.PushAsync(new AddPlot ());
         }
@@ -103,8 +115,8 @@ namespace eLiDAR.ViewModels {
             }
         }
 
-        PLOT _selectedPlotItem;
-        public PLOT SelectedPlotItem {
+        PLOTLIST _selectedPlotItem;
+        public PLOTLIST SelectedPlotItem {
             get => _selectedPlotItem;
             set {
                 if (value != null){
@@ -138,10 +150,14 @@ namespace eLiDAR.ViewModels {
         {
             await _navigation.PushAsync(new VegetationList(_plot.PLOTID));
         }
-
+        async Task ShowDWD(PLOT _plot)
+        {
+            await _navigation.PushAsync(new DWDList(_plot.PLOTID));
+        }
+        
         public string Title
         {
-            get => "Plot List for " + _plotRepository.GetProjectTitle(_selectedprojectid);
+            get => "Plot List for " + _plotRepository.GetProjectTitle(_selectedprojectid) + ".\n  " + PlotListFull.Count.ToString()+ " plots.";
             set
             {
             }
@@ -165,11 +181,12 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedproject, value);
                 _selectedprojectid = _selectedproject.PROJECTID ;
-                NotifyPropertyChanged("PlotList");
+                NotifyPropertyChanged("PlotListFull");
                 NotifyPropertyChanged("Title");
                 FetchPlots();
                 IsSelected = true;
             }
         }
+     
     }
 }

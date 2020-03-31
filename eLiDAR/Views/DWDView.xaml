@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="eLiDAR.Views.DWDView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentView.Content>
+        <Grid Padding="5" ColumnSpacing=" 1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="DWD Attributes" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="LINE" />
+                <Picker
+                    x:Name="txtLine"
+                    Title="Line"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListLine}"
+                    SelectedItem="{Binding SelectedLine, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Num" />
+                <Entry
+                    x:Name="txtNum"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="DWD Number"
+                    Text="{Binding DWDNUM}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Species" />
+                <Picker
+                    x:Name="txtSpecies"
+                    Title="Species"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListSpecies}"
+                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Diam (cm)" />
+                <Entry
+                    x:Name="txtDiam"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Diam (cm)"
+                    Text="{Binding DIAM}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Decomp Class" />
+                <Picker
+                    x:Name="txtDecompClass"
+                    Title="Decomp Class"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListDecompClass}"
+                    SelectedItem="{Binding SelectedDecompClass, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="DWD Origin" />
+                <Picker
+                    x:Name="txtOrigin"
+                    Title="Origin"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListOrigin}"
+                    SelectedItem="{Binding SelectedOrigin, Mode=TwoWay}" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="0" Grid.Column=" 1">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="DWD Cont." />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Tilt Angle" />
+                <Entry
+                    x:Name="txtTilt"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Tilt Angle"
+                    Text="{Binding TILT_ANGLE}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="DWD Length" />
+                <Entry
+                    x:Name="txtLength"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Length"
+                    Text="{Binding LENGTH}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Small Diam" />
+                <Entry
+                    x:Name="txtSmallDiam"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Small Diam"
+                    Text="{Binding SMALL_DIAM}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Large Diam" />
+                <Entry
+                    x:Name="txtLargeDiam"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Large Diam"
+                    Text="{Binding LARGE_DIAM}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="&gt;50% moss" />
+                <Picker
+                    x:Name="txtMoss"
+                    Title="&gt;50% moss"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding GT_50_MOSS, Mode=TwoWay}">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Burned" />
+                <Picker
+                    x:Name="txtBurned"
+                    Title="Burned"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding BURNED, Mode=TwoWay}">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Hollow" />
+                <Picker
+                    x:Name="txtHollow"
+                    Title="Hollow"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding HOLLOW, Mode=TwoWay}">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

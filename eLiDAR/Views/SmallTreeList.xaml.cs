@@ -12,19 +12,19 @@ namespace eLiDAR.Views {
             InitializeComponent();
             _viewmodel = new SmallTreeListViewModel(Navigation, plotID);
             this.BindingContext = _viewmodel;
-            MyListView.ItemsSource = null;
-            _viewmodel.FetchSmallTree();
-            MyListView.ItemsSource = _viewmodel.SmallTreeList;
+     //       MyListView.ItemsSource = null;
+      //      _viewmodel.FetchSmallTree();
+       //     MyListView.ItemsSource = _viewmodel.SmallTreeList;
 
         }
+        private SmallTreeListViewModel _viewmodel;
         protected override void OnAppearing()
         {
             base.OnAppearing();
             // Do your thing
-            //this.BindingContext.  
             _viewmodel.FetchSmallTree();
         }
-        private SmallTreeListViewModel _viewmodel;
 
-        }
+
+    }
 }

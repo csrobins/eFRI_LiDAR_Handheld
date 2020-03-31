@@ -91,6 +91,25 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("CROWN_AXIS_SHORT");
             }
         }
+        public int OFFET_AZIMUTH
+        {
+            get => _stemmap.OFFSET_AZIMUTH ;
+            set
+            {
+                _stemmap.OFFSET_AZIMUTH = value;
+                NotifyPropertyChanged("OFFSET_AZIMUTH");
+            }
+        }
+
+        public double OFFSET_DISTANCE
+        {
+            get => _stemmap.OFFSET_DISTANCE;
+            set
+            {
+                _stemmap.OFFSET_DISTANCE = value;
+                NotifyPropertyChanged("OFFSET_DISTANCE");
+            }
+        }
 
         List<STEMMAP> _stemmapList;
         public List<STEMMAP> StemMapList

@@ -5,27 +5,52 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using eLiDAR.Models;
+using Xamarin.Essentials; 
 
 namespace eLiDAR.Utilities
 {
     public class Utils
     {
-        
-
+        private bool _borealspecies { get; set; }
+        private string keyval = "UseBorealSpecies";
         public Guid getGUID()
         {
             // Create and display the value of two GUIDs.
             return Guid.NewGuid();
         }
-        //bool IsIndexed;
+
+        internal bool BorealSpecies
+        {
+            get
+            {
+                return Preferences.Get(keyval, false); 
+            }
+            set 
+            {
+                Preferences.Set(keyval, value);
+            }
+
+        }
+
+        //public bool IsBorealSpecies()
+        //{
+        //    var keyval = "UseBorealSpecies";
+        //    var useBoreal = Preferences.Get(keyval, false);
+        //    if (useBoreal)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 
     internal class PickerCell : ViewCell
     {
         private Label _label { get; set; }
-
         private View _picker { get; set; }
-
         private Grid _base;
 
         internal string Label

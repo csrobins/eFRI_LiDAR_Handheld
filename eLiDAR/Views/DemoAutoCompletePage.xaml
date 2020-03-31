@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage x:Class="eLiDAR.Views.DemoAutoCompletePage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:behaviors="clr-namespace:SupportWidgetXF.Behaviors;assembly=SupportWidgetXF"
-             xmlns:widget="clr-namespace:SupportWidgetXF.Widgets;assembly=SupportWidgetXF">
+<ContentPage
+    x:Class="eLiDAR.Views.DemoAutoCompletePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:SupportWidgetXF.Behaviors;assembly=SupportWidgetXF"
+    xmlns:widget="clr-namespace:SupportWidgetXF.Widgets;assembly=SupportWidgetXF">
     <ContentPage.Resources>
         <ResourceDictionary>
             <behaviors:BehaviorsEventConverter x:Key="BehaviorsEventConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Padding="10">
+        <StackLayout Padding="10" Orientation="Vertical">
             <Label Margin="0,20,0,0" Text="Title with Icon with description with data from api" />
             <!--<Grid>
                 <Grid.RowDefinitions>
@@ -43,17 +44,18 @@
 
 
             <Label Text="Single title" />
-            <widget:SupportAutoComplete x:Name="singleTitle"
-                                        HeightRequest="40"
-                                        HorizontalOptions="FillAndExpand"
-                                        CornerColor="Green"
-                                        CornerRadius="5"
-                                        CornerWidth="1"
-                                        DropMode="SingleTitle"
-                                        FocusCornerColor="Purple"
-                                        IsValid="{Binding IsValidSingle}"
-                                        ItemsSource="{Binding ItemDemo}"
-                                        Placeholder="type here" />
+            <widget:SupportAutoComplete
+                x:Name="singleTitle"
+                CornerColor="Green"
+                CornerRadius="5"
+                CornerWidth="1"
+                DropMode="SingleTitle"
+                FocusCornerColor="Purple"
+                HeightRequest="40"
+                HorizontalOptions="FillAndExpand"
+                IsValid="{Binding IsValidSingle}"
+                ItemsSource="{Binding ItemDemo}"
+                Placeholder="type here" />
 
             <!--<Label Margin="0,20,0,0" Text="Title with Icon with description" />
             <widget:SupportAutoComplete HeightRequest="40"
@@ -66,7 +68,7 @@
                                         ItemsSource="{Binding ItemDemo}"
                                         Placeholder="type here"
                                         Text="{Binding TextIt}" />
-            
+
             <Label Margin="0,20,0,0" Text="SupportAutoCompleteMultiValuen" />
             <widget:SupportAutoCompleteMultiValue x:Name="multi"
                                                   HeightRequest="40"

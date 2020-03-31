@@ -8,7 +8,8 @@
     <PackageReference Include="FluentValidation" Version="8.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
     <PackageReference Include="SupportWidgetXF" Version="1.3.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.396" />
     <PackageReference Include="LiveXAML" Version="2.1.73" />
     <PackageReference Include="Xamarin.RisePlugin.AutoCompleteTextView" Version="1.0.9" />
   </ItemGroup>
@@ -19,8 +20,12 @@
     <EmbeddedResource Remove="FlyoutHeader.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Data\Countries.txt" />
-    <None Remove="Data\USCities.txt" />
+    <None Remove="Data\colours.txt" />
+    <None Remove="Data\Ecosites.txt" />
+    <None Remove="Data\Genus.txt" />
+    <None Remove="Data\Horizons.txt" />
+    <None Remove="Data\Plants.txt" />
+    <None Remove="Data\Structure.txt" />
     <None Remove="Images\lidar.jpg" />
     <None Remove="Images\photo.png" />
     <None Remove="Images\pine.jpg" />
@@ -30,10 +35,22 @@
     <None Remove="ViewModels\CameraViewModel.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Countries.txt">
+    <EmbeddedResource Include="Data\colours.txt">
+      <Generator>MSBuild.Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Ecosites.txt">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data\USCities.txt">
+    <EmbeddedResource Include="Data\Genus.txt">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Horizons.txt">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Plants.txt">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Structure.txt">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\lidar.jpg" />
@@ -62,6 +79,12 @@
     <EmbeddedResource Update="Views\PlotEdit.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TreeComments.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Pages\LoginPage.xaml">
@@ -72,8 +95,35 @@
     <ProjectReference Include="..\AutoSuggestBox\dotMorten.Xamarin.Forms.AutoSuggestBox.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AddDWDAccum.xaml.cs">
+      <DependentUpon>AddDWDAccum.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddDWD.xaml.cs">
+      <DependentUpon>AddDWD.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddSmallTree.xaml.cs">
       <DependentUpon>AddSmallTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddDeformity.xaml.cs">
+      <DependentUpon>AddDeformity.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MottleColour.xaml.cs">
+      <DependentUpon>MottleColour.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SoilColour.xaml.cs">
+      <DependentUpon>SoilColour.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SoilStructure.xaml.cs">
+      <DependentUpon>SoilStructure.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SoilHorizon.xaml.cs">
+      <DependentUpon>SoilHorizon.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EcositeCode.xaml.cs">
+      <DependentUpon>EcositeCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EcositeDetailsPage.xaml.cs">
+      <DependentUpon>EcositeDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\AddVegetation.xaml.cs">
       <DependentUpon>AddVegetation.xaml</DependentUpon>
@@ -87,11 +137,29 @@
     <Compile Update="Views\AddPlot.xaml.cs">
       <DependentUpon>AddPlot.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\EcositeDetailsPage.xaml.cs">
-      <DependentUpon>EcositeDetailsPage.xaml</DependentUpon>
+    <Compile Update="Views\DeformityList.xaml.cs">
+      <DependentUpon>DeformityList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DWDAccumView.xaml.cs">
+      <DependentUpon>DWDAccumView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DWDAccumDetailsPage.xaml.cs">
+      <DependentUpon>DWDAccumDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DWDView.xaml.cs">
+      <DependentUpon>DWDView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EcositeView.xaml.cs">
+      <DependentUpon>EcositeView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\PlotFilterList.xaml.cs">
       <DependentUpon>PlotFilterList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DeformityDetailsPage.xaml.cs">
+      <DependentUpon>DeformityDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SmallTreeList.xaml.cs">
       <DependentUpon>SmallTreeList.xaml</DependentUpon>
@@ -101,6 +169,21 @@
     </Compile>
     <Compile Update="Views\SmallTreeView.xaml.cs">
       <DependentUpon>SmallTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DWDDetailsPage.xaml.cs">
+      <DependentUpon>DWDDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DWDList.xaml.cs">
+      <DependentUpon>DWDList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DeformityView.xaml.cs">
+      <DependentUpon>DeformityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PlotComments.xaml.cs">
+      <DependentUpon>PlotComments.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\EcositeComments.xaml.cs">
+      <DependentUpon>EcositeComments.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\VegetationList.xaml.cs">
       <DependentUpon>VegetationList.xaml</DependentUpon>

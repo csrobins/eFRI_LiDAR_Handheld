@@ -83,7 +83,7 @@ namespace eLiDAR.ViewModels {
         }
         public string Title
         {
-            get => "Soil layer list for plot " + _soilRepository.GetTitle(_fk);
+            get => "Soil layer list for plot " + _soilRepository.GetTitle(_fk) + ".\n  " + SoilList.Count.ToString() + " soil layers.";
             set
             {
             }

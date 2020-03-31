@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.EcositeCode"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:dm="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:widget="clr-namespace:SupportWidgetXF.Widgets;assembly=SupportWidgetXF"
+    Title="{Binding CommentsTitle}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="12">
+            <Label Text="Auto Complete" />
+            <Label HorizontalOptions="Start" Text="Choose from the Ontario ecosite code list with 1,265 codes in the list." />
+            <dm:AutoSuggestBox
+                x:Name="txtPRIECO"
+                PlaceholderText="Enter an ecosite code"
+                Text="{Binding PRI_ECO, Mode=TwoWay}"
+                TextChanged="TxtEco_TextChanged"
+                TextColor="Black" />
+            <Label x:Name="txtscientific" Text="{Binding GetEcosite1, Mode=TwoWay}" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Primary Eco %" />
+            <Entry
+                x:Name="txtPRIECOPCT"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Primary Eco %"
+                Text="{Binding PRI_ECO_PCT}" />
+            <dm:AutoSuggestBox
+                x:Name="txtVeg"
+                PlaceholderText="Enter a a secondary ecosite code"
+                Text="{Binding SEC_ECO, Mode=TwoWay}"
+                TextChanged="TxtEco_TextChanged"
+                TextColor="Black" />
+            <Label x:Name="txtscientific2" Text="{Binding GetEcosite2, Mode=TwoWay}" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Secondary Eco %" />
+            <Entry
+                x:Name="txtSECECOPCT"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Secondary Eco %"
+                Text="{Binding SEC_ECO_PCT}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

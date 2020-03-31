@@ -11,13 +11,13 @@ using eLiDAR.Views;
 
 using Xamarin.Forms;
 
-
 namespace eLiDAR.ViewModels {
     public class TreeListViewModel : BaseTreeViewModel {
 
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteAllCommand { get; private set; }
         public ICommand ShowFilteredCommand { get; private set; }
+        public ICommand ShowDeformityCommand { get; private set; }
 
         public TreeListViewModel(INavigation navigation) {
             _navigation = navigation;
@@ -26,6 +26,8 @@ namespace eLiDAR.ViewModels {
             AddCommand = new Command(async () => await ShowAdd(""));
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
+            ShowDeformityCommand = new Command<TREE>(async (x) => await ShowDeformity(x));
+
             FetchTrees();
         }
         public TreeListViewModel(INavigation navigation, string fk)
@@ -36,6 +38,7 @@ namespace eLiDAR.ViewModels {
             AddCommand = new Command(async () => await ShowAdd(_fk));
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
+            ShowDeformityCommand = new Command<TREE>(async (x) => await ShowDeformity(x));
             FetchTrees();
         }
 
@@ -43,9 +46,11 @@ namespace eLiDAR.ViewModels {
             if (_fk == "")
                 TreeStemList = _treeRepository.GetAllData();
             else
-                TreeStemList = _treeRepository.GetFilteredTreeStemData(_fk);
+//                TreeStemList = _treeRepository.GetFilteredTreeStemData(_fk);
+                TreeStemListFull = _treeRepository.GetFilteredTreeStemDataFull(_fk);
+
         }
-       
+
         async Task ShowAdd(string _fk) {
             if (_fk == "")
             {
@@ -76,6 +81,18 @@ namespace eLiDAR.ViewModels {
                 _treeStemList = value;
             }
         }
+        private List<TREELIST> _treeStemListFull;
+        public List<TREELIST> TreeStemListFull
+        {
+            get
+            {
+                return _treeRepository.GetFilteredTreeStemDataFull(_fk);
+            }
+            set
+            {
+                _treeStemListFull = value;
+            }
+        }
         async void ShowDetails(string selectedTreeID){
             await _navigation.PushAsync(new TreeDetailsPage(selectedTreeID));
         }
@@ -96,13 +113,19 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific projectid
             await _navigation.PushAsync(new StemMapDetailsPage(_tree.TREEID));
         }
+        async Task ShowDeformity(TREE _tree)
+        {
+            // launch the form - filtered to a specific projectid
+            await _navigation.PushAsync(new DeformityList(_tree.TREEID));
+        }
         public string Title
         {
-            get => "Tree List for plot " + _treeRepository.GetPlotTitle(_fk);
+            get => "Tree List for plot " + _treeRepository.GetPlotTitle(_fk) + ".  " + TreeStemListFull.Count.ToString() + " trees.";
             set
             {
             }
         }
+       
         public Int32 GetAzimuth
         {
             get => _treeRepository.GetAzimuth(_tree.TREEID);

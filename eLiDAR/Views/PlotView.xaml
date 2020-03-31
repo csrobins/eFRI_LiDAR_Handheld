@@ -1,35 +1,62 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="eLiDAR.Views.PlotView">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="eLiDAR.Views.PlotView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
     <ContentView.Content>
-        <Grid  Padding="10" ColumnSpacing=" 1" >
+        <Grid Padding="10" ColumnSpacing=" 1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Column="0" Grid.Row="0">
-                <Label Text="Plot Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
-                <Label Text="Plot Number" FontAttributes="None"  HorizontalOptions="Start" />
-                <Entry x:Name="txtPlotnum" Text="{Binding PLOTNUM}"  Placeholder="Plot number" HorizontalOptions="FillAndExpand"/>
-                <Label Text="Plot Type" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtPlotType" SelectedItem="{Binding PLOT_TYPE}" HorizontalOptions="FillAndExpand"  Title="Plot type">
-                   <Picker.Items>
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Plot Attributes" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Plot Number" />
+                <Entry
+                    x:Name="txtPlotnum"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Plot number"
+                    Text="{Binding PLOTNUM}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Plot Type" />
+                <Picker
+                    x:Name="txtPlotType"
+                    Title="Plot type"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding PLOT_TYPE}">
+                    <Picker.Items>
                         <x:String>A</x:String>
-                        <x:String>B</x:String>
-                   </Picker.Items>
+                        <x:String>AB</x:String>
+                        <x:String>AC</x:String>
+                        <x:String>ABC</x:String>
+                    </Picker.Items>
                 </Picker>
-                <Label Text="Measurement Tupe" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtMeasurementType" SelectedItem="{Binding MEASUREMENT_TYPE}" HorizontalOptions="FillAndExpand"  Title="Measurement Type">
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Measurement Tupe" />
+                <Picker
+                    x:Name="txtMeasurementType"
+                    Title="Measurement Type"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding MEASUREMENT_TYPE}">
                     <Picker.Items>
                         <x:String>New</x:String>
                         <x:String>Remeasure</x:String>
@@ -37,8 +64,15 @@
                         <x:String>Ministry Audit</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Forest District" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtDistrict" SelectedItem="{Binding FOREST_DISTRICT}" HorizontalOptions="FillAndExpand"  Title="Forest District">
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Forest District" />
+                <Picker
+                    x:Name="txtDistrict"
+                    Title="Forest District"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding FOREST_DISTRICT}">
                     <Picker.Items>
                         <x:String>Nipigon</x:String>
                         <x:String>Thunder Bay</x:String>
@@ -50,99 +84,181 @@
                         <x:String>Chapleau</x:String>
                         <x:String>Cochrane</x:String>
                         <x:String>Hearst</x:String>
-                        <x:String>Kirkland lake</x:String>
+                        <x:String>Kirkland Lake</x:String>
                         <x:String>North Bay</x:String>
                         <x:String>Sudbury</x:String>
                         <x:String>Timmins</x:String>
                         <x:String>Wawa</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Forest Management Unit" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtFMU" ItemsSource="{Binding ListFMU}" SelectedItem="{Binding SelectedFMU, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Forest Management Unit"/>
-                <!--<Picker x:Name="txtFMU" SelectedItem="{Binding FMU}" HorizontalOptions="FillAndExpand"  Title="FMU">
-                    <Picker.Items>
-                        <x:String>Abitibi River Forest</x:String>
-                        <x:String>Algoma Forest</x:String>
-                        <x:String>Algonquin Park Forest</x:String>
-                        <x:String>Bancroft-Minden Forest</x:String>
-                        <x:String>Black Spruce Forest</x:String>
-                        <x:String>Caribou Forest</x:String>
-                        <x:String>Crossroute Forest</x:String>
-                        <x:String>Dog River-Matawin Forest</x:String>
-                        <x:String>Dryden Forest</x:String>
-                        <x:String>English River Forest</x:String>
-                        <x:String>French-Severn Forest</x:String>
-                        <x:String>Gordon Cosens Forest</x:String>
-                        <x:String>Hearst Forest</x:String>
-                        <x:String>Kenogami Forest</x:String>
-                        <x:String>Kenora Forest</x:String>
-                        <x:String>Lac Seul Forest</x:String>
-                        <x:String>Lake Nipigon</x:String>
-                        <x:String>Lakehead Forest</x:String>
-                        <x:String>Magpie Forest</x:String>
-                        <x:String>Martel Forest</x:String>
-                        <x:String>Mazinaw-Lanark Forest</x:String>
-                        <x:String>Nagagami Forest</x:String>
-                        <x:String>Nipissing Forest</x:String>
-                        <x:String>Northshore Forest</x:String>
-                        <x:String>Ogoki Forest</x:String>
-                        <x:String>Ottawa Valley Forest</x:String>
-                        <x:String>Pic Forest</x:String>
-                        <x:String>Pineland Forest</x:String>
-                        <x:String>Red Lake Forest</x:String>
-                        <x:String>Romeo Malette Forest</x:String>
-                        <x:String>Sapawe Forest</x:String>
-                        <x:String>Spanish Forest</x:String>
-                        <x:String>Sudbury Forest</x:String>
-                        <x:String>Temagami</x:String>
-                        <x:String>Timiskaming Forest</x:String>
-                        <x:String>Trout Lake Forest</x:String>
-                        <x:String>Wabigoon Forest</x:String>
-                        <x:String>Whiskey Jack Forest</x:String>
-                        <x:String>White River Forest</x:String>
-                        <x:String>Whitefeather Forest</x:String>
-                    </Picker.Items>
-                </Picker>-->
-                <Label Text="Plot Date" FontAttributes="None" HorizontalOptions="Start" />
-                <DatePicker x:Name="txtDate" Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand" MinimumDate="01-Jan-2020"/>
-                <Label Text="Crew 1" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtCrew1"  Text="{Binding FIELD_CREW1}" HorizontalOptions="FillAndExpand"  Placeholder="Crew 1"/>
-                <Label Text="Crew 2" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtCrew2"  Text="{Binding FIELD_CREW2}" HorizontalOptions="FillAndExpand"  Placeholder="Crew 2"/>
-                </StackLayout>
-
-            <StackLayout Grid.Column=" 1" Grid.Row="0">
-                <Label Text="Location Fields" FontAttributes="Bold" HorizontalOptions="Start" />
-                <Label Text="Declination" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtDeclination"  Text="{Binding DECLINATION}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Declination"/>
-                <Label Text="UTM Zone" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtUTM"  Text="{Binding UTM_ZONE}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="UTM Zone"/>
-                <Label Text="Easting (m)" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtEasting"  Text="{Binding UTM_EASTING}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Easting"/>
-                <Label Text="Northing (m)" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtNorthing"  Text="{Binding UTM_NORTHING}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Northing"/>
-                <Label Text="Datum" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtDatum"  Text="{Binding DATUM}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Datum"/>
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Forest Management Unit" />
+                <Picker
+                    x:Name="txtFMU"
+                    Title="Forest Management Unit"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListFMU}"
+                    SelectedItem="{Binding SelectedFMU, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Plot Date" />
+                <DatePicker
+                    x:Name="txtDate"
+                    Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumDate="01-Jan-2020" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crew 1" />
+                <Entry
+                    x:Name="txtCrew1"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Crew 1"
+                    Text="{Binding FIELD_CREW1}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crew 2" />
+                <Entry
+                    x:Name="txtCrew2"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Crew 2"
+                    Text="{Binding FIELD_CREW2}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crew 3" />
+                <Entry
+                    x:Name="txtCrew3"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Crew 3"
+                    Text="{Binding FIELD_CREW3}" />
             </StackLayout>
 
-            <StackLayout Grid.Column="2"  Grid.Row="0">
-                <Label Text="Calculated Fields" FontAttributes="Bold" HorizontalOptions="Start" />
-                <Label Text="Leading Spp" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtLeadSpp"  Text="{Binding LEAD_SPP}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Lead Species"/>
-                <Label Text="Origin" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtOrigin"  Text="{Binding ORIGIN}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Origin"/>
-                <Label Text="Canopy Structure" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtCanopyStructure"  Text="{Binding CANOPY_STRUCTURE}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Canopy Structure"/>
-                <Label Text="Maturity" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtMaturity"  Text="{Binding MATURITY}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Maturity"/>
-                <Label Text="Crown Closure" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtCrownClosure"  Text="{Binding CROWN_CLOSURE}" IsReadOnly="True"  HorizontalOptions="FillAndExpand"  Placeholder="Crown Closure"/>
+            <StackLayout Grid.Row="0" Grid.Column=" 1">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Location Fields" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Declination" />
+                <Entry
+                    x:Name="txtDeclination"
+                    HorizontalOptions="FillAndExpand"
+                    IsReadOnly="True"
+                    Placeholder="Declination"
+                    Text="{Binding DECLINATION}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="UTM Zone" />
+                <Entry
+                    x:Name="txtUTM"
+                    HorizontalOptions="FillAndExpand"
+                    IsReadOnly="True"
+                    Placeholder="UTM Zone"
+                    Text="{Binding UTM_ZONE}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Easting (m)" />
+                <Entry
+                    x:Name="txtEasting"
+                    HorizontalOptions="FillAndExpand"
+                    IsReadOnly="True"
+                    Placeholder="Easting"
+                    Text="{Binding UTM_EASTING}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Northing (m)" />
+                <Entry
+                    x:Name="txtNorthing"
+                    HorizontalOptions="FillAndExpand"
+                    IsReadOnly="True"
+                    Placeholder="Northing"
+                    Text="{Binding UTM_NORTHING}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Datum" />
+                <Entry
+                    x:Name="txtDatum"
+                    HorizontalOptions="FillAndExpand"
+                    IsReadOnly="True"
+                    Placeholder="Datum"
+                    Text="{Binding DATUM}" />
             </StackLayout>
-            <StackLayout Grid.Column="1" Grid.Row=" 1" Grid.ColumnSpan="2">
-                <Label Text="Plot Notes" FontAttributes="None" HorizontalOptions="Start" />
-                <Editor x:Name="txtNotes"  Text="{Binding NOTES}" HorizontalOptions="FillAndExpand"  Placeholder="Plot Notes"/>
+
+            <StackLayout Grid.Row="0" Grid.Column="2">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Calculated Fields" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Leading Spp" />
+                <Picker
+                    x:Name="txtLeadSpp"
+                    Title="Leading Species"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListSpecies}"
+                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Origin" />
+                <Picker
+                    x:Name="txtOrigin"
+                    Title="Origin"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListCanopyOrigin}"
+                    SelectedItem="{Binding SelectedCanopyOrigin, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Canopy Structure" />
+                <Picker
+                    x:Name="txtCanopyStructure"
+                    Title="Canopy Structure"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListCanopyStructure}"
+                    SelectedItem="{Binding SelectedCanopyStructure, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Maturity Class" />
+                <Picker
+                    x:Name="txtMaturity"
+                    Title="Maturity Class"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListMaturityClass}"
+                    SelectedItem="{Binding SelectedMaturityClass, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crown Closure" />
+                <Entry
+                    x:Name="txtCrownClosure"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Crown Closure"
+                    Text="{Binding CROWN_CLOSURE}" />
+                <Button Command="{Binding CommentsCommand}" Text="Comments" />
             </StackLayout>
         </Grid>
-       
+
     </ContentView.Content>
 </ContentView>

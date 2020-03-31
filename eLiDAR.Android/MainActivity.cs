@@ -10,7 +10,7 @@ using SupportWidgetXF.Droid;
 
 namespace eLiDAR.Droid
 {
-    [Activity(Label = "eLiDAR", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,ScreenOrientation = ScreenOrientation.FullSensor )]
+    [Activity(Label = "eLiDAR", Icon = "@mipmap/Heatmap", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,ScreenOrientation = ScreenOrientation.FullSensor )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)

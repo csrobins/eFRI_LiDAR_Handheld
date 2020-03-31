@@ -1,19 +1,95 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" BackgroundColor="#D5E7FA"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:eLiDAR.Views" x:Class="eLiDAR.Views.StemMapDetailsPage">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.StemMapDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="{Binding Title}"
+    BackgroundColor="#D5E7FA">
     <ScrollView>
-    <StackLayout Padding="20" Spacing="12">
-        <Label Text="Stem Map Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
-        <Label Text="Azimuth" FontAttributes="None"  HorizontalOptions="Start" />
-        <Entry x:Name="txtAzimuth" Text="{Binding AZIMUTH}"  Placeholder="Azimuth" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
-        <Label Text="Distance (m)" FontAttributes="None" HorizontalOptions="Start" />
-        <Entry x:Name="txtDistance" Text="{Binding DISTANCE}"  Placeholder="Distance (m)" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
-        <Label Text="Crown Width 1 (m)" FontAttributes="None" HorizontalOptions="Start" />
-        <Entry x:Name="txtCrownWidth1" Text="{Binding CROWN_AXIS_LONG}"  Placeholder="Crown Width 1 (m)" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
-        <Label Text="Crown Width 2 (m)" FontAttributes="None" HorizontalOptions="Start" />
-        <Entry x:Name="txtCrownWidth2" Text="{Binding CROWN_AXIS_SHORT}"  Placeholder="Crown Width 2 (m)" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
-        <Button Text="Save" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding UpdateTreeCommand}" HorizontalOptions="Center" />  
-        <Button Text="Delete" BorderRadius="0" Margin="0,30,0,0" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteTreeCommand}" HorizontalOptions="Center"/>  
-    </StackLayout>
+        <StackLayout Padding="20" Spacing="12">
+            <Label
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Text="Stem Map Attributes" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Azimuth" />
+            <Entry
+                x:Name="txtAzimuth"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Azimuth"
+                Text="{Binding AZIMUTH}" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Distance (m)" />
+            <Entry
+                x:Name="txtDistance"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Distance (m)"
+                Text="{Binding DISTANCE}" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Crown Width 1 (m)" />
+            <Entry
+                x:Name="txtCrownWidth1"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Crown Width 1 (m)"
+                Text="{Binding CROWN_AXIS_LONG}" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Crown Width 2 (m)" />
+            <Entry
+                x:Name="txtCrownWidth2"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Crown Width 2 (m)"
+                Text="{Binding CROWN_AXIS_SHORT}" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Offset Azimuth" />
+            <Entry
+                x:Name="txtOffsetAzimuth"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Offset Azimuth"
+                Text="{Binding OFFSET_AZIMUTH}" />
+            <Label
+                FontAttributes="None"
+                HorizontalOptions="Start"
+                Text="Offset Distance (m)" />
+            <Entry
+                x:Name="txtOffsetDistance"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Offset Distance (m)"
+                Text="{Binding OFFSET_DISTANCE}" />
+            <Button
+                Margin="0,30,0,0"
+                BackgroundColor="#5989B5"
+                BorderRadius="0"
+                Command="{Binding UpdateTreeCommand}"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="Save"
+                TextColor="White" />
+            <Button
+                Margin="0,30,0,0"
+                BackgroundColor="#5989B5"
+                BorderRadius="0"
+                Command="{Binding DeleteTreeCommand}"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="Delete"
+                TextColor="White" />
+        </StackLayout>
     </ScrollView>
 </ContentPage>

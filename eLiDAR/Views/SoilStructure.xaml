@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.SoilStructure"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding SoilTitle}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="12">
+            <Label HorizontalOptions="Start" Text="Choose from the codes to construct a soil structure." />
+            <Button Command="{Binding ClearCommand}" Text="Start Over" />
+            <Picker
+                Title="Soil Structure Grade"
+                HorizontalOptions="FillAndExpand"
+                ItemDisplayBinding="{Binding NAME}"
+                ItemsSource="{Binding ListGrade}"
+                SelectedItem="{Binding SelectedMaster, Mode=TwoWay}" />
+            <Picker
+                Title="Soil Structure Kind"
+                HorizontalOptions="FillAndExpand"
+                ItemDisplayBinding="{Binding NAME}"
+                ItemsSource="{Binding ListKind}"
+                SelectedItem="{Binding SelectedSuffix1, Mode=TwoWay}" />
+            <Picker
+                Title="Soil Structure Class"
+                HorizontalOptions="FillAndExpand"
+                ItemDisplayBinding="{Binding NAME}"
+                ItemsSource="{Binding ListClass}"
+                SelectedItem="{Binding SelectedSuffix2, Mode=TwoWay}" />
+            <Label
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Text="SOIL STRUCTURE" />
+            <Entry
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                IsReadOnly="True"
+                Text="{Binding STRUCTURE}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

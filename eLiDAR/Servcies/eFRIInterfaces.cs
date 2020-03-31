@@ -24,7 +24,7 @@ namespace eLiDAR.Servcies
     {
         List<PLOT> GetAllData();
         List<PLOT> GetFilteredData(string PROJECTID);
-
+        List<PLOTLIST> GetFilteredDataFull(string PROJECTID);
         //Get Specific data
         PLOT GetPlotData(string PLOTID);
         // Delete all Data
@@ -38,13 +38,17 @@ namespace eLiDAR.Servcies
 
         String GetProjectTitle(string projectid);
         List<PROJECT> GetProjectList();
+        String GetPlotType(string plotid);
+
     }
     public interface ITreeRepository
     {
         List<TREE> GetAllData();
         List<TREE> GetFilteredData(string fk);
+        List<TREELIST> GetFilteredDataFull(string fk);
 
         List<TREE> GetFilteredTreeStemData(string fk);
+        List<TREELIST> GetFilteredTreeStemDataFull(string fk);
 
         //Get Specific data
         TREE GetTreeData(string TREEID);
@@ -60,6 +64,7 @@ namespace eLiDAR.Servcies
         int GetAzimuth(string treeid);
         double GetDistance(string treeid);
 
+        String GetPlotType(string plotid);
 
     }
     public interface IStemMapRepository
@@ -155,9 +160,43 @@ namespace eLiDAR.Servcies
         // Update Data
         void UpdateVegetation(VEGETATION vegetation);
         String GetTitle(string plotid);
-
-
     }
+    public interface IDeformityRepository
+    {
+        List<DEFORMITY> GetAllData();
+        List<DEFORMITY> GetFilteredData(string fk);
+
+        //Get Specific data
+        DEFORMITY GetDeformityData(string DEFORMITYID);
+        // Delete all Data
+        void DeleteAllDeformity();
+        // Delete Specific
+        void DeleteDeformity(string DEFORMITYID);
+        // Insert new to DB 
+        void InsertDeformity(DEFORMITY deformity, string fk);
+        // Update Data
+        void UpdateDeformity(DEFORMITY deformity);
+        String GetTitle(string plotid);
+    }
+    public interface IDWDRepository
+    {
+        List<DWD> GetAllData();
+        List<DWD> GetFilteredData(string fk);
+
+        //Get Specific data
+        DWD GetDWDData(string DWDID);
+        // Delete all Data
+        void DeleteAllDWD();
+        // Delete Specific
+        void DeleteDWD(string DWDID);
+        // Insert new to DB 
+        void InsertDWD(DWD dwd, string fk);
+        // Update Data
+        void UpdateDWD(DWD dwd);
+        String GetTitle(string plotid);
+    }
+
+
     public class ProjectRepository : IProjectRepository
     {
         DatabaseHelper _databaseHelper;
@@ -224,6 +263,10 @@ namespace eLiDAR.Servcies
         {
             return _databaseHelper.GetFilteredPlotData(id);
         }
+        public List<PLOTLIST> GetFilteredDataFull(string id)
+        {
+            return _databaseHelper.GetFilteredPlotDataFull(id);
+        }
 
         public PLOT GetPlotData(string PlotID)
         {
@@ -253,6 +296,18 @@ namespace eLiDAR.Servcies
                 return _databaseHelper.GetProjectTitle(projectid);
             }
         }
+        public String GetPlotType(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+
 
     }
 
@@ -281,10 +336,20 @@ namespace eLiDAR.Servcies
         {
             return _databaseHelper.GetFilteredTreeData(fk);
         }
+        public List<TREELIST> GetFilteredDataFull(string fk)
+        {
+            return _databaseHelper.GetFilteredTreeDataFull(fk);
+        }
+
         public List<TREE> GetFilteredTreeStemData(string fk)
         {
             return _databaseHelper.GetFilteredTreeStemList(fk);
         }
+        public List<TREELIST> GetFilteredTreeStemDataFull(string fk)
+        {
+            return _databaseHelper.GetFilteredTreeStemListFull(fk);
+        }
+
         public TREE GetTreeData(string TreeID)
         {
             return _databaseHelper.GetTreeData(TreeID);
@@ -334,6 +399,18 @@ namespace eLiDAR.Servcies
                 return _databaseHelper.GetDistance(treeid);
             }
         }
+        public String GetPlotType(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+
     }
 
     public class StemMapRepository : IStemMapRepository
@@ -619,5 +696,115 @@ namespace eLiDAR.Servcies
         }
 
     }
+    public class DeformityRepository : IDeformityRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public DeformityRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteDeformity(string ID)
+        {
+            _databaseHelper.DeleteDeformity(ID);
+        }
+        public void DeleteAllDeformity()
+        {
+            _databaseHelper.DeleteAllDeformity();
+        }
+        public List<DEFORMITY> GetAllData()
+        {
+            return _databaseHelper.GetAllDeformityData();
+        }
+
+        public List<DEFORMITY> GetFilteredData(string fk)
+        {
+            return _databaseHelper.GetFilteredDeformityData(fk);
+        }
+
+        public DEFORMITY GetDeformityData(string DeformityID)
+        {
+            return _databaseHelper.GetDeformityData(DeformityID);
+        }
+
+        public void InsertDeformity(DEFORMITY deformity, string fk)
+        {
+            deformity.DEFORMITYID  = Guid.NewGuid().ToString();
+            deformity.TREEID  = fk;
+            _databaseHelper.InsertDeformity(deformity);
+        }
+
+        public void UpdateDeformity(DEFORMITY deformity)
+        {
+            _databaseHelper.UpdateDeformity(deformity);
+        }
+        public String GetTitle(string treeid)
+        {
+            if (treeid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetTreeTitle(treeid);
+            }
+        }
+
+    }
+
+    public class DWDRepository : IDWDRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public DWDRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteDWD(string ID)
+        {
+            _databaseHelper.DeleteDWD(ID);
+        }
+        public void DeleteAllDWD()
+        {
+            _databaseHelper.DeleteAllDWD();
+        }
+        public List<DWD> GetAllData()
+        {
+            return _databaseHelper.GetAllDWDData();
+        }
+
+        public List<DWD> GetFilteredData(string fk)
+        {
+            return _databaseHelper.GetFilteredDWDData(fk);
+        }
+
+        public DWD GetDWDData(string DWDID)
+        {
+            return _databaseHelper.GetDWDData(DWDID);
+        }
+
+        public void InsertDWD(DWD dwd, string fk)
+        {
+            dwd.DWDID = Guid.NewGuid().ToString();
+            dwd.PLOTID = fk;
+            _databaseHelper.InsertDWD(dwd);
+        }
+
+        public void UpdateDWD(DWD dwd)
+        {
+            _databaseHelper.UpdateDWD(dwd);
+        }
+        public String GetTitle(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+
+    }
+
 
 }

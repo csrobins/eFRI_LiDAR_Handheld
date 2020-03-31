@@ -8,6 +8,7 @@ using eLiDAR.Models;
 using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
+using eLiDAR.Views;
 using FluentValidation;
 using FluentValidation.Results;
 using Xamarin.Forms;
@@ -17,9 +18,16 @@ namespace eLiDAR.ViewModels {
 
         public ICommand UpdateCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
+        public ICommand CommentsCommand { get; private set; }
+        public ICommand EcositeCommand { get; private set; }
+        public ICommand PhotoCommand { get; private set; }
+
         public List<PickerItems> ListDrainage { get; set; }
-        public List<PickerItems> ListPorePattern { get; set; }
-        public List<PickerItems> ListMoistureRegime { get; set; }
+        public List<PickerItemsString> ListPorePattern { get; set; }
+        public List<PickerItemsString> ListMoistureRegime { get; set; }
+        public List<PickerItemsString> ListDepthClass { get; set; }
+        public List<PickerItemsString> ListDeposition { get; set; }
+
         public List<PickerItems> ListHumusForm { get; set; }
         public EcositeDetailsViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
@@ -29,10 +37,15 @@ namespace eLiDAR.ViewModels {
             _fk = selectedID;
             UpdateCommand = new Command(async () => await Update());
             DeleteCommand = new Command(async () => await Delete());
+            CommentsCommand = new Command(async () => await ShowComments());
+            EcositeCommand = new Command(async () => await ShowEcosite());
+            PhotoCommand = new Command(async () => await ShowPhoto());
             ListDrainage = PickerService.DrainageItems().ToList();
             ListPorePattern = PickerService.PorePatternItems().ToList();
             ListMoistureRegime = PickerService.MoistureRegimeItems().ToList();
             ListHumusForm = PickerService.HumusFormItems().ToList();
+            ListDepthClass = PickerService.DepthClassItems().ToList();
+            ListDeposition = PickerService.DepositionItems().ToList();
 
             // Get the ecosite if it exists
             if (_ecositeRepository.IsEcositeExists(_fk))
@@ -40,7 +53,22 @@ namespace eLiDAR.ViewModels {
                 FetchDetails(_fk);
             }
         }
+        async Task ShowPhoto()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new CameraPage(_ecosite));
+        }
+        async Task ShowEcosite()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new EcositeCode(_ecosite));
+        }
 
+        async Task ShowComments()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new EcositeComments(_ecosite));
+        }
         private PickerItems _selectedDrainage = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedDrainage
         {
@@ -55,9 +83,50 @@ namespace eLiDAR.ViewModels {
                 _ecosite.DRAINAGE  = (int)_selectedDrainage.ID;
             }
         }
-
-        private PickerItems _selectedPorePattern = new PickerItems { ID = 0, NAME = "" };
-        public PickerItems SelectedPorePattern
+        private PickerItemsString _selectedDepthClass = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedDepthClass
+        {
+            get
+            {
+                _selectedDepthClass = PickerService.GetItem(ListDepthClass, _ecosite.MOISTURE_REGIME_DEPTH_CLASS);
+                return _selectedDepthClass;
+            }
+            set
+            {
+                SetProperty(ref _selectedDepthClass, value);
+                _ecosite.MOISTURE_REGIME_DEPTH_CLASS  = _selectedDepthClass.ID;
+            }
+        }
+        private PickerItemsString _selectedDeposition1 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedDeposition1
+        {
+            get
+            {
+                _selectedDeposition1 = PickerService.GetItem(ListDeposition, _ecosite.MODE_OF_DEPOSITION1);
+                return _selectedDeposition1;
+            }
+            set
+            {
+                SetProperty(ref _selectedDeposition1, value);
+                _ecosite.MODE_OF_DEPOSITION1  = _selectedDeposition1.ID;
+            }
+        }
+        private PickerItemsString _selectedDeposition2 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedDeposition2
+        {
+            get
+            {
+                _selectedDeposition2 = PickerService.GetItem(ListDeposition, _ecosite.MODE_OF_DEPOSITION2);
+                return _selectedDeposition2;
+            }
+            set
+            {
+                SetProperty(ref _selectedDeposition2, value);
+                _ecosite.MODE_OF_DEPOSITION2 = _selectedDeposition2.ID;
+            }
+        }
+        private PickerItemsString _selectedPorePattern = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedPorePattern
         {
             get
             {
@@ -67,12 +136,12 @@ namespace eLiDAR.ViewModels {
             set
             {
                 SetProperty(ref _selectedPorePattern, value);
-                _ecosite.EFFECTIVE_PORE_PATTERN  = (int)_selectedPorePattern.ID;
+                _ecosite.EFFECTIVE_PORE_PATTERN  = _selectedPorePattern.ID;
             }
         }
 
-        private PickerItems _selectedMoistureRegime = new PickerItems { ID = 0, NAME = "" };
-        public PickerItems SelectedMoistureRegime
+        private PickerItemsString _selectedMoistureRegime = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedMoistureRegime
         {
             get
             {
@@ -82,7 +151,7 @@ namespace eLiDAR.ViewModels {
             set
             {
                 SetProperty(ref _selectedMoistureRegime, value);
-                _ecosite.MOISTURE_REGIME  = (int)_selectedMoistureRegime.ID;
+                _ecosite.MOISTURE_REGIME  = _selectedMoistureRegime.ID;
             }
         }
 

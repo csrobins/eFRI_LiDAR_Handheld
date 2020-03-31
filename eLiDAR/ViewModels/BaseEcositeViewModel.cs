@@ -18,6 +18,7 @@ namespace eLiDAR.ViewModels
         public IEcositeRepository _ecositeRepository;
         public string _fk;
 
+
         public event PropertyChangedEventHandler PropertyChanged2;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyname = null)
         {
@@ -84,7 +85,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int EFFECTIVE_PORE_PATTERN
+        public string EFFECTIVE_PORE_PATTERN
         {
             get => _ecosite.EFFECTIVE_PORE_PATTERN;
             set
@@ -153,7 +154,7 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("DEPTH_TO_CARBONATES");
             }
         }
-        public int MOISTURE_REGIME_DEPTH_CLASS
+        public string MOISTURE_REGIME_DEPTH_CLASS
         {
             get => _ecosite.MOISTURE_REGIME_DEPTH_CLASS;
             set
@@ -163,7 +164,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int MOISTURE_REGIME
+        public string MOISTURE_REGIME
         {
             get => _ecosite.MOISTURE_REGIME;
             set
@@ -331,7 +332,16 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("DISTANCE");
             }
         }
-               
+
+        public string COMMENTS
+        {
+            get => _ecosite.COMMENTS;
+            set
+            {
+                _ecosite.COMMENTS = value;
+                NotifyPropertyChanged("COMMENTS");
+            }
+        }
         List<ECOSITE> _ecositeList;
         public List<ECOSITE> EcositeList
         {

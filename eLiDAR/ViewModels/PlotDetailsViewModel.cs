@@ -7,6 +7,7 @@ using eLiDAR.Models;
 using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
+using eLiDAR.Views;
 using FluentValidation.Results;
 using Xamarin.Forms;
 
@@ -15,7 +16,14 @@ namespace eLiDAR.ViewModels {
 
         public ICommand UpdatePlotCommand { get; private set; }
         public ICommand DeletePlotCommand { get; private set; }
+        public ICommand CommentsCommand { get; private set; }
         public List<PickerItems> ListFMU { get; set; }
+        public List<PickerItems> ListSpecies { get; set; }
+        public List<PickerItems> ListCanopyOrigin { get; set; }
+        public List<PickerItemsString> ListCanopyStructure { get; set; }
+        public List<PickerItemsString> ListMaturityClass { get; set; }
+        public List<PickerItems> ListNonStandardType { get; set; }
+
 
         public PlotDetailsViewModel(INavigation navigation, string selectedPlotID)
         {
@@ -27,7 +35,73 @@ namespace eLiDAR.ViewModels {
             UpdatePlotCommand = new Command(async () => await UpdatePlot());
             DeletePlotCommand = new Command(async () => await DeletePlot());
             ListFMU = PickerService.ForestItems().OrderBy(c => c.NAME).ToList();
+            CommentsCommand = new Command(async () => await ShowComments());
+            ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
+            ListCanopyOrigin = PickerService.CanopyOriginItems().OrderBy(c => c.NAME).ToList();
+            ListCanopyStructure = PickerService.CanopyStructureItems().OrderBy(c => c.NAME).ToList();
+            ListMaturityClass = PickerService.MaturityClassItems().OrderBy(c => c.NAME).ToList();
             FetchPlotDetails();
+        }
+        async Task ShowComments()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new PlotComments(_plot));
+        }
+        private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedSpecies
+        {
+            get
+            {
+                _selectedSpecies = PickerService.GetItem(ListSpecies, _plot.LEAD_SPP);
+                return _selectedSpecies;
+            }
+            set
+            {
+                SetProperty(ref _selectedSpecies, value);
+                _plot.LEAD_SPP = (int)_selectedSpecies.ID;
+            }
+        }
+        private PickerItems _selectedCanopyOrigin = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedCanopyOrigin
+        {
+            get
+            {
+                _selectedCanopyOrigin = PickerService.GetItem(ListCanopyOrigin, _plot.ORIGIN);
+                return _selectedCanopyOrigin;
+            }
+            set
+            {
+                SetProperty(ref _selectedCanopyOrigin, value);
+                _plot.ORIGIN = (int)_selectedCanopyOrigin.ID;
+            }
+        }
+        private PickerItemsString _selectedMaturityClass = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedMaturityClass
+        {
+            get
+            {
+                _selectedMaturityClass = PickerService.GetItem(ListMaturityClass, _plot.MATURITY);
+                return _selectedMaturityClass;
+            }
+            set
+            {
+                SetProperty(ref _selectedMaturityClass, value);
+                _plot.MATURITY = _selectedMaturityClass.ID;
+            }
+        }
+        private PickerItemsString _selectedCanopyStructure = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCanopyStructure
+        {
+            get
+            {
+                _selectedCanopyStructure = PickerService.GetItem(ListCanopyStructure, _plot.CANOPY_STRUCTURE);
+                return _selectedCanopyStructure;
+            }
+            set
+            {
+                SetProperty(ref _selectedCanopyStructure, value);
+                _plot.CANOPY_STRUCTURE = _selectedCanopyStructure.ID;
+            }
         }
 
         private PickerItems _selectedFMU = new PickerItems { ID = 0, NAME = "" };

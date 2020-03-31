@@ -1,10 +1,39 @@
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.ProjectView">
+<ContentView
+    x:Class="eLiDAR.Views.ProjectView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <StackLayout Spacing="12">
-        <Label Text="Project" FontAttributes="None"  HorizontalOptions="Start" />
-        <Entry x:Name="txtProject" Text="{Binding PROJECT}" HeightRequest="40" BackgroundColor="White" Placeholder="Project Name" HorizontalOptions="FillAndExpand"/>
-        <Label Text="Description" FontAttributes="None"  HorizontalOptions="Start" />
-        <Entry  x:Name="txtDescription" Text="{Binding DESCRIPTION}" BackgroundColor="White" HeightRequest="40" Placeholder="Description" HorizontalOptions="FillAndExpand"/>
-        <Label Text="Date" FontAttributes="None"  HorizontalOptions="Start" />
-        <DatePicker x:Name="txtDate" Date="{Binding DATE, StringFormat='{0:MMMM dd, yyyy}'}" HeightRequest="40" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
-     </StackLayout>
+        <Label
+            FontAttributes="None"
+            HorizontalOptions="Start"
+            Text="Project" />
+        <Entry
+            x:Name="txtProject"
+            BackgroundColor="White"
+            HeightRequest="40"
+            HorizontalOptions="FillAndExpand"
+            Placeholder="Project Name"
+            Text="{Binding PROJECT}" />
+        <Label
+            FontAttributes="None"
+            HorizontalOptions="Start"
+            Text="Description" />
+        <Entry
+            x:Name="txtDescription"
+            BackgroundColor="White"
+            HeightRequest="40"
+            HorizontalOptions="FillAndExpand"
+            Placeholder="Description"
+            Text="{Binding DESCRIPTION}" />
+        <Label
+            FontAttributes="None"
+            HorizontalOptions="Start"
+            Text="Date" />
+        <DatePicker
+            x:Name="txtDate"
+            BackgroundColor="White"
+            Date="{Binding PROJECT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
+            HeightRequest="40"
+            HorizontalOptions="FillAndExpand" />
+    </StackLayout>
 </ContentView>

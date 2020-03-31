@@ -136,7 +136,16 @@ namespace eLiDAR.ViewModels
 
         public DateTime PLOT_DATE
         {
-            get => _plot.PLOT_DATE;
+            get {
+                DateTime date1 = new DateTime(_plot.PLOT_DATE.Ticks );
+                DateTime date2 = new DateTime(2020, 1, 1, 12, 0, 0);
+                int result = DateTime.Compare(date1, date2);
+                if (result < 0)
+                {
+                    return DateTime.Today;
+                }
+                else {return  _plot.PLOT_DATE; }
+            }
             set
             {
                 _plot.PLOT_DATE = value;
@@ -154,7 +163,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public string LEAD_SPP
+        public int LEAD_SPP
         {
             get => _plot.LEAD_SPP;
             set
@@ -164,7 +173,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public string ORIGIN
+        public int ORIGIN
         {
             get => _plot.ORIGIN;
             set
@@ -223,7 +232,15 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("FIELD_CREW2");
             }
         }
-
+        public string FIELD_CREW3
+        {
+            get => _plot.FIELD_CREW3;
+            set
+            {
+                _plot.FIELD_CREW3 = value;
+                NotifyPropertyChanged("FIELD_CREW3");
+            }
+        }
         public string DECLINATION
         {
             get => _plot.DECLINATION;
@@ -274,13 +291,13 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public string NOTES
+        public string COMMENTS
         {
-            get => _plot.NOTES;
+            get => _plot.COMMENTS;
             set
             {
-                _plot.NOTES = value;
-                NotifyPropertyChanged("NOTES");
+                _plot.COMMENTS = value;
+                NotifyPropertyChanged("COMMENTS");
             }
         }
 
@@ -295,7 +312,16 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("PlotList");
             }
         }
-
+        List<PLOTLIST> _plotListFull;
+        public List<PLOTLIST> PlotListFull
+        {
+            get => _plotListFull;
+            set
+            {
+                _plotListFull = value;
+                NotifyPropertyChanged("PlotListFull");
+            }
+        }
 
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;

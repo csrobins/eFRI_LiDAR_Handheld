@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Servcies;
 using Xamarin.Forms;
+using eLiDAR.Services;
+using System.Linq;
 
 namespace eLiDAR.ViewModels
 {
@@ -17,6 +19,8 @@ namespace eLiDAR.ViewModels
         public IValidator _soilValidator;
         public IVegetationRepository _vegetationRepository;
         public string _fk;
+        public List<PickerItemsString> ListVeg  = PickerService.VegItems().ToList();
+        private string _getscientific;
 
         public event PropertyChangedEventHandler PropertyChanged2;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyname = null)
@@ -58,8 +62,26 @@ namespace eLiDAR.ViewModels
             set
             {
                 _vegetation.SPECIES = value;
-                NotifyPropertyChanged("SPECIES");
+               NotifyPropertyChanged("SPECIES");
+                SetScientific();
             }
+        }
+        
+        void SetScientific()
+        {
+           GetScientific = PickerService.GetItem(ListVeg, SPECIES).NAME;
+        }
+        public string GetScientific
+        {
+            get
+            {
+                return _getscientific;
+            }
+            set {
+                _getscientific = value;
+                NotifyPropertyChanged("GetScientific");
+            }
+            
         }
         public int QUAD1
         {

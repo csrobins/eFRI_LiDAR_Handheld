@@ -1,43 +1,139 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="eLiDAR.Views.VegetationView"
-             xmlns:behaviors="clr-namespace:SupportWidgetXF.Behaviors;assembly=SupportWidgetXF"
-             xmlns:widget="clr-namespace:SupportWidgetXF.Widgets;assembly=SupportWidgetXF"
-             xmlns:dm="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"        >
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="eLiDAR.Views.VegetationView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:SupportWidgetXF.Behaviors;assembly=SupportWidgetXF"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:dm="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:widget="clr-namespace:SupportWidgetXF.Widgets;assembly=SupportWidgetXF"
+    mc:Ignorable="d">
     <ContentView.Content>
-       
-            <StackLayout Grid.Column="0" Grid.Row="0">
-                <Label Text="Single title" />
-            <!--<widget:SupportAutoComplete x:Name="singleTitle"--><!--
-                                        HeightRequest="40"
-                                        HorizontalOptions="FillAndExpand"
-                                        CornerColor="Green"
-                                        CornerRadius="5"
-                                        CornerWidth="1"
-                                        DropMode="SingleTitle"
-                                        FocusCornerColor="Purple"
-                                        ItemsSource="{Binding ItemDemo}"--> 
-                                        <!--Placeholder="type here" Text="{Binding Test, Mode=TwoWay}" IsValid="True" />-->
-            <!--<Entry Text=" {Binding SPECIES, Mode=TwoWay}"/>-->
 
-            <Label Text="Simple Test using a static list of results, and filtering them dynamically based on input" HorizontalOptions="Start" />
-            <dm:AutoSuggestBox x:Name="SuggestBox1" 
-                           PlaceholderText="Enter a country"
-                           TextChanged="SuggestBox_TextChanged" 
-                           QuerySubmitted="SuggestBox_QuerySubmitted"
-                           Text=" {Binding SPECIES, Mode=TwoWay}"/>
-            <Label Text="" x:Name="status" />
-            <dm:AutoSuggestBox x:Name="SuggestBox2"
-                           PlaceholderText="Enter another country"
-                           TextChanged="SuggestBox_TextChanged"
-                           QuerySubmitted="SuggestBox_QuerySubmitted" />
+        <StackLayout Grid.Row="0" Grid.Column="0">
+            <Label Text="Single title" />
 
+            <Label HorizontalOptions="Start" Text="Choose from the Ontario plant list with 15,804 species in the list." />
+            <dm:AutoSuggestBox
+                x:Name="txtVeg"
+                PlaceholderText="Enter a 7-letter veg code"
+                Text="{Binding SPECIES, Mode=TwoWay}"
+                TextChanged="TxtVeg_TextChanged" />
+            <Label x:Name="txtscientific" Text="{Binding GetScientific, Mode=TwoWay}" />
+            <Grid Padding="10" ColumnSpacing=" 1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.Column="0">
+                    <Label
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start"
+                        Text="Quadrants % Cover" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="Quad 1" />
+                    <Entry
+                        x:Name="txtQuad1"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="Quad 1 % Cover"
+                        Text="{Binding QUAD1}" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="Quad 2" />
+                    <Entry
+                        x:Name="txtQuad2"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="Quad 2 % Cover"
+                        Text="{Binding QUAD2}" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="Quad 3" />
+                    <Entry
+                        x:Name="txtQuad3"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="Quad 3 % Cover"
+                        Text="{Binding QUAD3}" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="Quad 4" />
+                    <Entry
+                        x:Name="txtQuad4"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="Quad 4 % Cover"
+                        Text="{Binding QUAD4}" />
+                </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="1">
+                    <Label
+                        FontAttributes="Bold"
+                        HorizontalOptions="Start"
+                        Text="ELC Layer % Cover" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="ELC Layer 3" />
+                    <Entry
+                        x:Name="txtELClayer3"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="ELC Layer 3 % Cover"
+                        Text="{Binding ELCLAYER3}" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="ELC Layer 4" />
+                    <Entry
+                        x:Name="txtELClayer4"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="ELC Layer 4 % Cover"
+                        Text="{Binding ELCLAYER4}" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="ELC Layer 5" />
+                    <Entry
+                        x:Name="txtELClayer5"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="ELC Layer 5 % Cover"
+                        Text="{Binding ELCLAYER5}" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="ELC Layer 5" />
+                    <Entry
+                        x:Name="txtELClayer6"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="ELC Layer 6 % Cover"
+                        Text="{Binding ELCLAYER6}" />
+                    <Label
+                        FontAttributes="None"
+                        HorizontalOptions="Start"
+                        Text="ELC Layer 7" />
+                    <Entry
+                        x:Name="txtELClayer7"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="ELC Layer 7 % Cover"
+                        Text="{Binding ELCLAYER7}" />
+                </StackLayout>
+            </Grid>
         </StackLayout>
-            
-    
     </ContentView.Content>
 </ContentView>

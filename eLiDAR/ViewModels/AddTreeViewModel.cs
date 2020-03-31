@@ -18,6 +18,7 @@ namespace eLiDAR.ViewModels {
 
         public ICommand AddCommand { get; private set; }
         public ICommand ViewAllCommand { get; private set; }
+        public ICommand CommentsCommand { get; private set; }
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListVigour { get; set; }
         public List<PickerItems> ListCrownDamage { get; set; }
@@ -27,7 +28,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItems> ListWoodCondition { get; set; }
         public List<PickerItems> ListMortalityCause { get; set; }
         public List<PickerItems> ListDecayClass { get; set; }
-
+        public List<PickerItems> ListCrownPosition { get; set; }
 
         public AddTreeViewModel(INavigation navigation){
             _navigation = navigation;
@@ -47,7 +48,6 @@ namespace eLiDAR.ViewModels {
             ListDecayClass = PickerService.DecayClassItems().ToList();
 
     }
-
     public AddTreeViewModel(INavigation navigation, string fk)
         {
             _navigation = navigation;
@@ -66,10 +66,29 @@ namespace eLiDAR.ViewModels {
             ListWoodCondition = PickerService.WoodConditionItems().ToList();
             ListMortalityCause = PickerService.MortalityCauseItems().ToList();
             ListDecayClass = PickerService.DecayClassItems().ToList();
-
+            ListCrownPosition = PickerService.CrownPositionItems().ToList();
+            CommentsCommand = new Command(async () => await ShowComments());
+        }
+        async Task ShowComments()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new TreeComments(_tree));
         }
         // These are for the picker item sources that present a an item different than the code
-
+        private PickerItems _selectedCrownPosition = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems CrownPosition
+        {
+            get
+            {
+                _selectedCrownPosition = PickerService.GetItem(ListCrownPosition, _tree.CROWN_POSITION);
+                return _selectedCrownPosition;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrownPosition, value);
+                _tree.CROWN_POSITION = (int)_selectedCrownPosition.ID;
+            }
+        }
         private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedSpecies
         {
@@ -205,12 +224,14 @@ namespace eLiDAR.ViewModels {
         {
 
             TreeValidator _treeValidator = new TreeValidator();
+            _tree.PLOTID = _fk;
             ValidationResult validationResults = _treeValidator.Validate(_tree);
             if (validationResults.IsValid)
                {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Tree", "Do you want to save tree details?", "OK", "Cancel");
                 if (isUserAccept)
                     {
+
                     _treeRepository.InsertTree(_tree, _fk);
                     await _navigation.PopAsync();
 

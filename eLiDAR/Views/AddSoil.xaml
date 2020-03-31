@@ -1,15 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Add Soil Layer" BackgroundColor="#D5E7FA" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
- x:Class="eLiDAR.Views.AddSoil" xmlns:local="clr-namespace:eLiDAR.Views" BindingContext="AddSoilViewModel">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.AddSoil"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="Add Soil Layer"
+    BackgroundColor="#D5E7FA"
+    BindingContext="AddSoilViewModel">
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
-            <local:SoilView/>
-            <Button x:Name="SubmitButton" Command="{Binding AddCommand}" BorderRadius="0" Text="Save Soil" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5"/>
-            <Label Text="View All Soils" IsVisible="{Binding IsViewAll}" x:Name="ViewLbl" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15">  
-                <Label.GestureRecognizers>  
-                <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />  
-                </Label.GestureRecognizers>  
-            </Label>  
-    </StackLayout>
+            <local:SoilView />
+            <Button
+                x:Name="SubmitButton"
+                BackgroundColor="#5989B5"
+                BorderRadius="0"
+                Command="{Binding AddCommand}"
+                FontAttributes="Bold"
+                Text="Save Soil"
+                TextColor="White" />
+            <Label
+                x:Name="ViewLbl"
+                FontSize="15"
+                HorizontalOptions="EndAndExpand"
+                IsVisible="{Binding IsViewAll}"
+                Text="View All Soils"
+                TextColor="Black">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

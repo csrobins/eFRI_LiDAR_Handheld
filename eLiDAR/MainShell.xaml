@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="clr-namespace:eLiDAR;assembly=eLiDAR"
-             FlyoutBehavior="Disabled"
-             mc:Ignorable="d"
-             x:Class="eLiDAR.MainShell">
+<Shell
+    x:Class="eLiDAR.MainShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:eLiDAR;assembly=eLiDAR"
+    FlyoutBehavior="Disabled"
+    mc:Ignorable="d">
     <!--<ShellItem>
         <ShellContent>
             <pages:MainPage />
@@ -14,16 +15,16 @@
     </ShellItem>-->
     <TabBar>
         <Tab Title="Main">
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.Main}"/>
+            <ShellContent ContentTemplate="{DataTemplate pages:Views.Main}" />
         </Tab>
         <Tab Title="Projects">
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.ProjectList}"/>
+            <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
         </Tab>
-        <Tab Title="Plots" >
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotFilterList}"/>
-        </Tab>
-        <Tab Title="TEST" >
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.DemoAutoCompletePage}"/>
+        <!--<Tab Title="Plots">
+            <ShellContent ContentTemplate="{DataTemplate pages:Views.PlotFilterList}" />
+        </Tab>-->
+        <Tab Title="Settings">
+            <ShellContent ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
         </Tab>
 
         <!--<Tab Title=" Plot View">

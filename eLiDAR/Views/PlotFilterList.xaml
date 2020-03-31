@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="{Binding Title}" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eLiDAR.Views.PlotFilterList">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.PlotFilterList"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}">
     <Grid Padding="10,20,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -7,16 +11,37 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackLayout>
-            <Label Text="Select a project to filter plots"/>
-            <Picker x:Name="lstProjects" ItemsSource="{Binding ProjectList}" SelectedItem="{Binding SelectedProject, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Select a project"/>
-            <Button Text="New Plot"  FontAttributes="Bold" BorderRadius="0" HeightRequest="40" BorderColor="Black" BackgroundColor="Transparent" BorderWidth="1"  TextColor="Black"  Command="{Binding AddCommand}" HorizontalOptions="End" IsEnabled="{Binding IsSelected}"/>
+            <Label Text="Select a project to filter plots" />
+            <Picker
+                x:Name="lstProjects"
+                Title="Select a project"
+                HorizontalOptions="FillAndExpand"
+                ItemDisplayBinding="{Binding NAME}"
+                ItemsSource="{Binding ProjectList}"
+                SelectedItem="{Binding SelectedProject, Mode=TwoWay}" />
+            <Button
+                BackgroundColor="Transparent"
+                BorderColor="Black"
+                BorderRadius="0"
+                BorderWidth="1"
+                Command="{Binding AddCommand}"
+                FontAttributes="Bold"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                IsEnabled="{Binding IsSelected}"
+                Text="New Plot"
+                TextColor="Black" />
 
-            <ListView x:Name="MyListView" HasUnevenRows="true"  SeparatorColor="Black" ItemsSource="{Binding PlotList}"
-        SelectedItem="{Binding SelectedPlotItem, Mode=TwoWay}">
+            <ListView
+                x:Name="MyListView"
+                HasUnevenRows="true"
+                ItemsSource="{Binding PlotList}"
+                SelectedItem="{Binding SelectedPlotItem, Mode=TwoWay}"
+                SeparatorColor="Black">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid  Padding="10" x:Name="Item">
+                            <Grid x:Name="Item" Padding="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50" />
                                 </Grid.RowDefinitions>
@@ -25,21 +50,66 @@
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
-                                <StackLayout Grid.Column="0" >
-                                    <Label Text="Plot"  TextColor="Black" HorizontalTextAlignment="Start" />
-                                    <Label Text="{Binding PLOTNUM}"  Font="20" TextColor="Black" HorizontalTextAlignment="Start" />
-                                    <Label Text="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"  TextColor="Black"  HorizontalTextAlignment="Start"/>
+                                <StackLayout Grid.Column="0">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="Plot"
+                                        TextColor="Black" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding PLOTNUM}"
+                                        TextColor="Black" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                                        TextColor="Black" />
                                 </StackLayout>
-                                <StackLayout Grid.Column="1" >
-                                    <Label Text="Plot Type"  TextColor="Black" HorizontalTextAlignment="End"/>
-                                    <Label Text="{Binding PLOT_TYPE}"  Font="20" TextColor="Black" HorizontalTextAlignment="End" />
+                                <StackLayout Grid.Column="1">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Text="Plot Type"
+                                        TextColor="Black" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding PLOT_TYPE}"
+                                        TextColor="Black" />
                                 </StackLayout>
-                                <StackLayout Grid.Column="2" Orientation="Horizontal" VerticalOptions="End" >
-                                    <Button Text="Trees" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
-                                    <Button Text="Site" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSiteCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
-                                    <Button Text="Soil" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSoilCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
-                                    <Button Text="Small" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowSmallTreeCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
-                                    <Button Text="Vegetation" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowVegetationCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>
+                                <StackLayout
+                                    Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    VerticalOptions="End">
+                                    <Button
+                                        BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                        Command="{Binding ShowFilteredCommand}"
+                                        CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                        HorizontalOptions="End"
+                                        Text="Trees" />
+                                    <Button
+                                        BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                        Command="{Binding ShowSiteCommand}"
+                                        CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                        HorizontalOptions="End"
+                                        Text="Site" />
+                                    <Button
+                                        BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                        Command="{Binding ShowSoilCommand}"
+                                        CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                        HorizontalOptions="End"
+                                        Text="Soil" />
+                                    <Button
+                                        BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                        Command="{Binding ShowSmallTreeCommand}"
+                                        CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                        HorizontalOptions="End"
+                                        Text="Small" />
+                                    <Button
+                                        BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                        Command="{Binding ShowVegetationCommand}"
+                                        CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                        HorizontalOptions="End"
+                                        Text="Vegetation" />
 
                                 </StackLayout>
                             </Grid>
@@ -47,8 +117,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Delete All Plots"  BorderRadius="0" VerticalOptions="EndAndExpand" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5" Command="{Binding DeleteAllPlotsCommand}" />
+            <Button
+                BackgroundColor="#5989B5"
+                BorderRadius="0"
+                Command="{Binding DeleteAllPlotsCommand}"
+                FontAttributes="Bold"
+                Text="Delete All Plots"
+                TextColor="White"
+                VerticalOptions="EndAndExpand" />
 
         </StackLayout>
     </Grid>
-</ContentPage>  
+</ContentPage>

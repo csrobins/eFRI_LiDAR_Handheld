@@ -4,18 +4,26 @@ using Xamarin.Forms;
 
 namespace eLiDAR.Views {
     public partial class SoilDetailsPage : ContentPage {
-
+        private SoilDetailsViewModel _viewmodel;
         public SoilDetailsPage(string soilID) {
             try
             {
                 InitializeComponent();
-                this.BindingContext = new SoilDetailsViewModel(Navigation, soilID);
+                _viewmodel = new SoilDetailsViewModel(Navigation, soilID);
+                BindingContext = _viewmodel;
+             //  this.BindingContext = new SoilDetailsViewModel(Navigation, soilID);
             }
             catch (Exception e)
             {
                 var myerror = e.Message; // error
                                          //  Log.Fatal(e);
             };
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (_viewmodel != null) { _viewmodel.Refresh(); }
+
         }
     }
 }

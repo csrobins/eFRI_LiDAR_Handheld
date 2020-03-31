@@ -1,30 +1,68 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="eLiDAR.Views.TreeView">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="eLiDAR.Views.TreeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
     <ContentView.Content>
-        <Grid  Padding="10" ColumnSpacing=" 1" >
+        <Grid Padding="10" ColumnSpacing=" 1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Column="0" Grid.Row="0">
-                <Label Text="Tree Attributes" FontAttributes="Bold" HorizontalOptions="Start" />
-                <Label Text="Tree Number" FontAttributes="None"  HorizontalOptions="Start" />
-                <Entry x:Name="txtTreenum" Text="{Binding TREENUM}"  Placeholder="Tree number" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
-                <Label Text="Species" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtSpecies" ItemsSource="{Binding ListSpecies}" SelectedItem="{Binding SelectedSpecies, Mode=TwoWay }" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Species"/>
-                <Label Text="Origin" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtOrigin" SelectedItem="{Binding ORIGIN, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Origin">
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Tree Attributes" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Section Number" />
+                <Entry
+                    x:Name="txtSection"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Section number"
+                    Text="{Binding SECTION}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Tree Number" />
+                <Entry
+                    x:Name="txtTreenum"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Tree number"
+                    Text="{Binding TREENUM}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Species" />
+                <Picker
+                    x:Name="txtSpecies"
+                    Title="Species"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListSpecies}"
+                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Origin" />
+                <Picker
+                    x:Name="txtOrigin"
+                    Title="Origin"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding ORIGIN, Mode=TwoWay}">
                     <Picker.Items>
                         <x:String>N</x:String>
                         <x:String>P</x:String>
@@ -32,43 +70,125 @@
                         <x:String>L</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Status" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtStatus" SelectedItem="{Binding STATUS, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Status">
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Status" />
+                <Picker
+                    x:Name="txtStatus"
+                    Title="Status"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding STATUS, Mode=TwoWay}">
                     <Picker.Items>
                         <x:String>L</x:String>
                         <x:String>D</x:String>
+                        <x:String>V</x:String>
+                        <x:String>DV</x:String>
+                        <x:String>X</x:String>
+                        <x:String>C</x:String>
+                        <x:String>M</x:String>
+                        <x:String>E</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Vigour" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtVigour" ItemsSource="{Binding ListVigour, Mode=TwoWay}" SelectedItem="{Binding SelectedVigour}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Vigour"/>
-                <Label Text="Ht to DBH (m)" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtHt2DBH" Text="{Binding HT_TO_DBH}"  Placeholder="Ht to DBH (m)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
-                <Label Text="DBH (cm)" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtDBH" Text="{Binding DBH}"  Placeholder="DBH (cm)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
-                <Label Text="Ht (m)" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtHt" Text="{Binding HT}"  Placeholder="Ht (m)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
-                <Label Text="DBH In?" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtDBHIn" SelectedItem="{Binding DBH_IN, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="DBH In?">
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Ht to DBH (m)" />
+                <Entry
+                    x:Name="txtHt2DBH"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Ht to DBH (m)"
+                    Text="{Binding HT_TO_DBH}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="DBH (cm)" />
+                <Entry
+                    x:Name="txtDBH"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="DBH (cm)"
+                    Text="{Binding DBH}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="DBH In?" />
+                <Picker
+                    x:Name="txtDBHIn"
+                    Title="DBH In?"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding DBH_IN, Mode=TwoWay}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Crown In?" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtCrownIn" SelectedItem="{Binding CROWN_IN, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Crown In?">
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crown In?" />
+                <Picker
+                    x:Name="txtCrownIn"
+                    Title="Crown In?"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding CROWN_IN, Mode=TwoWay}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Age" FontAttributes="None" HorizontalOptions="Start" />
-                <Entry x:Name="txtAge" Text="{Binding AGE}"  Placeholder="Age (yrs)" Keyboard="Numeric"  HorizontalOptions="FillAndExpand"/>
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Vigour" />
+                <Picker
+                    x:Name="txtVigour"
+                    Title="Vigour"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListVigour, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedVigour}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Bark Retention" />
+                <Picker
+                    x:Name="txtBarkRetention"
+                    Title="Bark Retention"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotLiveTree}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListBarkRetention, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedBarkRetention}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Wood Condition" />
+                <Picker
+                    x:Name="txtWoodCondition"
+                    Title="Wood Condition"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotLiveTree}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListWoodCondition, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedWoodCondition}" />
             </StackLayout>
 
-            <StackLayout Grid.Column=" 1" Grid.Row="0">
-                <Label Text="Live Tree Fields" FontAttributes="Bold" HorizontalOptions="Start" />
-                <Label Text="Crown Class" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtCrwonClass" SelectedItem="{Binding CROWN_CLASS, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Crown Class">
+            <StackLayout Grid.Row="0" Grid.Column=" 1">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Live Tree Fields" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crown Class" />
+                <Picker
+                    x:Name="txtCrownClass"
+                    Title="Crown Class"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding CROWN_CLASS, Mode=TwoWay}">
                     <Picker.Items>
                         <x:String>E</x:String>
                         <x:String>D</x:String>
@@ -79,42 +199,151 @@
                         <x:String>A</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Crown Damage" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtCrownDamage" ItemsSource="{Binding ListCrownDamage, Mode=TwoWay}" SelectedItem="{Binding SelectedCrownDamage}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Crown Damage"/>
-                <Label Text="Defoliating Insect" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtDefoliatingInsect" ItemsSource="{Binding ListDefoliatingInsect, Mode=TwoWay}" SelectedItem="{Binding SelectedDefoliatingInsect}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Defoliating Insect"/>
-                <Label Text="Foliar Disease" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtFoliarDisease" ItemsSource="{Binding ListFoliarDisease, Mode=TwoWay}" SelectedItem="{Binding SelectedFoliarDisease}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Foliar Disease"/>
-                <Label Text="Stem Quality" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtStemQuality" SelectedItem="{Binding STEM_QUALITY, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Stem Quality">
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crown Position" />
+                <Picker
+                    x:Name="txtCrownPosition"
+                    Title="Crown Position"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListCrownPosition, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedCrownPosition}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Crown Damage" />
+                <Picker
+                    x:Name="txtCrownDamage"
+                    Title="Crown Damage"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListCrownDamage, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedCrownDamage}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Defoliating Insect" />
+                <Picker
+                    x:Name="txtDefoliatingInsect"
+                    Title="Defoliating Insect"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListDefoliatingInsect, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedDefoliatingInsect}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Foliar Disease" />
+                <Picker
+                    x:Name="txtFoliarDisease"
+                    Title="Foliar Disease"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListFoliarDisease, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedFoliarDisease}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Stem Quality" />
+                <Picker
+                    x:Name="txtStemQuality"
+                    Title="Stem Quality"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding STEM_QUALITY, Mode=TwoWay}">
                     <Picker.Items>
                         <x:String>A</x:String>
                         <x:String>B</x:String>
                         <x:String>C</x:String>
                         <x:String>D</x:String>
+                        <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Text="Bark Retention" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtBarkRetention" ItemsSource="{Binding ListBarkRetention, Mode=TwoWay}" SelectedItem="{Binding SelectedBarkRetention}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Bark Retention"/>
-                <Label Text="Wood Condition" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtWoodCondition" ItemsSource="{Binding ListWoodCondition, Mode=TwoWay}" SelectedItem="{Binding SelectedWoodCondition}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Wood Condition"/>
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Ht and Age Attributes (All Trees)" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Ht (m)" />
+                <Entry
+                    x:Name="txtHt"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Ht (m)"
+                    Text="{Binding HT}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Length (m)" />
+                <Entry
+                    x:Name="txtLength"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotLiveTree}"
+                    Keyboard="Numeric"
+                    Placeholder="Length (m)"
+                    Text="{Binding LENGTH}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Age" />
+                <Entry
+                    x:Name="txtAge"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Age (yrs)"
+                    Text="{Binding AGE}" />
             </StackLayout>
 
-            <StackLayout Grid.Column="2"  Grid.Row="0">
-                <Label Text="Dead Tree Fields" FontAttributes="Bold" HorizontalOptions="Start" />
-                <Label Text="Decay Class" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtDecayClass" ItemsSource="{Binding ListDecayClass, Mode=TwoWay}" SelectedItem="{Binding SelectedDecayClass}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Decay Class"/>
-                <Label Text="Mortality Cause" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtMortalityCause" ItemsSource="{Binding ListMortalityCause, Mode=TwoWay}" SelectedItem="{Binding SelectedMortalityCause}" ItemDisplayBinding="{Binding NAME}"  HorizontalOptions="FillAndExpand"  Title="Mortality Cause"/>
-                <Label Text="Broken Top" FontAttributes="None" HorizontalOptions="Start" />
-                <Picker x:Name="txtBrokenTop" SelectedItem="{Binding BROKEN_TOP, Mode=TwoWay}" HorizontalOptions="FillAndExpand"  Title="Broken Top">
+            <StackLayout Grid.Row="0" Grid.Column="2">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Dead Tree Fields" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Decay Class" />
+                <Picker
+                    x:Name="txtDecayClass"
+                    Title="Decay Class"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotLiveTree}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListDecayClass, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedDecayClass}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Mortality Cause" />
+                <Picker
+                    x:Name="txtMortalityCause"
+                    Title="Mortality Cause"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotLiveTree}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListMortalityCause, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedMortalityCause}" />
+                <Label
+                    FontAttributes="None"
+                    HorizontalOptions="Start"
+                    Text="Broken Top" />
+                <Picker
+                    x:Name="txtBrokenTop"
+                    Title="Broken Top"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotLiveTree}"
+                    SelectedItem="{Binding BROKEN_TOP, Mode=TwoWay}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
+                <Button Command="{Binding CommentsCommand}" Text="Comments" />
             </StackLayout>
-            
+
         </Grid>
     </ContentView.Content>
 </ContentView>

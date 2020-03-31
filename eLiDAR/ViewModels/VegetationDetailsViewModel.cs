@@ -18,7 +18,8 @@ namespace eLiDAR.ViewModels {
 
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
-       
+        public List<PickerItemsString> ListVeg { get; set; }
+
         public VegetationDetailsViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _vegetation = new VEGETATION();
@@ -27,29 +28,10 @@ namespace eLiDAR.ViewModels {
             _fk = selectedID;
             AddCommand = new Command(async () => await Update());
             DeleteCommand = new Command(async () => await Delete());
-            ItemDemo = new List<IAutoDropItem>();
-            ItemDemo.Add(new YourClass("Robert Downey Jr.", "Iron Man - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Chris Evans", "Captain America - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Scarlett Johansson", "Black Widow - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Tom Hiddleston", "Loki - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Mark Ruffalo", "The Hulk - Marvel Universe", "marvel"));
-            ItemDemo.Add(new YourClass("Ben Affleck", "BatMan - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Henry Cavill", "Superman - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Gal Gadot", "Wonder Woman - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Ezra Miller", "The Flash - DC Universe", "dc"));
-            ItemDemo.Add(new YourClass("Jason Momoa", "Aquaman - DC Universe", "dc"));
+            ListVeg = PickerService.VegItems().ToList();
             FetchDetails(selectedID);
         }
-        private List<IAutoDropItem> _ItemDemo;
-        public List<IAutoDropItem> ItemDemo
-        {
-            get => _ItemDemo;
-            set
-            {
-                _ItemDemo = value;
-                OnPropertyChanged();
-            }
-        }
+       
         private bool _IsValidSingle;
         public bool IsValidSingle
         {
@@ -105,22 +87,6 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-        private YourClass _test;
-        public YourClass  Test
-        {
-            get
-            {
-                //_selectedSpecies.ID = PickerService.GetIndex(ListSpecies, _tree.SPECIES);
-                //_selectedSpecies.NAME = PickerService.GetValue(ListSpecies, _tree.SPECIES);
-                _test = new YourClass("Robert Downey Jr.", "Iron Man - Marvel Universe", "marvel");
-                // _ItemDemo = _test;
-                return _test;
-            }
-            set
-            {
-             //   SetProperty(ref _selectedSpecies, value);
-            //    _vegetation.SPECIES = _test.ToString;
-            }
-        }
+      
     }
 }

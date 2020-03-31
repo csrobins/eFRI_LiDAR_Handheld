@@ -43,6 +43,12 @@ namespace eLiDAR.Helpers
             var plot = sqliteconnection.Query<PLOT>("select PLOTNUM from Plot where PLOTID = '" + id + "'").FirstOrDefault();
             return plot.PLOTNUM;
         }
+        public string GetPlotType(String id)
+        {
+            var plot = sqliteconnection.Query<PLOT>("select PLOT_TYPE from Plot where PLOTID = '" + id + "'").FirstOrDefault();
+            return plot.PLOT_TYPE;
+        }
+
         public string GetTreeTitle(String id)
         {
             var tree = sqliteconnection.Query<TREE>("select TREENUM from Tree where TREEID = '" + id + "'").FirstOrDefault();
@@ -123,6 +129,11 @@ namespace eLiDAR.Helpers
             return (from data in sqliteconnection.Table<PLOT>().OrderBy(t => t.PLOTNUM).Where(t => t.PROJECTID == projectid) 
                     select data).ToList();
         }
+        public List<PLOTLIST> GetFilteredPlotDataFull(string projectid)
+        {
+            return (from data in sqliteconnection.Query<PLOTLIST>("Select * from PLOT").OrderBy(t => t.PLOTNUM).Where(t => t.PROJECTID == projectid)
+                    select data).ToList();
+        }
         //Get Specific Plot data
         public PLOT GetPlotData(string id)
         {
@@ -165,6 +176,12 @@ namespace eLiDAR.Helpers
             return (from data in sqliteconnection.Table<TREE>().OrderBy(t => t.TREENUM).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
+        public List<TREELIST> GetFilteredTreeDataFull(string plotid)
+        {
+            return (from data in sqliteconnection.Query<TREELIST>("select TREE.*, PLOT_TYPE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID").OrderBy(t => t.TREENUM).Where(t => t.PLOTID == plotid)
+                    select data).ToList();
+        }
+
         public List<TREE> GetFilteredTreeStemList(string plotid)
         {
             string qry = "select TREE.TREEID, PLOTID, TREENUM, SPECIES, ORIGIN, STATUS, DBH, HT, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' ORDER BY TREENUM";
@@ -178,11 +195,121 @@ namespace eLiDAR.Helpers
                 var myerror = e.Message; // erro
                 return null;
             }
-
-
-            
-          
         }
+        public List<TREELIST> GetFilteredTreeStemListFull(string plotid)
+        {
+            string qry = "select PLOT_TYPE, TREE.TREEID, TREE.PLOTID, TREENUM, SPECIES, TREE.ORIGIN, STATUS, DBH, HT, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' ORDER BY TREENUM";
+            try
+            {
+                var tree = sqliteconnection.Query<TREELIST>(qry).ToList();
+                return tree;
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return null;
+            }
+        }
+        public bool IsTreeNumUnique(TREE _tree)
+        {
+            // for examinginif a unique tree number is being saved
+            string qry;
+            if (_tree.TREEID != null)
+            {
+                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUM = " + _tree.TREENUM + " and TREEID <> '" + _tree.TREEID + "'";
+            }
+            else
+            {
+                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUM = " + _tree.TREENUM ;
+            }
+            try
+            {
+                var treenum = sqliteconnection.ExecuteScalar<int>(qry);
+                if (treenum > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsPlotNumUnique(PLOT _plot)
+        {
+            // for examinginif a unique tree number is being saved
+            string qry;
+            if (_plot.PLOTID != null)
+            {
+                qry = "select count(PLOTID) from PLOT where MEASUREMENT_TYPE = '" + _plot.MEASUREMENT_TYPE +"' and PROJECTID = '" + _plot.PROJECTID + "' and PLOTNUM = '" + _plot.PLOTNUM + "' and PLOTID <> '" + _plot.PLOTID + "'";
+            }
+            else
+            {
+                qry = "select count(PLOTID) from PLOT where MEASUREMENT_TYPE = '" + _plot.MEASUREMENT_TYPE + "' and PROJECTID = '" + _plot.PROJECTID + "' and PLOTNUM = '" + _plot.PLOTNUM + "'";
+            }
+
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsDWDNumUnique(DWD _dwd)
+        {
+            // for examinginif a unique tree number is being saved
+            string qry;
+            if (_dwd.DWDID != null)
+            {
+                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINE = " + _dwd.LINE + " and PLOTID <> '" + _dwd.PLOTID + "'";
+            }
+            else
+            {
+                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINE = " + _dwd.LINE;
+            }
+
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsSoilNumUnique(SOIL  _soil)
+        {
+            // for examinginif a unique tree number is being saved
+            string qry;
+            if (_soil.SOILID != null)
+            {
+                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and LAYER = " + _soil.LAYER + " and PLOTID <> '" + _soil.PLOTID + "'";
+            }
+            else
+            {
+                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and LAYER = " + _soil.LAYER;
+            }
+
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+
         //Get Specific data
         public TREE GetTreeData(string id)
         {
@@ -304,7 +431,7 @@ namespace eLiDAR.Helpers
         }
         public List<SOIL> GetFilteredSoilData(string plotid)
         {
-            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.FROM).Where(t => t.PLOTID == plotid)
+            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.LAYER).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
         public SOIL GetSoilData(string id)
@@ -379,6 +506,75 @@ namespace eLiDAR.Helpers
         public VEGETATION GetVegetationData(string id)
         {
             return sqliteconnection.Table<VEGETATION>().FirstOrDefault(t => t.VEGETATIONID == id);
+        }
+
+        // Deformity Helpers
+
+        public void DeleteDeformity(string id)
+        {
+            sqliteconnection.Delete<DEFORMITY>(id);
+        }
+        // Insert new to DB 
+        public void InsertDeformity(DEFORMITY deformity)
+        {
+            sqliteconnection.Insert(deformity );
+        }
+        // Update Data
+        public void UpdateDeformity(DEFORMITY deformity)
+        {
+            sqliteconnection.Update(deformity );
+        }
+        public void DeleteAllDeformity()
+        {
+            sqliteconnection.DeleteAll<DEFORMITY>();
+        }
+        public List<DEFORMITY> GetAllDeformityData()
+        {
+            return (from data in sqliteconnection.Table<DEFORMITY>().OrderBy(t => t.HT_FROM)
+                    select data).ToList();
+        }
+        public List<DEFORMITY> GetFilteredDeformityData(string id)
+        {
+            return (from data in sqliteconnection.Table<DEFORMITY>().OrderBy(t => t.HT_FROM ).Where(t => t.TREEID == id)
+                    select data).ToList();
+        }
+        public DEFORMITY  GetDeformityData(string id)
+        {
+            return sqliteconnection.Table<DEFORMITY >().FirstOrDefault(t => t.DEFORMITYID == id);
+        }
+
+        //DWD Helpers
+        public void DeleteDWD(string id)
+        {
+            sqliteconnection.Delete<DWD>(id);
+        }
+        // Insert new to DB 
+        public void InsertDWD(DWD dwd)
+        {
+            sqliteconnection.Insert(dwd);
+        }
+        // Update Data
+        public void UpdateDWD(DWD dwd)
+        {
+            sqliteconnection.Update(dwd);
+        }
+        public void DeleteAllDWD()
+        {
+            sqliteconnection.DeleteAll<DWD>();
+        }
+        public List<DWD> GetAllDWDData()
+        {
+            return (from data in sqliteconnection.Table<DWD>().OrderBy(t => t.DWDNUM)
+                    select data).ToList();
+        }
+        public List<DWD> GetFilteredDWDData(string plotid)
+        {
+            return (from data in sqliteconnection.Table<DWD>().OrderBy(t => t.LINE).OrderBy(t => t.DWDNUM ).Where(t => t.PLOTID == plotid)
+                    select data).ToList();
+        }
+        public DWD GetDWDData(string id)
+        {
+            return sqliteconnection.Table<DWD>().FirstOrDefault(t => t.DWDID == id);
         }
 
     }
