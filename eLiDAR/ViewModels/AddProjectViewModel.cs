@@ -35,6 +35,8 @@ namespace eLiDAR.ViewModels {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Project", "Do you want to save project details?", "OK", "Cancel");
                 if (isUserAccept)
                 {
+                    _project.Created = System.DateTime.UtcNow;
+                    _project.LastModified = _project.Created;  
                     _projectRepository.InsertProject(_project);
                     await _navigation.PopAsync();
  //                   await _navigation.PushAsync(new ProjectList());

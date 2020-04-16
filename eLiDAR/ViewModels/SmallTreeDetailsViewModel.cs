@@ -58,7 +58,8 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Small Tree Details", "Save Small Tree Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
-                     _smallTreeRepository.UpdateSmallTree(_smallTree);
+                        _smallTree.LastModified = System.DateTime.UtcNow;
+                        _smallTreeRepository.UpdateSmallTree(_smallTree);
                      await _navigation.PopAsync();
                     }
                 }

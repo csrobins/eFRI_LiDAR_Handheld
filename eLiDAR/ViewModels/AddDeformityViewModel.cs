@@ -10,7 +10,6 @@ using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation;
 using FluentValidation.Results;
-using SupportWidgetXF.Models.Widgets;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
@@ -86,7 +85,9 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Deformity Details", "Save Deformity Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
-                     _deformityRepository.InsertDeformity(_deformity,_fk);
+                        _deformity.Created = System.DateTime.UtcNow;
+                        _deformity.LastModified = _deformity.Created;
+                        _deformityRepository.InsertDeformity(_deformity,_fk);
                         //  This is just to slow down the database
                      _deformityRepository.GetDeformityData(_deformity.DEFORMITYID);
                      await _navigation.PopAsync();
@@ -117,15 +118,6 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-        private List<IAutoDropItem> _ItemDemo;
-        public List<IAutoDropItem> ItemDemo
-        {
-            get => _ItemDemo;
-            set
-            {
-                _ItemDemo = value;
-                OnPropertyChanged();
-            }
-        }
+      
     }
 }

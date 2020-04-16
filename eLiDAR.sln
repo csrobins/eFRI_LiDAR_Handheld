@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eLiDAR.iOS", "eLiDAR.iOS\eL
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutoSuggestBox", "AutoSuggestBox", "{EAEDADBB-90A0-4596-A499-3F030CD2F5F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotMorten.Xamarin.Forms.AutoSuggestBox", "AutoSuggestBox\dotMorten.Xamarin.Forms.AutoSuggestBox.csproj", "{51866945-B641-45FF-A42A-B62D0D0A0154}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoSuggestBox", "AutoSuggestBox\AutoSuggestBox.csproj", "{51866945-B641-45FF-A42A-B62D0D0A0154}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

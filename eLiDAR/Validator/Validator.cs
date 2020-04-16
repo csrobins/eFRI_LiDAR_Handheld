@@ -11,14 +11,9 @@ namespace eLiDAR.Validator
         {  
             RuleFor(c => c.NAME).NotEmpty().WithMessage("Project name should not be empty.");
             RuleFor(c => c.DESCRIPTION).NotEmpty().WithMessage("Project description should not be empty.");
-            RuleFor(c => c.PROJECT_DATE).NotEmpty().WithMessage("Project date should not be empty.");
+      //      RuleFor(c => c.PROJECT_DATE).NotEmpty().WithMessage("Project date should not be empty.");
         }  
 
-        bool ValidateStringEmpty(string stringValue){
-            if (!string.IsNullOrEmpty(stringValue))
-                return true;
-            return false;
-        }
     }
     public class PlotValidator : AbstractValidator<PLOT>
     {
@@ -27,7 +22,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => IsUniquePlotNum(c)).WithMessage("Plot number must be unique within the project.");
             RuleFor(c => c.PLOTNUM).NotEmpty().WithMessage("Plot number should not be empty.");
             RuleFor(c => c.PLOT_TYPE).NotEmpty().WithMessage("Plot type should not be empty.");
-            RuleFor(c => c.PLOT_DATE).NotEmpty().WithMessage("Plot date should not be empty.");
+        //    RuleFor(c => c.PLOT_DATE).NotEmpty().WithMessage("Plot date should not be empty.");
             RuleFor(c => c.PLOT_DATE).GreaterThanOrEqualTo(DateTime.Parse("01-01-2020")).WithMessage("Plot date should > 01-01-2020.");
             RuleFor(c => c.FMU).NotEmpty().WithMessage("FMU should not be empty.");
             RuleFor(c => c.FOREST_DISTRICT).NotEmpty().WithMessage("Forest District should not be empty.");

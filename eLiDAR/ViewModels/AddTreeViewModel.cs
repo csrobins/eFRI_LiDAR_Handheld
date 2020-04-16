@@ -231,7 +231,8 @@ namespace eLiDAR.ViewModels {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Tree", "Do you want to save tree details?", "OK", "Cancel");
                 if (isUserAccept)
                     {
-
+                    _tree.Created = System.DateTime.UtcNow;
+                    _tree.LastModified = _tree.Created;
                     _treeRepository.InsertTree(_tree, _fk);
                     await _navigation.PopAsync();
 

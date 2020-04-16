@@ -143,8 +143,8 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Soil Details", "Save Soil Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
-                        
-                      _soilRepository.UpdateSoil(_soil);
+                        _soil.LastModified = System.DateTime.UtcNow;
+                        _soilRepository.UpdateSoil(_soil);
                       await _navigation.PopAsync();
                     }
                 }

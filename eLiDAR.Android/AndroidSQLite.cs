@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using eLiDAR;
 using eLiDAR.Droid;
 using eLiDAR.Helpers;
@@ -29,10 +30,15 @@ namespace eLiDAR.Droid {
                 {
                     binaryWriter.Write(buffer, 0, length);
                 }
+                // intialize the synchonizer to the base azure web service
+               // var result = task.Wait();
+
             }
             var conn = new SQLiteConnection( path);
 			// Return the database connection
 			return conn;
 		}
-	}
+
+   
+    }
 }

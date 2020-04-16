@@ -117,8 +117,9 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Soil Details", "Save Soil Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
-
-                     _soilRepository.InsertSoil(_soil,_fk);
+                        _soil.Created = System.DateTime.UtcNow;
+                        _soil.LastModified = _soil.Created;
+                        _soilRepository.InsertSoil(_soil,_fk);
                         //  This is just to slow down the database
                      _soilRepository.GetSoilData(_soil.SOILID);
                      await _navigation.PopAsync();

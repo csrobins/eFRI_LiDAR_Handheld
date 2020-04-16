@@ -51,11 +51,14 @@ namespace eLiDAR.ViewModels {
                     {
                         if (_stemMapRepository.IsStemMapExists(_fk))
                         {
+                            _stemmap.LastModified = System.DateTime.UtcNow;
                             _stemMapRepository.UpdateTree(_stemmap);
 
                         }
                         else
                         {
+                            _stemmap.Created = System.DateTime.UtcNow;
+                            _stemmap.LastModified = _stemmap.Created;
                             _stemMapRepository.InsertTree(_stemmap, _fk);
                         }
                         await _navigation.PopAsync();

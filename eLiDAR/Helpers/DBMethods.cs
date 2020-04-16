@@ -14,16 +14,9 @@ namespace eLiDAR.Helpers
         public DatabaseMethods()
         {
             sqliteconnection = DependencyService.Get<ISQLite>().GetConnection();
-            //sqliteconnection.CreateTable<ContactInfo>();
+        
         }
-        // Get All Project data    
-
-        public List<PROJECT> GetAllProjectData()
-        {
-            return (from data in sqliteconnection.Table<PROJECT>()
-                    select data).ToList();
-        }
-
+          
 
     }
 }

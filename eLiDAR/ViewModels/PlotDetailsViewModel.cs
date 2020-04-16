@@ -132,6 +132,7 @@ namespace eLiDAR.ViewModels {
             if (validationResults.IsValid) {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Plot Details", "Update Plot Details", "OK", "Cancel");
                 if (isUserAccept) {
+                    _plot.LastModified = System.DateTime.UtcNow;
                     _plotRepository.UpdatePlot(_plot);
                     await _navigation.PopAsync();
                 }

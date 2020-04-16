@@ -144,7 +144,8 @@ namespace eLiDAR.ViewModels {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Plot", "Do you want to save plot details?", "OK", "Cancel");
                 if (isUserAccept)
                 {
-
+                    _plot.Created = System.DateTime.UtcNow;
+                    _plot.LastModified = _plot.Created;
                     _plotRepository.InsertPlot(_plot, fk);
                     
                     await _navigation.PopAsync(); 

@@ -9,13 +9,8 @@
     BindingContext="BaseSettingsViewModel"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                FontAttributes="Bold"
-                FontSize="Medium"
-                HorizontalOptions="CenterAndExpand"
-                Text="Welcome to eLiDAR Settings!"
-                VerticalOptions="Start" />
+        <StackLayout Padding="20" Spacing="12">
+
             <StackLayout Margin="10" Orientation="Horizontal">
                 <Label
                     FontAttributes="Bold"
@@ -26,6 +21,42 @@
                     HorizontalOptions="EndAndExpand"
                     IsToggled="{Binding IsBoreal}" />
             </StackLayout>
+            <Button Command="{Binding SynchCommand}" Text="Synch Data" />
+            <StackLayout Orientation="Horizontal">
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Text="Last Synched" />
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"
+                    Text="{Binding LastSynched}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label HorizontalOptions="Start" Text="Projects Pushed" />
+                <Label HorizontalOptions="End" Text="{Binding PROJECT_ROWS_SYNCHED}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Projects Pulled" />
+                <Label Text="{Binding PROJECT_ROWS_PULLED}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Plots Pushed" />
+                <Label Text="{Binding PLOT_ROWS_SYNCHED}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Plots Pulled" />
+                <Label Text="{Binding PLOT_ROWS_PULLED}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Trees Pushed" />
+                <Label Text="{Binding TREE_ROWS_SYNCHED}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Trees Pulled" />
+                <Label Text="{Binding TREE_ROWS_PULLED}" />
+            </StackLayout>
+            <Label FontAttributes="Bold" Text="{Binding msg}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

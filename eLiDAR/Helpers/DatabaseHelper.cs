@@ -5,17 +5,19 @@ using System.Linq;
 using eLiDAR.Models;
 using System;
 using System.Threading.Tasks;
+using eLiDAR;
 
 namespace eLiDAR.Helpers
 {
     public class DatabaseHelper
     {
-
+        private LogWriter logger;
         static SQLiteConnection sqliteconnection;
         public const string DbFileName = "eLiDAR.sqlite";
-
+    
         public DatabaseHelper()
         {
+            logger = new LogWriter(); 
             sqliteconnection = DependencyService.Get<ISQLite>().GetConnection();
 
         }
@@ -105,7 +107,13 @@ namespace eLiDAR.Helpers
         // Insert new Project to DB 
         public void InsertProject(PROJECT project)
         {
-            sqliteconnection.Insert(project);
+            try
+            {
+                sqliteconnection.Insert(project);
+            }
+            catch (Exception ex) 
+                { logger.LogWrite(ex.Message);   }
+
         }
 
         // Update Project Data
@@ -154,7 +162,12 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void InsertPlot(PLOT plot)
         {
-            sqliteconnection.Insert(plot);
+            try
+            {
+                sqliteconnection.Insert(plot);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         // Update Plot Data
         public void UpdatePlot(PLOT plot)
@@ -330,7 +343,12 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void InsertTree(TREE tree)
         {
-            sqliteconnection.Insert(tree);
+            try
+            {
+                sqliteconnection.Insert(tree);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         // Update Tree Data
         public void UpdateTree(TREE tree)
@@ -361,7 +379,12 @@ namespace eLiDAR.Helpers
         }
         public void InsertStemmap(STEMMAP stemmap)
         {
-            sqliteconnection.Insert(stemmap);
+            try
+            {
+                sqliteconnection.Insert(stemmap);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         public void UpdateStemmap(STEMMAP stemmap)
         {
@@ -377,7 +400,12 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void InsertEcosite(ECOSITE ecosite)
         {
-            sqliteconnection.Insert(ecosite);
+            try
+            {
+                sqliteconnection.Insert(ecosite);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         // Update Tree Data
         public void UpdateEcosite(ECOSITE ecosite)
@@ -411,8 +439,13 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void  InsertSoil(SOIL soil)
         {
-            sqliteconnection.Insert(soil);
-           
+            try
+            {
+                sqliteconnection.Insert(soil);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
+
         }
         // Update Tree Data
         public void UpdateSoil(SOIL soil)
@@ -447,7 +480,12 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void InsertSmallTree(SMALLTREE smalltree)
         {
-            sqliteconnection.Insert(smalltree);
+            try
+            {
+                sqliteconnection.Insert(smalltree);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         // Update Tree Data
         public void UpdateSmallTree(SMALLTREE smalltree)
@@ -482,7 +520,12 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void InsertVegetation(VEGETATION vegetation)
         {
-            sqliteconnection.Insert(vegetation);
+            try
+            {
+                sqliteconnection.Insert(vegetation);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         // Update Data
         public void UpdateVegetation(VEGETATION vegetation)
@@ -517,7 +560,12 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void InsertDeformity(DEFORMITY deformity)
         {
-            sqliteconnection.Insert(deformity );
+            try
+            {
+                sqliteconnection.Insert(deformity);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         // Update Data
         public void UpdateDeformity(DEFORMITY deformity)
@@ -551,7 +599,12 @@ namespace eLiDAR.Helpers
         // Insert new to DB 
         public void InsertDWD(DWD dwd)
         {
-            sqliteconnection.Insert(dwd);
+            try
+            {
+                sqliteconnection.Insert(dwd);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         // Update Data
         public void UpdateDWD(DWD dwd)
@@ -576,6 +629,140 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<DWD>().FirstOrDefault(t => t.DWDID == id);
         }
-
+        public string GetLastSynchDate()
+        {
+            var settings = sqliteconnection.Table<SETTINGS>().FirstOrDefault();
+            return settings.LastSynched.ToString() ; 
+        }
+        public List<PROJECT> GetProjecttoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PROJECT>().Where(t => t.Created > fromdate).ToList() ;
+        }
+        public List<PROJECT> GetProjectToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PROJECT>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<PROJECT> GetProjectToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PROJECT>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted =="Y").ToList();
+        }
+        public void UpdateSettings(SETTINGS settings)
+        {
+            sqliteconnection.Update(settings);
+        }
+        public SETTINGS GetSettingsData()
+        {
+            return sqliteconnection.Table<SETTINGS>().Where(t => t.PLOT_ROWS_SYNCHED >=0).FirstOrDefault();
+        }
+        public List<PLOT> GetPlottoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PLOT>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<PLOT> GetPlotToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PLOT>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<PLOT> GetPlotToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PLOT>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<TREE> GetTreetoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<TREE>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<TREE> GetTreeToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<TREE>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<TREE> GetTreeToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<TREE>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<STEMMAP> GetStemmaptoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<STEMMAP>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<STEMMAP> GetStemmapToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<STEMMAP>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<STEMMAP> GetStemmapToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<STEMMAP>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<ECOSITE> GetEcositetoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<ECOSITE>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<ECOSITE> GetEcositeToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<ECOSITE>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<ECOSITE> GetEcositeToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<ECOSITE>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<SOIL> GetSoiltoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SOIL>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<SOIL> GetSoilToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SOIL>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<SOIL> GetSoilToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SOIL>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<SMALLTREE> GetSmalltreetoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREE>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<SMALLTREE> GetSmalltreeToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREE>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<SMALLTREE> GetSmalltreeToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREE>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<VEGETATION> GetVegetationtoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<VEGETATION>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<VEGETATION> GetVegetationToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<VEGETATION>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<VEGETATION> GetVegetationToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<VEGETATION>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<DEFORMITY> GetDeformitytoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<DEFORMITY>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<DEFORMITY> GetDeformityToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<DEFORMITY>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<DEFORMITY> GetDeformityToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<DEFORMITY>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<DWD> GetDWDtoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<DWD>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<DWD> GetDWDToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<DWD>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<DWD> GetDWDToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<DWD>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
     }
+
+
 }

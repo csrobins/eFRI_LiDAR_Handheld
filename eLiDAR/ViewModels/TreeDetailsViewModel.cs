@@ -225,6 +225,7 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree Details", "Update Tree Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
+                        _tree.LastModified = System.DateTime.UtcNow;
                         _treeRepository.UpdateTree(_tree);
                         NotifyPropertyChanged("TreeListFull"); 
                         await _navigation.PopAsync();

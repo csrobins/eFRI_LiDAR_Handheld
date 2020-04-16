@@ -1,21 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Add Plot" BackgroundColor="#D5E7FA" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
- x:Class="eLiDAR.Views.AddPlot" xmlns:local="clr-namespace:eLiDAR.Views" BindingContext="AddPlotViewModel">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.AddPlot"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="Add Plot"
+    BackgroundColor="#D5E7FA"
+    BindingContext="AddPlotViewModel">
     <ScrollView>
-    <StackLayout Padding="20" Spacing="12">
-        <!--<StackLayout Spacing="12">
+        <StackLayout Padding="20" Spacing="12">
+            <!--<StackLayout Spacing="12">
             <Entry x:Name="txtPlotnum" Text="{Binding PLOTNUM}" HeightRequest="40" BackgroundColor="White" Placeholder="Plot number" HorizontalOptions="FillAndExpand"/>
             <Entry  x:Name="txtPLot_Type" Text="{Binding PLOT_TYPE}" BackgroundColor="White" HeightRequest="40" Placeholder="Plot type" HorizontalOptions="FillAndExpand"/>
             <DatePicker x:Name="txtDate" Date="{Binding PLOT_DATE}" HeightRequest="40" BackgroundColor="White" HorizontalOptions="FillAndExpand"/>
 
         </StackLayout>-->
-        <local:PlotView/>
-        <Button x:Name="SubmitButton" Command="{Binding AddCommand}" BorderRadius="0" Text="Save Plot" FontAttributes="Bold" TextColor="White" BackgroundColor="#5989B5"/>
-        <Label Text="View All Plots" IsVisible="{Binding IsViewAll}" x:Name="ViewLbl" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15">  
-        <Label.GestureRecognizers>  
-        <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />  
-        </Label.GestureRecognizers>  
-        </Label>  
-    </StackLayout>
+            <local:PlotView />
+            <Button
+                x:Name="SubmitButton"
+                BackgroundColor="#5989B5"
+                BorderRadius="0"
+                Command="{Binding AddCommand}"
+                FontAttributes="Bold"
+                Text="Save Plot"
+                TextColor="White" />
+            <Label
+                x:Name="ViewLbl"
+                FontSize="15"
+                HorizontalOptions="EndAndExpand"
+                IsVisible="{Binding IsViewAll}"
+                Text="View All Plots"
+                TextColor="Black">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

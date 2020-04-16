@@ -1,0 +1,123 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Execute_stored_procedure_(V2)": {
+                "inputs": {
+                    "body": {
+                        "id": "@variables('id')"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['sql_1']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('default'))},@{encodeURIComponent(encodeURIComponent('default'))}/procedures/@{encodeURIComponent(encodeURIComponent(variables('procname')))}"
+                },
+                "runAfter": {
+                    "Initialize_procname": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
+            "Initialize_id": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "id",
+                            "type": "string",
+                            "value": "@{coalesce(trigger()['outputs']?['queries']?['id'],'')}"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "Initialize_procname": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "procname",
+                            "type": "string",
+                            "value": "@{concat('Delete',variables('tablename'))}"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_tablename": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Initialize_tablename": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "tablename",
+                            "type": "string",
+                            "value": "@triggerOutputs()['relativePathParameters']['resource']"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_id": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Response": {
+                "inputs": {
+                    "headers": {
+                        "@triggerOutputs()['relativePathParameters']['resource']": "application\\content"
+                    },
+                    "statusCode": 200
+                },
+                "kind": "Http",
+                "runAfter": {
+                    "Execute_stored_procedure_(V2)": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Response"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            },
+            "id": {
+                "defaultValue": "\"\"",
+                "type": "String"
+            }
+        },
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "method": "DELETE",
+                    "relativePath": "/{resource}/",
+                    "schema": {}
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "sql_1": {
+                    "connectionId": "/subscriptions/9b4c654c-2ec1-4789-9f5e-f3b9e5153624/resourceGroups/eLiDAR/providers/Microsoft.Web/connections/sql-6",
+                    "connectionName": "sql-6",
+                    "id": "/subscriptions/9b4c654c-2ec1-4789-9f5e-f3b9e5153624/providers/Microsoft.Web/locations/canadacentral/managedApis/sql"
+                }
+            }
+        }
+    }
+}

@@ -10,7 +10,7 @@ using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation;
 using FluentValidation.Results;
-using SupportWidgetXF.Models.Widgets;
+
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
@@ -129,7 +129,7 @@ namespace eLiDAR.ViewModels {
                         else {
                             _dwd.IS_ACCUM = "N";
                         }
-
+                        _dwd.LastModified = System.DateTime.UtcNow;
                         _dwdRepository.UpdateDWD (_dwd);
                         //  This is just to slow down the database
                      _dwdRepository.GetDWDData(_dwd.DWDID );

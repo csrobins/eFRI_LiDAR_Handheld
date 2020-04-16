@@ -10,7 +10,7 @@ using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation;
 using FluentValidation.Results;
-using SupportWidgetXF.Models.Widgets;
+
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
@@ -70,8 +70,9 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Vegetation Details", "Save Vegetation Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
-  
-                     _vegetationRepository.InsertVegetation(_vegetation,_fk);
+                        _vegetation.Created = System.DateTime.UtcNow;
+                        _vegetation.LastModified = _vegetation.Created;
+                        _vegetationRepository.InsertVegetation(_vegetation,_fk);
                         //  This is just to slow down the database
                      _vegetationRepository.GetVegetationData(_vegetation.VEGETATIONID );
                      await _navigation.PopAsync();

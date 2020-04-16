@@ -10,7 +10,7 @@ using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation;
 using FluentValidation.Results;
-using SupportWidgetXF.Models.Widgets;
+
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
@@ -123,7 +123,8 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("DWD Details", "Save DWD Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
-
+                        _dwd.Created = System.DateTime.UtcNow;
+                        _dwd.LastModified = _dwd.Created;
                         _dwdRepository.InsertDWD(_dwd,_fk);
                         //  This is just to slow down the database
                      _dwdRepository.GetDWDData (_dwd.DWDID);
@@ -155,6 +156,8 @@ namespace eLiDAR.ViewModels {
                     {
                         _dwd.IS_ACCUM = "Y";
                         _dwd.PLOTID = _fk;
+                        _dwd.Created = System.DateTime.UtcNow;
+                        _dwd.LastModified = _dwd.Created;
                         _dwdRepository.InsertDWD(_dwd, _fk);
                         //  This is just to slow down the database
                         _dwdRepository.GetDWDData(_dwd.DWDID);
@@ -187,15 +190,6 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-        private List<IAutoDropItem> _ItemDemo;
-        public List<IAutoDropItem> ItemDemo
-        {
-            get => _ItemDemo;
-            set
-            {
-                _ItemDemo = value;
-                OnPropertyChanged();
-            }
-        }
+       
     }
 }

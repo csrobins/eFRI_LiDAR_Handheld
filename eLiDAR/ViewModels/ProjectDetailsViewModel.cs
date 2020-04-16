@@ -39,6 +39,7 @@ namespace eLiDAR.ViewModels {
             if (validationResults.IsValid) {
                 bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Project Details", "Update Project Details", "OK", "Cancel");
                 if (isUserAccept) {
+                    _project.LastModified = System.DateTime.UtcNow;
                     _projectRepository.UpdateProject(_project);
                     await _navigation.PopAsync();
                 }

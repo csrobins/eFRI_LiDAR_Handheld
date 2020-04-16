@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;xamarinios10;MonoAndroid90</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">$(TargetFrameworks);uap10.0.16299</TargetFrameworks> <!-- Allows compiling on MacOS without UWP support-->
     <RootNamespace>dotMorten.Xamarin.Forms</RootNamespace>
-    <AssemblyName>dotMorten.Xamarin.Forms.AutoSuggestBox</AssemblyName>
+    <AssemblyName>AutoSuggestBox</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Morten Nielsen</Copyright>
     <RepositoryUrl>https://github.com/dotMorten/XamarinFormsControls</RepositoryUrl>

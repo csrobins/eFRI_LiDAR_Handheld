@@ -7,6 +7,21 @@ using System.Threading.Tasks;
 
 namespace eLiDAR.Models
 {
+
+    [Table("SETTINGS")]
+    public class SETTINGS
+    {
+        [PrimaryKey]
+        public int SETTINGSID { get; set; }
+        public DateTime LastSynched { get; set; }
+        public int PROJECT_ROWS_SYNCHED { get; set; }
+        public int PLOT_ROWS_SYNCHED { get; set; }
+        public int TREE_ROWS_SYNCHED { get; set; }
+        public int PROJECT_ROWS_PULLED { get; set; }
+        public int PLOT_ROWS_PULLED { get; set; }
+        public int TREE_ROWS_PULLED { get; set; }
+    }
+
     [Table("PROJECT")]
     public class PROJECT
     {
@@ -15,6 +30,10 @@ namespace eLiDAR.Models
         public string NAME { get; set; }
         public string DESCRIPTION { get; set; }
         public DateTime PROJECT_DATE { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
+
     }
     [Table("PLOT")]
     public class PLOT
@@ -46,6 +65,9 @@ namespace eLiDAR.Models
         public double UTM_NORTHING { get; set; }
         public string DATUM { get; set; }
         public string COMMENTS { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
 
     }
     public class PLOTLIST : PLOT
@@ -113,6 +135,9 @@ namespace eLiDAR.Models
         public double CROWN_WIDTH1 { get; set; }
         public double CROWN_WIDTH2 { get; set; }
         public string COMMENTS { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
 
     }
     public class TREELIST : TREE
@@ -157,6 +182,9 @@ namespace eLiDAR.Models
         public double CROWN_AXIS_SHORT { get; set; }
         public int OFFSET_AZIMUTH { get; set; }
         public double OFFSET_DISTANCE { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
     }
     [Table("ECOSITE")]
     public class ECOSITE
@@ -193,6 +221,9 @@ namespace eLiDAR.Models
         public int AZIMUTH { get; set; }
         public int DISTANCE { get; set; }
         public string COMMENTS { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
 
     }
     [Table("SOIL")]
@@ -214,6 +245,9 @@ namespace eLiDAR.Models
         public int PERCENT_GRAVEL { get; set; }
         public int PERCENT_COBBLE { get; set; }
         public int PERCENT_STONE { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
     }
     [Table("SMALLTREE")]
     public class SMALLTREE
@@ -230,6 +264,9 @@ namespace eLiDAR.Models
         public int HT_CLASS6_COUNT { get; set; }
         public int HT_CLASS7_COUNT { get; set; }
         public int HT_CLASS8_COUNT { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
     }
     [Table("VEGETATION")]
     public class VEGETATION
@@ -247,6 +284,9 @@ namespace eLiDAR.Models
         public int ELCLAYER5 { get; set; }
         public int ELCLAYER6 { get; set; }
         public int ELCLAYER7 { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
     }
     public class DEFORMITY
     {
@@ -271,6 +311,9 @@ namespace eLiDAR.Models
         public string OLD_NEST_CAVITY { get; set; }
         public string NEW_NEST_CAVITY { get; set; }
         public string STICK_NEST { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
 
     }
     public class DWD
@@ -296,6 +339,9 @@ namespace eLiDAR.Models
         public double ACCUM_DEPTH { get; set; }
         public int PERCENT_CONIFER { get; set; }
         public int PERCENT_DECID { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
 
     }
 

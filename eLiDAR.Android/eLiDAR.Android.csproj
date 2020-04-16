@@ -31,6 +31,7 @@
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
+    <AndroidKeyStore>false</AndroidKeyStore>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,9 +68,6 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>4.5.0.396</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>4.5.0.495</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -117,9 +115,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\photo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoSuggestBox\dotMorten.Xamarin.Forms.AutoSuggestBox.csproj">
+    <ProjectReference Include="..\AutoSuggestBox\AutoSuggestBox.csproj">
       <Project>{51866945-b641-45ff-a42a-b62d0d0a0154}</Project>
-      <Name>dotMorten.Xamarin.Forms.AutoSuggestBox</Name>
+      <Name>AutoSuggestBox</Name>
     </ProjectReference>
     <ProjectReference Include="..\eLiDAR\eLiDAR.csproj">
       <Project>{3c01266d-b4c5-44bb-a86c-a61141a25e49}</Project>

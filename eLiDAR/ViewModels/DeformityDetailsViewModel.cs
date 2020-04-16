@@ -85,7 +85,8 @@ namespace eLiDAR.ViewModels {
                     bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Deformity Details", "Save Deformity Details", "OK", "Cancel");
                     if (isUserAccept)
                     {
-                     _deformityRepository.UpdateDeformity (_deformity);
+                        _deformity.LastModified = System.DateTime.UtcNow;
+                        _deformityRepository.UpdateDeformity (_deformity);
                         //  This is just to slow down the database
                      _deformityRepository.GetDeformityData(_deformity.DEFORMITYID );
                      await _navigation.PopAsync();

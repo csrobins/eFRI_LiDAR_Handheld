@@ -187,11 +187,14 @@ namespace eLiDAR.ViewModels {
                     {
                         if (_ecositeRepository.IsEcositeExists(_fk))
                         {
+                            _ecosite.LastModified = System.DateTime.UtcNow;
                             _ecositeRepository.UpdateEcosite(_ecosite);
 
                         }
                         else
                         {
+                            _ecosite.Created = System.DateTime.UtcNow;
+                            _ecosite.LastModified = _ecosite.Created;
                             _ecositeRepository.InsertEcosite(_ecosite, _fk);
                         }
                         await _navigation.PopAsync();

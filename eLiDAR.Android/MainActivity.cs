@@ -6,11 +6,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using SupportWidgetXF.Droid;
+
 
 namespace eLiDAR.Droid
 {
-    [Activity(Label = "eLiDAR", Icon = "@mipmap/Heatmap", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,ScreenOrientation = ScreenOrientation.FullSensor )]
+    [Activity(Label = "eLiDAR", Icon = "@mipmap/Heatmap", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.FullSensor)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -22,9 +22,10 @@ namespace eLiDAR.Droid
 
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            SupportWidgetXFSetup.Initialize(this, bundle);
+            // printHashKey 
             LoadApplication(new App());
         }
+
     }
 }
 
