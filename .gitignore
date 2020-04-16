@@ -1,18 +1,41 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
+# Autosave files
+*~
+
+# build
 [Oo]bj/
 [Bb]in/
+packages/
+TestResults/
 
-# Other files and folders
-.settings/
+# globs
+Makefile.in
+*.DS_Store
+*.sln.cache
+*.suo
+*.cache
+*.pidb
+*.userprefs
+*.usertasks
+config.log
+config.make
+config.status
+aclocal.m4
+install-sh
+autom4te.cache/
+*.user
+*.tar.gz
+tarballs/
+test-results/
+Thumbs.db
+.vs/
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Mac bundle stuff
+*.dmg
+*.app
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# resharper
+*_Resharper.*
+*.Resharper
+
+# dotCover
+*.dotCover
