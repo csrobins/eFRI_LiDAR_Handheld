@@ -32,10 +32,13 @@ namespace eLiDAR.ViewModels
             databasehelper = new DatabaseHelper(); 
             FetchSettings();
         }
-         async Task Synchrun()
-        {
+        
 
+        async Task Synchrun()
+        {
+            IsBusy = true;
             bool success = await  _synchmanager.RunSynch();
+            IsBusy = false;
             if (success)
             {
                 msg = "Synch succeeded";
@@ -75,7 +78,16 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
+        private bool _isbusy;
+        public bool IsBusy
+        {
+            get => _isbusy;
+            set
+            {
+                _isbusy = value;
+                NotifyPropertyChanged("IsBusy");
+            }
+        }
         public bool IsBoreal
         {
             get => util.BorealSpecies;

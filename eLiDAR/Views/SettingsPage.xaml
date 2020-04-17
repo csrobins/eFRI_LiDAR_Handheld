@@ -21,7 +21,10 @@
                     HorizontalOptions="EndAndExpand"
                     IsToggled="{Binding IsBoreal}" />
             </StackLayout>
-            <Button Command="{Binding SynchCommand}" Text="Synch Data" />
+            <StackLayout Orientation="Vertical" >
+                <Button Command="{Binding SynchCommand}" Text="Synch Data" />
+                <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label
                     FontAttributes="Bold"
@@ -57,6 +60,7 @@
                 <Label Text="{Binding TREE_ROWS_PULLED}" />
             </StackLayout>
             <Label FontAttributes="Bold" Text="{Binding msg}" />
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
