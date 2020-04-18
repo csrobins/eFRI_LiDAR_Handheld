@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Foundation;
 using UIKit;
+using static elidar.iOS.IOSSQLite;
 
 namespace eLiDAR.iOS
 {
@@ -24,11 +26,13 @@ namespace eLiDAR.iOS
         {
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
-
-            Xamarin.RisePlugin.AutoCompleteTextView.iOS.AutoCompleteTextViewRenderer.Init();
+            string dbpath = FileAccessHelper.GetLocalFilePath("eLiDAR.sqlite");
+          //  Xamarin.RisePlugin.AutoCompleteTextView.iOS.AutoCompleteTextViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
+        
     }
+
 }

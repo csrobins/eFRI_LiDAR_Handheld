@@ -14,6 +14,7 @@
     <AssemblyName>eLiDAR.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ProvisioningType>automatic</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,8 +26,10 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>x86_64</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
+    <MtouchSdkVersion>13.4</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -48,11 +51,11 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Development: Craig Robinson (82V997AAJ4)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>
     </CodesignEntitlements>
-    <CodesignProvision />
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
   </PropertyGroup>
@@ -95,9 +98,16 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>eLiDAR.iOS.Application</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Compile Include="iOSSQLite.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <BundleResource Include="..\db\eLiDAR.sqlite">
+      <Link>Resources\eLiDAR.sqlite</Link>
+    </BundleResource>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -181,5 +191,8 @@
       <Project>{3c01266d-b4c5-44bb-a86c-a61141a25e49}</Project>
       <Name>eLiDAR</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\lidar.jpg" />
   </ItemGroup>
 </Project>

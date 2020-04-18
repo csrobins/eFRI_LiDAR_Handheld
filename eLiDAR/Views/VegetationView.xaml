@@ -10,8 +10,7 @@
     <ContentView.Content>
 
         <StackLayout Grid.Row="0" Grid.Column="0">
-            <Label Text="Single title" />
-
+            
             <Label HorizontalOptions="Start" Text="Choose from the Ontario plant list with 15,804 species in the list." />
             <dm:AutoSuggestBox
                 x:Name="txtVeg"
