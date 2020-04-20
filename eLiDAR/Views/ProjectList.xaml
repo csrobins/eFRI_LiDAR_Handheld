@@ -3,7 +3,11 @@
     x:Class="eLiDAR.Views.ProjectList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Project List">
+    Title="Project List"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <Grid Padding="10,10,10,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,23 +22,23 @@
             <Button
                 Grid.Row="0"
                 Grid.Column="1"
-                BackgroundColor="Transparent"
-                BorderColor="Black"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 BorderWidth="1"
                 Command="{Binding AddCommand}"
                 FontAttributes="Bold"
                 HeightRequest="40"
                 Text="New Project"
-                TextColor="Black" />
+                TextColor="White" />
         </Grid>
         <ListView
             x:Name="MyListView"
             Grid.Row="1"
+            BackgroundColor="{DynamicResource backgroundColor}"
             HasUnevenRows="true"
             ItemsSource="{Binding ProjectList}"
             SelectedItem="{Binding SelectedProjectItem, Mode=TwoWay}"
-            SeparatorColor="Black">
+            SeparatorColor="{DynamicResource AccentColor}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -50,21 +54,23 @@
                                 <Label
                                     FontAttributes="Bold"
                                     HorizontalOptions="Start"
-                                    Text="{Binding NAME}"
-                                    TextColor="Black" />
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding NAME}" />
                                 <Label
                                     HorizontalOptions="Start"
-                                    Text="{Binding DESCRIPTION}"
-                                    TextColor="Black" />
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding DESCRIPTION}" />
                             </StackLayout>
                             <Button
                                 Grid.Column="1"
+                                BackgroundColor="{StaticResource cerulean}"
                                 BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                 Command="{Binding ShowFilteredCommand}"
                                 CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                 HeightRequest=" 50"
                                 HorizontalOptions="End"
                                 Text="Plots"
+                                TextColor="White"
                                 WidthRequest=" 75" />
 
                         </Grid>
@@ -74,7 +80,7 @@
         </ListView>
         <Button
             Grid.Row="2"
-            BackgroundColor="#5989B5"
+            BackgroundColor="{StaticResource cerulean}"
             BorderRadius="0"
             Command="{Binding DeleteAllProjectsCommand}"
             FontAttributes="Bold"

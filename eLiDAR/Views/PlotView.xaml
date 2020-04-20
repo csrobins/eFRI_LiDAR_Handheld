@@ -20,27 +20,30 @@
 
             <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{DynamicResource TextTitle}"
                     Text="Plot Attributes" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Plot Number" />
                 <Entry
                     x:Name="txtPlotnum"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Plot number"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PLOTNUM}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Plot Type" />
                 <Picker
                     x:Name="txtPlotType"
                     Title="Plot type"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding PLOT_TYPE}">
+                    SelectedItem="{Binding PLOT_TYPE}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>A</x:String>
                         <x:String>AB</x:String>
@@ -49,14 +52,16 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Measurement Tupe" />
                 <Picker
                     x:Name="txtMeasurementType"
                     Title="Measurement Type"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding MEASUREMENT_TYPE}">
+                    SelectedItem="{Binding MEASUREMENT_TYPE}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>New</x:String>
                         <x:String>Remeasure</x:String>
@@ -65,14 +70,16 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Forest District" />
                 <Picker
                     x:Name="txtDistrict"
                     Title="Forest District"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding FOREST_DISTRICT}">
+                    SelectedItem="{Binding FOREST_DISTRICT}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Nipigon</x:String>
                         <x:String>Thunder Bay</x:String>
@@ -92,8 +99,8 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Forest Management Unit" />
                 <Picker
                     x:Name="txtFMU"
@@ -101,110 +108,121 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListFMU}"
-                    SelectedItem="{Binding SelectedFMU, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedFMU, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Plot Date" />
                 <DatePicker
                     x:Name="txtDate"
                     Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
                     HorizontalOptions="FillAndExpand"
-                    MinimumDate="01-Jan-2020" />
+                    MinimumDate="01-Jan-2020"
+                    Style="{DynamicResource TextSubhead}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crew 1" />
                 <Entry
                     x:Name="txtCrew1"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Crew 1"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding FIELD_CREW1}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crew 2" />
                 <Entry
                     x:Name="txtCrew2"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Crew 2"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding FIELD_CREW2}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crew 3" />
                 <Entry
                     x:Name="txtCrew3"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Crew 3"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding FIELD_CREW3}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{DynamicResource TextTitle}"
                     Text="Location Fields" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Declination" />
                 <Entry
                     x:Name="txtDeclination"
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="True"
                     Placeholder="Declination"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DECLINATION}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="UTM Zone" />
                 <Entry
                     x:Name="txtUTM"
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="True"
                     Placeholder="UTM Zone"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_ZONE}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Easting (m)" />
                 <Entry
                     x:Name="txtEasting"
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="True"
                     Placeholder="Easting"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_EASTING}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Northing (m)" />
                 <Entry
                     x:Name="txtNorthing"
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="True"
                     Placeholder="Northing"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_NORTHING}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Datum" />
                 <Entry
                     x:Name="txtDatum"
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="True"
                     Placeholder="Datum"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DATUM}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{DynamicResource TextTitle}"
                     Text="Calculated Fields" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Leading Spp" />
                 <Picker
                     x:Name="txtLeadSpp"
@@ -212,10 +230,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListSpecies}"
-                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Origin" />
                 <Picker
                     x:Name="txtOrigin"
@@ -223,10 +243,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListCanopyOrigin}"
-                    SelectedItem="{Binding SelectedCanopyOrigin, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedCanopyOrigin, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Canopy Structure" />
                 <Picker
                     x:Name="txtCanopyStructure"
@@ -234,10 +256,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListCanopyStructure}"
-                    SelectedItem="{Binding SelectedCanopyStructure, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedCanopyStructure, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Maturity Class" />
                 <Picker
                     x:Name="txtMaturity"
@@ -245,18 +269,25 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListMaturityClass}"
-                    SelectedItem="{Binding SelectedMaturityClass, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedMaturityClass, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crown Closure" />
                 <Entry
                     x:Name="txtCrownClosure"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Crown Closure"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding CROWN_CLOSURE}" />
-                <Button Command="{Binding CommentsCommand}" Text="Comments" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding CommentsCommand}"
+                    Text="Comments"
+                    TextColor="White" />
             </StackLayout>
         </Grid>
 

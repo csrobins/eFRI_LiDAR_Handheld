@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ScrollView
+    x:Class="eLiDAR.ControlGallery.ProppyControls.ColorPicker"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:eLiDAR.ControlGallery.ProppyControls"
+    BackgroundColor="White">
+
+    <ScrollView.BindingContext>
+        <vm:ColorPickerViewModel />
+    </ScrollView.BindingContext>
+
+    <StackLayout Padding="15,8">
+        <FlexLayout Direction="Row" JustifyContent="SpaceBetween">
+            <Entry
+                x:Name="HexEntry"
+                BackgroundColor="Transparent"
+                FlexLayout.Basis="30%"
+                Focused="Handle_Focused"
+                Placeholder="#"
+                Text="000000"
+                Unfocused="Handle_Unfocused" />
+            <Entry
+                x:Name="RedLbl"
+                BackgroundColor="Transparent"
+                FlexLayout.Basis="18%"
+                IsReadOnly="True"
+                Placeholder="R"
+                Text="{Binding Value, Source={x:Reference R}, Converter={StaticResource DoubleToIntConverter}}" />
+            <Entry
+                x:Name="GreenLbl"
+                BackgroundColor="Transparent"
+                FlexLayout.Basis="18%"
+                IsReadOnly="True"
+                Placeholder="G"
+                Text="{Binding Value, Source={x:Reference G}, Converter={StaticResource DoubleToIntConverter}}" />
+            <Entry
+                x:Name="BlueLbl"
+                BackgroundColor="Transparent"
+                FlexLayout.Basis="18%"
+                IsReadOnly="True"
+                Placeholder="B"
+                Text="{Binding Value, Source={x:Reference B}, Converter={StaticResource DoubleToIntConverter}}" />
+            <Entry
+                x:Name="AlphaLbl"
+                BackgroundColor="Transparent"
+                FlexLayout.Basis="18%"
+                IsReadOnly="True"
+                Placeholder="A"
+                Text="{Binding Value, Source={x:Reference A}, Converter={StaticResource DoubleToIntConverter}}" />
+        </FlexLayout>
+        <Slider
+            x:Name="R"
+            Maximum="255"
+            MaximumTrackColor="#cccccc"
+            Minimum="0"
+            MinimumTrackColor="#E52E15"
+            ThumbColor="#E52E15"
+            ValueChanged="OnColorSliderChanged"
+            Visual="Default" />
+        <Slider
+            x:Name="G"
+            Maximum="255"
+            MaximumTrackColor="#cccccc"
+            Minimum="0"
+            MinimumTrackColor="#88C800"
+            ThumbColor="#88C800"
+            ValueChanged="OnColorSliderChanged"
+            Visual="Default" />
+        <Slider
+            x:Name="B"
+            Maximum="255"
+            MaximumTrackColor="#cccccc"
+            Minimum="0"
+            MinimumTrackColor="#006CCF"
+            ThumbColor="#006CCF"
+            ValueChanged="OnColorSliderChanged"
+            Visual="Default" />
+        <Slider
+            x:Name="A"
+            Maximum="255"
+            MaximumTrackColor="#cccccc"
+            Minimum="0"
+            MinimumTrackColor="#888888"
+            ThumbColor="#888888"
+            ValueChanged="OnColorSliderChanged"
+            Visual="Default"
+            Value="255" />
+        <CollectionView
+            Margin="-15,0"
+            HeightRequest="45"
+            ItemsLayout="{x:Static LinearItemsLayout.Horizontal}"
+            ItemsSource="{Binding ColorViewModels}"
+            SelectionChanged="Handle_SelectionChanged"
+            SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView Padding="0,0,8,0" BackgroundColor="White">
+                        <BoxView
+                            BackgroundColor="{Binding HexColor}"
+                            CornerRadius="8"
+                            HeightRequest="45"
+                            VerticalOptions="Start"
+                            WidthRequest="45" />
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</ScrollView>

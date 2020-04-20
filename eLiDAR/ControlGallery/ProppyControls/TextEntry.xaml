@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ScrollView
+    x:Class="eLiDAR.ControlGallery.ProppyControls.TextEntry"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White">
+
+    <StackLayout Padding="15,8">
+        <Entry
+            x:Name="TextEntryField"
+            BackgroundColor="Transparent"
+            TextChanged="TextEntryField_OnTextChanged" />
+    </StackLayout>
+</ScrollView>

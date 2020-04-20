@@ -3,7 +3,11 @@
     x:Class="eLiDAR.Views.DeformityList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <Grid Padding="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,24 +22,24 @@
             <Button
                 Grid.Row="0"
                 Grid.Column="1"
-                BackgroundColor="Transparent"
-                BorderColor="Black"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 BorderWidth="1"
                 Command="{Binding AddCommand}"
-                FontAttributes="Bold"
-                HeightRequest="40"
+                HeightRequest="50"
                 Text="New Deformity"
-                TextColor="Black" />
+                TextColor="White"
+                WidthRequest="100" />
         </Grid>
         <ListView
             x:Name="MyListView"
             Grid.Row="1"
+            BackgroundColor="{DynamicResource backgroundColor}"
             HasUnevenRows="true"
             IsPullToRefreshEnabled="True"
             ItemsSource="{Binding DeformityList}"
             SelectedItem="{Binding SelectedDeformityItem, Mode=TwoWay}"
-            SeparatorColor="Black"
+            SeparatorColor="{StaticResource AccentColor}"
             VerticalScrollBarVisibility="Default">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -52,52 +56,52 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Type "
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding TYPE}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text=" Cause "
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding CAUSE}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="From "
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_FROM}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="To "
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_TO}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -105,27 +109,27 @@
                                 <StackLayout HorizontalOptions="End" Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Quadrant"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding QUAD}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout HorizontalOptions="End" Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Extent"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding EXTENT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -138,7 +142,7 @@
         </ListView>
         <Button
             Grid.Row="2"
-            BackgroundColor="#5989B5"
+            BackgroundColor="{StaticResource cerulean}"
             BorderRadius="0"
             Command="{Binding DeleteAllCommand}"
             FontAttributes="Bold"

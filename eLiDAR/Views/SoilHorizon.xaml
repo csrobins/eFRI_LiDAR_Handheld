@@ -6,49 +6,70 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding SoilTitle}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
     mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout Padding="20" Spacing="12">
-            <Label HorizontalOptions="Start" Text="Choose from the codes to construct a soil horizon." />
-            <Button Command="{Binding ClearCommand}" Text="Start Over" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextTitle}"
+                Text="Choose from the codes to construct a soil horizon." />
+            <Button
+                BackgroundColor="{StaticResource cerulean}"
+                Command="{Binding ClearCommand}"
+                Text="Start Over"
+                TextColor="White" />
             <Picker
                 Title="Soil Horizon Master"
                 HorizontalOptions="FillAndExpand"
                 ItemDisplayBinding="{Binding NAME}"
                 ItemsSource="{Binding ListHorizon}"
-                SelectedItem="{Binding SelectedMaster, Mode=TwoWay}" />
+                SelectedItem="{Binding SelectedMaster, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}" />
             <Picker
                 Title="Soil Horizon Suffix 1"
                 HorizontalOptions="FillAndExpand"
                 ItemDisplayBinding="{Binding NAME}"
                 ItemsSource="{Binding ListHorizonSuffix}"
-                SelectedItem="{Binding SelectedSuffix1, Mode=TwoWay}" />
+                SelectedItem="{Binding SelectedSuffix1, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}" />
             <Picker
                 Title="Soil Horizon Suffix 2"
                 HorizontalOptions="FillAndExpand"
                 ItemDisplayBinding="{Binding NAME}"
                 ItemsSource="{Binding ListHorizonSuffix}"
-                SelectedItem="{Binding SelectedSuffix2, Mode=TwoWay}" />
+                SelectedItem="{Binding SelectedSuffix2, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}" />
             <Picker
                 Title="Soil Horizon Suffix 3"
                 HorizontalOptions="FillAndExpand"
                 ItemDisplayBinding="{Binding NAME}"
                 ItemsSource="{Binding ListHorizonSuffix}"
-                SelectedItem="{Binding SelectedSuffix3, Mode=TwoWay}" />
+                SelectedItem="{Binding SelectedSuffix3, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}" />
             <Picker
                 Title="Soil Horizon Suffix 4"
                 HorizontalOptions="FillAndExpand"
                 ItemDisplayBinding="{Binding NAME}"
                 ItemsSource="{Binding ListHorizonSuffix}"
-                SelectedItem="{Binding SelectedSuffix4, Mode=TwoWay}" />
+                SelectedItem="{Binding SelectedSuffix4, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}" />
             <Label
-                FontAttributes="Bold"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="SOIL HORIZON" />
             <Entry
-                FontAttributes="Bold"
                 HorizontalOptions="FillAndExpand"
                 IsReadOnly="True"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding HORIZON}" />
         </StackLayout>
     </ContentPage.Content>

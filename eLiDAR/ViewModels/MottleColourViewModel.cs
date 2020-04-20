@@ -39,7 +39,7 @@ namespace eLiDAR.ViewModels {
     }
         void ClearItems()
         {
-            _thissoil.COLOUR = "";
+            _thissoil.MOTTLE_COLOUR = "";
             _ = _navigation.PopAsync();
        
         }
@@ -57,7 +57,7 @@ namespace eLiDAR.ViewModels {
         }
         void SetCalc()
         {
-            if (MOTTLE_COLOUR != null)
+            if (MOTTLE_COLOUR != null && MOTTLE_COLOUR != "")
             {
                 // Need to parse the horizon into parts
                 int len;

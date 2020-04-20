@@ -4,47 +4,60 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:dm="clr-namespace:dotMorten.Xamarin.Forms;assembly=AutoSuggestBox"
+    xmlns:dm="clr-namespace:dotMorten.Xamarin.Forms;assembly=dotMorten.Xamarin.Forms.AutoSuggestBox"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding CommentsTitle}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
     mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout Padding="20" Spacing="12">
-            <Label Text="Auto Complete" />
-            <Label HorizontalOptions="Start" Text="Choose from the Ontario ecosite code list with 1,265 codes in the list." />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextTitle}"
+                Text="Choose from the Ontario ecosite code list with 1,265 codes in the list." />
             <dm:AutoSuggestBox
                 x:Name="txtPRIECO"
                 PlaceholderText="Enter an ecosite code"
+                PlaceholderTextColor="{StaticResource AccentColor}"
                 Text="{Binding PRI_ECO, Mode=TwoWay}"
                 TextChanged="TxtEco_TextChanged"
-                TextColor="Black" />
+                TextColor="{DynamicResource TextPrimaryColor}" />
             <Label x:Name="txtscientific" Text="{Binding GetEcosite1, Mode=TwoWay}" />
             <Label
-                FontAttributes="None"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Primary Eco %" />
             <Entry
                 x:Name="txtPRIECOPCT"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Primary Eco %"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding PRI_ECO_PCT}" />
             <dm:AutoSuggestBox
                 x:Name="txtVeg"
                 PlaceholderText="Enter a a secondary ecosite code"
+                PlaceholderTextColor="{StaticResource AccentColor}"
                 Text="{Binding SEC_ECO, Mode=TwoWay}"
                 TextChanged="TxtEco_TextChanged"
-                TextColor="Black" />
-            <Label x:Name="txtscientific2" Text="{Binding GetEcosite2, Mode=TwoWay}" />
+                TextColor="{DynamicResource TextPrimaryColor}" />
             <Label
-                FontAttributes="None"
+                x:Name="txtscientific2"
+                Style="{StaticResource TextBody}"
+                Text="{Binding GetEcosite2, Mode=TwoWay}" />
+            <Label
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Secondary Eco %" />
             <Entry
                 x:Name="txtSECECOPCT"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Secondary Eco %"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding SEC_ECO_PCT}" />
         </StackLayout>
     </ContentPage.Content>

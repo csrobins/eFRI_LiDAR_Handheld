@@ -6,15 +6,28 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding SoilTitle}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
     mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout Padding="20" Spacing="12">
-            <Label HorizontalOptions="Start" Text="Choose from the codes to construct a mottle colour." />
-            <Button Command="{Binding ClearCommand}" Text="Start Over" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextTitle}"
+                Text="Choose from the codes to construct a mottle colour." />
+            <Button
+                BackgroundColor="{StaticResource cerulean}"
+                Command="{Binding ClearCommand}"
+                Text="Start Over"
+                TextColor="White" />
             <Picker
                 Title="Hue"
                 HorizontalOptions="FillAndExpand"
-                SelectedItem="{Binding MASTER, Mode=TwoWay}">
+                SelectedItem="{Binding MASTER, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}">
                 <Picker.Items>
                     <x:String>5R</x:String>
                     <x:String>7.5R</x:String>
@@ -41,7 +54,9 @@
             <Picker
                 Title="Value"
                 HorizontalOptions="FillAndExpand"
-                SelectedItem="{Binding SUFFIX1, Mode=TwoWay}">
+                SelectedItem="{Binding SUFFIX1, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}">
                 <Picker.Items>
                     <x:String>2</x:String>
                     <x:String>2.5</x:String>
@@ -59,7 +74,9 @@
             <Picker
                 Title="Chroma"
                 HorizontalOptions="FillAndExpand"
-                SelectedItem="{Binding SUFFIX2, Mode=TwoWay}">
+                SelectedItem="{Binding SUFFIX2, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}">
                 <Picker.Items>
                     <x:String />
                     <x:String>1</x:String>
@@ -71,13 +88,13 @@
                 </Picker.Items>
             </Picker>
             <Label
-                FontAttributes="Bold"
                 HorizontalOptions="Start"
-                Text="SOIL COLOUR" />
+                Style="{StaticResource TextBody}"
+                Text="MOTTLE COLOUR" />
             <Entry
-                FontAttributes="Bold"
                 HorizontalOptions="FillAndExpand"
                 IsReadOnly="True"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding MOTTLE_COLOUR}" />
         </StackLayout>
     </ContentPage.Content>

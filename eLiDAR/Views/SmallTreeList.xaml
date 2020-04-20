@@ -3,7 +3,11 @@
     x:Class="eLiDAR.Views.SmallTreeList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <Grid Padding="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,24 +22,24 @@
             <Button
                 Grid.Row="0"
                 Grid.Column="1"
-                BackgroundColor="Transparent"
-                BorderColor="Black"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 BorderWidth="1"
                 Command="{Binding AddCommand}"
-                FontAttributes="Bold"
-                HeightRequest="40"
+                HeightRequest="50"
                 Text="New Species"
-                TextColor="Black" />
+                TextColor="White"
+                WidthRequest="100" />
         </Grid>
         <ListView
             x:Name="MyListView"
             Grid.Row="1"
+            BackgroundColor="{DynamicResource backgroundColor}"
             HasUnevenRows="true"
             IsPullToRefreshEnabled="True"
             ItemsSource="{Binding SmallTreeList}"
             SelectedItem="{Binding SelectedSmallTreeItem, Mode=TwoWay}"
-            SeparatorColor="Black"
+            SeparatorColor="{StaticResource cerulean}"
             VerticalScrollBarVisibility="Default">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -53,54 +57,54 @@
                             <StackLayout Grid.Column="0" Orientation="Horizontal">
                                 <Label
                                     HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource TextSubheadSecondary}"
                                     Text="Species"
-                                    TextColor="Black"
                                     VerticalTextAlignment="Center" />
                                 <Label
                                     Font="20"
                                     HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource TextSubhead}"
                                     Text="{Binding SPECIES}"
-                                    TextColor="Black"
                                     VerticalTextAlignment="Center" />
                             </StackLayout>
                             <StackLayout Grid.Column="1" Spacing="1">
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 1.3-2.0m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS1_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 2.01-3.00m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS2_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 3.01-4.00m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS3_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -108,40 +112,40 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 4.01-5.00m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS4_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 5.01-6.00m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS5_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 6.01-7.00m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS6_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -149,27 +153,27 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 7.01-8.00m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS7_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Ht 8.01-9.00m"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS8_COUNT}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -182,10 +186,9 @@
         </ListView>
         <Button
             Grid.Row="2"
-            BackgroundColor="#5989B5"
+            BackgroundColor="{StaticResource cerulean}"
             BorderRadius="0"
             Command="{Binding DeleteAllCommand}"
-            FontAttributes="Bold"
             Text="Delete All Small Trees"
             TextColor="White"
             VerticalOptions="EndAndExpand" />

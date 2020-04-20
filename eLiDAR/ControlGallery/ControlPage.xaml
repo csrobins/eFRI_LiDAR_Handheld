@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.ControlGallery.ControlPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:eLiDAR.Behaviors"
+    xmlns:controlGallery="clr-namespace:eLiDAR.ControlGallery;assembly=eLiDAR"
+    xmlns:controls="clr-namespace:eLiDAR.ControlGallery.ProppyControls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:eLiDAR;assembly=eLiDAR"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="self"
+    Title="{Binding ControlTitle}"
+    Shell.TabBarIsVisible="false"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid x:Name="ContentGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <!--  Content container  -->
+                <RowDefinition Height="1*" />
+                <!--  Selection panel  -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ScrollView Grid.Row="0" Grid.ColumnSpan="2">
+                <Grid x:Name="ControlCanvas">
+                    <!--  Templates Go Here  -->
+                </Grid>
+            </ScrollView>
+            <Grid
+                x:Name="PropertyContainer"
+                Grid.Row="1"
+                Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <controls:Toolbar
+                    x:Name="PropertyToolbar"
+                    Grid.Row="0"
+                    Back="PropertyToolbar_OnBack"
+                    BackgroundColor="#f1f1f1"
+                    ViewSource="PropertyToolbar_OnViewSource" />
+                <CollectionView
+                    x:Name="PropertiesList"
+                    Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    ItemTemplate="{StaticResource PropertySelector}"
+                    ItemsSource="{Binding Properties}"
+                    SelectionChanged="Handle_SelectionChanged"
+                    SelectionMode="Single"
+                    VerticalOptions="Fill" />
+            </Grid>
+            <!--  PropertyContainer  -->
+        </Grid>
+        <!--  ContentGrid  -->
+    </ContentPage.Content>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="DefaultTemplate">
+                <Grid
+                    Padding="15,4"
+                    BackgroundColor="White"
+                    RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="38" />
+                        <RowDefinition Height="1" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        FontFamily="{StaticResource FontAwesome}"
+                        FontSize="18"
+                        Text="{Binding PropertyType, Converter={StaticResource TypeToIconConverter}}"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="16"
+                        HorizontalOptions="Start"
+                        Text="{Binding Name}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="2"
+                        HorizontalOptions="End"
+                        Text="&gt;"
+                        VerticalOptions="Center" />
+                    <BoxView
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Margin="-15,0"
+                        BackgroundColor="#cccccc" />
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="BooleanTemplate">
+                <Grid
+                    Padding="15,4"
+                    BackgroundColor="White"
+                    RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="80" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="38" />
+                        <RowDefinition Height="1" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        FontFamily="{StaticResource FontAwesome}"
+                        FontSize="18"
+                        Text="{Binding PropertyType, Converter={StaticResource TypeToIconConverter}}"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="16"
+                        HorizontalOptions="Start"
+                        Text="{Binding Name}"
+                        VerticalOptions="Center" />
+                    <Switch
+                        Grid.Column="2"
+                        HorizontalOptions="End"
+                        IsToggled="{Binding ., Converter={StaticResource PropertyInfoBooleanValueConverter}, ConverterParameter={x:Reference self}}"
+                        VerticalOptions="Center">
+                        <Switch.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                Command="{Binding BindingContext.SwitchedCommand, Source={x:Reference self}}"
+                                CommandParameter="{Binding .}"
+                                EventName="Toggled" />
+                        </Switch.Behaviors>
+                    </Switch>
+                    <BoxView
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Margin="-15,0"
+                        BackgroundColor="#cccccc" />
+                </Grid>
+            </DataTemplate>
+            <controlGallery:XappyPropertySelector
+                x:Key="PropertySelector"
+                BooleanTemplate="{StaticResource BooleanTemplate}"
+                DefaultTemplate="{StaticResource DefaultTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+</ContentPage>

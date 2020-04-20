@@ -6,13 +6,18 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding CommentsTitle}"
+    BackgroundColor="{DynamicResource backgroundColor}"
     BindingContext="TreeCommentsViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
     mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout>
             <Editor
                 AutoSize="TextChanges"
                 Placeholder="Add tree comments"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding COMMENTS}" />
         </StackLayout>
     </ContentPage.Content>

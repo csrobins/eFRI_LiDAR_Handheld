@@ -57,7 +57,7 @@ namespace eLiDAR.ViewModels {
         }
         void SetCalc()
         {
-            if (COLOUR != null)
+            if (COLOUR != null && COLOUR != "")
             {
                 // Need to parse the horizon into parts
                 int len;

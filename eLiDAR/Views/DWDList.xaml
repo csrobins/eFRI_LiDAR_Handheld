@@ -3,7 +3,11 @@
     x:Class="eLiDAR.Views.DWDList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <Grid Padding="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,37 +23,35 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    BackgroundColor="Transparent"
-                    BorderColor="Black"
+                    BackgroundColor="{StaticResource cerulean}"
                     BorderRadius="0"
                     BorderWidth="1"
                     Command="{Binding AddCommand}"
-                    FontAttributes="Bold"
-                    HeightRequest="40"
+                    HeightRequest="50"
                     Text="New DWD"
-                    TextColor="Black" />
+                    TextColor="White"
+                    WidthRequest="100" />
                 <Button
                     Grid.Row="0"
-                    Grid.Column="1"
-                    BackgroundColor="Transparent"
-                    BorderColor="Black"
+                    BackgroundColor="{StaticResource cerulean}"
                     BorderRadius="0"
                     BorderWidth="1"
                     Command="{Binding AddAccumCommand}"
-                    FontAttributes="Bold"
-                    HeightRequest="40"
-                    Text="New Accumulation"
-                    TextColor="Black" />
+                    HeightRequest="50"
+                    Text="New Accumltn"
+                    TextColor="White"
+                    WidthRequest="100 " />
             </StackLayout>
         </Grid>
         <ListView
             x:Name="MyListView"
             Grid.Row="1"
+            BackgroundColor="{DynamicResource backgroundColor}"
             HasUnevenRows="true"
             IsPullToRefreshEnabled="True"
             ItemsSource="{Binding DWDList}"
             SelectedItem="{Binding SelectedDWDItem, Mode=TwoWay}"
-            SeparatorColor="Black"
+            SeparatorColor="{StaticResource AccentColor}"
             VerticalScrollBarVisibility="Default">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -66,49 +68,49 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Line "
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding LINE}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Accumulation?"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding IS_ACCUM}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Num "
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding DWDNUM}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Species "
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding SPECIES}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
 
                                 </StackLayout>
@@ -117,32 +119,32 @@
                                 <StackLayout HorizontalOptions="End" Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Decomp Class"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding DECOMP_CLASS}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout HorizontalOptions="End" Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Length"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding LENGTH}"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
                                         Text=" (m)"
-                                        TextColor="Black"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -155,10 +157,9 @@
         </ListView>
         <Button
             Grid.Row="2"
-            BackgroundColor="#5989B5"
+            BackgroundColor="{StaticResource cerulean}"
             BorderRadius="0"
             Command="{Binding DeleteAllCommand}"
-            FontAttributes="Bold"
             Text="Delete All DWD"
             TextColor="White"
             VerticalOptions="EndAndExpand" />

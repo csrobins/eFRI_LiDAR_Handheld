@@ -20,23 +20,25 @@
 
             <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil/Site Attributes" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
-                    Text="Plot Number" />
+                    Style="{StaticResource TextBody}"
+                    Text="Humus Form" />
                 <Picker
                     x:Name="txtHumusForm"
                     Title="Humus Form"
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListHumusForm}"
-                    SelectedItem="{Binding SelectedHumusForm, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedHumusForm, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Drainage" />
                 <Picker
                     x:Name="txtDrainage"
@@ -44,24 +46,28 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListDrainage}"
-                    SelectedItem="{Binding SelectedDrainage, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedDrainage, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Stratified" />
                 <Picker
                     x:Name="txtStratified"
                     Title="Stratified"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding STRATIFIED}">
+                    SelectedItem="{Binding STRATIFIED}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Pore Pattern" />
                 <Picker
                     x:Name="txtPorePattern"
@@ -69,71 +75,78 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListPorePattern}"
-                    SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil - from 0 cm" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth to Distinct Mottles" />
                 <Entry
                     x:Name="txtDistintMottle"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth to Distinct Mottles (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_DISTINCT_MOTTLES}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth to Prominient Mottles" />
                 <Entry
                     x:Name="txtProminentMottle"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth to Prominent Mottles (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_PROMINENT_MOTTLES}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth to Gley" />
                 <Entry
                     x:Name="txtDeothtoGley"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth to Gley (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_GLEY}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth to Bedrock" />
                 <Entry
                     x:Name="txtDepthToBedrock"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth to Bedrock (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_BEDROCK}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth to Carbonates" />
                 <Entry
                     x:Name="txtDepthToCarbonates"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth to Carbonates (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_CARBONATES}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil/Site Attributes Continued..." />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth Class" />
                 <Picker
                     x:Name="txtDepthClass"
@@ -141,10 +154,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListDepthClass}"
-                    SelectedItem="{Binding SelectedDepthClass, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedDepthClass, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Moisture Regime" />
                 <Picker
                     x:Name="txtMoistureRegime"
@@ -152,10 +167,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListMoistureRegime}"
-                    SelectedItem="{Binding SelectedMoistureRegime, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedMoistureRegime, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Mode of Deposition 1" />
                 <Picker
                     x:Name="txtDeposition1"
@@ -163,10 +180,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListDeposition}"
-                    SelectedItem="{Binding SelectedDeposition1, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedDeposition1, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Mode of Deposition 2" />
                 <Picker
                     x:Name="txtDeposition2"
@@ -174,100 +193,122 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListDeposition}"
-                    SelectedItem="{Binding SelectedDeposition2, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedDeposition2, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil - from Surface (cm)" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Functional Rooting Depth (cm)" />
                 <Entry
                     x:Name="txtFunctionalrootingDepth"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Functional Rooting Depth (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding FUNCTIONAL_ROOTING_DEPTH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Maximum Rooting Depth (cm)" />
                 <Entry
                     x:Name="txtMaximumRootingDepth"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Maximum Rooting Depth (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding MAXIMUM_ROOTING_DEPTH}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 2">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil/Site Attributes Continued..." />
 
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth to Root Restriction (cm)" />
                 <Entry
                     x:Name="txtDepthToRootRestriction"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth to Root Restriction (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_ROOT_RESTRICTION}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth to Impassable Coarse Frags (cm)" />
                 <Entry
                     x:Name="txtDepthToCoarseFrags"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth to Impassable Coarse Frags (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_COARSE_FRAGS}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Seepage?" />
                 <Picker
                     x:Name="txtSeepage"
                     Title="Seepage"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding SEEPAGE}">
+                    SelectedItem="{Binding SEEPAGE}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil Pit Location" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Azimuth" />
                 <Entry
                     x:Name="txtAzimuth"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Azimuth"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding AZIMUTH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Distance (m)" />
                 <Entry
                     x:Name="txtDistance"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Distance (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DISTANCE}" />
-                <Button Command="{Binding CommentsCommand}" Text="Comments" />
-                <Button Command="{Binding EcositeCommand}" Text="Ecosite" />
-                <Button Command="{Binding PhotoCommand}" Text="Photos" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding CommentsCommand}"
+                    Text="Comments"
+                    TextColor="White" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding EcositeCommand}"
+                    Text="Ecosite"
+                    TextColor="White" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding PhotoCommand}"
+                    Text="Photos"
+                    TextColor="White" />
             </StackLayout>
 
         </Grid>

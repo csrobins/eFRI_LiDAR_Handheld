@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using Xamarin.Forms;
 using eLiDAR.Utilities;
 using System.Windows.Input;
 using eLiDAR.API;
 using System.Threading.Tasks;
-
+using eLiDAR.Styles;
+using eLiDAR.Domain.Global;
 
 namespace eLiDAR.ViewModels
 {
-    public class SettingsViewModel : INotifyPropertyChanged {
+    public class SettingsViewModel : INotifyPropertyChanged   {
 
         public INavigation _navigation;
         private Utils util;
@@ -23,22 +22,68 @@ namespace eLiDAR.ViewModels
         private DatabaseHelper databasehelper;
         public ICommand SynchCommand { get; private set; }
         private SynchManager _synchmanager;
+        public ICommand ChangeThemeCommand { get; set; }
+
+        public string SelectedTheme { get; set; }
         public SettingsViewModel(INavigation navigation)
         {
             _navigation = navigation;
             util = new Utils();
             SynchCommand = new Command(async () => await Synchrun());
             _synchmanager = new SynchManager();
-            databasehelper = new DatabaseHelper(); 
+            databasehelper = new DatabaseHelper();
+            ChangeThemeCommand = new Command((x) =>
+            {
+                if (SelectedTheme.ToLower() == "dark")
+                {
+                    Application.Current.Resources = new DarkTheme();
+                }
+                else
+                {
+                    Application.Current.Resources = new LightTheme();
+                }
+                App.AppTheme = SelectedTheme.ToLower();
+            });
+            if (!IsSynchBusy) { IsSynchEnabled = true; }
             FetchSettings();
         }
-        
+
+        public bool UseDarkMode
+        {
+            get => DependencyService.Get<AppModel>().UseDarkMode;
+            set
+            {
+                DependencyService.Get<AppModel>().UseDarkMode = value;
+                OnPropertyChanged(nameof(UseDarkMode));
+
+                if (UseDarkMode && App.AppTheme != "dark")
+                {
+                    App.Current.Resources = new DarkTheme();
+                    App.AppTheme = "dark";
+                }
+                else if (!UseDarkMode && App.AppTheme == "dark")
+                {
+                    App.Current.Resources = new LightTheme();
+                    App.AppTheme = "light";
+                }
+            }
+        }
+
+        public bool UseDeviceThemeSettings
+        {
+            get => DependencyService.Get<AppModel>().UseDeviceThemeSettings;
+            set
+            {
+                DependencyService.Get<AppModel>().UseDeviceThemeSettings = value;
+                OnPropertyChanged(nameof(UseDeviceThemeSettings));
+            }
+        }
 
         async Task Synchrun()
         {
-            IsBusy = true;
+            IsSynchBusy = true;
             bool success = await  _synchmanager.RunSynch();
-            IsBusy = false;
+            IsSynchBusy = false;
             if (success)
             {
                 msg = "Synch succeeded";
@@ -78,14 +123,29 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-        private bool _isbusy;
-        public bool IsBusy
+        private bool _issynchbusy;
+        public bool IsSynchBusy
         {
-            get => _isbusy;
+            get => _issynchbusy;
             set
             {
-                _isbusy = value;
-                NotifyPropertyChanged("IsBusy");
+                _issynchbusy = value;
+                if (value) {
+                    IsSynchEnabled = false;
+                }
+                else
+                { IsSynchEnabled = true; }
+                NotifyPropertyChanged("IsSynchBusy");
+            }
+        }
+        private bool _issynchenabled;
+        public bool IsSynchEnabled
+        {
+            get => _issynchenabled;
+            set
+            {
+                _issynchenabled = value;
+                NotifyPropertyChanged("IsSynchEnabled");
             }
         }
         public bool IsBoreal

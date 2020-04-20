@@ -5,8 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:eLiDAR.Views"
     Title="{Binding Title}"
-    BackgroundColor="#D5E7FA"
-    BindingContext="EcositeDetailsViewModel">
+    BackgroundColor="{DynamicResource backgroundColor}"
+    BindingContext="EcositeDetailsViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
         <StackLayout
             Padding="5"
@@ -16,10 +19,9 @@
             <local:EcositeView />
             <Button
                 x:Name="SubmitButton"
-                BackgroundColor="#5989B5"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding UpdateCommand}"
-                FontAttributes="Bold"
                 Text="Save Ecosite"
                 TextColor="White" />
         </StackLayout>

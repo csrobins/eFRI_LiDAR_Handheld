@@ -5,30 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:eLiDAR.Views"
     Title="Add Soil Layer"
-    BackgroundColor="#D5E7FA"
-    BindingContext="AddSoilViewModel">
+    BackgroundColor="{DynamicResource backgroundColor}"
+    BindingContext="AddSoilViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:SoilView />
             <Button
                 x:Name="SubmitButton"
-                BackgroundColor="#5989B5"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
-                FontAttributes="Bold"
                 Text="Save Soil"
                 TextColor="White" />
-            <Label
+            <!--<Label
                 x:Name="ViewLbl"
                 FontSize="15"
                 HorizontalOptions="EndAndExpand"
                 IsVisible="{Binding IsViewAll}"
                 Text="View All Soils"
-                TextColor="Black">
+                BackgroundColor="{StaticResource cerulean}"
+TextColor="White">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />
                 </Label.GestureRecognizers>
-            </Label>
+            </Label>-->
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScrollView
+    x:Class="eLiDAR.ControlGallery.ProppyControls.MarginProperty"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+
+        <Stepper
+            x:Name="LeftStepper"
+            Grid.Row="1"
+            Grid.Column="0"
+            ValueChanged="LeftStepper_OnValueChanged"
+            VerticalOptions="Center" />
+        <Stepper
+            x:Name="TopStepper"
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            ValueChanged="TopStepper_OnValueChanged" />
+        <Stepper
+            x:Name="RightStepper"
+            Grid.Row="1"
+            Grid.Column="2"
+            ValueChanged="RightStepper_OnValueChanged"
+            VerticalOptions="Center" />
+        <Stepper
+            x:Name="BottomStepper"
+            Grid.Row="2"
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            ValueChanged="BottomStepper_OnValueChanged" />
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <Frame
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="3"
+                Margin="22"
+                BackgroundColor="LightBlue"
+                BorderColor="Red"
+                HasShadow="False" />
+
+            <Label
+                x:Name="LeftMargin"
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="0"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="TopMargin"
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalTextAlignment="Center"
+                Text="0"
+                VerticalOptions="Start" />
+            <Label
+                x:Name="RightMargin"
+                Grid.Row="1"
+                Grid.Column="2"
+                HorizontalOptions="End"
+                Text="0"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="BottomMargin"
+                Grid.Row="2"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Text="0"
+                VerticalOptions="End" />
+
+        </Grid>
+    </Grid>
+</ScrollView>

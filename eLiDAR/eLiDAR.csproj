@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="4.1.0" />
+    <PackageReference Include="dotMorten.Xamarin.Forms.AutoSuggestBox" Version="1.1.1" />
     <PackageReference Include="FluentValidation" Version="8.6.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
@@ -89,9 +91,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoSuggestBox\AutoSuggestBox.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="Views\AddDWDAccum.xaml.cs">
       <DependentUpon>AddDWDAccum.xaml</DependentUpon>
     </Compile>
@@ -103,6 +102,9 @@
     </Compile>
     <Compile Update="Views\AddDeformity.xaml.cs">
       <DependentUpon>AddDeformity.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MottleColour.xaml.cs">
       <DependentUpon>MottleColour.xaml</DependentUpon>

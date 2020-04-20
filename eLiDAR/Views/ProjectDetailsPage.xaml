@@ -5,12 +5,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:eLiDAR.Views"
     Title="Project Details"
-    BackgroundColor="#D5E7FA">
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <StackLayout Padding="20" Spacing="12">
         <local:ProjectView />
         <Button
             Margin="0,30,0,0"
-            BackgroundColor="#5989B5"
+            BackgroundColor="{StaticResource cerulean}"
             BorderRadius="0"
             Command="{Binding UpdateProjectCommand}"
             FontAttributes="Bold"
@@ -18,7 +21,7 @@
             TextColor="White" />
         <Button
             Margin="0,30,0,0"
-            BackgroundColor="#5989B5"
+            BackgroundColor="{StaticResource cerulean}"
             BorderRadius="0"
             Command="{Binding DeleteProjectCommand}"
             FontAttributes="Bold"

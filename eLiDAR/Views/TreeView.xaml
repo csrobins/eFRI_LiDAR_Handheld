@@ -20,32 +20,34 @@
 
             <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Tree Attributes" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Section Number" />
                 <Entry
                     x:Name="txtSection"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Section number"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding SECTION}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Tree Number" />
                 <Entry
                     x:Name="txtTreenum"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Tree number"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding TREENUM}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Species" />
                 <Picker
                     x:Name="txtSpecies"
@@ -53,16 +55,20 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListSpecies}"
-                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Origin" />
                 <Picker
                     x:Name="txtOrigin"
                     Title="Origin"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding ORIGIN, Mode=TwoWay}">
+                    SelectedItem="{Binding ORIGIN, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>N</x:String>
                         <x:String>P</x:String>
@@ -71,14 +77,16 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Status" />
                 <Picker
                     x:Name="txtStatus"
                     Title="Status"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding STATUS, Mode=TwoWay}">
+                    SelectedItem="{Binding STATUS, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>L</x:String>
                         <x:String>D</x:String>
@@ -91,56 +99,62 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht to DBH (m)" />
                 <Entry
                     x:Name="txtHt2DBH"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Ht to DBH (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding HT_TO_DBH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="DBH (cm)" />
                 <Entry
                     x:Name="txtDBH"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="DBH (cm)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding DBH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="DBH In?" />
                 <Picker
                     x:Name="txtDBHIn"
                     Title="DBH In?"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding DBH_IN, Mode=TwoWay}">
+                    SelectedItem="{Binding DBH_IN, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crown In?" />
                 <Picker
                     x:Name="txtCrownIn"
                     Title="Crown In?"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding CROWN_IN, Mode=TwoWay}">
+                    SelectedItem="{Binding CROWN_IN, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Vigour" />
                 <Picker
                     x:Name="txtVigour"
@@ -148,10 +162,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListVigour, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedVigour}" />
+                    SelectedItem="{Binding SelectedVigour}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Bark Retention" />
                 <Picker
                     x:Name="txtBarkRetention"
@@ -160,10 +176,12 @@
                     IsEnabled="{Binding IsNotLiveTree}"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListBarkRetention, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedBarkRetention}" />
+                    SelectedItem="{Binding SelectedBarkRetention}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Wood Condition" />
                 <Picker
                     x:Name="txtWoodCondition"
@@ -172,23 +190,27 @@
                     IsEnabled="{Binding IsNotLiveTree}"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListWoodCondition, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedWoodCondition}" />
+                    SelectedItem="{Binding SelectedWoodCondition}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Live Tree Fields" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crown Class" />
                 <Picker
                     x:Name="txtCrownClass"
                     Title="Crown Class"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding CROWN_CLASS, Mode=TwoWay}">
+                    SelectedItem="{Binding CROWN_CLASS, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>E</x:String>
                         <x:String>D</x:String>
@@ -200,8 +222,8 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crown Position" />
                 <Picker
                     x:Name="txtCrownPosition"
@@ -209,10 +231,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListCrownPosition, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedCrownPosition}" />
+                    SelectedItem="{Binding SelectedCrownPosition}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Crown Damage" />
                 <Picker
                     x:Name="txtCrownDamage"
@@ -220,10 +244,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListCrownDamage, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedCrownDamage}" />
+                    SelectedItem="{Binding SelectedCrownDamage}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Defoliating Insect" />
                 <Picker
                     x:Name="txtDefoliatingInsect"
@@ -231,10 +257,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListDefoliatingInsect, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedDefoliatingInsect}" />
+                    SelectedItem="{Binding SelectedDefoliatingInsect}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Foliar Disease" />
                 <Picker
                     x:Name="txtFoliarDisease"
@@ -242,16 +270,20 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListFoliarDisease, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedFoliarDisease}" />
+                    SelectedItem="{Binding SelectedFoliarDisease}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Stem Quality" />
                 <Picker
                     x:Name="txtStemQuality"
                     Title="Stem Quality"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding STEM_QUALITY, Mode=TwoWay}">
+                    SelectedItem="{Binding STEM_QUALITY, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>A</x:String>
                         <x:String>B</x:String>
@@ -261,22 +293,23 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht and Age Attributes (All Trees)" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht (m)" />
                 <Entry
                     x:Name="txtHt"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Ht (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding HT}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Length (m)" />
                 <Entry
                     x:Name="txtLength"
@@ -284,27 +317,29 @@
                     IsEnabled="{Binding IsNotLiveTree}"
                     Keyboard="Numeric"
                     Placeholder="Length (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding LENGTH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Age" />
                 <Entry
                     x:Name="txtAge"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Age (yrs)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding AGE}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Dead Tree Fields" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Decay Class" />
                 <Picker
                     x:Name="txtDecayClass"
@@ -313,10 +348,12 @@
                     IsEnabled="{Binding IsNotLiveTree}"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListDecayClass, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedDecayClass}" />
+                    SelectedItem="{Binding SelectedDecayClass}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Mortality Cause" />
                 <Picker
                     x:Name="txtMortalityCause"
@@ -325,23 +362,31 @@
                     IsEnabled="{Binding IsNotLiveTree}"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListMortalityCause, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedMortalityCause}" />
+                    SelectedItem="{Binding SelectedMortalityCause}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Broken Top" />
                 <Picker
                     x:Name="txtBrokenTop"
                     Title="Broken Top"
                     HorizontalOptions="FillAndExpand"
                     IsEnabled="{Binding IsNotLiveTree}"
-                    SelectedItem="{Binding BROKEN_TOP, Mode=TwoWay}">
+                    SelectedItem="{Binding BROKEN_TOP, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
-                <Button Command="{Binding CommentsCommand}" Text="Comments" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding CommentsCommand}"
+                    Text="Comments"
+                    TextColor="White" />
             </StackLayout>
 
         </Grid>

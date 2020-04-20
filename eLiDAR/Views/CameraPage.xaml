@@ -3,19 +3,22 @@
     x:Class="eLiDAR.Views.CameraPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Take a Photo">
+    Title="Take a Photo"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <ContentPage.Content>
         <FlexLayout
             AlignContent="Center"
             AlignItems="Center"
             Direction="Column"
             JustifyContent="Center">
-            <Label Text="CameraView Coming Soon!" />
+            <Label Style="{StaticResource TextTitle}" Text="CameraView Coming Soon!" />
             <Label
                 x:Name="PayloadLabel"
-                FontSize="34"
-                Text="{Binding Payload, FallbackValue=Broken}"
-                TextColor="Red" />
+                Style="{StaticResource TextBody}"
+                Text="{Binding Payload, FallbackValue=Broken}" />
         </FlexLayout>
     </ContentPage.Content>
 </ContentPage>

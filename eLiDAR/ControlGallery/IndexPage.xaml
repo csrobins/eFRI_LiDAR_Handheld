@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.ControlGallery.IndexPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:eLiDAR.ControlGallery"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="UI Controls"
+    Shell.TabBarIsVisible="{Binding AppModel.IsTabBarVisible}"
+    Style="{DynamicResource backgroundStyle}"
+    mc:Ignorable="d">
+
+    <ContentPage.BindingContext>
+        <local:IndexPageViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+
+        <CollectionView
+            x:Name="LayoutsCV"
+            Margin="15"
+            IsGrouped="True"
+            ItemSizingStrategy="MeasureFirstItem"
+            ItemsSource="{Binding XamarinAll}"
+            SelectedItem="{Binding SelectedControl, Mode=TwoWay}"
+            SelectionChangedCommand="{Binding SelectCommand}"
+            SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="10"
+                    Orientation="Vertical"
+                    Span="2"
+                    VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Padding="8"
+                        BackgroundColor="{Binding GroupIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter='dusty_orange;cerulean;tomato'}"
+                        CornerRadius="3"
+                        HeightRequest="60"
+                        Visual="Material"
+                        WidthRequest="140">
+                        <Label
+                            d:Text="Something Else"
+                            FontSize="14"
+                            InputTransparent="true"
+                            LineBreakMode="NoWrap"
+                            Text="{Binding Title}"
+                            TextColor="Black"
+                            VerticalOptions="End" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </StackLayout>
+
+</ContentPage>

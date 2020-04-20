@@ -4,36 +4,36 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <StackLayout Spacing="12">
         <Label
-            FontAttributes="None"
             HorizontalOptions="Start"
+            Style="{StaticResource TextBody}"
             Text="Project" />
         <Entry
             x:Name="txtProject"
-            BackgroundColor="White"
             HeightRequest="40"
             HorizontalOptions="FillAndExpand"
             Placeholder="Project Name"
+            Style="{DynamicResource TextSubhead}"
             Text="{Binding PROJECT}" />
         <Label
-            FontAttributes="None"
             HorizontalOptions="Start"
+            Style="{StaticResource TextBody}"
             Text="Description" />
         <Entry
             x:Name="txtDescription"
-            BackgroundColor="White"
             HeightRequest="40"
             HorizontalOptions="FillAndExpand"
             Placeholder="Description"
+            Style="{DynamicResource TextSubhead}"
             Text="{Binding DESCRIPTION}" />
         <Label
-            FontAttributes="None"
             HorizontalOptions="Start"
+            Style="{StaticResource TextBody}"
             Text="Date" />
         <DatePicker
             x:Name="txtDate"
-            BackgroundColor="White"
             Date="{Binding PROJECT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
             HeightRequest="40"
-            HorizontalOptions="FillAndExpand" />
+            HorizontalOptions="FillAndExpand"
+            Style="{DynamicResource TextSubhead}" />
     </StackLayout>
 </ContentView>

@@ -5,30 +5,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:eLiDAR.Views"
     Title="Add Deformity/Cavity"
-    BackgroundColor="#D5E7FA"
-    BindingContext="AddDeformityViewModel">
+    BackgroundColor="{DynamicResource backgroundColor}"
+    BindingContext="AddDeformityViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:DeformityView />
             <Button
                 x:Name="SubmitButton"
-                BackgroundColor="#5989B5"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
-                FontAttributes="Bold"
                 Text="Save Deformity"
                 TextColor="White" />
-            <Label
+            <!--<Label
                 x:Name="ViewLbl"
                 FontSize="15"
                 HorizontalOptions="EndAndExpand"
                 IsVisible="{Binding IsViewAll}"
                 Text="View All Deformities"
-                TextColor="Black">
+               >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />
                 </Label.GestureRecognizers>
-            </Label>
+            </Label>-->
         </StackLayout>
     </ScrollView>
 </ContentPage>

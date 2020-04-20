@@ -12,7 +12,10 @@ namespace eLiDAR.Utilities
     public class Utils
     {
         private bool _borealspecies { get; set; }
-        private string keyval = "UseBorealSpecies";
+        private string keyvalboreal = "UseBorealSpecies";
+        private string keyvaldevicetheme = "UseDeviceTheme";
+        private string keyvaldarktheme = "UseDarkTheme";
+
         public Guid getGUID()
         {
             // Create and display the value of two GUIDs.
@@ -23,28 +26,47 @@ namespace eLiDAR.Utilities
         {
             get
             {
-                return Preferences.Get(keyval, false); 
+                return Preferences.Get(keyvalboreal, false); 
             }
             set 
             {
-                Preferences.Set(keyval, value);
+                Preferences.Set(keyvalboreal, value);
             }
-
+        }
+        internal bool DeviceTheme
+        {
+            get
+            {
+                return Preferences.Get(keyvaldevicetheme, false);
+            }
+            set
+            {
+                Preferences.Set(keyvaldevicetheme, value);
+                if (value)
+                {
+                    DarkTheme = false;
+                }
+            }
+        }
+        internal bool DarkTheme
+        {
+            get
+            {
+                return Preferences.Get(keyvaldarktheme, false);
+            }
+            set
+            {
+                Preferences.Set(keyvaldarktheme, value);
+                if (value) 
+                {
+                    DeviceTheme = false;
+                }
+               
+            }
         }
 
-        //public bool IsBorealSpecies()
-        //{
-        //    var keyval = "UseBorealSpecies";
-        //    var useBoreal = Preferences.Get(keyval, false);
-        //    if (useBoreal)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+
+
     }
 
     internal class PickerCell : ViewCell

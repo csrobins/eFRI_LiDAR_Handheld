@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using eLiDAR.Views;
 using System;
+using eLiDAR.Domain.Global;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace eLiDAR
@@ -14,7 +15,8 @@ namespace eLiDAR
         {
             InitializeComponent();
             //   MainPage = new eLiDAR.AppShell();
-            
+            DependencyService.Register<AppModel>();
+
             MainPage = new MainShell();       
         }
        
@@ -34,6 +36,10 @@ namespace eLiDAR
             // Handle when your app resumes
         }
 
-        
+        public static string AppTheme
+        {
+            get; set;
+        }
+
     }
 }

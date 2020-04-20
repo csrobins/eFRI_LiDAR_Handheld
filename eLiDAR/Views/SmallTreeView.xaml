@@ -20,12 +20,12 @@
 
             <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Small Tree Attributes" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Species" />
                 <Picker
                     x:Name="txtSpecies"
@@ -33,23 +33,25 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListSpecies}"
-                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Small Trees Continued" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 1.30-2.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass1}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass1"
@@ -57,14 +59,14 @@
                         Value="{Binding HT_CLASS1_COUNT, Mode=TwoWay}" />
                 </StackLayout>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 2.01-3.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass2}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass2"
@@ -72,14 +74,14 @@
                         Value="{Binding HT_CLASS2_COUNT, Mode=TwoWay}" />
                 </StackLayout>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 3.01-4.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass3}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass3"
@@ -87,14 +89,14 @@
                         Value="{Binding HT_CLASS3_COUNT, Mode=TwoWay}" />
                 </StackLayout>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 4.01-5.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass4}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass4"
@@ -104,18 +106,18 @@
             </StackLayout>
             <StackLayout Grid.Row="0" Grid.Column="2">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Small Trees Continued" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 5.01-6.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass5}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass5"
@@ -123,14 +125,14 @@
                         Value="{Binding HT_CLASS5_COUNT, Mode=TwoWay}" />
                 </StackLayout>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 6.01-7.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass6}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass6"
@@ -138,14 +140,14 @@
                         Value="{Binding HT_CLASS6_COUNT, Mode=TwoWay}" />
                 </StackLayout>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 7.01-8.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass7}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass7"
@@ -153,14 +155,14 @@
                         Value="{Binding HT_CLASS7_COUNT, Mode=TwoWay}" />
                 </StackLayout>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht 8.01-9.00m" />
                 <StackLayout Orientation="Horizontal">
                     <Label
-                        FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextTitle}"
                         Text="{Binding Source={x:Reference stpHtClass8}, Path=Value}" />
                     <Stepper
                         x:Name="stpHtClass8"

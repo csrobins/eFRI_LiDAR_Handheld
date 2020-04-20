@@ -22,8 +22,25 @@ namespace eLiDAR.Views
         private SettingsViewModel _viewmodel;
         protected override void OnAppearing()
         {
-            _viewmodel = new SettingsViewModel(Navigation);
-            this.BindingContext = _viewmodel;
+            try
+            {
+                _viewmodel = new SettingsViewModel(Navigation);
+                this.BindingContext = _viewmodel;
+            }
+            catch (Exception ex) 
+            { 
+                var msg = ex.Message;
+            }
+            
+        }
+        void Handle_Clicked_2(object sender, System.EventArgs e)
+        {
+            Application.Current.Resources["CurrentTheme"] = Application.Current.Resources["BaseStyle"];
+        }
+
+        void Handle_Clicked_3(object sender, System.EventArgs e)
+        {
+            Application.Current.Resources["CurrentTheme"] = Application.Current.Resources["SecondaryShell"];
         }
     }
 }

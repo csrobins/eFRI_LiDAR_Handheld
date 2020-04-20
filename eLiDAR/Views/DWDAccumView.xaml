@@ -18,12 +18,12 @@
 
             <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="DWD Attributes" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="LINE" />
                 <Picker
                     x:Name="txtLine"
@@ -31,30 +31,34 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListLine}"
-                    SelectedItem="{Binding SelectedLine, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedLine, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Length (m)" />
                 <Entry
                     x:Name="txtLength"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Length (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding ACCUM_LENGTH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Depth (m)" />
                 <Entry
                     x:Name="txtDepth"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Depth (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding ACCUM_DEPTH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Decomp Class" />
                 <Picker
                     x:Name="txtDecompClass"
@@ -62,10 +66,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListDecompClass}"
-                    SelectedItem="{Binding SelectedDecompClass, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedDecompClass, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="DWD Origin" />
                 <Picker
                     x:Name="txtOrigin"
@@ -73,40 +79,46 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListOrigin}"
-                    SelectedItem="{Binding SelectedOrigin, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedOrigin, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Burned" />
                 <Picker
                     x:Name="txtBurned"
                     Title="Burned"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding BURNED, Mode=TwoWay}">
+                    SelectedItem="{Binding BURNED, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="% Conifer" />
                 <Entry
                     x:Name="txtPercentConifer"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="% Conifer)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENT_CONIFER}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="% Decid" />
                 <Entry
                     x:Name="txtPercentDecid"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="% Decid)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENT_DECID}" />
             </StackLayout>
 

@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:eLiDAR"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:eLiDAR;assembly=eLiDAR"
     FlyoutBehavior="Disabled"
@@ -15,21 +16,47 @@
     </ShellItem>-->
     <TabBar>
         <Tab Title="Main">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesome}"
+                    Glyph="{x:Static local:IconFont.Home}"
+                    Size="14"
+                    Color="White" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:Views.Main}" />
         </Tab>
         <Tab Title="Projects">
             <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesome}"
+                    Glyph="{x:Static local:IconFont.ClipboardList}"
+                    Size="14"
+                    Color="White" />
+            </Tab.Icon>
+
         </Tab>
-        <!--<Tab Title="Plots">
-            <ShellContent ContentTemplate="{DataTemplate pages:Views.PlotFilterList}" />
-        </Tab>-->
         <Tab Title="Settings">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesome}"
+                    Glyph="{x:Static local:IconFont.Cog}"
+                    Size="14"
+                    Color="White" />
+            </Tab.Icon>
+
             <ShellContent ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
         </Tab>
-
-        <!--<Tab Title=" Plot View">
-            <ShellContent ContentTemplate=" {DataTemplate pages:Views.PlotView}"/>
-        </Tab>-->
+        <Tab Title="About">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesome}"
+                    Glyph="{x:Static local:IconFont.InfoCircle}"
+                    Size="14"
+                    Color="White" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate pages:Views.About}" />
+        </Tab>
 
     </TabBar>
 </Shell>

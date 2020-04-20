@@ -3,7 +3,11 @@
     x:Class="eLiDAR.Views.PlotList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <Grid Padding="5,5,5,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,37 +22,35 @@
             </Grid.ColumnDefinitions>
             <SearchBar
                 x:Name="MainSearch"
-                Grid.Row=" 0"
-                Grid.ColumnSpan=" 2"
-                CancelButtonColor="Orange"
-                FontAttributes="Italic"
-                FontSize="Small"
-                HorizontalTextAlignment="Center"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                CancelButtonColor="{StaticResource cerulean}"
+                HorizontalTextAlignment="Start"
                 Placeholder="Search plots..."
-                PlaceholderColor="DarkBlue"
-                TextChanged="SearchBar_OnTextChanged"
-                TextColor="DarkBlue" />
+                PlaceholderColor="{DynamicResource TextPrimaryColor}"
+                Style="{DynamicResource TextSubhead}"
+                TextChanged="SearchBar_OnTextChanged" />
             <Button
                 Grid.Row="1"
                 Grid.Column="1"
-                BackgroundColor="Transparent"
-                BorderColor="Black"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 BorderWidth="1"
                 Command="{Binding AddCommand}"
                 FontAttributes="Bold"
                 HeightRequest="50"
                 Text="New Plot"
-                TextColor="Black"
+                TextColor="White"
                 WidthRequest="100" />
         </Grid>
         <ListView
             x:Name="MyListView"
             Grid.Row="2"
+            BackgroundColor="{DynamicResource backgroundColor}"
             HasUnevenRows="true"
             ItemsSource="{Binding PlotListFull}"
             SelectedItem="{Binding SelectedPlotItem, Mode=TwoWay}"
-            SeparatorColor="Black">
+            SeparatorColor="{DynamicResource AccentColor}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -64,28 +66,28 @@
                             <StackLayout Grid.Column="0">
                                 <Label
                                     HorizontalTextAlignment="Start"
-                                    Text="Plot"
-                                    TextColor="Black" />
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Plot" />
                                 <Label
                                     Font="20"
                                     HorizontalTextAlignment="Start"
-                                    Text="{Binding PLOTNUM}"
-                                    TextColor="Black" />
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding PLOTNUM}" />
                                 <Label
                                     HorizontalTextAlignment="Start"
-                                    Text="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
-                                    TextColor="Black" />
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding PLOT_DATE, StringFormat='{0:dd-MMM-yy}'}" />
                             </StackLayout>
                             <StackLayout Grid.Column="1">
                                 <Label
                                     HorizontalTextAlignment="End"
-                                    Text="Plot Type"
-                                    TextColor="Black" />
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Plot Type" />
                                 <Label
                                     Font="20"
                                     HorizontalTextAlignment="End"
-                                    Text="{Binding PLOT_TYPE}"
-                                    TextColor="Black" />
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding PLOT_TYPE}" />
                             </StackLayout>
 
                             <FlexLayout
@@ -95,30 +97,37 @@
                                 JustifyContent="End"
                                 Wrap="Wrap">
                                 <Button
+                                    BackgroundColor="{StaticResource cerulean}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowFilteredCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     Text="Trees"
+                                    TextColor="White"
                                     WidthRequest=" 75" />
                                 <Button
+                                    BackgroundColor="{StaticResource cerulean}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSiteCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     Text="Site"
+                                    TextColor="White"
                                     WidthRequest="75" />
                                 <Button
+                                    BackgroundColor="{StaticResource cerulean}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSoilCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     Text="Soil"
+                                    TextColor="White"
                                     WidthRequest="75" />
                                 <Button
+                                    BackgroundColor="{StaticResource cerulean}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSmallTreeCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
@@ -126,17 +135,20 @@
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
                                     Text="Small"
+                                    TextColor="White"
                                     WidthRequest="75" />
                                 <Button
+                                    BackgroundColor="{StaticResource cerulean}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowVegetationCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
                                     Text="Veg"
+                                    TextColor="White"
                                     WidthRequest="75" />
                                 <Button
+                                    BackgroundColor="{StaticResource cerulean}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowDWDCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
@@ -144,6 +156,7 @@
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
                                     Text="DWD"
+                                    TextColor="White"
                                     WidthRequest="75" />
                             </FlexLayout>
                         </Grid>

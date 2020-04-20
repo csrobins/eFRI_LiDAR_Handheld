@@ -20,12 +20,12 @@
 
             <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Deformity Attributes" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Type" />
                 <Picker
                     x:Name="txtType"
@@ -33,10 +33,12 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListType}"
-                    SelectedItem="{Binding SelectedType, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedType, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Cause" />
                 <Picker
                     x:Name="txtCause"
@@ -44,32 +46,38 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListCause}"
-                    SelectedItem="{Binding SelectedCause, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedCause, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht From (m)" />
                 <Entry
                     x:Name="txtHtFrom"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Ht from (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding HT_FROM}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Ht To (m)" />
                 <Entry
                     x:Name="txtHtTo"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Ht to (m)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding HT_TO}" />
                 <Picker
                     x:Name="txtQuad"
                     Title="Quadrant"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding QUAD, Mode=TwoWay}">
+                    SelectedItem="{Binding QUAD, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>NE</x:String>
                         <x:String>SE</x:String>
@@ -78,164 +86,182 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Extent %" />
                 <Entry
                     x:Name="txtExtent"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Extent (%)"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding EXTENT}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Lean" />
                 <Entry
                     x:Name="txtLean"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Lean"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding LEAN}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Azimuth" />
                 <Entry
                     x:Name="txtAzimuth"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Azimuth"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding AZIMUTH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Length" />
                 <Entry
                     x:Name="txtLength"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Length"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding LENGTH}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Width" />
                 <Entry
                     x:Name="txtWidth"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Width"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding WIDTH}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Defomities Cont." />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Percent Scuff" />
                 <Entry
                     x:Name="txtPct_Scuff"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Percent Scuff"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PCT_SCUFF}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Percent Scrape" />
                 <Entry
                     x:Name="txtPct_Scrape"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Percent Scrape"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PCT_SCRAPE}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Percent Gouge" />
                 <Entry
                     x:Name="txtPct_Gouge"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Percent Gouge"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PCT_GOUGE}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Cavities" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Old Feeding Cavity" />
                 <Picker
                     x:Name="txtOldFeedingCavity"
                     Title="Old Feeding Cavity"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding OLD_FEEDNG_CAVITY, Mode=TwoWay}">
+                    SelectedItem="{Binding OLD_FEEDNG_CAVITY, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="New Feeding Cavity" />
                 <Picker
                     x:Name="txtNewFeedingCavity"
                     Title="New Feeding Cavity"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding NEW_FEEDNG_CAVITY, Mode=TwoWay}">
+                    SelectedItem="{Binding NEW_FEEDNG_CAVITY, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Old Nest Cavity" />
                 <Picker
                     x:Name="txtOldNestCavity"
                     Title="Old Nest Cavity"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding OLD_NEST_CAVITY, Mode=TwoWay}">
+                    SelectedItem="{Binding OLD_NEST_CAVITY, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="New Nest Cavity" />
                 <Picker
                     x:Name="txtNewNestCavity"
                     Title="New Nest Cavity"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding NEW_NEST_CAVITY, Mode=TwoWay}">
+                    SelectedItem="{Binding NEW_NEST_CAVITY, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Stick Nest" />
                 <Picker
                     x:Name="txtStickNest"
                     Title="Stick Nest"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding STICK_NEST, Mode=TwoWay}">
+                    SelectedItem="{Binding STICK_NEST, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
                         <x:String>N</x:String>

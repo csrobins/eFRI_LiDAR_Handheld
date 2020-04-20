@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.About"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    NavigationPage.HasNavigationBar="False"
+    Shell.TitleColor="{StaticResource cerulean}"
+    Shell.NavBarIsVisible="False"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid Padding="10,10,10,10">
+            <ScrollView>
+                <StackLayout MinimumHeightRequest="100" Orientation="Vertical">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Style="{DynamicResource TextTitle}">
+                                    eLiDAR for Ontario FRI
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    TextColor="{DynamicResource TextPrimaryColor}">
+                                    This app was developed in Xamarin.Forms for iOS and Android for ground plot data collection in the Ontario Forest Resource Inventory Program. Please download, and continue to enhance and improve this application for field data collection.
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontSize="17" TextColor="{DynamicResource TextPrimaryColor}">
+                                    Developed in 2020 by Craig Robinson and Sumac Geomatics.
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -20,53 +20,62 @@
 
             <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil Attributes" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Layer Number" />
                 <Entry
                     x:Name="txtLayer"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Layer"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding LAYER}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="From (cm)" />
                 <Entry
                     x:Name="txtFrom"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="From"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding FROM}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="To (cm)" />
                 <Entry
                     x:Name="txtTo"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="To"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding TO}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Horizon" />
-                <Button Command="{Binding SoilHorizonCommand}" Text="{Binding HorizonButton}" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding SoilHorizonCommand}"
+                    Text="{Binding HorizonButton}"
+                    TextColor="White" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="von Post" />
                 <Picker
                     x:Name="txtvonpost"
                     Title="von Post"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding VON_POST, Mode=TwoWay}">
+                    SelectedItem="{Binding VON_POST, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>vP1</x:String>
                         <x:String>vP2</x:String>
@@ -81,14 +90,16 @@
                     </Picker.Items>
                 </Picker>
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Mineral Texture" />
                 <Picker
                     x:Name="txttexture"
                     Title="Mineral Texture"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding TEXTURE, Mode=TwoWay}">
+                    SelectedItem="{Binding TEXTURE, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>vcS</x:String>
                         <x:String>cS</x:String>
@@ -124,12 +135,12 @@
             </StackLayout>
             <StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil Attributes Continued" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Pore Pattern" />
                 <Picker
                     x:Name="txtPorePattern"
@@ -137,58 +148,75 @@
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListPorePattern}"
-                    SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay}" />
+                    SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Structure" />
-                <Button Command="{Binding SoilStructureCommand}" Text="{Binding StructureButton}" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding SoilStructureCommand}"
+                    Text="{Binding StructureButton}"
+                    TextColor="White" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Colour" />
-                <Button Command="{Binding ColourCommand}" Text="{Binding ColourButton}" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding ColourCommand}"
+                    Text="{Binding ColourButton}"
+                    TextColor="White" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Mottle Colour" />
-                <Button Command="{Binding MottleColourCommand}" Text="{Binding MottleColourButton}" />
+                <Button
+                    BackgroundColor="{StaticResource cerulean}"
+                    Command="{Binding MottleColourCommand}"
+                    Text="{Binding MottleColourButton}"
+                    TextColor="White" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">
                 <Label
-                    FontAttributes="Bold"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
                     Text="Soil Attributes Continued" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Percent Gravel" />
                 <Entry
                     x:Name="txtPercentGravel"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Percent Gravel"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENT_GRAVEL}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Percent COBBLE" />
                 <Entry
                     x:Name="txtPercentCobble"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Percent Cobble"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENT_COBBLE}" />
                 <Label
-                    FontAttributes="None"
                     HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Percent Stone" />
                 <Entry
                     x:Name="txtPercentStone"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Percent Stone"
+                    Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENT_STONE}" />
             </StackLayout>
 

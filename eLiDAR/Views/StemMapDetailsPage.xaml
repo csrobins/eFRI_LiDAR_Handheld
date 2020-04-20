@@ -5,89 +5,94 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:eLiDAR.Views"
     Title="{Binding Title}"
-    BackgroundColor="#D5E7FA">
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <Label
-                FontAttributes="Bold"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextTitle}"
                 Text="Stem Map Attributes" />
             <Label
-                FontAttributes="None"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Azimuth" />
             <Entry
                 x:Name="txtAzimuth"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Azimuth"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding AZIMUTH}" />
             <Label
-                FontAttributes="None"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Distance (m)" />
             <Entry
                 x:Name="txtDistance"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Distance (m)"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding DISTANCE}" />
             <Label
-                FontAttributes="None"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Crown Width 1 (m)" />
             <Entry
                 x:Name="txtCrownWidth1"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Crown Width 1 (m)"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding CROWN_AXIS_LONG}" />
             <Label
-                FontAttributes="None"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Crown Width 2 (m)" />
             <Entry
                 x:Name="txtCrownWidth2"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Crown Width 2 (m)"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding CROWN_AXIS_SHORT}" />
             <Label
-                FontAttributes="None"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Offset Azimuth" />
             <Entry
                 x:Name="txtOffsetAzimuth"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Offset Azimuth"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding OFFSET_AZIMUTH}" />
             <Label
-                FontAttributes="None"
                 HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
                 Text="Offset Distance (m)" />
             <Entry
                 x:Name="txtOffsetDistance"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
                 Placeholder="Offset Distance (m)"
+                Style="{DynamicResource TextSubhead}"
                 Text="{Binding OFFSET_DISTANCE}" />
             <Button
                 Margin="0,30,0,0"
-                BackgroundColor="#5989B5"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding UpdateTreeCommand}"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                Text="Save"
+                Text="Save Stem Map"
                 TextColor="White" />
             <Button
                 Margin="0,30,0,0"
-                BackgroundColor="#5989B5"
+                BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding DeleteTreeCommand}"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
                 Text="Delete"
                 TextColor="White" />
         </StackLayout>
