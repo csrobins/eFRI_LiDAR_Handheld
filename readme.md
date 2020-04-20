@@ -8,5 +8,3 @@ eLiDAR will live in a public repository on Github at https://github.com/csrobins
 1.	The Xamarin.Forms solution (created in Visual Studio 2019), which contains all of the C# code for the eLiDAR common project, the eLidar.Android project and the eLidar.iOS project.
 2.	The SQLite database (on device) is included in the db folder.
 3.	The SQL to recreate the Azure SQL database is in the API folder.
-
-
