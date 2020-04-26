@@ -94,6 +94,7 @@ Global
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhoneSimulator.Deploy.0 = Debug|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.AppStore|Any CPU.ActiveCfg = AppStore|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.AppStore|iPhone.Build.0 = AppStore|iPhone
