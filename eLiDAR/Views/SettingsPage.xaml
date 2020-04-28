@@ -10,6 +10,9 @@
     ios:Page.UseSafeArea="true"
     BackgroundColor="{DynamicResource backgroundColor}"
     BindingContext="BaseSettingsViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
     mc:Ignorable="d">
     <ContentPage.Content>
         <ScrollView>
