@@ -8,6 +8,7 @@ using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using eLiDAR.Views;
+using FluentValidation.Results;
 using Xamarin.Forms;
 
 
@@ -137,7 +138,10 @@ namespace eLiDAR.ViewModels {
         async Task AddPlot(string fk)
         {
             _plot.PROJECTID = fk;
-            var validationResults = _plotValidator.Validate(_plot);
+//            var validationResults = _plotValidator.Validate((FluentValidation.IValidationContext)_plot);
+  
+            PlotValidator _plotValidator = new PlotValidator();
+            ValidationResult validationResults = _plotValidator.Validate(_plot);
 
             if (validationResults.IsValid)
             {

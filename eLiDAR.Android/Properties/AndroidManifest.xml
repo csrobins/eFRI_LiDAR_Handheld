@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" package="com.xamarin.eLiDAR" android:installLocation="auto" android:versionName="white pine">
-	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2" package="com.xamarin.eLiDAR" android:installLocation="auto" android:versionName="black spruce">
+	<uses-sdk android:minSdkVersion="29" android:targetSdkVersion="29" />
 	<application android:label="eLiDAR.Android" android:allowBackup="false" android:icon="@mipmap/Heatmap"></application>
 </manifest>

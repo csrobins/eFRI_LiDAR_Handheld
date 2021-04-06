@@ -52,7 +52,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c.DBH).NotEmpty().WithMessage("Tree DBH should not be empty and be between 0 and 200.");
             RuleFor(c => c.DBH).GreaterThan(0).WithMessage("Tree DBH should be > 0.");
             RuleFor(c => c.DBH).LessThan(200).WithMessage("Tree DBH should be < 200.");
-            RuleFor(c => c.AGE).ScalePrecision(0,3).WithMessage("Tree Age should not have decimals.");
+// RuleFor(c => c.AGE).scalePrecision(0,3).WithMessage("Tree Age should not have decimals.");
         }
 
         bool ValidateStringEmpty(string stringValue)
