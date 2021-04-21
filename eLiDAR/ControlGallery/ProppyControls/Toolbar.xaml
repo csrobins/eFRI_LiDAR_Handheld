@@ -4,7 +4,7 @@
     x:Class="eLiDAR.ControlGallery.ProppyControls.Toolbar"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:eLiDAR;assembly=eLiDAR">
+    xmlns:local="clr-namespace:eLiDAR;assembly=eVSN">
 
     <Grid.RowDefinitions>
         <RowDefinition Height="1" />

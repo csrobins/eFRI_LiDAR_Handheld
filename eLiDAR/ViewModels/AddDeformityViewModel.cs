@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation;
@@ -64,13 +63,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedType = PickerService.GetItem(ListType, _deformity.TYPE);
+                _selectedType = PickerService.GetItem(ListType, _deformity.DEFORMITYTYPECODE);
                 return _selectedType;
             }
             set
             {
                 SetProperty(ref _selectedType, value);
-                _deformity.TYPE  = (int)_selectedType.ID;
+                _deformity.DEFORMITYTYPECODE = (int)_selectedType.ID;
             }
         }
 

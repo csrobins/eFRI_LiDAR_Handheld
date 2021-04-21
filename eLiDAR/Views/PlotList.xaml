@@ -30,18 +30,7 @@
                 PlaceholderColor="{DynamicResource TextPrimaryColor}"
                 Style="{DynamicResource TextSubhead}"
                 TextChanged="SearchBar_OnTextChanged" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="1"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                BorderWidth="1"
-                Command="{Binding AddCommand}"
-                FontAttributes="Bold"
-                HeightRequest="50"
-                Text="New Plot"
-                TextColor="White"
-                WidthRequest="100" />
+           
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -72,11 +61,11 @@
                                     Font="20"
                                     HorizontalTextAlignment="Start"
                                     Style="{DynamicResource TextSubhead}"
-                                    Text="{Binding PLOTNUM}" />
+                                    Text="{Binding VSNPLOTNAME}" />
                                 <Label
                                     HorizontalTextAlignment="Start"
                                     Style="{DynamicResource TextSubhead}"
-                                    Text="{Binding PLOT_DATE, StringFormat='{0:dd-MMM-yy}'}" />
+                                    Text="{Binding PLOTOVERVIEWDATE, StringFormat='{0:dd-MMM-yy}'}" />
                             </StackLayout>
                             <StackLayout Grid.Column="1">
                                 <Label
@@ -87,7 +76,7 @@
                                     Font="20"
                                     HorizontalTextAlignment="End"
                                     Style="{DynamicResource TextSubhead}"
-                                    Text="{Binding PLOT_TYPE}" />
+                                    Text="{Binding VSNPLOTTYPECODE}" />
                             </StackLayout>
 
                             <FlexLayout
@@ -97,82 +86,69 @@
                                 JustifyContent="End"
                                 Wrap="Wrap">
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowFilteredCommand}"
-                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"                           
                                     HorizontalOptions="End"
                                     Text="Trees"
-                                    TextColor="White"
-                                    WidthRequest=" 75" />
+                                  />
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSiteCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     Text="Site"
-                                    TextColor="White"
-                                    WidthRequest="75" />
+                                     />
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSoilCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     Text="Soil"
-                                    TextColor="White"
-                                    WidthRequest="75" />
+                                  />
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
+                              
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSmallTreeCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
-                                    Text="Small"
-                                    TextColor="White"
-                                    WidthRequest="75" />
+                                    Text="Small" />
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowVegetationCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
                                     Text="Veg"
-                                    TextColor="White"
-                                    WidthRequest="75" />
+                                  />
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowDWDCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
-                                    Text="DWD"
-                                    TextColor="White"
-                                    WidthRequest="75" />
+                                    Text="DWD"/>
                             </FlexLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <!--<Button
-            Grid.Row="2"
-            BackgroundColor="#5989B5"
-            BorderRadius="0"
-            Command="{Binding DeleteAllPlotsCommand}"
-            FontAttributes="Bold"
-            Text="Delete All Plots"
-            TextColor="White"
-            VerticalOptions="EndAndExpand" />-->
+        <StackLayout Grid.Row="3"
+                Grid.Column="0" HorizontalOptions="End" VerticalOptions="End"  >
+                <Button x:Name="Button_Round"
+                    Text="+"
+                    Command="{Binding AddCommand}"
+                    Style ="{StaticResource RoundButtonStyle}"/>
+        </StackLayout>
+       
     </Grid>
 
 </ContentPage>

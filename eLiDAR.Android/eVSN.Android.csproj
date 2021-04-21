@@ -8,7 +8,7 @@
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>eLiDAR.Droid</RootNamespace>
-    <AssemblyName>eLiDAR.Android</AssemblyName>
+    <AssemblyName>eVSN.Android</AssemblyName>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -126,9 +126,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\photo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eLiDAR\eLiDAR.csproj">
+    <ProjectReference Include="..\eLiDAR\eVSN.csproj">
       <Project>{3c01266d-b4c5-44bb-a86c-a61141a25e49}</Project>
-      <Name>eLiDAR</Name>
+      <Name>eVSN</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -176,4 +176,9 @@
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptioneVSNAndroidHideInfoBar="True" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

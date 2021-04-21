@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using eLiDAR.Views;
@@ -74,13 +73,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedDrainage = PickerService.GetItem(ListDrainage, _ecosite.DRAINAGE);
+                _selectedDrainage = PickerService.GetItem(ListDrainage, _ecosite.DRAINAGECLASSCODE);
                 return _selectedDrainage;
             }
             set
             {
                 SetProperty(ref _selectedDrainage, value);
-                _ecosite.DRAINAGE  = (int)_selectedDrainage.ID;
+                _ecosite.DRAINAGECLASSCODE  = (int)_selectedDrainage.ID;
             }
         }
         private PickerItemsString _selectedDepthClass = new PickerItemsString { ID = "", NAME = "" };
@@ -102,13 +101,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedDeposition1 = PickerService.GetItem(ListDeposition, _ecosite.MODE_OF_DEPOSITION1);
+                _selectedDeposition1 = PickerService.GetItem(ListDeposition, _ecosite.MODEOFDEPOSITIONCODE1);
                 return _selectedDeposition1;
             }
             set
             {
                 SetProperty(ref _selectedDeposition1, value);
-                _ecosite.MODE_OF_DEPOSITION1  = _selectedDeposition1.ID;
+                _ecosite.MODEOFDEPOSITIONCODE1 = _selectedDeposition1.ID;
             }
         }
         private PickerItemsString _selectedDeposition2 = new PickerItemsString { ID = "", NAME = "" };
@@ -116,13 +115,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedDeposition2 = PickerService.GetItem(ListDeposition, _ecosite.MODE_OF_DEPOSITION2);
+                _selectedDeposition2 = PickerService.GetItem(ListDeposition, _ecosite.MODEOFDEPOSITIONCODE2);
                 return _selectedDeposition2;
             }
             set
             {
                 SetProperty(ref _selectedDeposition2, value);
-                _ecosite.MODE_OF_DEPOSITION2 = _selectedDeposition2.ID;
+                _ecosite.MODEOFDEPOSITIONCODE2  = _selectedDeposition2.ID;
             }
         }
         private PickerItemsString _selectedPorePattern = new PickerItemsString { ID = "", NAME = "" };
@@ -145,13 +144,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedMoistureRegime = PickerService.GetItem(ListMoistureRegime, _ecosite.MOISTURE_REGIME);
+                _selectedMoistureRegime = PickerService.GetItem(ListMoistureRegime, _ecosite.MOISTUREREGIMECODE);
                 return _selectedMoistureRegime;
             }
             set
             {
                 SetProperty(ref _selectedMoistureRegime, value);
-                _ecosite.MOISTURE_REGIME  = _selectedMoistureRegime.ID;
+                _ecosite.MOISTUREREGIMECODE  = _selectedMoistureRegime.ID;
             }
         }
 
@@ -160,13 +159,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedHumusForm = PickerService.GetItem(ListHumusForm, _ecosite.HUMUS_FORM);
+                _selectedHumusForm = PickerService.GetItem(ListHumusForm, _ecosite.HUMUSFORMCODE);
                 return _selectedHumusForm;
             }
             set
             {
                 SetProperty(ref _selectedHumusForm, value);
-                _ecosite.HUMUS_FORM = (int)_selectedHumusForm.ID;
+                _ecosite.HUMUSFORMCODE = (int)_selectedHumusForm.ID;
             }
         }
 

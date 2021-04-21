@@ -9,14 +9,16 @@ namespace eLiDAR.Views {
 
         public ProjectList() {
             InitializeComponent();
+            _viewmodel = new ProjectListViewModel(Navigation);
+            this.BindingContext = _viewmodel;
+            _viewmodel.FetchProjects();
         }
         private ProjectListViewModel _viewmodel;
         protected override void OnAppearing() {
-            _viewmodel = new ProjectListViewModel(Navigation);
-            this.BindingContext = _viewmodel;
+            base.OnAppearing(); 
             MyListView.ItemsSource = null;
+            _viewmodel.FetchProjects();
             MyListView.ItemsSource = _viewmodel.ProjectList;
-            _viewmodel.FetchProjects(); 
-		}
+        }
     }
 }

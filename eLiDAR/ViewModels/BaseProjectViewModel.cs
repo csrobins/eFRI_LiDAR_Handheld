@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
@@ -16,7 +16,16 @@ namespace eLiDAR.ViewModels
         public INavigation _navigation;
         public IValidator _projectValidator;
         public IProjectRepository _projectRepository;
-      
+        private bool _IsChanged = false;
+
+        public bool IsChanged
+        {
+            get => _IsChanged;
+            set
+            {
+                _IsChanged = value;
+            }
+        }
 
         public string PROJECTID
         {
@@ -33,6 +42,7 @@ namespace eLiDAR.ViewModels
             set{
                 _project.NAME = value;
                 NotifyPropertyChanged("NAME");
+                IsChanged = true;
             }
         }  
         public string DESCRIPTION
@@ -41,6 +51,7 @@ namespace eLiDAR.ViewModels
             set { 
                 _project.DESCRIPTION = value; 
                 NotifyPropertyChanged("DESCRIPTION");
+                IsChanged = true;
             }
         } 
         public DateTime PROJECT_DATE
@@ -49,6 +60,7 @@ namespace eLiDAR.ViewModels
             set { 
                 _project.PROJECT_DATE = value; 
                 NotifyPropertyChanged("PROJECT_DATE");
+                IsChanged = true;
             }
         } 
 

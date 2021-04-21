@@ -1,0 +1,31 @@
+<ContentView
+    x:Class="eLiDAR.Views.PersonView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <StackLayout Spacing="12" >
+
+        <Label
+            HorizontalOptions="Start"
+            Style="{StaticResource TextBody}"
+            Text="First Name" />
+        <Entry
+            
+            x:Name="txtFirst"
+            HeightRequest="40"
+            HorizontalOptions="FillAndExpand"
+            Placeholder="First Name"
+            Style="{DynamicResource TextSubhead}"
+            Text="{Binding FIRSTNAME}" />
+        <Label
+            HorizontalOptions="Start"
+            Style="{StaticResource TextBody}"
+            Text="Last Name" />
+        <Entry
+            x:Name="txtLastName"
+            HeightRequest="40"
+            HorizontalOptions="FillAndExpand"
+            Placeholder="Last Name"
+            Style="{DynamicResource TextSubhead}"
+            Text="{Binding LASTNAME}" />
+    </StackLayout>
+</ContentView>

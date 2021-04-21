@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.AddPerson"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    
+    Title="Add Personnel to the Project"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    BindingContext="AddPersonViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+
+    <StackLayout Padding="20" Spacing="12">
+        <local:PersonView />
+    </StackLayout>
+</ContentPage>

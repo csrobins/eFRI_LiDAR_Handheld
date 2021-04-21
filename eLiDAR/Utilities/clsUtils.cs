@@ -15,6 +15,8 @@ namespace eLiDAR.Utilities
         private string keyvalboreal = "UseBorealSpecies";
         private string keyvaldevicetheme = "UseDeviceTheme";
         private string keyvaldarktheme = "UseDarkTheme";
+        private string keynotifysave = "IsNotifySave";
+
 
         public Guid getGUID()
         {
@@ -31,6 +33,17 @@ namespace eLiDAR.Utilities
             set 
             {
                 Preferences.Set(keyvalboreal, value);
+            }
+        }
+        internal bool NotifySave
+        {
+            get
+            {
+                return Preferences.Get(keynotifysave, false);
+            }
+            set
+            {
+                Preferences.Set(keynotifysave, value);
             }
         }
         internal bool DeviceTheme

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation;
@@ -35,13 +34,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedSpecies = PickerService.GetItem(ListSpecies, _smallTree.SPECIES);
+                _selectedSpecies = PickerService.GetItem(ListSpecies, _smallTree.SPECIESCODE);
                 return _selectedSpecies;
             }
             set
             {
                 SetProperty(ref _selectedSpecies, value);
-                _smallTree.SPECIES   = (int)_selectedSpecies.ID;
+                _smallTree.SPECIESCODE   = (int)_selectedSpecies.ID;
             }
         }
         void FetchDetails(string fk){

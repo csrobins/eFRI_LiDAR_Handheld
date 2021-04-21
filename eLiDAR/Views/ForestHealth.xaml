@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.ForestHealth"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid Padding="10" ColumnSpacing=" 1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{DynamicResource TextTitle}"
+                    Text="Forest Health Attributes" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Crew Lead" />
+                <Picker
+                    x:Name="txtCrewLead"
+                    Title="Crew Lead"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedStandInfoPerson, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}"/>
+
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Forest Health Date" />
+                <DatePicker
+                    x:Name="txtStandInfoDate"
+                    Date="{Binding FORESTHEALTHDATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumDate="01-Jan-2020"
+                    Style="{DynamicResource TextSubhead}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Damage Description" />
+                <Entry
+                    x:Name="txtDamage"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Damage Description"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DAMAGEDESCRIPTION}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Follow Up Required?" />
+                <Picker
+                    x:Name="txtFollowUp"
+                    Title="Follow Up Required?"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding FOLLOWUPREQUIRED, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Comments" />
+                <Entry
+                    x:Name="txtComment"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Comments"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding FORESTHEALTHNOTE}" />
+            </StackLayout>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

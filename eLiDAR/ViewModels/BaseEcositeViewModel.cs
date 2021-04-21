@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
@@ -57,20 +57,20 @@ namespace eLiDAR.ViewModels
 
         public int HUMUS_FORM
         {
-            get => _ecosite.HUMUS_FORM;
+            get => _ecosite.HUMUSFORMCODE;
             set
             {
-                _ecosite.HUMUS_FORM = value;
+                _ecosite.HUMUSFORMCODE = value;
                 NotifyPropertyChanged("HUMUS_FORM");
             }
         }
 
         public int DRAINAGE
         {
-            get => _ecosite.DRAINAGE;
+            get => _ecosite.DRAINAGECLASSCODE;
             set
             {
-                _ecosite.DRAINAGE = value;
+                _ecosite.DRAINAGECLASSCODE = value;
                 NotifyPropertyChanged("DRAINAGE");
             }
         }
@@ -107,50 +107,50 @@ namespace eLiDAR.ViewModels
 
         public int DEPTH_TO_DISTINCT_MOTTLES
         {
-            get => _ecosite.DEPTH_TO_DISTINCT_MOTTLES;
+            get => _ecosite.DEPTHTODISTINCTMOTTLES;
             set
             {
-                _ecosite.DEPTH_TO_DISTINCT_MOTTLES = value;
+                _ecosite.DEPTHTODISTINCTMOTTLES = value;
                 NotifyPropertyChanged("DEPTH_TO_DISTINCT_MOTTLES");
             }
         }
 
         public int DEPTH_TO_PROMINENT_MOTTLES
         {
-            get => _ecosite.DEPTH_TO_PROMINENT_MOTTLES;
+            get => _ecosite.DEPTHTOPROMINENTMOTTLES;
             set
             {
-                _ecosite.DEPTH_TO_PROMINENT_MOTTLES = value;
+                _ecosite.DEPTHTOPROMINENTMOTTLES = value;
                 NotifyPropertyChanged("DEPTH_TO_PROMINENT_MOTTLES");
             }
         }
 
         public int DEPTH_TO_GLEY
         {
-            get => _ecosite.DEPTH_TO_GLEY;
+            get => _ecosite.DEPTHTOGLEY;
             set
             {
-                _ecosite.DEPTH_TO_GLEY = value;
+                _ecosite.DEPTHTOGLEY = value;
                 NotifyPropertyChanged("DEPTH_TO_GLEY");
             }
         }
 
         public int DEPTH_TO_BEDROCK
         {
-            get => _ecosite.DEPTH_TO_BEDROCK;
+            get => _ecosite.DEPTHTOBEDROCK;
             set
             {
-                _ecosite.DEPTH_TO_BEDROCK = value;
+                _ecosite.DEPTHTOBEDROCK = value;
                 NotifyPropertyChanged("DEPTH_TO_BEDROCK");
             }
         }
 
         public int DEPTH_TO_CARBONATES
         {
-            get => _ecosite.DEPTH_TO_CARBONATES;
+            get => _ecosite.DEPTHTOCARBONATES;
             set
             {
-                _ecosite.DEPTH_TO_CARBONATES = value;
+                _ecosite.DEPTHTOCARBONATES = value;
                 NotifyPropertyChanged("DEPTH_TO_CARBONATES");
             }
         }
@@ -166,100 +166,100 @@ namespace eLiDAR.ViewModels
 
         public string MOISTURE_REGIME
         {
-            get => _ecosite.MOISTURE_REGIME;
+            get => _ecosite.MOISTUREREGIMECODE;
             set
             {
-                _ecosite.MOISTURE_REGIME = value;
+                _ecosite.MOISTUREREGIMECODE = value;
                 NotifyPropertyChanged("MOISTURE_REGIME");
             }
         }
 
         public string MODE_OF_DEPOSITION1
         {
-            get => _ecosite.MODE_OF_DEPOSITION1;
+            get => _ecosite.MODEOFDEPOSITIONCODE1;
             set
             {
-                _ecosite.MODE_OF_DEPOSITION1 = value;
+                _ecosite.MODEOFDEPOSITIONCODE1 = value;
                 NotifyPropertyChanged("MODE_OF_DEPOSITION1");
             }
         }
 
         public string MODE_OF_DEPOSITION2
         {
-            get => _ecosite.MODE_OF_DEPOSITION2;
+            get => _ecosite.MODEOFDEPOSITIONCODE2;
             set
             {
-                _ecosite.MODE_OF_DEPOSITION2 = value;
+                _ecosite.MODEOFDEPOSITIONCODE2 = value;
                 NotifyPropertyChanged("MODE_OF_DEPOSITION2");
             }
         }
 
         public int FUNCTIONAL_ROOTING_DEPTH
         {
-            get => _ecosite.FUNCTIONAL_ROOTING_DEPTH;
+            get => _ecosite.FUNCTIONALROOTINGDEPTH;
             set
             {
-                _ecosite.FUNCTIONAL_ROOTING_DEPTH = value;
+                _ecosite.FUNCTIONALROOTINGDEPTH = value;
                 NotifyPropertyChanged("FUNCTIONAL_ROOTING_DEPTH");
             }
         }
 
         public int MAXIMUM_ROOTING_DEPTH
         {
-            get => _ecosite.MAXIMUM_ROOTING_DEPTH;
+            get => _ecosite.MAXIMUMROOTINGDEPTH;
             set
             {
-                _ecosite.MAXIMUM_ROOTING_DEPTH = value;
+                _ecosite.MAXIMUMROOTINGDEPTH = value;
                 NotifyPropertyChanged("MAXIMUM_ROOTING_DEPTH");
             }
         }
 
         public int DEPTH_TO_ROOT_RESTRICTION
         {
-            get => _ecosite.DEPTH_TO_ROOT_RESTRICTION;
+            get => _ecosite.DEPTHTOROOTRESTRICTION;
             set
             {
-                _ecosite.DEPTH_TO_ROOT_RESTRICTION = value;
+                _ecosite.DEPTHTOROOTRESTRICTION = value;
                 NotifyPropertyChanged("DEPTH_TO_ROOT_RESTRICTION");
             }
         }
 
         public int DEPTH_TO_WATER_TABLE
         {
-            get => _ecosite.DEPTH_TO_WATER_TABLE;
+            get => _ecosite.DEPTHTOWATERTABLE;
             set
             {
-                _ecosite.DEPTH_TO_WATER_TABLE = value;
+                _ecosite.DEPTHTOWATERTABLE = value;
                 NotifyPropertyChanged("DEPTH_TO_WATER_TABLE");
             }
         }
 
         public int DEPTH_TO_COARSE_FRAGS
         {
-            get => _ecosite.DEPTH_TO_COARSE_FRAGS;
+            get => _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS;
             set
             {
-                _ecosite.DEPTH_TO_COARSE_FRAGS = value;
+                _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = value;
                 NotifyPropertyChanged("DEPTH_TO_COARSE_FRAGS");
             }
         }
 
-        public int PROBLEMATIC_SITE_PROTOCOL_CLASS
+        public string PROBLEMATIC_SITE_PROTOCOL_CLASS
         {
-            get => _ecosite.PROBLEMATIC_SITE_PROTOCOL_CLASS;
+            get => _ecosite.PROBLEMATICSITE;
             set
             {
-                _ecosite.PROBLEMATIC_SITE_PROTOCOL_CLASS = value;
+                _ecosite.PROBLEMATICSITE = value;
                 NotifyPropertyChanged("PROBLEMATIC_SITE_PROTOCOL_CLASS");
             }
         }
 
         public string SEEPAGE
         {
-            get => _ecosite.SEEPAGE;
+            get => _ecosite.DEPTHTOSEEPAGE;
             set
             {
-                _ecosite.SEEPAGE = value;
+                _ecosite.DEPTHTOSEEPAGE = value;
                 NotifyPropertyChanged("SEEPAGE");
             }
         }
@@ -315,30 +315,30 @@ namespace eLiDAR.ViewModels
 
         public int AZIMUTH
         {
-            get => _ecosite.AZIMUTH;
+            get => _ecosite.PITAZIMUTH;
             set
             {
-                _ecosite.AZIMUTH = value;
+                _ecosite.PITAZIMUTH = value;
                 NotifyPropertyChanged("AZIMUTH");
             }
         }
 
-        public int DISTANCE
+        public Single DISTANCE
         {
-            get => _ecosite.DISTANCE;
+            get => _ecosite.PITDISTANCE;
             set
             {
-                _ecosite.DISTANCE = value;
+                _ecosite.PITDISTANCE = value;
                 NotifyPropertyChanged("DISTANCE");
             }
         }
 
         public string COMMENTS
         {
-            get => _ecosite.COMMENTS;
+            get => _ecosite.SUBSTRATENOTE;
             set
             {
-                _ecosite.COMMENTS = value;
+                _ecosite.SUBSTRATENOTE = value;
                 NotifyPropertyChanged("COMMENTS");
             }
         }

@@ -2,6 +2,7 @@
 using eLiDAR.Models;
 using eLiDAR.Helpers;
 using System;
+using FluentValidation.Validators;
 
 namespace eLiDAR.Validator
 {
@@ -15,17 +16,25 @@ namespace eLiDAR.Validator
         }  
 
     }
+    public class PersonValidator : AbstractValidator<PERSON>
+    {
+        public PersonValidator()
+        {
+            RuleFor(c => c.FIRSTNAME).NotEmpty().WithMessage("First name should not be empty.");
+            RuleFor(c => c.LASTNAME).NotEmpty().WithMessage("Last name should not be empty.");
+        }
+    }
     public class PlotValidator : AbstractValidator<PLOT>
     {
         public PlotValidator()
         {
             RuleFor(c => c).Must(c => IsUniquePlotNum(c)).WithMessage("Plot number must be unique within the project.");
-            RuleFor(c => c.PLOTNUM).NotEmpty().WithMessage("Plot number should not be empty.");
-            RuleFor(c => c.PLOT_TYPE).NotEmpty().WithMessage("Plot type should not be empty.");
+            RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number should not be empty.");
+            RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type should not be empty.");
         //    RuleFor(c => c.PLOT_DATE).NotEmpty().WithMessage("Plot date should not be empty.");
-            RuleFor(c => c.PLOT_DATE).GreaterThanOrEqualTo(DateTime.Parse("01-01-2020")).WithMessage("Plot date should > 01-01-2020.");
-            RuleFor(c => c.FMU).NotEmpty().WithMessage("FMU should not be empty.");
-            RuleFor(c => c.FOREST_DISTRICT).NotEmpty().WithMessage("Forest District should not be empty.");
+            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("01-01-2020")).WithMessage("Plot date should > 01-01-2020.");
+       //     RuleFor(c => c.FMU).NotEmpty().WithMessage("FMU should not be empty.");
+       //     RuleFor(c => c.FOREST_DISTRICT).NotEmpty().WithMessage("Forest District should not be empty.");
         }
 
         bool ValidateStringEmpty(string stringValue)
@@ -46,13 +55,16 @@ namespace eLiDAR.Validator
         public TreeValidator()
         {
             RuleFor(c => c).Must(c => IsUniqueTreeNum(c)).WithMessage("Tree number must be unique within the plot.");
-            RuleFor(c => c.TREENUM).NotEmpty().WithMessage("Tree number should not be empty.");
-            RuleFor(c => c.SPECIES).NotEmpty().WithMessage("Species should not be empty.");
-            RuleFor(c => c.ORIGIN).NotEmpty().WithMessage("Tree origin should not be empty.");
+            RuleFor(c => c.TREENUMBER).NotEmpty().WithMessage("Tree number should not be empty.");
+            RuleFor(c => c.TREENUMBER).SetValidator(new ScalePrecisionValidator(0, 5) ).WithMessage("Tree numbers must be integers");
+            RuleFor(c => c.TREENUMBER).LessThan(2000).WithMessage("Tree numbers must be < 2000");
+            RuleFor(c => c.TREENUMBER).GreaterThan(0).WithMessage("Tree numbers must be > 0");
+            RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
+            RuleFor(c => c.TREEORIGINCODE).NotEmpty().WithMessage("Tree origin should not be empty.");
             RuleFor(c => c.DBH).NotEmpty().WithMessage("Tree DBH should not be empty and be between 0 and 200.");
-            RuleFor(c => c.DBH).GreaterThan(0).WithMessage("Tree DBH should be > 0.");
+            RuleFor(c => c.DBH).GreaterThan(7).WithMessage("Tree DBH should be > 7cm.");
             RuleFor(c => c.DBH).LessThan(200).WithMessage("Tree DBH should be < 200.");
-// RuleFor(c => c.AGE).scalePrecision(0,3).WithMessage("Tree Age should not have decimals.");
+            RuleFor(c => c.DBH).SetValidator(new ScalePrecisionValidator(2, 6)).WithMessage("DBH can have up to 2 decimals");
         }
 
         bool ValidateStringEmpty(string stringValue)
@@ -106,7 +118,7 @@ namespace eLiDAR.Validator
         public EcositeValidator()
         {
             RuleFor(c => c.PRI_ECO).NotEmpty().WithMessage("Primary ecosite should not be empty.");
-            RuleFor(c => c.MOISTURE_REGIME).NotEmpty().WithMessage("Moisture Regime should not be empty.");
+            RuleFor(c => c.MOISTUREREGIMECODE).NotEmpty().WithMessage("Moisture Regime should not be empty.");
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -132,9 +144,9 @@ namespace eLiDAR.Validator
         public SoilValidator()
         {
             RuleFor(c => c).Must(c => IsUniqueSoilNum(c)).WithMessage("Soil layer number must be unique within the plot.");
-            RuleFor(c => c.LAYER).NotEmpty().WithMessage("Soil Layer is required.");
-            RuleFor(c => c.FROM).NotEmpty().WithMessage("From is required.");
-            RuleFor(c => c.TO).NotEmpty().WithMessage("To is required.");
+            RuleFor(c => c.HORIZONNUMBER).NotEmpty().WithMessage("Soil Layer is required.");
+            RuleFor(c => c.DEPTHFROM).NotEmpty().WithMessage("From is required.");
+            RuleFor(c => c.DEPTHTO).NotEmpty().WithMessage("To is required.");
             RuleFor(c => c.HORIZON).NotEmpty().WithMessage("Soil horizon is required.");
         }
         bool IsUniqueSoilNum(SOIL _soil)
@@ -166,7 +178,7 @@ namespace eLiDAR.Validator
     {
         public SmallTreeValidator()
         {
-            RuleFor(c => c.SPECIES).NotEmpty().WithMessage("Species should not be empty.");
+            RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -191,7 +203,7 @@ namespace eLiDAR.Validator
     {
         public VegetationValidator()
         {
-            RuleFor(c => c.SPECIES).NotEmpty().WithMessage("Species should not be empty.");
+            RuleFor(c => c.VSNSPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -216,9 +228,9 @@ namespace eLiDAR.Validator
     {
         public DeformityValidator()
         {
-            RuleFor(c => c.HT_FROM).NotEmpty().WithMessage("Ht From should not be empty.");
-            RuleFor(c => c.HT_TO).NotEmpty().WithMessage("Ht To should not be empty.");
-            RuleFor(c => c.HT_FROM).LessThan(c => c.HT_TO).WithMessage("Ht To should > Ht from.");
+            RuleFor(c => c.HEIGHTFROM).NotEmpty().WithMessage("Ht From should not be empty.");
+            RuleFor(c => c.HEIGHTTO).NotEmpty().WithMessage("Ht To should not be empty.");
+            RuleFor(c => c.HEIGHTFROM).LessThan(c => c.HEIGHTTO).WithMessage("Ht To should > Ht from.");
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -244,7 +256,7 @@ namespace eLiDAR.Validator
         public DWDValidator()
         {
             RuleFor(c => c).Must(c => IsUniqueDWDNum(c)).WithMessage("DWD number must be unique within the line.");
-            RuleFor(c => c.DECOMP_CLASS).NotEmpty().WithMessage("Decomp Class should not be empty.");
+            RuleFor(c => c.DECOMPOSITIONCLASS).NotEmpty().WithMessage("Decomp Class should not be empty.");
            
         }
         bool IsUniqueDWDNum(DWD _dwd)

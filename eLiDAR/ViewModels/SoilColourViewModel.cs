@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Views;
 using FluentValidation.Results;
@@ -34,12 +33,12 @@ namespace eLiDAR.ViewModels {
             _thissoil = _soil;
             
             ClearCommand = new Command(() => ClearItems());
-            _tempcolour = _thissoil.COLOUR;
+            _tempcolour = _thissoil.MATRIXCOLOUR;
             SetCalc();
     }
         void ClearItems()
         {
-            _thissoil.COLOUR = "";
+            _thissoil.MATRIXCOLOUR = "";
             _ = _navigation.PopAsync();
        
         }
@@ -76,13 +75,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                return _thissoil.COLOUR;
+                return _thissoil.MATRIXCOLOUR;
             }
 
             set
             {
-                _thissoil.COLOUR  = value;
-                NotifyPropertyChanged("COLOUR");
+                _thissoil.MATRIXCOLOUR  = value;
+                NotifyPropertyChanged("MATRIXCOLOUR");
             }
         }
         public string MASTER

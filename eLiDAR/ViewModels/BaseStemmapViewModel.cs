@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
@@ -75,38 +75,38 @@ namespace eLiDAR.ViewModels
 
         public double CROWN_AXIS_LONG
         {
-            get => _stemmap.CROWN_AXIS_LONG;
+            get => _stemmap.CROWNWIDTH1;
             set
             {
-                _stemmap.CROWN_AXIS_LONG  = value;
+                _stemmap.CROWNWIDTH1 = value;
                 NotifyPropertyChanged("CROWN_AXIS_LONG");
             }
         }
         public double CROWN_AXIS_SHORT
         {
-            get => _stemmap.CROWN_AXIS_SHORT;
+            get => _stemmap.CROWNWIDTH2;
             set
             {
-                _stemmap.CROWN_AXIS_SHORT = value;
+                _stemmap.CROWNWIDTH2 = value;
                 NotifyPropertyChanged("CROWN_AXIS_SHORT");
             }
         }
         public int OFFET_AZIMUTH
         {
-            get => _stemmap.OFFSET_AZIMUTH ;
+            get => _stemmap.CROWNOFFSETAZIMUTH ;
             set
             {
-                _stemmap.OFFSET_AZIMUTH = value;
+                _stemmap.CROWNOFFSETAZIMUTH = value;
                 NotifyPropertyChanged("OFFSET_AZIMUTH");
             }
         }
 
         public double OFFSET_DISTANCE
         {
-            get => _stemmap.OFFSET_DISTANCE;
+            get => _stemmap.CROWNOFFSETDISTANCE;
             set
             {
-                _stemmap.OFFSET_DISTANCE = value;
+                _stemmap.CROWNOFFSETDISTANCE = value;
                 NotifyPropertyChanged("OFFSET_DISTANCE");
             }
         }

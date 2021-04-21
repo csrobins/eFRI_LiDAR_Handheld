@@ -1,7 +1,6 @@
 ﻿
 namespace eLiDAR
 {
-
     static class FabIconFont
     {
         public static string JPPostalMark = "\u3012";

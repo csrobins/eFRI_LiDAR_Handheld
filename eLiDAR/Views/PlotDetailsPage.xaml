@@ -13,19 +13,15 @@
         <StackLayout Padding="20" Spacing="12">
             <local:PlotView />
             <Button
-                Margin="0,30,0,0"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
+                Style="{StaticResource FormButtonStyle }"
                 Command="{Binding UpdatePlotCommand}"
                 Text="Update"
-                TextColor="White" />
+                />
             <Button
-                Margin="0,30,0,0"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
+                Style="{StaticResource FormButtonStyle }"
                 Command="{Binding DeletePlotCommand}"
                 Text="Delete"
-                TextColor="White" />
+                 />
         </StackLayout>
     </ScrollView>
 </ContentPage>

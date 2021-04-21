@@ -11,21 +11,10 @@
     Shell.TitleColor="{StaticResource cerulean}">
     <StackLayout Padding="20" Spacing="12">
         <local:ProjectView />
-        <Button
-            Margin="0,30,0,0"
-            BackgroundColor="{StaticResource cerulean}"
-            BorderRadius="0"
-            Command="{Binding UpdateProjectCommand}"
-            FontAttributes="Bold"
-            Text="Update"
-            TextColor="White" />
-        <Button
-            Margin="0,30,0,0"
-            BackgroundColor="{StaticResource cerulean}"
-            BorderRadius="0"
+         <Button
+            Style="{StaticResource FormButtonStyle }"
             Command="{Binding DeleteProjectCommand}"
-            FontAttributes="Bold"
             Text="Delete"
-            TextColor="White" />
+          />
     </StackLayout>
 </ContentPage>

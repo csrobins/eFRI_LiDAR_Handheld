@@ -18,13 +18,7 @@ namespace eLiDAR.Views {
             MyListView.ItemsSource = _viewmodel.PlotListFull;
         }
         private PlotListViewModel _viewmodel;
-        public PlotList() {
-            InitializeComponent();
-            _viewmodel = new PlotListViewModel(Navigation);
-            this.BindingContext = _viewmodel;
-            _viewmodel.FetchPlots(); 
-        }
-
+    
         public PlotList(string projectID)
         {
             InitializeComponent();
@@ -40,7 +34,7 @@ namespace eLiDAR.Views {
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
                 MyListView.ItemsSource = _viewmodel.PlotListFull;
             else
-                MyListView.ItemsSource = _viewmodel.PlotListFull.Where(i => i.PLOTNUM.Contains(e.NewTextValue));
+                MyListView.ItemsSource = _viewmodel.PlotListFull.Where(i => i.VSNPLOTNAME.Contains(e.NewTextValue));
 
             MyListView.EndRefresh();
         }

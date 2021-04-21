@@ -6,7 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:local="clr-namespace:eLiDAR"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pages="clr-namespace:eLiDAR;assembly=eLiDAR"
+    xmlns:pages="clr-namespace:eLiDAR;assembly=eVSN"
     FlyoutBehavior="Disabled"
     mc:Ignorable="d">
     <!--<ShellItem>
@@ -25,7 +25,7 @@
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:Views.Main}" />
         </Tab>
-        <Tab Title="Projects">
+        <Tab Title="Data">
             <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
             <Tab.Icon>
                 <FontImageSource

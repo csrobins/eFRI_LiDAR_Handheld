@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using eLiDAR.Views;
@@ -120,13 +119,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedPorePattern = PickerService.GetItem(ListPorePattern, _soil.PORE_PATTERN);
+                _selectedPorePattern = PickerService.GetItem(ListPorePattern, _soil.POREPATTERNCODE);
                 return _selectedPorePattern;
             }
             set
             {
                 SetProperty(ref _selectedPorePattern, value);
-                _soil.PORE_PATTERN  = _selectedPorePattern.ID;
+                _soil.POREPATTERNCODE  = _selectedPorePattern.ID;
             }
         }
         void FetchDetails(string fk){

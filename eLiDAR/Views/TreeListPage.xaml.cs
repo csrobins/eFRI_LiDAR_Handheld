@@ -18,12 +18,6 @@ namespace eLiDAR.Views {
         }
         private TreeListViewModel _viewmodel;
 
-        public TreeListPage() {
-            InitializeComponent();
-            //this.BindingContext = new TreeListViewModel(Navigation);
-            _viewmodel = new TreeListViewModel(Navigation);
-            this.BindingContext = _viewmodel;
-        }
 
         public TreeListPage(string plotID)
         {
@@ -40,7 +34,7 @@ namespace eLiDAR.Views {
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
                 MyListView.ItemsSource = _viewmodel.TreeStemListFull;
             else
-                MyListView.ItemsSource = _viewmodel.TreeStemListFull.Where(i => i.TREENUM.Equals(Int32.Parse( e.NewTextValue)));
+                MyListView.ItemsSource = _viewmodel.TreeStemListFull.Where(i => i.TREENUMBER.Equals(Int32.Parse( e.NewTextValue)));
 
             MyListView.EndRefresh();
         }

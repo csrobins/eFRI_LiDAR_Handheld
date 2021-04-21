@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using eLiDAR.Views;
 
 using Xamarin.Forms;
@@ -29,21 +29,6 @@ namespace eLiDAR.ViewModels {
 
         //   public bool IsPlotTypeB { get; private set; }
 
-        public PlotListViewModel(INavigation navigation) {
-            _navigation = navigation;
-            _plotRepository = new PlotRepository();
-            _selectedprojectid = "";
-            AddCommand = new Command(async () => await ShowAdd()); 
-            DeleteAllCommand = new Command(async () => await DeleteAll());
-            ShowFilteredCommand = new Command<PLOT>(async (x) => await ShowTrees(x));
-            ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
-            ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
-            ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
-            ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
-            ShowDWDCommand = new Command<PLOT>(async (x) => await ShowDWD(x));
-
-            FetchPlots();
-        }
         public PlotListViewModel(INavigation navigation,string selectedprojectid )
         {
             _navigation = navigation;
@@ -61,7 +46,6 @@ namespace eLiDAR.ViewModels {
           //  SearchCommand = new Command<string>(async (text) => await Search(text));
             FetchPlots();
         }
-
  
         public void FetchPlots(){
             if (_selectedprojectid == "")
@@ -73,10 +57,7 @@ namespace eLiDAR.ViewModels {
 
         }
        
-     
-        async Task ShowAdd() {
-            await _navigation.PushAsync(new AddPlot ());
-        }
+    
         async Task ShowAdd(string fk)
         {
             await _navigation.PushAsync(new AddPlot(fk));
@@ -87,7 +68,7 @@ namespace eLiDAR.ViewModels {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Plot List", "Delete All Plot Details?", "OK", "Cancel");
             if (isUserAccept){
                 _plotRepository.DeleteAllPlots();
-                await _navigation.PushAsync(new AddPlot());
+                await _navigation.PopAsync(true);
             }
         }
 

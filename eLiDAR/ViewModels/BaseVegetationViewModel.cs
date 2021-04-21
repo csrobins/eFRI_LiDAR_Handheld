@@ -5,9 +5,8 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
-using Xamarin.Forms;
 using eLiDAR.Services;
+using Xamarin.Forms;
 using System.Linq;
 
 namespace eLiDAR.ViewModels
@@ -58,10 +57,10 @@ namespace eLiDAR.ViewModels
         }
         public string SPECIES
         {
-            get => _vegetation.SPECIES;
+            get => _vegetation.VSNSPECIESCODE;
             set
             {
-                _vegetation.SPECIES = value;
+                _vegetation.VSNSPECIESCODE = value;
                NotifyPropertyChanged("SPECIES");
                 SetScientific();
             }

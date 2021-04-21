@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using eLiDAR.Views;
 
 using Xamarin.Forms;
@@ -47,7 +47,7 @@ namespace eLiDAR.ViewModels {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Small Tree List", "Delete All Small Tree Details?", "OK", "Cancel");
             if (isUserAccept){
                 _smallTreeRepository.DeleteAllSmallTree();
-                await _navigation.PushAsync(new AddPlot());
+                await _navigation.PopAsync();
             }
         }
 

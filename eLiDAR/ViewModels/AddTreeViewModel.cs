@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using eLiDAR.Views;
@@ -19,6 +18,8 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand ViewAllCommand { get; private set; }
         public ICommand CommentsCommand { get; private set; }
+      
+
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListVigour { get; set; }
         public List<PickerItems> ListCrownDamage { get; set; }
@@ -30,25 +31,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItems> ListDecayClass { get; set; }
         public List<PickerItems> ListCrownPosition { get; set; }
 
-        public AddTreeViewModel(INavigation navigation){
-            _navigation = navigation;
-            //_treeValidator = new TreeValidator();
-            _tree = new TREE();
-            _treeRepository = new TreeRepository();
-            AddCommand = new Command(async () => await AddTree("")); 
-            ViewAllCommand = new Command(async () => await ShowList());
-            ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
-            ListVigour = PickerService.VigourItems().ToList();
-            ListCrownDamage = PickerService.CrownDamageItems().ToList();
-            ListDefoliatingInsect = PickerService.DefoliatingInsectItems().ToList();
-            ListFoliarDisease = PickerService.FoliarDiseaseItems().ToList();
-            ListBarkRetention = PickerService.BarkRetentionItems().ToList();
-            ListWoodCondition = PickerService.WoodConditionItems().ToList();
-            ListMortalityCause = PickerService.MortalityCauseItems().ToList();
-            ListDecayClass = PickerService.DecayClassItems().ToList();
-
-    }
-    public AddTreeViewModel(INavigation navigation, string fk)
+        public AddTreeViewModel(INavigation navigation, string fk)
         {
             _navigation = navigation;
             //_treeValidator = new TreeValidator();
@@ -68,12 +51,21 @@ namespace eLiDAR.ViewModels {
             ListDecayClass = PickerService.DecayClassItems().ToList();
             ListCrownPosition = PickerService.CrownPositionItems().ToList();
             CommentsCommand = new Command(async () => await ShowComments());
+           
+
+            // DoDefaults
+            _tree.HEIGHTTODBH = 1.3F;
+            _tree.DBHIN  = "Y";
+            _tree.CROWNIN = "Y";
+
         }
         async Task ShowComments()
         {
             // launch the form - filtered to a specific tree
             await _navigation.PushAsync(new TreeComments(_tree));
         }
+       
+
         // These are for the picker item sources that present a an item different than the code
         private PickerItems _selectedCrownPosition = new PickerItems { ID = 0, NAME = "" };
         public PickerItems CrownPosition
@@ -93,12 +85,12 @@ namespace eLiDAR.ViewModels {
         public PickerItems SelectedSpecies
         {
             get {
-                _selectedSpecies = PickerService.GetItem(ListSpecies, _tree.SPECIES);
+                _selectedSpecies = PickerService.GetItem(ListSpecies, _tree.SPECIESCODE);
                 return _selectedSpecies;
             }
             set {
                 SetProperty(ref _selectedSpecies, value);
-                _tree.SPECIES = (int)_selectedSpecies.ID;
+                _tree.SPECIESCODE = (int)_selectedSpecies.ID;
             }
         }
         // These are for the picker item sources that present a an item different than the code
@@ -107,13 +99,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedVigour = PickerService.GetItem(ListVigour, _tree.VIGOUR); ;
+                _selectedVigour = PickerService.GetItem(ListVigour, _tree.VIGOURCODE); ;
                 return _selectedVigour;
             }
             set
             {
                 SetProperty(ref _selectedVigour, value);
-                _tree.VIGOUR = (int)_selectedVigour.ID;
+                _tree.VIGOURCODE = (int)_selectedVigour.ID;
             }
         }
         private PickerItems _selectedCrownDamage = new PickerItems { ID = 0, NAME = "" };
@@ -121,13 +113,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedCrownDamage = PickerService.GetItem(ListCrownDamage, _tree.CROWN_DAMAGE);
+                _selectedCrownDamage = PickerService.GetItem(ListCrownDamage, _tree.CROWNDAMAGECODE);
                 return _selectedCrownDamage;
             }
             set
             {
                 SetProperty(ref _selectedCrownDamage, value);
-                _tree.CROWN_DAMAGE = (int)_selectedCrownDamage.ID;
+                _tree.CROWNDAMAGECODE = (int)_selectedCrownDamage.ID;
             }
         }
         private PickerItems _selectedDefoliatingInsect = new PickerItems { ID = 0, NAME = "" };
@@ -163,13 +155,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedBarkRetention = PickerService.GetItem(ListBarkRetention, _tree.BARK_RETENTION);
+                _selectedBarkRetention = PickerService.GetItem(ListBarkRetention, _tree.BARKRETENTIONCODE);
                 return _selectedBarkRetention;
             }
             set
             {
                 SetProperty(ref _selectedBarkRetention, value);
-                _tree.BARK_RETENTION = (int)_selectedBarkRetention.ID;
+                _tree.BARKRETENTIONCODE = (int)_selectedBarkRetention.ID;
             }
         }
         private PickerItems _selectedWoodCondition = new PickerItems { ID = 0, NAME = "" };
@@ -177,13 +169,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedWoodCondition = PickerService.GetItem(ListWoodCondition, _tree.WOOD_CONDITION);
+                _selectedWoodCondition = PickerService.GetItem(ListWoodCondition, _tree.WOODCONDITIONCODE);
                 return _selectedWoodCondition;
             }
             set
             {
                 SetProperty(ref _selectedWoodCondition, value);
-                _tree.WOOD_CONDITION = (int)_selectedWoodCondition.ID;
+                _tree.WOODCONDITIONCODE = (int)_selectedWoodCondition.ID;
             }
         }
         private PickerItems _selectedMortalityCause = new PickerItems { ID = 0, NAME = "" };
@@ -191,13 +183,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedMortalityCause = PickerService.GetItem(ListMortalityCause, _tree.MORT_CAUSE);
+                _selectedMortalityCause = PickerService.GetItem(ListMortalityCause, _tree.MORTALITYCAUSECODE);
                 return _selectedMortalityCause;
             }
             set
             {
                 SetProperty(ref _selectedMortalityCause, value);
-                _tree.MORT_CAUSE = (int)_selectedMortalityCause.ID;
+                _tree.MORTALITYCAUSECODE = (int)_selectedMortalityCause.ID;
             }
         }
 
@@ -206,13 +198,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedDecayClass = PickerService.GetItem(ListDecayClass, _tree.DECAY_CLASS);
+                _selectedDecayClass = PickerService.GetItem(ListDecayClass, _tree.DECAYCLASS);
                 return _selectedDecayClass;
             }
             set
             {
                 SetProperty(ref _selectedDecayClass, value);
-                _tree.DECAY_CLASS  = (int)_selectedDecayClass.ID;
+                _tree.DECAYCLASS  = (int)_selectedDecayClass.ID;
             }
         }
 

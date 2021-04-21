@@ -23,17 +23,17 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
                     Text="Tree Attributes" />
-                <Label
+                <!--     <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Section Number" />
-                <Entry
+              <Entry
                     x:Name="txtSection"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Section number"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding SECTION}" />
+                    Text="{Binding SECTION}" /> -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -94,8 +94,6 @@
                         <x:String>DV</x:String>
                         <x:String>X</x:String>
                         <x:String>C</x:String>
-                        <x:String>M</x:String>
-                        <x:String>E</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
@@ -173,7 +171,7 @@
                     x:Name="txtBarkRetention"
                     Title="Bark Retention"
                     HorizontalOptions="FillAndExpand"
-                    IsEnabled="{Binding IsNotLiveTree}"
+                    IsEnabled="{Binding IsLiveTree}"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListBarkRetention, Mode=TwoWay}"
                     SelectedItem="{Binding SelectedBarkRetention}"
@@ -187,7 +185,7 @@
                     x:Name="txtWoodCondition"
                     Title="Wood Condition"
                     HorizontalOptions="FillAndExpand"
-                    IsEnabled="{Binding IsNotLiveTree}"
+                    IsEnabled="{Binding IsLiveTree}"
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListWoodCondition, Mode=TwoWay}"
                     SelectedItem="{Binding SelectedWoodCondition}"
@@ -214,14 +212,14 @@
                     <Picker.Items>
                         <x:String>E</x:String>
                         <x:String>D</x:String>
-                        <x:String>CD</x:String>
+                        <x:String>C</x:String>
                         <x:String>I</x:String>
                         <x:String>S</x:String>
                         <x:String>U</x:String>
                         <x:String>A</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label
+            <!--    <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Crown Position" />
@@ -233,7 +231,7 @@
                     ItemsSource="{Binding ListCrownPosition, Mode=TwoWay}"
                     SelectedItem="{Binding SelectedCrownPosition}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
+                    TitleColor="{StaticResource AccentColor}" /> -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -247,7 +245,7 @@
                     SelectedItem="{Binding SelectedCrownDamage}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
-                <Label
+         <!--       <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Defoliating Insect" />
@@ -259,8 +257,8 @@
                     ItemsSource="{Binding ListDefoliatingInsect, Mode=TwoWay}"
                     SelectedItem="{Binding SelectedDefoliatingInsect}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
-                <Label
+                    TitleColor="{StaticResource AccentColor}" /> -->
+           <!--     <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Foliar Disease" />
@@ -272,7 +270,7 @@
                     ItemsSource="{Binding ListFoliarDisease, Mode=TwoWay}"
                     SelectedItem="{Binding SelectedFoliarDisease}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
+                    TitleColor="{StaticResource AccentColor}" /> -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -292,47 +290,7 @@
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Ht and Age Attributes (All Trees)" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Ht (m)" />
-                <Entry
-                    x:Name="txtHt"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Numeric"
-                    Placeholder="Ht (m)"
-                    Style="{DynamicResource TextSubhead}"
-                    Text="{Binding HT}" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Length (m)" />
-                <Entry
-                    x:Name="txtLength"
-                    HorizontalOptions="FillAndExpand"
-                    IsEnabled="{Binding IsNotLiveTree}"
-                    Keyboard="Numeric"
-                    Placeholder="Length (m)"
-                    Style="{DynamicResource TextSubhead}"
-                    Text="{Binding LENGTH}" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Age" />
-                <Entry
-                    x:Name="txtAge"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Numeric"
-                    Placeholder="Age (yrs)"
-                    Style="{DynamicResource TextSubhead}"
-                    Text="{Binding AGE}" />
-            </StackLayout>
-
-            <StackLayout Grid.Row="0" Grid.Column="2">
+            
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
@@ -373,20 +331,118 @@
                     x:Name="txtBrokenTop"
                     Title="Broken Top"
                     HorizontalOptions="FillAndExpand"
-                    IsEnabled="{Binding IsNotLiveTree}"
+                    IsEnabled="{Binding IsDecayClass1to3}"
                     SelectedItem="{Binding BROKEN_TOP, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
-                        <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
+            </StackLayout>
+
+            <StackLayout Grid.Row="0" Grid.Column="2">
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Height Attributes (All Trees)" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Direct Measurements" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Total Height (m)" />
+                <Entry
+                    x:Name="txtHt"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Ht (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding HT}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Height to Dead Tip (m)" />
+                <Entry
+                    x:Name="txtHttotip"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    IsEnabled= "{Binding IsLiveTree}"
+                    Placeholder="Ht (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding HEIGHTTODEADTIP}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Height to Live Crown (m)" />
+                <Entry
+                    x:Name="txtHttoCrown"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    IsEnabled= "{Binding IsLiveTree}"
+                    Placeholder="Ht to Live Crown (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DIRECTHEIGHTTOCONTLIVECROWN}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Ocular Measurements" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Total Height (m)" />
+                <Entry
+                    x:Name="txtOCUALRTOTALHEIGHT"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Ht (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding OCUALRTOTALHEIGHT}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Height to Live Crown (m)" />
+                <Entry
+                    x:Name="txtHttoOCULARHEIGHTTOCONTLIVECROWN"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    IsEnabled= "{Binding IsLiveTree}"
+                    Placeholder="Ht to Live Crown (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding OCULARHEIGHTTOCONTLIVECROWN}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Leaning Trees" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Offset Distance (m)" />
+                <Entry
+                    x:Name="txtDIRECTOFFSETDISTANCE"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Offset Distance (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DIRECTOFFSETDISTANCE}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Height to Live Crown (m)" />
+                <Entry
+                    x:Name="txtHtDEGREEOFLEAN"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Degree of Lean"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DEGREEOFLEAN}"/>
+
                 <Button
-                    BackgroundColor="{StaticResource cerulean}"
+                    Style="{StaticResource FormButtonStyle }"
                     Command="{Binding CommentsCommand}"
-                    Text="Comments"
-                    TextColor="White" />
+                    Text="Comments" />
             </StackLayout>
 
         </Grid>

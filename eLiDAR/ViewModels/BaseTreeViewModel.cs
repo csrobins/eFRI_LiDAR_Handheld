@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
@@ -47,6 +47,20 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("IsNotLiveTree");
             }
         }
+        private bool _isdecayclass1to3;
+        public bool IsDecayClass1to3
+        {
+            get
+            {
+                return _isdecayclass1to3;
+            }
+            set
+            {
+                _isdecayclass1to3 = value;
+                NotifyPropertyChanged("_isdecayclass1to3");
+            }
+        }
+       
         private bool _isnotlivetree;
         public bool IsNotLiveTree
         {
@@ -82,10 +96,10 @@ namespace eLiDAR.ViewModels
 
         public int TREENUM
         {
-            get => _tree.TREENUM;
+            get => _tree.TREENUMBER;
             set
             {
-                _tree.TREENUM = (int)value;
+                _tree.TREENUMBER = (int)value;
                 NotifyPropertyChanged("TREENUM");
             }
         }
@@ -110,10 +124,10 @@ namespace eLiDAR.ViewModels
 
         public int SPECIES
         {
-            get => _tree.SPECIES;
+            get => _tree.SPECIESCODE;
             set
             {
-                _tree.SPECIES = value;
+                _tree.SPECIESCODE = value;
                 NotifyPropertyChanged("SPECIES");
             }
         }
@@ -130,20 +144,20 @@ namespace eLiDAR.ViewModels
 
         public string ORIGIN
         {
-            get => _tree.ORIGIN;
+            get => _tree.TREEORIGINCODE;
             set
             {
-                _tree.ORIGIN = value;
+                _tree.TREEORIGINCODE = value;
                 NotifyPropertyChanged("ORIGIN");
             }
         }
 
         public string STATUS
         {
-            get => _tree.STATUS;
+            get => _tree.TREESTATUSCODE;
             set
             {
-                _tree.STATUS = value;
+                _tree.TREESTATUSCODE = value;
                 if (STATUS == "L" || STATUS == "V" || STATUS == "M" || STATUS == "E")
                 {
                     IsLiveTree = true;
@@ -155,10 +169,10 @@ namespace eLiDAR.ViewModels
 
         public int VIGOUR
         {
-            get => _tree.VIGOUR;
+            get => _tree.VIGOURCODE;
             set
             {
-                _tree.VIGOUR = value;
+                _tree.VIGOURCODE = value;
                 NotifyPropertyChanged("VIGOUR");
             }
         }
@@ -173,10 +187,10 @@ namespace eLiDAR.ViewModels
         }
         public float HT_TO_DBH
         {
-            get => _tree.HT_TO_DBH;
+            get => _tree.HEIGHTTODBH;
             set
             {
-                _tree.HT_TO_DBH = value;
+                _tree.HEIGHTTODBH = value;
                 NotifyPropertyChanged("HT_TO_DBH");
             }
         }
@@ -193,30 +207,138 @@ namespace eLiDAR.ViewModels
 
         public float HT
         {
-            get => _tree.HT;
+            get => _tree.DIRECTTOTALHEIGHT;
             set
             {
-                _tree.HT = value;
+                _tree.DIRECTTOTALHEIGHT = value;
                 NotifyPropertyChanged("HT");
+            }
+        }
+        public float OCUALRTOTALHEIGHT
+        {
+            get => _tree.OCUALRTOTALHEIGHT;
+            set
+            {
+                _tree.OCUALRTOTALHEIGHT = value;
+                NotifyPropertyChanged("OCUALRTOTALHEIGHT");
+            }
+        }
+        public float HEIGHTTODEADTIP
+        {
+            get => _tree.HEIGHTTODEADTIP;
+            set
+            {
+                _tree.HEIGHTTODEADTIP = value;
+                NotifyPropertyChanged("HEIGHTTODEADTIP");
+            }
+        }
+        public float DIRECTHEIGHTTOCONTLIVECROWN
+        {
+            get => _tree.DIRECTHEIGHTTOCONTLIVECROWN;
+            set
+            {
+                _tree.DIRECTHEIGHTTOCONTLIVECROWN = value;
+                NotifyPropertyChanged("DIRECTHEIGHTTOCONTLIVECROWN");
+            }
+        }
+        public float OCULARHEIGHTTOCONTLIVECROWN
+        {
+            get => _tree.OCULARHEIGHTTOCONTLIVECROWN;
+            set
+            {
+                _tree.OCULARHEIGHTTOCONTLIVECROWN = value;
+                NotifyPropertyChanged("OCULARHEIGHTTOCONTLIVECROWN");
+            }
+        }
+        public float DIRECTOFFSETDISTANCE
+        {
+            get => _tree.DIRECTOFFSETDISTANCE;
+            set
+            {
+                _tree.DIRECTOFFSETDISTANCE = value;
+                NotifyPropertyChanged("DIRECTOFFSETDISTANCE");
+            }
+        }
+        public int DEGREEOFLEAN
+        {
+            get => _tree.DEGREEOFLEAN;
+            set
+            {
+                _tree.DEGREEOFLEAN = value;
+                NotifyPropertyChanged("DEGREEOFLEAN");
+            }
+        }
+        public float HEIGHTTOCORE
+        {
+            get => _tree.HEIGHTTOCORE;
+            set
+            {
+                _tree.HEIGHTTOCORE = value;
+                NotifyPropertyChanged("HEIGHTTOCORE");
+            }
+        }
+        public string CORESTATUSCODE
+        {
+            get => _tree.CORESTATUSCODE;
+            set
+            {
+                _tree.CORESTATUSCODE = value;
+                NotifyPropertyChanged("CORESTATUSCODE");
+            }
+        }
+        public float SOUNDWOODLENGTH
+        {
+            get => _tree.SOUNDWOODLENGTH;
+            set
+            {
+                _tree.SOUNDWOODLENGTH = value;
+                NotifyPropertyChanged("SOUNDWOODLENGTH");
+            }
+        }
+        public int FIELDAGE
+        {
+            get => _tree.FIELDAGE;
+            set
+            {
+                _tree.FIELDAGE = value;
+                NotifyPropertyChanged("FIELDAGE");
+            }
+        }
+        public int OFFICERINGCOUNT
+        {
+            get => _tree.OFFICERINGCOUNT;
+            set
+            {
+                _tree.OFFICERINGCOUNT = value;
+                NotifyPropertyChanged("OFFICERINGCOUNT");
+            }
+        }
+        public int MISSINGRINGS
+        {
+            get => _tree.MISSINGRINGS;
+            set
+            {
+                _tree.MISSINGRINGS = value;
+                NotifyPropertyChanged("MISSINGRINGS");
             }
         }
 
         public string DBH_IN
         {
-            get => _tree.DBH_IN;
+            get => _tree.DBHIN;
             set
             {
-                _tree.DBH_IN = value;
+                _tree.DBHIN = value;
                 NotifyPropertyChanged("DBH_IN");
             }
         }
 
         public string CROWN_IN
         {
-            get => _tree.CROWN_IN;
+            get => _tree.CROWNIN;
             set
             {
-                _tree.CROWN_IN = value;
+                _tree.CROWNIN = value;
                 NotifyPropertyChanged("CROWN_IN");
             }
         }
@@ -233,20 +355,20 @@ namespace eLiDAR.ViewModels
 
         public string CROWN_CLASS
         {
-            get => _tree.CROWN_CLASS;
+            get => _tree.CROWNCLASSCODE;
             set
             {
-                _tree.CROWN_CLASS = value;
+                _tree.CROWNCLASSCODE = value;
                 NotifyPropertyChanged("CROWN_CLASS");
             }
         }
 
         public int CROWN_DAMAGE
         {
-            get => _tree.CROWN_DAMAGE;
+            get => _tree.CROWNDAMAGECODE;
             set
             {
-                _tree.CROWN_DAMAGE = value;
+                _tree.CROWNDAMAGECODE = value;
                 NotifyPropertyChanged("CROWN_DAMAGE");
             }
         }
@@ -273,71 +395,62 @@ namespace eLiDAR.ViewModels
 
         public string STEM_QUALITY
         {
-            get => _tree.STEM_QUALITY;
+            get => _tree.STEMQUALITYCODE;
             set
             {
-                _tree.STEM_QUALITY = value;
+                _tree.STEMQUALITYCODE = value;
                 NotifyPropertyChanged("STEM_QUALITY");
             }
         }
 
         public int BARK_RETENTION
         {
-            get => _tree.BARK_RETENTION;
+            get => _tree.BARKRETENTIONCODE;
             set
             {
-                _tree.BARK_RETENTION = value;
+                _tree.BARKRETENTIONCODE = value;
                 NotifyPropertyChanged("BARK_RETENTION");
             }
         }
 
         public int WOOD_CONDITION
         {
-            get => _tree.WOOD_CONDITION;
+            get => _tree.WOODCONDITIONCODE;
             set
             {
-                _tree.WOOD_CONDITION = value;
+                _tree.WOODCONDITIONCODE = value;
                 NotifyPropertyChanged("WOOD_CONDITION");
             }
         }
 
         public int DECAY_CLASS
         {
-            get => _tree.DECAY_CLASS;
+            get => _tree.DECAYCLASS;
             set
             {
-                _tree.DECAY_CLASS = value;
+                _tree.DECAYCLASS = value;
                 NotifyPropertyChanged("DECAY_CLASS");
+                if (value < 4 && IsNotLiveTree ) {IsDecayClass1to3 = true;} else { IsDecayClass1to3 = false; }
             }
         }
 
         public int MORT_CAUSE
         {
-            get => _tree.MORT_CAUSE;
+            get => _tree.MORTALITYCAUSECODE;
             set
             {
-                _tree.MORT_CAUSE = value;
+                _tree.MORTALITYCAUSECODE = value;
                 NotifyPropertyChanged("MORT_CAUSE");
             }
         }
 
         public string BROKEN_TOP
         {
-            get => _tree.BROKEN_TOP;
+            get => _tree.BROKENTOP;
             set
             {
-                _tree.BROKEN_TOP = value;
+                _tree.BROKENTOP = value;
                 NotifyPropertyChanged("BROKEN_TOP");
-            }
-        }
-
-        public int AGE
-        {
-            get => _tree.AGE;
-            set
-            {
-                _tree.AGE = (int)value;
-                NotifyPropertyChanged("AGE");
             }
         }
 
@@ -361,25 +474,6 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public double CROWN_WIDTH1
-        {
-            get => _tree.CROWN_WIDTH1;
-            set
-            {
-                _tree.CROWN_WIDTH1 = value;
-                NotifyPropertyChanged("CROWN_WIDTH1");
-            }
-        }
-
-        public double CROWN_WIDTH2
-        {
-            get => _tree.CROWN_WIDTH2;
-            set
-            {
-                _tree.CROWN_WIDTH2 = value;
-                NotifyPropertyChanged("CROWN_WIDTH2");
-            }
-        }
         public string COMMENTS
         {
             get => _tree.COMMENTS;
@@ -389,8 +483,6 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("COMMENTS");
             }
         }
-
-
 
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;

@@ -41,76 +41,58 @@
                     x:Name="txtPlotType"
                     Title="Plot type"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding PLOT_TYPE}"
+                    SelectedItem="{Binding PLOT_TYPE, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>A</x:String>
-                        <x:String>AB</x:String>
-                        <x:String>AC</x:String>
-                        <x:String>ABC</x:String>
+                        <x:String>B</x:String>
+                        <x:String>C</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Measurement Tupe" />
+                    Text="Measurement Type" />
                 <Picker
                     x:Name="txtMeasurementType"
                     Title="Measurement Type"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding MEASUREMENT_TYPE}"
-                    Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}">
-                    <Picker.Items>
-                        <x:String>New</x:String>
-                        <x:String>Remeasure</x:String>
-                        <x:String>Internal Audit</x:String>
-                        <x:String>Ministry Audit</x:String>
-                    </Picker.Items>
-                </Picker>
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Forest District" />
-                <Picker
-                    x:Name="txtDistrict"
-                    Title="Forest District"
-                    HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding FOREST_DISTRICT}"
-                    Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}">
-                    <Picker.Items>
-                        <x:String>Nipigon</x:String>
-                        <x:String>Thunder Bay</x:String>
-                        <x:String>Dryden</x:String>
-                        <x:String>Kenora</x:String>
-                        <x:String>Red Lake</x:String>
-                        <x:String>Fort Frances</x:String>
-                        <x:String>Sioux Lookout</x:String>
-                        <x:String>Chapleau</x:String>
-                        <x:String>Cochrane</x:String>
-                        <x:String>Hearst</x:String>
-                        <x:String>Kirkland Lake</x:String>
-                        <x:String>North Bay</x:String>
-                        <x:String>Sudbury</x:String>
-                        <x:String>Timmins</x:String>
-                        <x:String>Wawa</x:String>
-                    </Picker.Items>
-                </Picker>
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Forest Management Unit" />
-                <Picker
-                    x:Name="txtFMU"
-                    Title="Forest Management Unit"
-                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListMeasurementType}"
+                    SelectedItem="{Binding SelectedMeasurementType, Mode=TwoWay }"
                     ItemDisplayBinding="{Binding NAME}"
-                    ItemsSource="{Binding ListFMU}"
-                    SelectedItem="{Binding SelectedFMU, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
+                    TitleColor="{StaticResource AccentColor}">
+                </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Non Standard Condition" />
+                <Picker
+                    x:Name="txtNonStandardType"
+                    Title="Non Standard Type"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListNonStandardType}"
+                    SelectedItem="{Binding SelectedNonStandardType, Mode=TwoWay }"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Growth Plot Number" />
+                <Picker
+                    x:Name="txtGrowthPlotNumber"
+                    Title="Growth Plot Number"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListGrowthPlot}"
+                    SelectedItem="{Binding SelectedGrowthPlot, Mode=TwoWay }"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                 
+                </Picker>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -125,32 +107,41 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Crew 1" />
-                <Entry
-                    x:Name="txtCrew1"
+                <Picker
+                    x:Name="txtcrew1"
+                    Title="Crew Member 1"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Crew 1"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedCrew1, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding FIELD_CREW1}" />
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Crew 2" />
-                <Entry
-                    x:Name="txtCrew2"
+                <Picker
+                    x:Name="txtcrew2"
+                    Title="Crew Member 2"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Crew 2"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedCrew2, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding FIELD_CREW2}" />
+                    TitleColor="{StaticResource AccentColor}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Crew 3" />
-                <Entry
-                    x:Name="txtCrew3"
+                <Picker
+                    x:Name="txtcrew3"
+                    Title="Crew Member 3"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Crew 3"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedCrew3, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding FIELD_CREW3}" />
+                    TitleColor="{StaticResource AccentColor}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
@@ -165,7 +156,7 @@
                 <Entry
                     x:Name="txtDeclination"
                     HorizontalOptions="FillAndExpand"
-                    IsReadOnly="True"
+                    IsReadOnly="False" 
                     Placeholder="Declination"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DECLINATION}" />
@@ -176,7 +167,7 @@
                 <Entry
                     x:Name="txtUTM"
                     HorizontalOptions="FillAndExpand"
-                    IsReadOnly="True"
+                    IsReadOnly="False" 
                     Placeholder="UTM Zone"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_ZONE}" />
@@ -187,7 +178,7 @@
                 <Entry
                     x:Name="txtEasting"
                     HorizontalOptions="FillAndExpand"
-                    IsReadOnly="True"
+                    IsReadOnly="False" 
                     Placeholder="Easting"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_EASTING}" />
@@ -198,7 +189,7 @@
                 <Entry
                     x:Name="txtNorthing"
                     HorizontalOptions="FillAndExpand"
-                    IsReadOnly="True"
+                    IsReadOnly="False" 
                     Placeholder="Northing"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_NORTHING}" />
@@ -209,10 +200,22 @@
                 <Entry
                     x:Name="txtDatum"
                     HorizontalOptions="FillAndExpand"
-                    IsReadOnly="True"
+                    IsReadOnly="False" 
                     Placeholder="Datum"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DATUM}" />
+                <Button
+                    Style="{StaticResource FormButtonStyle } "
+                    Command="{Binding StandInfoCommand}"
+                    Text="Stand Info"/>
+                <Button
+                    Style="{StaticResource FormButtonStyle } "
+                    Command="{Binding ForestHealthCommand}"
+                    Text="Forest Health"/>
+                <Button
+                    Style="{StaticResource FormButtonStyle } "
+                    Command="{Binding PlotCrewCommand}"
+                    Text="Plot Crew"/>
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">
@@ -284,10 +287,10 @@
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding CROWN_CLOSURE}" />
                 <Button
-                    BackgroundColor="{StaticResource cerulean}"
+                    Style="{StaticResource FormButtonStyle } "
                     Command="{Binding CommentsCommand}"
                     Text="Comments"
-                    TextColor="White" />
+                    />
             </StackLayout>
         </Grid>
 

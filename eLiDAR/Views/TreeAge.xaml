@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.TreeAge"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+    <ContentPage.Content>
+        <StackLayout>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Tree Age Attributes" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Ht to Core (m)" />
+                <Entry
+                    x:Name="txtHtToCore"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Ht to Core (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding HEIGHTTOCORE}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Core Status" />
+                <Picker
+                    x:Name="txtCoreStatus"
+                    Title="Core Status"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListCoreStatus, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedCoreStatus}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Sound Wood Length (cm)" />
+                <Entry
+                    x:Name="txtSoundWood"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Sound Woood Length (cm)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding SOUNDWOODLENGTH}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Field Age (yrs)" />
+                <Entry
+                    x:Name="txtFieldAge"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Field Age (yrs)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding FIELDAGE}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Office Age" />
+                <Entry
+                    x:Name="txtOfficeAge"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Office Age (yrs)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding OFFICERINGCOUNT}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Missing Rings" />
+                <Entry
+                    x:Name="txtMissingRings"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Missing Rings"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding MISSINGRINGS}" />
+
+            <Button
+        Style="{StaticResource FormButtonStyle } "        
+                Command="{Binding UpdateTreeCommand}"
+                Text="Update"
+              />
+
+        </StackLayout>
+        
+ 
+  
+
+            </ContentPage.Content>
+</ContentPage>

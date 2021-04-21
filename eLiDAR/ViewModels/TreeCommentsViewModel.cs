@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Views;
 using FluentValidation.Results;
@@ -26,7 +25,7 @@ namespace eLiDAR.ViewModels {
         }
         public string CommentsTitle
         {
-            get => "Comments for tree " + _tree.TREENUM;
+            get => "Comments for tree " + _tree.TREENUMBER;
             set
             {
             }

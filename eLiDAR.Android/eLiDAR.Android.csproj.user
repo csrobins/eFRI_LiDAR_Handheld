@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <SelectedDevice>tablet_m-dpi_10_1in_q_10_0_-_api_29_1</SelectedDevice>
-    <DefaultDevice>tablet_m-dpi_10_1in_q_10_0_-_api_29_1</DefaultDevice>
-    <AndroidDesignerPreferredTheme>Theme.AppCompat.Light.NoActionBar</AndroidDesignerPreferredTheme>
-    <ActiveDebugProfile>tablet_m-dpi_10_1in_q_10_0_-_api_29_1</ActiveDebugProfile>
-  </PropertyGroup>
-</Project>

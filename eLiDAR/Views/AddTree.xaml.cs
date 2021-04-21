@@ -6,10 +6,7 @@ using Xamarin.Forms.Internals;
 namespace eLiDAR.Views
 {
     public partial class AddTree : ContentPage {
-        public AddTree() {
-            InitializeComponent();
-            BindingContext = new AddTreeViewModel(Navigation);
-        }
+      
         public AddTree(string fk)
         {
             try

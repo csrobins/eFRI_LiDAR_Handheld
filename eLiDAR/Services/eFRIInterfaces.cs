@@ -4,9 +4,26 @@ using eLiDAR.Models;
 using eLiDAR.Helpers;
 using System.Threading.Tasks;
 
-namespace eLiDAR.Servcies
+namespace eLiDAR.Services
 {
-       public interface IProjectRepository
+
+    public interface IPersonRepository
+    {
+        List<PERSON> GetAllPersonData();
+        //Get Specific data
+        PERSON GetPersonData(string PERSONID);
+        // Delete all Data
+        void DeleteAllPersons();
+        // Delete Specific
+        void DeletePerson(PERSON _person);
+        // Insert new to DB 
+        void InsertPerson(PERSON person);
+        // Update Data
+        void UpdatePerson(PERSON person);
+        String GetProjectTitle(string projectid);
+        List<PERSON> GetFilteredData(string id);
+    }
+    public interface IProjectRepository
     {
         List<PROJECT> GetAllProjectData();
         //Get Specific data
@@ -39,6 +56,7 @@ namespace eLiDAR.Servcies
         String GetProjectTitle(string projectid);
         List<PROJECT> GetProjectList();
         String GetPlotType(string plotid);
+        List<PERSON> GetPersonList(string projectid);
 
     }
     public interface ITreeRepository
@@ -234,6 +252,60 @@ namespace eLiDAR.Servcies
             _databaseHelper.UpdateProject(project);
         }
     }
+    public class PersonRepository : IPersonRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public PersonRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeletePerson(PERSON _person)
+        {
+//            _databaseHelper.DeletePerson(ID);
+            _person.IsDeleted = "Y";
+            _databaseHelper.UpdatePerson(_person);
+        }
+        public void DeleteAllPersons()
+        {
+            _databaseHelper.DeleteAllPersons();
+        }
+
+        public List<PERSON> GetAllPersonData()
+        {
+            return _databaseHelper.GetAllPersonData();
+        }
+
+        public PERSON GetPersonData(string PERSONID)
+        {
+            return _databaseHelper.GetPersonData(PERSONID);
+        }
+
+        public void InsertPerson(PERSON person)
+        {
+            person.PERSONID = Guid.NewGuid().ToString();
+
+            _databaseHelper.InsertPerson(person);
+        }
+        public void UpdatePerson(PERSON person)
+        {
+            _databaseHelper.UpdatePerson(person);
+        }
+        public String GetProjectTitle(string projectid)
+        {
+            if (projectid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetProjectTitle(projectid);
+            }
+        }
+        public List<PERSON> GetFilteredData(string id)
+        {
+            return _databaseHelper.GetFilteredPersonData(id);
+        }
+    }
 
     public class PlotRepository : IPlotRepository
     {
@@ -267,7 +339,10 @@ namespace eLiDAR.Servcies
         {
             return _databaseHelper.GetFilteredPlotDataFull(id);
         }
-
+        public List<PERSON> GetPersonList(string id)
+        {
+            return _databaseHelper.GetFilteredPersonData(id);
+        }
         public PLOT GetPlotData(string PlotID)
         {
             return _databaseHelper.GetPlotData(PlotID);

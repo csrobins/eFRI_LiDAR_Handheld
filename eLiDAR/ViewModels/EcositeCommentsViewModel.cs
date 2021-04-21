@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
-using eLiDAR.Services;
 using eLiDAR.Views;
 using FluentValidation.Results;
 using Xamarin.Forms;
@@ -33,10 +31,10 @@ namespace eLiDAR.ViewModels {
         }
         public string COMMENTS
         {
-            get => _ecosite.COMMENTS;
+            get => _ecosite.SUBSTRATENOTE;
             set
             {
-                _ecosite.COMMENTS = value;
+                _ecosite.SUBSTRATENOTE = value;
                 NotifyPropertyChanged("COMMENTS");
             }
         }

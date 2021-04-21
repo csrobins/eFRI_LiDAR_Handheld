@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
@@ -56,10 +56,10 @@ namespace eLiDAR.ViewModels
 
         public int LINE
         {
-            get => _dwd.LINE;
+            get => _dwd.LINENUMBER;
             set
             {
-                _dwd.LINE = value;
+                _dwd.LINENUMBER = value;
                 NotifyPropertyChanged("LINE");
             }
         }
@@ -76,88 +76,88 @@ namespace eLiDAR.ViewModels
 
         public int SPECIES
         {
-            get => _dwd.SPECIES;
+            get => _dwd.SPECIESCODE;
             set
             {
-                _dwd.SPECIES = value;
+                _dwd.SPECIESCODE = value;
                 NotifyPropertyChanged("SPECIES");
             }
         }
         public double DIAM
         {
-            get => _dwd.DIAM;
+            get => _dwd.DIAMETER;
             set
             {
-                _dwd.DIAM = value;
+                _dwd.DIAMETER = value;
                 NotifyPropertyChanged("DIAM");
             }
         }
         public int DECOMP_CLASS
         {
-            get => _dwd.DECOMP_CLASS;
+            get => _dwd.DECOMPOSITIONCLASS;
             set
             {
-                _dwd.DECOMP_CLASS = value;
+                _dwd.DECOMPOSITIONCLASS = value;
                 NotifyPropertyChanged("DECOMP_CLASS");
             }
         }
 
         public string ORIGIN
         {
-            get => _dwd.ORIGIN;
+            get => _dwd.DOWNWOODYDEBRISORIGINCODE;
             set
             {
-                _dwd.ORIGIN = value;
+                _dwd.DOWNWOODYDEBRISORIGINCODE = value;
                 NotifyPropertyChanged("ORIGIN");
             }
         }
 
         public int TILT_ANGLE
         {
-            get => _dwd.TILT_ANGLE;
+            get => _dwd.TILTANGLE;
             set
             {
-                _dwd.TILT_ANGLE = value;
+                _dwd.TILTANGLE = value;
                 NotifyPropertyChanged("TILT_ANGLE");
             }
         }
 
         public double LENGTH
         {
-            get => _dwd.LENGTH;
+            get => _dwd.DOWNWOODYDEBRISLENGTH;
             set
             {
-                _dwd.LENGTH = value;
+                _dwd.DOWNWOODYDEBRISLENGTH = value;
                 NotifyPropertyChanged("LENGTH");
             }
         }
 
         public double SMALL_DIAM
         {
-            get => _dwd.SMALL_DIAM;
+            get => _dwd.SMALLDIAMETER;
             set
             {
-                _dwd.SMALL_DIAM = value;
+                _dwd.SMALLDIAMETER = value;
                 NotifyPropertyChanged("SMALL_DIAM");
             }
         }
 
         public double LARGE_DIAM
         {
-            get => _dwd.LARGE_DIAM;
+            get => _dwd.LARGEDIAMETER;
             set
             {
-                _dwd.LARGE_DIAM = value;
+                _dwd.LARGEDIAMETER = value;
                 NotifyPropertyChanged("LARGE_DIAM");
             }
         }
 
         public string GT_50_MOSS
         {
-            get => _dwd.GT_50_MOSS;
+            get => _dwd.MOSS;
             set
             {
-                _dwd.GT_50_MOSS = value;
+                _dwd.MOSS = value;
                 NotifyPropertyChanged("GT_50_MOSS");
             }
         }
@@ -192,37 +192,37 @@ namespace eLiDAR.ViewModels
         }
         public double ACCUM_LENGTH
         {
-            get => _dwd.ACCUM_LENGTH;
+            get => _dwd.ACCUMULATIONLENGTH;
             set
             {
-                _dwd.ACCUM_LENGTH = value;
+                _dwd.ACCUMULATIONLENGTH = value;
                 NotifyPropertyChanged("ACCUM_LENGTH");
             }
         }
         public double ACCUM_DEPTH
         {
-            get => _dwd.ACCUM_DEPTH;
+            get => _dwd.ACCUMULATIONDEPTH;
             set
             {
-                _dwd.ACCUM_DEPTH = value;
+                _dwd.ACCUMULATIONDEPTH = value;
                 NotifyPropertyChanged("ACCUM_DEPTH");
             }
         }
         public int PERCENT_CONIFER
         {
-            get => _dwd.PERCENT_CONIFER;
+            get => _dwd.PERCENTCONIFER;
             set
             {
-                _dwd.PERCENT_CONIFER = value;
+                _dwd.PERCENTCONIFER = value;
                 NotifyPropertyChanged("PERCENT_CONIFER");
             }
         }
         public int PERCENT_DECID
         {
-            get => _dwd.PERCENT_DECID;
+            get => _dwd.PERCENTHARDWOOD;
             set
             {
-                _dwd.PERCENT_DECID = value;
+                _dwd.PERCENTHARDWOOD = value;
                 NotifyPropertyChanged("PERCENT_DECID");
             }
         }

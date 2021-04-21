@@ -32,7 +32,7 @@
                         FontFamily="{StaticResource FontAwesome}"
                         FontSize="40"
                         HorizontalOptions="CenterAndExpand"
-                        Text="eLiDAR for Ontario FRI"
+                        Text="eVSN for Ontario FRI"
                         TextColor="White"
                         VerticalOptions="CenterAndExpand" />
                     <Label
@@ -43,7 +43,7 @@
                         HorizontalOptions="CenterAndExpand"
                         IsVisible="False"
                         Opacity="0.7"
-                        Text="Developed in 2020 by Craig Robinson and Sumac Geomatics"
+                        Text="Developed in 2020, 2021."
                         TextColor="Black" />
                 </StackLayout>
             </ScrollView>

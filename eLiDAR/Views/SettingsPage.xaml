@@ -36,6 +36,24 @@
                         HorizontalOptions="EndAndExpand"
                         IsToggled="{Binding IsBoreal}" />
                 </StackLayout>
+                <StackLayout Margin="10" Orientation="Horizontal">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    TextColor="{DynamicResource TextPrimaryColor}">
+                                    Notify on Save
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Switch
+                        x:Name="swcSave"
+                        HorizontalOptions="EndAndExpand"
+                        IsToggled="{Binding IsNotifySave}" />
+                </StackLayout>
 
                 <StackLayout Margin="10" Orientation="Horizontal">
                     <Label>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.PersonList"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+
+
+    <Grid Padding="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <SearchBar
+                x:Name="MainSearch"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                CancelButtonColor="{StaticResource cerulean}"
+                HorizontalTextAlignment="Start"
+                Placeholder="Search people..."
+                PlaceholderColor="{DynamicResource TextPrimaryColor}"
+                Style="{DynamicResource TextSubhead}"
+                TextChanged="SearchBar_OnTextChanged" />
+        </Grid>
+        <ListView
+            x:Name="MyListView"
+            Grid.Row="2"
+            BackgroundColor="{DynamicResource backgroundColor}"
+            HasUnevenRows="true"
+            ItemsSource="{Binding CrewListFull}"
+            SelectedItem="{Binding SelectedPersonItem, Mode=TwoWay}"
+            SeparatorColor="{DynamicResource AccentColor}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:Name="Item" Padding="10">
+                            <Grid.RowDefinitions>
+                                <!--<RowDefinition Height="Auto" />-->
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column=" 0" Orientation="Horizontal">
+                                <Label
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding LASTNAME}" />
+                                <Label
+                                    HorizontalOptions="Start"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding FIRSTNAME}" />
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Grid.Row="3"
+                Grid.Column="0" HorizontalOptions="End" VerticalOptions="End"  >
+            <Button x:Name="Button_Round"
+                    Text="+"
+                    Command="{Binding AddCommand}"
+                    Style ="{StaticResource RoundButtonStyle}"/>
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>

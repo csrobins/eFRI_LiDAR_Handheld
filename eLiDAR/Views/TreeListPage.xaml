@@ -30,17 +30,7 @@
                 PlaceholderColor="{DynamicResource TextPrimaryColor}"
                 Style="{DynamicResource TextSubhead}"
                 TextChanged="SearchBar_OnTextChanged" />
-            <Button
-                Grid.Row="1"
-                Grid.Column="1"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                BorderWidth="1"
-                Command="{Binding AddCommand}"
-                HeightRequest="50"
-                Text="New Tree"
-                TextColor="White"
-                WidthRequest="100" />
+           
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -75,7 +65,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding TREENUM}"
+                                        Text="{Binding TREENUMBER}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -88,7 +78,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding SPECIES}"
+                                        Text="{Binding SPECIESCODE}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -164,41 +154,43 @@
                                 JustifyContent="End"
                                 Wrap="Wrap">
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowAgesCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                    HorizontalOptions="End"
+                                  
+                                    Text="Ages"
+                                     />
+                                <Button
+                                    Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowFilteredCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
                                     Text="Stem Map"
-                                    TextColor="White"
-                                    WidthRequest="90" />
+                                     />
                                 <Button
-                                    BackgroundColor="{StaticResource cerulean}"
+                                    Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowDeformityCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HeightRequest=" 50"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
-                                    Text="Deformity"
-                                    TextColor="White"
-                                    WidthRequest="90" />
+                                    Text="Deformity"/>
                             </FlexLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <!--<Button
-            Grid.Row="2"
-            BackgroundColor="#5989B5"
-            BorderRadius="0"
-            Command="{Binding DeleteAllCommand}"
-            FontAttributes="Bold"
-            Text="Delete All Trees"
-            TextColor="White"
-            VerticalOptions="EndAndExpand" />-->
+        <StackLayout Grid.Row="3"
+                Grid.Column="0" HorizontalOptions="End" VerticalOptions="End"  >
+            <Button x:Name="Button_Round"
+                    Text="+"
+                    Command="{Binding AddCommand}"
+                    Style ="{StaticResource RoundButtonStyle}"/>
+        </StackLayout>
     </Grid>
 </ContentPage>

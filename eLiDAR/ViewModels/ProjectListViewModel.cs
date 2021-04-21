@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using eLiDAR.Views;
 
 using Xamarin.Forms;
@@ -17,7 +17,8 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteAllProjectsCommand { get; private set; }
         public ICommand ShowFilteredCommand { get; private set; }
-    
+        public ICommand ShowCrewCommand { get; private set; }
+
 
         public ProjectListViewModel(INavigation navigation) {
             _navigation = navigation;
@@ -26,6 +27,7 @@ namespace eLiDAR.ViewModels {
             AddCommand = new Command(async () => await ShowAddProject()); 
             DeleteAllProjectsCommand = new Command(async () => await DeleteAllProjects());
             ShowFilteredCommand = new Command<PROJECT>(async (x) =>  await ShowPlots(x));
+            ShowCrewCommand = new Command<PROJECT>(async (x) => await ShowCrew(x));
             FetchProjects();
         }
 
@@ -68,5 +70,12 @@ namespace eLiDAR.ViewModels {
            // await _navigation.PushAsync(new PlotDetailsPage("1"));
 
         }
+        async Task ShowCrew(PROJECT _project)
+        {
+            // launch the crew form - filtered to a specific projectid
+            await _navigation.PushAsync(new PersonList(_project.PROJECTID));
+   
+        }
+
     }
 }

@@ -19,17 +19,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button
-                Grid.Row="0"
-                Grid.Column="1"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                BorderWidth="1"
-                Command="{Binding AddCommand}"
-                FontAttributes="Bold"
-                HeightRequest="40"
-                Text="New Project"
-                TextColor="White" />
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -61,31 +50,38 @@
                                     Style="{DynamicResource TextSubhead}"
                                     Text="{Binding DESCRIPTION}" />
                             </StackLayout>
-                            <Button
-                                Grid.Column="1"
-                                BackgroundColor="{StaticResource cerulean}"
-                                BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
-                                Command="{Binding ShowFilteredCommand}"
-                                CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                HeightRequest=" 50"
-                                HorizontalOptions="End"
-                                Text="Plots"
-                                TextColor="White"
-                                WidthRequest=" 75" />
-
+                            <FlexLayout
+                                Grid.Column=" 1"
+                                AlignContent="Start"
+                                FlowDirection="LeftToRight"
+                                JustifyContent="End"
+                                Wrap="Wrap" >
+                                <Button
+                                    Style="{StaticResource RectangularButtonStyle}"
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowFilteredCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                    Text="Plots"
+                                    />
+                                <Button
+                                    Style="{StaticResource RectangularButtonStyle}"
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowCrewCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                    Text="Crew"
+                                    />
+                            </FlexLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            Grid.Row="2"
-            BackgroundColor="{StaticResource cerulean}"
-            BorderRadius="0"
-            Command="{Binding DeleteAllProjectsCommand}"
-            FontAttributes="Bold"
-            Text="Delete All Projects"
-            TextColor="White"
-            VerticalOptions="EndAndExpand" />
+        <StackLayout Grid.Row="2"
+                Grid.Column="0" HorizontalOptions="End" VerticalOptions="End"  >
+            <Button x:Name="Button_Round"
+                    Style="{StaticResource RoundButtonStyle}"
+                    Text="+"
+                    Command="{Binding AddCommand}"/>
+        </StackLayout>
     </Grid>
 </ContentPage>

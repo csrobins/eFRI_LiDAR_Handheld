@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using eLiDAR.Views;
@@ -18,23 +17,18 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand ViewAllCommand { get; private set; }
         public ICommand CommentsCommand { get; private set; }
+        public ICommand StandInfoCommand { get; private set; }
+        public ICommand ForestHealthCommand { get; private set; }
+        public ICommand PlotCrewCommand { get; private set; }
+
         public List<PickerItems> ListFMU { get; set; }
         public List<PickerItems> ListSpecies { get; set; }
-        public List<PickerItems> ListCanopyOrigin { get; set; }
-        public List<PickerItemsString> ListCanopyStructure {get; set; }
-        public List<PickerItemsString> ListMaturityClass { get; set; }
+       
         public List<PickerItems> ListNonStandardType { get; set; }
-
-        public AddPlotViewModel(INavigation navigation){
-            _navigation = navigation;
-            _plotValidator = new PlotValidator();
-            _plot = new PLOT();
-            _plotRepository = new PlotRepository();
-            AddCommand = new Command(async () => await AddPlot("")); 
-            ViewAllCommand = new Command(async () => await ShowList());
-            ListFMU = PickerService.ForestItems().OrderBy(c => c.NAME).ToList();
-        }
-
+        public List<PickerItemsString> ListMeasurementType { get; set; }
+        public List<PickerItemsString> ListNonStandardTypeCode { get; set; }
+        public List<PickerItemsString> ListPerson { get; set; }
+        public List<PickerItems> ListGrowthPlot { get; set; }
         public AddPlotViewModel(INavigation navigation, string fk)
         {
             _navigation = navigation;
@@ -42,15 +36,24 @@ namespace eLiDAR.ViewModels {
             _plot = new PLOT();
             _plotRepository = new PlotRepository();
             _selectedprojectid = fk;
+            _plot.VSNPLOTNAME = "VSN";
+            _plot.IsDeleted = "N";
+            _plot.DATUM = "NAD83";
+            _plot.PROJECTID = fk;
+            _plot.PLOTOVERVIEWDATE = System.DateTime.Now;
             AddCommand = new Command(async () => await AddPlot(_selectedprojectid));
             ViewAllCommand = new Command(async () => await ShowList());
             ListFMU = PickerService.ForestItems().OrderBy(c => c.NAME).ToList();
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
-            ListCanopyOrigin= PickerService.CanopyOriginItems().OrderBy(c => c.NAME).ToList();
-            ListCanopyStructure = PickerService.CanopyStructureItems().OrderBy(c => c.NAME).ToList();
-            ListMaturityClass = PickerService.MaturityClassItems().OrderBy(c => c.NAME).ToList();
-
+            
+            ListMeasurementType = PickerService.MeasurementTypeItems().OrderBy(c => c.NAME).ToList();
+            ListNonStandardType = PickerService.NonStandardTypeItems().OrderBy(c => c.NAME).ToList();
+            ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+            ListGrowthPlot = PickerService.GrowthPlotItems().OrderBy(c => c.NAME).ToList();
             CommentsCommand = new Command(async () => await ShowComments());
+            StandInfoCommand = new Command(async () => await ShowStandInfo());
+            ForestHealthCommand = new Command(async () => await ShowForestHealth());
+            PlotCrewCommand = new Command(async () => await ShowPlotCrew());
 
         }
         async Task ShowComments()
@@ -58,6 +61,22 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             await _navigation.PushAsync(new PlotComments(_plot));
         }
+        async Task ShowStandInfo()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new StandInfo(_plot));
+        }
+        async Task ShowForestHealth()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new ForestHealth(_plot));
+        }
+        async Task ShowPlotCrew()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new PlotCrew(_plot));
+        }
+
         private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedSpecies
         {
@@ -72,68 +91,78 @@ namespace eLiDAR.ViewModels {
                 _plot.LEAD_SPP = (int)_selectedSpecies.ID;
             }
         }
-        private PickerItems _selectedCanopyOrigin = new PickerItems { ID = 0, NAME = "" };
-        public PickerItems SelectedCanopyOrigin
+        private PickerItems _selectedNonStandardType = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedNonStandardType
         {
             get
             {
-                _selectedCanopyOrigin = PickerService.GetItem(ListCanopyOrigin, _plot.ORIGIN);
-                return _selectedCanopyOrigin;
+                _selectedNonStandardType = PickerService.GetItem(ListNonStandardType, _plot.NONSTANDARDTYPECODE);
+                return _selectedNonStandardType;
             }
             set
             {
-                SetProperty(ref _selectedCanopyOrigin, value);
-                _plot.ORIGIN = (int)_selectedCanopyOrigin.ID;
-            }
-        }
-        private PickerItemsString _selectedMaturityClass = new PickerItemsString { ID = "", NAME = "" };
-        public PickerItemsString SelectedMaturityClass
-        {
-            get
-            {
-                _selectedMaturityClass = PickerService.GetItem(ListMaturityClass, _plot.MATURITY);
-                return _selectedMaturityClass;
-            }
-            set
-            {
-                SetProperty(ref _selectedMaturityClass, value);
-                _plot.MATURITY  = _selectedMaturityClass.ID;
-            }
-        }
-        private PickerItemsString _selectedCanopyStructure = new PickerItemsString { ID = "", NAME = "" };
-        public PickerItemsString SelectedCanopyStructure
-        {
-            get
-            {
-                _selectedCanopyStructure = PickerService.GetItem(ListCanopyStructure, _plot.CANOPY_STRUCTURE);
-                return _selectedCanopyStructure;
-            }
-            set
-            {
-                SetProperty(ref _selectedCanopyStructure, value);
-                _plot.CANOPY_STRUCTURE  = _selectedCanopyStructure.ID;
+                SetProperty(ref _selectedNonStandardType, value);
+                _plot.NONSTANDARDTYPECODE = (int)_selectedNonStandardType.ID;
             }
         }
 
-        private PickerItems _selectedFMU = new PickerItems { ID = 0, NAME = "" };
-        public PickerItems SelectedFMU
+        private List<PickerItemsString> FillPersonPicker()
+        {
+            var list = new List<PickerItemsString>();
+            foreach (var newperson in _plotRepository.GetPersonList(_plot.PROJECTID))
+            {
+                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + ", " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
+                list.Add(newitem);
+            };
+            return list;
+        }
+
+        private PickerItemsString _selectedForestHealthPerson = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedForestHealthPerson
         {
             get
             {
-                //_selectedSpecies.ID = PickerService.GetIndex(ListSpecies, _tree.SPECIES);
-                //_selectedSpecies.NAME = PickerService.GetValue(ListSpecies, _tree.SPECIES);
-                _selectedFMU = PickerService.GetItem(ListFMU, _plot.FMU);
-                return _selectedFMU;
+                _selectedForestHealthPerson = PickerService.GetItem(ListPerson, _plot.FORESTHEALTHPERSON);
+                return _selectedForestHealthPerson;
             }
             set
             {
-                SetProperty(ref _selectedFMU, value);
-                _plot.FMU = (int)_selectedFMU.ID;
+                SetProperty(ref _selectedForestHealthPerson, value);
+                _plot.FORESTHEALTHPERSON = _selectedForestHealthPerson.ID;
+            }
+        }
+
+        private PickerItemsString _selectedMeasurementType = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedMeasurementType
+        {
+        get
+        {
+            _selectedMeasurementType = PickerService.GetItem(ListMeasurementType, _plot.MEASURETYPECODE);
+            return _selectedMeasurementType;
+        }
+        set
+        {
+            SetProperty(ref _selectedMeasurementType, value);
+            _plot.MEASURETYPECODE = _selectedMeasurementType.ID;
+        }
+        }
+        private PickerItems _selectedGrowthPlot = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedGrowthPlot
+        {
+            get
+            {
+                _selectedGrowthPlot = PickerService.GetItem(ListGrowthPlot, _plot.GROWTHPLOTNUMBER);
+                return _selectedGrowthPlot;
+            }
+            set
+            {
+                SetProperty(ref _selectedGrowthPlot, value);
+                _plot.GROWTHPLOTNUMBER = (int)_selectedGrowthPlot.ID;
             }
         }
 
         async Task ShowList(){ 
-            await _navigation.PushAsync(new PlotList());
+            await _navigation.PushAsync(new PlotList(_selectedprojectid ));
         }
         async Task AddPlot(string fk)
         {

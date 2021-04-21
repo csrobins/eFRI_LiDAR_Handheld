@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
-using eLiDAR.Services;
 using eLiDAR.Views;
 using FluentValidation.Results;
 using Xamarin.Forms;
@@ -15,29 +13,20 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace eLiDAR.ViewModels {
-    public class PlotCommentsViewModel : INotifyPropertyChanged
+    public class PlotCommentsViewModel : BasePlotViewModel 
     {
         public INavigation _navigation;
-        public PLOT _plot;
+    //    public PLOT _plot;
         public PlotCommentsViewModel(INavigation navigation, PLOT _thisplot)
         {
             _navigation = navigation;
-            _plot = _thisplot;
+            _plot = _thisplot;      
         }
         public string CommentsTitle
         {
-            get => "Comments for plot " + _plot.PLOTNUM;
+            get => "Comments for plot " + _plot.VSNPLOTNAME;
             set
             {
-            }
-        }
-        public string COMMENTS
-        {
-            get => _plot.COMMENTS;
-            set
-            {
-                _plot.COMMENTS = value;
-                NotifyPropertyChanged("COMMENTS");
             }
         }
 

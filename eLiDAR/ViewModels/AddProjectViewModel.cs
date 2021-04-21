@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using eLiDAR.Validator;
 using eLiDAR.Views;
 using FluentValidation.Results;
@@ -21,11 +22,12 @@ namespace eLiDAR.ViewModels {
             _project = new PROJECT();
             _projectRepository = new ProjectRepository();
             AddProjectCommand = new Command(async () => await AddProject()); 
-            ViewAllProjectsCommand = new Command(async () => await ShowProjectList()); 
+            ViewAllProjectsCommand = new Command(async () => await ShowProjectList());
+            _project.PROJECT_DATE = DateTime.Now; 
         }
 
        async Task ShowProjectList(){ 
-            await _navigation.PushAsync(new PlotList());
+            await _navigation.PushAsync(new ProjectList());
         }
         async Task AddProject()
         {

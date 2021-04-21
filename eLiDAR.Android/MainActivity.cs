@@ -23,6 +23,7 @@ namespace eLiDAR.Droid
             global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
             // printHashKey 
+           
             LoadApplication(new App());
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using eLiDAR.Views;
 
 using Xamarin.Forms;
@@ -17,19 +17,10 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteAllCommand { get; private set; }
         public ICommand ShowFilteredCommand { get; private set; }
+        public ICommand ShowAgesCommand { get; private set; }
         public ICommand ShowDeformityCommand { get; private set; }
 
-        public TreeListViewModel(INavigation navigation) {
-            _navigation = navigation;
-            _treeRepository = new TreeRepository();
-            _fk = "";
-            AddCommand = new Command(async () => await ShowAdd(""));
-            DeleteAllCommand = new Command(async () => await DeleteAll());
-            ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
-            ShowDeformityCommand = new Command<TREE>(async (x) => await ShowDeformity(x));
-
-            FetchTrees();
-        }
+       
         public TreeListViewModel(INavigation navigation, string fk)
         {
             _navigation = navigation;
@@ -39,6 +30,8 @@ namespace eLiDAR.ViewModels {
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
             ShowDeformityCommand = new Command<TREE>(async (x) => await ShowDeformity(x));
+            ShowAgesCommand = new Command(async () => await ShowAges(_fk));
+
             FetchTrees();
         }
 
@@ -50,20 +43,19 @@ namespace eLiDAR.ViewModels {
                 TreeStemListFull = _treeRepository.GetFilteredTreeStemDataFull(_fk);
 
         }
-
+        async Task ShowAges(string _fk)
+        {
+            await _navigation.PushAsync(new TreeAge(_fk));
+        }
         async Task ShowAdd(string _fk) {
-            if (_fk == "")
-            {
-                await _navigation.PushAsync(new AddTree());
-            }
-            else { await _navigation.PushAsync(new AddTree(_fk)); }
+            await _navigation.PushAsync(new AddTree(_fk)); 
         }
 
         async Task DeleteAll(){
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree List", "Delete All Tree Details?", "OK", "Cancel");
             if (isUserAccept){
                 _treeRepository.DeleteAllTrees();
-                await _navigation.PushAsync(new AddPlot());
+                await _navigation.PopAsync();
             }
         }
         private List<TREE> _treeStemList;

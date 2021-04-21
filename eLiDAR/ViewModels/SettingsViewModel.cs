@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using eLiDAR.Styles;
 using eLiDAR.Domain.Global;
 
+
 namespace eLiDAR.ViewModels
 {
     public class SettingsViewModel : INotifyPropertyChanged   {
@@ -146,6 +147,15 @@ namespace eLiDAR.ViewModels
             {
                 _issynchenabled = value;
                 NotifyPropertyChanged("IsSynchEnabled");
+            }
+        }
+        public bool IsNotifySave
+        {
+            get => util.NotifySave ;
+            set
+            {
+                util.NotifySave  = value;
+                NotifyPropertyChanged("IsNotifySave");
             }
         }
         public bool IsBoreal

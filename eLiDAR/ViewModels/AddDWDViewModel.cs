@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
 using eLiDAR.Services;
 using eLiDAR.Validator;
 using FluentValidation;
@@ -53,13 +52,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedLine = PickerService.GetItem(ListLine, _dwd.LINE);
+                _selectedLine = PickerService.GetItem(ListLine, _dwd.LINENUMBER);
                 return _selectedLine;
             }
             set
             {
                 SetProperty(ref _selectedLine, value);
-                _dwd.LINE  = (int)_selectedLine.ID;
+                _dwd.LINENUMBER  = (int)_selectedLine.ID;
             }
         }
 
@@ -68,13 +67,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedSpecies = PickerService.GetItem(ListSpecies, _dwd.SPECIES);
+                _selectedSpecies = PickerService.GetItem(ListSpecies, _dwd.SPECIESCODE);
                 return _selectedSpecies;
             }
             set
             {
                 SetProperty(ref _selectedSpecies, value);
-                _dwd.SPECIES  = (int)_selectedSpecies.ID;
+                _dwd.SPECIESCODE  = (int)_selectedSpecies.ID;
             }
         }
         private PickerItemsString _selectedOrigin = new PickerItemsString { ID = "", NAME = "" };
@@ -82,13 +81,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedOrigin = PickerService.GetItem(ListOrigin, _dwd.ORIGIN );
+                _selectedOrigin = PickerService.GetItem(ListOrigin, _dwd.DOWNWOODYDEBRISORIGINCODE);
                 return _selectedOrigin;
             }
             set
             {
                 SetProperty(ref _selectedOrigin, value);
-                _dwd.ORIGIN  = _selectedOrigin.ID;
+                _dwd.DOWNWOODYDEBRISORIGINCODE  = _selectedOrigin.ID;
             }
         }
         private PickerItems _selectedDecompClass = new PickerItems { ID = 0, NAME = "" };
@@ -96,13 +95,13 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-                _selectedDecompClass = PickerService.GetItem(ListDecompClass, _dwd.DECOMP_CLASS );
+                _selectedDecompClass = PickerService.GetItem(ListDecompClass, _dwd.DECOMPOSITIONCLASS );
                 return _selectedDecompClass;
             }
             set
             {
                 SetProperty(ref _selectedDecompClass, value);
-                _dwd.DECOMP_CLASS  = (int)_selectedDecompClass.ID;
+                _dwd.DECOMPOSITIONCLASS = (int)_selectedDecompClass.ID;
             }
         }
 

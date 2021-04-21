@@ -28,10 +28,23 @@ namespace eLiDAR.Helpers
                     select data).ToList();
         }
 
+        public List<PERSON> GetAllPersonData()
+        {
+            return (from data in sqliteconnection.Table<PERSON>()
+                    select data).ToList();
+        }
+
+
         //Get Specific Project data
         public PROJECT GetProjectData(String id)
         {
             return sqliteconnection.Table<PROJECT>().FirstOrDefault(t => t.PROJECTID == id);
+        }
+
+        //Get Specific Person data
+        public PERSON GetPersonData(String id)
+        {
+            return sqliteconnection.Table<PERSON>().FirstOrDefault(t => t.PERSONID == id);
         }
 
         //Get Specific Project Title
@@ -42,19 +55,19 @@ namespace eLiDAR.Helpers
         }
         public string GetPlotTitle(String id)
         {
-            var plot = sqliteconnection.Query<PLOT>("select PLOTNUM from Plot where PLOTID = '" + id + "'").FirstOrDefault();
-            return plot.PLOTNUM;
+            var plot = sqliteconnection.Query<PLOT>("select VSNPLOTNAME from Plot where PLOTID = '" + id + "'").FirstOrDefault();
+            return plot.VSNPLOTNAME;
         }
         public string GetPlotType(String id)
         {
-            var plot = sqliteconnection.Query<PLOT>("select PLOT_TYPE from Plot where PLOTID = '" + id + "'").FirstOrDefault();
-            return plot.PLOT_TYPE;
+            var plot = sqliteconnection.Query<PLOT>("select VSNPLOTTYPECODE from Plot where PLOTID = '" + id + "'").FirstOrDefault();
+            return plot.VSNPLOTTYPECODE;
         }
 
         public string GetTreeTitle(String id)
         {
-            var tree = sqliteconnection.Query<TREE>("select TREENUM from Tree where TREEID = '" + id + "'").FirstOrDefault();
-            return tree.TREENUM.ToString();
+            var tree = sqliteconnection.Query<TREE>("select TREENUMBER from Tree where TREEID = '" + id + "'").FirstOrDefault();
+            return tree.TREENUMBER.ToString();
         }
 
         public int GetAzimuth(String id)
@@ -97,6 +110,15 @@ namespace eLiDAR.Helpers
         {
             sqliteconnection.DeleteAll<PROJECT>();
         }
+        public void DeleteAllPersons()
+        {
+            sqliteconnection.DeleteAll<PERSON>();
+        }
+        // Delete Specific Contact
+        public void DeletePerson(String id)
+        {
+            sqliteconnection.Delete<PERSON>(id);
+        }
 
         // Delete Specific Contact
         public void DeleteProject(String id)
@@ -116,30 +138,51 @@ namespace eLiDAR.Helpers
 
         }
 
+        public void InsertPerson(PERSON person)
+        {
+            try
+            {
+                sqliteconnection.Insert(person);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
+        }
+        // Update Project Data
+        public void UpdatePerson(PERSON person)
+        {
+            sqliteconnection.Update(person);
+        }
+
         // Update Project Data
         public void UpdateProject(PROJECT project)
         {
             sqliteconnection.Update(project);
         }
+
         /// <summary>
         /// /PLOT VM's start here
         /// </summary>
         /// <returns></returns>
         // Get All Plot Data 
         public List<PLOT> GetAllPlotData()
-        {
-            return (from data in sqliteconnection.Table<PLOT>().OrderBy(t => t.PLOTNUM)
+        { 
+            return (from data in sqliteconnection.Table<PLOT>().OrderBy(t => t.VSNPLOTNAME)
                     select data).ToList() ;
+        }
+        public List<PERSON> GetFilteredPersonData(string projectid)
+        {
+            return (from data in sqliteconnection.Query<PERSON>("select * from PERSON where PROJECTID = '" + projectid + "' and IsDeleted = 'N' ORDER BY LASTNAME")
+                    select data).ToList();
         }
 
         public List<PLOT> GetFilteredPlotData(string projectid)
         {
-            return (from data in sqliteconnection.Table<PLOT>().OrderBy(t => t.PLOTNUM).Where(t => t.PROJECTID == projectid) 
+            return (from data in sqliteconnection.Table<PLOT>().OrderBy(t => t.VSNPLOTNAME).Where(t => t.PROJECTID == projectid) 
                     select data).ToList();
         }
         public List<PLOTLIST> GetFilteredPlotDataFull(string projectid)
         {
-            return (from data in sqliteconnection.Query<PLOTLIST>("Select * from PLOT").OrderBy(t => t.PLOTNUM).Where(t => t.PROJECTID == projectid)
+            return (from data in sqliteconnection.Query<PLOTLIST>("Select * from PLOT").OrderBy(t => t.VSNPLOTNAME).Where(t => t.PROJECTID == projectid)
                     select data).ToList();
         }
         //Get Specific Plot data
@@ -180,24 +223,24 @@ namespace eLiDAR.Helpers
         // Get All Tree Data 
         public List<TREE> GetAllTreeData()
         {
-            return (from data in sqliteconnection.Table<TREE>().OrderBy(t => t.TREENUM)
+            return (from data in sqliteconnection.Table<TREE>().OrderBy(t => t.TREENUMBER)
                     select data).ToList();
         }
         
         public List<TREE> GetFilteredTreeData(string plotid)
         {
-            return (from data in sqliteconnection.Table<TREE>().OrderBy(t => t.TREENUM).Where(t => t.PLOTID == plotid)
+            return (from data in sqliteconnection.Table<TREE>().OrderBy(t => t.TREENUMBER).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
         public List<TREELIST> GetFilteredTreeDataFull(string plotid)
         {
-            return (from data in sqliteconnection.Query<TREELIST>("select TREE.*, PLOT_TYPE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID").OrderBy(t => t.TREENUM).Where(t => t.PLOTID == plotid)
+            return (from data in sqliteconnection.Query<TREELIST>("select TREE.*, VSNPLOTTYPECODE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID").OrderBy(t => t.TREENUMBER).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
 
         public List<TREE> GetFilteredTreeStemList(string plotid)
         {
-            string qry = "select TREE.TREEID, PLOTID, TREENUM, SPECIES, ORIGIN, STATUS, DBH, HT, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' ORDER BY TREENUM";
+            string qry = "select TREE.TREEID, PLOTID, TREENUMBER, SPECIESCODE, TREEORIGINCODE, TREESTATUSCODE, DBH, DIRECTTOTALHEIGHT, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' ORDER BY TREENUMBER";
             try
             {
                 var tree = sqliteconnection.Query<TREE>(qry).ToList();
@@ -211,7 +254,7 @@ namespace eLiDAR.Helpers
         }
         public List<TREELIST> GetFilteredTreeStemListFull(string plotid)
         {
-            string qry = "select PLOT_TYPE, TREE.TREEID, TREE.PLOTID, TREENUM, SPECIES, TREE.ORIGIN, STATUS, DBH, HT, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' ORDER BY TREENUM";
+            string qry = "select VSNPLOTTYPECODE, TREE.TREEID, TREE.PLOTID, TREENUMBER, SPECIESCODE, TREE.TREEORIGINCODE, TREESTATUSCODE, DBH, DIRECTTOTALHEIGHT, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' ORDER BY TREENUMBER";
             try
             {
                 var tree = sqliteconnection.Query<TREELIST>(qry).ToList();
@@ -229,11 +272,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (_tree.TREEID != null)
             {
-                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUM = " + _tree.TREENUM + " and TREEID <> '" + _tree.TREEID + "'";
+                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUMBER = " + _tree.TREENUMBER + " and TREEID <> '" + _tree.TREEID + "'";
             }
             else
             {
-                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUM = " + _tree.TREENUM ;
+                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUMBER = " + _tree.TREENUMBER;
             }
             try
             {
@@ -253,11 +296,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (_plot.PLOTID != null)
             {
-                qry = "select count(PLOTID) from PLOT where MEASUREMENT_TYPE = '" + _plot.MEASUREMENT_TYPE +"' and PROJECTID = '" + _plot.PROJECTID + "' and PLOTNUM = '" + _plot.PLOTNUM + "' and PLOTID <> '" + _plot.PLOTID + "'";
+                qry = "select count(PLOTID) from PLOT where MEASURETYPECODE = '" + _plot.MEASURETYPECODE +"' and PROJECTID = '" + _plot.PROJECTID + "' and VSNPLOTNAME = '" + _plot.VSNPLOTNAME + "' and PLOTID <> '" + _plot.PLOTID + "'";
             }
             else
             {
-                qry = "select count(PLOTID) from PLOT where MEASUREMENT_TYPE = '" + _plot.MEASUREMENT_TYPE + "' and PROJECTID = '" + _plot.PROJECTID + "' and PLOTNUM = '" + _plot.PLOTNUM + "'";
+                qry = "select count(PLOTID) from PLOT where MEASURETYPECODE = '" + _plot.MEASURETYPECODE + "' and PROJECTID = '" + _plot.PROJECTID + "' and VSNPLOTNAME = '" + _plot.VSNPLOTNAME + "'";
             }
 
             try
@@ -278,11 +321,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (_dwd.DWDID != null)
             {
-                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINE = " + _dwd.LINE + " and PLOTID <> '" + _dwd.PLOTID + "'";
+                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINENUMBER = " + _dwd.LINENUMBER + " and PLOTID <> '" + _dwd.PLOTID + "'";
             }
             else
             {
-                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINE = " + _dwd.LINE;
+                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINENUMBER = " + _dwd.LINENUMBER;
             }
 
             try
@@ -303,11 +346,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (_soil.SOILID != null)
             {
-                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and LAYER = " + _soil.LAYER + " and PLOTID <> '" + _soil.PLOTID + "'";
+                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and HORIZONNUMBER = " + _soil.HORIZONNUMBER + " and PLOTID <> '" + _soil.PLOTID + "'";
             }
             else
             {
-                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and LAYER = " + _soil.LAYER;
+                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and HORIZONNUMBER = " + _soil.HORIZONNUMBER;
             }
 
             try
@@ -459,12 +502,12 @@ namespace eLiDAR.Helpers
         }
         public List<SOIL> GetAllSoilData()
         {
-            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.FROM)
+            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.DEPTHFROM)
                     select data).ToList();
         }
         public List<SOIL> GetFilteredSoilData(string plotid)
         {
-            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.LAYER).Where(t => t.PLOTID == plotid)
+            return (from data in sqliteconnection.Table<SOIL>().OrderBy(t => t.HORIZONNUMBER).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
         public SOIL GetSoilData(string id)
@@ -499,12 +542,12 @@ namespace eLiDAR.Helpers
         }
         public List<SMALLTREE> GetAllSmallTreeData()
         {
-            return (from data in sqliteconnection.Table<SMALLTREE>().OrderBy(t => t.SPECIES)
+            return (from data in sqliteconnection.Table<SMALLTREE>().OrderBy(t => t.SPECIESCODE)
                     select data).ToList();
         }
         public List<SMALLTREE> GetFilteredSmallTreeData(string plotid)
         {
-            return (from data in sqliteconnection.Table<SMALLTREE>().OrderBy(t => t.SPECIES).Where(t => t.PLOTID == plotid)
+            return (from data in sqliteconnection.Table<SMALLTREE>().OrderBy(t => t.SPECIESCODE).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
         public SMALLTREE GetSmallTreeData(string id)
@@ -538,12 +581,12 @@ namespace eLiDAR.Helpers
         }
         public List<VEGETATION> GetAllVegetationData()
         {
-            return (from data in sqliteconnection.Table<VEGETATION>().OrderBy(t => t.SPECIES)
+            return (from data in sqliteconnection.Table<VEGETATION>().OrderBy(t => t.VSNSPECIESCODE)
                     select data).ToList();
         }
         public List<VEGETATION> GetFilteredVegetationData(string plotid)
         {
-            return (from data in sqliteconnection.Table<VEGETATION>().OrderBy(t => t.SPECIES).Where(t => t.PLOTID == plotid)
+            return (from data in sqliteconnection.Table<VEGETATION>().OrderBy(t => t.VSNSPECIESCODE).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
         public VEGETATION GetVegetationData(string id)
@@ -578,12 +621,12 @@ namespace eLiDAR.Helpers
         }
         public List<DEFORMITY> GetAllDeformityData()
         {
-            return (from data in sqliteconnection.Table<DEFORMITY>().OrderBy(t => t.HT_FROM)
+            return (from data in sqliteconnection.Table<DEFORMITY>().OrderBy(t => t.HEIGHTFROM)
                     select data).ToList();
         }
         public List<DEFORMITY> GetFilteredDeformityData(string id)
         {
-            return (from data in sqliteconnection.Table<DEFORMITY>().OrderBy(t => t.HT_FROM ).Where(t => t.TREEID == id)
+            return (from data in sqliteconnection.Table<DEFORMITY>().OrderBy(t => t.HEIGHTFROM).Where(t => t.TREEID == id)
                     select data).ToList();
         }
         public DEFORMITY  GetDeformityData(string id)
@@ -622,7 +665,7 @@ namespace eLiDAR.Helpers
         }
         public List<DWD> GetFilteredDWDData(string plotid)
         {
-            return (from data in sqliteconnection.Table<DWD>().OrderBy(t => t.LINE).OrderBy(t => t.DWDNUM ).Where(t => t.PLOTID == plotid)
+            return (from data in sqliteconnection.Table<DWD>().OrderBy(t => t.LINENUMBER).OrderBy(t => t.DWDNUM ).Where(t => t.PLOTID == plotid)
                     select data).ToList();
         }
         public DWD GetDWDData(string id)

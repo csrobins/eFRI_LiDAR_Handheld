@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>eVSN</AssemblyName>
+    <RootNamespace>eLiDAR</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -96,6 +98,9 @@
     <Compile Update="Views\AddDWD.xaml.cs">
       <DependentUpon>AddDWD.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddPerson.xaml.cs">
+      <DependentUpon>AddPerson.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddSmallTree.xaml.cs">
       <DependentUpon>AddSmallTree.xaml</DependentUpon>
     </Compile>
@@ -105,8 +110,26 @@
     <Compile Update="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PlotCrew.xaml.cs">
+      <DependentUpon>PlotCrew.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MottleColour.xaml.cs">
       <DependentUpon>MottleColour.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PersonList.xaml.cs">
+      <DependentUpon>PersonList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PersonView.xaml.cs">
+      <DependentUpon>PersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PersonDetailsPage.xaml.cs">
+      <DependentUpon>PersonDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ForestHealth.xaml.cs">
+      <DependentUpon>ForestHealth.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StandInfo.xaml.cs">
+      <DependentUpon>StandInfo.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SoilColour.xaml.cs">
       <DependentUpon>SoilColour.xaml</DependentUpon>
@@ -182,6 +205,9 @@
     </Compile>
     <Compile Update="Views\EcositeComments.xaml.cs">
       <DependentUpon>EcositeComments.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TreeAge.xaml.cs">
+      <DependentUpon>TreeAge.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\VegetationList.xaml.cs">
       <DependentUpon>VegetationList.xaml</DependentUpon>

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
@@ -58,30 +58,30 @@ namespace eLiDAR.ViewModels
 
         public int LAYER
         {
-            get => _soil.LAYER;
+            get => _soil.HORIZONNUMBER;
             set
             {
-                _soil.LAYER = value;
+                _soil.HORIZONNUMBER = value;
                 NotifyPropertyChanged("LAYER");
             }
         }
 
         public int FROM
         {
-            get => _soil.FROM;
+            get => _soil.DEPTHFROM;
             set
             {
-                _soil.FROM = value;
+                _soil.DEPTHFROM = value;
                 NotifyPropertyChanged("FROM");
             }
         }
 
         public int TO
         {
-            get => _soil.TO;
+            get => _soil.DEPTHTO;
             set
             {
-                _soil.TO = value;
+                _soil.DEPTHTO = value;
                 NotifyPropertyChanged("TO");
             }
         }
@@ -98,30 +98,30 @@ namespace eLiDAR.ViewModels
 
         public string VON_POST
         {
-            get => _soil.VON_POST;
+            get => _soil.DECOMPOSITIONCODE;
             set
             {
-                _soil.VON_POST = value;
+                _soil.DECOMPOSITIONCODE = value;
                 NotifyPropertyChanged("VON_POST");
             }
         }
 
         public string TEXTURE
         {
-            get => _soil.TEXTURE;
+            get => _soil.MINERALTEXTURECODE;
             set
             {
-                _soil.TEXTURE = value;
+                _soil.MINERALTEXTURECODE = value;
                 NotifyPropertyChanged("TEXTURE");
             }
         }
 
         public string PORE_PATTERN
         {
-            get => _soil.PORE_PATTERN;
+            get => _soil.POREPATTERNCODE;
             set
             {
-                _soil.PORE_PATTERN = value;
+                _soil.POREPATTERNCODE = value;
                 NotifyPropertyChanged("PORE_PATTERN");
             }
         }
@@ -138,50 +138,50 @@ namespace eLiDAR.ViewModels
 
         public string COLOUR
         {
-            get => _soil.COLOUR;
+            get => _soil.MATRIXCOLOUR;
             set
             {
-                _soil.COLOUR = value;
+                _soil.MATRIXCOLOUR = value;
                 NotifyPropertyChanged("COLOUR");
             }
         }
 
         public string MOTTLE_COLOUR
         {
-            get => _soil.MOTTLE_COLOUR;
+            get => _soil.MOTTLECOLOUR;
             set
             {
-                _soil.MOTTLE_COLOUR = value;
+                _soil.MOTTLECOLOUR = value;
                 NotifyPropertyChanged("MOTTLE_COLOUR");
             }
         }
 
         public int PERCENT_GRAVEL
         {
-            get => _soil.PERCENT_GRAVEL;
+            get => _soil.PERCENTGRAVEL;
             set
             {
-                _soil.PERCENT_GRAVEL = value;
+                _soil.PERCENTGRAVEL = value;
                 NotifyPropertyChanged("PERCENT_GRAVEL");
             }
         }
 
         public int PERCENT_COBBLE
         {
-            get => _soil.PERCENT_COBBLE;
+            get => _soil.PERCENTCOBBLE;
             set
             {
-                _soil.PERCENT_COBBLE = value;
+                _soil.PERCENTCOBBLE = value;
                 NotifyPropertyChanged("PERCENT_COBBLE");
             }
         }
 
         public int PERCENT_STONE
         {
-            get => _soil.PERCENT_STONE;
+            get => _soil.PERCENTSTONE;
             set
             {
-                _soil.PERCENT_STONE = value;
+                _soil.PERCENTSTONE = value;
                 NotifyPropertyChanged("PERCENT_STONE");
             }
         }

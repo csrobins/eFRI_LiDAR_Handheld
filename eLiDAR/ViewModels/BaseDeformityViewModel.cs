@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using FluentValidation;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Servcies;
+using eLiDAR.Services;
 using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
@@ -57,10 +57,10 @@ namespace eLiDAR.ViewModels
 
         public int TYPE
         {
-            get => _deformity.TYPE;
+            get => _deformity.DEFORMITYTYPECODE;
             set
             {
-                _deformity.TYPE = value;
+                _deformity.DEFORMITYTYPECODE = value;
                 NotifyPropertyChanged("TYPE");
             }
         }
@@ -77,30 +77,30 @@ namespace eLiDAR.ViewModels
 
         public double HT_FROM
         {
-            get => _deformity.HT_FROM;
+            get => _deformity.HEIGHTFROM;
             set
             {
-                _deformity.HT_FROM = value;
+                _deformity.HEIGHTFROM = value;
                 NotifyPropertyChanged("HT_FROM");
             }
         }
 
         public double HT_TO
         {
-            get => _deformity.HT_TO;
+            get => _deformity.HEIGHTTO;
             set
             {
-                _deformity.HT_TO = value;
+                _deformity.HEIGHTTO = value;
                 NotifyPropertyChanged("HT_TO");
             }
         }
 
         public string QUAD
         {
-            get => _deformity.QUAD;
+            get => _deformity.QUADRANTCODE;
             set
             {
-                _deformity.QUAD = value;
+                _deformity.QUADRANTCODE = value;
                 NotifyPropertyChanged("QUAD");
             }
         }
@@ -117,10 +117,10 @@ namespace eLiDAR.ViewModels
 
         public int LEAN
         {
-            get => _deformity.LEAN;
+            get => _deformity.DEGGREELEANARCH;
             set
             {
-                _deformity.LEAN = value;
+                _deformity.DEGGREELEANARCH = value;
                 NotifyPropertyChanged("LEAN");
             }
         }
@@ -137,49 +137,49 @@ namespace eLiDAR.ViewModels
 
         public double LENGTH
         {
-            get => _deformity.LENGTH;
+            get => _deformity.DEFORMITYLENGTH;
             set
             {
-                _deformity.LENGTH = value;
+                _deformity.DEFORMITYLENGTH = value;
                 NotifyPropertyChanged("LENGTH");
             }
         }
 
         public double WIDTH
         {
-            get => _deformity.WIDTH;
+            get => _deformity.DEFORMITYWIDTH;
             set
             {
-                _deformity.WIDTH = value;
+                _deformity.DEFORMITYWIDTH = value;
                 NotifyPropertyChanged("WIDTH");
             }
         }
 
         public int PCT_SCUFF
         {
-            get => _deformity.PCT_SCUFF;
+            get => _deformity.SCUFF;
             set
             {
-                _deformity.PCT_SCUFF = value;
+                _deformity.SCUFF = value;
                 NotifyPropertyChanged("PCT_SCRUFF");
             }
         }
         public int PCT_SCRAPE
         {
-            get => _deformity.PCT_SCRAPE;
+            get => _deformity.SCRAPE;
             set
             {
-                _deformity.PCT_SCRAPE = value;
+                _deformity.SCRAPE = value;
                 NotifyPropertyChanged("PCT_SCRAPE");
             }
         }
 
         public int PCT_GOUGE
         {
-            get => _deformity.PCT_GOUGE;
+            get => _deformity.GOUGE;
             set
             {
-                _deformity.PCT_GOUGE = value;
+                _deformity.GOUGE = value;
                 NotifyPropertyChanged("PCT_GOUGE");
             }
         }

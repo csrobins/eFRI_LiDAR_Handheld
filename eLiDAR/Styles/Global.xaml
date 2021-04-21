@@ -3,7 +3,7 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:eLiDAR.Converters;assembly=eLiDAR">
+    xmlns:converters="clr-namespace:eLiDAR.Converters;assembly=eVSN">
 
     <!--  Default  -->
     <Color x:Key="aqua_marine">#FF36D1DC</Color>
@@ -43,7 +43,41 @@
         <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
         <Setter Property="Shell.UnselectedColor" Value="#CC0000" />
     </Style>
+    
+    <Style x:Key="RectangularButtonStyle" TargetType="Button" >
+        <Setter Property="CornerRadius"  Value="5" />
+        <Setter Property="Margin"  Value="2" />
+        <Setter Property="BackgroundColor"  Value="{DynamicResource cerulean}" />
+        <Setter Property="TextColor"  Value="White"  />
+        <Setter Property="HeightRequest"  Value="50" />
+        <Setter Property="HorizontalOptions"   Value="End" />
+        <Setter Property="WidthRequest"    Value="75" />
+    </Style>
 
+    <Style x:Key="RoundButtonStyle" TargetType="Button" >
+        <Setter Property="CornerRadius"  Value="25" />
+        <Setter Property="Margin"  Value="8" />
+        <Setter Property="BackgroundColor"  Value="{DynamicResource cerulean}" />
+        <Setter Property="BorderColor"  Value="{DynamicResource cerulean}" />
+        <Setter Property="BorderWidth"  Value="2"  />
+        <Setter Property="FontAttributes"   Value="Bold"   />
+        <Setter Property="TextColor"  Value="White"  />
+        <Setter Property="HeightRequest"  Value="50" />
+        <Setter Property="HorizontalOptions"   Value="Center" />
+        <Setter Property="VerticalOptions"   Value="Start" />
+        <Setter Property="WidthRequest"    Value="50" />
+    </Style>
+    <Style x:Key="FormButtonStyle" TargetType="Button" >
+        <Setter Property="CornerRadius"  Value="5" />
+        <Setter Property="Margin"  Value="2" />
+        <Setter Property="BackgroundColor"  Value="{DynamicResource cerulean}" />
+        <Setter Property="FontAttributes"   Value="Bold"   />
+        <Setter Property="TextColor"  Value="White"  />
+        <Setter Property="HeightRequest"  Value="50" />
+        <Setter Property="WidthRequest"  Value="200" />
+        <Setter Property="HorizontalOptions"   Value="Center" />
+        <Setter Property="VerticalOptions"   Value="Start" />
+    </Style>
     <Style
         ApplyToDerivedTypes="True"
         BasedOn="{StaticResource BaseStyle}"

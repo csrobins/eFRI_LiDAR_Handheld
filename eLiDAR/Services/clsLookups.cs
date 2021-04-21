@@ -84,6 +84,20 @@ namespace eLiDAR.Services
             x.NAME = "";
             return x;
         }
+        public static PERSON GetPersonItem(List<PERSON> list, string val)
+        {
+            foreach (var PERSON in list)
+            {
+                if (PERSON.PERSONID == val)
+                {
+                    return PERSON;
+                }
+            };
+            PERSON x = new PERSON();
+            x.PERSONID = "";
+            x.LASTNAME = "";
+            return x;
+        }
 
         public static List<PickerItems> SpeciesItems() {
             Utils util = new Utils();
@@ -273,55 +287,7 @@ namespace eLiDAR.Services
             }
         }
 
-        //public static List<PickerItems> BorealSpeciesItems()
-        //{
-        //    var list = new List<PickerItems>()
-        //    {
-        //        new PickerItems() {ID = 1005, NAME = "1005-Amelanchier Spp"},
-        //        new PickerItems() {ID = 25, NAME = "25-American Larch/Tamarack"},
-        //        new PickerItems() {ID = 20, NAME = "20-Balsam Fir"},
-        //        new PickerItems() {ID = 73, NAME = "73-Balsam Poplar"},
-        //        new PickerItems() {ID = 1246, NAME = "1246-Basket Willow"},
-        //        new PickerItems() {ID = 907, NAME = "907-Bay-leaved Willow"},
-        //        new PickerItems() {ID = 13, NAME = "13-Black Spruce"},
-        //        new PickerItems() {ID = 1234, NAME = "1234-Black Willow"},
-        //        new PickerItems() {ID = 71, NAME = "71-Eastern Cottonwood"},
-        //        new PickerItems() {ID = 19, NAME = "19-Eastern Hemlock"},
-        //        new PickerItems() {ID = 23, NAME = "23-Eastern Red Cedar"},
-        //        new PickerItems() {ID = 22, NAME = "22-Eastern White Cedar"},
-        //        new PickerItems() {ID = 1, NAME = "1-Eastern White Pine"},
-        //        new PickerItems() {ID = 168, NAME = "168-Gray Birch"},
-        //        new PickerItems() {ID = 47, NAME = "47-Green/Red Ash"},
-        //        new PickerItems() {ID = 3, NAME = "3-Jack Pine"},
-        //        new PickerItems() {ID = 70, NAME = "70-Large-tooth Aspen"},
-        //        new PickerItems() {ID = 117, NAME = "117-Manitoba Maple"},
-        //        new PickerItems() {ID = 1231, NAME = "1231-Mccall's Willow"},
-        //        new PickerItems() {ID = 15, NAME = "15-Norway Spruce"},
-        //        new PickerItems() {ID = 139, NAME = "139-Pin Cherry"},
-        //        new PickerItems() {ID = 75, NAME = "75-Populus species"},
-        //        new PickerItems() {ID = 32, NAME = "32-Red Maple"},
-        //        new PickerItems() {ID = 2, NAME = "2-Red Pine"},
-        //        new PickerItems() {ID = 14, NAME = "14-Red Spruce"},
-        //        new PickerItems() {ID = 903, NAME = "903-Salix tree species"},
-        //        new PickerItems() {ID = 4, NAME = "4-Scotch Pine"},
-        //        new PickerItems() {ID = 124, NAME = "124-Shagbark Hickory"},
-        //        new PickerItems() {ID = 33, NAME = "33-Silver Maple"},
-        //        new PickerItems() {ID = 1091, NAME = "1091-Sorbus species"},
-        //        new PickerItems() {ID = 1001, NAME = "1001-Striped Maple"},
-        //        new PickerItems() {ID = 74, NAME = "74-Trembling Aspen"},
-        //        new PickerItems() {ID = 990, NAME = "990-Unknown Conifer"},
-        //        new PickerItems() {ID = 991, NAME = "991-Unknown Hardwood"},
-        //        new PickerItems() {ID = 0, NAME = "0-Unknown Tree Species"},
-        //        new PickerItems() {ID = 38, NAME = "38-White Birch"},
-        //        new PickerItems() {ID = 76, NAME = "76-White Poplar"},
-        //        new PickerItems() {ID = 12, NAME = "12-White Spruce"},
-        //        new PickerItems() {ID = 63, NAME = "63-White Willow"},
-        //        new PickerItems() {ID = 37, NAME = "37-Yellow Birch"},
-        //        new PickerItems() {ID = 906, NAME = "906-Yellow Willow"},
-
-        //    };
-        //    return list;
-        //}
+     
 
         public static List<PickerItems> ForestItems()
         {
@@ -370,6 +336,39 @@ namespace eLiDAR.Services
             };
             return list;
         }
+        public static List<PickerItemsString> CoreStatusItems()
+        {
+            var list = new List<PickerItemsString>()
+            {
+                new PickerItemsString() {ID = "C", NAME = "C-complete"},
+                new PickerItemsString() {ID = "M", NAME = "M-missed pith"},
+                new PickerItemsString() {ID = "R", NAME = "R-rotten"},
+                new PickerItemsString() {ID = "S", NAME = "S-short"}
+            };
+            return list;
+        }
+        public static List<PickerItemsString> MeasurementTypeItems()
+        {
+            var list = new List<PickerItemsString>()
+            {
+                new PickerItemsString() {ID = "RMN", NAME = "RMN-Regular Measurement-new"},
+                new PickerItemsString() {ID = "RME", NAME = "RME-Regular Measurement-existing"},
+                new PickerItemsString() {ID = "DC", NAME = "DC-Data Correction"},
+                new PickerItemsString() {ID = "IA", NAME = "IA-Internal Audit"},
+                new PickerItemsString() {ID = "OA", NAME = "OA-Other Audit"}
+            };
+            return list;
+        }
+        public static List<PickerItems> GrowthPlotItems()
+        {
+            var list = new List<PickerItems>()
+            {
+                new PickerItems() {ID = 1, NAME = "1"},
+                new PickerItems() {ID = 2, NAME = "2"},
+                new PickerItems() {ID = 3, NAME = "3"}
+            };
+            return list;
+        }
         public static List<PickerItems> VigourItems()
         {
             var list = new List<PickerItems>()
@@ -378,8 +377,10 @@ namespace eLiDAR.Services
                 new PickerItems() {ID = 2, NAME = "2-light decline"},
                 new PickerItems() {ID = 3, NAME = "3-moderate decline"},
                 new PickerItems() {ID = 4, NAME = "4-severe decline"},
-                new PickerItems() {ID = 5, NAME = "5-dead"},
-                new PickerItems() {ID = 6, NAME = "6-down dead"}
+                new PickerItems() {ID = 5, NAME = "5-recently dead"},
+                new PickerItems() {ID = 6, NAME = "6-long dead"},
+                new PickerItems() {ID = 7, NAME = "7-down dead"}
+
             };
             return list;
         }
@@ -484,11 +485,11 @@ namespace eLiDAR.Services
         {
             var list = new List<PickerItems>()
             {
-                new PickerItems() {ID = 1, NAME = "1-recent dead/stem intact"},
-                new PickerItems() {ID = 2, NAME = "2-recent dead/stem loss"},
-                new PickerItems() {ID = 3, NAME = "3-old dead/broken top"},
-                new PickerItems() {ID = 4, NAME = "4-old dead/>6m ht"},
-                new PickerItems() {ID = 5, NAME = "5-old dead/<6m ht"}
+                new PickerItems() {ID = 1, NAME = "1-recent dead/fine branches"},
+                new PickerItems() {ID = 2, NAME = "2->50% coarse branches"},
+                new PickerItems() {ID = 3, NAME = "3-<50% coarse branches"},
+                new PickerItems() {ID = 4, NAME = "4-balance of soft and hard"},
+                new PickerItems() {ID = 5, NAME = "5-stem soft and spongy"}
             };
             return list;
         }
@@ -587,10 +588,10 @@ namespace eLiDAR.Services
         {
             var list = new List<PickerItems>()
             {
-                new PickerItems() {ID = 1, NAME = "1-construction" },
-                new PickerItems() {ID = 2, NAME = "2-safety"},
-                new PickerItems() {ID = 3, NAME = "3-logging"},
-                new PickerItems() {ID = 4, NAME = "4-replacement"}
+                new PickerItems() {ID = 3, NAME = "3-safety"},
+                new PickerItems() {ID = 4, NAME = "4-logging"},
+                new PickerItems() {ID = 6, NAME = "6-moved plot"},
+                new PickerItems() {ID = 7, NAME = "7-natural disturbance plot"}
             };
             return list;
         }
@@ -606,7 +607,23 @@ namespace eLiDAR.Services
                 new PickerItems() {ID = 6, NAME = "6-selection cut"},
                 new PickerItems() {ID = 7, NAME = "7-succession"},
                 new PickerItems() {ID = 8, NAME = "8-unknown"},
-                new PickerItems() {ID = 9, NAME = "9-other"}
+                new PickerItems() {ID = 9, NAME = "9-other"},
+                new PickerItems() {ID = 10, NAME = "10-old field"}
+
+            };
+            return list;
+        }
+        public static List<PickerItems> DisturbanceItems()
+        {
+            var list = new List<PickerItems>()
+            {
+                new PickerItems() {ID = 1, NAME = "1-fire" },
+                new PickerItems() {ID = 2, NAME = "2-wind"},
+                new PickerItems() {ID = 3, NAME = "3-ice storm"},
+                new PickerItems() {ID = 4, NAME = "4-disease"},
+                new PickerItems() {ID = 5, NAME = "5-insect"},
+                new PickerItems() {ID = 6, NAME = "6-snow loading"},
+                new PickerItems() {ID = 7, NAME = "7-anthropogenic"}
             };
             return list;
         }
@@ -758,7 +775,9 @@ namespace eLiDAR.Services
                 new PickerItemsString() {ID = "S", NAME = "S-stable"},
                 new PickerItemsString() {ID = "O", NAME = "O-overmature"},
                 new PickerItemsString() {ID = "D", NAME = "D-decline"},
-                new PickerItemsString() {ID = "A", NAME = "A-all aged"}
+                new PickerItemsString() {ID = "A", NAME = "A-all aged"},
+                new PickerItemsString() {ID = "R", NAME = "R-Regenerating"}
+
             };
             return list;
         }

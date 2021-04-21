@@ -11,7 +11,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>elidar.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>eLiDAR.iOS</AssemblyName>
+    <AssemblyName>eVSN.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <ProvisioningType>automatic</ProvisioningType>
@@ -200,9 +200,9 @@
     <BundleResource Include="Resources\photo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eLiDAR\eLiDAR.csproj">
+    <ProjectReference Include="..\eLiDAR\eVSN.csproj">
       <Project>{3c01266d-b4c5-44bb-a86c-a61141a25e49}</Project>
-      <Name>eLiDAR</Name>
+      <Name>eVSN</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
