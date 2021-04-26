@@ -44,6 +44,42 @@
                                     FontAttributes="Bold"
                                     FontSize="17"
                                     TextColor="{DynamicResource TextPrimaryColor}">
+                                    Allow Plot Deletion
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Switch
+                        x:Name="swchPlotDeletion"
+                        HorizontalOptions="EndAndExpand"
+                        IsToggled="{Binding IsAllowPlotDeletion}" />
+                </StackLayout>
+                <StackLayout Margin="10" Orientation="Horizontal">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    TextColor="{DynamicResource TextPrimaryColor}">
+                                    Allow Project Deletion
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Switch
+                        x:Name="swchProjectDeletion"
+                        HorizontalOptions="EndAndExpand"
+                        IsToggled="{Binding IsAllowProjectDeletion}" />
+                </StackLayout>
+                <StackLayout Margin="10" Orientation="Horizontal">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    TextColor="{DynamicResource TextPrimaryColor}">
                                     Notify on Save
                                 </Span>
                             </FormattedString>
@@ -99,11 +135,10 @@
 
                 <StackLayout Orientation="Vertical">
                     <Button
-                        BackgroundColor="{StaticResource cerulean}"
+                        Style="{StaticResource FormButtonStyle}"
                         Command="{Binding SynchCommand}"
                         IsEnabled="{Binding IsSynchEnabled}"
-                        Text="Synch Data"
-                        TextColor="White" />
+                        Text="Synch Data"       />
                     <ActivityIndicator IsRunning="{Binding IsSynchBusy}" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">

@@ -81,6 +81,20 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Access Condition" />
+                <Picker
+                    x:Name="txtAccessCondition"
+                    Title="Access Condition"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListAccessCondition}"
+                    SelectedItem="{Binding SelectedAccessCondition, Mode=TwoWay }"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Growth Plot Number" />
                 <Picker
                     x:Name="txtGrowthPlotNumber"
@@ -156,6 +170,7 @@
                 <Entry
                     x:Name="txtDeclination"
                     HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric" 
                     IsReadOnly="False" 
                     Placeholder="Declination"
                     Style="{DynamicResource TextSubhead}"
@@ -168,6 +183,7 @@
                     x:Name="txtUTM"
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="False" 
+                    Keyboard="Numeric" 
                     Placeholder="UTM Zone"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_ZONE}" />
@@ -180,6 +196,7 @@
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="False" 
                     Placeholder="Easting"
+                    Keyboard="Numeric" 
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_EASTING}" />
                 <Label
@@ -191,6 +208,7 @@
                     HorizontalOptions="FillAndExpand"
                     IsReadOnly="False" 
                     Placeholder="Northing"
+                    Keyboard="Numeric" 
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_NORTHING}" />
                 <Label
@@ -216,6 +234,10 @@
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding PlotCrewCommand}"
                     Text="Plot Crew"/>
+                <Button
+                    Style="{StaticResource FormButtonStyle } "
+                    Command="{Binding PhotoCommand}"
+                    Text="Photos"/>
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">

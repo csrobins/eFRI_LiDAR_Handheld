@@ -6,8 +6,6 @@ namespace eLiDAR.Views
 {
     public partial class PersonDetailsPage : ContentPage
     {
-
-
         public PersonDetailsPage(string ID)
         {
             InitializeComponent();

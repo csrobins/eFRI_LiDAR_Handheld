@@ -15,7 +15,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+               
             </Grid.ColumnDefinitions>
 
             <StackLayout Grid.Row="0" Grid.Column="0">
@@ -61,32 +61,31 @@
                     Style="{StaticResource TextBody}"
                     Text="Horizon" />
                 <Button
-                    BackgroundColor="{StaticResource cerulean}"
+                    Style="{StaticResource FormButtonStyle }"
                     Command="{Binding SoilHorizonCommand}"
-                    Text="{Binding HorizonButton}"
-                    TextColor="White" />
+                    Text="{Binding HorizonButton}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="von Post" />
+                    Text="Decompostion Codet" />
                 <Picker
                     x:Name="txtvonpost"
-                    Title="von Post"
+                    Title="Decompostion Code"
                     HorizontalOptions="FillAndExpand"
                     SelectedItem="{Binding VON_POST, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
-                        <x:String>vP1</x:String>
-                        <x:String>vP2</x:String>
-                        <x:String>vP3</x:String>
-                        <x:String>vP4</x:String>
-                        <x:String>vP5</x:String>
-                        <x:String>vP6</x:String>
-                        <x:String>vP7</x:String>
-                        <x:String>vP8</x:String>
-                        <x:String>vP9</x:String>
-                        <x:String>vP10</x:String>
+                        <x:String>Of1</x:String>
+                        <x:String>Of2</x:String>
+                        <x:String>Of3</x:String>
+                        <x:String>Of4</x:String>
+                        <x:String>Om5</x:String>
+                        <x:String>Om6</x:String>
+                        <x:String>Oh7</x:String>
+                        <x:String>Oh8</x:String>
+                        <x:String>Oh9</x:String>
+                        <x:String>Oh10</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
@@ -132,12 +131,6 @@
                         <x:String>C</x:String>
                     </Picker.Items>
                 </Picker>
-            </StackLayout>
-            <StackLayout Grid.Row="0" Grid.Column=" 1">
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextTitle}"
-                    Text="Soil Attributes Continued" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -151,40 +144,6 @@
                     SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Structure" />
-                <Button
-                    BackgroundColor="{StaticResource cerulean}"
-                    Command="{Binding SoilStructureCommand}"
-                    Text="{Binding StructureButton}"
-                    TextColor="White" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Colour" />
-                <Button
-                    BackgroundColor="{StaticResource cerulean}"
-                    Command="{Binding ColourCommand}"
-                    Text="{Binding ColourButton}"
-                    TextColor="White" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Mottle Colour" />
-                <Button
-                    BackgroundColor="{StaticResource cerulean}"
-                    Command="{Binding MottleColourCommand}"
-                    Text="{Binding MottleColourButton}"
-                    TextColor="White" />
-            </StackLayout>
-
-            <StackLayout Grid.Row="0" Grid.Column="2">
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextTitle}"
-                    Text="Soil Attributes Continued" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -219,7 +178,47 @@
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENT_STONE}" />
             </StackLayout>
+            <StackLayout Grid.Row="0" Grid.Column=" 1">
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Soil Attributes Continued" />
+              
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Structure" />
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding SoilStructureCommand}"
+                    Text="{Binding StructureButton}"   />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Matrix Colour" />
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding ColourCommand}"
+                    Text="{Binding ColourButton}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Mottle Colour" />
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding MottleColourCommand}"
+                    Text="{Binding MottleColourButton}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Gley Colour" />
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding GleyColourCommand}"
+                    Text="{Binding GleyColourButton}"/>
+            </StackLayout>
 
+           
         </Grid>
     </ContentView.Content>
 </ContentView>

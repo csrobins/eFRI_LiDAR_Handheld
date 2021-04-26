@@ -19,29 +19,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Column="1" HorizontalOptions="End">
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    BackgroundColor="{StaticResource cerulean}"
-                    BorderRadius="0"
-                    BorderWidth="1"
-                    Command="{Binding AddCommand}"
-                    HeightRequest="50"
-                    Text="New DWD"
-                    TextColor="White"
-                    WidthRequest="100" />
-                <Button
-                    Grid.Row="0"
-                    BackgroundColor="{StaticResource cerulean}"
-                    BorderRadius="0"
-                    BorderWidth="1"
-                    Command="{Binding AddAccumCommand}"
-                    HeightRequest="50"
-                    Text="New Accumltn"
-                    TextColor="White"
-                    WidthRequest="100 " />
-            </StackLayout>
+            
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -75,7 +53,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding LINE}"
+                                        Text="{Binding LINENUMBER}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -110,7 +88,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding SPECIES}"
+                                        Text="{Binding SPECIESCODE}"
                                         VerticalTextAlignment="Center" />
 
                                 </StackLayout>
@@ -126,7 +104,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding DECOMP_CLASS}"
+                                        Text="{Binding DECOMPOSITIONCLASS}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout HorizontalOptions="End" Orientation="Horizontal">
@@ -139,7 +117,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding LENGTH}"
+                                        Text="{Binding DOWNWOODYDEBRISLENGTH}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="End"
@@ -155,13 +133,23 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            Grid.Row="2"
-            BackgroundColor="{StaticResource cerulean}"
-            BorderRadius="0"
-            Command="{Binding DeleteAllCommand}"
-            Text="Delete All DWD"
-            TextColor="White"
-            VerticalOptions="EndAndExpand" />
+        <StackLayout Grid.Row="2" HorizontalOptions="End">
+            <StackLayout Orientation="Vertical" Grid.Column="1" >
+                <Label Text="ADD DWD" VerticalOptions="Center" HorizontalOptions="Center"  />
+                <Button
+                    Style="{StaticResource RoundButtonStyle}"
+                    Command="{Binding AddCommand}"
+                    Text="+"/>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Grid.Row="2" HorizontalOptions="Start">
+            <StackLayout Orientation="Vertical" Grid.Column="1" >
+                <Label Text="ADD Accum" VerticalOptions="Center" HorizontalOptions="Center"  />
+                <Button
+                    Style="{StaticResource RoundButtonStyle}"
+                    Command="{Binding AddAccumCommand}"
+                    Text="+"/>
+            </StackLayout>
+        </StackLayout>
     </Grid>
 </ContentPage>

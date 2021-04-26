@@ -19,6 +19,7 @@ namespace eLiDAR.Views {
             MyListView.ItemsSource = null;
             _viewmodel.FetchProjects();
             MyListView.ItemsSource = _viewmodel.ProjectList;
+       //     if (_viewmodel != null) { _viewmodel.Refresh(); }
         }
     }
 }

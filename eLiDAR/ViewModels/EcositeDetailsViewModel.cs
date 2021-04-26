@@ -20,7 +20,8 @@ namespace eLiDAR.ViewModels {
         public ICommand CommentsCommand { get; private set; }
         public ICommand EcositeCommand { get; private set; }
         public ICommand PhotoCommand { get; private set; }
-
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
         public List<PickerItems> ListDrainage { get; set; }
         public List<PickerItemsString> ListPorePattern { get; set; }
         public List<PickerItemsString> ListMoistureRegime { get; set; }
@@ -28,6 +29,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListDeposition { get; set; }
 
         public List<PickerItems> ListHumusForm { get; set; }
+        private bool _AllowToLeave = false;
         public EcositeDetailsViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _ecosite = new ECOSITE();
@@ -45,27 +47,38 @@ namespace eLiDAR.ViewModels {
             ListHumusForm = PickerService.HumusFormItems().ToList();
             ListDepthClass = PickerService.DepthClassItems().ToList();
             ListDeposition = PickerService.DepositionItems().ToList();
-
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
             // Get the ecosite if it exists
             if (_ecositeRepository.IsEcositeExists(_fk))
             {
                 FetchDetails(_fk);
+                
             }
+            else { _ecosite.SUBSTRATEDATE = System.DateTime.Now;  }
+            Refresh();
         }
         async Task ShowPhoto()
         {
-            // launch the form - filtered to a specific tree
-            await _navigation.PushAsync(new CameraPage(_ecosite));
+            // launch the form - filtered to a specific photo list
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowToLeave = true;
+                await _navigation.PushAsync(new PhotoList(_ecosite.PLOTID)); 
+            }       
         }
         async Task ShowEcosite()
         {
             // launch the form - filtered to a specific tree
+            _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeCode(_ecosite));
         }
 
         async Task ShowComments()
         {
             // launch the form - filtered to a specific tree
+            _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeComments(_ecosite));
         }
         private PickerItems _selectedDrainage = new PickerItems { ID = 0, NAME = "" };
@@ -173,55 +186,121 @@ namespace eLiDAR.ViewModels {
             _ecosite = _ecositeRepository.GetEcositeData(fk);
         }
 
-        async Task Update() {
+        private Task Update() {
             try
             {
-                EcositeValidator _ecositeValidator = new EcositeValidator();
-                ValidationResult validationResults = _ecositeValidator.Validate(_ecosite);
-
-                if (validationResults.IsValid)
+                if (_ecositeRepository.IsEcositeExists(_fk))
                 {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Ecosite Details", "Save Ecosite Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
-                        if (_ecositeRepository.IsEcositeExists(_fk))
-                        {
-                            _ecosite.LastModified = System.DateTime.UtcNow;
-                            _ecositeRepository.UpdateEcosite(_ecosite);
-
-                        }
-                        else
-                        {
-                            _ecosite.Created = System.DateTime.UtcNow;
-                            _ecosite.LastModified = _ecosite.Created;
-                            _ecositeRepository.InsertEcosite(_ecosite, _fk);
-                        }
-                        await _navigation.PopAsync();
-                    }
+                    _ecosite.LastModified = System.DateTime.UtcNow;
+                    _ecositeRepository.UpdateEcosite(_ecosite);
+                   
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Add Ecosite", validationResults.Errors[0].ErrorMessage, "Ok");
+                    _ecosite.IsDeleted = "N";        
+                    _ecosite.Created = System.DateTime.UtcNow;
+                    _ecosite.LastModified = _ecosite.Created;
+                    _ecositeRepository.InsertEcosite(_ecosite, _fk);
                 }
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {
-                var myerror = e.Message; // error
-                                         //  Log.Fatal(e);
+                var myerror = e.Message;
+                return Task.CompletedTask;// error
+                                          //  Log.Fatal(e);
             };
         }
         async Task Delete() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Ecosite Details", "Delete Ecosite Details", "OK", "Cancel");
             if (isUserAccept) {
-                _ecositeRepository.DeleteEcosite(_ecosite.ECOSITEID);
+                _ecositeRepository.DeleteEcosite(_ecosite);
+                _AllowToLeave = true;
                 await _navigation.PopAsync();
             }
+        }
+        public string EcositeButton
+        {
+            get
+         {
+                if (PRI_ECO == null) { return "Ecosite"; }
+                else { return PRI_ECO; }
+            }
+            set
+            {
+            }
+        }
+        public void Refresh()
+        {
+            NotifyPropertyChanged("EcositeButton");
+          
         }
         public string Title
         {
             get => "Ecosite details for plot " + _ecositeRepository.GetTitle(_fk);
             set
             {
+            }
+        }
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+            Refresh(); 
+        }
+        private void OnDisappearing()
+        {
+            _AllowToLeave = false;
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                if (!_AllowToLeave)
+                {
+                    e.Cancel();
+                    await GoBack();
+                }
+            }
+        }
+
+        private async Task<bool> TrySave()
+        {
+            EcositeValidator _validator = new EcositeValidator();
+            ValidationResult validationResults = _validator.Validate(_ecosite);
+            if (validationResults.IsValid)
+            {
+                _ = Update();
+                return true;
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Update Site", validationResults.Errors[0].ErrorMessage, "Ok");
+                return false;
+            }
+        }
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                EcositeValidator _validator = new EcositeValidator();
+                ValidationResult validationResults = _validator.Validate(_ecosite);
+                if (validationResults.IsValid)
+                {
+                    _ = Update();
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Site", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
             }
         }
     }

@@ -17,7 +17,7 @@
                 AutoSize="TextChanges"
                 Placeholder="Add soil/site comments"
                 Style="{DynamicResource TextSubhead}"
-                Text="{Binding COMMENTS}" />
+                Text="{Binding SUBSTRATENOTE}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

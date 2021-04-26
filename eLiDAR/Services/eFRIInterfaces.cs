@@ -22,6 +22,22 @@ namespace eLiDAR.Services
         void UpdatePerson(PERSON person);
         String GetProjectTitle(string projectid);
         List<PERSON> GetFilteredData(string id);
+        
+    }
+    public interface IPhotoRepository
+    {
+    
+        PHOTO GetPhotoData(string PHOTOID);
+        // Delete all Data
+   
+        void DeletePhoto(PHOTO _photo);
+        // Insert new to DB 
+        void InsertPhoto(PHOTO _photo);
+        // Update Data
+        void UpdatePhoto(PHOTO _photo);
+        String GetPlotTitle(string plotid);
+        List<PHOTO> GetFilteredData(string id);
+        bool IsPhotoTableEmpty(string plotid);
     }
     public interface IProjectRepository
     {
@@ -31,7 +47,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllProjects();
         // Delete Specific
-        void DeleteProject(string PROJECTID);
+        void DeleteProject(PROJECT table);
         // Insert new to DB 
         void InsertProject(PROJECT project);
         // Update Data
@@ -47,7 +63,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllPlots();
         // Delete Specific
-        void DeletePlot(string PLOTID);
+        void DeletePlot(PLOT table);
         // Insert new to DB 
         void InsertPlot (PLOT plot, string fk);
         // Update Data
@@ -57,6 +73,7 @@ namespace eLiDAR.Services
         List<PROJECT> GetProjectList();
         String GetPlotType(string plotid);
         List<PERSON> GetPersonList(string projectid);
+        bool IsUniquePlot(PLOT _plot);
 
     }
     public interface ITreeRepository
@@ -73,7 +90,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllTrees();
         // Delete Specific
-        void DeleteTree(string TREEID);
+        void DeleteTree(TREE table);
         // Insert new to DB 
         void InsertTree(TREE tree, string fk);
         // Update Data
@@ -95,7 +112,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllTrees();
         // Delete Specific
-        void DeleteTree(string STEMMAPID);
+        void DeleteTree(STEMMAP table);
         // Insert new to DB 
         void InsertTree(STEMMAP stemmap, string fk);
         // Update Data
@@ -115,7 +132,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllEcosites();
         // Delete Specific
-        void DeleteEcosite(string ECOSITEID);
+        void DeleteEcosite(ECOSITE table);
         // Insert new to DB 
         void InsertEcosite(ECOSITE ecosite, string fk);
         // Update Data
@@ -134,7 +151,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllSoil();
         // Delete Specific
-        void DeleteSoil(string SOILID);
+        void DeleteSoil(SOIL table);
         // Insert new to DB 
         void InsertSoil(SOIL soil, string fk);
         // Update Data
@@ -153,7 +170,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllSmallTree();
         // Delete Specific
-        void DeleteSmallTree(string SMALLTREEID);
+        void DeleteSmallTree(SMALLTREE table);
         // Insert new to DB 
         void InsertSmallTree(SMALLTREE smalltree, string fk);
         // Update Data
@@ -172,11 +189,28 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllVegetation();
         // Delete Specific
-        void DeleteVegetation(string VEGETATIONID);
+        void DeleteVegetation(VEGETATION table);
         // Insert new to DB 
         void InsertVegetation(VEGETATION vegetation, string fk);
         // Update Data
         void UpdateVegetation(VEGETATION vegetation);
+        String GetTitle(string plotid);
+    }
+    public interface IVegetationCensusRepository
+    {
+        List<VEGETATIONCENSUS> GetAllData();
+        List<VEGETATIONCENSUS> GetFilteredData(string fk);
+
+        //Get Specific data
+        VEGETATIONCENSUS GetVegetationData(string VEGETATIONCENSUSID);
+        // Delete all Data
+        void DeleteAllVegetation();
+        // Delete Specific
+        void DeleteVegetation(VEGETATIONCENSUS table);
+        // Insert new to DB 
+        void InsertVegetation(VEGETATIONCENSUS vegetation, string fk);
+        // Update Data
+        void UpdateVegetation(VEGETATIONCENSUS vegetation);
         String GetTitle(string plotid);
     }
     public interface IDeformityRepository
@@ -189,7 +223,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllDeformity();
         // Delete Specific
-        void DeleteDeformity(string DEFORMITYID);
+        void DeleteDeformity(DEFORMITY table);
         // Insert new to DB 
         void InsertDeformity(DEFORMITY deformity, string fk);
         // Update Data
@@ -206,7 +240,7 @@ namespace eLiDAR.Services
         // Delete all Data
         void DeleteAllDWD();
         // Delete Specific
-        void DeleteDWD(string DWDID);
+        void DeleteDWD(DWD table);
         // Insert new to DB 
         void InsertDWD(DWD dwd, string fk);
         // Update Data
@@ -222,9 +256,11 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteProject(string ID)
+        public void DeleteProject(PROJECT _table)
         {
-            _databaseHelper.DeleteProject(ID);
+//            _databaseHelper.DeleteProject(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateProject(_table);
         }
         public void DeleteAllProjects()
         {
@@ -306,7 +342,54 @@ namespace eLiDAR.Services
             return _databaseHelper.GetFilteredPersonData(id);
         }
     }
+    public class PhotoRepository : IPhotoRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public PhotoRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeletePhoto(PHOTO _photo)
+        {
+            _photo.IsDeleted = "Y";
+            _databaseHelper.UpdatePhoto(_photo);
+        }
+        
+        public PHOTO GetPhotoData(string PHOTOID)
+        {
+            return _databaseHelper.GetPhotoData(PHOTOID);
+        }
 
+        public void InsertPhoto(PHOTO photo)
+        {
+            photo.PHOTOID = Guid.NewGuid().ToString();
+
+            _databaseHelper.InsertPhoto(photo);
+        }
+        public void UpdatePhoto(PHOTO photo)
+        {
+            _databaseHelper.UpdatePhoto(photo);
+        }
+        public String GetPlotTitle(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+        public List<PHOTO> GetFilteredData(string id)
+        {
+            return _databaseHelper.GetFilteredPhotoData(id);
+        }
+        public bool IsPhotoTableEmpty(string plotid)
+        {
+            return _databaseHelper.IsPhotoTableEmpty(plotid);  
+        }
+    }
     public class PlotRepository : IPlotRepository
     {
         DatabaseHelper _databaseHelper;
@@ -314,9 +397,11 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeletePlot(string ID)
+        public void DeletePlot(PLOT _table)
         {
-            _databaseHelper.DeletePlot(ID);
+  //          _databaseHelper.DeletePlot(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdatePlot(_table);
         }
         public void DeleteAllPlots()
         {
@@ -383,7 +468,10 @@ namespace eLiDAR.Services
             }
         }
 
-
+        public bool IsUniquePlot(PLOT _plot)
+        {
+            return _databaseHelper.IsPlotNumUnique(_plot);  
+        }
     }
 
     public class TreeRepository : ITreeRepository
@@ -393,9 +481,12 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteTree(string ID)
+        public void DeleteTree(TREE _table)
         {
-            _databaseHelper.DeleteTree(ID);
+ //           _databaseHelper.DeleteTree(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateTree(_table);
+
         }
         public void DeleteAllTrees()
         {
@@ -495,9 +586,12 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteTree(string ID)
+        public void DeleteTree(STEMMAP _table)
         {
-            _databaseHelper.DeleteStemmap(ID);
+//            _databaseHelper.DeleteStemmap(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateStemmap(_table);
+
         }
         public void DeleteAllTrees()
         {
@@ -554,9 +648,12 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteEcosite(string ID)
+        public void DeleteEcosite(ECOSITE _table)
         {
-            _databaseHelper.DeleteEcosite(ID);
+//            _databaseHelper.DeleteEcosite(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateEcosite(_table);
+
         }
         public void DeleteAllEcosites()
         {
@@ -613,9 +710,11 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteSoil(string ID)
+        public void DeleteSoil(SOIL _table)
         {
-            _databaseHelper.DeleteSoil(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateSoil(_table);
+
         }
         public void DeleteAllSoil()
         {
@@ -669,9 +768,11 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteSmallTree(string ID)
+        public void DeleteSmallTree(SMALLTREE _table)
         {
-            _databaseHelper.DeleteSmallTree(ID);
+//            _databaseHelper.DeleteSmallTree(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateSmallTree(_table);
         }
         public void DeleteAllSmallTree()
         {
@@ -724,9 +825,12 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteVegetation(string ID)
+        public void DeleteVegetation(VEGETATION _table)
         {
-            _databaseHelper.DeleteVegetation(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateVegetation(_table);
+
+    //        _databaseHelper.DeleteVegetation(ID);
         }
         public void DeleteAllVegetation()
         {
@@ -771,6 +875,63 @@ namespace eLiDAR.Services
         }
 
     }
+    public class VegetationCensusRepository : IVegetationCensusRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public VegetationCensusRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteVegetation(VEGETATIONCENSUS _table)
+        {
+//            _databaseHelper.DeleteVegetationCensus(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateVegetation(_table);
+
+        }
+        public void DeleteAllVegetation()
+        {
+            _databaseHelper.DeleteAllVegetationCensus();
+        }
+        public List<VEGETATIONCENSUS> GetAllData()
+        {
+            return _databaseHelper.GetAllVegetationCensusData();
+        }
+
+        public List<VEGETATIONCENSUS> GetFilteredData(string fk)
+        {
+            return _databaseHelper.GetFilteredVegetationCensusData(fk);
+        }
+
+        public VEGETATIONCENSUS GetVegetationData(string VegetationID)
+        {
+            return _databaseHelper.GetVegetationCensusData(VegetationID);
+        }
+
+        public void InsertVegetation(VEGETATIONCENSUS vegetationcensus, string fk)
+        {
+            vegetationcensus.VEGETATIONCENSUSID = Guid.NewGuid().ToString();
+            vegetationcensus.PLOTID = fk;
+            _databaseHelper.InsertVegetationCensus(vegetationcensus);
+        }
+
+        public void UpdateVegetation(VEGETATIONCENSUS vegetation)
+        {
+            _databaseHelper.UpdateVegetation(vegetation);
+        }
+        public String GetTitle(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+
+    }
     public class DeformityRepository : IDeformityRepository
     {
         DatabaseHelper _databaseHelper;
@@ -778,9 +939,11 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteDeformity(string ID)
+        public void DeleteDeformity(DEFORMITY _table)
         {
-            _databaseHelper.DeleteDeformity(ID);
+ //           _databaseHelper.DeleteDeformity(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateDeformity(_table);
         }
         public void DeleteAllDeformity()
         {
@@ -833,9 +996,11 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public void DeleteDWD(string ID)
+        public void DeleteDWD(DWD _table)
         {
-            _databaseHelper.DeleteDWD(ID);
+//            _databaseHelper.DeleteDWD(ID);
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateDWD(_table);
         }
         public void DeleteAllDWD()
         {

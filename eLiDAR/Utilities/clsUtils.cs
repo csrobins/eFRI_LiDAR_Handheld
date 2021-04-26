@@ -16,12 +16,36 @@ namespace eLiDAR.Utilities
         private string keyvaldevicetheme = "UseDeviceTheme";
         private string keyvaldarktheme = "UseDarkTheme";
         private string keynotifysave = "IsNotifySave";
-
+        private string keyallowplotdeletion = "IsAllowPlotDeletion";
+        private string keyallowprojectdeletion = "IsAllowProjectDeletion";
 
         public Guid getGUID()
         {
             // Create and display the value of two GUIDs.
             return Guid.NewGuid();
+        }
+
+        internal bool AllowPlotDeletion
+        {
+            get
+            {
+                return Preferences.Get(keyallowplotdeletion, false);
+            }
+            set
+            {
+                Preferences.Set(keyallowplotdeletion, value);
+            }
+        }
+        internal bool AllowProjectDeletion
+        {
+            get
+            {
+                return Preferences.Get(keyallowprojectdeletion, false);
+            }
+            set
+            {
+                Preferences.Set(keyallowprojectdeletion, value);
+            }
         }
 
         internal bool BorealSpecies

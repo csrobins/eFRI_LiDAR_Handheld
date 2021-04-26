@@ -18,6 +18,8 @@ namespace eLiDAR.ViewModels {
         public ICommand DeleteCommand { get; private set; }
         public List<PickerItems> ListCause { get; set; }
         public List<PickerItems> ListType { get; set; }
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
         public AddDeformityViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _deformity = new DEFORMITY();
@@ -28,6 +30,9 @@ namespace eLiDAR.ViewModels {
             DeleteCommand = new Command(async () => await Delete());
             ListCause = PickerService.CauseItems().ToList();
             ListType = PickerService.TypeItems().ToList();
+            IsChanged = false;
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
 
         }
         private bool _IsValidSingle;
@@ -73,40 +78,30 @@ namespace eLiDAR.ViewModels {
             }
         }
 
-        async Task Update() {
+        private Task Update() {
             try
             {
-                DeformityValidator _deformityValidator = new DeformityValidator();
-                ValidationResult validationResults = _deformityValidator.Validate(_deformity);
 
-                if (validationResults.IsValid)
-                {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Deformity Details", "Save Deformity Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
-                        _deformity.Created = System.DateTime.UtcNow;
-                        _deformity.LastModified = _deformity.Created;
-                        _deformityRepository.InsertDeformity(_deformity,_fk);
+                _deformity.IsDeleted = "N";
+                _deformity.Created = System.DateTime.UtcNow;
+               _deformity.LastModified = _deformity.Created;
+               _deformityRepository.InsertDeformity(_deformity,_fk);
                         //  This is just to slow down the database
-                     _deformityRepository.GetDeformityData(_deformity.DEFORMITYID);
-                     await _navigation.PopAsync();
-                    }
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Add Deformity", validationResults.Errors[0].ErrorMessage, "Ok");
-                }
+               _deformityRepository.GetDeformityData(_deformity.DEFORMITYID);
+                return Task.CompletedTask;
+
             }
             catch (Exception e)
             {
-                var myerror = e.Message; // error
-                                         //  Log.Fatal(e);
+                var myerror = e.Message;
+                return Task.CompletedTask;// error
+                                          //  Log.Fatal(e);
             };
         }
         async Task Delete() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Deformity Details", "Delete Deformity Details", "OK", "Cancel");
             if (isUserAccept) {
-                _deformityRepository.DeleteDeformity (_deformity.DEFORMITYID  );
+                _deformityRepository.DeleteDeformity (_deformity);
                 await _navigation.PopAsync();
             }
         }
@@ -117,6 +112,46 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-      
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                e.Cancel();
+                await GoBack();
+            }
+        }
+
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                DeformityValidator _validator = new DeformityValidator();
+                ValidationResult validationResults = _validator.Validate(_deformity);
+                if (validationResults.IsValid)
+                {
+                    _ = Update();
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Deformity", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
+            }
+        }
     }
 }

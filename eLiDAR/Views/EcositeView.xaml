@@ -26,6 +26,16 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Date" />
+                <DatePicker
+                    x:Name="txtDate"
+                    Date="{Binding SUBSTRATEDATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumDate="01-Jan-2020"
+                    Style="{DynamicResource TextSubhead}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Humus Form" />
                 <Picker
                     x:Name="txtHumusForm"
@@ -137,6 +147,28 @@
                     Placeholder="Depth to Carbonates (cm)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_CARBONATES}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Depth to Carbonates" />
+                <Entry
+                    x:Name="txtDepthToWater"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Depth to Water Table (cm)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DEPTHTOWATERTABLE}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Depth to Seepage" />
+                <Entry
+                    x:Name="txtDepthToSeepage"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Depth to Seepage (cm)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DEPTHTOSEEPAGE}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
@@ -173,6 +205,49 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Mineral Texture" />
+                <Picker
+                    x:Name="txttexture"
+                    Title="Mineral Texture"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding MINERALTEXTURECODE, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                    <Picker.Items>
+                        <x:String>vcS</x:String>
+                        <x:String>cS</x:String>
+                        <x:String>mS</x:String>
+                        <x:String>fS</x:String>
+                        <x:String>vfS</x:String>
+                        <x:String>LvcS</x:String>
+                        <x:String>LcS</x:String>
+                        <x:String>LmS</x:String>
+                        <x:String>LfS</x:String>
+                        <x:String>LvfS</x:String>
+                        <x:String>SivcS</x:String>
+                        <x:String>SicS</x:String>
+                        <x:String>SimS</x:String>
+                        <x:String>SifS</x:String>
+                        <x:String>SivfS</x:String>
+                        <x:String>vcSL</x:String>
+                        <x:String>cSL</x:String>
+                        <x:String>mSL</x:String>
+                        <x:String>fSL</x:String>
+                        <x:String>vfSL</x:String>
+                        <x:String>L</x:String>
+                        <x:String>SiL</x:String>
+                        <x:String>Si</x:String>
+                        <x:String>CL</x:String>
+                        <x:String>SiCL</x:String>
+                        <x:String>SCL</x:String>
+                        <x:String>SC</x:String>
+                        <x:String>SiC</x:String>
+                        <x:String>C</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Mode of Deposition 1" />
                 <Picker
                     x:Name="txtDeposition1"
@@ -186,6 +261,17 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Mode of Deposition 1 Rank" />
+                <Entry
+                    x:Name="txtDepoRank1"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Mode of Deposition 1 Rank"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding MODEOFDEPOSITIONRANK1}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Mode of Deposition 2" />
                 <Picker
                     x:Name="txtDeposition2"
@@ -196,6 +282,17 @@
                     SelectedItem="{Binding SelectedDeposition2, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Mode of Deposition 2 Rank" />
+                <Entry
+                    x:Name="txtDepoRank2"
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Mode of Deposition 2 Rank"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding MODEOFDEPOSITIONRANK2}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
@@ -252,7 +349,7 @@
                     Placeholder="Depth to Impassable Coarse Frags (cm)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTH_TO_COARSE_FRAGS}" />
-                <Label
+           <!--     <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Seepage?" />
@@ -267,7 +364,23 @@
                         <x:String>Y</x:String>
                         <x:String>N</x:String>
                     </Picker.Items>
-                </Picker>
+                </Picker> -->
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Problematic Site?" />
+                <Picker
+                    x:Name="txtProblem"
+                    Title="Problematic Site?"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding PROBLEMATIC_SITE_PROTOCOL_CLASS}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                    <Picker.Items>
+                        <x:String>Y</x:String>
+                        <x:String>N</x:String>
+                    </Picker.Items>
+                </Picker> 
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
@@ -295,20 +408,17 @@
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DISTANCE}" />
                 <Button
-                    BackgroundColor="{StaticResource cerulean}"
+                    Style="{StaticResource FormButtonStyle } "
                     Command="{Binding CommentsCommand}"
-                    Text="Comments"
-                    TextColor="White" />
+                    Text="Comments"  />
                 <Button
-                    BackgroundColor="{StaticResource cerulean}"
+                    Style="{StaticResource FormButtonStyle } "
                     Command="{Binding EcositeCommand}"
-                    Text="Ecosite"
-                    TextColor="White" />
+                    Text="{Binding EcositeButton}"/>
                 <Button
-                    BackgroundColor="{StaticResource cerulean}"
+                   Style="{StaticResource FormButtonStyle } "
                     Command="{Binding PhotoCommand}"
-                    Text="Photos"
-                    TextColor="White" />
+                    Text="Photos"   />
             </StackLayout>
 
         </Grid>

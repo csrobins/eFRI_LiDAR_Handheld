@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.AddPhoto"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="Add Plot Photos"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    BindingContext="AddPhotoViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="12">
+            <local:PhotoView />
+    <!--       <Button
+                x:Name="SubmitButton"
+                BackgroundColor="{StaticResource cerulean}"
+                BorderRadius="0"
+                Command="{Binding AddCommand}"
+                Text="Save Photo"
+                TextColor="White" /> -->
+            <Button
+                Style= "{StaticResource FormButtonStyle}"
+                x:Name="CameraButton"
+                Command="{Binding CameraCommand}"
+                Text="Future Camera"/>
+            <!--<Label
+                x:Name="ViewLbl"
+                FontSize="15"
+                HorizontalOptions="EndAndExpand"
+                IsVisible="{Binding IsViewAll}"
+                Text="View All Veg"
+                TextColor="Black">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />
+                </Label.GestureRecognizers>
+            </Label>-->
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

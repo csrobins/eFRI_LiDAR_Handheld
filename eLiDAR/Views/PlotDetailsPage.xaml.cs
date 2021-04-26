@@ -3,19 +3,24 @@ using Xamarin.Forms;
 
 namespace eLiDAR.Views {
     public partial class PlotDetailsPage : ContentPage {
-        //private string pROJECTID;
-
-        //public PlotDetailsPage(string pROJECTID)
-        //{
-        //    this.pROJECTID = pROJECTID;
-        //}
 
         public PlotDetailsPage(string plotID) {
             InitializeComponent();
             this.BindingContext = new PlotDetailsViewModel(Navigation,plotID);
-            //this.BindingContext = new PlotDetailsViewModel(Navigation);
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((PlotDetailsViewModel)this.BindingContext).OnAppearingCommand.Execute(null);
 
-            //picker.ItemsSource = GFG.My_list;
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ((PlotDetailsViewModel)this.BindingContext).OnDisappearingCommand.Execute(null);
+            // execute OnDisappearingCommand        
+            // informing ViewModel
         }
     }
 }

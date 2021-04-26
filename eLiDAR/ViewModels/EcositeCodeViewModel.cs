@@ -119,7 +119,63 @@ namespace eLiDAR.ViewModels {
                 NotifyPropertyChanged("COMMENTS");
             }
         }
-     
+        public int POREPATTERNCODE
+        {
+            get => _ecosite.POREPATTERNCODE;
+            set
+            {
+                _ecosite.POREPATTERNCODE = value;
+                NotifyPropertyChanged("POREPATTERNCODE");
+            }
+        }
+
+        public string MINERALTEXTURECODE
+        {
+            get => _ecosite.MINERALTEXTURECODE;
+            set
+            {
+                _ecosite.MINERALTEXTURECODE = value;
+                NotifyPropertyChanged("MINERALTEXTURECODE");
+            }
+        }
+        public string DECOMPOSITIONCODE
+        {
+            get => _ecosite.DECOMPOSITIONCODE;
+            set
+            {
+                _ecosite.DECOMPOSITIONCODE = value;
+                NotifyPropertyChanged("DECOMPOSITIONCODE");
+            }
+        }
+        public System.DateTime SUBSTRATEDATE
+        {
+            get => _ecosite.SUBSTRATEDATE;
+            set
+            {
+                _ecosite.SUBSTRATEDATE = value;
+                NotifyPropertyChanged("SUBSTRATEDATE");
+            }
+        }
+        public int MODEOFDEPOSITIONRANK1
+        {
+            get => _ecosite.MODEOFDEPOSITIONRANK1;
+            set
+            {
+                _ecosite.MODEOFDEPOSITIONRANK1 = value;
+                NotifyPropertyChanged("MODEOFDEPOSITIONRANK1");
+            }
+        }
+
+        public int MODEOFDEPOSITIONRANK2
+        {
+            get => _ecosite.MODEOFDEPOSITIONRANK2;
+            set
+            {
+                _ecosite.MODEOFDEPOSITIONRANK2 = value;
+                NotifyPropertyChanged("MODEOFDEPOSITIONRANK2");
+            }
+        }
+
 
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;

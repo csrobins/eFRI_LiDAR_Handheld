@@ -22,20 +22,28 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListOrigin { get; set; }
         public List<PickerItems> ListDecompClass { get; set; }
         public List<PickerItems> ListLine { get; set; }
-        public AddDWDViewModel(INavigation navigation, string selectedID) {
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
+        private bool _isaccum;
+        public AddDWDViewModel(INavigation navigation, string selectedID, bool IsAccumulation = false)
+        {
             _navigation = navigation;
             _dwd = new DWD();
+            _isaccum = IsAccumulation; 
             _dwd.DWDID  = selectedID;
             _dwdRepository = new DWDRepository();
             _fk = selectedID;
             AddCommand = new Command(async () => await Update());
-            AddAccumCommand = new Command(async () => await Update(true));
+            AddAccumCommand = new Command(async () => await Update(IsAccumulation));
 
             DeleteCommand = new Command(async () => await Delete());
             ListSpecies = PickerService.SpeciesItems().ToList();
             ListOrigin = PickerService.OriginItems().ToList();
             ListDecompClass = PickerService.DecompClassItems().ToList();
             ListLine = PickerService.LineItems().ToList();
+            IsChanged = false;
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
         }
         private bool _IsValidSingle;
         public bool IsValidSingle
@@ -110,85 +118,105 @@ namespace eLiDAR.ViewModels {
         void FetchDetails(string fk){
             _dwd = _dwdRepository.GetDWDData(fk);
         }
-        async Task Update() {
+        private Task Update() {
             try
             {
-                DWDValidator _dwdValidator = new DWDValidator();
-                _dwd.PLOTID = _fk;
-                ValidationResult validationResults = _dwdValidator.Validate(_dwd);
-
-                if (validationResults.IsValid)
-                {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("DWD Details", "Save DWD Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
-                        _dwd.Created = System.DateTime.UtcNow;
-                        _dwd.LastModified = _dwd.Created;
-                        _dwdRepository.InsertDWD(_dwd,_fk);
+                
+                _dwd.Created = System.DateTime.UtcNow;
+                _dwd.IsDeleted = "N";
+                _dwd.IS_ACCUM = "N";
+                _dwd.LastModified = _dwd.Created;
+                _dwdRepository.InsertDWD(_dwd,_fk);
                         //  This is just to slow down the database
-                     _dwdRepository.GetDWDData (_dwd.DWDID);
-                     await _navigation.PopAsync();
-                    }
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Add DWD", validationResults.Errors[0].ErrorMessage, "Ok");
-                }
+                _dwdRepository.GetDWDData (_dwd.DWDID);
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {
                 var myerror = e.Message; // error
-                                         //  Log.Fatal(e);
+                return Task.CompletedTask;                         //  Log.Fatal(e);
             };
         }
-        async Task Update(bool IsAccum)
+        private Task Update(bool IsAccum)
         {
             try
             {
-                DWDValidator _dwdValidator = new DWDValidator();
-                ValidationResult validationResults = _dwdValidator.Validate(_dwd);
-
-                if (validationResults.IsValid)
-                {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("DWD Accumulation Details", "Save DWD Accumulation Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
-                        _dwd.IS_ACCUM = "Y";
-                        _dwd.PLOTID = _fk;
-                        _dwd.Created = System.DateTime.UtcNow;
-                        _dwd.LastModified = _dwd.Created;
-                        _dwdRepository.InsertDWD(_dwd, _fk);
-                        //  This is just to slow down the database
-                        _dwdRepository.GetDWDData(_dwd.DWDID);
-                        await _navigation.PopAsync();
-                    }
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Add DWD Accumulation", validationResults.Errors[0].ErrorMessage, "Ok");
-                }
+                _dwd.IS_ACCUM = "Y";
+                _dwd.IsDeleted = "N";
+                _dwd.PLOTID = _fk;
+                _dwd.Created = System.DateTime.UtcNow;
+                _dwd.LastModified = _dwd.Created;
+                _dwdRepository.InsertDWD(_dwd, _fk);
+                //  This is just to slow down the database
+                 _dwdRepository.GetDWDData(_dwd.DWDID);
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {
-                var myerror = e.Message; // error
-                                         //  Log.Fatal(e);
+                var myerror = e.Message;
+                return Task.CompletedTask;// error
+                                          //  Log.Fatal(e);
             };
         }
 
         async Task Delete() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("DWD Details", "Delete DWD Details", "OK", "Cancel");
             if (isUserAccept) {
-                _dwdRepository.DeleteDWD(_dwd.DWDID );
+                _dwdRepository.DeleteDWD(_dwd);
                 await _navigation.PopAsync();
             }
         }
         public string Title
         {
-            get => "DWD Accumulation details for plot " + _dwdRepository.GetTitle(_fk);
+            get
+            {
+                if (_isaccum) { return "DWD Accumulation details for plot " + _dwdRepository.GetTitle(_fk); }
+                else { return "DWD details for plot " + _dwdRepository.GetTitle(_fk); }
+            }
             set
             {
             }
         }
-       
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                e.Cancel();
+                await GoBack();
+            }
+        }
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+             if (IsChanged)
+            {
+                DWDValidator _validator = new DWDValidator();
+                ValidationResult validationResults = _validator.Validate(_dwd);
+                if (validationResults.IsValid)
+                {
+                    if (_isaccum) { _ = Update(true); }
+                    else { _ = Update(); }
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update DWD", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
+            }
+        }
     }
 }

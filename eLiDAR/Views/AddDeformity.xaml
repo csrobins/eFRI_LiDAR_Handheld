@@ -13,13 +13,11 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:DeformityView />
-            <Button
-                x:Name="SubmitButton"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
+       <!--     <Button
+                Style="{StaticResource FormButtonStyle }"
                 Command="{Binding AddCommand}"
-                Text="Save Deformity"
-                TextColor="White" />
+                Text="Update" /> -->
+
             <!--<Label
                 x:Name="ViewLbl"
                 FontSize="15"

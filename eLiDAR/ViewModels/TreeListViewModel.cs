@@ -30,7 +30,7 @@ namespace eLiDAR.ViewModels {
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
             ShowDeformityCommand = new Command<TREE>(async (x) => await ShowDeformity(x));
-            ShowAgesCommand = new Command(async () => await ShowAges(_fk));
+            ShowAgesCommand = new Command<TREE>(async (x) => await ShowAges(x));
 
             FetchTrees();
         }
@@ -43,9 +43,10 @@ namespace eLiDAR.ViewModels {
                 TreeStemListFull = _treeRepository.GetFilteredTreeStemDataFull(_fk);
 
         }
-        async Task ShowAges(string _fk)
+        async Task ShowAges(TREE _tree)
         {
-            await _navigation.PushAsync(new TreeAge(_fk));
+            // launch the form - filtered to a specific projectid
+            await _navigation.PushAsync(new TreeAge(_tree.TREEID));
         }
         async Task ShowAdd(string _fk) {
             await _navigation.PushAsync(new AddTree(_fk)); 

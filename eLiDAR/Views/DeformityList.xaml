@@ -19,17 +19,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button
-                Grid.Row="0"
-                Grid.Column="1"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                BorderWidth="1"
-                Command="{Binding AddCommand}"
-                HeightRequest="50"
-                Text="New Deformity"
-                TextColor="White"
-                WidthRequest="100" />
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -63,7 +52,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding TYPE}"
+                                        Text="{Binding DEFORMITYTYPECODE}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
@@ -86,7 +75,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_FROM}"
+                                        Text="{Binding HEIGHTFROM}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
@@ -96,7 +85,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_TO}"
+                                        Text="{Binding HEIGHTTO}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
@@ -116,7 +105,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding QUAD}"
+                                        Text="{Binding QUADRANTCODE}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout HorizontalOptions="End" Orientation="Horizontal">
@@ -140,14 +129,12 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            Grid.Row="2"
-            BackgroundColor="{StaticResource cerulean}"
-            BorderRadius="0"
-            Command="{Binding DeleteAllCommand}"
-            FontAttributes="Bold"
-            Text="Delete All Deformities"
-            TextColor="White"
-            VerticalOptions="EndAndExpand" />
+        <StackLayout Grid.Row="2" HorizontalOptions="End" VerticalOptions="End">
+            <Button
+                Style="{StaticResource RoundButtonStyle }"
+                Command="{Binding AddCommand}"
+                Text="+"
+                 />
+        </StackLayout>
     </Grid>
 </ContentPage>

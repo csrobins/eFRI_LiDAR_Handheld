@@ -14,6 +14,7 @@ namespace eLiDAR.Views
                 InitializeComponent();
                 _viewmodel = new AddSoilViewModel(Navigation, fk);
                 BindingContext =_viewmodel;
+                NavigationPage.SetHasNavigationBar(this, false);
             }
             catch (Exception e)
             {
@@ -25,7 +26,15 @@ namespace eLiDAR.Views
         {
             base.OnAppearing();
             if (_viewmodel != null) { _viewmodel.Refresh(); }
+            ((AddSoilViewModel)this.BindingContext).OnAppearingCommand.Execute(null);
 
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ((AddSoilViewModel)this.BindingContext).OnDisappearingCommand.Execute(null);
+            // execute OnDisappearingCommand        
+            // informing ViewModel
         }
 
     }

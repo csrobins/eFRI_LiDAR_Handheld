@@ -33,6 +33,16 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+        private bool _IsChanged = false;
+
+        public bool IsChanged
+        {
+            get => _IsChanged;
+            set
+            {
+                _IsChanged = value;
+            }
+        }
 
         public string DEFORMITYID
         
@@ -62,6 +72,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.DEFORMITYTYPECODE = value;
                 NotifyPropertyChanged("TYPE");
+                IsChanged = true;
             }
         }
 
@@ -72,6 +83,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.CAUSE = value;
                 NotifyPropertyChanged("CAUSE");
+                IsChanged = true;
             }
         }
 
@@ -82,6 +94,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.HEIGHTFROM = value;
                 NotifyPropertyChanged("HT_FROM");
+                IsChanged = true;
             }
         }
 
@@ -92,6 +105,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.HEIGHTTO = value;
                 NotifyPropertyChanged("HT_TO");
+                IsChanged = true;
             }
         }
 
@@ -102,6 +116,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.QUADRANTCODE = value;
                 NotifyPropertyChanged("QUAD");
+                IsChanged = true;
             }
         }
 
@@ -112,6 +127,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.EXTENT = value;
                 NotifyPropertyChanged("EXTENT");
+                IsChanged = true;
             }
         }
 
@@ -122,6 +138,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.DEGGREELEANARCH = value;
                 NotifyPropertyChanged("LEAN");
+                IsChanged = true;
             }
         }
 
@@ -132,6 +149,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.AZIMUTH = value;
                 NotifyPropertyChanged("AZIMUTH");
+                IsChanged = true;
             }
         }
 
@@ -142,6 +160,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.DEFORMITYLENGTH = value;
                 NotifyPropertyChanged("LENGTH");
+                IsChanged = true;
             }
         }
 
@@ -152,6 +171,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.DEFORMITYWIDTH = value;
                 NotifyPropertyChanged("WIDTH");
+                IsChanged = true;
             }
         }
 
@@ -162,6 +182,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.SCUFF = value;
                 NotifyPropertyChanged("PCT_SCRUFF");
+                IsChanged = true;
             }
         }
         public int PCT_SCRAPE
@@ -171,6 +192,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.SCRAPE = value;
                 NotifyPropertyChanged("PCT_SCRAPE");
+                IsChanged = true;
             }
         }
 
@@ -181,6 +203,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.GOUGE = value;
                 NotifyPropertyChanged("PCT_GOUGE");
+                IsChanged = true;
             }
         }
 
@@ -191,6 +214,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.OLD_FEEDING_CAVITY = value;
                 NotifyPropertyChanged("OLD_FEEDING_CAVITY");
+                IsChanged = true;
             }
         }
 
@@ -201,6 +225,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.NEW_FEEDING_CAVITY = value;
                 NotifyPropertyChanged("NEW_FEEDING_CAVITY");
+                IsChanged = true;
             }
         }
 
@@ -211,6 +236,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.OLD_NEST_CAVITY = value;
                 NotifyPropertyChanged("OLD_NEST_CAVITY");
+                IsChanged = true;
             }
         }
 
@@ -221,6 +247,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.NEW_NEST_CAVITY = value;
                 NotifyPropertyChanged("NEW_NEST_CAVITY");
+                IsChanged = true;
             }
         }
 
@@ -231,6 +258,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.STICK_NEST = value;
                 NotifyPropertyChanged("STICK_NEST");
+                IsChanged = true;
             }
         }
 

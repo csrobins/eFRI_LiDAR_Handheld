@@ -9,7 +9,8 @@ namespace eLiDAR.Views {
             try
             {
                 InitializeComponent();
-                this.BindingContext = new DWDDetailsViewModel(Navigation, soilID);
+                this.BindingContext = new DWDDetailsViewModel(Navigation, soilID, true);
+                NavigationPage.SetHasNavigationBar(this, false);
             }
             catch (Exception e)
             {
@@ -17,5 +18,19 @@ namespace eLiDAR.Views {
                                          //  Log.Fatal(e);
             };
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((DWDDetailsViewModel)this.BindingContext).OnAppearingCommand.Execute(null);
+
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ((DWDDetailsViewModel)this.BindingContext).OnDisappearingCommand.Execute(null);
+            // execute OnDisappearingCommand        
+            // informing ViewModel
+        }
+
     }
 }

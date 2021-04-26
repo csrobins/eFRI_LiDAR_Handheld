@@ -23,7 +23,9 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowSiteCommand { get; private set; }
         public ICommand ShowSmallTreeCommand { get; private set; }
         public ICommand ShowSoilCommand { get; private set; }
+        public ICommand ShowPhotoCommand { get; private set; }
         public ICommand ShowVegetationCommand { get; private set; }
+        public ICommand ShowVegetationCensusCommand { get; private set; }
         public ICommand ShowDWDCommand { get; private set; }
        // public ICommand SearchCommand { get; private set; }
 
@@ -41,7 +43,9 @@ namespace eLiDAR.ViewModels {
             ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
             ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
             ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
+            ShowPhotoCommand = new Command<PLOT>(async (x) => await ShowPhoto(x));
             ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
+            ShowVegetationCensusCommand = new Command<PLOT>(async (x) => await ShowVegetationCensus(x));
             ShowDWDCommand = new Command<PLOT>(async (x) => await ShowDWD(x));
           //  SearchCommand = new Command<string>(async (text) => await Search(text));
             FetchPlots();
@@ -122,6 +126,11 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific projectid
             await _navigation.PushAsync(new SoilList(_plot.PLOTID));
         }
+        async Task ShowPhoto(PLOT _plot)
+        {
+            // launch the form - filtered to a specific projectid
+            await _navigation.PushAsync(new PhotoList(_plot.PLOTID));
+        }
         async Task ShowSmallTree(PLOT _plot)
         {
             await _navigation.PushAsync(new SmallTreeList(_plot.PLOTID));
@@ -130,6 +139,10 @@ namespace eLiDAR.ViewModels {
         async Task ShowVegetation(PLOT _plot)
         {
             await _navigation.PushAsync(new VegetationList(_plot.PLOTID));
+        }
+        async Task ShowVegetationCensus(PLOT _plot)
+        {
+            await _navigation.PushAsync(new VegetationCensusList(_plot.PLOTID));
         }
         async Task ShowDWD(PLOT _plot)
         {

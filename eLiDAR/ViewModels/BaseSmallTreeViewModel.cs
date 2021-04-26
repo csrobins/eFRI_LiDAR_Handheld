@@ -33,7 +33,16 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+        private bool _IsChanged = false;
 
+        public bool IsChanged
+        {
+            get => _IsChanged;
+            set
+            {
+                _IsChanged = value;
+            }
+        }
         public string SMALLTREEID
         {
             get => _smallTree.SMALLTREEID;
@@ -61,6 +70,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.SPECIESCODE = value;
                 NotifyPropertyChanged("SPECIES");
+                IsChanged = true;
             }
         }
 
@@ -71,6 +81,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS1_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS1_COUNT");
+                IsChanged = true;
             }
         }
 
@@ -81,6 +92,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS2_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS2_COUNT");
+                IsChanged = true;
             }
         }
 
@@ -91,6 +103,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS3_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS3_COUNT");
+                IsChanged = true;
             }
         }
 
@@ -101,6 +114,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS4_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS4_COUNT");
+                IsChanged = true;
             }
         }
 
@@ -111,6 +125,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS5_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS5_COUNT");
+                IsChanged = true;
             }
         }
 
@@ -121,6 +136,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS6_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS6_COUNT");
+                IsChanged = true;
             }
         }
 
@@ -131,6 +147,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS7_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS7_COUNT");
+                IsChanged = true;
             }
         }
 
@@ -141,6 +158,7 @@ namespace eLiDAR.ViewModels
             {
                 _smallTree.HT_CLASS8_COUNT = value;
                 NotifyPropertyChanged("HT_CLASS8_COUNT");
+                IsChanged = true;
             }
         }
 

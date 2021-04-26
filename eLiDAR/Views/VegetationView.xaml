@@ -31,13 +31,26 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-
                 <StackLayout Grid.Row="0" Grid.Column="0">
+                    <Label
+                        HorizontalOptions="Start"
+                        Style="{StaticResource TextBody}"
+                        Text="Specimen Number" />
+                    <Entry
+                        x:Name="txtSpecimen"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric"
+                        Placeholder="Specimen Number"
+                        Style="{DynamicResource TextSubhead}"
+                        Text="{Binding SPECIMENNUMBER}" />
+                </StackLayout> 
+                <StackLayout Grid.Row="1" Grid.Column="0">
                     <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextTitle}"
@@ -87,7 +100,7 @@
                         Style="{DynamicResource TextSubhead}"
                         Text="{Binding QUAD4}" />
                 </StackLayout>
-                <StackLayout Grid.Row="0" Grid.Column="1">
+                <StackLayout Grid.Row="1" Grid.Column="1">
                     <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextTitle}"

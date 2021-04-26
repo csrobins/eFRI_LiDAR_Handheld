@@ -36,11 +36,11 @@
                     SelectedItem="{Binding SelectedType, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
-                <Label
+           <!--     <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Cause" />
-                <Picker
+                  <Picker
                     x:Name="txtCause"
                     Title="Cause"
                     HorizontalOptions="FillAndExpand"
@@ -48,7 +48,7 @@
                     ItemsSource="{Binding ListCause}"
                     SelectedItem="{Binding SelectedCause, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
+                    TitleColor="{StaticResource AccentColor}" /> -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"

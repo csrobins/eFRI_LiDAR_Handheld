@@ -13,7 +13,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace eLiDAR.ViewModels {
-    public class EcositeCommentsViewModel : INotifyPropertyChanged
+    public class EcositeCommentsViewModel : INotifyPropertyChanged  
     {
         public INavigation _navigation;
         public ECOSITE _ecosite;
@@ -29,13 +29,13 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-        public string COMMENTS
+        public string SUBSTRATENOTE
         {
             get => _ecosite.SUBSTRATENOTE;
             set
             {
                 _ecosite.SUBSTRATENOTE = value;
-                NotifyPropertyChanged("COMMENTS");
+                NotifyPropertyChanged("SUBSTRATENOTE");
             }
         }
 

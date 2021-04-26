@@ -33,6 +33,15 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+        private bool _IsChanged = false;
+        public bool IsChanged
+        {
+            get => _IsChanged;
+            set
+            {
+                _IsChanged = value;
+            }
+        }
         private bool _islivetree;
         public bool IsLiveTree
         {
@@ -101,6 +110,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.TREENUMBER = (int)value;
                 NotifyPropertyChanged("TREENUM");
+                IsChanged = true;
             }
         }
         public int SECTION
@@ -110,6 +120,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.SECTION = (int)value;
                 NotifyPropertyChanged("SECTION");
+                IsChanged = true;
             }
         }
         public int CROWN_POSITION
@@ -119,6 +130,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.CROWN_POSITION = value;
                 NotifyPropertyChanged("CRWON_POSITION");
+                IsChanged = true;
             }
         }
 
@@ -129,6 +141,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.SPECIESCODE = value;
                 NotifyPropertyChanged("SPECIES");
+                IsChanged = true;
             }
         }
 
@@ -139,6 +152,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.TAG_TYPE = value;
                 NotifyPropertyChanged("TAG_TYPE");
+                IsChanged = true;
             }
         }
 
@@ -149,6 +163,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.TREEORIGINCODE = value;
                 NotifyPropertyChanged("ORIGIN");
+                IsChanged = true;
             }
         }
 
@@ -164,6 +179,7 @@ namespace eLiDAR.ViewModels
                 }
                 else { IsLiveTree = false; }
                 NotifyPropertyChanged("STATUS");
+                IsChanged = true;
             }
         }
 
@@ -174,6 +190,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.VIGOURCODE = value;
                 NotifyPropertyChanged("VIGOUR");
+                IsChanged = true;
             }
         }
         public Single LENGTH
@@ -183,6 +200,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.LENGTH = value;
                 NotifyPropertyChanged("LENGTH");
+                IsChanged = true;
             }
         }
         public float HT_TO_DBH
@@ -192,6 +210,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.HEIGHTTODBH = value;
                 NotifyPropertyChanged("HT_TO_DBH");
+                IsChanged = true;
             }
         }
 
@@ -202,6 +221,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.DBH = value;
                 NotifyPropertyChanged("DBH");
+                IsChanged = true;
             }
         }
 
@@ -212,6 +232,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.DIRECTTOTALHEIGHT = value;
                 NotifyPropertyChanged("HT");
+                IsChanged = true;
             }
         }
         public float OCUALRTOTALHEIGHT
@@ -221,6 +242,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.OCUALRTOTALHEIGHT = value;
                 NotifyPropertyChanged("OCUALRTOTALHEIGHT");
+                IsChanged = true;
             }
         }
         public float HEIGHTTODEADTIP
@@ -230,6 +252,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.HEIGHTTODEADTIP = value;
                 NotifyPropertyChanged("HEIGHTTODEADTIP");
+                IsChanged = true;
             }
         }
         public float DIRECTHEIGHTTOCONTLIVECROWN
@@ -239,6 +262,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.DIRECTHEIGHTTOCONTLIVECROWN = value;
                 NotifyPropertyChanged("DIRECTHEIGHTTOCONTLIVECROWN");
+                IsChanged = true;
             }
         }
         public float OCULARHEIGHTTOCONTLIVECROWN
@@ -248,6 +272,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.OCULARHEIGHTTOCONTLIVECROWN = value;
                 NotifyPropertyChanged("OCULARHEIGHTTOCONTLIVECROWN");
+                IsChanged = true;
             }
         }
         public float DIRECTOFFSETDISTANCE
@@ -257,6 +282,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.DIRECTOFFSETDISTANCE = value;
                 NotifyPropertyChanged("DIRECTOFFSETDISTANCE");
+                IsChanged = true;
             }
         }
         public int DEGREEOFLEAN
@@ -266,6 +292,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.DEGREEOFLEAN = value;
                 NotifyPropertyChanged("DEGREEOFLEAN");
+                IsChanged = true;
             }
         }
         public float HEIGHTTOCORE
@@ -275,6 +302,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.HEIGHTTOCORE = value;
                 NotifyPropertyChanged("HEIGHTTOCORE");
+                IsChanged = true;
             }
         }
         public string CORESTATUSCODE
@@ -284,6 +312,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.CORESTATUSCODE = value;
                 NotifyPropertyChanged("CORESTATUSCODE");
+                IsChanged = true;
             }
         }
         public float SOUNDWOODLENGTH
@@ -293,6 +322,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.SOUNDWOODLENGTH = value;
                 NotifyPropertyChanged("SOUNDWOODLENGTH");
+                IsChanged = true;
             }
         }
         public int FIELDAGE
@@ -302,6 +332,8 @@ namespace eLiDAR.ViewModels
             {
                 _tree.FIELDAGE = value;
                 NotifyPropertyChanged("FIELDAGE");
+                IsChanged = true;
+
             }
         }
         public int OFFICERINGCOUNT
@@ -311,6 +343,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.OFFICERINGCOUNT = value;
                 NotifyPropertyChanged("OFFICERINGCOUNT");
+                IsChanged = true;
             }
         }
         public int MISSINGRINGS
@@ -320,6 +353,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.MISSINGRINGS = value;
                 NotifyPropertyChanged("MISSINGRINGS");
+                IsChanged = true;
             }
         }
 
@@ -330,6 +364,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.DBHIN = value;
                 NotifyPropertyChanged("DBH_IN");
+                IsChanged = true;
             }
         }
 
@@ -340,6 +375,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.CROWNIN = value;
                 NotifyPropertyChanged("CROWN_IN");
+                IsChanged = true;
             }
         }
 
@@ -410,6 +446,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.BARKRETENTIONCODE = value;
                 NotifyPropertyChanged("BARK_RETENTION");
+                IsChanged = true;
             }
         }
 
@@ -420,6 +457,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.WOODCONDITIONCODE = value;
                 NotifyPropertyChanged("WOOD_CONDITION");
+                IsChanged = true;
             }
         }
 

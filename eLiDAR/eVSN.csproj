@@ -110,6 +110,15 @@
     <Compile Update="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddPhoto.xaml.cs">
+      <DependentUpon>AddPhoto.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddVegetationCensus.xaml.cs">
+      <DependentUpon>AddVegetationCensus.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GleyColour.xaml.cs">
+      <DependentUpon>GleyColour.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PlotCrew.xaml.cs">
       <DependentUpon>PlotCrew.xaml</DependentUpon>
     </Compile>
@@ -206,11 +215,32 @@
     <Compile Update="Views\EcositeComments.xaml.cs">
       <DependentUpon>EcositeComments.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\StemMapView.xaml.cs">
+      <DependentUpon>StemMapView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TreeAge.xaml.cs">
       <DependentUpon>TreeAge.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\VegetationCensusList.xaml.cs">
+      <DependentUpon>VegetationCensusList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VegetationCensusDetailsPage.xaml.cs">
+      <DependentUpon>VegetationCensusDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PhotoList.xaml.cs">
+      <DependentUpon>PhotoList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PhotoDetailsPage.xaml.cs">
+      <DependentUpon>PhotoDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\VegetationList.xaml.cs">
       <DependentUpon>VegetationList.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VegetationCensusView.xaml.cs">
+      <DependentUpon>VegetationCensusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PhotoView.xaml.cs">
+      <DependentUpon>PhotoView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\VegetationView.xaml.cs">
       <DependentUpon>VegetationView.xaml</DependentUpon>

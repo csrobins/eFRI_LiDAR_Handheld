@@ -12,14 +12,15 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:PlotView />
-            <Button
+        <!--    <Button
                 Style="{StaticResource FormButtonStyle }"
                 Command="{Binding UpdatePlotCommand}"
                 Text="Update"
-                />
+                />  -->
             <Button
                 Style="{StaticResource FormButtonStyle }"
                 Command="{Binding DeletePlotCommand}"
+                IsEnabled="{Binding AllowPlotDeletion}"
                 Text="Delete"
                  />
         </StackLayout>

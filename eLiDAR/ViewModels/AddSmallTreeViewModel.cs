@@ -17,7 +17,8 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         public List<PickerItems> ListSpecies { get; set; }
-
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
         public AddSmallTreeViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _smallTree = new SMALLTREE();
@@ -26,7 +27,10 @@ namespace eLiDAR.ViewModels {
             _fk = selectedID;
             AddCommand = new Command(async () => await Update());
             DeleteCommand = new Command(async () => await Delete());
-            ListSpecies = PickerService.SpeciesItems().ToList().OrderBy(c => c.NAME).ToList();
+            ListSpecies = PickerService.SmallTreeSpeciesItems().ToList().OrderBy(c => c.NAME).ToList();
+            IsChanged = false;
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
         }
         private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedSpecies
@@ -45,38 +49,25 @@ namespace eLiDAR.ViewModels {
         void FetchDetails(string fk){
             _smallTree = _smallTreeRepository.GetSmallTreeData(fk);
         }
-        async Task Update() {
+        private Task Update() {
             try
             {
-                SmallTreeValidator _smallTreeValidator = new SmallTreeValidator();
-                ValidationResult validationResults = _smallTreeValidator.Validate(_smallTree);
-
-                if (validationResults.IsValid)
-                {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Small Tree Details", "Save Small Tree Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
-                        _smallTree.Created = System.DateTime.UtcNow;
-                        _smallTree.LastModified = _smallTree.Created;
-                        _smallTreeRepository.InsertSmallTree(_smallTree,_fk);
-                     await _navigation.PopAsync();
-                    }
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Add Small Tree", validationResults.Errors[0].ErrorMessage, "Ok");
-                }
+                _smallTree.IsDeleted = "N"; 
+                _smallTree.Created = System.DateTime.UtcNow;
+                _smallTree.LastModified = _smallTree.Created;
+                _smallTreeRepository.InsertSmallTree(_smallTree,_fk);
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {
                 var myerror = e.Message; // error
-                                         //  Log.Fatal(e);
+                return Task.CompletedTask;             //  Log.Fatal(e);
             };
         }
         async Task Delete() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Small Tree Details", "Delete Small Tree Details", "OK", "Cancel");
             if (isUserAccept) {
-                _smallTreeRepository.DeleteSmallTree(_smallTree.SMALLTREEID );
+                _smallTreeRepository.DeleteSmallTree(_smallTree);
                 await _navigation.PopAsync();
             }
         }
@@ -85,6 +76,47 @@ namespace eLiDAR.ViewModels {
             get => "Small Trees for plot " + _smallTreeRepository.GetTitle(_fk);
             set
             {
+            }
+        }
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                e.Cancel();
+                await GoBack();
+            }
+        }
+
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                SmallTreeValidator _validator = new SmallTreeValidator();
+                ValidationResult validationResults = _validator.Validate(_smallTree);
+                if (validationResults.IsValid)
+                {
+                    _ = Update();
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Small Tree", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
             }
         }
     }

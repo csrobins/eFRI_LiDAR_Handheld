@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="eLiDAR.Views.StemMapView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <StackLayout >
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextTitle}"
+                Text="Stem Map Attributes" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
+                Text="Azimuth" />
+            <Entry
+                x:Name="txtAzimuth"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Azimuth"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding AZIMUTH}" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
+                Text="Distance (m)" />
+            <Entry
+                x:Name="txtDistance"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Distance (m)"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding DISTANCE}" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
+                Text="Crown Width 1 (m)" />
+            <Entry
+                x:Name="txtCrownWidth1"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Crown Width 1 (m)"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding CROWN_AXIS_LONG}" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
+                Text="Crown Width 2 (m)" />
+            <Entry
+                x:Name="txtCrownWidth2"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Crown Width 2 (m)"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding CROWN_AXIS_SHORT}" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
+                Text="Offset Azimuth" />
+            <Entry
+                x:Name="txtOffsetAzimuth"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Offset Azimuth"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding OFFSET_AZIMUTH}" />
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
+                Text="Offset Distance (m)" />
+            <Entry
+                x:Name="txtOffsetDistance"
+                HorizontalOptions="FillAndExpand"
+                Keyboard="Numeric"
+                Placeholder="Offset Distance (m)"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding OFFSET_DISTANCE}" />
+        <!--    <Button
+                Style="{StaticResource FormButtonStyle }"
+                Command="{Binding UpdateTreeCommand}"
+                Text="Save Stem Map"
+                 /> -->
+            <Button
+                Style="{StaticResource FormButtonStyle }"
+                Command="{Binding DeleteTreeCommand}"
+                Text="Delete" />
+    </StackLayout>
+</ContentView>

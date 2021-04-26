@@ -39,7 +39,7 @@ namespace eLiDAR.Views
         {
             AutoSuggestBox box = (AutoSuggestBox)sender;
             // Filter the list based on text input
-            box.ItemsSource = GetSuggestions(box.Text);
+        box.ItemsSource = GetSuggestions(box.Text);
         }
         private List<string> GetSuggestions(string text)
         {

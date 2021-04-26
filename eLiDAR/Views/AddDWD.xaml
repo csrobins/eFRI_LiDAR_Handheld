@@ -13,13 +13,13 @@
     <ScrollView>
         <StackLayout Padding="5" Spacing="12">
             <local:DWDView />
-            <Button
+       <!--     <Button
                 x:Name="SubmitButton"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
                 Text="Save DWD"
-                TextColor="White" />
+                TextColor="White" /> -->
             <!--<Label
                 x:Name="ViewLbl"
                 FontSize="15"

@@ -17,13 +17,13 @@
             Spacing="5"
             VerticalOptions="FillAndExpand">
             <local:EcositeView />
-            <Button
+    <!--        <Button
                 x:Name="SubmitButton"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding UpdateCommand}"
                 Text="Save Ecosite"
-                TextColor="White" />
+                TextColor="White" /> -->
         </StackLayout>
     </ScrollView>
 </ContentPage>

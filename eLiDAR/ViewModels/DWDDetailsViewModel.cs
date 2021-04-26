@@ -22,13 +22,16 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListOrigin { get; set; }
         public List<PickerItems> ListDecompClass { get; set; }
         public List<PickerItems> ListLine { get; set; }
-
-        public DWDDetailsViewModel(INavigation navigation, string selectedID) {
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
+        private bool _isaccum;
+        public DWDDetailsViewModel(INavigation navigation, string selectedID, bool IsAccumulation = false) {
             _navigation = navigation;
             _dwd = new DWD ();
             //_vegetation.VEGETATIONID  = selectedID;
             _dwdRepository = new DWDRepository();
             _fk = selectedID;
+            _isaccum = IsAccumulation; 
             AddCommand = new Command(async () => await Update(false));
             AddAccumCommand = new Command(async () => await Update(true));
 
@@ -38,6 +41,9 @@ namespace eLiDAR.ViewModels {
             ListDecompClass = PickerService.DecompClassItems().ToList();
             ListLine = PickerService.LineItems().ToList();
             FetchDetails(selectedID);
+            IsChanged = false;
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
         }
        
         private bool _IsValidSingle;
@@ -112,15 +118,7 @@ namespace eLiDAR.ViewModels {
         }
         async Task Update(bool IsAccum) {
             try
-            {
-                DWDValidator _dwdValidator = new DWDValidator();
-                ValidationResult validationResults = _dwdValidator.Validate(_dwd);
-
-                if (validationResults.IsValid)
-                {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("DWD Details", "Save DWD Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
+            {   
                         if (IsAccum)
                         {
                             _dwd.IS_ACCUM = "Y";
@@ -132,14 +130,7 @@ namespace eLiDAR.ViewModels {
                         _dwdRepository.UpdateDWD (_dwd);
                         //  This is just to slow down the database
                      _dwdRepository.GetDWDData(_dwd.DWDID );
-                     await _navigation.PopAsync();
-                    }
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Add DWD", validationResults.Errors[0].ErrorMessage, "Ok");
-                }
-            }
+                  }
             catch (Exception e)
             {
                 var myerror = e.Message; // error
@@ -149,15 +140,60 @@ namespace eLiDAR.ViewModels {
         async Task Delete() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("DWD Details", "Delete DWD Details", "OK", "Cancel");
             if (isUserAccept) {
-                _dwdRepository.DeleteDWD(_dwd.DWDID );
+                _dwdRepository.DeleteDWD(_dwd);
                 await _navigation.PopAsync();
             }
         }
         public string Title
         {
-            get => "DWD details for plot " + _dwdRepository.GetTitle(_dwd.PLOTID);
+            get
+            {
+                if (_isaccum) { return "DWD Accumulation details for plot " + _dwdRepository.GetTitle(_dwd.PLOTID); }
+                else { return "DWD details for plot " + _dwdRepository.GetTitle(_dwd.PLOTID ); }
+            }
             set
             {
+            }
+        }
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                e.Cancel();
+                await GoBack();
+            }
+        }
+
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                DWDValidator _validator = new DWDValidator();
+                ValidationResult validationResults = _validator.Validate(_dwd);
+                if (validationResults.IsValid)
+                {
+                    _ = Update(_isaccum);
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update DWD", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
             }
         }
     }

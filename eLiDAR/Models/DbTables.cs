@@ -117,7 +117,7 @@ namespace eLiDAR.Models
             get
             {
                // if (VSNPLOTTYPECODE.Contains("B" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "B")
-                if (VSNPLOTTYPECODE.Contains("B"))
+                if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))
                 {
                         return true;
                 }
@@ -139,6 +139,22 @@ namespace eLiDAR.Models
             set { }
         }
 
+    }
+    [Table("PHOTO")]
+    public class PHOTO
+    {
+        [PrimaryKey]
+        public string PHOTOID { get; set; }
+        public string PLOTID { get; set; }
+        public string PHOTOTYPE { get; set; }
+        public string DESCRIPTION { get; set; }
+        public int PHOTONUMBER { get; set; }
+        public string FRAMENUMBER { get; set; }
+        public int AZIMUTH { get; set; }
+        public Single DISTANCE { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
     }
 
     [Table("PERSON")]
@@ -217,7 +233,7 @@ namespace eLiDAR.Models
             {
 //                if (VSNPLOTTYPECODE == "AB" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "B")
 
-                if (VSNPLOTTYPECODE.Contains("B"))
+                if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))
                 {
                     return true;
                 }
@@ -229,7 +245,19 @@ namespace eLiDAR.Models
         {
             get
             {
-                if (VSNPLOTTYPECODE == "AC" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "C")
+                if (VSNPLOTTYPECODE.Contains("C"))
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            set { }
+        }
+        public bool IsLiveTree
+        {
+            get
+            {
+                if (TREESTATUSCODE.Contains("L") || TREESTATUSCODE.Contains("V"))
                 {
                     return true;
                 }
@@ -295,7 +323,7 @@ namespace eLiDAR.Models
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
         public int POREPATTERNCODE { get; set; }
-        public string MINERALTEXTRURECODE { get; set; }
+        public string MINERALTEXTURECODE { get; set; }
         public string DECOMPOSITIONCODE { get; set; }
       
         public DateTime SUBSTRATEDATE { get; set; }
@@ -375,15 +403,6 @@ namespace eLiDAR.Models
         public string PLOTID { get; set; }
         public string VSNSPECIESCODE { get; set; }
         public int SPECIMENNUMBER { get; set; }
-        public int QUAD1 { get; set; }
-        public int QUAD2 { get; set; }
-        public int QUAD3 { get; set; }
-        public int QUAD4 { get; set; }
-        public int ELCLAYER3 { get; set; }
-        public int ELCLAYER4 { get; set; }
-        public int ELCLAYER5 { get; set; }
-        public int ELCLAYER6 { get; set; }
-        public int ELCLAYER7 { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }

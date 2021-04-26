@@ -13,20 +13,17 @@
         <StackLayout Padding="20" Spacing="12">
             <local:TreeView />
 
-            <Button
+       <!--     <Button
                 Margin="0,30,0,0"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding UpdateTreeCommand}"
                 Text="Update"
-                TextColor="White" />
+                TextColor="White" />  -->
             <Button
-                Margin="0,30,0,0"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
+                Style="{StaticResource FormButtonStyle}"
                 Command="{Binding DeleteTreeCommand}"
-                Text="Delete"
-                TextColor="White" />
+                Text="Delete"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

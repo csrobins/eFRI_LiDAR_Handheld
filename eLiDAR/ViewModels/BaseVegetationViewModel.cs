@@ -36,7 +36,15 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
+        private bool _IsChanged = false;
+        public bool IsChanged
+        {
+            get => _IsChanged;
+            set
+            {
+                _IsChanged = value;
+            }
+        }
         public string VEGETATIONID
         {
             get => _vegetation.VEGETATIONID;
@@ -61,8 +69,11 @@ namespace eLiDAR.ViewModels
             set
             {
                 _vegetation.VSNSPECIESCODE = value;
-               NotifyPropertyChanged("SPECIES");
-                SetScientific();
+
+              NotifyPropertyChanged("SPECIES");
+              SetScientific();
+              IsChanged = true;
+
             }
         }
         
@@ -89,6 +100,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.QUAD1 = value;
                 NotifyPropertyChanged("QUAD1");
+                IsChanged = true;
             }
         }
         public int QUAD2
@@ -125,6 +137,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.ELCLAYER3 = value;
                 NotifyPropertyChanged("ELCLAYER3");
+                IsChanged = true;
             }
         }
         public int ELCLAYER4
@@ -134,6 +147,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.ELCLAYER4 = value;
                 NotifyPropertyChanged("ELCLAYER4");
+                IsChanged = true;
             }
         }
         public int ELCLAYER5
@@ -143,6 +157,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.ELCLAYER5 = value;
                 NotifyPropertyChanged("ELCLAYER5");
+                IsChanged = true;
             }
         }
         public int ELCLAYER6
@@ -152,6 +167,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.ELCLAYER6 = value;
                 NotifyPropertyChanged("ELCLAYER6");
+                IsChanged = true;
             }
         }
         public int ELCLAYER7
@@ -161,6 +177,17 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.ELCLAYER7 = value;
                 NotifyPropertyChanged("ELCLAYER7");
+                IsChanged = true;
+            }
+        }
+        public int SPECIMENNUMBER
+        {
+            get => _vegetation.SPECIMENNUMBER;
+            set
+            {
+                _vegetation.SPECIMENNUMBER = value;
+                NotifyPropertyChanged("SPECIMENNUMBER");
+                IsChanged = true;
             }
         }
 

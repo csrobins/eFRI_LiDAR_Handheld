@@ -9,8 +9,8 @@
     Shell.BackgroundColor="{DynamicResource backgroundColor}"
     Shell.ForegroundColor="{StaticResource cerulean}"
     Shell.TitleColor="{StaticResource cerulean}">
-    <ContentPage.Content>
-        <StackLayout>
+    
+        <StackLayout Padding="20">
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
@@ -84,16 +84,13 @@
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding MISSINGRINGS}" />
 
-            <Button
+   <!--         <Button
         Style="{StaticResource FormButtonStyle } "        
                 Command="{Binding UpdateTreeCommand}"
                 Text="Update"
-              />
+              /> -->
 
         </StackLayout>
         
- 
-  
-
-            </ContentPage.Content>
+           
 </ContentPage>

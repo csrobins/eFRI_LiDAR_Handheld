@@ -92,7 +92,7 @@ namespace eLiDAR.ViewModels
             }
             else { 
                 msg = "Not all tables synched!";
-                await Application.Current.MainPage.DisplayAlert("Synch did not fnish", "The synch operation was not completed.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Synch did not finish", "The synch operation was not completed.", "OK");
             }
             FetchSettings(); 
         }
@@ -156,6 +156,24 @@ namespace eLiDAR.ViewModels
             {
                 util.NotifySave  = value;
                 NotifyPropertyChanged("IsNotifySave");
+            }
+        }
+        public bool IsAllowPlotDeletion
+        {
+            get => util.AllowPlotDeletion;
+            set
+            {
+                util.AllowPlotDeletion = value;
+                NotifyPropertyChanged("IsAllowPlotDeletion");
+            }
+        }
+        public bool IsAllowProjectDeletion
+        {
+            get => util.AllowProjectDeletion;
+            set
+            {
+                util.AllowProjectDeletion = value;
+                NotifyPropertyChanged("IsAllowProjectDeletion");
             }
         }
         public bool IsBoreal

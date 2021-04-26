@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:eLiDAR.Views"
-    Title="Add DWD Line"
+    Title="{Binding Title}"
     BackgroundColor="{DynamicResource backgroundColor}"
     BindingContext="AddDWDViewModel"
     Shell.BackgroundColor="{DynamicResource backgroundColor}"
@@ -13,13 +13,13 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:DWDAccumView />
-            <Button
+        <!--    <Button
                 x:Name="SubmitButton"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddAccumCommand}"
                 Text="Save DWD Accumulation"
-                TextColor="White" />
+                TextColor="White" /> -->
             <!--<Label
                 x:Name="ViewLbl"
                 FontSize="15"

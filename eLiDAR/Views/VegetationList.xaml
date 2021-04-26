@@ -19,17 +19,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button
-                Grid.Row="0"
-                Grid.Column="1"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                BorderWidth="1"
-                Command="{Binding AddCommand}"
-                HeightRequest="50"
-                Text="New Vegetation"
-                TextColor="White"
-                WidthRequest="100" />
+           
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -62,7 +52,18 @@
                                         Font="20"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding SPECIES}"
+                                        Text="{Binding VSNSPECIESCODE}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Specimen #"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding SPECIMENNUMBER}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -123,13 +124,12 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            Grid.Row="2"
-            BackgroundColor="{StaticResource cerulean}"
-            BorderRadius="0"
-            Command="{Binding DeleteAllCommand}"
-            Text="Delete All Vegetation"
-            TextColor="White"
-            VerticalOptions="EndAndExpand" />
+        <StackLayout Grid.Row="2" HorizontalOptions="End" VerticalOptions="End" >
+            <Button
+                Style="{StaticResource RoundButtonStyle }"
+                Command="{Binding AddCommand}"
+                Text="+"/>
+        </StackLayout>
+ 
     </Grid>
 </ContentPage>

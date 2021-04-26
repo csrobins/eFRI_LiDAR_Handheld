@@ -81,7 +81,7 @@ namespace eLiDAR.ViewModels {
             set
             {
                 _thissoil.MATRIXCOLOUR  = value;
-                NotifyPropertyChanged("MATRIXCOLOUR");
+                NotifyPropertyChanged("COLOUR");
             }
         }
         public string MASTER

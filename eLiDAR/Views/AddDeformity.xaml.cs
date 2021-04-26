@@ -13,6 +13,7 @@ namespace eLiDAR.Views
             {
                 InitializeComponent();
                 BindingContext = new AddDeformityViewModel(Navigation, fk);
+                NavigationPage.SetHasNavigationBar(this, false);
             }
             catch (Exception e)
             {
@@ -20,5 +21,19 @@ namespace eLiDAR.Views
               //  Log.Fatal(e);
             };
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((AddDeformityViewModel)this.BindingContext).OnAppearingCommand.Execute(null);
+
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ((AddDeformityViewModel)this.BindingContext).OnDisappearingCommand.Execute(null);
+            // execute OnDisappearingCommand        
+            // informing ViewModel
+        }
+
     }
 }

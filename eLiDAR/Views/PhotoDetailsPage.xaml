@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.PhotoDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="12">
+            <local:PhotoView />
+    <!--        <Button
+                Margin="0,30,0,0"
+                BackgroundColor="{StaticResource cerulean}"
+                BorderRadius="0"
+                Command="{Binding AddCommand}"
+                Text="Update"
+                TextColor="White" /> -->
+            <Button
+                Style ="{StaticResource FormButtonStyle }"
+                Command="{Binding DeleteCommand}"
+                Text="Delete" />
+            <Button
+                Style ="{StaticResource FormButtonStyle }"
+                Command="{Binding CameraCommand}"
+                Text="Future Camera"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

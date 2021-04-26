@@ -3,6 +3,7 @@ using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
+using eLiDAR.Utilities;
 using eLiDAR.Validator;
 using FluentValidation.Results;
 using Xamarin.Forms;
@@ -21,7 +22,7 @@ namespace eLiDAR.ViewModels {
             _project.PROJECTID = selectedProjectID;
             _projectRepository = new ProjectRepository();
 
-            UpdateProjectCommand = new Command(async () => await Update());
+            UpdateProjectCommand = new Command(async () => Update());
             DeleteProjectCommand = new Command(async () => await DeleteProject());
 
             FetchProjectDetails();
@@ -29,12 +30,23 @@ namespace eLiDAR.ViewModels {
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
         }
-
+        public bool AllowProjectDeletion
+        {
+            get
+            {
+                Utils util = new Utils();
+                return util.AllowProjectDeletion;
+            }
+            set
+            {
+            }
+        }
         void FetchProjectDetails(){
             _project = _projectRepository.GetProjectData(_project.PROJECTID);
         }
 
-        private Task Update() {
+        private Task Update()
+        {
 
             _project.LastModified = System.DateTime.UtcNow;
             _projectRepository.UpdateProject(_project);
@@ -44,7 +56,7 @@ namespace eLiDAR.ViewModels {
         async Task DeleteProject() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Project Details", "Delete Project Details", "OK", "Cancel");
             if (isUserAccept) {
-                _projectRepository.DeleteProject(_project.PROJECTID);
+                _projectRepository.DeleteProject(_project);
                 await _navigation.PopAsync();
             }
         }
@@ -74,6 +86,8 @@ namespace eLiDAR.ViewModels {
                 if (validationResults.IsValid)
                 {
                     _ = Update();
+                    //just to slow things down
+                    _project = _projectRepository.GetProjectData(_project.PROJECTID);
                     Shell.Current.Navigating -= Current_Navigating;
                     await Shell.Current.GoToAsync("..", true);
                 }

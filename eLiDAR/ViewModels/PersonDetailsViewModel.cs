@@ -35,8 +35,6 @@ namespace eLiDAR.ViewModels {
             IsChanged = false;
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
-
-
         }
 
         //async Task ShowList(){ 
@@ -76,8 +74,7 @@ namespace eLiDAR.ViewModels {
         {
             Shell.Current.Navigating -= Current_Navigating;
         }
-        private async void Current_Navigating(object sender,
-                                    ShellNavigatingEventArgs e)
+        private async void Current_Navigating(object sender,  ShellNavigatingEventArgs e)
         {
             if (e.CanCancel)
             {
@@ -91,8 +88,8 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
-                PersonValidator _personValidator = new PersonValidator();
-                ValidationResult validationResults = _personValidator.Validate(_person);
+                PersonValidator _validator = new PersonValidator();
+                ValidationResult validationResults = _validator.Validate(_person);
                 if (validationResults.IsValid)
                 {
                     _ = UpdatePerson();

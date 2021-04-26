@@ -33,6 +33,15 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+        private bool _IsChanged = false;
+        public bool IsChanged
+        {
+            get => _IsChanged;
+            set
+            {
+                _IsChanged = value;
+            }
+        }
         public string STEMMAPID
         {
             get => _stemmap.STEMMAPID;
@@ -60,6 +69,7 @@ namespace eLiDAR.ViewModels
             {
                 _stemmap.AZIMUTH  = value;
                 NotifyPropertyChanged("AZIMUTH");
+                IsChanged = true;
             }
         }
 
@@ -70,6 +80,7 @@ namespace eLiDAR.ViewModels
             {
                 _stemmap.DISTANCE = value;
                 NotifyPropertyChanged("DISTANCE");
+                IsChanged = true;
             }
         }
 
@@ -80,6 +91,7 @@ namespace eLiDAR.ViewModels
             {
                 _stemmap.CROWNWIDTH1 = value;
                 NotifyPropertyChanged("CROWN_AXIS_LONG");
+                IsChanged = true;
             }
         }
         public double CROWN_AXIS_SHORT
@@ -89,15 +101,17 @@ namespace eLiDAR.ViewModels
             {
                 _stemmap.CROWNWIDTH2 = value;
                 NotifyPropertyChanged("CROWN_AXIS_SHORT");
+                IsChanged = true;
             }
         }
-        public int OFFET_AZIMUTH
+        public int OFFSET_AZIMUTH
         {
             get => _stemmap.CROWNOFFSETAZIMUTH ;
             set
             {
                 _stemmap.CROWNOFFSETAZIMUTH = value;
                 NotifyPropertyChanged("OFFSET_AZIMUTH");
+                IsChanged = true;
             }
         }
 
@@ -108,6 +122,7 @@ namespace eLiDAR.ViewModels
             {
                 _stemmap.CROWNOFFSETDISTANCE = value;
                 NotifyPropertyChanged("OFFSET_DISTANCE");
+                IsChanged = true;
             }
         }
 

@@ -12,19 +12,17 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:VegetationView />
-            <Button
+        <!--    <Button
                 Margin="0,30,0,0"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
                 Text="Update"
-                TextColor="White" />
+                TextColor="White" />  -->
             <Button
-                Margin="0,30,0,0"
-                BackgroundColor="{StaticResource cerulean}"
+                Style ="{StaticResource FormButtonStyle }"
                 Command="{Binding DeleteCommand}"
-                Text="Delete"
-                TextColor="White" />
+                Text="Delete" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

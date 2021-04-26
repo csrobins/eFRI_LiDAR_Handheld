@@ -18,7 +18,10 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand ViewAllCommand { get; private set; }
         public ICommand CommentsCommand { get; private set; }
-      
+        public ICommand StemMapCommand { get; private set; }
+        public ICommand DeformityCommand { get; private set; }
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
 
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListVigour { get; set; }
@@ -30,7 +33,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItems> ListMortalityCause { get; set; }
         public List<PickerItems> ListDecayClass { get; set; }
         public List<PickerItems> ListCrownPosition { get; set; }
-
+        private bool _AllowtoLeave = false;
         public AddTreeViewModel(INavigation navigation, string fk)
         {
             _navigation = navigation;
@@ -51,20 +54,57 @@ namespace eLiDAR.ViewModels {
             ListDecayClass = PickerService.DecayClassItems().ToList();
             ListCrownPosition = PickerService.CrownPositionItems().ToList();
             CommentsCommand = new Command(async () => await ShowComments());
-           
+            StemMapCommand = new Command(async () => await ShowStemMap());
+            DeformityCommand = new Command(async () => await ShowDeformity());
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
 
             // DoDefaults
             _tree.HEIGHTTODBH = 1.3F;
             _tree.DBHIN  = "Y";
             _tree.CROWNIN = "Y";
-
         }
         async Task ShowComments()
         {
             // launch the form - filtered to a specific tree
+            _AllowtoLeave = true;
             await _navigation.PushAsync(new TreeComments(_tree));
         }
-       
+        async Task ShowStemMap()
+        {
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowtoLeave = true;
+                await _navigation.PushAsync(new StemMapDetailsPage(_tree.TREEID));
+            }
+          
+        }
+        private async Task<bool> TrySave()
+        {
+            TreeValidator _validator = new TreeValidator();
+            ValidationResult validationResults = _validator.Validate(_tree);
+            if (validationResults.IsValid)
+            {
+                _ = AddTree(_fk);
+                return true;
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Update Tree", validationResults.Errors[0].ErrorMessage, "Ok");
+                return false;
+            }
+        }
+        async Task ShowDeformity()
+        {
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowtoLeave = true;
+                await _navigation.PushAsync(new DeformityList(_tree.TREEID));
+            }
+            
+        }
 
         // These are for the picker item sources that present a an item different than the code
         private PickerItems _selectedCrownPosition = new PickerItems { ID = 0, NAME = "" };
@@ -212,30 +252,68 @@ namespace eLiDAR.ViewModels {
         async Task ShowList(){ 
             await _navigation.PushAsync(new TreeListPage(_fk));
         }
-        async Task AddTree(string _fk)
+        private Task AddTree(string _fk)
         {
-
-            TreeValidator _treeValidator = new TreeValidator();
-            _tree.PLOTID = _fk;
-            ValidationResult validationResults = _treeValidator.Validate(_tree);
-            if (validationResults.IsValid)
-               {
-                bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Tree", "Do you want to save tree details?", "OK", "Cancel");
-                if (isUserAccept)
-                    {
-                    _tree.Created = System.DateTime.UtcNow;
-                    _tree.LastModified = _tree.Created;
-                    _treeRepository.InsertTree(_tree, _fk);
-                    await _navigation.PopAsync();
-
-//                    await _navigation.PushAsync(new TreeListPage(_fk));
-                    }
+            if (_tree.TREEID == null)
+            {
+                _tree.Created = System.DateTime.UtcNow;
+                _tree.IsDeleted = "N";
+                _tree.LastModified = _tree.Created;
+                _treeRepository.InsertTree(_tree, _fk);
             }
             else
-                {
-               await Application.Current.MainPage.DisplayAlert("Add Tree", validationResults.Errors[0].ErrorMessage, "Ok");
-               }
+            {
+                _tree.LastModified = System.DateTime.UtcNow;
+                _treeRepository.UpdateTree(_tree);
+            }
+            return Task.CompletedTask;
         }
         public bool IsViewAll => _treeRepository.GetAllData().Count > 0 ? true : false;
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            _AllowtoLeave = false;
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                if (!_AllowtoLeave)
+                {
+                    e.Cancel();
+                    await GoBack();
+                }
+            }
+        }
+
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                TreeValidator _validator = new TreeValidator();
+                ValidationResult validationResults = _validator.Validate(_tree);
+                if (validationResults.IsValid)
+                {
+                    _ = AddTree(_fk);
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Tree", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
+            }
+        }
     }
+
 }

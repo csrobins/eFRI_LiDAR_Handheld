@@ -19,14 +19,14 @@
 
         </StackLayout>-->
             <local:PlotView />
-            <Button
+       <!--     <Button
                 x:Name="SubmitButton"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
                 FontAttributes="Bold"
                 Text="Save Plot"
-                TextColor="White" />
+                TextColor="White" /> -->
             <!--<Label
                 x:Name="ViewLbl"
                 FontSize="15"

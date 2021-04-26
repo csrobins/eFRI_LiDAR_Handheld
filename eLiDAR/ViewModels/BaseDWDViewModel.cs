@@ -33,6 +33,15 @@ namespace eLiDAR.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+        private bool _IsChanged = false;
+        public bool IsChanged
+        {
+            get => _IsChanged;
+            set
+            {
+                _IsChanged = value;
+            }
+        }
 
         public string DWDID
         {
@@ -61,6 +70,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.LINENUMBER = value;
                 NotifyPropertyChanged("LINE");
+                IsChanged = true;
             }
         }
 
@@ -71,6 +81,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.DWDNUM = value;
                 NotifyPropertyChanged("DWDNUM");
+                IsChanged = true;
             }
         }
 
@@ -81,6 +92,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.SPECIESCODE = value;
                 NotifyPropertyChanged("SPECIES");
+                IsChanged = true;
             }
         }
         public double DIAM
@@ -90,6 +102,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.DIAMETER = value;
                 NotifyPropertyChanged("DIAM");
+                IsChanged = true;
             }
         }
         public int DECOMP_CLASS
@@ -99,6 +112,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.DECOMPOSITIONCLASS = value;
                 NotifyPropertyChanged("DECOMP_CLASS");
+                IsChanged = true;
             }
         }
 
@@ -109,6 +123,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.DOWNWOODYDEBRISORIGINCODE = value;
                 NotifyPropertyChanged("ORIGIN");
+                IsChanged = true;
             }
         }
 
@@ -119,6 +134,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.TILTANGLE = value;
                 NotifyPropertyChanged("TILT_ANGLE");
+                IsChanged = true;
             }
         }
 
@@ -129,6 +145,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.DOWNWOODYDEBRISLENGTH = value;
                 NotifyPropertyChanged("LENGTH");
+                IsChanged = true;
             }
         }
 
@@ -139,6 +156,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.SMALLDIAMETER = value;
                 NotifyPropertyChanged("SMALL_DIAM");
+                IsChanged = true;
             }
         }
 
@@ -149,6 +167,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.LARGEDIAMETER = value;
                 NotifyPropertyChanged("LARGE_DIAM");
+                IsChanged = true;
             }
         }
 
@@ -159,6 +178,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.MOSS = value;
                 NotifyPropertyChanged("GT_50_MOSS");
+                IsChanged = true;
             }
         }
 
@@ -169,6 +189,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.BURNED = value;
                 NotifyPropertyChanged("BURNED");
+                IsChanged = true;
             }
         }
 
@@ -179,6 +200,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.HOLLOW = value;
                 NotifyPropertyChanged("HOLLOW");
+                IsChanged = true;
             }
         }
         public string IS_ACCUM
@@ -188,6 +210,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.IS_ACCUM = value;
                 NotifyPropertyChanged("IS_ACCUM");
+                IsChanged = true;
             }
         }
         public double ACCUM_LENGTH
@@ -197,6 +220,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.ACCUMULATIONLENGTH = value;
                 NotifyPropertyChanged("ACCUM_LENGTH");
+                IsChanged = true;
             }
         }
         public double ACCUM_DEPTH
@@ -206,6 +230,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.ACCUMULATIONDEPTH = value;
                 NotifyPropertyChanged("ACCUM_DEPTH");
+                IsChanged = true;
             }
         }
         public int PERCENT_CONIFER
@@ -215,6 +240,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.PERCENTCONIFER = value;
                 NotifyPropertyChanged("PERCENT_CONIFER");
+                IsChanged = true;
             }
         }
         public int PERCENT_DECID
@@ -224,6 +250,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.PERCENTHARDWOOD = value;
                 NotifyPropertyChanged("PERCENT_DECID");
+                IsChanged = true;
             }
         }
 

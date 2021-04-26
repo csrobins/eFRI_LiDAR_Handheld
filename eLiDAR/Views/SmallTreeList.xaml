@@ -19,17 +19,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button
-                Grid.Row="0"
-                Grid.Column="1"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                BorderWidth="1"
-                Command="{Binding AddCommand}"
-                HeightRequest="50"
-                Text="New Species"
-                TextColor="White"
-                WidthRequest="100" />
+           
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -64,7 +54,7 @@
                                     Font="20"
                                     HorizontalTextAlignment="Start"
                                     Style="{DynamicResource TextSubhead}"
-                                    Text="{Binding SPECIES}"
+                                    Text="{Binding SPECIESCODE}"
                                     VerticalTextAlignment="Center" />
                             </StackLayout>
                             <StackLayout Grid.Column="1" Spacing="1">
@@ -184,13 +174,21 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackLayout Grid.Row="2" HorizontalOptions="End" VerticalOptions="End">  
         <Button
+                Style="{StaticResource RoundButtonStyle }"
+                Grid.Row="0"
+                Grid.Column="1"
+                Command="{Binding AddCommand}"
+                Text="+"/>
+        </StackLayout>
+     <!--   <Button
             Grid.Row="2"
             BackgroundColor="{StaticResource cerulean}"
             BorderRadius="0"
             Command="{Binding DeleteAllCommand}"
             Text="Delete All Small Trees"
             TextColor="White"
-            VerticalOptions="EndAndExpand" />
+            VerticalOptions="EndAndExpand" /> -->
     </Grid>
 </ContentPage>

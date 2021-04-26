@@ -13,13 +13,13 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:SoilView />
-            <Button
+    <!--        <Button
                 x:Name="SubmitButton"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
                 Text="Save Soil"
-                TextColor="White" />
+                TextColor="White" /> -->
             <!--<Label
                 x:Name="ViewLbl"
                 FontSize="15"

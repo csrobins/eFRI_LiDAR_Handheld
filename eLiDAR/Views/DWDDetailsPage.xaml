@@ -12,20 +12,18 @@
     <ScrollView>
         <StackLayout Padding="5" Spacing="12">
             <local:DWDView />
-            <Button
+       <!--     <Button
                 Margin="0,30,0,0"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
                 Text="Update"
-                TextColor="White" />
+                TextColor="White" /> -->
             <Button
-                Margin="0,30,0,0"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
+                Style="{StaticResource FormButtonStyle}"
                 Command="{Binding DeleteCommand}"
                 Text="Delete"
-                TextColor="White" />
+              />
         </StackLayout>
     </ScrollView>
 </ContentPage>

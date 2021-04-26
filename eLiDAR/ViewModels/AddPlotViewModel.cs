@@ -20,7 +20,7 @@ namespace eLiDAR.ViewModels {
         public ICommand StandInfoCommand { get; private set; }
         public ICommand ForestHealthCommand { get; private set; }
         public ICommand PlotCrewCommand { get; private set; }
-
+        public ICommand PhotoCommand { get; private set; }
         public List<PickerItems> ListFMU { get; set; }
         public List<PickerItems> ListSpecies { get; set; }
        
@@ -29,6 +29,10 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListNonStandardTypeCode { get; set; }
         public List<PickerItemsString> ListPerson { get; set; }
         public List<PickerItems> ListGrowthPlot { get; set; }
+        public List<PickerItems> ListAccessCondition { get; set; }
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
+        private bool _AllowToLeave = false;
         public AddPlotViewModel(INavigation navigation, string fk)
         {
             _navigation = navigation;
@@ -50,31 +54,64 @@ namespace eLiDAR.ViewModels {
             ListNonStandardType = PickerService.NonStandardTypeItems().OrderBy(c => c.NAME).ToList();
             ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
             ListGrowthPlot = PickerService.GrowthPlotItems().OrderBy(c => c.NAME).ToList();
+            ListAccessCondition = PickerService.AccessConditionItems().OrderBy(c => c.NAME).ToList();
             CommentsCommand = new Command(async () => await ShowComments());
             StandInfoCommand = new Command(async () => await ShowStandInfo());
             ForestHealthCommand = new Command(async () => await ShowForestHealth());
             PlotCrewCommand = new Command(async () => await ShowPlotCrew());
+            PhotoCommand = new Command(async () => await ShowPhoto());
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
 
         }
         async Task ShowComments()
         {
+            _AllowToLeave = true;
             // launch the form - filtered to a specific tree
             await _navigation.PushAsync(new PlotComments(_plot));
         }
         async Task ShowStandInfo()
         {
+            _AllowToLeave = true;
             // launch the form - filtered to a specific tree
             await _navigation.PushAsync(new StandInfo(_plot));
         }
         async Task ShowForestHealth()
         {
+            _AllowToLeave = true;
             // launch the form - filtered to a specific tree
             await _navigation.PushAsync(new ForestHealth(_plot));
         }
         async Task ShowPlotCrew()
         {
+            _AllowToLeave = true;
             // launch the form - filtered to a specific tree
             await _navigation.PushAsync(new PlotCrew(_plot));
+        }
+        async Task ShowPhoto()
+        {
+            // launch the form - filtered to a specific photo list
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowToLeave = true;
+                await _navigation.PushAsync(new PhotoList(_plot.PLOTID));
+            }
+        }
+        private async Task<bool> TrySave()
+        {
+            PlotValidator _validator = new PlotValidator();
+            ValidationResult validationResults = _validator.Validate(_plot);
+            if (validationResults.IsValid)
+            {
+                _ = AddPlot(_selectedprojectid);
+                return true;
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Update Plot", validationResults.Errors[0].ErrorMessage, "Ok");
+                return false;
+            }
         }
 
         private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
@@ -103,6 +140,20 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedNonStandardType, value);
                 _plot.NONSTANDARDTYPECODE = (int)_selectedNonStandardType.ID;
+            }
+        }
+        private PickerItems _selectedAccessCondition = new PickerItems { ID = 0, NAME = "" };
+        public PickerItems SelectedAccessCondtion
+        {
+            get
+            {
+                _selectedAccessCondition = PickerService.GetItem(ListAccessCondition, _plot.ACCESSCONDITIONCODE);
+                return _selectedAccessCondition;
+            }
+            set
+            {
+                SetProperty(ref _selectedAccessCondition, value);
+                _plot.ACCESSCONDITIONCODE  = (int)_selectedAccessCondition.ID;
             }
         }
 
@@ -164,32 +215,70 @@ namespace eLiDAR.ViewModels {
         async Task ShowList(){ 
             await _navigation.PushAsync(new PlotList(_selectedprojectid ));
         }
-        async Task AddPlot(string fk)
+        private Task AddPlot(string fk)
         {
-            _plot.PROJECTID = fk;
-//            var validationResults = _plotValidator.Validate((FluentValidation.IValidationContext)_plot);
-  
-            PlotValidator _plotValidator = new PlotValidator();
-            ValidationResult validationResults = _plotValidator.Validate(_plot);
-
-            if (validationResults.IsValid)
+            if (_plot.PLOTID == null)
             {
-                bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Plot", "Do you want to save plot details?", "OK", "Cancel");
-                if (isUserAccept)
+                _plot.PROJECTID = fk;
+                _plot.Created = System.DateTime.UtcNow;
+                _plot.LastModified = _plot.Created;
+                _plot.IsDeleted = "N";
+                _plotRepository.InsertPlot(_plot, fk);
+                return Task.CompletedTask;
+            }
+            else
+            {
+                _plot.LastModified = System.DateTime.Now;
+                _plotRepository.UpdatePlot(_plot);
+                return Task.CompletedTask;
+            }
+
+        }
+        public bool IsViewAll => _plotRepository.GetAllData().Count > 0 ? true : false;
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            _AllowToLeave = false;
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                if (!_AllowToLeave)
                 {
-                    _plot.Created = System.DateTime.UtcNow;
-                    _plot.LastModified = _plot.Created;
-                    _plotRepository.InsertPlot(_plot, fk);
-                    
-                    await _navigation.PopAsync(); 
-                 //   await _navigation.PushAsync(new PlotList(fk));
+                    e.Cancel();
+                    await GoBack();
+                }
+            }
+        }
+
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                PlotValidator _validator = new PlotValidator();
+                ValidationResult validationResults = _validator.Validate(_plot);
+                if (validationResults.IsValid)
+                {
+                    _ = AddPlot(_selectedprojectid);
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Plot", validationResults.Errors[0].ErrorMessage, "Ok");
                 }
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Add Plot", validationResults.Errors[0].ErrorMessage, "Ok");
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
             }
         }
-        public bool IsViewAll => _plotRepository.GetAllData().Count > 0 ? true : false;
     }
 }

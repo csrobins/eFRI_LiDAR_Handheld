@@ -19,7 +19,6 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowFilteredCommand { get; private set; }
         public ICommand ShowCrewCommand { get; private set; }
 
-
         public ProjectListViewModel(INavigation navigation) {
             _navigation = navigation;
             _projectRepository = new ProjectRepository();
@@ -33,6 +32,7 @@ namespace eLiDAR.ViewModels {
 
         public void FetchProjects(){
             ProjectList = _projectRepository.GetAllProjectData();
+            NotifyPropertyChanged("ProjectList");
         }
 
         async Task ShowAddProject() {
@@ -75,6 +75,13 @@ namespace eLiDAR.ViewModels {
             // launch the crew form - filtered to a specific projectid
             await _navigation.PushAsync(new PersonList(_project.PROJECTID));
    
+        }
+        public List<PROJECT> ProjectList
+        {
+            get => _projectRepository.GetAllProjectData();
+            set
+            {
+            }
         }
 
     }

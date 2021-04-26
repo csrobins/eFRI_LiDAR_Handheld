@@ -8,12 +8,11 @@
     Shell.BackgroundColor="{DynamicResource backgroundColor}"
     Shell.ForegroundColor="{StaticResource cerulean}"
     Shell.TitleColor="{StaticResource cerulean}">
-    <Grid Padding="5,5,5,5">
+    <Grid Padding="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -30,11 +29,11 @@
                 PlaceholderColor="{DynamicResource TextPrimaryColor}"
                 Style="{DynamicResource TextSubhead}"
                 TextChanged="SearchBar_OnTextChanged" />
-           
+
         </Grid>
         <ListView
             x:Name="MyListView"
-            Grid.Row="2"
+            Grid.Row="1"
             BackgroundColor="{DynamicResource backgroundColor}"
             HasUnevenRows="true"
             ItemsSource="{Binding PlotListFull}"
@@ -111,6 +110,14 @@
                                   />
                                 <Button
                                     Style="{StaticResource RectangularButtonStyle }"
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowPhotoCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                    HorizontalOptions="End"
+                                    Text="Photo"
+                                  />
+                                <Button
+                                    Style="{StaticResource RectangularButtonStyle }"
                               
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSmallTreeCommand}"
@@ -125,8 +132,15 @@
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
-                                    Text="Veg"
-                                  />
+                                    Text="Veg"/>
+                                <Button
+                                    Style="{StaticResource RectangularButtonStyle }"
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowVegetationCensusCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                    HorizontalOptions="End"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
+                                    Text="Census"/>
                                 <Button
                                     Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
@@ -141,14 +155,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackLayout Grid.Row="3"
-                Grid.Column="0" HorizontalOptions="End" VerticalOptions="End"  >
-                <Button x:Name="Button_Round"
+        <StackLayout Grid.Row="2" HorizontalOptions="End" VerticalOptions="End"  >
+            <Button x:Name="Button_Round"
                     Text="+"
                     Command="{Binding AddCommand}"
                     Style ="{StaticResource RoundButtonStyle}"/>
         </StackLayout>
-       
     </Grid>
-
 </ContentPage>

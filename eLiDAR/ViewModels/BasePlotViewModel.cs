@@ -633,6 +633,16 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+        public int ACCESSCONDITIONCODE
+        {
+            get => _plot.ACCESSCONDITIONCODE;
+            set
+            {
+                _plot.ACCESSCONDITIONCODE = value;
+                NotifyPropertyChanged("ACCESSCONDITIONCODE");
+                IsChanged = true;
+            }
+        }
 
         List<PLOT> _plotList;
         public List<PLOT> PlotList

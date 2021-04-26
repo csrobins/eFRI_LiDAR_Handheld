@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:eLiDAR.Views"
-    Title="Add Soil Layer"
+    Title="{Binding Title}"
     BackgroundColor="{DynamicResource backgroundColor}"
     BindingContext="AddSmallTreeViewModel"
     Shell.BackgroundColor="{DynamicResource backgroundColor}"
@@ -13,13 +13,13 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:SmallTreeView />
-            <Button
+       <!--     <Button
                 x:Name="SubmitButton"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
                 Command="{Binding AddCommand}"
                 Text="Save Small Tree"
-                TextColor="White" />
+                TextColor="White" /> -->
             <!--<Label Text="View All Small Trees" IsVisible="{Binding IsViewAll}" x:Name="ViewLbl" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15">
                 <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />

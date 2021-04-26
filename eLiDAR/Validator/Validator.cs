@@ -3,6 +3,8 @@ using eLiDAR.Models;
 using eLiDAR.Helpers;
 using System;
 using FluentValidation.Validators;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace eLiDAR.Validator
 {
@@ -22,6 +24,13 @@ namespace eLiDAR.Validator
         {
             RuleFor(c => c.FIRSTNAME).NotEmpty().WithMessage("First name should not be empty.");
             RuleFor(c => c.LASTNAME).NotEmpty().WithMessage("Last name should not be empty.");
+        }
+    }
+    public class PhotoValidator : AbstractValidator<PHOTO>
+    {
+        public PhotoValidator()
+        {
+            RuleFor(c => c.PHOTOTYPE).NotEmpty().WithMessage("Photo Type cannot be empty");
         }
     }
     public class PlotValidator : AbstractValidator<PLOT>
@@ -86,6 +95,33 @@ namespace eLiDAR.Validator
         }
 
     }
+    public class TreeAgeValidator : AbstractValidator<TREE>
+    {
+        public TreeAgeValidator()
+        {
+            
+            
+        }
+
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool IsUniqueTreeNum(TREE _tree)
+        {
+            DatabaseHelper _db = new DatabaseHelper();
+            return _db.IsTreeNumUnique(_tree);
+        }
+
+    }
     public class StemMapValidator : AbstractValidator<STEMMAP>
     {
         public StemMapValidator()
@@ -117,8 +153,20 @@ namespace eLiDAR.Validator
     {
         public EcositeValidator()
         {
-            RuleFor(c => c.PRI_ECO).NotEmpty().WithMessage("Primary ecosite should not be empty.");
+          //  RuleFor(c => c.PRI_ECO).NotEmpty().When(c => c.PRI_ECO !=null).WithMessage("Primary ecosite should not be empty.");
+            RuleFor(c => c).Must(c => IsValidEcosite(c.PRI_ECO)).When(c => c.PRI_ECO != null).WithMessage("Invalid ecosite for PRI_ECO.");
+            RuleFor(c => c).Must(c => IsValidEcosite(c.SEC_ECO)).When(c => c.SEC_ECO != null).WithMessage("Invalid ecosite for SEC_ECO.");
             RuleFor(c => c.MOISTUREREGIMECODE).NotEmpty().WithMessage("Moisture Regime should not be empty.");
+        }
+        bool IsValidEcosite(string strcheck)
+        {
+            List<string> ListCheck = new List<string>();
+            using (var s = typeof(EcositeValidator).Assembly.GetManifestResourceStream("eLiDAR.Data.Ecosites.txt"))
+            {
+                ListCheck = new System.IO.StreamReader(s).ReadToEnd().Split('\n').Select(t => t.Trim()).ToList();
+                if (ListCheck.Contains(strcheck)) { return true; }
+            }
+            return false;
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -144,11 +192,46 @@ namespace eLiDAR.Validator
         public SoilValidator()
         {
             RuleFor(c => c).Must(c => IsUniqueSoilNum(c)).WithMessage("Soil layer number must be unique within the plot.");
+            RuleFor(c => c).Must(c => IsValidHorizon(c.HORIZON)).When(c => c.HORIZON != null).WithMessage("Invalid soil horizon.");
+            RuleFor(c => c).Must(c => IsValidColour(c.MATRIXCOLOUR)).When(c => c.MATRIXCOLOUR != null).WithMessage("Invalid soil matrix colour.");
+            RuleFor(c => c).Must(c => IsValidStructure(c.STRUCTURE)).When(c => c.MINERALTEXTURECODE != null).WithMessage("Invalid soil structure.");
+            RuleFor(c => c).Must(c => IsValidColour(c.GLEYCOLOUR)).When(c => c.GLEYCOLOUR != null).WithMessage("Invalid soil gley colour.");
+            RuleFor(c => c).Must(c => IsValidColour(c.MOTTLECOLOUR)).When(c => c.MOTTLECOLOUR != null).WithMessage("Invalid soil gley colour.");
             RuleFor(c => c.HORIZONNUMBER).NotEmpty().WithMessage("Soil Layer is required.");
-            RuleFor(c => c.DEPTHFROM).NotEmpty().WithMessage("From is required.");
-            RuleFor(c => c.DEPTHTO).NotEmpty().WithMessage("To is required.");
-            RuleFor(c => c.HORIZON).NotEmpty().WithMessage("Soil horizon is required.");
+            RuleFor(c => c.DEPTHTO).GreaterThan(c => c.DEPTHFROM).WithMessage("To must be greater than the From.");
+    //        RuleFor(c => c.HORIZON).NotEmpty().WithMessage("Soil horizon is required.");
         }
+        bool IsValidHorizon(string strcheck)
+        {
+            List<string> ListCheck = new List<string>();
+            using (var s = typeof(SoilValidator).Assembly.GetManifestResourceStream("eLiDAR.Data.Horizons.txt"))
+            {
+                ListCheck = new System.IO.StreamReader(s).ReadToEnd().Split('\n').Select(t => t.Trim()).ToList();
+                if (ListCheck.Contains(strcheck)) { return true; }
+            }
+            return false;
+        }
+        bool IsValidColour(string strcheck)
+        {
+            List<string> ListCheck = new List<string>();
+            using (var s = typeof(SoilValidator).Assembly.GetManifestResourceStream("eLiDAR.Data.colours.txt"))
+            {
+                ListCheck = new System.IO.StreamReader(s).ReadToEnd().Split('\n').Select(t => t.Trim()).ToList();
+                if (ListCheck.Contains(strcheck)) { return true; }
+            }
+            return false;
+        }
+        bool IsValidStructure(string strcheck)
+        {
+            List<string> ListCheck = new List<string>();
+            using (var s = typeof(SoilValidator).Assembly.GetManifestResourceStream("eLiDAR.Data.Structure.txt"))
+            {
+                ListCheck = new System.IO.StreamReader(s).ReadToEnd().Split('\n').Select(t => t.Trim()).ToList();
+                if (ListCheck.Contains(strcheck)) { return true; }
+            }
+            return false;
+        }
+
         bool IsUniqueSoilNum(SOIL _soil)
         {
             DatabaseHelper _db = new DatabaseHelper();
@@ -202,8 +285,10 @@ namespace eLiDAR.Validator
     public class VegetationValidator : AbstractValidator<VEGETATION>
     {
         public VegetationValidator()
-        {
+        { 
             RuleFor(c => c.VSNSPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
+   
+            RuleFor(c => c).Must(c => IsValidPlant(c.VSNSPECIESCODE)).WithMessage("Invalid plant");
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -221,6 +306,52 @@ namespace eLiDAR.Validator
         {
             if (!(value == 0))
                 return true;
+            return false;
+        }
+        bool IsValidPlant(string plant)
+        {
+            List<string> ListPlant = new List<string>();
+            using (var s = typeof(VegetationValidator).Assembly.GetManifestResourceStream("eLiDAR.Data.Genus.txt"))
+            {
+                ListPlant = new System.IO.StreamReader(s).ReadToEnd().Split('\n').Select(t => t.Trim()).ToList();
+                if (ListPlant.Contains(plant)) { return true; }
+            }
+            return false;
+        }
+    }
+    public class VegetationCensusValidator : AbstractValidator<VEGETATIONCENSUS>
+    {
+        public VegetationCensusValidator()
+        {
+            RuleFor(c => c.VSNSPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
+            RuleFor(c => c).Must(c => IsValidPlant(c.VSNSPECIESCODE)).WithMessage("Invalid plant");
+        }
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool IsValidPlant(string plant)
+        {
+            List<string> ListPlant = new List<string>();
+            using (var s = typeof(VegetationCensusValidator).Assembly.GetManifestResourceStream("eLiDAR.Data.Genus.txt"))
+            {
+                ListPlant = new System.IO.StreamReader(s).ReadToEnd().Split('\n').Select(t => t.Trim()).ToList();
+                if (ListPlant.Contains(plant)) { return true; }
+            }
             return false;
         }
     }
@@ -257,7 +388,8 @@ namespace eLiDAR.Validator
         {
             RuleFor(c => c).Must(c => IsUniqueDWDNum(c)).WithMessage("DWD number must be unique within the line.");
             RuleFor(c => c.DECOMPOSITIONCLASS).NotEmpty().WithMessage("Decomp Class should not be empty.");
-           
+            RuleFor(c => c.LINENUMBER).NotEmpty().WithMessage("Line Number must be populated");
+            RuleFor(c => c.DWDNUM).NotEmpty().WithMessage("DWD Number must be populated");
         }
         bool IsUniqueDWDNum(DWD _dwd)
         {

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <ContentView.Content>
-        <Grid Padding="10" ColumnSpacing=" 1">
+        <Grid Padding="10,10,10,10" ColumnSpacing=" 1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -153,19 +153,6 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Vigour" />
-                <Picker
-                    x:Name="txtVigour"
-                    Title="Vigour"
-                    HorizontalOptions="FillAndExpand"
-                    ItemDisplayBinding="{Binding NAME}"
-                    ItemsSource="{Binding ListVigour, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedVigour}"
-                    Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
                     Text="Bark Retention" />
                 <Picker
                     x:Name="txtBarkRetention"
@@ -219,58 +206,6 @@
                         <x:String>A</x:String>
                     </Picker.Items>
                 </Picker>
-            <!--    <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Crown Position" />
-                <Picker
-                    x:Name="txtCrownPosition"
-                    Title="Crown Position"
-                    HorizontalOptions="FillAndExpand"
-                    ItemDisplayBinding="{Binding NAME}"
-                    ItemsSource="{Binding ListCrownPosition, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedCrownPosition}"
-                    Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" /> -->
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Crown Damage" />
-                <Picker
-                    x:Name="txtCrownDamage"
-                    Title="Crown Damage"
-                    HorizontalOptions="FillAndExpand"
-                    ItemDisplayBinding="{Binding NAME}"
-                    ItemsSource="{Binding ListCrownDamage, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedCrownDamage}"
-                    Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
-         <!--       <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Defoliating Insect" />
-                <Picker
-                    x:Name="txtDefoliatingInsect"
-                    Title="Defoliating Insect"
-                    HorizontalOptions="FillAndExpand"
-                    ItemDisplayBinding="{Binding NAME}"
-                    ItemsSource="{Binding ListDefoliatingInsect, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedDefoliatingInsect}"
-                    Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" /> -->
-           <!--     <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Foliar Disease" />
-                <Picker
-                    x:Name="txtFoliarDisease"
-                    Title="Foliar Disease"
-                    HorizontalOptions="FillAndExpand"
-                    ItemDisplayBinding="{Binding NAME}"
-                    ItemsSource="{Binding ListFoliarDisease, Mode=TwoWay}"
-                    SelectedItem="{Binding SelectedFoliarDisease}"
-                    Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" /> -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -339,6 +274,45 @@
                         <x:String>Y</x:String>
                     </Picker.Items>
                 </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Tree Health Fields" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Vigour Rating" />
+                <Picker
+                    x:Name="txtVigour"
+                    Title="Vigour Rating"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListVigour, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedVigour}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Crown Damage" />
+                <Picker
+                    x:Name="txtCrownDamage"
+                    Title="Crown Damage"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListCrownDamage, Mode=TwoWay}"
+                    IsEnabled="{Binding IsLiveTree}"
+                    SelectedItem="{Binding SelectedCrownDamage}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding StemMapCommand}"
+                    Text="Stem Map" />
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding DeformityCommand}"
+                    Text="Deformity" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">

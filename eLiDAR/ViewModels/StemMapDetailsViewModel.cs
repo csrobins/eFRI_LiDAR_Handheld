@@ -17,6 +17,8 @@ namespace eLiDAR.ViewModels {
 
         public ICommand UpdateTreeCommand { get; private set; }
         public ICommand DeleteTreeCommand { get; private set; }
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
         public StemMapDetailsViewModel(INavigation navigation, string selectedTreeID) {
             _navigation = navigation;
             _stemmap = new STEMMAP();
@@ -30,6 +32,9 @@ namespace eLiDAR.ViewModels {
             {
                 FetchTreeDetails(_fk);
             }
+            IsChanged = false;
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
         }
 
 
@@ -37,48 +42,34 @@ namespace eLiDAR.ViewModels {
             _stemmap = _stemMapRepository.GetTreeData(fk);
         }
 
-        async Task UpdateTree() {
-            
+        private Task UpdateTree() {
+
             try
             {
-                StemMapValidator _stemmapValidator = new StemMapValidator();
-                ValidationResult treevalidationResults = _stemmapValidator.Validate(_stemmap);
-
-                if (treevalidationResults.IsValid)
+                if (_stemMapRepository.IsStemMapExists(_fk))
                 {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Stem Map Details", "Save Stem Map Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
-                        if (_stemMapRepository.IsStemMapExists(_fk))
-                        {
-                            _stemmap.LastModified = System.DateTime.UtcNow;
-                            _stemMapRepository.UpdateTree(_stemmap);
-
-                        }
-                        else
-                        {
-                            _stemmap.Created = System.DateTime.UtcNow;
-                            _stemmap.LastModified = _stemmap.Created;
-                            _stemMapRepository.InsertTree(_stemmap, _fk);
-                        }
-                        await _navigation.PopAsync();
-                    }
+                    _stemmap.LastModified = System.DateTime.UtcNow;
+                    _stemMapRepository.UpdateTree(_stemmap);
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Add Stem Map", treevalidationResults.Errors[0].ErrorMessage, "Ok");
+                    _stemmap.Created = System.DateTime.UtcNow;
+                    _stemmap.LastModified = _stemmap.Created;
+                    _stemmap.IsDeleted = "N";
+                    _stemMapRepository.InsertTree(_stemmap, _fk);
                 }
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {
-                var myerror = e.Message; // error
-                                         //  Log.Fatal(e);
-            };
+                var myerror = e.Message;
+                return Task.CompletedTask;
+            }
         }
         async Task DeleteTree() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Stem Map Details", "Delete Stem Map Details", "OK", "Cancel");
             if (isUserAccept) {
-                _stemMapRepository.DeleteTree(_stemmap.TREEID);
+                _stemMapRepository.DeleteTree(_stemmap);
                 await _navigation.PopAsync();
             }
         }
@@ -87,6 +78,47 @@ namespace eLiDAR.ViewModels {
             get => "Stem Map details for tree " + _stemMapRepository.GetTitle(_fk);
             set
             {
+            }
+        }
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                e.Cancel();
+                await GoBack();
+            }
+        }
+
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                StemMapValidator _validator = new StemMapValidator();
+                ValidationResult validationResults = _validator.Validate(_stemmap);
+                if (validationResults.IsValid)
+                {
+                    _ = UpdateTree();
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Tree", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
             }
         }
     }

@@ -20,20 +20,25 @@ namespace eLiDAR.ViewModels {
 
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItemsString> ListCoreStatus { get; set; }
-
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
 
         public TreeAgeViewModel(INavigation navigation, string selectedTreeID) {
             _navigation = navigation;
             _tree = new TREE();
             _tree.TREEID = selectedTreeID;
             _treeRepository = new TreeRepository();
-
+           
             UpdateTreeCommand = new Command(async () => await UpdateTree());
             CommentsCommand = new Command(async () => await ShowComments());
 
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
             ListCoreStatus = PickerService.CoreStatusItems().OrderBy(c => c.NAME).ToList();
             FetchTreeDetails();
+            //defaults
+            if (_tree.HEIGHTTOCORE == 0) { _tree.HEIGHTTOCORE = 1.3F; }
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
         }
 
         async Task ShowComments()
@@ -79,36 +84,26 @@ namespace eLiDAR.ViewModels {
             _tree = _treeRepository.GetTreeData(_tree.TREEID);
         }
 
-        async Task UpdateTree() {
+        private Task UpdateTree() {
             //var validationResults = _treeValidator.Validate(_tree);
             //TreeValidator _treeValidator = new TreeValidator();
             //ValidationResult validationResults = new ValidationResult();
             //validationResults =  _treeValidator.Validate(_tree);
             try
             {
-                TreeValidator _treeValidator = new TreeValidator();
-                ValidationResult treevalidationResults = _treeValidator.Validate(_tree);
+               
+                 _tree.LastModified = System.DateTime.UtcNow;
+                 _treeRepository.UpdateTree(_tree);
+                 NotifyPropertyChanged("TreeListFull");
+                return Task.CompletedTask;
+                //     await _navigation.PopAsync();
 
-                if (treevalidationResults.IsValid)
-                {
-                    bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree Age Details", "Update Tree Age Details", "OK", "Cancel");
-                    if (isUserAccept)
-                    {
-                        _tree.LastModified = System.DateTime.UtcNow;
-                        _treeRepository.UpdateTree(_tree);
-                        NotifyPropertyChanged("TreeListFull"); 
-                        await _navigation.PopAsync();
-                    }
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Add Tree", treevalidationResults.Errors[0].ErrorMessage, "Ok");
-                }
             }
             catch (Exception e)
             {
-                var myerror = e.Message; // error
-                                         //  Log.Fatal(e);
+                var myerror = e.Message;
+                return Task.CompletedTask;// error
+                                          //  Log.Fatal(e);
             };
 
         }
@@ -116,15 +111,56 @@ namespace eLiDAR.ViewModels {
         async Task DeleteTree() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree Details", "Delete Tree Details", "OK", "Cancel");
             if (isUserAccept) {
-                _treeRepository.DeleteTree(_tree.TREEID);
+                _treeRepository.DeleteTree(_tree);
                 await _navigation.PopAsync();
             }
         }
         public string Title
         {
-            get => "Tree Details for tree " + _tree.TREENUMBER;
+            get => "Tree Age Details for tree " + _tree.TREENUMBER.ToString() ;
             set
             {
+            }
+        }
+        private void OnAppearing()
+        {
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                e.Cancel();
+                await GoBack();
+            }
+        }
+
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                TreeAgeValidator _validator = new TreeAgeValidator();
+                ValidationResult validationResults = _validator.Validate(_tree);
+                if (validationResults.IsValid)
+                {
+                    _ = UpdateTree();
+                    Shell.Current.Navigating -= Current_Navigating;
+                    await Shell.Current.GoToAsync("..", true);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Tree Age", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                await Shell.Current.GoToAsync("..", true);
             }
         }
     }

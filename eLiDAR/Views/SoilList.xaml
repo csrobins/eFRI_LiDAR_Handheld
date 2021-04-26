@@ -19,17 +19,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button
-                Grid.Row="0"
-                Grid.Column="1"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                BorderWidth="1"
-                Command="{Binding AddCommand}"
-                HeightRequest="50"
-                Text="New Soil Layer"
-                TextColor="White"
-                WidthRequest="100" />
+           
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -63,7 +53,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding LAYER}"
+                                        Text="{Binding HORIZONNUMBER}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -75,7 +65,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding FROM}"
+                                        Text="{Binding DEPTHFROM}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
@@ -85,7 +75,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding TO}"
+                                        Text="{Binding DEPTHTO}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
@@ -118,7 +108,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding TEXTURE}"
+                                        Text="{Binding MINERALTEXTURECODE}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -129,13 +119,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackLayout Grid.Row="2" HorizontalOptions="End" VerticalOptions="End" > 
         <Button
-            Grid.Row="2"
-            BackgroundColor="{StaticResource cerulean}"
-            BorderRadius="0"
-            Command="{Binding DeleteAllCommand}"
-            Text="Delete All Soils"
-            TextColor="White"
-            VerticalOptions="EndAndExpand" />
+            Style="{StaticResource RoundButtonStyle }"  
+            Command="{Binding AddCommand}"
+            Text="+" />
+        </StackLayout>
     </Grid>
 </ContentPage>

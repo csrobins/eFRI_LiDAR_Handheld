@@ -16,6 +16,9 @@ namespace eLiDAR
         public static string APIDeleteUrl = "https://prod-03.canadacentral.logic.azure.com/workflows/25f0f3c7b503473e9e3c9c0aafe4d895/triggers/manual/paths/invoke/{0}/?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=71pN-A3wfwebCVBXEJMYIEqA9jaLl5OZf1C58qdOiqg{1}";
         public static int DefaultSmallTreeArea = 100;
         public static int DefaultUnderstoryVegArea = 100;
+        public static int DefaultPhoto1Distance = 6;
+        public static int DefaultPhoto2Distance = 12;
+
 
     }
 }
