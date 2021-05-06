@@ -12,7 +12,7 @@ using eLiDAR.Services;
 
 namespace eLiDAR.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+     
     public partial class VegetationCensusView : ContentView
     {
 

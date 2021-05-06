@@ -16,179 +16,265 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20" Spacing="12">
+        <!--    <Grid Padding="10" ColumnSpacing=" 1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions> -->
 
-                <StackLayout Margin="10" Orientation="Horizontal">
-                    <Label>
+                <StackLayout Margin ="10" Grid.Row="0" Grid.Column="0">
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Use Boreal Species List
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            x:Name="swchBorealSpecies"
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding IsBoreal}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Use Numeric Species List
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            x:Name="swchNumericSpecies"
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding UseNumericList}" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span
                                     FontAttributes="Bold"
                                     FontSize="17"
                                     TextColor="{DynamicResource TextPrimaryColor}">
-                                    Use Boreal Species List
+                                    Use Alphabetic Species List
                                 </Span>
                             </FormattedString>
                         </Label.FormattedText>
-                    </Label>
-                    <Switch
-                        x:Name="swchBorealSpecies"
+                        </Label>
+                        <Switch
+                        x:Name="swchAlphaSpecies"
                         HorizontalOptions="EndAndExpand"
-                        IsToggled="{Binding IsBoreal}" />
+                        IsToggled="{Binding UseAlphaList}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Allow Plot Deletion
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            x:Name="swchPlotDeletion"
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding IsAllowPlotDeletion}" />
+                    </StackLayout>
+             </StackLayout>
+             <StackLayout  Grid.Column="1" Grid.Row="0" >
+                    <StackLayout Margin="10" Orientation="Horizontal" >
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Allow Project Deletion
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            x:Name="swchProjectDeletion"
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding IsAllowProjectDeletion}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Allow Autonumbering (for Trees, Soils, DWD)
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            x:Name="swchAutoNumber"
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding IsAllowAutoNumber}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                            Notify on Save
+                                        </Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Switch
+                            x:Name="swcSave"
+                            HorizontalOptions="EndAndExpand"
+                            IsEnabled="false"
+                            IsToggled="{Binding IsNotifySave}" />
+                   </StackLayout>
+                   <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Use Device Theme
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding UseDeviceThemeSettings}"
+                            VerticalOptions="Center" />
+                   </StackLayout>
+                   <StackLayout
+                        Margin="10"
+                        IsVisible="{Binding UseDeviceThemeSettings, Converter={StaticResource InvertedBoolConverter}}"
+                        Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Use Dark Theme
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding UseDarkMode}"
+                            VerticalOptions="Center" />
+                   </StackLayout>
                 </StackLayout>
-                <StackLayout Margin="10" Orientation="Horizontal">
-                    <Label>
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span
+                <StackLayout Grid.Row ="1" Grid.ColumnSpan="2">
+                        <BoxView Style="{DynamicResource HRule}" />
+                        <StackLayout Margin="10" Orientation="Horizontal">
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
                                     FontAttributes="Bold"
                                     FontSize="17"
                                     TextColor="{DynamicResource TextPrimaryColor}">
-                                    Allow Plot Deletion
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Switch
-                        x:Name="swchPlotDeletion"
-                        HorizontalOptions="EndAndExpand"
-                        IsToggled="{Binding IsAllowPlotDeletion}" />
-                </StackLayout>
-                <StackLayout Margin="10" Orientation="Horizontal">
-                    <Label>
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span
-                                    FontAttributes="Bold"
-                                    FontSize="17"
-                                    TextColor="{DynamicResource TextPrimaryColor}">
-                                    Allow Project Deletion
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Switch
-                        x:Name="swchProjectDeletion"
-                        HorizontalOptions="EndAndExpand"
-                        IsToggled="{Binding IsAllowProjectDeletion}" />
-                </StackLayout>
-                <StackLayout Margin="10" Orientation="Horizontal">
-                    <Label>
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span
-                                    FontAttributes="Bold"
-                                    FontSize="17"
-                                    TextColor="{DynamicResource TextPrimaryColor}">
-                                    Notify on Save
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Switch
-                        x:Name="swcSave"
-                        HorizontalOptions="EndAndExpand"
-                        IsToggled="{Binding IsNotifySave}" />
-                </StackLayout>
+                                            Do Partial Synch
+                                        </Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Switch
+                            x:Name="swcSynch"
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding DoPartialSynch}" />
+                        </StackLayout>
 
-                <StackLayout Margin="10" Orientation="Horizontal">
-                    <Label>
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span
-                                    FontAttributes="Bold"
-                                    FontSize="17"
-                                    TextColor="{DynamicResource TextPrimaryColor}">
-                                    Use Device Theme
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Switch
-                        HorizontalOptions="EndAndExpand"
-                        IsToggled="{Binding UseDeviceThemeSettings}"
-                        VerticalOptions="Center" />
-                </StackLayout>
-
-                <StackLayout
-                    Margin="10"
-                    IsVisible="{Binding UseDeviceThemeSettings, Converter={StaticResource InvertedBoolConverter}}"
-                    Orientation="Horizontal">
-                    <Label>
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span
-                                    FontAttributes="Bold"
-                                    FontSize="17"
-                                    TextColor="{DynamicResource TextPrimaryColor}">
-                                    Use Dark Theme
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Switch
-                        HorizontalOptions="EndAndExpand"
-                        IsToggled="{Binding UseDarkMode}"
-                        VerticalOptions="Center" />
-                </StackLayout>
-                <BoxView Style="{DynamicResource HRule}" />
-
-                <StackLayout Orientation="Vertical">
-                    <Button
-                        Style="{StaticResource FormButtonStyle}"
-                        Command="{Binding SynchCommand}"
-                        IsEnabled="{Binding IsSynchEnabled}"
-                        Text="Synch Data"       />
-                    <ActivityIndicator IsRunning="{Binding IsSynchBusy}" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label
-                        FontAttributes="Bold"
-                        HorizontalOptions="Start"
-                        Style="{DynamicResource TextSubhead}"
-                        Text="Last Synched" />
-                    <Label
+                        <StackLayout Orientation="Vertical">
+                            <Button
+                             Style="{StaticResource FormButtonStyle}"
+                             Command="{Binding SynchCommand}"
+                             IsEnabled="{Binding IsSynchEnabled}"
+                             Text="Synch Data"       />
+                            <ActivityIndicator IsRunning="{Binding IsSynchBusy}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            Style="{DynamicResource TextSubhead}"
+                            Text="Last Synched" />
+                            <Label
                         FontAttributes="Bold"
                         HorizontalOptions="End"
                         Style="{DynamicResource TextSubhead}"
                         Text="{Binding LastSynched}" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextBody}"
                         Text="Projects Pushed" />
-                    <Label
+                            <Label
                         HorizontalOptions="End"
                         Style="{StaticResource TextBody}"
                         Text="{Binding PROJECT_ROWS_SYNCHED}" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Style="{StaticResource TextBody}" Text="Projects Pulled" />
-                    <Label Style="{StaticResource TextBody}" Text="{Binding PROJECT_ROWS_PULLED}" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Style="{StaticResource TextBody}" Text="Plots Pushed" />
-                    <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_SYNCHED}" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Style="{StaticResource TextBody}" Text="Plots Pulled" />
-                    <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_PULLED}" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Style="{StaticResource TextBody}" Text="Trees Pushed" />
-                    <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_SYNCHED}" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Style="{StaticResource TextBody}" Text="Trees Pulled" />
-                    <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_PULLED}" />
-                </StackLayout>
-                <Label
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource TextBody}" Text="Projects Pulled" />
+                            <Label Style="{StaticResource TextBody}" Text="{Binding PROJECT_ROWS_PULLED}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource TextBody}" Text="Plots Pushed" />
+                            <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_SYNCHED}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource TextBody}" Text="Plots Pulled" />
+                            <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_PULLED}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource TextBody}" Text="Trees Pushed" />
+                            <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_SYNCHED}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{StaticResource TextBody}" Text="Trees Pulled" />
+                            <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_PULLED}" />
+                        </StackLayout>
+                        <Label
                     FontAttributes="Bold"
                     Style="{StaticResource TextBody}"
                     Text="{Binding msg}" />
-
-            </StackLayout>
+                </StackLayout>
+                 </StackLayout> 
+          <!--  </Grid> -->
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

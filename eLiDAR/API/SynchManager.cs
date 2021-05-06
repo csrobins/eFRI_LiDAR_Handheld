@@ -1,9 +1,11 @@
 ﻿using eLiDAR.Helpers;
 using eLiDAR.Models;
+using eLiDAR.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace eLiDAR.API
 {
@@ -21,13 +23,14 @@ namespace eLiDAR.API
         private int plotpushes;
         private int projectpushes;
         private int treepushes;
-
+        private Utils util = new Utils();
         public SynchManager()
         {
             service = new RestService(); 
             databasehelper = new DatabaseHelper();
             settings = databasehelper.GetSettingsData();
             prevdate = GetDate();
+             
         }
         // main procedure from which to run the synch process
         // all other sych processes start form here
@@ -47,6 +50,9 @@ namespace eLiDAR.API
                 // execute the synch on each tabe here
                 Task<bool> doproject = ProjectSynch();
                 bool projectdone = await doproject;
+
+                Task<bool> doperson = PersonSynch();
+                bool persondone = await doperson;
 
                 Task<bool> doplot = PlotSynch();
                 bool plotdone = await doplot;
@@ -75,9 +81,15 @@ namespace eLiDAR.API
                 Task<bool> dodwd = DWDSynch();
                 bool dwddone = await dodwd;
 
+                Task<bool> dophoto = PhotoSynch();
+                bool photodone = await dophoto;
+               
+                Task<bool> dovegetationcensus = VegetationCensusSynch();
+                bool vegetationcensusdone = await dovegetationcensus;
+
 
                 // finish up by saving the details
-                if (projectdone && plotdone && treedone && stemmapdone && ecositedone && soildone && smalltreedone && vegetationdone && deformitydone && dwddone)
+                if (projectdone && plotdone && treedone && stemmapdone && ecositedone && soildone && smalltreedone && vegetationdone && deformitydone && dwddone && photodone && persondone && vegetationcensusdone && service.IsSuccess )
                 {
                     settings.LastSynched = DateTime.UtcNow;
                     settings.PROJECT_ROWS_SYNCHED = projectpushes;
@@ -90,7 +102,11 @@ namespace eLiDAR.API
                     databasehelper.UpdateSettings(settings);
                     return true;
                 }
-                else { return false; }
+                else 
+                {
+                    await Application.Current.MainPage.DisplayAlert("Synch did not finish", service.Msg, "Ok");
+                    return false;
+                }
             }
             catch (Exception ex)
             { 
@@ -140,12 +156,12 @@ namespace eLiDAR.API
             }
 
             //push deletes
-            var deletelist = databasehelper.GetProjectToDelete(settings.LastSynched);
-            foreach(var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetProjectToDelete(settings.LastSynched);
+            //foreach(var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
   
             return true;
         }
@@ -188,12 +204,12 @@ namespace eLiDAR.API
             }
 
             //push deletes
-            var deletelist = databasehelper.GetPlotToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetPlotToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
 
             return true;
         }
@@ -202,6 +218,7 @@ namespace eLiDAR.API
             TreeManager manager = new TreeManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
+
 
             // pull updated records
             Task<List<TREE>> getupdatetask = manager.GetTasksAsync(filterUpdate);
@@ -226,22 +243,26 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<TREE>> gettask = manager.GetTasksAsync(filterNew);
-            List<TREE> newrecords = await gettask;
-            foreach (var itm in newrecords)
+
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertTree(itm);
-                treepulls = treepulls+1;
+                // pull new records
+                Task<List<TREE>> gettask = manager.GetTasksAsync(filterNew);
+                List<TREE> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertTree(itm);
+                    treepulls = treepulls + 1;
+                }
             }
 
             //push deletes
-            var deletelist = databasehelper.GetTreeToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetTreeToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
 
             return true;
         }
@@ -275,21 +296,24 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<STEMMAP>> gettask = manager.GetTasksAsync(filterNew);
-            List<STEMMAP> newrecords = await gettask;
-            foreach (var itm in newrecords)
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertStemmap(itm);
+                // pull new records
+                Task<List<STEMMAP>> gettask = manager.GetTasksAsync(filterNew);
+                List<STEMMAP> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertStemmap(itm);
+                }
             }
 
             //push deletes
-            var deletelist = databasehelper.GetStemmapToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetStemmapToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
             return true;
         }
         public async Task<bool> EcositeSynch()
@@ -321,21 +345,24 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<ECOSITE>> gettask = manager.GetTasksAsync(filterNew);
-            List<ECOSITE> newrecords = await gettask;
-            foreach (var itm in newrecords)
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertEcosite(itm);
+                // pull new records
+                Task<List<ECOSITE>> gettask = manager.GetTasksAsync(filterNew);
+                List<ECOSITE> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertEcosite(itm);
+                }
             }
 
-            //push deletes
-            var deletelist = databasehelper.GetEcositeToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            ////push deletes
+            //var deletelist = databasehelper.GetEcositeToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
             return true;
         }
         public async Task<bool> SoilSynch()
@@ -367,21 +394,24 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<SOIL>> gettask = manager.GetTasksAsync(filterNew);
-            List<SOIL> newrecords = await gettask;
-            foreach (var itm in newrecords)
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertSoil(itm);
+                // pull new records
+                Task<List<SOIL>> gettask = manager.GetTasksAsync(filterNew);
+                List<SOIL> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertSoil(itm);
+                }
             }
 
             //push deletes
-            var deletelist = databasehelper.GetSoilToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetSoilToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
             return true;
         }
         public async Task<bool> SmalltreeSynch()
@@ -413,21 +443,24 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<SMALLTREE>> gettask = manager.GetTasksAsync(filterNew);
-            List<SMALLTREE> newrecords = await gettask;
-            foreach (var itm in newrecords)
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertSmallTree(itm);
+                // pull new records
+                Task<List<SMALLTREE>> gettask = manager.GetTasksAsync(filterNew);
+                List<SMALLTREE> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertSmallTree(itm);
+                }
             }
 
             //push deletes
-            var deletelist = databasehelper.GetSmalltreeToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetSmalltreeToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
             return true;
         }
 
@@ -460,21 +493,24 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<VEGETATION>> gettask = manager.GetTasksAsync(filterNew);
-            List<VEGETATION> newrecords = await gettask;
-            foreach (var itm in newrecords)
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertVegetation(itm);
+                // pull new records
+                Task<List<VEGETATION>> gettask = manager.GetTasksAsync(filterNew);
+                List<VEGETATION> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertVegetation(itm);
+                }
             }
 
             //push deletes
-            var deletelist = databasehelper.GetVegetationToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetVegetationToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
             return true;
         }
         public async Task<bool> DeformitySynch()
@@ -506,21 +542,24 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<DEFORMITY>> gettask = manager.GetTasksAsync(filterNew);
-            List<DEFORMITY> newrecords = await gettask;
-            foreach (var itm in newrecords)
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertDeformity(itm);
+                // pull new records
+                Task<List<DEFORMITY>> gettask = manager.GetTasksAsync(filterNew);
+                List<DEFORMITY> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertDeformity(itm);
+                }
             }
 
             //push deletes
-            var deletelist = databasehelper.GetDeformityToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetDeformityToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
             return true;
         }
 
@@ -553,24 +592,173 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            // pull new records
-            Task<List<DWD>> gettask = manager.GetTasksAsync(filterNew);
-            List<DWD> newrecords = await gettask;
-            foreach (var itm in newrecords)
+            if (!util.DoPartialSynch)
             {
-                databasehelper.InsertDWD(itm);
+                // pull new records
+                Task<List<DWD>> gettask = manager.GetTasksAsync(filterNew);
+                List<DWD> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertDWD(itm);
+                }
             }
 
             //push deletes
-            var deletelist = databasehelper.GetDWDToDelete(settings.LastSynched);
-            foreach (var itm in deletelist)
-            {
-                Task deletetask = manager.DeleteTaskAsync(itm);
-                await deletetask;
-            }
+            //var deletelist = databasehelper.GetDWDToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
             return true;
         }
+        public async Task<bool> PhotoSynch()
+        {
+            PhotoManager manager = new PhotoManager(service);
+            string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
+            string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
 
+            // pull updated records
+            Task<List<PHOTO>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+            List<PHOTO> updaterecords = await getupdatetask;
+            foreach (var itm in updaterecords)
+            {
+                databasehelper.UpdatePhoto(itm);
+            }
+
+            // push new records
+            var list = databasehelper.GetPhototoInsert(settings.LastSynched);
+            if (list.Count > 0)
+            {
+                Task inserttask = manager.SaveTasksAsync(list, true);
+                await inserttask;
+
+            }
+            //push updates
+            var updatelist = databasehelper.GetPhotoToUpdate(settings.LastSynched);
+            if (updatelist.Count > 0)
+            {
+                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                await pushupdatetask;
+            }
+            if (!util.DoPartialSynch)
+            {
+                // pull new records
+                Task<List<PHOTO>> gettask = manager.GetTasksAsync(filterNew);
+                List<PHOTO> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertPhoto(itm);
+                }
+            }
+
+            //push deletes
+            //var deletelist = databasehelper.GetPhotoToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
+            return true;
+        }
+        public async Task<bool> PersonSynch()
+        {
+            PersonManager manager = new PersonManager(service);
+            string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
+            string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
+
+            // pull updated records
+            Task<List<PERSON>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+            List<PERSON> updaterecords = await getupdatetask;
+            foreach (var itm in updaterecords)
+            {
+                databasehelper.UpdatePerson(itm);
+            }
+
+            // push new records
+            var list = databasehelper.GetPersontoInsert(settings.LastSynched);
+            if (list.Count > 0)
+            {
+                Task inserttask = manager.SaveTasksAsync(list, true);
+                await inserttask;
+
+            }
+            //push updates
+            var updatelist = databasehelper.GetPersonToUpdate(settings.LastSynched);
+            if (updatelist.Count > 0)
+            {
+                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                await pushupdatetask;
+            }
+            if (!util.DoPartialSynch)
+            {
+                // pull new records
+                Task<List<PERSON>> gettask = manager.GetTasksAsync(filterNew);
+                List<PERSON> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertPerson(itm);
+                }
+            }
+
+            //push deletes
+            //var deletelist = databasehelper.GetPersonToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
+            return true;
+        }
+        public async Task<bool> VegetationCensusSynch()
+        {
+            VegetationCensusManager manager = new VegetationCensusManager(service);
+            string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
+            string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
+
+            // pull updated records
+            Task<List<VEGETATIONCENSUS>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+            List<VEGETATIONCENSUS> updaterecords = await getupdatetask;
+            foreach (var itm in updaterecords)
+            {
+                databasehelper.UpdateVegetation(itm);
+            }
+
+            // push new records
+            var list = databasehelper.GetVegetationCensustoInsert(settings.LastSynched);
+            if (list.Count > 0)
+            {
+                Task inserttask = manager.SaveTasksAsync(list, true);
+                await inserttask;
+
+            }
+            //push updates
+            var updatelist = databasehelper.GetVegetationCensusToUpdate(settings.LastSynched);
+            if (updatelist.Count > 0)
+            {
+                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                await pushupdatetask;
+            }
+            if (!util.DoPartialSynch)
+            {
+                // pull new records
+                Task<List<VEGETATIONCENSUS>> gettask = manager.GetTasksAsync(filterNew);
+                List<VEGETATIONCENSUS> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertVegetationCensus(itm);
+                }
+            }
+
+            //push deletes
+            //var deletelist = databasehelper.GetVegetationCensusToDelete(settings.LastSynched);
+            //foreach (var itm in deletelist)
+            //{
+            //    Task deletetask = manager.DeleteTaskAsync(itm);
+            //    await deletetask;
+            //}
+            return true;
+        }
 
         string GetDate()
         {

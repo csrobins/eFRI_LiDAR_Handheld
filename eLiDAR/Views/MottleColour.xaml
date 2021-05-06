@@ -18,10 +18,9 @@
                 Style="{StaticResource TextTitle}"
                 Text="Choose from the codes to construct a mottle colour." />
             <Button
-                BackgroundColor="{StaticResource cerulean}"
+                Style="{StaticResource FormButtonStyle}"
                 Command="{Binding ClearCommand}"
-                Text="Start Over"
-                TextColor="White" />
+                Text="Start Over"/>
             <Picker
                 Title="Hue"
                 HorizontalOptions="FillAndExpand"

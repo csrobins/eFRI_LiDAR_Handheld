@@ -80,8 +80,9 @@
 
                             <FlexLayout
                                 Grid.Column=" 2"
-                                AlignContent="Start"
+                                AlignContent="End"
                                 FlowDirection="LeftToRight"
+                                HorizontalOptions="End"
                                 JustifyContent="End"
                                 Wrap="Wrap">
                                 <Button
@@ -147,7 +148,7 @@
                                     Command="{Binding ShowDWDCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
                                     Text="DWD"/>
                             </FlexLayout>
                         </Grid>

@@ -16,20 +16,29 @@ namespace eLiDAR.ViewModels {
        
         public PlotCrewViewModel(INavigation navigation, PLOT _thisplot)
         {
-            _navigation = navigation;
-            _plot = new PLOT();
-            _plot = _thisplot;
-            _plotRepository = new PlotRepository();
-            if (_plot.SMALLTREESHRUBDATE  == System.DateTime.MinValue ) { _plot.SMALLTREESHRUBDATE = System.DateTime.Now; }
-            if (_plot.DEFORMITYDATE == System.DateTime.MinValue) { _plot.DEFORMITYDATE = System.DateTime.Now; }
-            if (_plot.DOWNWOODYDEBRISDATE == System.DateTime.MinValue) { _plot.DOWNWOODYDEBRISDATE = System.DateTime.Now; }
-            if (_plot.UNDERSTORYVEGETATIONDATE == System.DateTime.MinValue) { _plot.UNDERSTORYVEGETATIONDATE = System.DateTime.Now; }
-            if (_plot.UNDERSTORYCENSUSDATE == System.DateTime.MinValue) { _plot.UNDERSTORYCENSUSDATE = System.DateTime.Now; }
-            if (_plot.UNDERSTORYVEGETATIONAREA == 0) { _plot.UNDERSTORYVEGETATIONAREA = Constants.DefaultUnderstoryVegArea; }
-            if (_plot.SMALLTREESHRUBAREA  == 0) { _plot.SMALLTREESHRUBAREA  = Constants.DefaultSmallTreeArea ; }
+            try
+            {
+                _navigation = navigation;
+                _plot = new PLOT();
+                _plot = _thisplot;
+                _plotRepository = new PlotRepository();
 
-            ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
-         
+                if (_plot.SMALLTREESHRUBDATE == System.DateTime.MinValue) { _plot.SMALLTREESHRUBDATE = System.DateTime.Now; }
+                if (_plot.DEFORMITYDATE == System.DateTime.MinValue) { _plot.DEFORMITYDATE = System.DateTime.Now; }
+                if (_plot.DOWNWOODYDEBRISDATE == System.DateTime.MinValue) { _plot.DOWNWOODYDEBRISDATE = System.DateTime.Now; }
+                if (_plot.UNDERSTORYVEGETATIONDATE == System.DateTime.MinValue) { _plot.UNDERSTORYVEGETATIONDATE = System.DateTime.Now; }
+                if (_plot.UNDERSTORYCENSUSDATE == System.DateTime.MinValue) { _plot.UNDERSTORYCENSUSDATE = System.DateTime.Now; }
+                if (_plot.UNDERSTORYVEGETATIONAREA == 0) { _plot.UNDERSTORYVEGETATIONAREA = Constants.DefaultUnderstoryVegArea; }
+                if (_plot.SMALLTREESHRUBAREA == 0) { _plot.SMALLTREESHRUBAREA = Constants.DefaultSmallTreeArea; }
+                if (_plot.LINELENGTH1 == 0 && _plot.VSNPLOTTYPECODE.Contains("C")) { _plot.LINELENGTH1 = Constants.DefaultDWDLineLength; }
+                if (_plot.LINELENGTH2 == 0 && _plot.VSNPLOTTYPECODE.Contains("C")) { _plot.LINELENGTH2 = Constants.DefaultDWDLineLength; }
+             //   ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+                ListPerson = PickerService.FillPersonPicker(_plotRepository.GetPersonList(_plot.PROJECTID)).OrderBy(c => c.NAME).ToList();
+            }
+            catch (System.Exception ex) 
+            {
+                var msg = ex.Message; 
+            }
         }
         public string Title
         {
@@ -43,7 +52,7 @@ namespace eLiDAR.ViewModels {
             var list = new List<PickerItemsString>();
             foreach (var newperson in _plotRepository.GetPersonList(_plot.PROJECTID))
             {
-                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + ", " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
+                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + " " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
                 list.Add(newitem);
             };
             return list;
@@ -150,6 +159,26 @@ namespace eLiDAR.ViewModels {
                 _plot.SMALLTREESHRUBNOTE = value;
                 NotifyPropertyChanged("SMALLTREESHRUBNOTE");
         
+            }
+        }
+        public double LINELENGTH1
+        {
+            get => _plot.LINELENGTH1 ;
+            set
+            {
+                _plot.LINELENGTH1 = value;
+                NotifyPropertyChanged("LINELENGTH1");
+
+            }
+        }
+        public double LINELENGTH2
+        {
+            get => _plot.LINELENGTH2;
+            set
+            {
+                _plot.LINELENGTH2 = value;
+                NotifyPropertyChanged("LINELENGTH2");
+
             }
         }
         public string SMALLTREEPERSON

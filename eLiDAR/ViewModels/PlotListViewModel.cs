@@ -1,18 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using eLiDAR.Helpers;
 using eLiDAR.Models;
-using eLiDAR.Services;
 using eLiDAR.Views;
-
 using Xamarin.Forms;
-using eLiDAR.Utilities;
 using eLiDAR.Services;
-using System.Linq;
-using System.Collections.ObjectModel;
+
 
 namespace eLiDAR.ViewModels {
     public class PlotListViewModel : BasePlotViewModel {
@@ -114,7 +107,16 @@ namespace eLiDAR.ViewModels {
         async Task ShowTrees(PLOT _plot)
         {
             // launch the form - filtered to a specific projectid
-            await _navigation.PushAsync(new TreeListPage(_plot.PLOTID));
+            try
+            {
+                await _navigation.PushAsync(new TreeListPage(_plot.PLOTID));
+            }
+            catch (System.Exception e)
+            {
+                var myerror = e.Message; // error
+                                         //  Log.Fatal(e);
+            };
+
         }
         async Task ShowSite(PLOT _plot)
         {

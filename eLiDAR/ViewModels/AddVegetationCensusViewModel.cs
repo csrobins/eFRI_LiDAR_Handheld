@@ -23,7 +23,7 @@ namespace eLiDAR.ViewModels {
         public AddVegetationCensusViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _vegetation = new VEGETATIONCENSUS();
-            _vegetation.VEGETATIONCENSUSID  = selectedID;
+            _vegetation.PLOTID  = selectedID;
             _vegetationCensusRepository = new VegetationCensusRepository();
          
             _fk = selectedID;
@@ -121,7 +121,8 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = Update();
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+             //       await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -131,7 +132,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+       //         await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

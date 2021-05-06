@@ -10,7 +10,7 @@
     Shell.ForegroundColor="{StaticResource cerulean}"
     Shell.TitleColor="{StaticResource cerulean}">
     <ScrollView>
-        <StackLayout Padding="20" Spacing="12">
+        <StackLayout Padding="10" Spacing="12">
             <local:TreeView />
 
        <!--     <Button
@@ -24,6 +24,10 @@
                 Style="{StaticResource FormButtonStyle}"
                 Command="{Binding DeleteTreeCommand}"
                 Text="Delete"/>
+            <Button
+                Style="{StaticResource FormButtonStyle}"
+                Command="{Binding ResetCommand}"
+                Text="Reset"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

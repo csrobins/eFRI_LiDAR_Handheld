@@ -9,7 +9,7 @@ using dotMorten.Xamarin.Forms;
 
 namespace eLiDAR.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+     
     public partial class VegetationView : ContentView
     {
 

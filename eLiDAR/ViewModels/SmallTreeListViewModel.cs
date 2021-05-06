@@ -83,7 +83,7 @@ namespace eLiDAR.ViewModels {
         }
         public string Title
         {
-            get => "Small tree details for plot " + _smallTreeRepository.GetTitle(_fk) + ".  " + SmallTreeList.Count.ToString() + " species.";
+            get => "Smaller tree details for plot " + _smallTreeRepository.GetTitle(_fk) + ".  " + SmallTreeList.Count.ToString() + " species.";
             set
             {
             }

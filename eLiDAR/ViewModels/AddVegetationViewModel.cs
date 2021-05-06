@@ -26,7 +26,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _vegetation = new VEGETATION();
             _vegetationcensus = new VEGETATIONCENSUS();
-            _vegetation.VEGETATIONID  = selectedID;
+            _vegetation.PLOTID  = selectedID;
             _vegetationRepository = new VegetationRepository();
             _vegetationcensusRepository = new VegetationCensusRepository();
 
@@ -74,12 +74,13 @@ namespace eLiDAR.ViewModels {
                 _vegetation.Created = System.DateTime.UtcNow;
                 _vegetation.LastModified = _vegetation.Created;
                 _vegetationRepository.InsertVegetation(_vegetation,_fk);
-                //Add in the species to the VSN table
-                _vegetationcensus.IsDeleted = "N";
-                _vegetationcensus.Created = _vegetation.Created;
-                _vegetationcensus.LastModified = _vegetation.Created;
-                _vegetationcensus.VSNSPECIESCODE = _vegetation.VSNSPECIESCODE;
-                _vegetationcensusRepository.InsertVegetation(_vegetationcensus, _fk);
+                ////Add in the species to the VSN table
+                ///// removed on May 5
+                //_vegetationcensus.IsDeleted = "N";
+                //_vegetationcensus.Created = _vegetation.Created;
+                //_vegetationcensus.LastModified = _vegetation.Created;
+                //_vegetationcensus.VSNSPECIESCODE = _vegetation.VSNSPECIESCODE;
+                //_vegetationcensusRepository.InsertVegetation(_vegetationcensus, _fk);
                         //  This is just to slow down the database
                 _vegetationRepository.GetVegetationData(_vegetation.VEGETATIONID );
                 return Task.CompletedTask;
@@ -133,7 +134,8 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = Update();
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+           //         await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -143,7 +145,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+        //        await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

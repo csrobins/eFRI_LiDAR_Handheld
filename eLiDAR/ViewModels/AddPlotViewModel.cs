@@ -23,12 +23,13 @@ namespace eLiDAR.ViewModels {
         public ICommand PhotoCommand { get; private set; }
         public List<PickerItems> ListFMU { get; set; }
         public List<PickerItems> ListSpecies { get; set; }
-       
         public List<PickerItems> ListNonStandardType { get; set; }
         public List<PickerItemsString> ListMeasurementType { get; set; }
         public List<PickerItemsString> ListNonStandardTypeCode { get; set; }
         public List<PickerItemsString> ListPerson { get; set; }
         public List<PickerItems> ListGrowthPlot { get; set; }
+        public List<PickerItemsString> ListGrowthPlotType { get; set; }
+
         public List<PickerItems> ListAccessCondition { get; set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
@@ -40,20 +41,25 @@ namespace eLiDAR.ViewModels {
             _plot = new PLOT();
             _plotRepository = new PlotRepository();
             _selectedprojectid = fk;
+            //Do defaults
             _plot.VSNPLOTNAME = "VSN";
             _plot.IsDeleted = "N";
             _plot.DATUM = "NAD83";
             _plot.PROJECTID = fk;
             _plot.PLOTOVERVIEWDATE = System.DateTime.Now;
+            _plot.MEASUREYEAR = _plot.PLOTOVERVIEWDATE.Year;
+            
+
             AddCommand = new Command(async () => await AddPlot(_selectedprojectid));
             ViewAllCommand = new Command(async () => await ShowList());
             ListFMU = PickerService.ForestItems().OrderBy(c => c.NAME).ToList();
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
-            
             ListMeasurementType = PickerService.MeasurementTypeItems().OrderBy(c => c.NAME).ToList();
             ListNonStandardType = PickerService.NonStandardTypeItems().OrderBy(c => c.NAME).ToList();
-            ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+         //   ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+            ListPerson = PickerService.FillPersonPicker(_plotRepository.GetPersonList(_selectedprojectid)).OrderBy(c => c.NAME).ToList(); 
             ListGrowthPlot = PickerService.GrowthPlotItems().OrderBy(c => c.NAME).ToList();
+            ListGrowthPlotType = PickerService.GrowthPlotTypeItems().OrderBy(c => c.NAME).ToList();
             ListAccessCondition = PickerService.AccessConditionItems().OrderBy(c => c.NAME).ToList();
             CommentsCommand = new Command(async () => await ShowComments());
             StandInfoCommand = new Command(async () => await ShowStandInfo());
@@ -62,7 +68,6 @@ namespace eLiDAR.ViewModels {
             PhotoCommand = new Command(async () => await ShowPhoto());
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
-
         }
         async Task ShowComments()
         {
@@ -143,7 +148,7 @@ namespace eLiDAR.ViewModels {
             }
         }
         private PickerItems _selectedAccessCondition = new PickerItems { ID = 0, NAME = "" };
-        public PickerItems SelectedAccessCondtion
+        public PickerItems SelectedAccessCondition
         {
             get
             {
@@ -162,10 +167,95 @@ namespace eLiDAR.ViewModels {
             var list = new List<PickerItemsString>();
             foreach (var newperson in _plotRepository.GetPersonList(_plot.PROJECTID))
             {
-                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + ", " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
+                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + " " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
                 list.Add(newitem);
             };
             return list;
+        }
+
+        private PickerItemsString _selectedCrew1 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew1
+        {
+            get
+            {
+                _selectedCrew1 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW1);
+                return _selectedCrew1;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew1, value);
+                _plot.FIELD_CREW1 = _selectedCrew1.ID;
+            }
+        }
+        private PickerItemsString _selectedCrew2 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew2
+        {
+            get
+            {
+                _selectedCrew2 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW2);
+                return _selectedCrew2;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew2, value);
+                _plot.FIELD_CREW2 = _selectedCrew2.ID;
+            }
+        }
+        private PickerItemsString _selectedCrew3 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew3
+        {
+            get
+            {
+                _selectedCrew3 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW3);
+                return _selectedCrew3;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew3, value);
+                _plot.FIELD_CREW3 = _selectedCrew3.ID;
+            }
+        }
+        private PickerItemsString _selectedCrew4 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew4
+        {
+            get
+            {
+                _selectedCrew4 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW4);
+                return _selectedCrew4;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew4, value);
+                _plot.FIELD_CREW4 = _selectedCrew4.ID;
+            }
+        }
+        private PickerItemsString _selectedCrew5 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew5
+        {
+            get
+            {
+                _selectedCrew5 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW5);
+                return _selectedCrew5;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew5, value);
+                _plot.FIELD_CREW5 = _selectedCrew5.ID;
+            }
+        }
+        private PickerItemsString _selectedCrew6 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew6
+        {
+            get
+            {
+                _selectedCrew6 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW6);
+                return _selectedCrew6;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew6, value);
+                _plot.FIELD_CREW6 = _selectedCrew6.ID;
+            }
         }
 
         private PickerItemsString _selectedForestHealthPerson = new PickerItemsString { ID = "", NAME = "" };
@@ -211,7 +301,20 @@ namespace eLiDAR.ViewModels {
                 _plot.GROWTHPLOTNUMBER = (int)_selectedGrowthPlot.ID;
             }
         }
-
+        private PickerItemsString _selectedGrowthPlotType = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedGrowthPlotType
+        {
+            get
+            {
+                _selectedGrowthPlotType = PickerService.GetItem(ListGrowthPlotType, _plot.EXISTINGPLOTTYPECODE);
+                return _selectedGrowthPlotType;
+            }
+            set
+            {
+                SetProperty(ref _selectedGrowthPlotType, value);
+                _plot.EXISTINGPLOTTYPECODE = _selectedGrowthPlotType.ID;
+            }
+        }
         async Task ShowList(){ 
             await _navigation.PushAsync(new PlotList(_selectedprojectid ));
         }
@@ -267,7 +370,8 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = AddPlot(_selectedprojectid);
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+              //      await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -277,7 +381,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+         //       await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

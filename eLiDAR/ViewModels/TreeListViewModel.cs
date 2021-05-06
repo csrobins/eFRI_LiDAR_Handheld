@@ -23,16 +23,23 @@ namespace eLiDAR.ViewModels {
        
         public TreeListViewModel(INavigation navigation, string fk)
         {
-            _navigation = navigation;
-            _treeRepository = new TreeRepository();
-            _fk = fk;
-            AddCommand = new Command(async () => await ShowAdd(_fk));
-            DeleteAllCommand = new Command(async () => await DeleteAll());
-            ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
-            ShowDeformityCommand = new Command<TREE>(async (x) => await ShowDeformity(x));
-            ShowAgesCommand = new Command<TREE>(async (x) => await ShowAges(x));
+            try
+            {
+                _navigation = navigation;
+                _treeRepository = new TreeRepository();
+                _fk = fk;
+                AddCommand = new Command(async () => await ShowAdd(_fk));
+                DeleteAllCommand = new Command(async () => await DeleteAll());
+                ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
+                ShowDeformityCommand = new Command<TREE>(async (x) => await ShowDeformity(x));
+                ShowAgesCommand = new Command<TREE>(async (x) => await ShowAges(x));
 
-            FetchTrees();
+                FetchTrees();
+            }
+            catch (Exception ex)
+            {
+                var myerror = ex.Message;
+            }
         }
 
         public void FetchTrees() {
@@ -118,7 +125,7 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
-       
+
         public Int32 GetAzimuth
         {
             get => _treeRepository.GetAzimuth(_tree.TREEID);

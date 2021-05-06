@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView
     x:Class="eLiDAR.Views.TreeView"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -193,6 +193,7 @@
                     x:Name="txtCrownClass"
                     Title="Crown Class"
                     HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsLiveTree}"
                     SelectedItem="{Binding CROWN_CLASS, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
@@ -214,6 +215,7 @@
                     x:Name="txtStemQuality"
                     Title="Stem Quality"
                     HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsLiveTree}"
                     SelectedItem="{Binding STEM_QUALITY, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
@@ -312,6 +314,7 @@
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding DeformityCommand}"
+                    IsEnabled="{Binding IsLiveTree}"
                     Text="Deformity" />
             </StackLayout>
 
@@ -333,6 +336,7 @@
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
                     Placeholder="Ht (m)"
+                    IsEnabled="{Binding IsLiveTree}"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding HT}"/>
                 <Label
@@ -404,7 +408,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Height to Live Crown (m)" />
+                    Text="Degree of Lean" />
                 <Entry
                     x:Name="txtHtDEGREEOFLEAN"
                     HorizontalOptions="FillAndExpand"

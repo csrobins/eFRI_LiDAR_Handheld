@@ -32,18 +32,39 @@ namespace eLiDAR.API
         Task PushDEFORMITYAsync(List<DEFORMITY> items, bool isNewItem);
         Task<List<DWD>> GetCurrentDWDListAsync(string table, string filter);
         Task PushDWDAsync(List<DWD> items, bool isNewItem);
+        Task<List<PHOTO>> GetCurrentPhotoListAsync(string table, string filter);
+        Task PushPhotoAsync(List<PHOTO> items, bool isNewItem);
+        Task<List<PERSON>> GetCurrentPersonListAsync(string table, string filter);
+        Task PushPersonAsync(List<PERSON> items, bool isNewItem);
+        Task<List<VEGETATIONCENSUS>> GetCurrentVegetationCensusListAsync(string table, string filter);
+        Task PushVegetationCensusAsync(List<VEGETATIONCENSUS> items, bool isNewItem);
+     
 
     }
 
     public class RestService : IRestService
     {
         HttpClient _client;
+        private bool _isSuccess = true;
+        private string _msg;
 
       //  public List<PROJECT> Items { get; private set; }
 
         public RestService()
         {
             _client = new HttpClient();
+        }
+        public bool IsSuccess
+        {
+            get { return _isSuccess; }
+            set { _isSuccess = value; }
+
+        }
+        public string Msg
+        {
+            get { return _msg; }
+            set { _msg = value; }
+
         }
 
         public async Task<List<PROJECT>> GetCurrentProjectListAsync(string table,string filter)
@@ -58,10 +79,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<PROJECT>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                   // Msg = "Project dataex.Message;
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message; 
             }
             return Items;
         }
@@ -89,10 +117,18 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Project data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
+
             }
         }
 
@@ -126,10 +162,18 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<PLOT>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Plot data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
+
             }
             return Items;
         }
@@ -158,10 +202,18 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Plot data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
+
             }
         }
 
@@ -177,12 +229,20 @@ namespace eLiDAR.API
                 var content = await response.Content.ReadAsStringAsync();
                 Items = JsonConvert.DeserializeObject<List<TREE>>(content);
             }
-        }
+            else
+                {
+                    IsSuccess = false;
+                    Msg = "Tree data did not serialize";
+                }
+            }
         catch (Exception ex)
         {
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
-        }
-        return Items;
+            IsSuccess = false;
+            Msg = ex.Message;
+
+            }
+            return Items;
     }
 
         public async Task PushTreeAsync(List<TREE> items, bool isNewItem)
@@ -208,10 +268,18 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Tree data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
+
             }
         }
 
@@ -564,5 +632,153 @@ namespace eLiDAR.API
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
+        public async Task<List<PERSON>> GetCurrentPersonListAsync(string table, string filter)
+        {
+            List<PERSON> Items = new List<PERSON>();
+            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Items = JsonConvert.DeserializeObject<List<PERSON>>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Items;
+        }
+
+        public async Task PushPersonAsync(List<PERSON> items, bool isNewItem)
+        {
+            try
+            {
+                var table = "person";
+                var json = JsonConvert.SerializeObject(items);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewItem)
+                {
+                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    response = await _client.PostAsync(uri, content);
+                }
+                else
+                {
+                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    response = await _client.PutAsync(uri, content);
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\Items successfully saved.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+        public async Task<List<PHOTO>> GetCurrentPhotoListAsync(string table, string filter)
+        {
+            List<PHOTO> Items = new List<PHOTO>();
+            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Items = JsonConvert.DeserializeObject<List<PHOTO>>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Items;
+        }
+
+        public async Task PushPhotoAsync(List<PHOTO> items, bool isNewItem)
+        {
+            try
+            {
+                var table = "photo";
+                var json = JsonConvert.SerializeObject(items);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewItem)
+                {
+                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    response = await _client.PostAsync(uri, content);
+                }
+                else
+                {
+                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    response = await _client.PutAsync(uri, content);
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\Items successfully saved.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+        public async Task<List<VEGETATIONCENSUS>> GetCurrentVegetationCensusListAsync(string table, string filter)
+        {
+            List<VEGETATIONCENSUS> Items = new List<VEGETATIONCENSUS>();
+            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Items = JsonConvert.DeserializeObject<List<VEGETATIONCENSUS>>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return Items;
+        }
+
+        public async Task PushVegetationCensusAsync(List<VEGETATIONCENSUS> items, bool isNewItem)
+        {
+            try
+            {
+                var table = "vegetationcensus";
+                var json = JsonConvert.SerializeObject(items);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewItem)
+                {
+                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    response = await _client.PostAsync(uri, content);
+                }
+                else
+                {
+                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    response = await _client.PutAsync(uri, content);
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\Items successfully saved.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
     }
+
 }

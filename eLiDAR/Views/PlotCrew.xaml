@@ -12,6 +12,7 @@
     Shell.TitleColor="{StaticResource cerulean}"
     mc:Ignorable="d">
     <ContentPage.Content>
+        <ScrollView> 
         <Grid Padding="10" ColumnSpacing=" 1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -139,6 +140,28 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Length DWD Line 1(m)" />
+                <Entry
+                    x:Name="txtDWDLine1"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Length DWD Line 1(m)"
+                    Keyboard="Numeric" 
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding LINELENGTH1}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Length DWD Line 2(m)" />
+                <Entry
+                    x:Name="txtDWDLine2"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Length DWD Line 2(m)"
+                    Keyboard="Numeric" 
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding LINELENGTH2}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="DWD Notes" />
                 <Entry
                     x:Name="txtDWDNotes"
@@ -233,6 +256,6 @@
             </StackLayout>
 
         </Grid>
-
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

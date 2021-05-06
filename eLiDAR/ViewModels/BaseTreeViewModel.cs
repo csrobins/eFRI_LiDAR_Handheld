@@ -42,7 +42,7 @@ namespace eLiDAR.ViewModels
                 _IsChanged = value;
             }
         }
-        private bool _islivetree;
+        private bool _islivetree = true;
         public bool IsLiveTree
         {
             get
@@ -173,7 +173,7 @@ namespace eLiDAR.ViewModels
             set
             {
                 _tree.TREESTATUSCODE = value;
-                if (STATUS == "L" || STATUS == "V" || STATUS == "M" || STATUS == "E")
+                if (value == "L" || value == "V" || value == "M" || value == "E")
                 {
                     IsLiveTree = true;
                 }

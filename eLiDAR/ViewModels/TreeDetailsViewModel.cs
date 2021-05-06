@@ -18,7 +18,9 @@ namespace eLiDAR.ViewModels {
         public ICommand UpdateTreeCommand { get; private set; }
         public ICommand DeleteTreeCommand { get; private set; }
         public ICommand CommentsCommand { get; private set; }
-
+        public ICommand ResetCommand { get; private set; }
+        public ICommand StemMapCommand { get; private set; }
+        public ICommand DeformityCommand { get; private set; }
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListVigour { get; set; }
         public List<PickerItems> ListCrownDamage { get; set; }
@@ -41,6 +43,9 @@ namespace eLiDAR.ViewModels {
             UpdateTreeCommand = new Command(async () => await UpdateTree());
             DeleteTreeCommand = new Command(async () => await DeleteTree());
             CommentsCommand = new Command(async () => await ShowComments());
+            ResetCommand = new Command(async () => await ResetValues());
+            StemMapCommand = new Command(async () => await ShowStemMap());
+            DeformityCommand = new Command(async () => await ShowDeformity());
 
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
             ListVigour = PickerService.VigourItems().ToList();
@@ -59,6 +64,30 @@ namespace eLiDAR.ViewModels {
             OnDisappearingCommand = new Command(() => OnDisappearing());
         }
 
+        async Task ResetValues()
+        {
+            // for resetting tree values
+            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree Details", "Do you want to reset tree values for this tree?", "OK", "Cancel");
+            if (isUserAccept)
+            {
+                CROWN_CLASS = "";
+                STEM_QUALITY = "";
+
+                BROKEN_TOP = "";
+                PickerItems reset = new PickerItems { ID = 0, NAME = "" };
+                SelectedBarkRetention =reset;
+                SelectedWoodCondition =reset;
+                SelectedCrownDamage = reset;
+                SelectedMortalityCause = reset;
+                SelectedDecayClass = reset;
+        //        NotifyPropertyChanged("SelectedBarkRetention");
+         //       NotifyPropertyChanged("SelectedWoodCondition");
+          //      NotifyPropertyChanged("SelectedCrownDamage");
+           //     NotifyPropertyChanged("SelectedMortalityCause");
+            //    NotifyPropertyChanged("SelectedDecayClass");
+
+            }
+        }
         async Task ShowComments()
         {
             // launch the form - filtered to a specific tree
@@ -74,6 +103,7 @@ namespace eLiDAR.ViewModels {
                 await _navigation.PushAsync(new StemMapDetailsPage(_tree.TREEID));
             }
         }
+
         private async Task<bool> TrySave()
         {
             TreeValidator _validator = new TreeValidator();
@@ -269,9 +299,16 @@ namespace eLiDAR.ViewModels {
         async Task DeleteTree() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree Details", "Delete Tree Details", "OK", "Cancel");
             if (isUserAccept) {
-                _treeRepository.DeleteTree(_tree);
-                _AllowToLeave = true;
-                await _navigation.PopAsync();
+                if (_treeRepository.AllowDelete(_tree))
+                {
+                    _treeRepository.DeleteTree(_tree);
+                    _AllowToLeave = true;
+                    await _navigation.PopAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Cannot delete tree", "This tree has related stem map or deformity data.  Delete those records first before deleting the tree.", "OK", "Cancel");
+                }
             }
         }
         public string Title
@@ -313,7 +350,8 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = UpdateTree();
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+             //       await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -323,7 +361,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+           //     await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

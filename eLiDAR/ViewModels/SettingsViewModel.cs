@@ -176,6 +176,44 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("IsAllowProjectDeletion");
             }
         }
+        public bool IsAllowAutoNumber
+        {
+            get => util.AllowAutoNumber;
+            set
+            {
+                util.AllowAutoNumber = value;
+                NotifyPropertyChanged("IsAllowAutoNumber");
+            }
+        }
+        public bool UseNumericList
+        {
+            get => util.UseNumericList;
+            set
+            {
+                util.UseNumericList = value;
+                if (value) { UseAlphaList = !value; }
+                NotifyPropertyChanged("UseNumericList");
+            }
+        }
+        public bool UseAlphaList
+        {
+            get => util.UseAlphaList;
+            set
+            {
+                util.UseAlphaList = value;
+                if (value) { UseNumericList = !value; }
+                NotifyPropertyChanged("UseAlphaList");
+            }
+        }
+        public bool DoPartialSynch
+        {
+            get => util.DoPartialSynch;
+            set
+            {
+                util.DoPartialSynch  = value;
+                NotifyPropertyChanged("DoPartialSynch");
+            }
+        }
         public bool IsBoreal
         {
             get => util.BorealSpecies;

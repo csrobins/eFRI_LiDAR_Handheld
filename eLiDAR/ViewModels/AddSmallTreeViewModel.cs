@@ -22,7 +22,7 @@ namespace eLiDAR.ViewModels {
         public AddSmallTreeViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _smallTree = new SMALLTREE();
-            _smallTree.SMALLTREEID   = selectedID;
+            _smallTree.PLOTID   = selectedID;
             _smallTreeRepository = new SmallTreeRepository();
             _fk = selectedID;
             AddCommand = new Command(async () => await Update());
@@ -106,7 +106,8 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = Update();
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+        //            await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -116,7 +117,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+          //      await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

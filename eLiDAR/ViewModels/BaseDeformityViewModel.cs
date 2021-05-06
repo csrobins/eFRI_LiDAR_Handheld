@@ -133,10 +133,10 @@ namespace eLiDAR.ViewModels
 
         public int LEAN
         {
-            get => _deformity.DEGGREELEANARCH;
+            get => _deformity.DEGREELEANARCH;
             set
             {
-                _deformity.DEGGREELEANARCH = value;
+                _deformity.DEGREELEANARCH = value;
                 NotifyPropertyChanged("LEAN");
                 IsChanged = true;
             }

@@ -13,7 +13,7 @@ using Xamarin.Forms.Xaml;
 
 namespace eLiDAR.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+     
     public partial class SoilColour : ContentPage
     {
         private SoilColourViewModel _viewmodel;

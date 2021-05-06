@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace eLiDAR.Styles
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+   
     public partial class DefaultTheme : ResourceDictionary
     {
         public DefaultTheme()

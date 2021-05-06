@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -40,6 +41,8 @@
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0" Spacing="1">
                                 <StackLayout Orientation="Horizontal">
@@ -72,24 +75,24 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Quad 1"
+                                        Text="ELC Layer 3"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding QUAD1}"
+                                        Text="{Binding ELCLAYER3}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Quad 2"
+                                        Text="ELC Layer 4"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding QUAD2}"
+                                        Text="{Binding ELCLAYER4}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -98,26 +101,43 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Quad 3"
+                                        Text="ELC Layer 5"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding QUAD3}"
+                                        Text="{Binding ELCLAYER5}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Quad 4"
+                                        Text="ELC Layer 6"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding QUAD4}"
+                                        Text="{Binding ELCLAYER6}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
+                                
+                            </StackLayout>
+                            <StackLayout Grid.Column="3" Spacing="1">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="ELC Layer 7"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding ELCLAYER7}"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                              
+
                             </StackLayout>
                         </Grid>
                     </ViewCell>

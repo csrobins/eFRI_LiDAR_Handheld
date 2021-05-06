@@ -15,6 +15,7 @@ using eLiDAR.Utilities;
 namespace eLiDAR.ViewModels {
     public class AddTreeViewModel : BaseTreeViewModel {
 
+        private Utils util = new Utils(); 
         public ICommand AddCommand { get; private set; }
         public ICommand ViewAllCommand { get; private set; }
         public ICommand CommentsCommand { get; private set; }
@@ -41,6 +42,7 @@ namespace eLiDAR.ViewModels {
             _tree = new TREE();
             _treeRepository = new TreeRepository();
             _fk = fk;
+            _tree.PLOTID = fk;
             AddCommand = new Command(async () => await AddTree(_fk));
             ViewAllCommand = new Command(async () => await ShowList());
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
@@ -63,6 +65,9 @@ namespace eLiDAR.ViewModels {
             _tree.HEIGHTTODBH = 1.3F;
             _tree.DBHIN  = "Y";
             _tree.CROWNIN = "Y";
+            _tree.TREESTATUSCODE = "L";
+            if (util.AllowAutoNumber) { _tree.TREENUMBER = _treeRepository.GetNextNumber(fk); }
+
         }
         async Task ShowComments()
         {
@@ -301,7 +306,8 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = AddTree(_fk);
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+             //       await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -311,7 +317,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+          //      await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

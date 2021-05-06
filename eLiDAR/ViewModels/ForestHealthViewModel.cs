@@ -21,7 +21,8 @@ namespace eLiDAR.ViewModels {
             _plotRepository = new PlotRepository();
             if (_plot.FORESTHEALTHDATE  == System.DateTime.MinValue ) { _plot.FORESTHEALTHDATE = System.DateTime.Now; }
 
-            ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+//            ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+            ListPerson = PickerService.FillPersonPicker(_plotRepository.GetPersonList(_plot.PROJECTID)).OrderBy(c => c.NAME).ToList();
         }
         public string Title
         {
@@ -35,7 +36,7 @@ namespace eLiDAR.ViewModels {
             var list = new List<PickerItemsString>();
             foreach (var newperson in _plotRepository.GetPersonList(_plot.PROJECTID))
             {
-                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + ", " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
+                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + " " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
                 list.Add(newitem);
             };
             return list;

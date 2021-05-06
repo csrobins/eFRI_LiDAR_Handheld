@@ -18,7 +18,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Style="{DynamicResource TextTitle}">
-                                    eLiDAR for Ontario FRI
+                                    eVSN for Ontario FRI
                                 </Span>
                             </FormattedString>
                         </Label.FormattedText>
@@ -30,7 +30,9 @@
                                     FontAttributes="Bold"
                                     FontSize="17"
                                     TextColor="{DynamicResource TextPrimaryColor}">
-                                    This app was developed in Xamarin.Forms for iOS and Android for ground plot data collection in the Ontario Forest Resource Inventory Program. Please download, and continue to enhance and improve this application for field data collection.
+                                    This app was developed in Xamarin.Forms for iOS, Android and UWP for ground plot data collection in the Ontario Vegetation sampling Network. Please download, and continue to enhance and improve this application for field data collection.
+                                    
+                                    Add more here about the app:....
                                 </Span>
                             </FormattedString>
                         </Label.FormattedText>
@@ -40,7 +42,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontSize="17" TextColor="{DynamicResource TextPrimaryColor}">
-                                    Developed in 2020 by Craig Robinson and Sumac Geomatics.
+                                    Developed in 2021 by Forsite Consultants, Sumac Geomatics, and KBM Resources.
                                 </Span>
                             </FormattedString>
                         </Label.FormattedText>

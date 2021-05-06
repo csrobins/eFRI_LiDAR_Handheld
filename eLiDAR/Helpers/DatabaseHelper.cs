@@ -197,7 +197,7 @@ namespace eLiDAR.Helpers
         }
         public List<PHOTO> GetFilteredPhotoData(string plotid)
         {
-            return (from data in sqliteconnection.Query<PHOTO>("select * from PHOTO where PLOTID = '" + plotid + "' and IsDeleted = 'N' ORDER BY PHOTOTYPE and FRAMENUMBER")
+            return (from data in sqliteconnection.Query<PHOTO>("select * from PHOTO where PLOTID = '" + plotid + "' and IsDeleted = 'N' ORDER BY PHOTOTYPE, FRAMENUMBER, PHOTONUMBER, AZIMUTH")
                     select data).ToList();
         }
         public List<PLOT> GetFilteredPlotData(string projectid)
@@ -309,11 +309,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (_tree.TREEID != null)
             {
-                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUMBER = " + _tree.TREENUMBER + " and TREEID <> '" + _tree.TREEID + "'";
+                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and IsDeleted = 'N' and TREENUMBER = " + _tree.TREENUMBER + " and TREEID <> '" + _tree.TREEID + "'";
             }
             else
             {
-                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and TREENUMBER = " + _tree.TREENUMBER;
+                qry = "select count(TREEID) from TREE where PLOTID = '" + _tree.PLOTID + "' and IsDeleted = 'N' and TREENUMBER = " + _tree.TREENUMBER;
             }
             try
             {
@@ -351,11 +351,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (_plot.PLOTID != null)
             {
-                qry = "select count(PLOTID) from PLOT where MEASURETYPECODE = '" + _plot.MEASURETYPECODE +"' and PROJECTID = '" + _plot.PROJECTID + "' and VSNPLOTNAME = '" + _plot.VSNPLOTNAME + "' and PLOTID <> '" + _plot.PLOTID + "'";
+                qry = "select count(PLOTID) from PLOT where MEASURETYPECODE = '" + _plot.MEASURETYPECODE + "' and IsDeleted = 'N' and PROJECTID = '" + _plot.PROJECTID + "' and VSNPLOTNAME = '" + _plot.VSNPLOTNAME + "' and PLOTID <> '" + _plot.PLOTID + "'";
             }
             else
             {
-                qry = "select count(PLOTID) from PLOT where MEASURETYPECODE = '" + _plot.MEASURETYPECODE + "' and PROJECTID = '" + _plot.PROJECTID + "' and VSNPLOTNAME = '" + _plot.VSNPLOTNAME + "'";
+                qry = "select count(PLOTID) from PLOT where MEASURETYPECODE = '" + _plot.MEASURETYPECODE + "' and IsDeleted = 'N' and PROJECTID = '" + _plot.PROJECTID + "' and VSNPLOTNAME = '" + _plot.VSNPLOTNAME + "'";
             }
 
             try
@@ -376,11 +376,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (_dwd.DWDID != null)
             {
-                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINENUMBER = " + _dwd.LINENUMBER + " and PLOTID <> '" + _dwd.PLOTID + "'";
+                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "'  and IsDeleted = 'N' and IS_ACCUM != 'Y' and DWDNUM = '" + _dwd.DWDNUM + "' and LINENUMBER = " + _dwd.LINENUMBER + " and DWDID <> '" + _dwd.DWDID + "'";
             }
             else
             {
-                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and DWDNUM = '" + _dwd.DWDNUM + "' and LINENUMBER = " + _dwd.LINENUMBER;
+                qry = "select count(DWDID) from DWD where PLOTID = '" + _dwd.PLOTID + "' and IsDeleted = 'N' and IS_ACCUM != 'Y' and DWDNUM = '" + _dwd.DWDNUM + "' and LINENUMBER = " + _dwd.LINENUMBER;
             }
 
             try
@@ -401,13 +401,138 @@ namespace eLiDAR.Helpers
             string qry;
             if (_soil.SOILID != null)
             {
-                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and HORIZONNUMBER = " + _soil.HORIZONNUMBER + " and PLOTID <> '" + _soil.PLOTID + "'";
+                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and IsDeleted = 'N'  and HORIZONNUMBER = " + _soil.HORIZONNUMBER + " and SOILID <> '" + _soil.SOILID + "'";
             }
             else
             {
-                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and HORIZONNUMBER = " + _soil.HORIZONNUMBER;
+                qry = "select count(SOILID) from SOIL where PLOTID = '" + _soil.PLOTID + "' and IsDeleted = 'N' and HORIZONNUMBER = " + _soil.HORIZONNUMBER;
             }
 
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsVegUnique(VEGETATION _vegetation)
+        {
+            // for examinginif a unique veg species is being saved
+            string qry;
+            if (_vegetation.VEGETATIONID != null)
+            {
+                qry = "select count(VEGETATIONID) from VEGETATION where PLOTID = '" + _vegetation.PLOTID + "'  and IsDeleted = 'N'  and VSNSPECIESCODE = '" + _vegetation.VSNSPECIESCODE + "' and VEGETATIONID <> '" + _vegetation.VEGETATIONID + "'";
+            }
+            else
+            {
+                qry = "select count(VEGETATIONID) from VEGETATION where PLOTID = '" + _vegetation.PLOTID + "' and IsDeleted = 'N' and VSNSPECIESCODE = '" + _vegetation.VSNSPECIESCODE + "'";
+            }
+
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsSpecimenUnique(VEGETATION _vegetation)
+        {
+            // for examinginif a unique veg specimen number is being saved
+            string qry;
+            if (_vegetation.SPECIMENNUMBER == 0) { return true; }
+            if (_vegetation.VEGETATIONID != null)
+            {
+                qry = "select count(VEGETATIONID) from VEGETATION where PLOTID = '" + _vegetation.PLOTID + "'  and IsDeleted = 'N'  and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER + "' and VEGETATIONID <> '" + _vegetation.VEGETATIONID + "'";
+            }
+            else
+            {
+                qry = "select count(VEGETATIONID) from VEGETATION where PLOTID = '" + _vegetation.PLOTID + "' and IsDeleted = 'N' and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER;
+            }
+
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsSpecimenUnique(VEGETATIONCENSUS _vegetation)
+        {
+            // for examinginif a unique veg specimen number is being saved
+            string qry;
+            if (_vegetation.SPECIMENNUMBER == 0 ) { return true; }
+            if (_vegetation.VEGETATIONCENSUSID != null)
+            {
+                qry = "select count(VEGETATIONCENSUSID) from VEGETATIONCENSUS where PLOTID = '" + _vegetation.PLOTID + "'  and IsDeleted = 'N'  and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER + "' and VEGETATIONCENSUSID <> '" + _vegetation.VEGETATIONCENSUSID + "'";
+            }
+            else
+            {
+                qry = "select count(VEGETATIONCENSUSID) from VEGETATIONCENSUS where PLOTID = '" + _vegetation.PLOTID + "' and IsDeleted = 'N' and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER;
+            }
+
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsVegUnique(VEGETATIONCENSUS _vegetation)
+        {
+            // for examinginif a unique veg census species is being saved
+            string qry;
+            if (_vegetation.VEGETATIONCENSUSID != null)
+            {
+                qry = "select count(VEGETATIONCENSUSID) from VEGETATIONCENSUS where PLOTID = '" + _vegetation.PLOTID + "' and IsDeleted = 'N' and VSNSPECIESCODE = '" + _vegetation.VSNSPECIESCODE + "' and VEGETATIONCENSUSID <> '" + _vegetation.VEGETATIONCENSUSID + "'";
+            }
+            else
+            {
+                qry = "select count(VEGETATIONCENSUSID) from VEGETATIONCENSUS where PLOTID = '" + _vegetation.PLOTID + "' and IsDeleted = 'N'  and VSNSPECIESCODE = '" + _vegetation.VSNSPECIESCODE + "'";
+            }
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+        public bool IsSmallTreeUnique(SMALLTREE _smalltree)
+        {
+            // for examinginif a unique veg census species is being saved
+            string qry;
+            if (_smalltree.SMALLTREEID != null)
+            {
+                qry = "select count(SMALLTREEID) from SMALLTREE where PLOTID = '" + _smalltree.PLOTID + "' and IsDeleted = 'N' and SPECIESCODE = " + _smalltree.SPECIESCODE + " and SMALLTREEID <> '" + _smalltree.SMALLTREEID + "'";
+            }
+            else
+            {
+                qry = "select count(SMALLTREEID) from SMALLTREE where PLOTID = '" + _smalltree.PLOTID + "' and IsDeleted = 'N' and SPECIESCODE = " + _smalltree.SPECIESCODE;
+            }
             try
             {
                 var num = sqliteconnection.ExecuteScalar<int>(qry);
@@ -425,6 +550,54 @@ namespace eLiDAR.Helpers
         public TREE GetTreeData(string id)
         {
             return sqliteconnection.Table<TREE>().FirstOrDefault(t => t.TREEID == id);
+        }
+        public int GetNextTreeNumber(string id)
+        {
+            string qry;
+            qry = "select max(TREENUMBER) from TREE where PLOTID = '" + id + "' and IsDeleted = 'N'";
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return num +1; }
+                else { return 1; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return 1;
+            }
+        }
+        public int GetNextSoilNumber(string id)
+        {
+            string qry;
+            qry = "select max(HORIZONNUMBER) from SOIL where PLOTID = '" + id + "' and IsDeleted = 'N'";
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return num + 1; }
+                else { return 1; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return 1;
+            }
+        }
+        public int GetNextDWDNumber(string id, int line)
+        {
+            string qry;
+            qry = "select max(DWDNUM) from DWD where PLOTID = '" + id + "' and LINENUMBER = " + line.ToString()  + " and IsDeleted = 'N'";
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return num + 1; }
+                else { return 1; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return 1;
+            }
         }
 
         // Delete all Data
@@ -910,6 +1083,42 @@ namespace eLiDAR.Helpers
         public List<DWD> GetDWDToDelete(DateTime fromdate)
         {
             return sqliteconnection.Table<DWD>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<PHOTO> GetPhototoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PHOTO>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<PHOTO> GetPhotoToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PHOTO>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<PHOTO> GetPhotoToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PHOTO>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<PERSON> GetPersontoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PERSON>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<PERSON> GetPersonToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PERSON>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<PERSON> GetPersonToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<PERSON>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+        public List<VEGETATIONCENSUS> GetVegetationCensustoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<VEGETATIONCENSUS>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<VEGETATIONCENSUS> GetVegetationCensusToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<VEGETATIONCENSUS>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<VEGETATIONCENSUS> GetVegetationCensusToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<VEGETATIONCENSUS>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
         }
     }
 

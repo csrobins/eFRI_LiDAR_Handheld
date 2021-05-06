@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 
 namespace eLiDAR.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+     
     public partial class PlotComments : ContentPage
     {
         private PlotCommentsViewModel _viewmodel;

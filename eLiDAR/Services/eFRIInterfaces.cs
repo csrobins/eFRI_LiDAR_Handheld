@@ -74,7 +74,7 @@ namespace eLiDAR.Services
         String GetPlotType(string plotid);
         List<PERSON> GetPersonList(string projectid);
         bool IsUniquePlot(PLOT _plot);
-
+        bool AllowDelete(PLOT _plot);
     }
     public interface ITreeRepository
     {
@@ -100,6 +100,8 @@ namespace eLiDAR.Services
         double GetDistance(string treeid);
 
         String GetPlotType(string plotid);
+        bool AllowDelete(TREE _tree);
+        int GetNextNumber(string plotid);
 
     }
     public interface IStemMapRepository
@@ -157,7 +159,7 @@ namespace eLiDAR.Services
         // Update Data
         void UpdateSoil(SOIL soil);
         String GetTitle(string plotid);
-    
+        int GetNextNumber(string plotid);
 
     }
     public interface ISmallTreeRepository
@@ -246,6 +248,7 @@ namespace eLiDAR.Services
         // Update Data
         void UpdateDWD(DWD dwd);
         String GetTitle(string plotid);
+        int GetNextNumber(string plotid, int line);
     }
 
 
@@ -258,7 +261,8 @@ namespace eLiDAR.Services
         }
         public void DeleteProject(PROJECT _table)
         {
-//            _databaseHelper.DeleteProject(ID);
+            //            _databaseHelper.DeleteProject(ID);
+            _table.LastModified = System.DateTime.UtcNow;
             _table.IsDeleted = "Y";
             _databaseHelper.UpdateProject(_table);
         }
@@ -297,7 +301,8 @@ namespace eLiDAR.Services
         }
         public void DeletePerson(PERSON _person)
         {
-//            _databaseHelper.DeletePerson(ID);
+            //            _databaseHelper.DeletePerson(ID);
+            _person.LastModified = System.DateTime.UtcNow;
             _person.IsDeleted = "Y";
             _databaseHelper.UpdatePerson(_person);
         }
@@ -352,6 +357,7 @@ namespace eLiDAR.Services
         public void DeletePhoto(PHOTO _photo)
         {
             _photo.IsDeleted = "Y";
+            _photo.LastModified = System.DateTime.UtcNow;
             _databaseHelper.UpdatePhoto(_photo);
         }
         
@@ -399,7 +405,8 @@ namespace eLiDAR.Services
         }
         public void DeletePlot(PLOT _table)
         {
-  //          _databaseHelper.DeletePlot(ID);
+            //          _databaseHelper.DeletePlot(ID);
+            _table.LastModified = System.DateTime.UtcNow;
             _table.IsDeleted = "Y";
             _databaseHelper.UpdatePlot(_table);
         }
@@ -444,6 +451,19 @@ namespace eLiDAR.Services
         {
             _databaseHelper.UpdatePlot(Plot);
         }
+        public bool AllowDelete(PLOT _plot)
+        {
+            //to check if there are related records and prevent deletion
+            if (_databaseHelper.GetFilteredTreeData(_plot.PLOTID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredSmallTreeData(_plot.PLOTID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredPhotoData(_plot.PLOTID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredDWDData(_plot.PLOTID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredEcositeData(_plot.PLOTID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredSoilData(_plot.PLOTID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredVegetationData(_plot.PLOTID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredVegetationCensusData(_plot.PLOTID).Count > 0) { return false; }
+            else { return true; }
+        }
 
         public String GetProjectTitle(string projectid)
         {
@@ -472,6 +492,8 @@ namespace eLiDAR.Services
         {
             return _databaseHelper.IsPlotNumUnique(_plot);  
         }
+
+
     }
 
     public class TreeRepository : ITreeRepository
@@ -483,11 +505,17 @@ namespace eLiDAR.Services
         }
         public void DeleteTree(TREE _table)
         {
- //           _databaseHelper.DeleteTree(ID);
+            //           _databaseHelper.DeleteTree(ID);
+            _table.LastModified = System.DateTime.UtcNow;  
             _table.IsDeleted = "Y";
             _databaseHelper.UpdateTree(_table);
 
         }
+        public int GetNextNumber(string plotid)
+        {
+           return _databaseHelper.GetNextTreeNumber(plotid);
+        }
+
         public void DeleteAllTrees()
         {
             _databaseHelper.DeleteAllTrees();
@@ -526,6 +554,13 @@ namespace eLiDAR.Services
             Tree.TREEID = Guid.NewGuid().ToString();
             Tree.PLOTID = fk;
             _databaseHelper.InsertTree(Tree);
+        }
+        public bool AllowDelete(TREE _tree)
+        {
+         //to check if there are related records and prevent deletion
+            if (_databaseHelper.GetFilteredStemmapData(_tree.TREEID).Count > 0) { return false; }
+            else if (_databaseHelper.GetFilteredDeformityData(_tree.TREEID).Count > 0) { return false; }
+            else { return true; }
         }
 
         public void UpdateTree(TREE Tree)
@@ -590,6 +625,7 @@ namespace eLiDAR.Services
         {
 //            _databaseHelper.DeleteStemmap(ID);
             _table.IsDeleted = "Y";
+            _table.LastModified = System.DateTime.UtcNow;
             _databaseHelper.UpdateStemmap(_table);
 
         }
@@ -710,9 +746,14 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
+        public int GetNextNumber(string plotid)
+        {
+            return _databaseHelper.GetNextSoilNumber(plotid);
+        }
         public void DeleteSoil(SOIL _table)
         {
             _table.IsDeleted = "Y";
+            _table.LastModified = System.DateTime.UtcNow;
             _databaseHelper.UpdateSoil(_table);
 
         }
@@ -770,7 +811,8 @@ namespace eLiDAR.Services
         }
         public void DeleteSmallTree(SMALLTREE _table)
         {
-//            _databaseHelper.DeleteSmallTree(ID);
+            //            _databaseHelper.DeleteSmallTree(ID);
+            _table.LastModified = System.DateTime.UtcNow;
             _table.IsDeleted = "Y";
             _databaseHelper.UpdateSmallTree(_table);
         }
@@ -828,6 +870,7 @@ namespace eLiDAR.Services
         public void DeleteVegetation(VEGETATION _table)
         {
             _table.IsDeleted = "Y";
+            _table.LastModified = System.DateTime.UtcNow;
             _databaseHelper.UpdateVegetation(_table);
 
     //        _databaseHelper.DeleteVegetation(ID);
@@ -886,6 +929,7 @@ namespace eLiDAR.Services
         {
 //            _databaseHelper.DeleteVegetationCensus(ID);
             _table.IsDeleted = "Y";
+            _table.LastModified = System.DateTime.UtcNow;
             _databaseHelper.UpdateVegetation(_table);
 
         }
@@ -995,6 +1039,10 @@ namespace eLiDAR.Services
         public DWDRepository()
         {
             _databaseHelper = new DatabaseHelper();
+        }
+        public int GetNextNumber(string plotid, int line)
+        {
+            return _databaseHelper.GetNextDWDNumber(plotid, line);
         }
         public void DeleteDWD(DWD _table)
         {

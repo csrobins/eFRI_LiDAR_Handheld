@@ -256,5 +256,80 @@ namespace eLiDAR.API
 			return restService.DeleteAsync(tablename, item.DWDID);
 		}
 	}
+	public class PhotoManager
+	{
+		IRestService restService;
+		private static string tablename = "photo";
+
+		public PhotoManager(IRestService service)
+		{
+			restService = service;
+		}
+
+		public Task<List<PHOTO>> GetTasksAsync(string filter)
+		{
+			return restService.GetCurrentPhotoListAsync(tablename, filter);
+		}
+
+		public Task SaveTasksAsync(List<PHOTO> items, bool isNewItem = false)
+		{
+			return restService.PushPhotoAsync(items, isNewItem);
+		}
+
+		public Task DeleteTaskAsync(PHOTO item)
+		{
+			return restService.DeleteAsync(tablename, item.PHOTOID);
+		}
+	}
+	public class PersonManager
+	{
+		IRestService restService;
+		private static string tablename = "person";
+
+		public PersonManager(IRestService service)
+		{
+			restService = service;
+		}
+
+		public Task<List<PERSON>> GetTasksAsync(string filter)
+		{
+			return restService.GetCurrentPersonListAsync(tablename, filter);
+		}
+
+		public Task SaveTasksAsync(List<PERSON> items, bool isNewItem = false)
+		{
+			return restService.PushPersonAsync(items, isNewItem);
+		}
+
+		public Task DeleteTaskAsync(PERSON item)
+		{
+			return restService.DeleteAsync(tablename, item.PERSONID);
+		}
+	}
+	public class VegetationCensusManager
+	{
+		IRestService restService;
+		private static string tablename = "vegetationcensus";
+
+		public VegetationCensusManager(IRestService service)
+		{
+			restService = service;
+		}
+
+		public Task<List<VEGETATIONCENSUS>> GetTasksAsync(string filter)
+		{
+			return restService.GetCurrentVegetationCensusListAsync(tablename, filter);
+		}
+
+		public Task SaveTasksAsync(List<VEGETATIONCENSUS> items, bool isNewItem = false)
+		{
+			return restService.PushVegetationCensusAsync(items, isNewItem);
+		}
+
+		public Task DeleteTaskAsync(VEGETATIONCENSUS item)
+		{
+			return restService.DeleteAsync(tablename, item.VEGETATIONCENSUSID);
+		}
+	}
 }
 

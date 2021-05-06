@@ -14,7 +14,7 @@ using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
     public class AddDWDViewModel: BaseDWDViewModel {
-
+        private Utilities.Utils util = new Utilities.Utils();  
         public ICommand AddCommand { get; private set; }
         public ICommand AddAccumCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
@@ -44,6 +44,7 @@ namespace eLiDAR.ViewModels {
             IsChanged = false;
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
+           
         }
         private bool _IsValidSingle;
         public bool IsValidSingle
@@ -55,6 +56,22 @@ namespace eLiDAR.ViewModels {
                 OnPropertyChanged();
             }
         }
+        private void GetNextNum()
+        {
+            if (util.AllowAutoNumber && !_isaccum && DWDNUM == 0 && LINE > 0) { DWDNUM = _dwdRepository.GetNextNumber(_fk,LINE); }
+        }
+        //public int LINE
+        //{
+        //    get => _dwd.LINENUMBER;
+        //    set
+        //    {
+        //        _dwd.LINENUMBER = value;
+        //        NotifyPropertyChanged("LINE");
+        //        IsChanged = true;
+        //        GetNextNum();
+        //    }
+        //}
+
         private PickerItems _selectedLine = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedLine
         {
@@ -67,6 +84,7 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedLine, value);
                 _dwd.LINENUMBER  = (int)_selectedLine.ID;
+                GetNextNum();
             }
         }
 
@@ -205,7 +223,8 @@ namespace eLiDAR.ViewModels {
                     if (_isaccum) { _ = Update(true); }
                     else { _ = Update(); }
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+            //        await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -215,7 +234,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+      //          await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

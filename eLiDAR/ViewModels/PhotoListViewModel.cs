@@ -50,31 +50,49 @@ namespace eLiDAR.ViewModels {
                 _newphoto2.PLOTID = _selectedplotid;
                 _photoRepository.InsertPhoto(_newphoto2);
                 // Insert records for the Stand Infor Photos
-                for (int i = 0; i < 8; i++)
+                int j = 1;
+                for (int i = 2; i < 18; i+=2)
                 {
                     PHOTO _newphoto3 = new PHOTO();
                     _newphoto3.PHOTOTYPE = "Stand Information";
-                    _newphoto3.PHOTONUMBER = i + 2;
-                    _newphoto3.AZIMUTH = 45 * i;
-                    _newphoto3.DISTANCE = Constants.DefaultPhoto1Distance;
+                    _newphoto3.PHOTONUMBER = i;
+                    _newphoto3.AZIMUTH = (i - (j + 1)) * 45;
+                    if (j % 2 == 0)
+                    {
+                        _newphoto3.DISTANCE = Constants.DefaultPhoto2Distance;
+                    }
+                    else
+                    {
+                        _newphoto3.DISTANCE = Constants.DefaultPhoto1Distance;
+                    }
                     _newphoto3.PLOTID = _selectedplotid;
                     _newphoto3.Created = System.DateTime.UtcNow;
                     _newphoto3.LastModified = _newphoto3.Created;
                     _newphoto3.IsDeleted = "N";
                     _photoRepository.InsertPhoto(_newphoto3);
+                    j = j + 1;
                 }
-                for (int i = 0; i < 8; i++)
+                j = 2;
+                for (int i = 3; i < 18; i += 2)
                 {
-                    PHOTO _newphoto4 = new PHOTO();
-                    _newphoto4.PHOTOTYPE = "Stand Information";
-                    _newphoto4.PHOTONUMBER = i + 10;
-                    _newphoto4.AZIMUTH = 45 * i;
-                    _newphoto4.DISTANCE = Constants.DefaultPhoto2Distance;
-                    _newphoto4.PLOTID = _selectedplotid;
-                    _newphoto4.Created = System.DateTime.UtcNow;
-                    _newphoto4.LastModified = _newphoto4.Created;
-                    _newphoto4.IsDeleted = "N";
-                    _photoRepository.InsertPhoto(_newphoto4);
+                    PHOTO _newphoto3 = new PHOTO();
+                    _newphoto3.PHOTOTYPE = "Stand Information";
+                    _newphoto3.PHOTONUMBER = i;
+                    _newphoto3.AZIMUTH = (i - (j + 1)) * 45;
+                    if (j % 2 == 0)
+                    {
+                        _newphoto3.DISTANCE = Constants.DefaultPhoto2Distance;
+                    }
+                    else
+                    {
+                        _newphoto3.DISTANCE = Constants.DefaultPhoto1Distance;
+                    }
+                    _newphoto3.PLOTID = _selectedplotid;
+                    _newphoto3.Created = System.DateTime.UtcNow;
+                    _newphoto3.LastModified = _newphoto3.Created;
+                    _newphoto3.IsDeleted = "N";
+                    _photoRepository.InsertPhoto(_newphoto3);
+                    j = j + 1;
                 }
 
             }

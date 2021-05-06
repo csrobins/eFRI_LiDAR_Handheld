@@ -6,7 +6,6 @@
     Source="DefaultTheme.xaml">
 
     <Color x:Key="backgroundColor">#FF000000</Color>
-
     <Color x:Key="TextPrimaryColor">#B0FFFFFF</Color>
     <Color x:Key="TextSecondaryColor">#B0FFFFFF</Color>
     <Color x:Key="TextTernaryColor">#C8C8C8</Color>

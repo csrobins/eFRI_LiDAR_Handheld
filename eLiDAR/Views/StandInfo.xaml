@@ -12,6 +12,7 @@
     Shell.TitleColor="{StaticResource cerulean}"
     mc:Ignorable="d">
     <ContentPage.Content>
+        <ScrollView >
         <Grid Padding="10" ColumnSpacing=" 1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -54,40 +55,91 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Canopy Structure" />
+                    Text="Canopy Structure 1" />
                 <Picker
-                    x:Name="txtCanopyStructure"
-                    Title="Canopy Structure"
+                    x:Name="txtCanopyStructure1"
+                    Title="Canopy Structure 1"
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListCanopyStructure}"
-                    SelectedItem="{Binding SelectedCanopyStructure, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedCanopyStructure1, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Canopy Origin" />
+                    Text="Canopy Structure 2" />
                 <Picker
-                    x:Name="txtorigin"
-                    Title="Canopy Origin"
+                    x:Name="txtCanopyStructure2"
+                    Title="Canopy Structure 2"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListCanopyStructure}"
+                    SelectedItem="{Binding SelectedCanopyStructure2, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Canopy Origin 1" />
+                <Picker
+                    x:Name="txtorigin1"
+                    Title="Canopy Origin 1"
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListCanopyOrigin}"
-                    SelectedItem="{Binding SelectedCanopyOrigin}"
+                    SelectedItem="{Binding SelectedCanopyOrigin1}"
                     ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
                 </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Canopy Origin 2" />
+                <Picker
+                    x:Name="txtorigin2"
+                    Title="Canopy Origin 2"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListCanopyOrigin}"
+                    SelectedItem="{Binding SelectedCanopyOrigin2}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Maturity Class 1" />
+                <Picker
+                    x:Name="txtmaturityclass1"
+                    Title="Maturity Class 1"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListMaturityClass}"
+                    SelectedItem="{Binding SelectedMaturityClass1, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Maturity Class Rationale 1" />
+                <Entry
+                    x:Name="txtMaturityClassRationale1"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Maturity Class Rationale"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding MATURITYCLASSRATIONALE1}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Maturity Class" />
                 <Picker
-                    x:Name="txtmaturityclass"
-                    Title="Maturity Class"
+                    x:Name="txtmaturityclass2"
+                    Title="Maturity Class 2"
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListMaturityClass}"
-                    SelectedItem="{Binding SelectedMaturityClass, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedMaturityClass2, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
@@ -95,13 +147,13 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Maturity Class Rationale" />
+                    Text="Maturity Class Rationale 2" />
                 <Entry
-                    x:Name="txtMaturityClassRationale"
+                    x:Name="txtMaturityClassRationale2"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Maturity Class Rationale"
+                    Placeholder="Maturity Class Rationale 2"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding MATURITYCLASSRATIONALE}" />
+                    Text="{Binding MATURITYCLASSRATIONALE2}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -122,13 +174,27 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Disturbance Code" />
+                    Text="Disturbance Code 1" />
                 <Picker
                     x:Name="txtdisturbance"
-                    Title="Disturbance Code"
+                    Title="Disturbance Code 1"
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListDisturbanceCode}"
-                    SelectedItem="{Binding SelectedDisturbance, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedDisturbance1, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                </Picker>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Disturbance Code 2" />
+                <Picker
+                    x:Name="txtdisturbance2"
+                    Title="Disturbance Code 2"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListDisturbanceCode}"
+                    SelectedItem="{Binding SelectedDisturbance2, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
@@ -157,6 +223,6 @@
                     Text="{Binding PERCENTMORTALITY}" Keyboard="Numeric"  />
             </StackLayout>
         </Grid>
-
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

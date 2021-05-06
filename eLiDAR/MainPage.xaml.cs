@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace eLiDAR
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+  
     public partial class MainPage : ContentPage
     {
         public MainPage()

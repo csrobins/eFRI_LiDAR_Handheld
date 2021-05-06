@@ -14,7 +14,7 @@ using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
     public class AddSoilViewModel: BaseSoilViewModel {
-
+        private Utilities.Utils util = new Utilities.Utils(); 
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         public ICommand SoilHorizonCommand { get; private set; }
@@ -46,6 +46,8 @@ namespace eLiDAR.ViewModels {
             IsChanged = false;
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
+            if (util.AllowAutoNumber) { _soil.HORIZONNUMBER = _soilRepository.GetNextNumber(_fk); }
+
         }
         public void Refresh()
         {
@@ -220,7 +222,8 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = Update();
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+             //       await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
                 }
                 else
                 {
@@ -230,7 +233,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+        //        await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

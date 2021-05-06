@@ -18,11 +18,59 @@ namespace eLiDAR.Utilities
         private string keynotifysave = "IsNotifySave";
         private string keyallowplotdeletion = "IsAllowPlotDeletion";
         private string keyallowprojectdeletion = "IsAllowProjectDeletion";
+        private string keydopartialsynch = "DoPartialSynch";
+        private string keyallowautonumber = "AllowAutoNumber";
+        private string keynumericlist = "UseNumericList";
+        private string keyalphalist = "UseAlphaList";
 
         public Guid getGUID()
         {
             // Create and display the value of two GUIDs.
             return Guid.NewGuid();
+        }
+        internal bool DoPartialSynch
+        {
+            get
+            {
+                return Preferences.Get(keydopartialsynch, false);
+            }
+            set
+            {
+                Preferences.Set(keydopartialsynch, value);
+            }
+        }
+        internal bool UseNumericList
+        {
+            get
+            {
+                return Preferences.Get(keynumericlist, false);
+            }
+            set
+            {
+                Preferences.Set(keynumericlist, value);
+            }
+        }
+        internal bool UseAlphaList
+        {
+            get
+            {
+                return Preferences.Get(keyalphalist, false);
+            }
+            set
+            {
+                Preferences.Set(keyalphalist, value);
+            }
+        }
+        internal bool AllowAutoNumber
+        {
+            get
+            {
+                return Preferences.Get(keyallowautonumber, true);
+            }
+            set
+            {
+                Preferences.Set(keyallowautonumber, value);
+            }
         }
 
         internal bool AllowPlotDeletion

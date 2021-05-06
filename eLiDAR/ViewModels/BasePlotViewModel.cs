@@ -115,56 +115,46 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-
-        //public int ADMINISTRATIVE
-        //{
-        //    get => _plot.ADMINISTRATIVE;
-        //    set
-        //    {
-        //        _plot.ADMINISTRATIVE = value;
-        //        NotifyPropertyChanged("ADMINISTRATIVE");
-        //    }
-        //}
-
-        //public string FOREST_DISTRICT
-        //{
-        //    get => _plot.FOREST_DISTRICT;
-        //    set
-        //    {
-        //        _plot.FOREST_DISTRICT = value;
-        //        NotifyPropertyChanged("FOREST_DISTRICT");
-        //    }
-        //}
-
-        //public int FMU
-        //{
-        //    get => _plot.FMU;
-        //    set
-        //    {
-        //        _plot.FMU = value;
-        //        NotifyPropertyChanged("FMU");
-        //    }
-        //}
-
-        //public int MANAGEMENT_UNIT
-        //{
-        //    get => _plot.MANAGEMENT_UNIT;
-        //    set
-        //    {
-        //        _plot.MANAGEMENT_UNIT = value;
-        //        NotifyPropertyChanged("MANAGEMENT_UNIT");
-        //    }
-        //}
-
-        //public string IMAGE_ANNOTATION
-        //{
-        //    get => _plot.IMAGE_ANNOTATION;
-        //    set
-        //    {
-        //        _plot.IMAGE_ANNOTATION = value;
-        //        NotifyPropertyChanged("IMAGE_ANNOTATION");
-        //    }
-        //}
+        public string EXISTINGPLOTNAME
+        {
+            get => _plot.EXISTINGPLOTNAME;
+            set
+            {
+                _plot.EXISTINGPLOTNAME = value;
+                NotifyPropertyChanged("EXISTINGPLOTNAME");
+                IsChanged = true;
+            }
+        }
+        public string EXISTINGPLOTTYPECODE
+        {
+            get => _plot.EXISTINGPLOTTYPECODE;
+            set
+            {
+                _plot.EXISTINGPLOTTYPECODE = value;
+                NotifyPropertyChanged("EXISTINGPLOTTYPECODE");
+                IsChanged = true;
+            }
+        }
+        public double DISTANCETARGETMOVED
+        {
+            get => _plot.DISTANCETARGETMOVED;
+            set
+            {
+                _plot.DISTANCETARGETMOVED = value;
+                NotifyPropertyChanged("DISTANCETARGETMOVED");
+                IsChanged = true;
+            }
+        }
+        public int AZIMUTHTARGETMOVED
+        {
+            get => _plot.AZIMUTHTARGETMOVED;
+            set
+            {
+                _plot.AZIMUTHTARGETMOVED = value;
+                NotifyPropertyChanged("AZIMUTHTARGETMOVED");
+                IsChanged = true;
+            }
+        }
 
         public string PLOTKEY
         {
@@ -191,6 +181,7 @@ namespace eLiDAR.ViewModels
             set
             {
                 _plot.PLOTOVERVIEWDATE = value;
+                _plot.MEASUREYEAR = _plot.PLOTOVERVIEWDATE.Year; 
                 NotifyPropertyChanged("PLOT_DATE");
                 IsChanged = true;
             }
@@ -218,50 +209,91 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int ORIGIN
+        public int MAINCANOPYORIGINCODE1
         {
-            get => _plot.ORIGIN;
+            get => _plot.MAINCANOPYORIGINCODE1;
             set
             {
-                _plot.ORIGIN = value;
-                NotifyPropertyChanged("ORIGIN");
+                _plot.MAINCANOPYORIGINCODE1 = value;
+                NotifyPropertyChanged("MAINCANOPYORIGINCODE1");
+                IsChanged = true;
+            }
+        }
+        public int MAINCANOPYORIGINCODE2
+        {
+            get => _plot.MAINCANOPYORIGINCODE2;
+            set
+            {
+                _plot.MAINCANOPYORIGINCODE2 = value;
+                NotifyPropertyChanged("MAINCANOPYORIGINCODE2");
                 IsChanged = true;
             }
         }
 
-        public string CANOPY_STRUCTURE
+        public string CANOPYSTRUCTURECODE1
         {
-            get => _plot.CANOPYSTRUCTURECODE;
+            get => _plot.CANOPYSTRUCTURECODE1;
             set
             {
-                _plot.CANOPYSTRUCTURECODE = value;
-                NotifyPropertyChanged("CANOPY_STRUCTURE");
-                IsChanged = true;
-            }
-        }
- 
-        public string MATURITY
-        {
-            get => _plot.MATURITYCLASSCODE;
-            set
-            {
-                _plot.MATURITYCLASSCODE = value;
-                NotifyPropertyChanged("MATURITY");
+                _plot.CANOPYSTRUCTURECODE1 = value;
+                NotifyPropertyChanged("CANOPYSTRUCTURECODE1");
                 IsChanged = true;
             }
         }
 
-        public string MATURITYCLASSRATIONALE
+        public string CANOPYSTRUCTURECODE2
         {
-            get => _plot.MATURITYCLASSRATIONALE;
+            get => _plot.CANOPYSTRUCTURECODE2;
             set
             {
-                _plot.MATURITYCLASSRATIONALE = value;
-                NotifyPropertyChanged("MATURITYCLASSRATIONALE");
+                _plot.CANOPYSTRUCTURECODE2 = value;
+                NotifyPropertyChanged("CANOPYSTRUCTURECODE2");
                 IsChanged = true;
             }
         }
 
+        public string MATURITYCLASSCODE1
+        {
+            get => _plot.MATURITYCLASSCODE1;
+            set
+            {
+                _plot.MATURITYCLASSCODE1 = value;
+                NotifyPropertyChanged("MATURITYCLASSCODE1");
+                IsChanged = true;
+            }
+        }
+
+        public string MATURITYCLASSRATIONALE1
+        {
+            get => _plot.MATURITYCLASSRATIONALE1;
+            set
+            {
+                _plot.MATURITYCLASSRATIONALE1 = value;
+                NotifyPropertyChanged("MATURITYCLASSRATIONALE1");
+                IsChanged = true;
+            }
+        }
+        public string MATURITYCLASSCODE2
+        {
+            get => _plot.MATURITYCLASSCODE2;
+            set
+            {
+                _plot.MATURITYCLASSCODE2 = value;
+                NotifyPropertyChanged("MATURITYCLASSCODE2");
+                IsChanged = true;
+            }
+        }
+
+        public string MATURITYCLASSRATIONALE2
+        {
+            get => _plot.MATURITYCLASSRATIONALE2;
+            set
+            {
+                _plot.MATURITYCLASSRATIONALE2 = value;
+                NotifyPropertyChanged("MATURITYCLASSRATIONALE2");
+                IsChanged = true;
+            }
+        }
         public int CROWN_CLOSURE
         {
             get => _plot.CROWN_CLOSURE;
@@ -304,7 +336,37 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public string DECLINATION
+        public string FIELD_CREW4
+        {
+            get => _plot.FIELD_CREW4;
+            set
+            {
+                _plot.FIELD_CREW4 = value;
+                NotifyPropertyChanged("FIELD_CREW4");
+                IsChanged = true;
+            }
+        }
+        public string FIELD_CREW5
+        {
+            get => _plot.FIELD_CREW5;
+            set
+            {
+                _plot.FIELD_CREW5 = value;
+                NotifyPropertyChanged("FIELD_CREW5");
+                IsChanged = true;
+            }
+        }
+        public string FIELD_CREW6
+        {
+            get => _plot.FIELD_CREW6;
+            set
+            {
+                _plot.FIELD_CREW6 = value;
+                NotifyPropertyChanged("FIELD_CREW6");
+                IsChanged = true;
+            }
+        }
+        public int DECLINATION
         {
             get => _plot.DECLINATION;
             set
@@ -522,6 +584,27 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+        public double LINELENGTH1
+        {
+            get => _plot.LINELENGTH1;
+            set
+            {
+                _plot.LINELENGTH1 = value;
+                NotifyPropertyChanged("LINELENGTH1");
+                IsChanged = true;
+            }
+        }
+        public double LINELENGTH2
+        {
+            get => _plot.LINELENGTH2;
+            set
+            {
+                _plot.LINELENGTH2 = value;
+                NotifyPropertyChanged("LINELENGTH2");
+                IsChanged = true;
+            }
+        }
+
         public string DOWNWOODYDEBRISNOTE
         {
             get => _plot.DOWNWOODYDEBRISNOTE;
@@ -603,13 +686,23 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public int DISTURBANCECODE
+        public int DISTURBANCECODE1
         {
-            get => _plot.DISTURBANCECODE;
+            get => _plot.DISTURBANCECODE1;
             set
             {
-                _plot.DISTURBANCECODE = value;
-                NotifyPropertyChanged("DISTURBANCECODE");
+                _plot.DISTURBANCECODE1 = value;
+                NotifyPropertyChanged("DISTURBANCECODE1");
+                IsChanged = true;
+            }
+        }
+        public int DISTURBANCECODE2
+        {
+            get => _plot.DISTURBANCECODE2;
+            set
+            {
+                _plot.DISTURBANCECODE2 = value;
+                NotifyPropertyChanged("DISTURBANCECODE2");
                 IsChanged = true;
             }
         }

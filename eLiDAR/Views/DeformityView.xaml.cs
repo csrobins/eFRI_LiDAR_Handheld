@@ -8,7 +8,6 @@ using Xamarin.Forms.Xaml;
 
 namespace eLiDAR.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DeformityView : ContentView
     {
         public DeformityView()

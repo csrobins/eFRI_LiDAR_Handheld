@@ -11,7 +11,7 @@ using eLiDAR.ViewModels;
 
 namespace eLiDAR.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+     
     public partial class SettingsPage : ContentPage
     {
         public SettingsPage()

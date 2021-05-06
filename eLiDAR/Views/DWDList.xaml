@@ -41,6 +41,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="20*" />
                                 <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0" Spacing="1">
                                 <StackLayout Orientation="Horizontal">
@@ -126,7 +128,65 @@
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
-
+                            <StackLayout Grid.Column="2" Spacing="1">
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Small Diam"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding SMALLDIAMETER}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text=" cm"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Large Diam"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding LARGEDIAMETER}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text=" cm"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="3" Spacing="1">
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Diameter"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding DIAMETER}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text=" cm"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                               
+                            </StackLayout>
                             <!--<Button Grid.Column="2" Text="Stem Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>-->
                         </Grid>
                     </ViewCell>

@@ -2,7 +2,7 @@
 <ContentPage
     x:Class="eLiDAR.Views.TreeListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     Title="{Binding Title}"
     BackgroundColor="{DynamicResource backgroundColor}"
     Shell.BackgroundColor="{DynamicResource backgroundColor}"
@@ -102,7 +102,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT}"
+                                        Text="{Binding DIRECTTOTALHEIGHT}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -114,7 +114,7 @@
                                     <Label
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding STATUS}"
+                                        Text="{Binding TREESTATUSCODE}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -145,49 +145,46 @@
                                 </StackLayout>
                             </StackLayout>
                             <FlexLayout
-                                Grid.Column=" 3"
+                                Grid.Column="3"
                                 AlignContent="End"
                                 FlowDirection="LeftToRight"
                                 HorizontalOptions="End"
                                 JustifyContent="End"
                                 Wrap="Wrap">
                                 <Button
-                                    Style="{StaticResource RectangularButtonStyle }"
+                                    Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowAgesCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HorizontalOptions="End"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsLiveTree}"
-                                    Text="Ages"
-                                     />
+                                    HorizontalOptions="End" Text="Ages"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.LiveTree}" /> 
                                 <Button
-                                    Style="{StaticResource RectangularButtonStyle }"
+                                    Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowFilteredCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
-                                    Text="Stem Map"
-                                     />
+                                    Text="Stem Map"/>
                                 <Button
-                                    Style="{StaticResource RectangularButtonStyle }"
+                                    Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowDeformityCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
                                     Text="Deformity"/>
-                            </FlexLayout>
+                            </FlexLayout>  
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView> 
         <StackLayout Grid.Row="2"  HorizontalOptions="End" VerticalOptions="Start">
             <Button x:Name="Button_Round"
                     Text="+"
                     Command="{Binding AddCommand}"
                     Style ="{StaticResource RoundButtonStyle}"/>
         </StackLayout>
-    </Grid>
+    </Grid> 
 </ContentPage>

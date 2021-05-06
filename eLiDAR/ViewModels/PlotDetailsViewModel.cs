@@ -5,7 +5,6 @@ using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
-using eLiDAR.Services;
 using eLiDAR.Utilities;
 using eLiDAR.Validator;
 using eLiDAR.Views;
@@ -22,6 +21,8 @@ namespace eLiDAR.ViewModels {
         public ICommand ForestHealthCommand { get; private set; }
         public ICommand PlotCrewCommand { get; private set; }
         public ICommand PhotoCommand { get; private set; }
+        public ICommand ValidateCommand { get; private set; }
+
         public List<PickerItems> ListFMU { get; set; }
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListCanopyOrigin { get; set; }
@@ -32,6 +33,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListNonStandardTypeCode { get; set; }
         public List<PickerItemsString> ListPerson { get; set; }
         public List<PickerItems> ListGrowthPlot { get; set; }
+        public List<PickerItemsString> ListGrowthPlotType { get; set; }
         public List<PickerItems> ListAccessCondition { get; set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
@@ -58,13 +60,16 @@ namespace eLiDAR.ViewModels {
             ForestHealthCommand = new Command(async () => await ShowForestHealth());
             PlotCrewCommand = new Command(async () => await ShowPlotCrew());
             PhotoCommand = new Command(async () => await ShowPhoto());
-            ListGrowthPlot = PickerService.GrowthPlotItems().OrderBy(c => c.NAME).ToList();
+            ValidateCommand = new Command(async () => await DoValidate());
 
+            ListGrowthPlot = PickerService.GrowthPlotItems().OrderBy(c => c.NAME).ToList();
+            ListGrowthPlotType = PickerService.GrowthPlotTypeItems().OrderBy(c => c.NAME).ToList();
             FetchPlotDetails();
             IsChanged = false;
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
-            ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+//            ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+            ListPerson = PickerService.FillPersonPicker(_plotRepository.GetPersonList(_plot.PROJECTID)).OrderBy(c => c.NAME).ToList();
         }
         public bool AllowPlotDeletion
         {
@@ -89,6 +94,20 @@ namespace eLiDAR.ViewModels {
             _AllowToLeave = true;
             await _navigation.PushAsync(new StandInfo(_plot));
         }
+        async Task DoValidate()
+        {
+            FullValidater _validater = new FullValidater(_plot);
+            if (_validater.ValidAll())
+            {
+                await Application.Current.MainPage.DisplayAlert("Validater", "No errors found", "OK", "Cancel");
+            }
+            else
+            {
+                string errmsg = _validater.msg; 
+                await Application.Current.MainPage.DisplayAlert("Validater", errmsg , "OK", "Cancel");
+            }
+        }
+
         async Task ShowForestHealth()
         {
             // launch the form - filtered to a specific tree
@@ -131,13 +150,13 @@ namespace eLiDAR.ViewModels {
             var list = new List<PickerItemsString>();
             foreach (var newperson in _plotRepository.GetPersonList(_plot.PROJECTID))
             {
-                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + ", " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
+                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + " " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
                 list.Add(newitem);
             };
             return list;
         }
         private PickerItems _selectedAccessCondition = new PickerItems { ID = 0, NAME = "" };
-        public PickerItems SelectedAccessCondtion
+        public PickerItems SelectedAccessCondition
         {
             get
             {
@@ -193,6 +212,48 @@ namespace eLiDAR.ViewModels {
                 _plot.FIELD_CREW3 = _selectedCrew3.ID;
             }
         }
+        private PickerItemsString _selectedCrew4 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew4
+        {
+            get
+            {
+                _selectedCrew4 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW4);
+                return _selectedCrew4;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew4, value);
+                _plot.FIELD_CREW4 = _selectedCrew4.ID;
+            }
+        }
+        private PickerItemsString _selectedCrew5 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew5
+        {
+            get
+            {
+                _selectedCrew5 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW5);
+                return _selectedCrew5;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew5, value);
+                _plot.FIELD_CREW5 = _selectedCrew5.ID;
+            }
+        }
+        private PickerItemsString _selectedCrew6 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrew6
+        {
+            get
+            {
+                _selectedCrew6 = PickerService.GetItem(ListPerson, _plot.FIELD_CREW6);
+                return _selectedCrew6;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrew6, value);
+                _plot.FIELD_CREW6 = _selectedCrew6.ID;
+            }
+        }
 
 
         private PickerItemsString _selectedMeasurementType = new PickerItemsString { ID = "", NAME = "" };
@@ -237,7 +298,20 @@ namespace eLiDAR.ViewModels {
                 _plot.GROWTHPLOTNUMBER = (int)_selectedGrowthPlot.ID;
             }
         }
-
+        private PickerItemsString _selectedGrowthPlotType = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedGrowthPlotType
+        {
+            get
+            {
+                _selectedGrowthPlotType = PickerService.GetItem(ListGrowthPlotType, _plot.EXISTINGPLOTTYPECODE);
+                return _selectedGrowthPlotType;
+            }
+            set
+            {
+                SetProperty(ref _selectedGrowthPlotType, value);
+                _plot.EXISTINGPLOTTYPECODE = _selectedGrowthPlotType.ID;
+            }
+        }
         private PickerItems _selectedSpecies = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedSpecies
         {
@@ -252,48 +326,8 @@ namespace eLiDAR.ViewModels {
                 _plot.LEAD_SPP = (int)_selectedSpecies.ID;
             }
         }
-        private PickerItems _selectedCanopyOrigin = new PickerItems { ID = 0, NAME = "" };
-        public PickerItems SelectedCanopyOrigin
-        {
-            get
-            {
-                _selectedCanopyOrigin = PickerService.GetItem(ListCanopyOrigin, _plot.ORIGIN);
-                return _selectedCanopyOrigin;
-            }
-            set
-            {
-                SetProperty(ref _selectedCanopyOrigin, value);
-                _plot.ORIGIN = (int)_selectedCanopyOrigin.ID;
-            }
-        }
-        private PickerItemsString _selectedMaturityClass = new PickerItemsString { ID = "", NAME = "" };
-        public PickerItemsString SelectedMaturityClass
-        {
-            get
-            {
-                _selectedMaturityClass = PickerService.GetItem(ListMaturityClass, _plot.MATURITYCLASSCODE);
-                return _selectedMaturityClass;
-            }
-            set
-            {
-                SetProperty(ref _selectedMaturityClass, value);
-                _plot.MATURITYCLASSCODE = _selectedMaturityClass.ID;
-            }
-        }
-        private PickerItemsString _selectedCanopyStructure = new PickerItemsString { ID = "", NAME = "" };
-        public PickerItemsString SelectedCanopyStructure
-        {
-            get
-            {
-                _selectedCanopyStructure = PickerService.GetItem(ListCanopyStructure, _plot.CANOPYSTRUCTURECODE);
-                return _selectedCanopyStructure;
-            }
-            set
-            {
-                SetProperty(ref _selectedCanopyStructure, value);
-                _plot.CANOPYSTRUCTURECODE = _selectedCanopyStructure.ID;
-            }
-        }
+      
+    
 
    
         void FetchPlotDetails(){
@@ -311,9 +345,16 @@ namespace eLiDAR.ViewModels {
         async Task DeletePlot() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Plot Details", "Delete Plot Details", "OK", "Cancel");
             if (isUserAccept) {
-                _plotRepository.DeletePlot(_plot);
-                _AllowToLeave = true;
-                await _navigation.PopAsync();
+                if (_plotRepository.AllowDelete(_plot))
+                {
+                    _plotRepository.DeletePlot(_plot);
+                    _AllowToLeave = true;
+                    await _navigation.PopAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Cannot delete plot", "This plot has related trees, small trees, dwd, veg, soil or ecosites.  Delete those records first before deleting the plot.", "OK", "Cancel");
+                }
             }
         }
         public string PlotTitle
@@ -353,7 +394,9 @@ namespace eLiDAR.ViewModels {
                 {
                     _ = UpdatePlot();
                     Shell.Current.Navigating -= Current_Navigating;
-                    await Shell.Current.GoToAsync("..", true);
+// await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
+
                 }
                 else
                 {
@@ -363,7 +406,8 @@ namespace eLiDAR.ViewModels {
             else
             {
                 Shell.Current.Navigating -= Current_Navigating;
-                await Shell.Current.GoToAsync("..", true);
+             //   await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
             }
         }
     }

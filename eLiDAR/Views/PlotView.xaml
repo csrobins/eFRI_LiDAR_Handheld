@@ -15,7 +15,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <StackLayout Grid.Row="0" Grid.Column="0">
@@ -67,6 +66,16 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Plot Date" />
+                <DatePicker
+                    x:Name="txtDate"
+                    Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumDate="01-Jan-2020"
+                    Style="{DynamicResource TextSubhead}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Non Standard Condition" />
                 <Picker
                     x:Name="txtNonStandardType"
@@ -95,6 +104,29 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Existing Plot Name" />
+                <Entry
+                    x:Name="txtExisting"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Existing Plot Name"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding EXISTINGPLOTNAME}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Existing Plot Type" />
+                <Picker
+                    x:Name="txtGrowthPlotType"
+                    Title="Existing Plot Type"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListGrowthPlotType}"
+                    SelectedItem="{Binding SelectedGrowthPlotType, Mode=TwoWay }"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}"/>
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Growth Plot Number" />
                 <Picker
                     x:Name="txtGrowthPlotNumber"
@@ -104,19 +136,29 @@
                     SelectedItem="{Binding SelectedGrowthPlot, Mode=TwoWay }"
                     ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}">
-                 
-                </Picker>
+                    TitleColor="{StaticResource AccentColor}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Plot Date" />
-                <DatePicker
-                    x:Name="txtDate"
-                    Date="{Binding PLOT_DATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    Text="Distance Target Moved(m)" />
+                <Entry
+                    x:Name="txtDist"
                     HorizontalOptions="FillAndExpand"
-                    MinimumDate="01-Jan-2020"
-                    Style="{DynamicResource TextSubhead}" />
+                    Placeholder="Distance Target Moved(m)"
+                    Keyboard="Numeric" 
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DISTANCETARGETMOVED}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Azimuth Target Moved(m)" />
+                <Entry
+                    x:Name="txtAzi"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Azimuth Target Moved"
+                    Keyboard="Numeric" 
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding AZIMUTHTARGETMOVED}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -154,6 +196,45 @@
                     ItemDisplayBinding="{Binding NAME}"
                     ItemsSource="{Binding ListPerson}"
                     SelectedItem="{Binding SelectedCrew3, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Crew 4" />
+                <Picker
+                    x:Name="txtcrew4"
+                    Title="Crew Member 4"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedCrew4, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Crew 5" />
+                <Picker
+                    x:Name="txtcrew5"
+                    Title="Crew Member 5"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedCrew5, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Crew 6" />
+                <Picker
+                    x:Name="txtcrew6"
+                    Title="Crew Member 6"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedCrew6, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
             </StackLayout>
@@ -238,9 +319,14 @@
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding PhotoCommand}"
                     Text="Photos"/>
+                <Button
+                    Style="{StaticResource FormButtonStyle } "
+                    Command="{Binding CommentsCommand}"
+                    Text="Comments"
+                    />
             </StackLayout>
 
-            <StackLayout Grid.Row="0" Grid.Column="2">
+     <!--       <StackLayout Grid.Row="0" Grid.Column="2">
                 <Label
                     HorizontalOptions="Start"
                     Style="{DynamicResource TextTitle}"
@@ -308,12 +394,8 @@
                     Placeholder="Crown Closure"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding CROWN_CLOSURE}" />
-                <Button
-                    Style="{StaticResource FormButtonStyle } "
-                    Command="{Binding CommentsCommand}"
-                    Text="Comments"
-                    />
-            </StackLayout>
+              
+            </StackLayout> -->
         </Grid>
 
     </ContentView.Content>

@@ -54,14 +54,23 @@ namespace eLiDAR.Models
         public DateTime PLOTOVERVIEWDATE { get; set; }
         public string MEASURETYPECODE { get; set; }
         public int LEAD_SPP { get; set; }
-        public int ORIGIN { get; set; }
-        public string CANOPYSTRUCTURECODE { get; set; }
-        public string MATURITYCLASSCODE { get; set; }
+        public int MAINCANOPYORIGINCODE1 { get; set; }
+        public int MAINCANOPYORIGINCODE2 { get; set; }
+        public string CANOPYSTRUCTURECODE1 { get; set; }
+        public string CANOPYSTRUCTURECODE2 { get; set; }
+        public string MATURITYCLASSCODE1 { get; set; }
+        public string MATURITYCLASSCODE2 { get; set; }
+        public string MATURITYCLASSRATIONALE1 { get; set; }
+        public string MATURITYCLASSRATIONALE2 { get; set; }
+
         public int CROWN_CLOSURE { get; set; }
         public string FIELD_CREW1 { get; set; }
         public string FIELD_CREW2 { get; set; }
         public string FIELD_CREW3 { get; set; }
-        public string DECLINATION { get; set; }
+        public string FIELD_CREW4 { get; set; }
+        public string FIELD_CREW5 { get; set; }
+        public string FIELD_CREW6 { get; set; }
+        public int DECLINATION { get; set; }
         public int UTMZONE { get; set; }
         public double EASTING { get; set; }
         public double NORTHING { get; set; }
@@ -73,9 +82,12 @@ namespace eLiDAR.Models
         public int NONSTANDARDTYPECODE { get; set; }
         public int ACCESSCONDITIONCODE { get; set; }
         public int MEASUREYEAR { get; set; }
-        public string MATURITYCLASSRATIONALE { get; set; }
-        public int SITERANK { get; set; }
         public int GROWTHPLOTNUMBER { get; set; }
+        public string EXISTINGPLOTNAME { get; set; }
+        public string EXISTINGPLOTTYPECODE { get; set; }
+        public double DISTANCETARGETMOVED { get; set; }
+        public int AZIMUTHTARGETMOVED { get; set; }
+        public int SITERANK { get; set; }
         public int CROWNDAMAGECODE { get; set; }
         public int VIGOURCODE { get; set; }
         public string DAMAGEDESCRIPTION { get; set; }
@@ -105,10 +117,14 @@ namespace eLiDAR.Models
         public DateTime STANDINFODATE { get; set; }
         public string STANDINFONOTE { get; set; }
         public string STANDINFOPERSON { get; set; }
-        public int DISTURBANCECODE { get; set; }
+        public int DISTURBANCECODE1 { get; set; }
+        public int DISTURBANCECODE2 { get; set; }
         public int PERCENTAFFECTED { get; set; }
         public int PERCENTMORTALITY { get; set; }
         public string FOLLOWUPREQUIRED { get; set; }
+        public double LINELENGTH1 { get; set; }
+        public double LINELENGTH2 { get; set; }
+
 
     }
     public class PLOTLIST : PLOT
@@ -116,25 +132,33 @@ namespace eLiDAR.Models
         public bool IsPlotTypeB {
             get
             {
-               // if (VSNPLOTTYPECODE.Contains("B" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "B")
-                if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))
+                try
                 {
+                    if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))
+                    {
                         return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else { return false; }
+                catch (Exception ex) { return false; } 
             }
             set { }
             }
         public bool IsPlotTypeC {
             get
             {
-//                if (VSNPLOTTYPECODE == "AC" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "C")
-                if (VSNPLOTTYPECODE.Contains("C"))
-
+                try
+                {
+                    if (VSNPLOTTYPECODE.Contains("C"))
                     {
                         return true;
+                    }
+                    else { return false; }
                 }
-                else { return false; }
+                catch (Exception ex) { return false; }
             }
             set { }
         }
@@ -231,13 +255,19 @@ namespace eLiDAR.Models
         {
             get
             {
-//                if (VSNPLOTTYPECODE == "AB" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "B")
-
-                if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))
+                //                if (VSNPLOTTYPECODE == "AB" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "B")
+                try
                 {
-                    return true;
+                    if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))
+                    {
+                        return true;
+                    }
+                    else { return false; }
                 }
-                else { return false; }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
             set { }
         }
@@ -245,23 +275,37 @@ namespace eLiDAR.Models
         {
             get
             {
-                if (VSNPLOTTYPECODE.Contains("C"))
+                try
                 {
-                    return true;
+                    if (VSNPLOTTYPECODE.Contains("C"))
+                    {
+                        return true;
+                    }
+                    else { return false; }
                 }
-                else { return false; }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
             set { }
         }
-        public bool IsLiveTree
+        public bool LiveTree
         {
             get
             {
-                if (TREESTATUSCODE.Contains("L") || TREESTATUSCODE.Contains("V"))
+                try
                 {
-                    return true;
+                    if (TREESTATUSCODE.Contains("L") || TREESTATUSCODE.Contains("V"))
+                    {
+                        return true;
+                    }
+                    else { return false; }
                 }
-                else { return false; }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
             set { }
         }
@@ -418,7 +462,7 @@ namespace eLiDAR.Models
         public double HEIGHTTO { get; set; }
         public string QUADRANTCODE { get; set; }
         public int EXTENT { get; set; }
-        public int DEGGREELEANARCH { get; set; }
+        public int DEGREELEANARCH { get; set; }
         public int AZIMUTH { get; set; }
         public double DEFORMITYLENGTH { get; set; }
         public double DEFORMITYWIDTH { get; set; }
