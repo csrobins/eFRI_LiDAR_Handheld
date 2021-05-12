@@ -18,7 +18,8 @@ namespace eLiDAR.Views {
                 //this.BindingContext.  
                 MyListView.ItemsSource = null;
                 _viewmodel.FetchTrees();
-                MyListView.ItemsSource = _viewmodel.TreeStemListFull;
+             //   MyListView.ItemsSource = _viewmodel.TreeStemListFull;
+                UpdateList(this.MainSearch.Text);
             }
             catch (Exception e)
             {
@@ -47,13 +48,24 @@ namespace eLiDAR.Views {
         }
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
+            UpdateList(e.NewTextValue);
+            //MyListView.BeginRefresh();
+
+            //if (string.IsNullOrWhiteSpace(e.NewTextValue))
+            //    MyListView.ItemsSource = _viewmodel.TreeStemListFull;
+            //else
+            //    MyListView.ItemsSource = _viewmodel.TreeStemListFull.Where(i => i.TREENUMBER.Equals(Int32.Parse(e.NewTextValue)));
+
+            //MyListView.EndRefresh();
+        }
+        private void UpdateList(string txtvalue)
+        {
             MyListView.BeginRefresh();
 
-            if (string.IsNullOrWhiteSpace(e.NewTextValue))
+            if (string.IsNullOrWhiteSpace(txtvalue))
                 MyListView.ItemsSource = _viewmodel.TreeStemListFull;
             else
-                MyListView.ItemsSource = _viewmodel.TreeStemListFull.Where(i => i.TREENUMBER.Equals(Int32.Parse(e.NewTextValue)));
-
+                MyListView.ItemsSource = _viewmodel.TreeStemListFull.Where(i => i.TREENUMBER.Equals(Int32.Parse(txtvalue)));
             MyListView.EndRefresh();
         }
     }

@@ -21,6 +21,7 @@ namespace eLiDAR.ViewModels {
         public ICommand CommentsCommand { get; private set; }
         public ICommand StemMapCommand { get; private set; }
         public ICommand DeformityCommand { get; private set; }
+        public ICommand AgeCommand { get; private set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
 
@@ -34,6 +35,10 @@ namespace eLiDAR.ViewModels {
         public List<PickerItems> ListMortalityCause { get; set; }
         public List<PickerItems> ListDecayClass { get; set; }
         public List<PickerItems> ListCrownPosition { get; set; }
+        public List<PickerItemsString> ListCrownClass { get; set; }
+        public List<PickerItemsString> ListStemQuality { get; set; }
+
+
         private bool _AllowtoLeave = false;
         public AddTreeViewModel(INavigation navigation, string fk)
         {
@@ -45,19 +50,24 @@ namespace eLiDAR.ViewModels {
             _tree.PLOTID = fk;
             AddCommand = new Command(async () => await AddTree(_fk));
             ViewAllCommand = new Command(async () => await ShowList());
-            ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
-            ListVigour = PickerService.VigourItems().ToList();
-            ListCrownDamage = PickerService.CrownDamageItems().ToList();
-            ListDefoliatingInsect = PickerService.DefoliatingInsectItems().ToList();
-            ListFoliarDisease = PickerService.FoliarDiseaseItems().ToList();
-            ListBarkRetention = PickerService.BarkRetentionItems().ToList();
-            ListWoodCondition = PickerService.WoodConditionItems().ToList();
-            ListMortalityCause = PickerService.MortalityCauseItems().ToList();
-            ListDecayClass = PickerService.DecayClassItems().ToList();
-            ListCrownPosition = PickerService.CrownPositionItems().ToList();
+            ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.ID ).ToList();
+            ListVigour = PickerService.VigourItems().OrderBy(c => c.NAME).ToList();
+            ListCrownDamage = PickerService.CrownDamageItems().OrderBy(c => c.NAME).ToList();
+            ListDefoliatingInsect = PickerService.DefoliatingInsectItems().OrderBy(c => c.NAME).ToList();
+            ListFoliarDisease = PickerService.FoliarDiseaseItems().OrderBy(c => c.NAME).ToList();
+            ListBarkRetention = PickerService.BarkRetentionItems().OrderBy(c => c.NAME).ToList();
+            ListWoodCondition = PickerService.WoodConditionItems().OrderBy(c => c.NAME).ToList();
+            ListMortalityCause = PickerService.MortalityCauseItems().OrderBy(c => c.NAME).ToList();
+            ListDecayClass = PickerService.DecayClassItems().OrderBy(c => c.NAME).ToList();
+            ListCrownPosition = PickerService.CrownPositionItems().OrderBy(c => c.NAME).ToList();
+            ListCrownClass = PickerService.CrownClassItems().OrderBy(c => c.NAME).ToList();
+            ListStemQuality = PickerService.StemQualityItems().OrderBy(c => c.NAME).ToList();
+
             CommentsCommand = new Command(async () => await ShowComments());
             StemMapCommand = new Command(async () => await ShowStemMap());
             DeformityCommand = new Command(async () => await ShowDeformity());
+            AgeCommand = new Command(async () => await ShowAge());
+
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
 
@@ -66,6 +76,11 @@ namespace eLiDAR.ViewModels {
             _tree.DBHIN  = "Y";
             _tree.CROWNIN = "Y";
             _tree.TREESTATUSCODE = "L";
+            _tree.TREEORIGINCODE = "N";
+            _tree.HEIGHTTODEADTIP = null;
+            _tree.DIRECTHEIGHTTOCONTLIVECROWN = null;
+            _tree.OCULARHEIGHTTOCONTLIVECROWN = null;
+
             if (util.AllowAutoNumber) { _tree.TREENUMBER = _treeRepository.GetNextNumber(fk); }
 
         }
@@ -106,9 +121,19 @@ namespace eLiDAR.ViewModels {
             if (_issaved)
             {
                 _AllowtoLeave = true;
-                await _navigation.PushAsync(new DeformityList(_tree.TREEID));
+                await _navigation.PushAsync(new TreeAge(_tree.TREEID));
             }
             
+        }
+        async Task ShowAge()
+        {
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowtoLeave = true;
+                await _navigation.PushAsync(new TreeAge(_tree.TREEID));
+            }
+
         }
 
         // These are for the picker item sources that present a an item different than the code
@@ -167,6 +192,37 @@ namespace eLiDAR.ViewModels {
                 _tree.CROWNDAMAGECODE = (int)_selectedCrownDamage.ID;
             }
         }
+
+        private PickerItemsString _selectedCrownClass = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedCrownClass
+        {
+            get
+            {
+                _selectedCrownClass = PickerService.GetItem(ListCrownClass, _tree.CROWNCLASSCODE);
+                return _selectedCrownClass;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrownClass, value);
+                _tree.CROWNCLASSCODE = _selectedCrownClass.ID;
+            }
+        }
+        private PickerItemsString _selectedStemQuality = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedStemQuality
+        {
+            get
+            {
+                _selectedStemQuality = PickerService.GetItem(ListStemQuality, _tree.STEMQUALITYCODE);
+                return _selectedStemQuality;
+            }
+            set
+            {
+                SetProperty(ref _selectedCrownClass, value);
+                _tree.STEMQUALITYCODE = _selectedStemQuality.ID;
+
+            }
+        }
+
         private PickerItems _selectedDefoliatingInsect = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedDefoliatingInsect
         {
@@ -250,6 +306,7 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedDecayClass, value);
                 _tree.DECAYCLASS  = (int)_selectedDecayClass.ID;
+                if (_tree.DECAYCLASS < 4 && IsNotLiveTree) { IsDecayClass1to3 = true; } else { IsDecayClass1to3 = false; }
             }
         }
 

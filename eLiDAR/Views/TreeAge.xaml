@@ -53,34 +53,34 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Field Age (yrs)" />
+                    Text="Field Ring Count (yrs)" />
                 <Entry
                     x:Name="txtFieldAge"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
-                    Placeholder="Field Age (yrs)"
+                    Placeholder="Field Ring Count (yrs)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding FIELDAGE}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Office Age" />
+                    Text="Office Ring Count (yrs)" />
                 <Entry
                     x:Name="txtOfficeAge"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
-                    Placeholder="Office Age (yrs)"
+                    Placeholder="Office Ring Count (yrs)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding OFFICERINGCOUNT}" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Missing Rings" />
+                    Text="Missing Rings (yrs)" />
                 <Entry
                     x:Name="txtMissingRings"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
-                    Placeholder="Missing Rings"
+                    Placeholder="Missing Rings (yrs)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding MISSINGRINGS}" />
 

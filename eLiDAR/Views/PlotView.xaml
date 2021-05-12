@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:eLiDAR="clr-namespace:eLiDAR;assembly=eVSN"
     mc:Ignorable="d">
     <ContentView.Content>
         <Grid Padding="10" ColumnSpacing=" 1">
@@ -260,14 +261,28 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="UTM Zone" />
-                <Entry
+                <StackLayout Orientation="Horizontal" >
+                    <Entry
                     x:Name="txtUTM"
-                    HorizontalOptions="FillAndExpand"
+                    HorizontalOptions="Start" 
                     IsReadOnly="False" 
                     Keyboard="Numeric" 
                     Placeholder="UTM Zone"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_ZONE}" />
+                    <Button
+                    Style="{StaticResource FontAwesome5FreeRegular}"
+                    HorizontalOptions="End"
+                    Text="{x:Static eLiDAR:IconFont.LocationArrow }" 
+                    FontSize="Large" 
+                    TextColor="{StaticResource AccentColor}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    BackgroundColor="{DynamicResource backgroundColor}"
+                    Command="{Binding LocationCommand}" 
+                       />
+                </StackLayout>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -324,6 +339,7 @@
                     Command="{Binding CommentsCommand}"
                     Text="Comments"
                     />
+              
             </StackLayout>
 
      <!--       <StackLayout Grid.Row="0" Grid.Column="2">

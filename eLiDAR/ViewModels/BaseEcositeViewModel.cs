@@ -118,7 +118,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int DEPTH_TO_DISTINCT_MOTTLES
+        public Nullable<int> DEPTH_TO_DISTINCT_MOTTLES
         {
             get => _ecosite.DEPTHTODISTINCTMOTTLES;
             set
@@ -129,7 +129,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int DEPTH_TO_PROMINENT_MOTTLES
+        public Nullable<int> DEPTH_TO_PROMINENT_MOTTLES
         {
             get => _ecosite.DEPTHTOPROMINENTMOTTLES;
             set
@@ -140,7 +140,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int DEPTH_TO_GLEY
+        public Nullable<int> DEPTH_TO_GLEY
         {
             get => _ecosite.DEPTHTOGLEY;
             set
@@ -151,7 +151,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int DEPTH_TO_BEDROCK
+        public Nullable<int> DEPTH_TO_BEDROCK
         {
             get => _ecosite.DEPTHTOBEDROCK;
             set
@@ -172,7 +172,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public int DEPTH_TO_CARBONATES
+        public Nullable<int> DEPTH_TO_CARBONATES
         {
             get => _ecosite.DEPTHTOCARBONATES;
             set
@@ -278,7 +278,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int DEPTH_TO_ROOT_RESTRICTION
+        public Nullable<int> DEPTH_TO_ROOT_RESTRICTION
         {
             get => _ecosite.DEPTHTOROOTRESTRICTION;
             set
@@ -289,7 +289,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int DEPTH_TO_WATER_TABLE
+        public Nullable<int> DEPTH_TO_WATER_TABLE
         {
             get => _ecosite.DEPTHTOWATERTABLE;
             set
@@ -300,7 +300,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int DEPTH_TO_COARSE_FRAGS
+        public Nullable<int> DEPTH_TO_COARSE_FRAGS
         {
             get => _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS;
             set
@@ -322,7 +322,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public string DEPTHTOSEEPAGE
+        public Nullable<int> DEPTHTOSEEPAGE
         {
             get => _ecosite.DEPTHTOSEEPAGE;
             set

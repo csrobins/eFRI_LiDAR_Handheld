@@ -13,7 +13,7 @@ namespace eLiDAR.Droid {
 			// Documents folder
             var path = Path.Combine(documentsPath, DatabaseHelper.DbFileName);
 
-            // Use this if I need to reset the datbase
+            // Use this if I need to reset the database
             bool Isdebug = false;
             if (Isdebug == true)
                 {

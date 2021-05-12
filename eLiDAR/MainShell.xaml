@@ -47,7 +47,7 @@
 
             <ShellContent ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
         </Tab>
-        <Tab Title="About">
+        <Tab Title="Info">
             <Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"

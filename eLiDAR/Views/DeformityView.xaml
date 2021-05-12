@@ -121,12 +121,12 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Length" />
+                    Text="Length (m)" />
                 <Entry
                     x:Name="txtLength"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
-                    Placeholder="Length"
+                    Placeholder="Length (m)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding LENGTH}" />
                 <Label

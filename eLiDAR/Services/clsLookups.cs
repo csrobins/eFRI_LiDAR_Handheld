@@ -721,7 +721,134 @@ namespace eLiDAR.Services
              new PickerItems() {ID = 1191, NAME = "1191-Canada plum"},
              new PickerItems() {ID = 1267, NAME = "1267-Vitis species"},
              new PickerItems() {ID = 1271, NAME = "1271-Northern prickly ash"},
-             new PickerItems() {ID = 1273, NAME = "1273-Common buttonbush"}
+             new PickerItems() {ID = 1273, NAME = "1273-Common buttonbush"},
+                 new PickerItems() {ID = 1005, NAME = "1005-Amelanchier Spp"},
+                     new PickerItems() {ID = 51, NAME = "51-American Basswood"},
+                     new PickerItems() {ID = 44, NAME = "44-American Beech"},
+                     new PickerItems() {ID = 171, NAME = "171-American Chestnut"},
+                     new PickerItems() {ID = 50, NAME = "50-American/White Elm"},
+                     new PickerItems() {ID = 111, NAME = "111-American Hornbeam/Blue-Beech"},
+                     new PickerItems() {ID = 25, NAME = "25-American Larch/Tamarack"},
+                     new PickerItems() {ID = 1092, NAME = "1092-American Mountain-ash"},
+                     new PickerItems() {ID = 82, NAME = "82-American Witch-hazel"},
+                     new PickerItems() {ID = 20, NAME = "20-Balsam Fir"},
+                     new PickerItems() {ID = 73, NAME = "73-Balsam Poplar"},
+                     new PickerItems() {ID = 1246, NAME = "1246-Basket Willow"},
+                     new PickerItems() {ID = 907, NAME = "907-Bay-leaved Willow"},
+                     new PickerItems() {ID = 93, NAME = "93-Big Shellbark Hickory"},
+                     new PickerItems() {ID = 166, NAME = "166-Big-leaf Linden"},
+                     new PickerItems() {ID = 123, NAME = "123-Bitternut Hickory"},
+                     new PickerItems() {ID = 45, NAME = "45-Black Ash"},
+                     new PickerItems() {ID = 58, NAME = "58-Black Cherry"},
+                     new PickerItems() {ID = 137, NAME = "137-Black Gum"},
+                     new PickerItems() {ID = 61, NAME = "61-Black Locust"},
+                     new PickerItems() {ID = 94, NAME = "94-Black Maple"},
+                     new PickerItems() {ID = 86, NAME = "86-Black Oak"},
+                     new PickerItems() {ID = 6, NAME = "6-Black Pine"},
+                     new PickerItems() {ID = 13, NAME = "13-Black Spruce"},
+                     new PickerItems() {ID = 54, NAME = "54-Black Walnut"},
+                     new PickerItems() {ID = 1234, NAME = "1234-Black Willow"},
+                     new PickerItems() {ID = 132, NAME = "132-Blue Ash"},
+                     new PickerItems() {ID = 1153, NAME = "1153-Bosc's Thorn"},
+                     new PickerItems() {ID = 1196, NAME = "1196-Buckthorn"},
+                     new PickerItems() {ID = 42, NAME = "42-Bur Oak"},
+                     new PickerItems() {ID = 55, NAME = "55-Butternut"},
+                     new PickerItems() {ID = 72, NAME = "72-Carolina Poplar"},
+                     new PickerItems() {ID = 112, NAME = "112-Cherry Birch"},
+                     new PickerItems() {ID = 91, NAME = "91-Chinquapin Oak"},
+                     new PickerItems() {ID = 1151, NAME = "1151-Cockspur Hawthorn"},
+                     new PickerItems() {ID = 902, NAME = "902-Common Apple"},
+                     new PickerItems() {ID = 68, NAME = "68-Common Hackberry"},
+                     new PickerItems() {ID = 905, NAME = "905-Crack Willow"},
+                     new PickerItems() {ID = 136, NAME = "136-Cucumber Tree"},
+                     new PickerItems() {ID = 1156, NAME = "1156-Dotted Hawthorn"},
+                     new PickerItems() {ID = 1152, NAME = "1152-Douglas's Hawthorn"},
+                     new PickerItems() {ID = 121, NAME = "121-Downy Birch"},
+                     new PickerItems() {ID = 71, NAME = "71-Eastern Cottonwood"},
+                     new PickerItems() {ID = 19, NAME = "19-Eastern Hemlock"},
+                     new PickerItems() {ID = 23, NAME = "23-Eastern Red Cedar"},
+                     new PickerItems() {ID = 22, NAME = "22-Eastern White Cedar"},
+                     new PickerItems() {ID = 1, NAME = "1-Eastern White Pine"},
+                     new PickerItems() {ID = 1155, NAME = "1155-English Hawthorn"},
+                     new PickerItems() {ID = 26, NAME = "26-European Larch"},
+                     new PickerItems() {ID = 146, NAME = "146-European Mountain-ash"},
+                     new PickerItems() {ID = 120, NAME = "120-European Weeping Birch"},
+                     new PickerItems() {ID = 1032, NAME = "1032-Fineberry Hawthorn"},
+                     new PickerItems() {ID = 1033, NAME = "1033-Fleshy Hawthorn"},
+                     new PickerItems() {ID = 177, NAME = "177-Freeman's Maple"},
+                     new PickerItems() {ID = 173, NAME = "173-Glossy Buckthorn"},
+                     new PickerItems() {ID = 168, NAME = "168-Gray Birch"},
+                     new PickerItems() {ID = 47, NAME = "47-Green/Red Ash"},
+                     new PickerItems() {ID = 128, NAME = "128-Hawthorn species"},
+                     new PickerItems() {ID = 96, NAME = "96-Honey Locust"},
+                     new PickerItems() {ID = 141, NAME = "141-Hop Tree"},
+                     new PickerItems() {ID = 69, NAME = "69-Horse Chestnut"},
+                     new PickerItems() {ID = 97, NAME = "97-Hybrid Poplar"},
+                     new PickerItems() {ID = 56, NAME = "56-Ironwood/Eastern Hop-hornbeam"},
+                     new PickerItems() {ID = 3, NAME = "3-Jack Pine"},
+                     new PickerItems() {ID = 27, NAME = "27-Japanese Larch"},
+                     new PickerItems() {ID = 133, NAME = "133-Kentucky Coffee-tree"},
+                     new PickerItems() {ID = 70, NAME = "70-Large-tooth Aspen"},
+                     new PickerItems() {ID = 150, NAME = "150-Little-leaf Linden"},
+                     new PickerItems() {ID = 1180, NAME = "1180-Malus species"},
+                     new PickerItems() {ID = 117, NAME = "117-Manitoba Maple"},
+                     new PickerItems() {ID = 1231, NAME = "1231-Mccall's Willow"},
+                     new PickerItems() {ID = 92, NAME = "92-Mockernut hickory"},
+                     new PickerItems() {ID = 77, NAME = "77-Northern Catalpa"},
+                     new PickerItems() {ID = 1093, NAME = "1093-Northern Mountain-ash"},
+                     new PickerItems() {ID = 41, NAME = "41-Northern Red Oak"},
+                     new PickerItems() {ID = 34, NAME = "34-Norway Maple"},
+                     new PickerItems() {ID = 15, NAME = "15-Norway Spruce"},
+                     new PickerItems() {ID = 119, NAME = "119-Pawpaw"},
+                     new PickerItems() {ID = 1217, NAME = "1217-Peach-leaved Willow"},
+                     new PickerItems() {ID = 139, NAME = "139-Pin Cherry"},
+                     new PickerItems() {ID = 87, NAME = "87-Pin Oak"},
+                     new PickerItems() {ID = 5, NAME = "5-Pitch Pine"},
+                     new PickerItems() {ID = 75, NAME = "75-Populus species"},
+                     new PickerItems() {ID = 1062, NAME = "1062-Prunus species"},
+                     new PickerItems() {ID = 901, NAME = "901-Pumpkin Ash"},
+                     new PickerItems() {ID = 32, NAME = "32-Red Maple"},
+                     new PickerItems() {ID = 175, NAME = "175-Red Mulberry"},
+                     new PickerItems() {ID = 2, NAME = "2-Red Pine"},
+                     new PickerItems() {ID = 14, NAME = "14-Red Spruce"},
+                     new PickerItems() {ID = 125, NAME = "125-Redbud"},
+                     new PickerItems() {ID = 1195, NAME = "1195-Rhamnus species"},
+                     new PickerItems() {ID = 170, NAME = "170-Rock Elm"},
+                     new PickerItems() {ID = 904, NAME = "904-Rusty Sallow"},
+                     new PickerItems() {ID = 903, NAME = "903-Salix tree species"},
+                     new PickerItems() {ID = 78, NAME = "78-Sassafras"},
+                     new PickerItems() {ID = 4, NAME = "4-Scotch Pine"},
+                     new PickerItems() {ID = 124, NAME = "124-Shagbark Hickory"},
+                     new PickerItems() {ID = 39, NAME = "39-Shumard's Oak"},
+                     new PickerItems() {ID = 33, NAME = "33-Silver Maple"},
+                     new PickerItems() {ID = 169, NAME = "169-Slippery Elm"},
+                     new PickerItems() {ID = 1091, NAME = "1091-Sorbus species"},
+                     new PickerItems() {ID = 174, NAME = "174-Sour Red Cherry"},
+                     new PickerItems() {ID = 1001, NAME = "1001-Striped Maple"},
+                     new PickerItems() {ID = 30, NAME = "30-Sugar Maple"},
+                     new PickerItems() {ID = 88, NAME = "88-Swamp White Oak"},
+                     new PickerItems() {ID = 90, NAME = "90-Sweet Cherry"},
+                     new PickerItems() {ID = 172, NAME = "172-Sweet Chestnut"},
+                     new PickerItems() {ID = 134, NAME = "134-Sweet gum"},
+                     new PickerItems() {ID = 89, NAME = "56-Sweet Pignut Hickory"},
+                     new PickerItems() {ID = 57, NAME = "57-Sycamore"},
+                     new PickerItems() {ID = 74, NAME = "74-Trembling Aspen"},
+                     new PickerItems() {ID = 60, NAME = "60-Tulip Tree"},
+                     new PickerItems() {ID = 990, NAME = "990-Unknown Conifer"},
+                     new PickerItems() {ID = 991, NAME = "991-Unknown Hardwood"},
+                     new PickerItems() {ID = 0, NAME = "0-Unknown Tree Species"},
+                     new PickerItems() {ID = 1154, NAME = "1154-Variable Thorn"},
+                     new PickerItems() {ID = 64, NAME = "64-Weeping Willow"},
+                     new PickerItems() {ID = 109, NAME = "109-Western Red Cedar"},
+                     new PickerItems() {ID = 46, NAME = "46-White Ash"},
+                     new PickerItems() {ID = 38, NAME = "38-White Birch"},
+                     new PickerItems() {ID = 40, NAME = "40-White Oak"},
+                     new PickerItems() {ID = 76, NAME = "76-White Poplar"},
+                     new PickerItems() {ID = 12, NAME = "12-White Spruce"},
+                     new PickerItems() {ID = 63, NAME = "63-White Willow"},
+                     new PickerItems() {ID = 145, NAME = "145-Whitebeam"},
+                     new PickerItems() {ID = 37, NAME = "37-Yellow Birch"},
+                     new PickerItems() {ID = 906, NAME = "906-Yellow Willow"},
             };
                 return list;
         }
@@ -818,14 +945,41 @@ namespace eLiDAR.Services
             };
             return list;
         }
+        public static List<PickerItemsString> CrownClassItems()
+        {
+            var list = new List<PickerItemsString>()
+            {
+                new PickerItemsString() {ID = "E", NAME = "E-emergent"},
+                new PickerItemsString() {ID = "D", NAME = "D-dominant"},
+                new PickerItemsString() {ID = "C", NAME = "C-codominant"},
+                new PickerItemsString() {ID = "A", NAME = "A-anomaly"},
+                new PickerItemsString() {ID = "I", NAME = "I-intermediate"},
+                new PickerItemsString() {ID = "S", NAME = "S-suppressed"},
+                new PickerItemsString() {ID = "U", NAME = "U-understory"},
+            };
+            return list;
+        }
+        public static List<PickerItemsString> StemQualityItems()
+        {
+            var list = new List<PickerItemsString>()
+            {
+                new PickerItemsString() {ID = "A", NAME = "A-high quality"},
+                new PickerItemsString() {ID = "B", NAME = "B-medium quality"},
+                new PickerItemsString() {ID = "C", NAME = "C-low quality"},
+                new PickerItemsString() {ID = "D", NAME = "D-chipper"},
+                new PickerItemsString() {ID = "N", NAME = "N-non merch"},
+            };
+            return list;
+        }
+
         public static List<PickerItems> VigourItems()
         {
             var list = new List<PickerItems>()
             {
-                new PickerItems() {ID = 1, NAME = "1-healthy"},
-                new PickerItems() {ID = 2, NAME = "2-light decline"},
-                new PickerItems() {ID = 3, NAME = "3-moderate decline"},
-                new PickerItems() {ID = 4, NAME = "4-severe decline"},
+                new PickerItems() {ID = 1, NAME = "1-healthy <10% damage"},
+                new PickerItems() {ID = 2, NAME = "2-light decline 11-25% damage"},
+                new PickerItems() {ID = 3, NAME = "3-moderate decline 26-50% damage"},
+                new PickerItems() {ID = 4, NAME = "4-severe decline >50% damage"},
                 new PickerItems() {ID = 5, NAME = "5-recently dead"},
                 new PickerItems() {ID = 6, NAME = "6-long dead"}
 
@@ -837,12 +991,12 @@ namespace eLiDAR.Services
             var list = new List<PickerItems>()
             {
                 new PickerItems() {ID = 0, NAME = "0-no damage evident"},
-                new PickerItems() {ID = 1, NAME = "1-branch/twig dieback"},
-                new PickerItems() {ID = 2, NAME = "2-transparency"},
-                new PickerItems() {ID = 3, NAME = "3-discolouration"},
-                new PickerItems() {ID = 4, NAME = "4-witches broom"},
+                new PickerItems() {ID = 1, NAME = "1-branch/twig dieback w live crown"},
+                new PickerItems() {ID = 2, NAME = "2-branch/crown breakage"},
+                new PickerItems() {ID = 3, NAME = "3-crown transparency"},
+                new PickerItems() {ID = 4, NAME = "4-discolouration"},
                 new PickerItems() {ID = 5, NAME = "5-defoliator"},
-                new PickerItems() {ID = 6, NAME = "6-not discernable"}
+                new PickerItems() {ID = 6, NAME = "6-witches broom/mistletoe"}
             };
             return list;
         }
@@ -917,13 +1071,13 @@ namespace eLiDAR.Services
         {
             var list = new List<PickerItems>()
             {
-                new PickerItems() {ID = 1, NAME = "1-no decay"},
-                new PickerItems() {ID = 2, NAME = "2-probable decay"},
-                new PickerItems() {ID = 3, NAME = "3-limited decay"},
-                new PickerItems() {ID = 4, NAME = "4-mostly hard"},
-                new PickerItems() {ID = 5, NAME = "5-balance hard/soft"},
-                new PickerItems() {ID = 6, NAME = "6-mostly soft"},
-                new PickerItems() {ID = 7, NAME = "7-no hard wood"},
+                new PickerItems() {ID = 1, NAME = "1-no decay - DC 1 or 2"},
+                new PickerItems() {ID = 2, NAME = "2-probable decay - DC 1 or 2"},
+                new PickerItems() {ID = 3, NAME = "3-limited decay - DC 1 or 2"},
+                new PickerItems() {ID = 4, NAME = "4-mostly hard - DC 3"},
+                new PickerItems() {ID = 5, NAME = "5-balance hard/soft - DC 4"},
+                new PickerItems() {ID = 6, NAME = "6-mostly soft - DC 4 or 5"},
+                new PickerItems() {ID = 7, NAME = "7-no hard wood - DC 5"},
                 new PickerItems() {ID = 8, NAME = "8-hollow shell"}
 
             };
@@ -1099,12 +1253,12 @@ namespace eLiDAR.Services
                 new PickerItems() {ID = 7, NAME = "7-RAW MODER"},
                 new PickerItems() {ID = 8, NAME = "8-FIBRIMOR"},
                 new PickerItems() {ID = 9, NAME = "9-HumiFIBRIMOR"},
-                new PickerItems() {ID = 10, NAME = "10-FibriHUMMIMOR"},
+                new PickerItems() {ID = 10, NAME = "10-FibriHUMIMOR"},
                 new PickerItems() {ID = 11, NAME = "11-HUMIMOR"},
                 new PickerItems() {ID = 12, NAME = "12-Humic PEATYMOR"},
                 new PickerItems() {ID = 13, NAME = "13-Mesic PEATYMOR"},
                 new PickerItems() {ID = 14, NAME = "14-Fibric PEATYMOR"},
-                new PickerItems() {ID = 15, NAME = "15-ANMOOR (muck)"}
+                new PickerItems() {ID = 15, NAME = "15-ANMOR (muck)"}
             };
             return list;
         }

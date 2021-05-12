@@ -27,7 +27,7 @@ namespace eLiDAR.ViewModels {
             _fk = selectedID;
             AddCommand = new Command(async () => await Update());
             DeleteCommand = new Command(async () => await Delete());
-            ListSpecies = PickerService.SmallTreeSpeciesItems().ToList().OrderBy(c => c.NAME).ToList();
+            ListSpecies = PickerService.SmallTreeSpeciesItems().ToList().OrderBy(c => c.ID).ToList();
             IsChanged = false;
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());

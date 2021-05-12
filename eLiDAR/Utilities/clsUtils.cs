@@ -22,12 +22,25 @@ namespace eLiDAR.Utilities
         private string keyallowautonumber = "AllowAutoNumber";
         private string keynumericlist = "UseNumericList";
         private string keyalphalist = "UseAlphaList";
+        private string keyerrorlist = "ErrorList";
 
         public Guid getGUID()
         {
             // Create and display the value of two GUIDs.
             return Guid.NewGuid();
         }
+        internal string ErrorList
+        {
+            get
+            {
+                return Preferences.Get(keyerrorlist, "");
+            }
+            set
+            {
+                Preferences.Set(keyerrorlist, value);
+            }
+        }
+
         internal bool DoPartialSynch
         {
             get

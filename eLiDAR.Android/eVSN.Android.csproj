@@ -72,7 +72,7 @@
       <Version>2.0.0.11</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.6.292</Version>
+      <Version>1.7.335</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>4.8.0.1821</Version>
@@ -178,7 +178,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptioneVSNAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptioneVSNAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptioneVSNAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptioneVSNAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

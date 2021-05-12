@@ -35,6 +35,7 @@ namespace eLiDAR.ViewModels {
             _fk = selectedID;
             _soil.DEPTHFROM = 0;
             _soil.DEPTHTO = 0;
+            
             AddCommand = new Command(async () => await Update());
             DeleteCommand = new Command(async () => await Delete());
             ListPorePattern = PickerService.PorePatternItems().ToList();

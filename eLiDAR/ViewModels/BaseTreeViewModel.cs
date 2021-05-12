@@ -51,7 +51,7 @@ namespace eLiDAR.ViewModels
             }
             set { 
                 _islivetree = value;
-                _isnotlivetree = !value;
+                IsNotLiveTree = !value;
                 NotifyPropertyChanged("IsLiveTree");
                 NotifyPropertyChanged("IsNotLiveTree");
             }
@@ -66,7 +66,7 @@ namespace eLiDAR.ViewModels
             set
             {
                 _isdecayclass1to3 = value;
-                NotifyPropertyChanged("_isdecayclass1to3");
+                NotifyPropertyChanged("IsDecayClass1to3");
             }
         }
        
@@ -80,7 +80,7 @@ namespace eLiDAR.ViewModels
             set
             {
                 _isnotlivetree = value;
-                NotifyPropertyChanged("IsLiveNotTree");
+                NotifyPropertyChanged("IsNotLiveTree");
             }
         }
         public string TREEID
@@ -182,6 +182,16 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+        public string VSNSTATUSCODE
+        {
+            get => _tree.VSNSTATUSCODE;
+            set
+            {
+                _tree.VSNSTATUSCODE = value;
+                NotifyPropertyChanged("VSNSTATUSCODE");
+                IsChanged = true;
+            }
+        }
 
         public int VIGOUR
         {
@@ -245,7 +255,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public float HEIGHTTODEADTIP
+        public Nullable<float> HEIGHTTODEADTIP
         {
             get => _tree.HEIGHTTODEADTIP;
             set
@@ -255,7 +265,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public float DIRECTHEIGHTTOCONTLIVECROWN
+        public Nullable<float> DIRECTHEIGHTTOCONTLIVECROWN
         {
             get => _tree.DIRECTHEIGHTTOCONTLIVECROWN;
             set
@@ -265,7 +275,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public float OCULARHEIGHTTOCONTLIVECROWN
+        public Nullable<float> OCULARHEIGHTTOCONTLIVECROWN
         {
             get => _tree.OCULARHEIGHTTOCONTLIVECROWN;
             set

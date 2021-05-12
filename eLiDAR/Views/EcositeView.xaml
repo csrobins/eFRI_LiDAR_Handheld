@@ -75,7 +75,7 @@
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label
+         <!--       <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Pore Pattern" />
@@ -87,7 +87,7 @@
                     ItemsSource="{Binding ListPorePattern}"
                     SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
+                    TitleColor="{StaticResource AccentColor}" />  -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
@@ -150,7 +150,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Carbonates" />
+                    Text="Depth to Water Table (cm)" />
                 <Entry
                     x:Name="txtDepthToWater"
                     HorizontalOptions="FillAndExpand"
@@ -419,6 +419,10 @@
                    Style="{StaticResource FormButtonStyle } "
                     Command="{Binding PhotoCommand}"
                     Text="Photos"   />
+                <Button
+                   Style="{StaticResource FormButtonStyle } "
+                    Command="{Binding SoilCommand}"
+                    Text="Soils"   />
             </StackLayout>
 
         </Grid>

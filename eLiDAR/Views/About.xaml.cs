@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eLiDAR.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,20 @@ namespace eLiDAR.Views
         public About()
         {
             InitializeComponent();
+            _viewmodel = new AboutViewModel(Navigation);
+            this.BindingContext = _viewmodel;
         }
+        private AboutViewModel _viewmodel;
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            // Do your thing
+            //this.BindingContext.  
+      
+            _viewmodel.FetchSettings();
+         
+
+        }
+        
     }
 }

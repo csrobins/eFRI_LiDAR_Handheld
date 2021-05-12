@@ -5,6 +5,7 @@ using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
+using eLiDAR.Utilities;
 using eLiDAR.Validator;
 using eLiDAR.Views;
 using FluentValidation.Results;
@@ -21,6 +22,7 @@ namespace eLiDAR.ViewModels {
         public ICommand ForestHealthCommand { get; private set; }
         public ICommand PlotCrewCommand { get; private set; }
         public ICommand PhotoCommand { get; private set; }
+        public ICommand LocationCommand { get; private set; }
         public List<PickerItems> ListFMU { get; set; }
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListNonStandardType { get; set; }
@@ -68,6 +70,8 @@ namespace eLiDAR.ViewModels {
             PhotoCommand = new Command(async () => await ShowPhoto());
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
+            LocationCommand = new Command(async () => await DoLocation());
+
         }
         async Task ShowComments()
         {
@@ -92,6 +96,18 @@ namespace eLiDAR.ViewModels {
             _AllowToLeave = true;
             // launch the form - filtered to a specific tree
             await _navigation.PushAsync(new PlotCrew(_plot));
+        }
+        async Task DoLocation()
+        {
+            // launch the form - filtered to a specific photo list
+
+            Location _location = new Location();
+            var tuple  = await _location.GetCurrentLocation();
+            UTM_EASTING = tuple.Item1;
+            UTM_NORTHING = tuple.Item2;
+            UTM_ZONE = tuple.Item3;
+
+            //     await Application.Current.MainPage.DisplayAlert("Location", str, "Ok");
         }
         async Task ShowPhoto()
         {

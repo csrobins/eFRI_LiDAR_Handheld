@@ -20,6 +20,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <SearchBar
+                x:Name="MainSearch"
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
                 CancelButtonColor="{StaticResource cerulean}"
@@ -46,6 +47,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
@@ -144,8 +146,22 @@
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
+                            <StackLayout Grid.Column="3" Spacing="1" Orientation="Horizontal">
+                               
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Core Status "
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding CORESTATUSCODE}"
+                                        VerticalTextAlignment="Center" />
+                      
+                            </StackLayout>
                             <FlexLayout
-                                Grid.Column="3"
+                                Grid.Column="4"
                                 AlignContent="End"
                                 FlowDirection="LeftToRight"
                                 HorizontalOptions="End"

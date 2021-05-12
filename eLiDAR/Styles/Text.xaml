@@ -16,6 +16,18 @@
         <Setter Property="FontSize" Value="{StaticResource TextSizeHeadline}" />
     </Style>
 
+    <Style x:Key="FontAwesome5FreeRegular" TargetType="Label">
+        <Setter Property="FontFamily">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="iOS" Value="Font Awesome 5 Free" />
+                    <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
+                    <On Platform="UWP" Value="Assets/fa-solid-900.ttf#Font Awesome 5 Free" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="TextTitle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
         <Setter Property="FontSize" Value="{StaticResource TextSizeTitle}" />

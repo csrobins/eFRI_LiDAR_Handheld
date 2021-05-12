@@ -15,7 +15,7 @@ namespace eLiDAR.Views {
             MyListView.ItemsSource = null;
             _viewmodel.FetchPlots();
 
-            MyListView.ItemsSource = _viewmodel.PlotListFull;
+            UpdateList(this.MainSearch.Text); 
         }
         private PlotListViewModel _viewmodel;
     
@@ -29,13 +29,24 @@ namespace eLiDAR.Views {
         }
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
+            UpdateList(e.NewTextValue); 
+            //MyListView.BeginRefresh();
+
+            //if (string.IsNullOrWhiteSpace(e.NewTextValue))
+            //    MyListView.ItemsSource = _viewmodel.PlotListFull;
+            //else
+            //    MyListView.ItemsSource = _viewmodel.PlotListFull.Where(i => i.VSNPLOTNAME.Contains(e.NewTextValue));
+
+            //MyListView.EndRefresh();
+        }
+        private void UpdateList(string txtvalue)
+        {
             MyListView.BeginRefresh();
 
-            if (string.IsNullOrWhiteSpace(e.NewTextValue))
+            if (string.IsNullOrWhiteSpace(txtvalue))
                 MyListView.ItemsSource = _viewmodel.PlotListFull;
             else
-                MyListView.ItemsSource = _viewmodel.PlotListFull.Where(i => i.VSNPLOTNAME.Contains(e.NewTextValue));
-
+                MyListView.ItemsSource = _viewmodel.PlotListFull.Where(i => i.VSNPLOTNAME.Contains(txtvalue));
             MyListView.EndRefresh();
         }
     }

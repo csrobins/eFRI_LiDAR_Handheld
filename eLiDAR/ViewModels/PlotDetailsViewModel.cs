@@ -22,7 +22,7 @@ namespace eLiDAR.ViewModels {
         public ICommand PlotCrewCommand { get; private set; }
         public ICommand PhotoCommand { get; private set; }
         public ICommand ValidateCommand { get; private set; }
-
+        public ICommand LocationCommand { get; private set; }
         public List<PickerItems> ListFMU { get; set; }
         public List<PickerItems> ListSpecies { get; set; }
         public List<PickerItems> ListCanopyOrigin { get; set; }
@@ -60,6 +60,7 @@ namespace eLiDAR.ViewModels {
             ForestHealthCommand = new Command(async () => await ShowForestHealth());
             PlotCrewCommand = new Command(async () => await ShowPlotCrew());
             PhotoCommand = new Command(async () => await ShowPhoto());
+            LocationCommand = new Command(async () => await DoLocation());
             ValidateCommand = new Command(async () => await DoValidate());
 
             ListGrowthPlot = PickerService.GrowthPlotItems().OrderBy(c => c.NAME).ToList();
@@ -103,8 +104,10 @@ namespace eLiDAR.ViewModels {
             }
             else
             {
-                string errmsg = _validater.msg; 
-                await Application.Current.MainPage.DisplayAlert("Validater", errmsg , "OK", "Cancel");
+                string errmsg = _validater.msg;
+                Utils util = new Utils();
+                util.ErrorList = errmsg;
+                await Application.Current.MainPage.DisplayAlert("Validation Errors", "Errors found. Go to the Info tab for error details", "OK", "Cancel");
             }
         }
 
@@ -341,7 +344,18 @@ namespace eLiDAR.ViewModels {
             return Task.CompletedTask;
 
         }
+        async Task DoLocation()
+        {
+            // launch the form - filtered to a specific photo list
 
+            Location _location = new Location();
+            var tuple = await _location.GetCurrentLocation();
+            UTM_EASTING = tuple.Item1;
+            UTM_NORTHING = tuple.Item2;
+            UTM_ZONE = tuple.Item3;
+
+            //     await Application.Current.MainPage.DisplayAlert("Location", str, "Ok");
+        }
         async Task DeletePlot() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Plot Details", "Delete Plot Details", "OK", "Cancel");
             if (isUserAccept) {

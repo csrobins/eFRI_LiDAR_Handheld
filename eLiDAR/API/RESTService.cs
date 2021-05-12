@@ -295,10 +295,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<STEMMAP>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Stem map data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = "Stem map data did not serialize";
             }
             return Items;
         }
@@ -326,10 +333,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Stem map data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = "Stem map data did not push";
             }
         }
 
@@ -345,10 +359,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<ECOSITE>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Ecosite data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = "Ecosite data did not serialize";
             }
             return Items;
         }
@@ -376,10 +397,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Ecosite data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
         }
 
@@ -395,10 +423,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<SOIL>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Soil data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
             return Items;
         }
@@ -426,10 +461,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Soil data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
         }
 
@@ -445,10 +487,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<SMALLTREE>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Small tree data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
             return Items;
         }
@@ -476,10 +525,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Small tree data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
         }
 
@@ -495,10 +551,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<VEGETATION>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Veg data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
             return Items;
         }
@@ -526,10 +589,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Veg data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
         }
 
@@ -545,10 +615,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<DEFORMITY>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Deformity data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
             return Items;
         }
@@ -576,10 +653,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Deformity data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message ;
             }
         }
 
@@ -595,10 +679,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<DWD>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "DWD data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
             return Items;
         }
@@ -626,10 +717,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "DWD data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
         }
         public async Task<List<PERSON>> GetCurrentPersonListAsync(string table, string filter)
@@ -644,10 +742,19 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<PERSON>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Person data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+              
+                    IsSuccess = false;
+                    Msg = ex.Message ;
+                
             }
             return Items;
         }
@@ -675,10 +782,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Person data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
         }
         public async Task<List<PHOTO>> GetCurrentPhotoListAsync(string table, string filter)
@@ -693,10 +807,17 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<PHOTO>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Photo data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
             return Items;
         }
@@ -724,10 +845,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Photo data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg =ex.Message;
             }
         }
         public async Task<List<VEGETATIONCENSUS>> GetCurrentVegetationCensusListAsync(string table, string filter)
@@ -742,11 +870,19 @@ namespace eLiDAR.API
                     var content = await response.Content.ReadAsStringAsync();
                     Items = JsonConvert.DeserializeObject<List<VEGETATIONCENSUS>>(content);
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Veg census data did not serialize";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
+                IsSuccess = false;
+                Msg = ex.Message;
+            
+        }
             return Items;
         }
 
@@ -773,10 +909,17 @@ namespace eLiDAR.API
                 {
                     Debug.WriteLine(@"\Items successfully saved.");
                 }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Veg census data did not push";
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
             }
         }
     }

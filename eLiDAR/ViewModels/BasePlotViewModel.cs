@@ -736,6 +736,69 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+        public DateTime AGEDATE
+        {
+            get => _plot.AGEDATE;
+            set
+            {
+                _plot.AGEDATE = value;
+                NotifyPropertyChanged("AGEDATE");
+                IsChanged = true;
+            }
+        }
+        public string AGENOTE
+        {
+            get => _plot.AGENOTE;
+            set
+            {
+                _plot.AGENOTE = value;
+                NotifyPropertyChanged("AGENOTE");
+                IsChanged = true;
+            }
+        }
+
+        public string AGEPERSON
+        {
+            get => _plot.AGEPERSON;
+            set
+            {
+                _plot.AGEPERSON = value;
+                NotifyPropertyChanged("AGEPERSON");
+                IsChanged = true;
+            }
+        }
+
+        public DateTime STEMMAPPINGDATE
+        {
+            get => _plot.STEMMAPPINGDATE;
+            set
+            {
+                _plot.STEMMAPPINGDATE = value;
+                NotifyPropertyChanged("STEMMAPPINGDATE");
+                IsChanged = true;
+            }
+        }
+        public string STEMMAPPINGNOTE
+        {
+            get => _plot.STEMMAPPINGNOTE;
+            set
+            {
+                _plot.STEMMAPPINGNOTE = value;
+                NotifyPropertyChanged("STEMMAPPINGNOTE");
+                IsChanged = true;
+            }
+        }
+
+        public string STEMMAPPINGPERSON
+        {
+            get => _plot.STEMMAPPINGPERSON;
+            set
+            {
+                _plot.STEMMAPPINGPERSON = value;
+                NotifyPropertyChanged("STEMMAPPINGPERSON");
+                IsChanged = true;
+            }
+        }
 
         List<PLOT> _plotList;
         public List<PLOT> PlotList

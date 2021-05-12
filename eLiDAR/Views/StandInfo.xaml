@@ -133,7 +133,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Maturity Class" />
+                    Text="Maturity Class 2" />
                 <Picker
                     x:Name="txtmaturityclass2"
                     Title="Maturity Class 2"
@@ -170,7 +170,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{DynamicResource TextTitle}"
-                    Text="Disturbance Fields" />
+                    Text="Recent Disturbance Fields" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"

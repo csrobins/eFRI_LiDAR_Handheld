@@ -67,15 +67,29 @@
                                     Text="{Binding PLOTOVERVIEWDATE, StringFormat='{0:dd-MMM-yy}'}" />
                             </StackLayout>
                             <StackLayout Grid.Column="1">
-                                <Label
+                                <StackLayout Orientation="Horizontal" >
+                                    <Label
                                     HorizontalTextAlignment="End"
                                     Style="{DynamicResource TextSubheadSecondary}"
                                     Text="Plot Type" />
-                                <Label
+                                    <Label
                                     Font="20"
                                     HorizontalTextAlignment="End"
                                     Style="{DynamicResource TextSubhead}"
                                     Text="{Binding VSNPLOTTYPECODE}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" >
+                                    <Label
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Measurement Type" />
+                                    <Label
+                                    Font="20"
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding MEASURETYPECODE}" />
+                                </StackLayout> 
+
                             </StackLayout>
 
                             <FlexLayout

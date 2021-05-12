@@ -18,36 +18,15 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Style="{DynamicResource TextTitle}">
-                                    eVSN for Ontario FRI
+                                    eVSN for Ontario FRI  - Recent Error List
                                 </Span>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Label>
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span
-                                    FontAttributes="Bold"
-                                    FontSize="17"
-                                    TextColor="{DynamicResource TextPrimaryColor}">
-                                    This app was developed in Xamarin.Forms for iOS, Android and UWP for ground plot data collection in the Ontario Vegetation sampling Network. Please download, and continue to enhance and improve this application for field data collection.
-                                    
-                                    Add more here about the app:....
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
+                    <Label
+                        Text="{Binding ErrorList}"
+                        TextColor="{DynamicResource TextPrimaryColor}">
                     </Label>
-
-                    <Label>
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span FontSize="17" TextColor="{DynamicResource TextPrimaryColor}">
-                                    Developed in 2021 by Forsite Consultants, Sumac Geomatics, and KBM Resources.
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-
                 </StackLayout>
             </ScrollView>
         </Grid>

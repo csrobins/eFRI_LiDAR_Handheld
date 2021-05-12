@@ -19,6 +19,7 @@ namespace eLiDAR.Validator
             _plot = plot;
    //         _databasehelper = new DatabaseHelper(); 
         }
+
         public bool ValidAll()
         {
             bool isvalid = false;
@@ -52,12 +53,17 @@ namespace eLiDAR.Validator
             PlotValidator _validator = new PlotValidator(true) ;
          //   PLOT _plot = _databasehelper.GetPlotData(_plotid);
             msg = "Checked plot " + _plot.VSNPLOTNAME;
+         //   _validator.CascadeMode = CascadeMode.Continue; 
             ValidationResult validationResults = _validator.Validate(_plot);
             if (validationResults.IsValid)
             { return  true; }
             else
             { 
-                msg = validationResults.Errors[0].ErrorMessage;
+
+                foreach (var err in validationResults.Errors)
+                {
+                    AddMsg(err.ErrorMessage, 1); 
+                }
                 return false;
             }
         }
@@ -66,6 +72,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<TREE> _treelist = _databasehelper.GetFilteredTreeData(_plot.PLOTID);  
             TreeValidator _validator = new TreeValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _treelist.Count.ToString() + " trees in plot " + _plot.VSNPLOTNAME;
             foreach (var _tree in _treelist)
             {
@@ -73,16 +80,32 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_tree);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+               //     msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
                     isvalid = false;
-                }
-                if (_plot.VSNPLOTTYPECODE.Contains("B") || _plot.VSNPLOTTYPECODE.Contains("B"))
-                {
-                    if (!ValidDeformity(_tree)) { isvalid = false; }
                 }
                 if ( _plot.VSNPLOTTYPECODE.Contains("C"))
                 {
-                    if (!ValidStemMap(_tree)) { isvalid = false; }
+                    if (!ValidDeformity(_tree)) { isvalid = false; }
+                }
+                if (_plot.VSNPLOTTYPECODE.Contains("B") || _plot.VSNPLOTTYPECODE.Contains("C"))
+                {
+                    List<STEMMAP> _stemlist = _databasehelper.GetFilteredStemmapData(_tree.TREEID);
+                    if (_stemlist.Count > 0)
+                    {
+                        // check if count == 0
+                        if (!ValidStemMap(_tree)) { isvalid = false; }
+                    }
+                    else
+                    {
+                        msg = "0 stem maps in tree " + _tree.TREENUMBER.ToString();
+                        isvalid = false;
+                    }
+
                 }
             }
             return isvalid;
@@ -92,6 +115,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<DWD> _list = _databasehelper.GetFilteredDWDData(_plot.PLOTID);
             DWDValidator _validator = new DWDValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " dwd in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -99,7 +123,12 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
                     isvalid = false;
                 }
             }
@@ -110,6 +139,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<SMALLTREE> _list = _databasehelper.GetFilteredSmallTreeData(_plot.PLOTID);
             SmallTreeValidator _validator = new SmallTreeValidator(true);
+    //        _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " small trees in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -117,7 +147,12 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
                     isvalid = false;
                 }
             }
@@ -128,6 +163,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<SOIL> _list = _databasehelper.GetFilteredSoilData(_plot.PLOTID);
             SoilValidator _validator = new SoilValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " soil layers in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -135,7 +171,12 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
                     isvalid = false;
                 }
             }
@@ -146,6 +187,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<ECOSITE> _list = _databasehelper.GetFilteredEcositeData(_plot.PLOTID);
             EcositeValidator _validator = new EcositeValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " substrate/ecosites in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -153,7 +195,12 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+                    //msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
                     isvalid = false;
                 }
             }
@@ -164,6 +211,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<PHOTO> _list = _databasehelper.GetFilteredPhotoData(_plot.PLOTID);
             PhotoValidator _validator = new PhotoValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " photos in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -171,7 +219,11 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+//                    msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
                     isvalid = false;
                 }
             }
@@ -182,6 +234,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<VEGETATION> _list = _databasehelper.GetFilteredVegetationData(_plot.PLOTID);
             VegetationValidator _validator = new VegetationValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " veg species in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -189,7 +242,12 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
+//                    msg = validationResults.Errors[0].ErrorMessage;
                     isvalid = false;
                 }
             }
@@ -200,6 +258,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<VEGETATIONCENSUS> _list = _databasehelper.GetFilteredVegetationCensusData(_plot.PLOTID);
             VegetationCensusValidator _validator = new VegetationCensusValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " veg census species in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -207,7 +266,12 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+                    //msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
                     isvalid = false;
                 }
             }
@@ -219,6 +283,7 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<DEFORMITY> _list = _databasehelper.GetFilteredDeformityData(_tree.TREEID);
             DeformityValidator _validator = new DeformityValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " deformities in tree " + _tree.TREENUMBER.ToString();
             foreach (var _itm in _list)
             {
@@ -226,7 +291,12 @@ namespace eLiDAR.Validator
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+//                    msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 2);
+                    }
+
                     isvalid = false;
                 }
             }
@@ -238,13 +308,19 @@ namespace eLiDAR.Validator
             bool isvalid = true;
             List<STEMMAP> _list = _databasehelper.GetFilteredStemmapData(_tree.TREEID);
             StemMapValidator _validator = new StemMapValidator(true);
+            _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " stem maps in tree " + _tree.TREENUMBER.ToString();
             foreach (var _itm in _list)
             {
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
-                    msg = validationResults.Errors[0].ErrorMessage;
+                    //  msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 2);
+                    }
+
                     isvalid = false;
                 }
             }
@@ -261,6 +337,15 @@ namespace eLiDAR.Validator
             {
                 _msg = _msg + value + Environment.NewLine;
             }
+        }
+        private void AddMsg(string newmsg, int indent = 0)
+        {
+            string tmpmsg = "";
+            for (int i = 0; i < indent; i++)
+            {
+                tmpmsg = tmpmsg + "\t";
+            }
+            msg = tmpmsg + newmsg;
         }
     }
     public class ProjectValidator : AbstractValidator<PROJECT>  
@@ -302,14 +387,14 @@ namespace eLiDAR.Validator
             RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot length must be 9 digits.");
             RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number should not be empty.");
             RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type should not be empty.");
-            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("01-01-2020")).WithMessage("Plot date should > 01-01-2020.");
+            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Plot date should > 01-01-2020.");
 
             if (DoFullvalidation )
             {
                 RuleFor(c => c.DECLINATION).Must(c => c >= -20 && c <= 20).WithMessage("Declination must be between -20 and 20.");
                 RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone be between 15 and 18.");
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew memeber in Field Crew 1");
-                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("01-01-2020")).WithMessage("Stand Information date should > 01-01-2020.");
+                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Stand Information date should > 01-01-2020.");
                 RuleFor(c => c.SITERANK).Must(c => c >= 1 && c <= 2).WithMessage("Site Rank must be 1 or 2.");
                 RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
                 RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
@@ -376,11 +461,11 @@ namespace eLiDAR.Validator
                 RuleFor(c => c).Must(c => c.CROWNDAMAGECODE == 0).WithMessage("Crown damage not required when tree status = D,DV.");
             });
 
-                RuleFor(c => c).Must(c => c.SPECIESCODE == 0).WithMessage("Species code should be empty when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
-                RuleFor(c => c).Must(c => c.TREEORIGINCODE == null).WithMessage("Tree Origin Code should be null when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
-                RuleFor(c => c).Must(c => c.HEIGHTTODBH == 0).WithMessage("Ht to DBH should be 0 when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
-                // Live  Trees and dead trees
-                When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE.Contains("V") || c.TREESTATUSCODE.Contains("D"), () =>
+            RuleFor(c => c).Must(c => c.SPECIESCODE == 0).WithMessage("Species code should be empty when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
+            RuleFor(c => c).Must(c => c.TREEORIGINCODE == null).WithMessage("Tree Origin Code should be null when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
+            RuleFor(c => c).Must(c => c.HEIGHTTODBH == 0).WithMessage("Ht to DBH should be 0 when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
+            // Live  Trees and dead trees
+            When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE.Contains("V") || c.TREESTATUSCODE.Contains("D"), () =>
                 {
                     RuleFor(c => c).Must(c => c.SPECIESCODE > 0).WithMessage("Species Code should not be null when tree status = L,V,D,DV.");
                     RuleFor(c => c).Must(c => c.TREEORIGINCODE != null).WithMessage("Tree origin code should not be null when tree status = L,V,D,DV.");
@@ -389,7 +474,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.WOODCONDITIONCODE > 0).WithMessage("bark retention should not be empty when tree status = L,V,D,DV.");
                 });
                 // Live  Trees
-                When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V", () =>
+            When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V", () =>
                 {
                     RuleFor(c => c).Must(c => c.CROWNCLASSCODE != null).WithMessage("Crown Class Code should not be null when tree status = L,V.");
                     RuleFor(c => c).Must(c => c.STEMQUALITYCODE != null).WithMessage("Stem Quality should not be null when tree status = L,V.");
@@ -528,7 +613,26 @@ namespace eLiDAR.Validator
                 RuleFor(c => c).Must(c => c.PRI_ECO_PCT + c.SEC_ECO_PCT == 100).WithMessage("Ecosites must sum to 100.");
                 RuleFor(c => c).Must(c => c.PRI_ECO_PCT >= 20 && +c.PRI_ECO_PCT <= 100).WithMessage("Primary ecosite must be between 20 and 100.");
                 RuleFor(c => c).Must(c => c.SEC_ECO_PCT <= 100).WithMessage("Secondary ecosite must be less than 100.");
+                RuleFor(c => c).Must(c => c.DEPTHTODISTINCTMOTTLES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to mottles must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOPROMINENTMOTTLES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to mottles must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOGLEY <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to gley must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOCARBONATES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to carbonates must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE  <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to seepage must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to water table must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Functional rooting must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Max rooting depth must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTODISTINCTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to mottles must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOPROMINENTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to mottles must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOGLEY <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to gley must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOCARBONATES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to carbonates must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to seepage must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to water table must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Functional rooting must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Max rooting depth must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.PITAZIMUTH >= 1 && c.PITAZIMUTH <= 360).WithMessage("Pit azimuth should be between 1 and 360.");
+                RuleFor(c => c).Must(c => c.PITDISTANCE >= 0 && c.PITDISTANCE  <= 20).WithMessage("Pit distance should be <= 20m.");
 
+                // RuleFor(c => c).Must(c => c..SEC_ECO)).When(c => c.SEC_ECO != null).WithMessage("Invalid ecosite for SEC_ECO.");
             }
 
         }
@@ -843,6 +947,60 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities 1,2,6,14,17.");
                     RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities 1,2,6,14,17.");
                 });
+                When(c => c.DEFORMITYTYPECODE == 4 || c.DEFORMITYTYPECODE == 21, () =>
+                {
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should be empty for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH > 0).WithMessage("Degree lean arch should not be empty for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities  4,21.");
+                });
+                When(c => c.DEFORMITYTYPECODE == 5 || c.DEFORMITYTYPECODE == 13 ||  c.DEFORMITYTYPECODE == 19 || c.DEFORMITYTYPECODE == 22 ||  c.DEFORMITYTYPECODE == 23, () =>
+                {
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not be empty for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO >= c.HEIGHTFROM).WithMessage("Ht to should not be empty and should be > Ht from for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH ==  0).WithMessage("Degree lean arch should not be empty for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities 5,13,19,22,23.");
+                });
+                When(c => c.DEFORMITYTYPECODE == 8, () =>
+                {
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should  be empty for defomities 8.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for defomities 8.");
+                    RuleFor(c => c).Must(c => c.EXTENT > 0).WithMessage("Extent should not be empty for defomities 8.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 8.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should not be empty for defomities 8.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities 8.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities 8.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities 8.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities 8.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities 8.");
+                });
+                When(c => c.DEFORMITYTYPECODE == 10, () =>
+                {
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not  be empty for defomities 10.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO >= c.HEIGHTFROM).WithMessage("Ht to should not be empty for defomities 10.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities 10.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 10.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should not be empty for defomities 10.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH > 0).WithMessage("Deformity length should not be empty for defomities 10.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH > 0).WithMessage("Deformity width should not be empty for defomities 10.");
+                    RuleFor(c => c).Must(c => c.SCRAPE > 0).WithMessage("Scrape should not be 0 for defomities 10.");
+                    RuleFor(c => c).Must(c => c.GOUGE > 0).WithMessage("Gouge should not be 0 for defomities 10.");
+                    RuleFor(c => c).Must(c => c.SCUFF > 0).WithMessage("Scuff should not be 0 for defomities 10.");
+                    RuleFor(c => c).Must(c => c.AZIMUTH  > 0).WithMessage("Azimouth should not be 0 for defomities 10.");
+
+                });
             }
 
         }
@@ -870,22 +1028,24 @@ namespace eLiDAR.Validator
         public DWDValidator(bool DoFullValidation = false)
         {
             RuleFor(c => c).Must(c => IsUniqueDWDNum(c)).WithMessage("DWD number must be unique within the line.");
+            RuleFor(c => c.LINENUMBER).NotEmpty().WithMessage("Line Number must be populated");
             if (DoFullValidation)
             {
 
                 RuleFor(c => c.DECOMPOSITIONCLASS).NotEmpty().WithMessage("Decomp Class should not be empty.");
-                RuleFor(c => c.LINENUMBER).NotEmpty().WithMessage("Line Number must be populated");
-                RuleFor(c => c.DWDNUM).NotEmpty().WithMessage("DWD Number must be populated");
+               
                 //for accumualtions
                 When(c => c.IS_ACCUM == "Y", () =>
                 {
                     RuleFor(c => c).Must(c => c.ACCUMULATIONDEPTH >= 0.01 && c.ACCUMULATIONDEPTH <= 9.99).WithMessage("DWD accumulation depth should be between 0.01 and 9.99");
                     RuleFor(c => c).Must(c => c.ACCUMULATIONLENGTH >= 0.01 && c.ACCUMULATIONLENGTH <= 50).WithMessage("DWD accumulation length should be between 0.01 and 50");
                     RuleFor(c => c).Must(c => c.PERCENTCONIFER + c.PERCENTHARDWOOD == 100).WithMessage("DWD accumulation conifer + hardwood must = 100%");
+                    RuleFor(c => c.DWDNUM).NotEmpty().WithMessage("DWD Number must be populated");
                 });
                 // for regular DWD
                 When(c => c.IS_ACCUM != "Y", () =>
                 {
+                  
                     RuleFor(c => c).Must(c => c.DOWNWOODYDEBRISLENGTH >= 0.01 && c.DOWNWOODYDEBRISLENGTH <= 40).WithMessage("DWD length should be between 0.01 and 40");
                     RuleFor(c => c).Must(c => c.LARGEDIAMETER >= 7.5 && c.LARGEDIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");
                     RuleFor(c => c).Must(c => c.SMALLDIAMETER >= 7.5 && c.SMALLDIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");

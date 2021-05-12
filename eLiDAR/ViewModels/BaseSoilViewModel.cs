@@ -75,7 +75,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int FROM
+        public float FROM
         {
             get => _soil.DEPTHFROM;
             set
@@ -86,7 +86,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int TO
+        public float TO
         {
             get => _soil.DEPTHTO;
             set

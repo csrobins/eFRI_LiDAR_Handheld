@@ -20,6 +20,8 @@ namespace eLiDAR.ViewModels {
         public ICommand CommentsCommand { get; private set; }
         public ICommand EcositeCommand { get; private set; }
         public ICommand PhotoCommand { get; private set; }
+        public ICommand SoilCommand { get; private set; }
+
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
         public List<PickerItems> ListDrainage { get; set; }
@@ -41,6 +43,8 @@ namespace eLiDAR.ViewModels {
             CommentsCommand = new Command(async () => await ShowComments());
             EcositeCommand = new Command(async () => await ShowEcosite());
             PhotoCommand = new Command(async () => await ShowPhoto());
+            SoilCommand = new Command(async () => await ShowSoil());
+
             ListDrainage = PickerService.DrainageItems().ToList();
             ListPorePattern = PickerService.PorePatternItems().ToList();
             ListMoistureRegime = PickerService.MoistureRegimeItems().ToList();
@@ -55,7 +59,20 @@ namespace eLiDAR.ViewModels {
                 FetchDetails(_fk);
                 
             }
-            else { _ecosite.SUBSTRATEDATE = System.DateTime.Now;  }
+            else {
+                _ecosite.SUBSTRATEDATE = System.DateTime.Now;
+                _ecosite.DEPTHTOCARBONATES = null;
+                _ecosite.DEPTHTOBEDROCK = null;
+                _ecosite.DEPTHTODISTINCTMOTTLES = null;
+                _ecosite.DEPTHTOGLEY = null;
+                _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = null;
+                _ecosite.DEPTHTOPROMINENTMOTTLES = null;
+                _ecosite.DEPTHTOROOTRESTRICTION  = null;
+                _ecosite.DEPTHTOSEEPAGE = null;
+                _ecosite.DEPTHTOWATERTABLE = null;
+
+
+            }
             Refresh();
         }
         async Task ShowPhoto()
@@ -68,6 +85,18 @@ namespace eLiDAR.ViewModels {
                 await _navigation.PushAsync(new PhotoList(_ecosite.PLOTID)); 
             }       
         }
+
+        async Task ShowSoil()
+        {
+            // launch the form - filtered to a specific photo list
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowToLeave = true;
+                await _navigation.PushAsync(new SoilList(_ecosite.PLOTID));
+            }
+        }
+
         async Task ShowEcosite()
         {
             // launch the form - filtered to a specific tree

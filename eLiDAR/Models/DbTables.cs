@@ -124,7 +124,12 @@ namespace eLiDAR.Models
         public string FOLLOWUPREQUIRED { get; set; }
         public double LINELENGTH1 { get; set; }
         public double LINELENGTH2 { get; set; }
-
+        public DateTime AGEDATE { get; set; }
+        public string AGENOTE { get; set; }
+        public string AGEPERSON { get; set; }
+        public DateTime STEMMAPPINGDATE { get; set; }
+        public string STEMMAPPINGNOTE { get; set; }
+        public string STEMMAPPINGPERSON { get; set; }
 
     }
     public class PLOTLIST : PLOT
@@ -207,6 +212,7 @@ namespace eLiDAR.Models
         public string TAG_TYPE { get; set; }
         public string TREEORIGINCODE { get; set; }
         public string TREESTATUSCODE { get; set; }
+        public string VSNSTATUSCODE { get; set; }
         public int VIGOURCODE { get; set; }
         public Single HEIGHTTODBH { get; set; }
         public Single DBH { get; set; }
@@ -231,9 +237,9 @@ namespace eLiDAR.Models
         public Single DBH2 { get; set; }
         public Single DIRECTTOTALHEIGHT { get; set; }
         public Single OCUALRTOTALHEIGHT { get; set; }
-        public Single HEIGHTTODEADTIP { get; set; }
-        public Single DIRECTHEIGHTTOCONTLIVECROWN { get; set; }
-        public Single OCULARHEIGHTTOCONTLIVECROWN { get; set; }
+        public Nullable<Single> HEIGHTTODEADTIP { get; set; }
+        public Nullable<Single> DIRECTHEIGHTTOCONTLIVECROWN { get; set; }
+        public Nullable<Single> OCULARHEIGHTTOCONTLIVECROWN { get; set; }
         public Single DIRECTOFFSETDISTANCE { get; set; }
         public int DEGREEOFLEAN { get; set; }
         public Single HEIGHTTOCORE { get; set; }
@@ -339,22 +345,22 @@ namespace eLiDAR.Models
         public string STRATIFIED { get; set; }
         public string EFFECTIVE_PORE_PATTERN { get; set; }
         public string ELC_SUBSTRATE_TYPE { get; set; }
-        public int DEPTHTODISTINCTMOTTLES { get; set; }
-        public int DEPTHTOPROMINENTMOTTLES { get; set; }
-        public int DEPTHTOGLEY { get; set; }
-        public int DEPTHTOBEDROCK { get; set; }
-        public int DEPTHTOCARBONATES { get; set; }
+        public Nullable<int> DEPTHTODISTINCTMOTTLES { get; set; }
+        public Nullable<int> DEPTHTOPROMINENTMOTTLES { get; set; }
+        public Nullable<int> DEPTHTOGLEY { get; set; }
+        public Nullable<int> DEPTHTOBEDROCK { get; set; }
+        public Nullable<int> DEPTHTOCARBONATES { get; set; }
         public string MOISTURE_REGIME_DEPTH_CLASS { get; set; }
         public string MOISTUREREGIMECODE { get; set; }
         public string MODEOFDEPOSITIONCODE1 { get; set; }
         public string MODEOFDEPOSITIONCODE2 { get; set; }
         public int FUNCTIONALROOTINGDEPTH { get; set; }
         public int MAXIMUMROOTINGDEPTH { get; set; }
-        public int DEPTHTOROOTRESTRICTION { get; set; }
-        public int DEPTHTOWATERTABLE { get; set; }
-        public int DEPTHTOIMPASSABLECOARSEFRAGMENTS { get; set; }
+        public Nullable<int> DEPTHTOROOTRESTRICTION { get; set; }
+        public Nullable<int> DEPTHTOWATERTABLE { get; set; }
+        public Nullable<int> DEPTHTOIMPASSABLECOARSEFRAGMENTS { get; set; }
         public string PROBLEMATICSITE { get; set; }
-        public string DEPTHTOSEEPAGE { get; set; }
+        public Nullable<int> DEPTHTOSEEPAGE { get; set; }
         public string SOIL_PIT_PHOTO { get; set; }
         public string PRI_ECO { get; set; }
         public int PRI_ECO_PCT { get; set; }
@@ -382,8 +388,8 @@ namespace eLiDAR.Models
         public string SOILID { get; set; }
         public string PLOTID { get; set; }
         public int HORIZONNUMBER { get; set; }
-        public int DEPTHFROM { get; set; }
-        public int DEPTHTO { get; set; }
+        public float DEPTHFROM { get; set; }
+        public float DEPTHTO { get; set; }
         public string HORIZON { get; set; }
         public string DECOMPOSITIONCODE { get; set; }
         public string MINERALTEXTURECODE { get; set; }

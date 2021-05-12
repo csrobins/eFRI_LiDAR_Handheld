@@ -207,7 +207,7 @@
                                     FontAttributes="Bold"
                                     FontSize="17"
                                     TextColor="{DynamicResource TextPrimaryColor}">
-                                            Do Partial Synch
+                                            Do Partial Synch (push all data, but only pull project and plot data when synching)
                                         </Span>
                                     </FormattedString>
                                 </Label.FormattedText>

@@ -29,7 +29,7 @@ namespace eLiDAR.ViewModels {
             AddCommand = new Command(async () => await Update());
             DeleteCommand = new Command(async () => await Delete());
             ListCause = PickerService.CauseItems().ToList();
-            ListType = PickerService.TypeItems().ToList();
+            ListType = PickerService.TypeItems().OrderBy(x => x.ID).ToList();
 
             FetchDetails(selectedID);
             IsChanged = false;

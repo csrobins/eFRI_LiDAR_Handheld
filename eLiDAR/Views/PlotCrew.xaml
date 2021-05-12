@@ -26,14 +26,14 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{DynamicResource TextTitle}"
-                    Text="Small Tree Attributes" />
+                    Text="Smaller Tree Attributes" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Small Crew Lead" />
+                    Text="Smaller Crew Lead" />
                 <Picker
                     x:Name="txtSmallTreeCrewLead"
-                    Title="Small Tree Crew Lead"
+                    Title="Smaller Tree Crew Lead"
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListPerson}"
                     SelectedItem="{Binding SelectedSmallTreePerson, Mode=TwoWay}"
@@ -44,7 +44,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Small Tree Date" />
+                    Text="Smaller Tree Date" />
                 <DatePicker
                     x:Name="txtSmallTreeDate"
                     Date="{Binding SMALLTREESHRUBDATE, StringFormat='{0:MMMM dd, yyyy}'}"
@@ -54,21 +54,21 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Small Tree Plot Area (m2)" />
+                    Text="Smaller Tree Plot Area (m2)" />
                 <Entry
                     x:Name="txtSmallTreeArea"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Small Tree Plot Area"
+                    Placeholder="Smaller Tree Plot Area"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding SMALLTREESHRUBAREA}" Keyboard="Numeric"  />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Small Tree Notes" />
+                    Text="Smaller Tree Notes" />
                 <Entry
                     x:Name="txtSmallTreeNotes"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Small Tree Notes"
+                    Placeholder="Smaller Tree Notes"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding SMALLTREESHRUBNOTE}" />
                 <Label
@@ -169,7 +169,46 @@
                     Placeholder="DWD Notes"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DOWNWOODYDEBRISNOTE}" />
-            </StackLayout>
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{DynamicResource TextTitle}"
+                    Text="Stem Map Attributes" />
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Stem Map Lead" />
+                    <Picker
+                    x:Name="txtStemMapLead"
+                    Title="Stem Map Crew Lead"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedStemMappingPerson, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}"/>
+
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Stem Map Date" />
+                    <DatePicker
+                    x:Name="txtStemMapDate"
+                    Date="{Binding STEMMAPPINGDATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumDate="01-Jan-2020"
+                    Style="{DynamicResource TextSubhead}" />
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Stem Map Notes" />
+                    <Entry
+                    x:Name="txtStemMapNotes"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Stem Map Notes"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding STEMMAPPINNOTE}" />
+
+                </StackLayout>
             <StackLayout Grid.Row="0" Grid.Column="1">
                 <Label
                     HorizontalOptions="Start"
@@ -253,7 +292,45 @@
                     Placeholder="Understory Census Notes"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UNDERSTORYCENSUSNOTE}" />
-            </StackLayout>
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{DynamicResource TextTitle}"
+                    Text="Tree Age Attributes" />
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Age Crew Lead" />
+                    <Picker
+                    x:Name="txtAgeCrewLead"
+                    Title="Age Crew Lead"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedAgePerson, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}"/>
+
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Age Date" />
+                    <DatePicker
+                    x:Name="txtAgeDate"
+                    Date="{Binding AGEDATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumDate="01-Jan-2020"
+                    Style="{DynamicResource TextSubhead}" />
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Age Notes" />
+                    <Entry
+                    x:Name="txtAgeNotes"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Age Notes"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding AGENOTE}" />
+                </StackLayout>
 
         </Grid>
         </ScrollView>
