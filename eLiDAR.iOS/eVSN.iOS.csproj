@@ -211,4 +211,16 @@
   <ItemGroup>
     <BundleResource Include="Resources\Heatmap.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\drainage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\humusform.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\moistureregime.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\stratification.jpg" />
+  </ItemGroup>
 </Project>

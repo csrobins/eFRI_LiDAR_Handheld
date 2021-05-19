@@ -67,13 +67,14 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Decompostion Codet" />
+                    Text="Decompostion Code" />
                 <Picker
                     x:Name="txtvonpost"
-                    Title="Decompostion Code"
+                    Title="Decomposition Code"
                     HorizontalOptions="FillAndExpand"
                     SelectedItem="{Binding VON_POST, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
+                    IsEnabled="{Binding IsOrganic}"
                     TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Of1</x:String>
@@ -89,6 +90,15 @@
                     </Picker.Items>
                 </Picker>
                 <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Mineral Texture" />
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding TextureCommand}"
+                    Text="{Binding TextureButton}" 
+                    IsEnabled="{Binding IsNotOrganic}"/>
+                <!--            <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Mineral Texture" />
@@ -130,7 +140,7 @@
                         <x:String>SiC</x:String>
                         <x:String>C</x:String>
                     </Picker.Items>
-                </Picker>
+                </Picker>  -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -143,7 +153,8 @@
                     ItemsSource="{Binding ListPorePattern}"
                     SelectedItem="{Binding SelectedPorePattern, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
-                    TitleColor="{StaticResource AccentColor}" />
+                    TitleColor="{StaticResource AccentColor}"
+                    IsEnabled="{Binding IsNotOrganic}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -154,7 +165,8 @@
                     Keyboard="Numeric"
                     Placeholder="Percent Gravel"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding PERCENT_GRAVEL}" />
+                    Text="{Binding PERCENT_GRAVEL}"
+                    IsEnabled="{Binding IsNotOrganic}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -165,7 +177,8 @@
                     Keyboard="Numeric"
                     Placeholder="Percent Cobble"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding PERCENT_COBBLE}" />
+                    Text="{Binding PERCENT_COBBLE}"
+                    IsEnabled="{Binding IsNotOrganic}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -176,7 +189,8 @@
                     Keyboard="Numeric"
                     Placeholder="Percent Stone"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding PERCENT_STONE}" />
+                    Text="{Binding PERCENT_STONE}" 
+                    IsEnabled="{Binding IsNotOrganic}"/>
             </StackLayout>
             <StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
@@ -191,7 +205,8 @@
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding SoilStructureCommand}"
-                    Text="{Binding StructureButton}"   />
+                    Text="{Binding StructureButton}"
+                    IsEnabled="{Binding IsNotOrganic}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -199,7 +214,8 @@
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding ColourCommand}"
-                    Text="{Binding ColourButton}" />
+                    Text="{Binding ColourButton}"
+                    IsEnabled="{Binding IsNotOrganic}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -207,7 +223,8 @@
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding MottleColourCommand}"
-                    Text="{Binding MottleColourButton}"/>
+                    Text="{Binding MottleColourButton}"
+                    IsEnabled="{Binding IsNotOrganic}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -215,7 +232,9 @@
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding GleyColourCommand}"
-                    Text="{Binding GleyColourButton}"/>
+                    Text="{Binding GleyColourButton}"
+                    IsEnabled="{Binding IsNotOrganic}"/>
+  
             </StackLayout>
 
            

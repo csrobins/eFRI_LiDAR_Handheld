@@ -22,7 +22,7 @@ namespace eLiDAR.ViewModels {
             _projectValidator = new ProjectValidator();
             _project = new PROJECT();
             _projectRepository = new ProjectRepository();
-            AddProjectCommand = new Command(async () => await AddProject()); 
+            AddProjectCommand = new Command(() =>  AddProject()); 
             ViewAllProjectsCommand = new Command(async () => await ShowProjectList());
             _project.PROJECT_DATE = DateTime.Now;
             IsChanged = false;
@@ -30,10 +30,10 @@ namespace eLiDAR.ViewModels {
             OnDisappearingCommand = new Command(() => OnDisappearing());
         }
 
-       async Task ShowProjectList(){ 
+        async Task ShowProjectList(){ 
             await _navigation.PushAsync(new ProjectList());
         }
-        async Task AddProject()
+        private void AddProject()
         {         
             _project.Created = System.DateTime.UtcNow;
             _project.LastModified = _project.Created;
@@ -66,7 +66,7 @@ namespace eLiDAR.ViewModels {
                 ValidationResult validationResults = _projectValidator.Validate(_project);
                 if (validationResults.IsValid)
                 {
-                    await AddProject();
+                    AddProject();
                     Shell.Current.Navigating -= Current_Navigating;
             //        await Shell.Current.GoToAsync("..", true);
                     await _navigation.PopAsync(true);

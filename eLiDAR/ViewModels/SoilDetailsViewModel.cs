@@ -22,6 +22,8 @@ namespace eLiDAR.ViewModels {
         public ICommand ColourCommand { get; private set; }
         public ICommand MottleColourCommand { get; private set; }
         public ICommand GleyColourCommand { get; private set; }
+        public ICommand TextureCommand { get; private set; }
+        public ICommand ImageCommand { get; private set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
         public List<PickerItemsString> ListPorePattern { get; set; }
@@ -42,6 +44,8 @@ namespace eLiDAR.ViewModels {
             ColourCommand = new Command(async () => await ShowColour());
             MottleColourCommand = new Command(async () => await ShowMottleColour());
             GleyColourCommand = new Command(async () => await ShowGleyColour());
+            TextureCommand = new Command(async () => await ShowTexture());
+            ImageCommand = new Command(async () => await ShowImage());
             // Get the soil
             FetchDetails(_selectedid);
             IsChanged = false;
@@ -56,6 +60,7 @@ namespace eLiDAR.ViewModels {
             NotifyPropertyChanged("ColourButton");
             NotifyPropertyChanged("MottleColourButton");
             NotifyPropertyChanged("GleyColourButton");
+            NotifyPropertyChanged("TextureButton");
         }
         async Task ShowSoilStructure()
         {
@@ -80,6 +85,18 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new MottleColour(_soil));
+        }
+        async Task ShowTexture()
+        {
+            // launch the form - filtered to a specific tree
+            _AllowToLeave = true;
+            await _navigation.PushAsync(new Texture(_soil));
+        }
+        async Task ShowImage()
+        {
+            // launch the form - filtered to a specific tree
+            _AllowToLeave = true;
+            await _navigation.PushAsync(new ImagePage());
         }
         public string ColourButton
         {
@@ -129,8 +146,25 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
+                if (HORIZON == "Of" || HORIZON == "Of1" || HORIZON == "Of2" || HORIZON == "Of3" || HORIZON == "Of4" || HORIZON == "Om" || HORIZON == "Om1" || HORIZON == "Om2" || HORIZON == "Oh" || HORIZON == "Oh1" || HORIZON == "Oh2")
+                {
+                    IsOrganic = true;
+                }
+                else { IsOrganic = false; }
                 if (HORIZON == null) { return "Horizon"; }
                 else { return HORIZON; }
+
+            }
+            set
+            {
+            }
+        }
+        public string TextureButton
+        {
+            get
+            {
+                if (TEXTURE  == null) { return "Mineral Texture"; }
+                else { return TEXTURE; }
             }
             set
             {

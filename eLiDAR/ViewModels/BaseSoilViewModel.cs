@@ -85,6 +85,28 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+        private bool _isorganic; 
+        public bool IsOrganic
+        {
+            get =>  _isorganic;
+            set
+            {
+                _isorganic = value;
+                IsNotOrganic = !value;
+                NotifyPropertyChanged("IsOrganic");
+            }
+        }
+
+        private bool _isnotorganic;
+        public bool IsNotOrganic
+        {
+            get => _isnotorganic;
+            set
+            {
+                _isnotorganic = value;
+                NotifyPropertyChanged("IsNotOrganic");
+            }
+        }
 
         public float TO
         {
@@ -112,6 +134,11 @@ namespace eLiDAR.ViewModels
             set
             {
                 _soil.HORIZON  = value;
+                if (value == "Of" || value == "Of1" || value == "Of2" || value == "Of3" || value == "Of4" || value == "Om" || value == "Om1" || value == "Om2" || value == "Oh" || value == "Oh1" || value == "Oh2")
+                {
+                    IsOrganic = true;
+                }
+                else { IsOrganic = false; }
                 NotifyPropertyChanged("HORIZON");
                 IsChanged = true;
             }

@@ -19,6 +19,7 @@ namespace eLiDAR.ViewModels {
         public ICommand AddCommand { get; private set; }
         public ICommand ViewAllCommand { get; private set; }
         public ICommand CommentsCommand { get; private set; }
+        public ICommand DeleteTreeCommand { get; private set; }
         public ICommand StemMapCommand { get; private set; }
         public ICommand DeformityCommand { get; private set; }
         public ICommand AgeCommand { get; private set; }
@@ -49,6 +50,7 @@ namespace eLiDAR.ViewModels {
             _fk = fk;
             _tree.PLOTID = fk;
             AddCommand = new Command(async () => await AddTree(_fk));
+            DeleteTreeCommand = new Command(async () => await DeleteTree());
             ViewAllCommand = new Command(async () => await ShowList());
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.ID ).ToList();
             ListVigour = PickerService.VigourItems().OrderBy(c => c.NAME).ToList();
@@ -75,12 +77,13 @@ namespace eLiDAR.ViewModels {
             _tree.HEIGHTTODBH = 1.3F;
             _tree.DBHIN  = "Y";
             _tree.CROWNIN = "Y";
-            _tree.TREESTATUSCODE = "L";
-            _tree.TREEORIGINCODE = "N";
-            _tree.HEIGHTTODEADTIP = null;
-            _tree.DIRECTHEIGHTTOCONTLIVECROWN = null;
-            _tree.OCULARHEIGHTTOCONTLIVECROWN = null;
-
+            if (util.UseDefaultOrigin) { _tree.TREEORIGINCODE = util.DefaultOrigin; }
+            if (util.UseDefaultStatus) { _tree.TREESTATUSCODE = util.DefaultStatus; }
+            if (util.UseDefaultVSNStatus) { _tree.VSNSTATUSCODE = util.DefaultVSNStatus; }
+            if (util.UseDefaultSpecies) { _tree.SPECIESCODE = util.DefaultSpecies; }
+            //_tree.HEIGHTTODEADTIP = null;
+            //_tree.DIRECTHEIGHTTOCONTLIVECROWN = null;
+            //_tree.OCULARHEIGHTTOCONTLIVECROWN = null;
             if (util.AllowAutoNumber) { _tree.TREENUMBER = _treeRepository.GetNextNumber(fk); }
 
         }
@@ -124,6 +127,23 @@ namespace eLiDAR.ViewModels {
                 await _navigation.PushAsync(new TreeAge(_tree.TREEID));
             }
             
+        }
+        async Task DeleteTree()
+        {
+            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree Details", "Delete Tree Details", "OK", "Cancel");
+            if (isUserAccept)
+            {
+                if (_treeRepository.AllowDelete(_tree))
+                {
+                    _treeRepository.DeleteTree(_tree);
+                    _AllowtoLeave = true;
+                    await _navigation.PopAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Cannot delete tree", "This tree has related stem map or deformity data.  Delete those records first before deleting the tree.", "OK", "Cancel");
+                }
+            }
         }
         async Task ShowAge()
         {

@@ -83,7 +83,7 @@ namespace eLiDAR.Services
         List<TREELIST> GetFilteredDataFull(string fk);
 
         List<TREE> GetFilteredTreeStemData(string fk);
-        List<TREELIST> GetFilteredTreeStemDataFull(string fk);
+        List<TREELIST> GetFilteredTreeStemDataFull(string fk, bool sort = false);
 
         //Get Specific data
         TREE GetTreeData(string TREEID);
@@ -166,7 +166,7 @@ namespace eLiDAR.Services
     {
         List<SMALLTREE> GetAllData();
         List<SMALLTREE> GetFilteredData(string fk);
-
+        List<SMALLTREELIST> GetFilteredDataFull(string fk);
         //Get Specific data
         SMALLTREE GetSmallTreeData(string SMALLTREEID);
         // Delete all Data
@@ -248,7 +248,7 @@ namespace eLiDAR.Services
         // Update Data
         void UpdateDWD(DWD dwd);
         String GetTitle(string plotid);
-        int GetNextNumber(string plotid, int line);
+        int GetNextNumber(string plotid);
     }
 
 
@@ -431,7 +431,7 @@ namespace eLiDAR.Services
         {
             return _databaseHelper.GetFilteredPlotDataFull(id);
         }
-        public List<PERSON> GetPersonList(string id)
+        public List<PERSON> GetPersonList(string id = null)
         {
             return _databaseHelper.GetFilteredPersonData(id);
         }
@@ -539,9 +539,9 @@ namespace eLiDAR.Services
         {
             return _databaseHelper.GetFilteredTreeStemList(fk);
         }
-        public List<TREELIST> GetFilteredTreeStemDataFull(string fk)
+        public List<TREELIST> GetFilteredTreeStemDataFull(string fk, bool sort = false)
         {
-            return _databaseHelper.GetFilteredTreeStemListFull(fk);
+            return _databaseHelper.GetFilteredTreeStemListFull(fk, sort);
         }
 
         public TREE GetTreeData(string TreeID)
@@ -825,7 +825,10 @@ namespace eLiDAR.Services
         {
             return _databaseHelper.GetAllSmallTreeData();
         }
-
+        public List<SMALLTREELIST> GetFilteredDataFull(string fk)
+        {
+            return _databaseHelper.GetFilteredSmallTreeDataFull(fk);
+        }
         public List<SMALLTREE> GetFilteredData(string fk)
         {
             return _databaseHelper.GetFilteredSmallTreeData(fk);
@@ -1040,9 +1043,9 @@ namespace eLiDAR.Services
         {
             _databaseHelper = new DatabaseHelper();
         }
-        public int GetNextNumber(string plotid, int line)
+        public int GetNextNumber(string plotid)
         {
-            return _databaseHelper.GetNextDWDNumber(plotid, line);
+            return _databaseHelper.GetNextDWDNumber(plotid);
         }
         public void DeleteDWD(DWD _table)
         {

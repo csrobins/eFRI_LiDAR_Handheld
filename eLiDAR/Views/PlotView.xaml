@@ -270,6 +270,7 @@
                     Placeholder="UTM Zone"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UTM_ZONE}" />
+                   
                     <Button
                     Style="{StaticResource FontAwesome5FreeRegular}"
                     HorizontalOptions="End"
@@ -279,6 +280,8 @@
                     CornerRadius="25"
                     HeightRequest="50"
                     WidthRequest="50"
+                    BorderWidth="2"
+                    BorderColor="{StaticResource cerulean}"                     
                     BackgroundColor="{DynamicResource backgroundColor}"
                     Command="{Binding LocationCommand}" 
                        />

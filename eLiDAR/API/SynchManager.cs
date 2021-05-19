@@ -641,15 +641,13 @@ namespace eLiDAR.API
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
-            if (!util.DoPartialSynch)
+
+            // pull new records
+            Task<List<PHOTO>> gettask = manager.GetTasksAsync(filterNew);
+            List<PHOTO> newrecords = await gettask;
+            foreach (var itm in newrecords)
             {
-                // pull new records
-                Task<List<PHOTO>> gettask = manager.GetTasksAsync(filterNew);
-                List<PHOTO> newrecords = await gettask;
-                foreach (var itm in newrecords)
-                {
-                    databasehelper.InsertPhoto(itm);
-                }
+                databasehelper.InsertPhoto(itm);
             }
 
             //push deletes

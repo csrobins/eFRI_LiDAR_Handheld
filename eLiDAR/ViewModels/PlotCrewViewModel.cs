@@ -5,6 +5,7 @@ using eLiDAR.Services;
 using Xamarin.Forms;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using eLiDAR.Utilities;
 
 namespace eLiDAR.ViewModels {
     public class PlotCrewViewModel : INotifyPropertyChanged 
@@ -22,7 +23,8 @@ namespace eLiDAR.ViewModels {
                 _plot = new PLOT();
                 _plot = _thisplot;
                 _plotRepository = new PlotRepository();
-
+                Utils util = new Utils();
+                // DO DEFAULTS
                 if (_plot.SMALLTREESHRUBDATE == System.DateTime.MinValue) { _plot.SMALLTREESHRUBDATE = System.DateTime.Now; }
                 if (_plot.DEFORMITYDATE == System.DateTime.MinValue) { _plot.DEFORMITYDATE = System.DateTime.Now; }
                 if (_plot.DOWNWOODYDEBRISDATE == System.DateTime.MinValue) { _plot.DOWNWOODYDEBRISDATE = System.DateTime.Now; }
@@ -32,7 +34,15 @@ namespace eLiDAR.ViewModels {
                 if (_plot.SMALLTREESHRUBAREA == 0) { _plot.SMALLTREESHRUBAREA = Constants.DefaultSmallTreeArea; }
                 if (_plot.LINELENGTH1 == 0 && _plot.VSNPLOTTYPECODE.Contains("C")) { _plot.LINELENGTH1 = Constants.DefaultDWDLineLength; }
                 if (_plot.LINELENGTH2 == 0 && _plot.VSNPLOTTYPECODE.Contains("C")) { _plot.LINELENGTH2 = Constants.DefaultDWDLineLength; }
-             //   ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
+                if (util.UseDefaultPerson)
+                {
+                    if (_plot.STANDINFOPERSON == null) { _plot.STANDINFOPERSON = util.DefaultPerson; }
+                    if (_plot.SMALLTREEPERSON == null) { _plot.SMALLTREEPERSON  = util.DefaultPerson; }
+                    if (_plot.AGEPERSON == null) { _plot.AGEPERSON = util.DefaultPerson; }
+                    if (_plot.FIELD_CREW1 == null) { _plot.FIELD_CREW1 = util.DefaultPerson; }
+                    if (_plot.FORESTHEALTHPERSON == null) { _plot.FORESTHEALTHPERSON = util.DefaultPerson; }
+                }
+                //   ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
                 ListPerson = PickerService.FillPersonPicker(_plotRepository.GetPersonList(_plot.PROJECTID)).OrderBy(c => c.NAME).ToList();
             }
             catch (System.Exception ex) 
@@ -40,6 +50,7 @@ namespace eLiDAR.ViewModels {
                 var msg = ex.Message; 
             }
         }
+     
         public string Title
         {
             get => "Notes and personnel for plot " + _plot.VSNPLOTNAME + " elements";

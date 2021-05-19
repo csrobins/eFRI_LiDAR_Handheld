@@ -21,80 +21,86 @@ namespace eLiDAR.ViewModels {
             AddCommand = new Command(async () => await ShowAdd(_fk));
             
             ShowFilteredCommand = new Command<PHOTO>(async (x) => await ShowVegetation(x));
-            CheckTable();
+          //  CheckTable();
             FetchVegetation();
         }
-        void CheckTable()
+
+        
+        public async Task CheckTable()
         {
             // run this to prepopulate table with photos the first time through
             if (_photoRepository.IsPhotoTableEmpty(_selectedplotid))
             {
-                PHOTO _newphoto = new PHOTO();
-                _newphoto.PHOTOTYPE = "Stand Information";
-                _newphoto.PHOTONUMBER = 1;
-                _newphoto.AZIMUTH = 0;
-                _newphoto.DISTANCE = 0;
-                _newphoto.PLOTID = _selectedplotid;
-                _newphoto.Created = System.DateTime.UtcNow;
-                _newphoto.LastModified = _newphoto.Created;
-                _newphoto.IsDeleted = "N";
-                _photoRepository.InsertPhoto(_newphoto);
-                PHOTO _newphoto2 = new PHOTO();
-                _newphoto2.PHOTOTYPE = "Stand Information";
-                _newphoto2.PHOTONUMBER = 18;
-                _newphoto2.AZIMUTH = 0;
-                _newphoto2.DISTANCE = 0;
-                _newphoto2.Created = System.DateTime.UtcNow;
-                _newphoto2.LastModified = _newphoto2.Created;
-                _newphoto2.IsDeleted = "N";
-                _newphoto2.PLOTID = _selectedplotid;
-                _photoRepository.InsertPhoto(_newphoto2);
-                // Insert records for the Stand Infor Photos
-                int j = 1;
-                for (int i = 2; i < 18; i+=2)
+                bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Add Photo Details", "Do you want to prepopulate the standard 18 Stand Information Photo Details?", "OK", "Cancel");
+                if (isUserAccept)
                 {
-                    PHOTO _newphoto3 = new PHOTO();
-                    _newphoto3.PHOTOTYPE = "Stand Information";
-                    _newphoto3.PHOTONUMBER = i;
-                    _newphoto3.AZIMUTH = (i - (j + 1)) * 45;
-                    if (j % 2 == 0)
+                    PHOTO _newphoto = new PHOTO();
+                    _newphoto.PHOTOTYPE = "Stand Information";
+                    _newphoto.PHOTONUMBER = 1;
+                    _newphoto.AZIMUTH = 0;
+                    _newphoto.DISTANCE = 0;
+                    _newphoto.PLOTID = _selectedplotid;
+                    _newphoto.Created = System.DateTime.UtcNow;
+                    _newphoto.LastModified = _newphoto.Created;
+                    _newphoto.IsDeleted = "N";
+                    _photoRepository.InsertPhoto(_newphoto);
+                    PHOTO _newphoto2 = new PHOTO();
+                    _newphoto2.PHOTOTYPE = "Stand Information";
+                    _newphoto2.PHOTONUMBER = 18;
+                    _newphoto2.AZIMUTH = 0;
+                    _newphoto2.DISTANCE = 0;
+                    _newphoto2.Created = System.DateTime.UtcNow;
+                    _newphoto2.LastModified = _newphoto2.Created;
+                    _newphoto2.IsDeleted = "N";
+                    _newphoto2.PLOTID = _selectedplotid;
+                    _photoRepository.InsertPhoto(_newphoto2);
+                    // Insert records for the Stand Infor Photos
+                    int j = 1;
+                    for (int i = 2; i < 18; i += 2)
                     {
-                        _newphoto3.DISTANCE = Constants.DefaultPhoto2Distance;
+                        PHOTO _newphoto3 = new PHOTO();
+                        _newphoto3.PHOTOTYPE = "Stand Information";
+                        _newphoto3.PHOTONUMBER = i;
+                        _newphoto3.AZIMUTH = (i - (j + 1)) * 45;
+                        if (j % 2 == 0)
+                        {
+                            _newphoto3.DISTANCE = Constants.DefaultPhoto2Distance;
+                        }
+                        else
+                        {
+                            _newphoto3.DISTANCE = Constants.DefaultPhoto1Distance;
+                        }
+                        _newphoto3.PLOTID = _selectedplotid;
+                        _newphoto3.Created = System.DateTime.UtcNow;
+                        _newphoto3.LastModified = _newphoto3.Created;
+                        _newphoto3.IsDeleted = "N";
+                        _photoRepository.InsertPhoto(_newphoto3);
+                        j = j + 1;
                     }
-                    else
+                    j = 2;
+                    for (int i = 3; i < 18; i += 2)
                     {
-                        _newphoto3.DISTANCE = Constants.DefaultPhoto1Distance;
+                        PHOTO _newphoto3 = new PHOTO();
+                        _newphoto3.PHOTOTYPE = "Stand Information";
+                        _newphoto3.PHOTONUMBER = i;
+                        _newphoto3.AZIMUTH = (i - (j + 1)) * 45;
+                        if (j % 2 == 0)
+                        {
+                            _newphoto3.DISTANCE = Constants.DefaultPhoto2Distance;
+                        }
+                        else
+                        {
+                            _newphoto3.DISTANCE = Constants.DefaultPhoto1Distance;
+                        }
+                        _newphoto3.PLOTID = _selectedplotid;
+                        _newphoto3.Created = System.DateTime.UtcNow;
+                        _newphoto3.LastModified = _newphoto3.Created;
+                        _newphoto3.IsDeleted = "N";
+                        _photoRepository.InsertPhoto(_newphoto3);
+                        j = j + 1;
                     }
-                    _newphoto3.PLOTID = _selectedplotid;
-                    _newphoto3.Created = System.DateTime.UtcNow;
-                    _newphoto3.LastModified = _newphoto3.Created;
-                    _newphoto3.IsDeleted = "N";
-                    _photoRepository.InsertPhoto(_newphoto3);
-                    j = j + 1;
+                    FetchVegetation(); 
                 }
-                j = 2;
-                for (int i = 3; i < 18; i += 2)
-                {
-                    PHOTO _newphoto3 = new PHOTO();
-                    _newphoto3.PHOTOTYPE = "Stand Information";
-                    _newphoto3.PHOTONUMBER = i;
-                    _newphoto3.AZIMUTH = (i - (j + 1)) * 45;
-                    if (j % 2 == 0)
-                    {
-                        _newphoto3.DISTANCE = Constants.DefaultPhoto2Distance;
-                    }
-                    else
-                    {
-                        _newphoto3.DISTANCE = Constants.DefaultPhoto1Distance;
-                    }
-                    _newphoto3.PLOTID = _selectedplotid;
-                    _newphoto3.Created = System.DateTime.UtcNow;
-                    _newphoto3.LastModified = _newphoto3.Created;
-                    _newphoto3.IsDeleted = "N";
-                    _photoRepository.InsertPhoto(_newphoto3);
-                    j = j + 1;
-                }
-
             }
         }
 

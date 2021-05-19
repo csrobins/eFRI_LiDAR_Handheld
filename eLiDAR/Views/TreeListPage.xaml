@@ -19,10 +19,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Horizontal"  Grid.Row="0"  Grid.ColumnSpan="2" >
             <SearchBar
                 x:Name="MainSearch"
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
+                HorizontalOptions="StartAndExpand" 
                 CancelButtonColor="{StaticResource cerulean}"
                 HorizontalTextAlignment="Start"
                 Keyboard="Numeric"
@@ -30,6 +30,13 @@
                 PlaceholderColor="{DynamicResource TextPrimaryColor}"
                 Style="{DynamicResource TextSubhead}"
                 TextChanged="SearchBar_OnTextChanged" />
+            <Label Text="Sort on Species, DBH" HorizontalOptions="End" VerticalTextAlignment="Center"  />
+            <Switch
+                 x:Name="swchSort"
+                 HorizontalOptions="End"
+                 IsToggled="{Binding DefaultSort}"
+                 Toggled="OnToggled"/>
+            </StackLayout>
         </Grid>
         <ListView
             x:Name="MyListView"
@@ -78,7 +85,7 @@
                                         Font="20"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding SPECIESCODE}"
+                                        Text="{Binding SpeciesName}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -88,11 +95,13 @@
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
                                         Text="DBH(cm)"
+                                        TextColor="{Binding DBHColor}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
                                         Text="{Binding DBH}"
+                                        TextColor="{Binding DBHColor}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -126,11 +135,13 @@
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Dist(m)"
+                                         TextColor="{Binding StemMapColor}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
                                         Text="{Binding DISTANCE}"
+                                        TextColor="{Binding StemMapColor}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -138,11 +149,25 @@
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Azm"
+                                         TextColor="{Binding StemMapColor}"
                                         VerticalTextAlignment="Center" />
                                     <Label
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
                                         Text="{Binding AZIMUTH}"
+                                        TextColor="{Binding StemMapColor}"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Crown Class"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding CROWNCLASSCODE}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
@@ -157,6 +182,7 @@
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
                                         Text="{Binding CORESTATUSCODE}"
+                                        TextColor="{Binding AgeColor}"
                                         VerticalTextAlignment="Center" />
                       
                             </StackLayout>
@@ -195,7 +221,10 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView> 
+        </ListView>
+        <StackLayout Grid.Row="2"  HorizontalOptions="Start" VerticalOptions="Start">
+            <Label Text="{Binding SpeciesComp}"/>
+        </StackLayout>
         <StackLayout Grid.Row="2"  HorizontalOptions="End" VerticalOptions="Start">
             <Button x:Name="Button_Round"
                     Text="+"

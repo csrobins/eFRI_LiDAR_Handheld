@@ -132,12 +132,12 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Width" />
+                    Text="Width (m)" />
                 <Entry
                     x:Name="txtWidth"
                     HorizontalOptions="FillAndExpand"
                     Keyboard="Numeric"
-                    Placeholder="Width"
+                    Placeholder="Width (m)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding WIDTH}" />
             </StackLayout>

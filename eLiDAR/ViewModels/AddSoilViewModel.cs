@@ -22,6 +22,7 @@ namespace eLiDAR.ViewModels {
         public ICommand ColourCommand { get; private set; }
         public ICommand MottleColourCommand { get; private set; }
         public ICommand GleyColourCommand { get; private set; }
+        public ICommand TextureCommand { get; private set; }
         public List<PickerItemsString> ListPorePattern { get; set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
@@ -44,6 +45,7 @@ namespace eLiDAR.ViewModels {
             ColourCommand = new Command(async () => await ShowColour());
             MottleColourCommand = new Command(async () => await ShowMottleColour());
             GleyColourCommand = new Command(async () => await ShowGleyColour());
+            TextureCommand = new Command(async () => await ShowTexture());
             IsChanged = false;
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
@@ -57,7 +59,7 @@ namespace eLiDAR.ViewModels {
             NotifyPropertyChanged("ColourButton");
             NotifyPropertyChanged("MottleColourButton");
             NotifyPropertyChanged("GleyColourButton");
-
+            NotifyPropertyChanged("TextureButton");
         }
         async Task ShowColour()
         {
@@ -89,6 +91,12 @@ namespace eLiDAR.ViewModels {
             _AllowToLeave = true;
             await _navigation.PushAsync(new SoilHorizon(_soil));
         }
+        async Task ShowTexture()
+        {
+            // launch the form - filtered to a specific tree
+            _AllowToLeave = true;
+            await _navigation.PushAsync(new Texture(_soil));
+        }
         public string ColourButton
         {
             get
@@ -117,6 +125,17 @@ namespace eLiDAR.ViewModels {
             {
                 if (GLEYCOLOUR == null) { return "Gley Colour"; }
                 else { return GLEYCOLOUR; }
+            }
+            set
+            {
+            }
+        }
+        public string TextureButton
+        {
+            get
+            {
+                if (TEXTURE == null) { return "Mineral Texture"; }
+                else { return TEXTURE; }
             }
             set
             {

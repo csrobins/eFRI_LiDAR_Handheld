@@ -13,7 +13,11 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:DeformityView />
-       <!--     <Button
+            <Button
+                Style="{StaticResource FormButtonStyle}"
+                Command="{Binding DeleteCommand}"
+                Text="Delete"/>
+            <!--     <Button
                 Style="{StaticResource FormButtonStyle }"
                 Command="{Binding AddCommand}"
                 Text="Update" /> -->

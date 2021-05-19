@@ -54,7 +54,7 @@
                                         Style="{DynamicResource TextSubhead}"
                                         Text="{Binding DEFORMITYTYPECODE}"
                                         VerticalTextAlignment="Center" />
-                                    <Label
+                             <!--       <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
                                         Text=" Cause "
@@ -64,14 +64,14 @@
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
                                         Text="{Binding CAUSE}"
-                                        VerticalTextAlignment="Center" />
+                                        VerticalTextAlignment="Center" /> -->
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
                                         Text="From "
-                                        VerticalTextAlignment="Center" />
+                                        VerticalTextAlignment="Center" /> 
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"

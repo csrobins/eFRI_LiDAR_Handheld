@@ -11,7 +11,7 @@ using eLiDAR.API;
 using System.Threading.Tasks;
 using eLiDAR.Styles;
 using eLiDAR.Domain.Global;
-
+using eLiDAR.Views;
 
 namespace eLiDAR.ViewModels
 {
@@ -22,6 +22,7 @@ namespace eLiDAR.ViewModels
         private SETTINGS settings;
         private DatabaseHelper databasehelper;
         public ICommand SynchCommand { get; private set; }
+        public ICommand DefaultCommand { get; private set; }
         private SynchManager _synchmanager;
         public ICommand ChangeThemeCommand { get; set; }
 
@@ -31,6 +32,7 @@ namespace eLiDAR.ViewModels
             _navigation = navigation;
             util = new Utils();
             SynchCommand = new Command(async () => await Synchrun());
+            DefaultCommand = new Command(async () => await DoDefault());
             _synchmanager = new SynchManager();
             databasehelper = new DatabaseHelper();
             ChangeThemeCommand = new Command((x) =>
@@ -48,7 +50,11 @@ namespace eLiDAR.ViewModels
             if (!IsSynchBusy) { IsSynchEnabled = true; }
             FetchSettings();
         }
-
+        async Task DoDefault()
+        {
+            // launch the form - filtered to a specific tree
+            await _navigation.PushAsync(new DefaultPage());
+        }
         public bool UseDarkMode
         {
             get => DependencyService.Get<AppModel>().UseDarkMode;
@@ -147,6 +153,24 @@ namespace eLiDAR.ViewModels
             {
                 _issynchenabled = value;
                 NotifyPropertyChanged("IsSynchEnabled");
+            }
+        }
+        public bool AllowVegCalc
+        {
+            get => util.AllowVegCalc;
+            set
+            {
+                util.AllowVegCalc = value;
+                NotifyPropertyChanged("AllowVegCalc");
+            }
+        }
+        public bool UseAlphaSpecies
+        {
+            get => util.UseAlphaSpecies;
+            set
+            {
+                util.UseAlphaSpecies = value;
+                NotifyPropertyChanged("UseAlphaSpecies");
             }
         }
         public bool IsNotifySave

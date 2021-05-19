@@ -58,7 +58,12 @@ namespace eLiDAR.Views {
 
             //MyListView.EndRefresh();
         }
-        private void UpdateList(string txtvalue)
+        private void OnToggled(object sender, ToggledEventArgs e)
+        {
+            UpdateList();
+        }
+
+        private void UpdateList(string txtvalue = null)
         {
             MyListView.BeginRefresh();
 

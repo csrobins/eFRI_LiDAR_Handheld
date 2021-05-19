@@ -169,6 +169,33 @@
                         Maximum="100"
                         Value="{Binding HT_CLASS8_COUNT, Mode=TwoWay}" />
                 </StackLayout>
+                <StackLayout Orientation="Horizontal" >
+                    <StackLayout Orientation="Vertical">
+                        <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Other Ht(m)"/>
+                        <Entry
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Other Ht (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding HEIGHT}" />
+                   
+                    </StackLayout >
+                    <StackLayout Orientation="Vertical">
+                        <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Count"/>
+                        <Entry
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Count"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding COUNT}" />
+                    </StackLayout>
+              </StackLayout> 
             </StackLayout>
         </Grid>
     </ContentView.Content>

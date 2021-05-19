@@ -88,6 +88,20 @@ namespace eLiDAR.Validator
 
                     isvalid = false;
                 }
+                msg = "Checked age for tree " + _tree.TREENUMBER.ToString();
+                TreeAgeValidator _agevalidator = new TreeAgeValidator(true);
+                ValidationResult validationageResults = _agevalidator.Validate(_tree);
+                if (!validationageResults.IsValid)
+                {
+                    //     msg = validationResults.Errors[0].ErrorMessage;
+                    foreach (var err in validationageResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
+                    isvalid = false;
+                }
+
                 if ( _plot.VSNPLOTTYPECODE.Contains("C"))
                 {
                     if (!ValidDeformity(_tree)) { isvalid = false; }
@@ -99,6 +113,11 @@ namespace eLiDAR.Validator
                     {
                         // check if count == 0
                         if (!ValidStemMap(_tree)) { isvalid = false; }
+                        if (_tree.TREESTATUSCODE == "X" || _tree.TREESTATUSCODE == "V") 
+                                {
+                                 msg = " no stem maps requrired for X, C status trees in tree " + _tree.TREENUMBER.ToString();
+                                isvalid = false; 
+                                }
                     }
                     else
                     {
@@ -284,10 +303,10 @@ namespace eLiDAR.Validator
             List<DEFORMITY> _list = _databasehelper.GetFilteredDeformityData(_tree.TREEID);
             DeformityValidator _validator = new DeformityValidator(true);
             _validator.CascadeMode = CascadeMode.Continue;
-            msg = _list.Count.ToString() + " deformities in tree " + _tree.TREENUMBER.ToString();
+            msg = _list.Count.ToString() + " deformity(ies) in tree " + _tree.TREENUMBER.ToString();
             foreach (var _itm in _list)
             {
-                msg = "Checked " + _itm.HEIGHTFROM.ToString();
+                msg = "Checked deformity " + _itm.DEFORMITYTYPECODE.ToString();
                 ValidationResult validationResults = _validator.Validate(_itm);
                 if (!validationResults.IsValid)
                 {
@@ -309,7 +328,7 @@ namespace eLiDAR.Validator
             List<STEMMAP> _list = _databasehelper.GetFilteredStemmapData(_tree.TREEID);
             StemMapValidator _validator = new StemMapValidator(true);
             _validator.CascadeMode = CascadeMode.Continue;
-            msg = _list.Count.ToString() + " stem maps in tree " + _tree.TREENUMBER.ToString();
+            msg = _list.Count.ToString() + " stem map(s) in tree " + _tree.TREENUMBER.ToString();
             foreach (var _itm in _list)
             {
                 ValidationResult validationResults = _validator.Validate(_itm);
@@ -398,6 +417,13 @@ namespace eLiDAR.Validator
                 RuleFor(c => c.SITERANK).Must(c => c >= 1 && c <= 2).WithMessage("Site Rank must be 1 or 2.");
                 RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
                 RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
+                RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
+                RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
+                RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Growth plot number should be populated when Plot type = RME");
+                RuleFor(c => c.EXISTINGPLOTNAME).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot name should be populated when Plot type = RME");
+                RuleFor(c => c.EXISTINGPLOTTYPECODE).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot type code should be populated when Plot type = RME");
+                RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Non Standard Type Code should be 6 when Plot type = RME");
+                RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 9999999).WithMessage("Easting should be between 4620000 and 9999999 m");
             }
         }
 
@@ -447,32 +473,32 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.WOODCONDITIONCODE > 0).WithMessage("Wood retention should not be empty when tree status = L,V,D,DV.");
                 });
             // Live  Trees
-            When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V", () =>
-            {
-                RuleFor(c => c).Must(c => c.CROWNCLASSCODE != null).WithMessage("Crown Class Code should not be null when tree status = L,V.");
-                RuleFor(c => c).Must(c => c.STEMQUALITYCODE != null).WithMessage("Stem Quality should not be null when tree status = L,V.");
-                RuleFor(c => c).Must(c => c.CROWNDAMAGECODE  > 0).WithMessage("Crown damage required when tree status = L,V.");
-            });
+            //When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V", () =>
+            //{
+            //    RuleFor(c => c).Must(c => c.CROWNCLASSCODE != null).WithMessage("Crown Class Code should not be null when tree status = L,V.");
+            //    RuleFor(c => c).Must(c => c.STEMQUALITYCODE != null).WithMessage("Stem Quality should not be null when tree status = L,V.");
+            //    RuleFor(c => c).Must(c => c.CROWNDAMAGECODE  > 0).WithMessage("Crown damage required when tree status = L,V.");
+            //});
             // Dead  Trees
-            When(c => c.TREESTATUSCODE.Contains("D"), () =>
-            {
-                RuleFor(c => c).Must(c => c.DECAYCLASS > 0).WithMessage("Decay Class should not be 0  when tree status = D,DV.");
-                RuleFor(c => c).Must(c => c.MORTALITYCAUSECODE > 0).WithMessage("Mortality cause should not be 0 when tree status = D,DV.");
-                RuleFor(c => c).Must(c => c.CROWNDAMAGECODE == 0).WithMessage("Crown damage not required when tree status = D,DV.");
-            });
+            //When(c => c.TREESTATUSCODE.Contains("D"), () =>
+            //{
+            //    RuleFor(c => c).Must(c => c.DECAYCLASS > 0).WithMessage("Decay Class should not be 0  when tree status = D,DV.");
+            //    RuleFor(c => c).Must(c => c.MORTALITYCAUSECODE > 0).WithMessage("Mortality cause should not be 0 when tree status = D,DV.");
+            //    RuleFor(c => c).Must(c => c.CROWNDAMAGECODE == 0).WithMessage("Crown damage not required when tree status = D,DV.");
+            //});
 
-            RuleFor(c => c).Must(c => c.SPECIESCODE == 0).WithMessage("Species code should be empty when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
-            RuleFor(c => c).Must(c => c.TREEORIGINCODE == null).WithMessage("Tree Origin Code should be null when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
-            RuleFor(c => c).Must(c => c.HEIGHTTODBH == 0).WithMessage("Ht to DBH should be 0 when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
-            // Live  Trees and dead trees
-            When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE.Contains("V") || c.TREESTATUSCODE.Contains("D"), () =>
-                {
-                    RuleFor(c => c).Must(c => c.SPECIESCODE > 0).WithMessage("Species Code should not be null when tree status = L,V,D,DV.");
-                    RuleFor(c => c).Must(c => c.TREEORIGINCODE != null).WithMessage("Tree origin code should not be null when tree status = L,V,D,DV.");
-                    RuleFor(c => c).Must(c => c.HEIGHTTODBH > 0).WithMessage("Ht to DBH should be > 0 when tree status = L,V,D,DV.");
-                    RuleFor(c => c).Must(c => c.BARKRETENTIONCODE > 0).WithMessage("bark retention should not be empty when tree status = L,V,D,DV.");
-                    RuleFor(c => c).Must(c => c.WOODCONDITIONCODE > 0).WithMessage("bark retention should not be empty when tree status = L,V,D,DV.");
-                });
+            //RuleFor(c => c).Must(c => c.SPECIESCODE == 0).WithMessage("Species code should be empty when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
+            //RuleFor(c => c).Must(c => c.TREEORIGINCODE == null).WithMessage("Tree Origin Code should be null when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
+            //RuleFor(c => c).Must(c => c.HEIGHTTODBH == 0).WithMessage("Ht to DBH should be 0 when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
+            //// Live  Trees and dead trees
+            //When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE.Contains("V") || c.TREESTATUSCODE.Contains("D"), () =>
+            //    {
+            //        RuleFor(c => c).Must(c => c.SPECIESCODE > 0).WithMessage("Species Code should not be null when tree status = L,V,D,DV.");
+            //        RuleFor(c => c).Must(c => c.TREEORIGINCODE != null).WithMessage("Tree origin code should not be null when tree status = L,V,D,DV.");
+            //        RuleFor(c => c).Must(c => c.HEIGHTTODBH > 0).WithMessage("Ht to DBH should be > 0 when tree status = L,V,D,DV.");
+            //        RuleFor(c => c).Must(c => c.BARKRETENTIONCODE > 0).WithMessage("bark retention should not be empty when tree status = L,V,D,DV.");
+            //        RuleFor(c => c).Must(c => c.WOODCONDITIONCODE > 0).WithMessage("bark retention should not be empty when tree status = L,V,D,DV.");
+            //    });
                 // Live  Trees
             When(c => c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V", () =>
                 {
@@ -487,6 +513,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.OFFICERINGCOUNT <= 500).When(c => c.CORESTATUSCODE != null).WithMessage("Office ring count should be less than 500");
                     RuleFor(c => c).Must(c => c.MISSINGRINGS <= 20).When(c => c.CORESTATUSCODE != null).WithMessage("Missing ring count should be less than 20");
                     RuleFor(c => c).Must(c => c.SOUNDWOODLENGTH <= 50).When(c => c.CORESTATUSCODE != null).WithMessage("Sound wood length should be less than 50cm");
+                    RuleFor(c => c).Must(c => c.HEIGHTTODEADTIP > c.DIRECTTOTALHEIGHT).When(c => c.HEIGHTTODEADTIP > 0).WithMessage("Ht to dead tip must be > than ht");
 
                 });
                 // Dead  Trees
@@ -498,7 +525,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.DIRECTHEIGHTTOCONTLIVECROWN == 0).WithMessage("Ht to LC must be 0 when tree status = D,DV.");
                     RuleFor(c => c).Must(c => c.OCULARHEIGHTTOCONTLIVECROWN == 0).WithMessage("Ht to LC must be 0 when tree status = D,DV.");
                     RuleFor(c => c).Must(c => c.HEIGHTTOCORE == 0).WithMessage("Ht to Core must be 0 when tree status = D,DV.");
-                    RuleFor(c => c).Must(c => c.OCUALRTOTALHEIGHT > 0).WithMessage("Ocular Ht must not be 0 when tree status = D,DV");
+                    RuleFor(c => c).Must(c => c.OCULARTOTALHEIGHT > 0).WithMessage("Ocular Ht must not be 0 when tree status = D,DV");
                     RuleFor(c => c.CORESTATUSCODE).Must(c => c == null).WithMessage("No ages are done for tree when tree status = D,DV");
                     RuleFor(c => c.FIELDAGE).Must(c => c == 0).WithMessage("No ages are done for tree when tree status = D,DV");
 
@@ -534,10 +561,24 @@ namespace eLiDAR.Validator
 
     public class TreeAgeValidator : AbstractValidator<TREE>
     {
-        public TreeAgeValidator()
+        public TreeAgeValidator(bool DoFullValidation = false)
         {
-            
-            
+            if (DoFullValidation)
+            {
+                // Organic horizons
+                When(c => c.CORESTATUSCODE != null, () =>
+            {
+                RuleFor(c => c).Must(c => c.FIELDAGE > 0 && c.FIELDAGE < 500).WithMessage("Field age should be between 1 and 500");
+                RuleFor(c => c).Must(c => c.HEIGHTTOCORE >=0 && c.HEIGHTTOCORE < 2.5).WithMessage("Height to core should be < 2.5m");
+                RuleFor(c => c).Must(c => c.MISSINGRINGS >= 0 && c.MISSINGRINGS <= 10).WithMessage("Missing rings should be between 0 and 10");
+                RuleFor(c => c).Must(c => c.OFFICERINGCOUNT > 0 && c.OFFICERINGCOUNT < 500).WithMessage("Office ring count should be between 1 and 500");
+                RuleFor(c => c).Must(c => c.SOUNDWOODLENGTH  > 0 && c.SOUNDWOODLENGTH < 50).WithMessage("Sound Wood length be between 0 and 50");
+                RuleFor(c => c).Must(c => c.TREESTATUSCODE == "L" || c.TREESTATUSCODE == "V").WithMessage("Only L, V trees should hve ages");
+//            ([CoreStatusCode] = 'C' AND[MissingRings] IS NOT NULL AND[MissingRings]>= (0) AND[MissingRings] <= (4) OR[CoreStatusCode] = 'M' AND[MissingRings] IS NOT NULL AND[MissingRings]>= (5) AND[MissingRings] <= (10) OR([CoreStatusCode] = 'R' OR[CoreStatusCode] = 'S') AND[MissingRings] IS NULL)
+
+            });
+            }
+
         }
 
         bool ValidateStringEmpty(string stringValue)
@@ -573,6 +614,12 @@ namespace eLiDAR.Validator
                 RuleFor(c => c.CROWNWIDTH2).NotEmpty().WithMessage("crown Width 2 should not be empty.");
                 RuleFor(c => c).Must(c => c.CROWNWIDTH1 <= 30).WithMessage("Crown width 1 should be less than 30m.");
                 RuleFor(c => c).Must(c => c.CROWNWIDTH2 <= 30).WithMessage("Crown width 1 should be less than 30m.");
+                RuleFor(c => c).Must(c => c.CROWNOFFSETAZIMUTH <= 360).WithMessage("Crown Offset Azimuth should be less than 360.");
+                RuleFor(c => c).Must(c => c.CROWNOFFSETDISTANCE <= 50).WithMessage("Crown offset distance should be and less than 50m.");
+                RuleFor(c => c).Must(c => c.CROWNOFFSETDISTANCE > 0).When(c => c.CROWNOFFSETAZIMUTH >0).WithMessage("Crown offset distance should be populated when crown offset azimuth >0");
+                RuleFor(c => c).Must(c => c.CROWNOFFSETAZIMUTH > 0).When(c => c.CROWNOFFSETDISTANCE > 0).WithMessage("Crown offset azimuth should be populated when crown offset distance >0");
+
+
             }
         }
 
@@ -672,28 +719,39 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => IsUniqueSoilNum(c)).WithMessage("Soil layer number must be unique within the plot.");
             RuleFor(c => c).Must(c => IsValidHorizon(c.HORIZON)).When(c => c.HORIZON != null).WithMessage("Invalid soil horizon.");
             RuleFor(c => c).Must(c => IsValidColour(c.MATRIXCOLOUR)).When(c => c.MATRIXCOLOUR != null).WithMessage("Invalid soil matrix colour.");
-            RuleFor(c => c).Must(c => IsValidStructure(c.STRUCTURE)).When(c => c.MINERALTEXTURECODE != null).WithMessage("Invalid soil structure.");
+            RuleFor(c => c).Must(c => IsValidStructure(c.STRUCTURE)).When(c => c.STRUCTURE != null).WithMessage("Invalid soil structure.");
             RuleFor(c => c).Must(c => IsValidColour(c.GLEYCOLOUR)).When(c => c.GLEYCOLOUR != null).WithMessage("Invalid soil gley colour.");
             RuleFor(c => c).Must(c => IsValidColour(c.MOTTLECOLOUR)).When(c => c.MOTTLECOLOUR != null).WithMessage("Invalid soil gley colour.");
-            RuleFor(c => c.HORIZONNUMBER).NotEmpty().WithMessage("Soil Layer is required.");
-            RuleFor(c => c.DEPTHTO).GreaterThan(c => c.DEPTHFROM).WithMessage("To must be greater than the From.");
+            RuleFor(c => c.HORIZONNUMBER).NotEmpty().WithMessage("Soil Layer number is required.");
+            RuleFor(c => c.DEPTHTO).NotEqual(c => c.DEPTHFROM).WithMessage("To and From must not be the same value.");
             RuleFor(c => c.DEPTHTO).LessThan(250).WithMessage("To must be be less than 250cm.");
             RuleFor(c => c.DEPTHFROM).LessThan(250).WithMessage("From must be be less than 250cm.");
 
             if (DoFullValidation)
             {
+
+                When(c => c.DEPTHTO > c.DEPTHFROM, () =>
+                {
+                    RuleFor(c => c.DEPTHTO).LessThan(c => c.DEPTHFROM).WithMessage("This soil layer is below the soil 0 cm mark.  Confirm that is the case.");
+                });
+
+                When(c => c.DEPTHTO < c.DEPTHFROM, () =>
+                {
+                    RuleFor(c => c.DEPTHTO).LessThan(c => c.DEPTHFROM).WithMessage("This soil layer is above the soil 0 cm mark.  Confirm that is the case.");
+                });
+
                 // Organic horizons
-                When(c => c.HORIZON == "L" || c.HORIZON == "F" || c.HORIZON == "H" || c.HORIZON == "Hi" || c.HORIZON == "Of" || c.HORIZON == "Of1" || c.HORIZON == "Of2" || c.HORIZON == "Of3" || c.HORIZON == "Of4" || c.HORIZON == "Om" || c.HORIZON == "Om1" || c.HORIZON == "Om2" || c.HORIZON == "Oh" || c.HORIZON == "Oh1" || c.HORIZON == "Oh2", () =>
+                When(c => c.HORIZON == "Of" || c.HORIZON == "Of1" || c.HORIZON == "Of2" || c.HORIZON == "Of3" || c.HORIZON == "Of4" || c.HORIZON == "Om" || c.HORIZON == "Om1" || c.HORIZON == "Om2" || c.HORIZON == "Oh" || c.HORIZON == "Oh1" || c.HORIZON == "Oh2", () =>
                  {
-                     RuleFor(c => c).Must(c => c.DECOMPOSITIONCODE != null).WithMessage("A decoposition code is required for organic horizons");
+                     RuleFor(c => c).Must(c => c.DECOMPOSITIONCODE != null).WithMessage("A decomposition code is required for organic horizons");
                      RuleFor(c => c).Must(c => c.MATRIXCOLOUR == null).WithMessage("No matrix colour is used for organic horizons");
                      RuleFor(c => c).Must(c => c.MOTTLECOLOUR == null).WithMessage("No mottle colour is used for organic horizons");
                      RuleFor(c => c).Must(c => c.GLEYCOLOUR == null).WithMessage("No gley colour is used for organic horizons");
-                     RuleFor(c => c).Must(c => c.PERCENTGRAVEL == 0).WithMessage("% gravelmust be 0 for organic horizons");
+                     RuleFor(c => c).Must(c => c.PERCENTGRAVEL == 0).WithMessage("% gravel must be 0 for organic horizons");
                      RuleFor(c => c).Must(c => c.PERCENTCOBBLE == 0).WithMessage("% cobble must be 0 for organic horizons");
                      RuleFor(c => c).Must(c => c.PERCENTSTONE == 0).WithMessage("% stone must be 0 for organic horizons");
-                     RuleFor(c => c).Must(c => c.STRUCTURE == null).WithMessage("structure must be empty for organic horizons");
-                     RuleFor(c => c).Must(c => c.MINERALTEXTURECODE == null).WithMessage("texture must be empty for organic horizons");
+                     RuleFor(c => c).Must(c => c.STRUCTURE == null).WithMessage("Structure must be empty for organic horizons");
+                     RuleFor(c => c).Must(c => c.MINERALTEXTURECODE == null).WithMessage("Texture must be empty for organic horizons");
                      RuleFor(c => c).Must(c => c.POREPATTERNCODE == null).WithMessage("Pore pattern must be empty for organic horizons");
                  });
                 // Mineral horizons
@@ -810,7 +868,7 @@ namespace eLiDAR.Validator
 
             RuleFor(c => c).Must(c => c.ELCLAYER3 >= 0 && c.ELCLAYER3 <= 99).WithMessage("% cover for ELC layer 3 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER4 >= 0 && c.ELCLAYER4 <= 99).WithMessage("% cover for ELC layer 4 must be <= 99%");
-            RuleFor(c => c).Must(c => c.ELCLAYER5 >= 0 && c.ELCLAYER5 <= 9).WithMessage("% cover for ELC layer 5 must be <= 99%");
+            RuleFor(c => c).Must(c => c.ELCLAYER5 >= 0 && c.ELCLAYER5 <= 99).WithMessage("% cover for ELC layer 5 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER6 >= 0 && c.ELCLAYER6 <= 99).WithMessage("% cover for ELC layer 6 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER7 >= 0 && c.ELCLAYER7 <= 99).WithMessage("% cover for ELC layer 7 must be <= 99%");
         }
@@ -907,7 +965,7 @@ namespace eLiDAR.Validator
         {
           //  RuleFor(c => c.HEIGHTFROM).NotEmpty().WithMessage("Ht From should not be empty.");
           //  RuleFor(c => c.HEIGHTTO).NotEmpty().WithMessage("Ht To should not be empty.");
-            RuleFor(c => c).Must(c => c.HEIGHTFROM <= c.HEIGHTTO).WithMessage("Ht To should > Ht from.");
+            RuleFor(c => c).Must(c => c.HEIGHTFROM < c.HEIGHTTO).When(c => c.HEIGHTTO > 0).WithMessage("Ht To should > Ht from.");
             RuleFor(c => c).Must(c => c.DEFORMITYLENGTH <=10).WithMessage("Deformity length should be < 10m.");
             RuleFor(c => c).Must(c => c.DEFORMITYWIDTH <= 2).WithMessage("Deformity width should be < 2m.");
             RuleFor(c => c).Must(c => c.SCRAPE <=100).WithMessage("Scrape should be <= 100");
@@ -922,83 +980,83 @@ namespace eLiDAR.Validator
                 // for specific deformites
                 When(c => c.DEFORMITYTYPECODE == 0 || c.DEFORMITYTYPECODE == 7 || c.DEFORMITYTYPECODE == 24 || c.DEFORMITYTYPECODE == 25 || c.DEFORMITYTYPECODE == 26, () =>
                 {
-                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should be empty for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should be empty for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities 0,7,24,25,26.");
-                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should be empty for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should be empty for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for deformities 0,7,24,25,26.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for deformities 0,7,24,25,26.");
                 });
                 // for specific deformites
                 When(c => c.DEFORMITYTYPECODE == 1 || c.DEFORMITYTYPECODE == 2 || c.DEFORMITYTYPECODE == 6 || c.DEFORMITYTYPECODE == 14 || c.DEFORMITYTYPECODE == 17, () =>
                 {
-                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not be empty for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should be empty for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities 1,2,6,14,17.");
-                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not be empty for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should be empty for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for deformities 1,2,6,14,17.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for deformities 1,2,6,14,17.");
                 });
                 When(c => c.DEFORMITYTYPECODE == 4 || c.DEFORMITYTYPECODE == 21, () =>
                 {
-                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should be empty for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.DEGREELEANARCH > 0).WithMessage("Degree lean arch should not be empty for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities  4,21.");
-                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities  4,21.");
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should be empty for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH > 0).WithMessage("Degree lean arch should not be empty for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for deformities  4,21.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for deformities  4,21.");
                 });
                 When(c => c.DEFORMITYTYPECODE == 5 || c.DEFORMITYTYPECODE == 13 ||  c.DEFORMITYTYPECODE == 19 || c.DEFORMITYTYPECODE == 22 ||  c.DEFORMITYTYPECODE == 23, () =>
                 {
-                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not be empty for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.HEIGHTTO >= c.HEIGHTFROM).WithMessage("Ht to should not be empty and should be > Ht from for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.DEGREELEANARCH ==  0).WithMessage("Degree lean arch should not be empty for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities 5,13,19,22,23.");
-                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not be empty for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO >= c.HEIGHTFROM).WithMessage("Ht to should not be empty and should be > Ht from for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH ==  0).WithMessage("Degree lean arch should not be empty for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for deformities 5,13,19,22,23.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for deformities 5,13,19,22,23.");
                 });
                 When(c => c.DEFORMITYTYPECODE == 8, () =>
                 {
-                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should  be empty for defomities 8.");
-                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for defomities 8.");
-                    RuleFor(c => c).Must(c => c.EXTENT > 0).WithMessage("Extent should not be empty for defomities 8.");
-                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 8.");
-                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should not be empty for defomities 8.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for defomities 8.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for defomities 8.");
-                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for defomities 8.");
-                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for defomities 8.");
-                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for defomities 8.");
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM == 0).WithMessage("Ht from should  be empty for deformity 8.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO == 0).WithMessage("Ht to should be empty for deformity 8.");
+                    RuleFor(c => c).Must(c => c.EXTENT > 0).WithMessage("Extent should not be empty for deformity 8.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for deformity 8.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should not be empty for deformity 8.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH == 0).WithMessage("Deformity length should be empty for deformity 8.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH == 0).WithMessage("Deformity width should be empty for deformity 8.");
+                    RuleFor(c => c).Must(c => c.SCRAPE == 0).WithMessage("Scrape should be 0 for deformity 8.");
+                    RuleFor(c => c).Must(c => c.GOUGE == 0).WithMessage("Gouge should be 0 for deformity 8.");
+                    RuleFor(c => c).Must(c => c.SCUFF == 0).WithMessage("Scuff should be 0 for deformity 8.");
                 });
                 When(c => c.DEFORMITYTYPECODE == 10, () =>
                 {
-                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not  be empty for defomities 10.");
-                    RuleFor(c => c).Must(c => c.HEIGHTTO >= c.HEIGHTFROM).WithMessage("Ht to should not be empty for defomities 10.");
-                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for defomities 10.");
-                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for defomities 10.");
-                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should not be empty for defomities 10.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH > 0).WithMessage("Deformity length should not be empty for defomities 10.");
-                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH > 0).WithMessage("Deformity width should not be empty for defomities 10.");
-                    RuleFor(c => c).Must(c => c.SCRAPE > 0).WithMessage("Scrape should not be 0 for defomities 10.");
-                    RuleFor(c => c).Must(c => c.GOUGE > 0).WithMessage("Gouge should not be 0 for defomities 10.");
-                    RuleFor(c => c).Must(c => c.SCUFF > 0).WithMessage("Scuff should not be 0 for defomities 10.");
-                    RuleFor(c => c).Must(c => c.AZIMUTH  > 0).WithMessage("Azimouth should not be 0 for defomities 10.");
+                    RuleFor(c => c).Must(c => c.HEIGHTFROM >= 0).WithMessage("Ht from should not  be empty for deformity 10.");
+                    RuleFor(c => c).Must(c => c.HEIGHTTO >= c.HEIGHTFROM).WithMessage("Ht to should not be empty for deformity 10.");
+                    RuleFor(c => c).Must(c => c.EXTENT == 0).WithMessage("Extent should be empty for deformity 10.");
+                    RuleFor(c => c).Must(c => c.QUADRANTCODE == null).WithMessage("Quadrant code should be empty for deformity 10.");
+                    RuleFor(c => c).Must(c => c.DEGREELEANARCH == 0).WithMessage("Degree lean arch should not be empty for deformity 10.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYLENGTH > 0).WithMessage("Deformity length should not be empty for deformity 10.");
+                    RuleFor(c => c).Must(c => c.DEFORMITYWIDTH > 0).WithMessage("Deformity width should not be empty for deformity 10.");
+                    RuleFor(c => c).Must(c => c.SCRAPE > 0).WithMessage("Scrape should not be 0 for deformity 10.");
+                    RuleFor(c => c).Must(c => c.GOUGE > 0).WithMessage("Gouge should not be 0 for deformity 10.");
+                    RuleFor(c => c).Must(c => c.SCUFF > 0).WithMessage("Scuff should not be 0 for deformity 10.");
+                    RuleFor(c => c).Must(c => c.AZIMUTH  > 0).WithMessage("Azimuth should not be 0 for deformity 10.");
 
                 });
             }
@@ -1027,11 +1085,11 @@ namespace eLiDAR.Validator
     {
         public DWDValidator(bool DoFullValidation = false)
         {
-            RuleFor(c => c).Must(c => IsUniqueDWDNum(c)).WithMessage("DWD number must be unique within the line.");
+            
             RuleFor(c => c.LINENUMBER).NotEmpty().WithMessage("Line Number must be populated");
             if (DoFullValidation)
             {
-
+                RuleFor(c => c).Must(c => IsUniqueDWDNum(c)).WithMessage("DWD number must be unique within the line.");
                 RuleFor(c => c.DECOMPOSITIONCLASS).NotEmpty().WithMessage("Decomp Class should not be empty.");
                
                 //for accumualtions

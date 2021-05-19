@@ -114,7 +114,7 @@ namespace eLiDAR.ViewModels {
             if (_issaved)
             {
                 _AllowToLeave = true;
-                await _navigation.PushAsync(new TreeAge(_tree.TREEID));
+                await _navigation.PushAsync(new TreeAge(_tree));
             }
 
         }
@@ -166,7 +166,7 @@ namespace eLiDAR.ViewModels {
             }
             set
             {
-                SetProperty(ref _selectedCrownClass, value);
+                SetProperty(ref _selectedStemQuality, value);
                 _tree.STEMQUALITYCODE = _selectedStemQuality.ID;
 
             }

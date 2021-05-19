@@ -30,19 +30,19 @@
                 Style="{DynamicResource TextSubhead}"
                 TitleColor="{StaticResource AccentColor}" />
             <Picker
-                Title="Soil Structure Kind"
-                HorizontalOptions="FillAndExpand"
-                ItemDisplayBinding="{Binding NAME}"
-                ItemsSource="{Binding ListKind}"
-                SelectedItem="{Binding SelectedSuffix1, Mode=TwoWay}"
-                Style="{DynamicResource TextSubhead}"
-                TitleColor="{StaticResource AccentColor}" />
-            <Picker
                 Title="Soil Structure Class"
                 HorizontalOptions="FillAndExpand"
                 ItemDisplayBinding="{Binding NAME}"
                 ItemsSource="{Binding ListClass}"
                 SelectedItem="{Binding SelectedSuffix2, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}" />
+            <Picker
+                Title="Soil Structure Kind"
+                HorizontalOptions="FillAndExpand"
+                ItemDisplayBinding="{Binding NAME}"
+                ItemsSource="{Binding ListKind}"
+                SelectedItem="{Binding SelectedSuffix1, Mode=TwoWay}"
                 Style="{DynamicResource TextSubhead}"
                 TitleColor="{StaticResource AccentColor}" />
             <Label

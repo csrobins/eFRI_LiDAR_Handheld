@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:eLiDAR="clr-namespace:eLiDAR;assembly=eVSN"
     mc:Ignorable="d">
     <ContentView.Content>
         <Grid Padding="5" ColumnSpacing=" 1">
@@ -37,7 +38,8 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Humus Form" />
-                <Picker
+                <StackLayout Orientation="Horizontal" >
+                    <Picker
                     x:Name="txtHumusForm"
                     Title="Humus Form"
                     HorizontalOptions="FillAndExpand"
@@ -46,10 +48,22 @@
                     SelectedItem="{Binding SelectedHumusForm, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
-                <Label
+                <Button
+                    Style="{StaticResource FontAwesome5FreeRegular}"
+                    HorizontalOptions="End"
+                    Text="{x:Static eLiDAR:IconFont.InfoCircle}" 
+                    FontSize="Large" 
+                    TextColor="{StaticResource AccentColor}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"                  
+                    BackgroundColor="{DynamicResource backgroundColor}" Command="{Binding ImageCommand}"/>
+            </StackLayout>
+            <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Drainage" />
+                <StackLayout Orientation="Horizontal" >
                 <Picker
                     x:Name="txtDrainage"
                     Title="Drainage"
@@ -59,10 +73,22 @@
                     SelectedItem="{Binding SelectedDrainage, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
+                <Button
+                    Style="{StaticResource FontAwesome5FreeRegular}"
+                    HorizontalOptions="End"
+                    Text="{x:Static eLiDAR:IconFont.InfoCircle}" 
+                    FontSize="Large" 
+                    TextColor="{StaticResource AccentColor}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"                  
+                    BackgroundColor="{DynamicResource backgroundColor}" Command="{Binding ImageCommand}"/>
+                </StackLayout>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Stratified" />
+                <StackLayout Orientation="Horizontal" >
                 <Picker
                     x:Name="txtStratified"
                     Title="Stratified"
@@ -75,7 +101,18 @@
                         <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
-         <!--       <Label
+                <Button
+                    Style="{StaticResource FontAwesome5FreeRegular}"
+                    HorizontalOptions="End"
+                    Text="{x:Static eLiDAR:IconFont.InfoCircle}" 
+                    FontSize="Large" 
+                    TextColor="{StaticResource AccentColor}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"                  
+                    BackgroundColor="{DynamicResource backgroundColor}" Command="{Binding ImageCommand}"/>
+            </StackLayout>
+            <!--       <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Pore Pattern" />
@@ -193,7 +230,8 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Moisture Regime" />
-                <Picker
+                <StackLayout Orientation="Horizontal">
+                    <Picker
                     x:Name="txtMoistureRegime"
                     Title="Moisture Regime"
                     HorizontalOptions="FillAndExpand"
@@ -202,11 +240,27 @@
                     SelectedItem="{Binding SelectedMoistureRegime, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
+                    <Button
+                    Style="{StaticResource FontAwesome5FreeRegular}"
+                    HorizontalOptions="End"
+                    Text="{x:Static eLiDAR:IconFont.InfoCircle}" 
+                    FontSize="Large" 
+                    TextColor="{StaticResource AccentColor}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="50"                  
+                    BackgroundColor="{DynamicResource backgroundColor}" Command="{Binding ImageCommand}"/>
+                </StackLayout>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Mineral Texture" />
-                <Picker
+                    Text="Mineral Texture"/>
+                <Button
+                    Style="{StaticResource FormButtonStyle }"
+                    Command="{Binding TextureCommand}"
+                    Text="{Binding TextureButton}" />
+
+      <!--          <Picker
                     x:Name="txttexture"
                     Title="Mineral Texture"
                     HorizontalOptions="FillAndExpand"
@@ -244,7 +298,7 @@
                         <x:String>SiC</x:String>
                         <x:String>C</x:String>
                     </Picker.Items>
-                </Picker>
+                </Picker> -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"

@@ -1,4 +1,5 @@
-﻿using eLiDAR.ViewModels;
+﻿using eLiDAR.Models;
+using eLiDAR.ViewModels;
 using Xamarin.Forms;
 
 namespace eLiDAR.Views {
@@ -8,6 +9,13 @@ namespace eLiDAR.Views {
             InitializeComponent();
             this.BindingContext = new TreeAgeViewModel(Navigation,treeID);
         }
+
+        public TreeAge(TREE tree)
+        {
+            InitializeComponent();
+            this.BindingContext = new TreeAgeViewModel(Navigation, tree);
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

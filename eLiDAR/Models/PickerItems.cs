@@ -14,4 +14,11 @@ namespace eLiDAR.Models
         public string ID { get; set; }
         public string NAME { get; set; }
     }
+    public class SpeciesList
+    {
+        public int spp { get; set; }
+        public double BA { get; set; }
+        public string sppname { get; set; }
+
+    }
 }

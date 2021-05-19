@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>eVSN</AssemblyName>
     <RootNamespace>eLiDAR</RootNamespace>
+    <Version>2.0.0</Version>
+    <Company>Forsite Consultants Ltd</Company>
+    <Authors>Craig Robinson</Authors>
+    <Description>App for the data collection of VSN plots for Ontario LiDAR Inventory program.  This app collects plot types A, B and C.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -119,6 +123,9 @@
     <Compile Update="Views\GleyColour.xaml.cs">
       <DependentUpon>GleyColour.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Image.xaml.cs">
+      <DependentUpon>Image.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PlotCrew.xaml.cs">
       <DependentUpon>PlotCrew.xaml</DependentUpon>
     </Compile>
@@ -136,6 +143,12 @@
     </Compile>
     <Compile Update="Views\ForestHealth.xaml.cs">
       <DependentUpon>ForestHealth.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DefaultPage.xaml.cs">
+      <DependentUpon>DefaultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Texture.xaml.cs">
+      <DependentUpon>Texture.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StandInfo.xaml.cs">
       <DependentUpon>StandInfo.xaml</DependentUpon>

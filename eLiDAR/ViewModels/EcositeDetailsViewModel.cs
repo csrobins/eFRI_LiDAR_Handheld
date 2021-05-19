@@ -21,9 +21,10 @@ namespace eLiDAR.ViewModels {
         public ICommand EcositeCommand { get; private set; }
         public ICommand PhotoCommand { get; private set; }
         public ICommand SoilCommand { get; private set; }
-
+        public ICommand TextureCommand { get; private set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
+        public ICommand ImageCommand { get; private set; }
         public List<PickerItems> ListDrainage { get; set; }
         public List<PickerItemsString> ListPorePattern { get; set; }
         public List<PickerItemsString> ListMoistureRegime { get; set; }
@@ -44,13 +45,14 @@ namespace eLiDAR.ViewModels {
             EcositeCommand = new Command(async () => await ShowEcosite());
             PhotoCommand = new Command(async () => await ShowPhoto());
             SoilCommand = new Command(async () => await ShowSoil());
-
+            TextureCommand = new Command(async () => await ShowTexture());
             ListDrainage = PickerService.DrainageItems().ToList();
             ListPorePattern = PickerService.PorePatternItems().ToList();
             ListMoistureRegime = PickerService.MoistureRegimeItems().ToList();
             ListHumusForm = PickerService.HumusFormItems().ToList();
             ListDepthClass = PickerService.DepthClassItems().ToList();
             ListDeposition = PickerService.DepositionItems().ToList();
+            ImageCommand = new Command(async () => await ShowImage());
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
             // Get the ecosite if it exists
@@ -96,12 +98,23 @@ namespace eLiDAR.ViewModels {
                 await _navigation.PushAsync(new SoilList(_ecosite.PLOTID));
             }
         }
-
+        async Task ShowImage()
+        {
+            // launch the form - filtered to a specific tree
+            _AllowToLeave = true;
+            await _navigation.PushAsync(new ImagePage());
+        }
         async Task ShowEcosite()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeCode(_ecosite));
+        }
+        async Task ShowTexture()
+        {
+            // launch the form - filtered to a specific tree
+            _AllowToLeave = true;
+            await _navigation.PushAsync(new Texture(_ecosite));
         }
 
         async Task ShowComments()
@@ -259,10 +272,22 @@ namespace eLiDAR.ViewModels {
             {
             }
         }
+        public string TextureButton
+        {
+            get
+            {
+                if (MINERALTEXTURECODE == null) { return "Mineral Texture"; }
+                else { return MINERALTEXTURECODE; }
+            }
+            set
+            {
+            }
+        }
         public void Refresh()
         {
             NotifyPropertyChanged("EcositeButton");
-          
+            NotifyPropertyChanged("TextureButton");
+
         }
         public string Title
         {

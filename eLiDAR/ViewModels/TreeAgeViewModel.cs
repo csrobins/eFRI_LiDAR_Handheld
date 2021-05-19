@@ -22,7 +22,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListCoreStatus { get; set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
-
+        private bool _dosave = true;
         public TreeAgeViewModel(INavigation navigation, string selectedTreeID) {
             _navigation = navigation;
             _tree = new TREE();
@@ -35,6 +35,24 @@ namespace eLiDAR.ViewModels {
             ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
             ListCoreStatus = PickerService.CoreStatusItems().OrderBy(c => c.NAME).ToList();
             FetchTreeDetails();
+            //defaults
+            if (_tree.HEIGHTTOCORE == 0) { _tree.HEIGHTTOCORE = 1.3F; }
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
+        }
+        public TreeAgeViewModel(INavigation navigation, TREE tree)
+        {
+            _navigation = navigation;
+            _tree = tree;
+//            _tree.TREEID = selectedTreeID;
+            _treeRepository = new TreeRepository();
+            _dosave = false;
+            UpdateTreeCommand = new Command(async () => await UpdateTree());
+            CommentsCommand = new Command(async () => await ShowComments());
+
+            ListSpecies = PickerService.SpeciesItems().OrderBy(c => c.NAME).ToList();
+            ListCoreStatus = PickerService.CoreStatusItems().OrderBy(c => c.NAME).ToList();
+            //FetchTreeDetails();
             //defaults
             if (_tree.HEIGHTTOCORE == 0) { _tree.HEIGHTTOCORE = 1.3F; }
             OnAppearingCommand = new Command(() => OnAppearing());
@@ -93,8 +111,11 @@ namespace eLiDAR.ViewModels {
             {
                
                  _tree.LastModified = System.DateTime.UtcNow;
-                 _treeRepository.UpdateTree(_tree);
-                 NotifyPropertyChanged("TreeListFull");
+               if (_dosave)
+                {
+                    _treeRepository.UpdateTree(_tree);
+                }
+                NotifyPropertyChanged("TreeListFull");
                 return Task.CompletedTask;
                 //     await _navigation.PopAsync();
 
@@ -108,16 +129,9 @@ namespace eLiDAR.ViewModels {
 
         }
 
-        async Task DeleteTree() {
-            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Tree Details", "Delete Tree Details", "OK", "Cancel");
-            if (isUserAccept) {
-                _treeRepository.DeleteTree(_tree);
-                await _navigation.PopAsync();
-            }
-        }
         public string Title
         {
-            get => "Tree Age Details for tree " + _tree.TREENUMBER.ToString() ;
+            get => "Tree Age Details for tree " + _tree.TREENUMBER.ToString() + ", Species:" + _tree.SPECIESCODE.ToString() + ", DBH:" + _tree.DBH.ToString();
             set
             {
             }

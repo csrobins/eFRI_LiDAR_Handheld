@@ -8,6 +8,7 @@ using eLiDAR.Models;
 using eLiDAR.Services;
 using eLiDAR.Services;
 using eLiDAR.Validator;
+using eLiDAR.Views;
 using FluentValidation;
 using FluentValidation.Results;
 using Xamarin.Forms;
@@ -17,6 +18,7 @@ namespace eLiDAR.ViewModels {
 
         public ICommand UpdateTreeCommand { get; private set; }
         public ICommand DeleteTreeCommand { get; private set; }
+      //  public ICommand CommentsCommand { get; private set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
         public StemMapDetailsViewModel(INavigation navigation, string selectedTreeID) {
@@ -27,6 +29,7 @@ namespace eLiDAR.ViewModels {
             _fk = selectedTreeID;
             UpdateTreeCommand = new Command(async () => await UpdateTree());
             DeleteTreeCommand = new Command(async () => await DeleteTree());
+       //     CommentsCommand = new Command(async () => await ShowComments());
             // Get the tree if it exists
             if (_stemMapRepository.IsStemMapExists(_fk))
             {
@@ -41,6 +44,14 @@ namespace eLiDAR.ViewModels {
         void FetchTreeDetails(string fk){
             _stemmap = _stemMapRepository.GetTreeData(fk);
         }
+       
+
+        //async Task ShowComments()
+        //{
+        //    // launch the form - filtered to a specific tree
+        //    _AllowToLeave = true;
+        //    await _navigation.PushAsync(new PlotCrew(_plotid));
+        //}
 
         private Task UpdateTree() {
 

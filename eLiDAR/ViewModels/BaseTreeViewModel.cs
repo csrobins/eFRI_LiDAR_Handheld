@@ -247,15 +247,15 @@ namespace eLiDAR.ViewModels
         }
         public float OCUALRTOTALHEIGHT
         {
-            get => _tree.OCUALRTOTALHEIGHT;
+            get => _tree.OCULARTOTALHEIGHT;
             set
             {
-                _tree.OCUALRTOTALHEIGHT = value;
+                _tree.OCULARTOTALHEIGHT = value;
                 NotifyPropertyChanged("OCUALRTOTALHEIGHT");
                 IsChanged = true;
             }
         }
-        public Nullable<float> HEIGHTTODEADTIP
+        public float HEIGHTTODEADTIP
         {
             get => _tree.HEIGHTTODEADTIP;
             set
@@ -265,7 +265,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public Nullable<float> DIRECTHEIGHTTOCONTLIVECROWN
+        public float DIRECTHEIGHTTOCONTLIVECROWN
         {
             get => _tree.DIRECTHEIGHTTOCONTLIVECROWN;
             set
@@ -275,7 +275,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public Nullable<float> OCULARHEIGHTTOCONTLIVECROWN
+        public float OCULARHEIGHTTOCONTLIVECROWN
         {
             get => _tree.OCULARHEIGHTTOCONTLIVECROWN;
             set
@@ -478,7 +478,7 @@ namespace eLiDAR.ViewModels
             {
                 _tree.DECAYCLASS = value;
                 NotifyPropertyChanged("DECAY_CLASS");
-                if (value < 4 && IsNotLiveTree ) {IsDecayClass1to3 = true;} else { IsDecayClass1to3 = false; }
+                if (value < 4 ) {IsDecayClass1to3 = true;} else { IsDecayClass1to3 = false; }
             }
         }
 
@@ -502,25 +502,25 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public double AZIMUTH
-        {
-            get => _tree.AZIMUTH;
-            set
-            {
-                _tree.AZIMUTH = value;
-                NotifyPropertyChanged("AZIMUTH");
-            }
-        }
+        //public double AZIMUTH
+        //{
+        //    get => _tree.AZIMUTH;
+        //    set
+        //    {
+        //        _tree.AZIMUTH = value;
+        //        NotifyPropertyChanged("AZIMUTH");
+        //    }
+        //}
 
-        public double DISTANCE
-        {
-            get => _tree.DISTANCE;
-            set
-            {
-                _tree.DISTANCE = value;
-                NotifyPropertyChanged("DISTANCE");
-            }
-        }
+        //public double DISTANCE
+        //{
+        //    get => _tree.DISTANCE;
+        //    set
+        //    {
+        //        _tree.DISTANCE = value;
+        //        NotifyPropertyChanged("DISTANCE");
+        //    }
+        //}
 
         public string COMMENTS
         {

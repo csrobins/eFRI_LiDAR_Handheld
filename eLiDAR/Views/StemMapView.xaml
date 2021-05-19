@@ -82,7 +82,11 @@
                 Command="{Binding UpdateTreeCommand}"
                 Text="Save Stem Map"
                  /> -->
-            <Button
+        <!--    <Button
+                Style="{StaticResource FormButtonStyle }"
+                Command="{Binding CommentsCommand}"
+                Text="Comments"/>   -->
+        <Button
                 Style="{StaticResource FormButtonStyle }"
                 Command="{Binding DeleteTreeCommand}"
                 Text="Delete" />

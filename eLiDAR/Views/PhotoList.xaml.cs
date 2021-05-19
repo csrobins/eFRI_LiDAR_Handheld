@@ -6,7 +6,8 @@ namespace eLiDAR.Views {
         protected override void OnAppearing()
         {
             base.OnAppearing();
-       //     MyListView.ItemsSource = null;
+            //     MyListView.ItemsSource = null;
+            _viewmodel.CheckTable(); 
             _viewmodel.FetchVegetation();
        //     MyListView.ItemsSource = _viewmodel.VegetationList;
 

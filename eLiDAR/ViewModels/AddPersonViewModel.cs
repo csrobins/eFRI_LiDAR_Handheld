@@ -28,7 +28,7 @@ namespace eLiDAR.ViewModels {
             _personRepository = new PersonRepository();
             _selectedprojectid = fk;
             _person.PROJECTID = fk;
-            AddCommand = new Command(async () => await AddPerson(_selectedprojectid));
+            AddCommand = new Command(() => AddPerson(_selectedprojectid));
             ViewAllCommand = new Command(async () => await ShowList());
             IsChanged = false;
             OnAppearingCommand = new Command(() => OnAppearing());
@@ -59,7 +59,7 @@ namespace eLiDAR.ViewModels {
                 ValidationResult validationResults = _personValidator.Validate(_person);
                 if (validationResults.IsValid)
                 {
-                    _ = AddPerson(_selectedprojectid );
+                    AddPerson(_selectedprojectid );
                     Shell.Current.Navigating -= Current_Navigating;
                //     await Shell.Current.GoToAsync("..", true);
                     await _navigation.PopAsync(true);
@@ -79,7 +79,7 @@ namespace eLiDAR.ViewModels {
         async Task ShowList(){ 
             await _navigation.PushAsync(new PersonList(_selectedprojectid ));
         }
-        async Task AddPerson(string fk)
+        private void AddPerson(string fk)
         {
                 _person.Created = System.DateTime.UtcNow;
                 _person.LastModified = _person.Created;

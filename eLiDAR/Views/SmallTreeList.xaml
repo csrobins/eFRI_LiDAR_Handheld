@@ -54,7 +54,7 @@
                                     Font="20"
                                     HorizontalTextAlignment="Start"
                                     Style="{DynamicResource TextSubhead}"
-                                    Text="{Binding SPECIESCODE}"
+                                    Text="{Binding SpeciesName}"
                                     VerticalTextAlignment="Center" />
                             </StackLayout>
                             <StackLayout Grid.Column="1" Spacing="1">
@@ -164,6 +164,29 @@
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HT_CLASS8_COUNT}"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Other Hts "
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding HEIGHT}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="m "
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding COUNT}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>

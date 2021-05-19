@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SQLite;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace eLiDAR.Models
 {
@@ -231,15 +232,15 @@ namespace eLiDAR.Models
         public int DECAYCLASS { get; set; }
         public int MORTALITYCAUSECODE { get; set; }
         public string BROKENTOP { get; set; }
-        public double AZIMUTH { get; set; }
-        public double DISTANCE { get; set; }
+   //     public double AZIMUTH { get; set; }
+   //     public double DISTANCE { get; set; }
         public Single DBH1 { get; set; }
         public Single DBH2 { get; set; }
         public Single DIRECTTOTALHEIGHT { get; set; }
-        public Single OCUALRTOTALHEIGHT { get; set; }
-        public Nullable<Single> HEIGHTTODEADTIP { get; set; }
-        public Nullable<Single> DIRECTHEIGHTTOCONTLIVECROWN { get; set; }
-        public Nullable<Single> OCULARHEIGHTTOCONTLIVECROWN { get; set; }
+        public Single OCULARTOTALHEIGHT { get; set; }
+        public Single HEIGHTTODEADTIP { get; set; }
+        public Single DIRECTHEIGHTTOCONTLIVECROWN { get; set; }
+        public Single OCULARHEIGHTTOCONTLIVECROWN { get; set; }
         public Single DIRECTOFFSETDISTANCE { get; set; }
         public int DEGREEOFLEAN { get; set; }
         public Single HEIGHTTOCORE { get; set; }
@@ -257,6 +258,8 @@ namespace eLiDAR.Models
     public class TREELIST : TREE
     {
         public string VSNPLOTTYPECODE { get; set; }
+        public double AZIMUTH { get; set; }
+        public double DISTANCE { get; set; }
         public bool IsPlotTypeB
         {
             get
@@ -314,6 +317,125 @@ namespace eLiDAR.Models
                 }
             }
             set { }
+        }
+        public string SpeciesName
+        {
+            get
+            {
+                try
+                {
+                    Utilities.Utils util = new Utilities.Utils();
+                    if (!util.UseAlphaSpecies) 
+                    {
+                        return SPECIESCODE.ToString();
+                    }
+                    else { return Services.PickerService.GetValue(Services.PickerService.SpeciesMaster().ToList(), SPECIESCODE); }
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+
+        }
+        public Xamarin.Forms.Color StemMapColor
+        {
+            get
+            {
+                try
+                {
+
+                    if (DISTANCE == 0)
+                    {
+                        //   return Xamarin.Forms.Color.Red;
+                        return Xamarin.Forms.Color.FromHex("#FFE52E15");
+
+                    }
+                    else
+                    {
+                        //  return Xamarin.Forms.Color.Accent;
+                        return Xamarin.Forms.Color.FromHex("#FF333333");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Xamarin.Forms.Color.Accent;
+                }
+            }
+
+        }
+        public Xamarin.Forms.Color AgeColor
+        {
+            get
+            {
+                try
+                {
+
+                    if (CORESTATUSCODE == null || CORESTATUSCODE == "")
+                    {
+                        //   return Xamarin.Forms.Color.Red;
+                        return Xamarin.Forms.Color.FromHex("#FF333333");
+
+                    }
+                    else
+                    {
+                        //  return Xamarin.Forms.Color.Accent;
+                        return Xamarin.Forms.Color.FromHex("#FF88C800");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Xamarin.Forms.Color.Accent;
+                }
+            }
+
+        }
+        public Xamarin.Forms.Color DBHColor
+        {
+            get
+            {
+                try
+                {
+                    if (DBH == 0)
+                    {
+                        //   return Xamarin.Forms.Color.Red;
+                        return Xamarin.Forms.Color.FromHex("#FFE52E15");
+                    }
+                    else
+                    {
+                        //  return Xamarin.Forms.Color.Accent;
+                        return Xamarin.Forms.Color.FromHex("#FF333333");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Xamarin.Forms.Color.Accent;
+                }
+            }
+
+        }
+    }
+    public class SMALLTREELIST : SMALLTREE
+    {
+        public string SpeciesName
+        {
+            get
+            {
+                try
+                {
+                    Utilities.Utils util = new Utilities.Utils();
+                    if (!util.UseAlphaSpecies)
+                    {
+                        return SPECIESCODE.ToString();
+                    }
+                    else { return Services.PickerService.GetValue(Services.PickerService.SmallSpeciesMaster().ToList(), SPECIESCODE); }
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+
         }
 
     }
@@ -423,6 +545,9 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int COUNT { get; set; }
+        public double HEIGHT { get; set; }
+
     }
     [Table("VEGETATION")]
     public class VEGETATION
@@ -444,6 +569,22 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int QUAD1_ELC4 { get; set; }
+        public int QUAD2_ELC4 { get; set; }
+        public int QUAD3_ELC4 { get; set; }
+        public int QUAD4_ELC4 { get; set; }
+        public int QUAD1_ELC5 { get; set; }
+        public int QUAD2_ELC5 { get; set; }
+        public int QUAD3_ELC5 { get; set; }
+        public int QUAD4_ELC5 { get; set; }
+        public int QUAD1_ELC6 { get; set; }
+        public int QUAD2_ELC6 { get; set; }
+        public int QUAD3_ELC6 { get; set; }
+        public int QUAD4_ELC6 { get; set; }
+        public int QUAD1_ELC7 { get; set; }
+        public int QUAD2_ELC7 { get; set; }
+        public int QUAD3_ELC7 { get; set; }
+        public int QUAD4_ELC7 { get; set; }
     }
     [Table("VEGETATIONCENSUS")]
     public class VEGETATIONCENSUS

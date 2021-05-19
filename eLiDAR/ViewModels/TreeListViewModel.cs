@@ -7,7 +7,9 @@ using System.Windows.Input;
 using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
+using eLiDAR.Utilities;
 using eLiDAR.Views;
+
 
 using Xamarin.Forms;
 
@@ -20,7 +22,6 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowAgesCommand { get; private set; }
         public ICommand ShowDeformityCommand { get; private set; }
 
-       
         public TreeListViewModel(INavigation navigation, string fk)
         {
             try
@@ -43,12 +44,10 @@ namespace eLiDAR.ViewModels {
         }
 
         public void FetchTrees() {
-            if (_fk == "")
-                TreeStemList = _treeRepository.GetAllData();
-            else
-//                TreeStemList = _treeRepository.GetFilteredTreeStemData(_fk);
-                TreeStemListFull = _treeRepository.GetFilteredTreeStemDataFull(_fk);
-
+           
+            TreeStemListFull = _treeRepository.GetFilteredTreeStemDataFull(_fk, DefaultSort); 
+            NotifyPropertyChanged("Title");
+            NotifyPropertyChanged("SpeciesComp"); 
         }
         async Task ShowAges(TREE _tree)
         {
@@ -81,16 +80,33 @@ namespace eLiDAR.ViewModels {
                 _treeStemList = value;
             }
         }
+        private bool _defaultsort = false;
+        public bool DefaultSort
+        {
+            get 
+            {
+                return _defaultsort;
+            }
+            set
+            {
+                _defaultsort = value;
+                NotifyPropertyChanged("DefaultSort");
+                FetchTrees(); 
+            }
+        }
         private List<TREELIST> _treeStemListFull;
         public List<TREELIST> TreeStemListFull
         {
             get
             {
-                return _treeRepository.GetFilteredTreeStemDataFull(_fk);
+               
+                    return _treeRepository.GetFilteredTreeStemDataFull(_fk, DefaultSort);
+               
             }
             set
             {
                 _treeStemListFull = value;
+                NotifyPropertyChanged("TreeStemListFull");
             }
         }
         async void ShowDetails(string selectedTreeID){
@@ -117,6 +133,15 @@ namespace eLiDAR.ViewModels {
         {
             // launch the form - filtered to a specific projectid
             await _navigation.PushAsync(new DeformityList(_tree.TREEID));
+        }
+        public string SpeciesComp
+        {
+            get
+            {
+                List<TREE> _list = _treeRepository.GetFilteredData(_fk);
+                Utils util = new Utils();
+                return util.getSppComp(_list); 
+            }
         }
         public string Title
         {

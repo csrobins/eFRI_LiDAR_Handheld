@@ -22,7 +22,7 @@ namespace eLiDAR.ViewModels {
             _project.PROJECTID = selectedProjectID;
             _projectRepository = new ProjectRepository();
 
-            UpdateProjectCommand = new Command(async () => Update());
+            UpdateProjectCommand = new Command(() => Update());
             DeleteProjectCommand = new Command(async () => await DeleteProject());
 
             FetchProjectDetails();

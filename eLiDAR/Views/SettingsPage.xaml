@@ -16,17 +16,8 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <ScrollView>
-        <!--    <Grid Padding="10" ColumnSpacing=" 1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions> -->
-
-                <StackLayout Margin ="10" Grid.Row="0" Grid.Column="0">
+            <StackLayout Margin="10">
+                <StackLayout >
                     <StackLayout Margin="10" Orientation="Horizontal">
                         <Label>
                             <Label.FormattedText>
@@ -46,25 +37,24 @@
                             IsToggled="{Binding IsBoreal}" />
                     </StackLayout>
                     <StackLayout Margin="10" Orientation="Horizontal">
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
                                         FontAttributes="Bold"
                                         FontSize="17"
                                         TextColor="{DynamicResource TextPrimaryColor}">
-                                        Use Numeric Species List
-                                    </Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Switch
+                                    Use Numeric Species List in Pickers
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Switch
                             x:Name="swchNumericSpecies"
                             HorizontalOptions="EndAndExpand"
                             IsToggled="{Binding UseNumericList}" />
                     </StackLayout>
-                    <StackLayout Grid.Row="0" Grid.Column="1">
-                        <StackLayout Margin="10" Orientation="Horizontal">
+                    <StackLayout Margin="10" Orientation="Horizontal">
                         <Label>
                         <Label.FormattedText>
                             <FormattedString>
@@ -72,7 +62,7 @@
                                     FontAttributes="Bold"
                                     FontSize="17"
                                     TextColor="{DynamicResource TextPrimaryColor}">
-                                    Use Alphabetic Species List
+                                    Use Alphabetic Species List in Pickers
                                 </Span>
                             </FormattedString>
                         </Label.FormattedText>
@@ -82,6 +72,25 @@
                         HorizontalOptions="EndAndExpand"
                         IsToggled="{Binding UseAlphaList}" />
                     </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    TextColor="{DynamicResource TextPrimaryColor}">
+                                        Use Alphabetic Species Names in Lists
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                        x:Name="swchAlphaSpeciesList"
+                        HorizontalOptions="EndAndExpand"
+                        IsToggled="{Binding UseAlphaSpecies}" />
+                    </StackLayout>
+
                     <StackLayout Margin="10" Orientation="Horizontal">
                         <Label>
                             <Label.FormattedText>
@@ -100,8 +109,6 @@
                             HorizontalOptions="EndAndExpand"
                             IsToggled="{Binding IsAllowPlotDeletion}" />
                     </StackLayout>
-             </StackLayout>
-             <StackLayout  Grid.Column="1" Grid.Row="0" >
                     <StackLayout Margin="10" Orientation="Horizontal" >
                         <Label>
                             <Label.FormattedText>
@@ -138,6 +145,25 @@
                             HorizontalOptions="EndAndExpand"
                             IsToggled="{Binding IsAllowAutoNumber}" />
                     </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="17"
+                                        TextColor="{DynamicResource TextPrimaryColor}">
+                                        Allow Veg Layers to auto-calculate from quad values
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Switch
+                            x:Name="swchVegLayer"
+                            HorizontalOptions="EndAndExpand"
+                            IsToggled="{Binding AllowVegCalc}" />
+                    </StackLayout>
+                    <Button Text="Set Defaults" Style="{DynamicResource FormButtonStyle}" Command="{Binding DefaultCommand}"/>
                     <StackLayout Margin="10" Orientation="Horizontal">
                             <Label>
                                 <Label.FormattedText>
@@ -197,84 +223,83 @@
                             VerticalOptions="Center" />
                    </StackLayout>
                 </StackLayout>
-                <StackLayout Grid.Row ="1" Grid.ColumnSpan="2">
-                        <BoxView Style="{DynamicResource HRule}" />
-                        <StackLayout Margin="10" Orientation="Horizontal">
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span
+            <StackLayout Margin="10">
+                <BoxView Style="{DynamicResource HRule}" />
+                <StackLayout Margin="10" Orientation="Horizontal">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
                                     FontAttributes="Bold"
                                     FontSize="17"
                                     TextColor="{DynamicResource TextPrimaryColor}">
-                                            Do Partial Synch (push all data, but only pull project and plot data when synching)
-                                        </Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Switch
+                                    Do Partial Synch (push all data, but only pull projects and plots)
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Switch
                             x:Name="swcSynch"
                             HorizontalOptions="EndAndExpand"
                             IsToggled="{Binding DoPartialSynch}" />
-                        </StackLayout>
+                </StackLayout>
 
-                        <StackLayout Orientation="Vertical">
-                            <Button
+                <StackLayout Orientation="Vertical">
+                    <Button
                              Style="{StaticResource FormButtonStyle}"
                              Command="{Binding SynchCommand}"
                              IsEnabled="{Binding IsSynchEnabled}"
                              Text="Synch Data"       />
-                            <ActivityIndicator IsRunning="{Binding IsSynchBusy}" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label
+                    <ActivityIndicator IsRunning="{Binding IsSynchBusy}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label
                             FontAttributes="Bold"
                             HorizontalOptions="Start"
                             Style="{DynamicResource TextSubhead}"
                             Text="Last Synched" />
-                            <Label
+                    <Label
                         FontAttributes="Bold"
                         HorizontalOptions="End"
                         Style="{DynamicResource TextSubhead}"
                         Text="{Binding LastSynched}" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextBody}"
                         Text="Projects Pushed" />
-                            <Label
+                    <Label
                         HorizontalOptions="End"
                         Style="{StaticResource TextBody}"
                         Text="{Binding PROJECT_ROWS_SYNCHED}" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Style="{StaticResource TextBody}" Text="Projects Pulled" />
-                            <Label Style="{StaticResource TextBody}" Text="{Binding PROJECT_ROWS_PULLED}" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Style="{StaticResource TextBody}" Text="Plots Pushed" />
-                            <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_SYNCHED}" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Style="{StaticResource TextBody}" Text="Plots Pulled" />
-                            <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_PULLED}" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Style="{StaticResource TextBody}" Text="Trees Pushed" />
-                            <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_SYNCHED}" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Style="{StaticResource TextBody}" Text="Trees Pulled" />
-                            <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_PULLED}" />
-                        </StackLayout>
-                        <Label
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource TextBody}" Text="Projects Pulled" />
+                    <Label Style="{StaticResource TextBody}" Text="{Binding PROJECT_ROWS_PULLED}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource TextBody}" Text="Plots Pushed" />
+                    <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_SYNCHED}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource TextBody}" Text="Plots Pulled" />
+                    <Label Style="{StaticResource TextBody}" Text="{Binding PLOT_ROWS_PULLED}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource TextBody}" Text="Trees Pushed" />
+                    <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_SYNCHED}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource TextBody}" Text="Trees Pulled" />
+                    <Label Style="{StaticResource TextBody}" Text="{Binding TREE_ROWS_PULLED}" />
+                </StackLayout>
+                <Label
                     FontAttributes="Bold"
                     Style="{StaticResource TextBody}"
                     Text="{Binding msg}" />
-                </StackLayout>
-                 </StackLayout> 
-          <!--  </Grid> -->
+            </StackLayout>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

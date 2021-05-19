@@ -161,9 +161,29 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+        public int COUNT
+        {
+            get => _smallTree.COUNT;
+            set
+            {
+                _smallTree.COUNT = value;
+                NotifyPropertyChanged("COUNT");
+                IsChanged = true;
+            }
+        }
+        public double HEIGHT
+        {
+            get => _smallTree.HEIGHT;
+            set
+            {
+                _smallTree.HEIGHT = value;
+                NotifyPropertyChanged("HEIGHT");
+                IsChanged = true;
+            }
+        }
 
-        List<SMALLTREE> _smallTreeList;
-        public List<SMALLTREE> SmallTreeList
+        List<SMALLTREELIST> _smallTreeList;
+        public List<SMALLTREELIST> SmallTreeList
         {
             get => _smallTreeList;
             set

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.Texture"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="12">
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextTitle}"
+                Text="Choose from the codes to construct a valid mineral texture." />
+            <Button
+                Style="{StaticResource FormButtonStyle}"
+                Command="{Binding ClearCommand}"
+                Text="Start Over"/>
+            <Picker
+                Title="Coarse fragment prefix"
+                HorizontalOptions="FillAndExpand"
+                SelectedItem="{Binding PREFIX, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}">
+                <Picker.Items>
+                    <x:String>gr</x:String>
+                    <x:String>co</x:String>
+                    <x:String>st</x:String>
+                    <x:String>bo</x:String>
+                    <x:String>vgr</x:String>
+                    <x:String>vco</x:String>
+                    <x:String>vst</x:String>
+                    <x:String>vbo</x:String>
+                </Picker.Items>
+            </Picker>
+            <Picker
+                Title="Mineral Texture"
+                HorizontalOptions="FillAndExpand"
+                SelectedItem="{Binding MASTER, Mode=TwoWay}"
+                Style="{DynamicResource TextSubhead}"
+                TitleColor="{StaticResource AccentColor}">
+                <Picker.Items>
+                    <x:String>vcS</x:String>
+                    <x:String>cS</x:String>
+                    <x:String>mS</x:String>
+                    <x:String>fS</x:String>
+                    <x:String>vfS</x:String>
+                    <x:String>LvcS</x:String>
+                    <x:String>LcS</x:String>
+                    <x:String>LmS</x:String>
+                    <x:String>LfS</x:String>
+                    <x:String>LvfS</x:String>
+                    <x:String>SivcS</x:String>
+                    <x:String>SicS</x:String>
+                    <x:String>SimS</x:String>
+                    <x:String>SifS</x:String>
+                    <x:String>SivfS</x:String>
+                    <x:String>vcSL</x:String>
+                    <x:String>cSL</x:String>
+                    <x:String>mSL</x:String>
+                    <x:String>fSL</x:String>
+                    <x:String>vfSL</x:String>
+                    <x:String>L</x:String>
+                    <x:String>SiL</x:String>
+                    <x:String>Si</x:String>
+                    <x:String>CL</x:String>
+                    <x:String>SiCL</x:String>
+                    <x:String>SCL</x:String>
+                    <x:String>SC</x:String>
+                    <x:String>SiC</x:String>
+                    <x:String>C</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextBody}"
+                Text="FINAL MINERAL TEXTURE" />
+            <Entry
+                HorizontalOptions="FillAndExpand"
+                IsReadOnly="True"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding TEXTURE}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

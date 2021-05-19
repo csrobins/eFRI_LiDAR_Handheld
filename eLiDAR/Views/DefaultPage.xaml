@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.DefaultPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Default Settings"
+    ios:Page.UseSafeArea="true"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    BindingContext="DefaultViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="10">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource TextPrimaryColor}" Text="Use Default Species (when set to 'off' the default is ignored)"/>
+                        <Switch
+                            HorizontalOptions="EndAndExpand" 
+                            IsToggled="{Binding UseDefaultSpecies}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" TextColor="{DynamicResource TextPrimaryColor}" FontSize="17" Text="Default Species"/>
+                        <Picker
+                            Title="Species"
+                            IsEnabled="{Binding UseDefaultSpecies}"
+                            HorizontalOptions="EndAndExpand"   
+                            ItemDisplayBinding="{Binding NAME}"
+                            ItemsSource="{Binding ListSpecies}"
+                            SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}"
+                            Style="{DynamicResource TextSubhead}"
+                            TitleColor="{StaticResource AccentColor}"/>
+                    </StackLayout>
+                </StackLayout> 
+                <StackLayout >
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource TextPrimaryColor}" Text="Use Default Tree Origin"/>
+                        <Switch
+                            HorizontalOptions="EndAndExpand" 
+                            IsToggled="{Binding UseDefaultOrigin}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" TextColor="{DynamicResource TextPrimaryColor}" FontSize="17" Text="Default Tree Origin"/>
+                        <Picker
+                            Title="Tree Origin"
+                            IsEnabled="{Binding UseDefaultOrigin}"
+                            HorizontalOptions="EndAndExpand"   
+                            SelectedItem="{Binding DefaultOrigin, Mode=TwoWay}"
+                            Style="{DynamicResource TextSubhead}"
+                            TitleColor="{StaticResource AccentColor}">
+                                <Picker.Items>
+                                    <x:String>N</x:String>
+                                    <x:String>P</x:String>
+                                    <x:String>C</x:String>
+                                    <x:String>L</x:String>
+                                </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout >
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource TextPrimaryColor}" Text="Use Default Tree Status"/>
+                        <Switch
+                            HorizontalOptions="EndAndExpand" 
+                            IsToggled="{Binding UseDefaultStatus}"/>
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" TextColor="{DynamicResource TextPrimaryColor}" FontSize="17" Text="Default Tree Status"/>
+                        <Picker
+                            Title="Tree Status"
+                            IsEnabled="{Binding UseDefaultStatus}"
+                            HorizontalOptions="EndAndExpand"   
+                            SelectedItem="{Binding DefaultStatus, Mode=TwoWay}"
+                            Style="{DynamicResource TextSubhead}"
+                            TitleColor="{StaticResource AccentColor}">
+                            <Picker.Items>
+                                <x:String>L</x:String>
+                                <x:String>D</x:String>
+                                <x:String>V</x:String>
+                                <x:String>DV</x:String>
+                                <x:String>X</x:String>
+                                <x:String>C</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource TextPrimaryColor}" Text="Use Default VSN Tree Status"/>
+                        <Switch
+                            HorizontalOptions="EndAndExpand" 
+                            IsToggled="{Binding UseDefaultVSNStatus}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" TextColor="{DynamicResource TextPrimaryColor}" FontSize="17" Text="Default VSN Tree Status"/>
+                        <Picker
+                            Title="VSN Tree Status"
+                            IsEnabled="{Binding UseDefaultVSNStatus}"
+                            HorizontalOptions="EndAndExpand"   
+                            SelectedItem="{Binding DefaultVSNStatus, Mode=TwoWay}"
+                            Style="{DynamicResource TextSubhead}"
+                            TitleColor="{StaticResource AccentColor}">
+                            <Picker.Items>
+                                <x:String>o</x:String>
+                                <x:String>a</x:String>
+                                <x:String>i</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource TextPrimaryColor}" Text="Use Default Person"/>
+                        <Switch
+                            HorizontalOptions="EndAndExpand" 
+                            IsToggled="{Binding UseDefaultPerson}" />
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" TextColor="{DynamicResource TextPrimaryColor}" FontSize="17" Text="Default Person"/>
+                        <Picker
+                            IsEnabled="{Binding UseDefaultPerson}"
+                            Title="Default Person"
+                            HorizontalOptions="EndAndExpand"
+                            ItemsSource="{Binding ListPerson}"
+                            SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
+                            ItemDisplayBinding="{Binding NAME}"
+                            Style="{DynamicResource TextSubhead}"
+                            TitleColor="{StaticResource AccentColor}"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource TextPrimaryColor}" Text="Use Default Declination"/>
+                        <Switch
+                            HorizontalOptions="EndAndExpand" 
+                            IsToggled="{Binding UseDefaultDeclination}"/>
+                    </StackLayout>
+                    <StackLayout Margin="10" Orientation="Horizontal">
+                        <Label HorizontalOptions="Start" FontAttributes="Bold" TextColor="{DynamicResource TextPrimaryColor}" FontSize="17" Text="Default Declination"/>
+                        <Entry IsEnabled="{Binding UseDefaultDeclination}"
+                    Placeholder="Default Declination"
+                    HorizontalOptions="EndAndExpand"
+                    Keyboard="Numeric" 
+                    Style="{DynamicResource TextSubhead}"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout> 
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

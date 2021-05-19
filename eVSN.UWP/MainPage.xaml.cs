@@ -28,7 +28,7 @@ namespace eLiDAR.UWP
         {
             try
             {
-                this.InitializeComponent();
+                InitializeComponent();
                 LoadApplication(new eLiDAR.App());
             }
             catch (Exception ex)

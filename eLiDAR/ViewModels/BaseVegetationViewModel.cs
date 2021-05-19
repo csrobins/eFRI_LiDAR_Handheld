@@ -8,6 +8,7 @@ using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
 using System.Linq;
+using eLiDAR.Utilities;
 
 namespace eLiDAR.ViewModels
 {
@@ -20,6 +21,7 @@ namespace eLiDAR.ViewModels
         public string _fk;
         public List<PickerItemsString> ListVeg  = PickerService.VegItems().ToList();
         private string _getscientific;
+        private Utils util = new Utils();
 
         public event PropertyChangedEventHandler PropertyChanged2;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyname = null)
@@ -76,7 +78,17 @@ namespace eLiDAR.ViewModels
 
             }
         }
-        
+        void UpdateSums()
+        {
+            if (util.AllowVegCalc)
+            {
+                ELCLAYER3 = (QUAD1 + QUAD2 + QUAD3 + QUAD4) / 4;
+                ELCLAYER4 = (QUAD1_ELC4 + QUAD2_ELC4 + QUAD3_ELC4 + QUAD4_ELC4) / 4;
+                ELCLAYER5 = (QUAD1_ELC5 + QUAD2_ELC5 + QUAD3_ELC5 + QUAD4_ELC5) / 4;
+                ELCLAYER6 = (QUAD1_ELC6 + QUAD2_ELC6 + QUAD3_ELC6 + QUAD4_ELC6) / 4;
+                ELCLAYER7 = (QUAD1_ELC7 + QUAD2_ELC7 + QUAD3_ELC7 + QUAD4_ELC7) / 4;
+            }
+        }                                                                 
         void SetScientific()
         {
            GetScientific = PickerService.GetItem(ListVeg, SPECIES).NAME;
@@ -101,6 +113,7 @@ namespace eLiDAR.ViewModels
                 _vegetation.QUAD1 = value;
                 NotifyPropertyChanged("QUAD1");
                 IsChanged = true;
+                UpdateSums(); 
             }
         }
         public int QUAD2
@@ -110,6 +123,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.QUAD2 = value;
                 NotifyPropertyChanged("QUAD2");
+                UpdateSums();
             }
         }
         public int QUAD3
@@ -119,6 +133,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.QUAD3 = value;
                 NotifyPropertyChanged("QUAD3");
+                UpdateSums();
             }
         }
         public int QUAD4
@@ -128,6 +143,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.QUAD4 = value;
                 NotifyPropertyChanged("QUAD4");
+                UpdateSums();
             }
         }
         public int ELCLAYER3
@@ -188,6 +204,183 @@ namespace eLiDAR.ViewModels
                 _vegetation.SPECIMENNUMBER = value;
                 NotifyPropertyChanged("SPECIMENNUMBER");
                 IsChanged = true;
+            }
+        }
+        public int QUAD1_ELC4
+        {
+            get => _vegetation.QUAD1_ELC4;
+            set
+            {
+                _vegetation.QUAD1_ELC4 = value;
+                NotifyPropertyChanged("QUAD1_ELC4");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD2_ELC4
+        {
+            get => _vegetation.QUAD2_ELC4;
+            set
+            {
+                _vegetation.QUAD2_ELC4 = value;
+                NotifyPropertyChanged("QUAD2_ELC4");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+
+        public int QUAD3_ELC4
+        {
+            get => _vegetation.QUAD3_ELC4;
+            set
+            {
+                _vegetation.QUAD3_ELC4 = value;
+                NotifyPropertyChanged("QUAD3_ELC4");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD4_ELC4
+        {
+            get => _vegetation.QUAD4_ELC4;
+            set
+            {
+                _vegetation.QUAD4_ELC4 = value;
+                NotifyPropertyChanged("QUAD4_ELC4");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD1_ELC5
+        {
+            get => _vegetation.QUAD1_ELC5;
+            set
+            {
+                _vegetation.QUAD1_ELC5 = value;
+                NotifyPropertyChanged("QUAD1_ELC5");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD2_ELC5
+        {
+            get => _vegetation.QUAD2_ELC5;
+            set
+            {
+                _vegetation.QUAD2_ELC5 = value;
+                NotifyPropertyChanged("QUAD2_ELC5");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD3_ELC5
+        {
+            get => _vegetation.QUAD3_ELC5;
+            set
+            {
+                _vegetation.QUAD3_ELC5 = value;
+                NotifyPropertyChanged("QUAD3_ELC5");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD4_ELC5
+        {
+            get => _vegetation.QUAD4_ELC5;
+            set
+            {
+                _vegetation.QUAD4_ELC5 = value;
+                NotifyPropertyChanged("QUAD4_ELC5");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD1_ELC6
+        {
+            get => _vegetation.QUAD1_ELC6;
+            set
+            {
+                _vegetation.QUAD1_ELC6 = value;
+                NotifyPropertyChanged("QUAD1_ELC6");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD2_ELC6
+        {
+            get => _vegetation.QUAD2_ELC6;
+            set
+            {
+                _vegetation.QUAD2_ELC6 = value;
+                NotifyPropertyChanged("QUAD2_ELC6");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD3_ELC6
+        {
+            get => _vegetation.QUAD3_ELC6;
+            set
+            {
+                _vegetation.QUAD3_ELC6 = value;
+                NotifyPropertyChanged("QUAD3_ELC6");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD4_ELC6
+        {
+            get => _vegetation.QUAD4_ELC6;
+            set
+            {
+                _vegetation.QUAD4_ELC6 = value;
+                NotifyPropertyChanged("QUAD4_ELC6");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD1_ELC7
+        {
+            get => _vegetation.QUAD1_ELC7;
+            set
+            {
+                _vegetation.QUAD1_ELC7 = value;
+                NotifyPropertyChanged("QUAD1_ELC7");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD2_ELC7
+        {
+            get => _vegetation.QUAD2_ELC7;
+            set
+            {
+                _vegetation.QUAD2_ELC7 = value;
+                NotifyPropertyChanged("QUAD2_ELC7");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD3_ELC7
+        {
+            get => _vegetation.QUAD3_ELC7;
+            set
+            {
+                _vegetation.QUAD3_ELC7 = value;
+                NotifyPropertyChanged("QUAD3_ELC7");
+                IsChanged = true;
+                UpdateSums();
+            }
+        }
+        public int QUAD4_ELC7
+        {
+            get => _vegetation.QUAD4_ELC7;
+            set
+            {
+                _vegetation.QUAD4_ELC7 = value;
+                NotifyPropertyChanged("QUAD4_ELC7");
+                IsChanged = true;
+                UpdateSums();
             }
         }
 

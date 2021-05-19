@@ -58,7 +58,7 @@ namespace eLiDAR.ViewModels {
         }
         private void GetNextNum()
         {
-            if (util.AllowAutoNumber && !_isaccum && DWDNUM == 0 && LINE > 0) { DWDNUM = _dwdRepository.GetNextNumber(_fk,LINE); }
+            if (util.AllowAutoNumber && !_isaccum && DWDNUM == 0 && LINE > 0) { DWDNUM = _dwdRepository.GetNextNumber(_fk); }
         }
         //public int LINE
         //{

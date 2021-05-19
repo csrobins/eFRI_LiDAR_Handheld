@@ -11,7 +11,7 @@ using eLiDAR.API;
 using System.Threading.Tasks;
 using eLiDAR.Styles;
 using eLiDAR.Domain.Global;
-
+using Xamarin.Essentials;
 
 namespace eLiDAR.ViewModels
 {
@@ -26,12 +26,23 @@ namespace eLiDAR.ViewModels
         {
             _navigation = navigation;
             util = new Utils();
+        
             FetchSettings();
         }
         public void FetchSettings()
         {
             NotifyPropertyChanged("ErrorList");        
         }
+
+        public string GetVersion
+        {
+            get
+            {
+               
+                return AppInfo.Name +  " version " + AppInfo.VersionString  + " build " + AppInfo.BuildString;  
+            }
+        }
+
         public string ErrorList
         {
             get => util.ErrorList ;

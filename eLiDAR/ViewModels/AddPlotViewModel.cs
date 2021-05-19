@@ -43,6 +43,7 @@ namespace eLiDAR.ViewModels {
             _plot = new PLOT();
             _plotRepository = new PlotRepository();
             _selectedprojectid = fk;
+            Utils util = new Utils();
             //Do defaults
             _plot.VSNPLOTNAME = "VSN";
             _plot.IsDeleted = "N";
@@ -50,7 +51,7 @@ namespace eLiDAR.ViewModels {
             _plot.PROJECTID = fk;
             _plot.PLOTOVERVIEWDATE = System.DateTime.Now;
             _plot.MEASUREYEAR = _plot.PLOTOVERVIEWDATE.Year;
-            
+            if (util.UseDefaultDeclination) { _plot.DECLINATION = util.DefaultDeclination; }
 
             AddCommand = new Command(async () => await AddPlot(_selectedprojectid));
             ViewAllCommand = new Command(async () => await ShowList());
@@ -71,7 +72,6 @@ namespace eLiDAR.ViewModels {
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
             LocationCommand = new Command(async () => await DoLocation());
-
         }
         async Task ShowComments()
         {
@@ -178,16 +178,16 @@ namespace eLiDAR.ViewModels {
             }
         }
 
-        private List<PickerItemsString> FillPersonPicker()
-        {
-            var list = new List<PickerItemsString>();
-            foreach (var newperson in _plotRepository.GetPersonList(_plot.PROJECTID))
-            {
-                var newitem = new PickerItemsString() { ID = newperson.LASTNAME + " " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
-                list.Add(newitem);
-            };
-            return list;
-        }
+        //private List<PickerItemsString> FillPersonPicker()
+        //{
+        //    var list = new List<PickerItemsString>();
+        //    foreach (var newperson in _plotRepository.GetPersonList(_plot.PROJECTID))
+        //    {
+        //        var newitem = new PickerItemsString() { ID = newperson.LASTNAME + " " + newperson.FIRSTNAME, NAME = newperson.LASTNAME + ", " + newperson.FIRSTNAME };
+        //        list.Add(newitem);
+        //    };
+        //    return list;
+        //}
 
         private PickerItemsString _selectedCrew1 = new PickerItemsString { ID = "", NAME = "" };
         public PickerItemsString SelectedCrew1

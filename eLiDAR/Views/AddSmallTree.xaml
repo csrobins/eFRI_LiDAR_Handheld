@@ -13,7 +13,11 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:SmallTreeView />
-       <!--     <Button
+            <Button
+                Style="{StaticResource FormButtonStyle}"
+                Command="{Binding DeleteCommand}"
+                Text="Delete"/>
+            <!--     <Button
                 x:Name="SubmitButton"
                 BackgroundColor="{StaticResource cerulean}"
                 BorderRadius="0"
