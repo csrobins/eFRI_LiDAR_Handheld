@@ -258,12 +258,19 @@
                             HorizontalOptions="Start"
                             Style="{DynamicResource TextSubhead}"
                             Text="Last Synched" />
-                    <Label
-                        FontAttributes="Bold"
-                        HorizontalOptions="End"
-                        Style="{DynamicResource TextSubhead}"
-                        Text="{Binding LastSynched}" />
-                </StackLayout>
+                        <DatePicker
+                        x:Name="txtDate"
+                        Date="{Binding LastSynched}"
+                        Format="MMMM dd, yyyy h:mm:ss tt"
+                        HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding AllowDateChange}"
+                        MinimumDate="01-Jan-2020"
+                        Style="{DynamicResource TextSubhead}" />
+                        <Switch
+                            x:Name="swcDate"
+                            HorizontalOptions="EndAndExpand"                      
+                            IsToggled="{Binding AllowDateChange}" />
+                    </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label
                         HorizontalOptions="Start"

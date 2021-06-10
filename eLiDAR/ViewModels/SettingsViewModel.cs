@@ -112,7 +112,10 @@ namespace eLiDAR.ViewModels
             NotifyPropertyChanged("PROJECT_ROWS_PULLED");
             NotifyPropertyChanged("PLOT_ROWS_PULLED");
             NotifyPropertyChanged("TREE_ROWS_PULLED");
-
+        }
+        private void Update()
+        {
+            databasehelper.UpdateSettings(settings);  
         }
 
         public event PropertyChangedEventHandler PropertyChanged2;
@@ -151,8 +154,20 @@ namespace eLiDAR.ViewModels
             get => _issynchenabled;
             set
             {
-                _issynchenabled = value;
+                if (util.IsLoggedIn) { _issynchenabled = value; }
+                else { _issynchenabled = false; }
+                //_issynchenabled = true;
                 NotifyPropertyChanged("IsSynchEnabled");
+            }
+        }
+        private bool _allowdatechange = false;
+        public bool AllowDateChange
+        {
+            get => _allowdatechange;
+            set
+            {
+                _allowdatechange = value;
+                NotifyPropertyChanged("AllowDateChange");
             }
         }
         public bool AllowVegCalc
@@ -229,6 +244,18 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("UseAlphaList");
             }
         }
+        public bool IsLoggedIn
+        {
+            get
+            {
+                return util.IsLoggedIn;
+            }
+            set
+            {
+                util.IsLoggedIn = value;
+                NotifyPropertyChanged("IsLoggedIn");
+            }
+        }
         public bool DoPartialSynch
         {
             get => util.DoPartialSynch;
@@ -262,6 +289,8 @@ namespace eLiDAR.ViewModels
             get => settings.LastSynched;
             set
             {
+                settings.LastSynched = value;
+                Update();
                 NotifyPropertyChanged("LastSynched");
             }
         }

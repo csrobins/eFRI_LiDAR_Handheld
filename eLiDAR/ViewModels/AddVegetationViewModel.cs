@@ -22,6 +22,7 @@ namespace eLiDAR.ViewModels {
         public VegetationCensusRepository _vegetationcensusRepository;
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
+        private bool _AllowToLeave = false;
         public AddVegetationViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _vegetation = new VEGETATION();
@@ -96,6 +97,7 @@ namespace eLiDAR.ViewModels {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Vegetation Details", "Delete Vegetation Details", "OK", "Cancel");
             if (isUserAccept) {
                 _vegetationRepository.DeleteVegetation (_vegetation);
+                _AllowToLeave = true;
                 await _navigation.PopAsync();
             }
         }
@@ -118,8 +120,11 @@ namespace eLiDAR.ViewModels {
         {
             if (e.CanCancel)
             {
-                e.Cancel();
-                await GoBack();
+                if (!_AllowToLeave)
+                {
+                    e.Cancel();
+                    await GoBack();
+                }
             }
         }
 

@@ -14,7 +14,7 @@
     <AssemblyName>eVSN.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <ProvisioningType>automatic</ProvisioningType>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,17 +53,17 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Development: Craig Robinson (82V997AAJ4)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>
     </CodesignEntitlements>
-    <CodesignProvision>
-    </CodesignProvision>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <MtouchLink>None</MtouchLink>
     <MtouchInterpreter>
     </MtouchInterpreter>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -76,6 +76,8 @@
     <CodesignKey>Apple Development: Craig Robinson (82V997AAJ4)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
+    <IpaPackageName>eVSN</IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -89,6 +91,7 @@
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
     <CodesignKey>Apple Development: Craig Robinson (82V997AAJ4)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <OptimizePNGs>true</OptimizePNGs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -115,6 +118,9 @@
     <BundleResource Include="..\db\eLiDAR.sqlite">
       <Link>Resources\eLiDAR.sqlite</Link>
     </BundleResource>
+    <BundleResource Include="Contents.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,46 +129,151 @@
     <BundleResource Include="Resources\fontawesome.otf" />
   </ItemGroup>
   <ItemGroup>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1201.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1201.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1202.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1202.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1521.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1521.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1671.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1671.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1801.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon1801.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon201.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon201.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon291.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon291.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon401.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon401.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon402.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon402.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon403.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon403.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon581.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon581.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon582.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon582.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon601.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon601.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon761.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon761.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon801.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon801.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon802.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon802.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon871.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets2.xcassets\AppIcons.appiconset\Icon871.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
-      <Visible>false</Visible>
-    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -222,5 +333,92 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\stratification.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon58.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon76.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon87.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon120.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon152.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon180.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon201.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon401.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon402.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon403.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon581.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon582.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon601.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon761.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon801.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon802.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon871.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon1201.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon1202.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon1521.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon1671.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Icon1801.png" />
   </ItemGroup>
 </Project>

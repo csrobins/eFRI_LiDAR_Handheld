@@ -209,6 +209,10 @@ namespace eLiDAR.Helpers
             return (from data in sqliteconnection.Query<PHOTO>("select * from PHOTO where PLOTID = '" + plotid + "' and IsDeleted = 'N' ORDER BY PHOTOTYPE, FRAMENUMBER, PHOTONUMBER, AZIMUTH")
                     select data).ToList();
         }
+        public USER GetUser(string username)
+        {
+            return sqliteconnection.Table<USER>().FirstOrDefault(t => t.USERNAME == username);
+        }
         public List<PLOT> GetFilteredPlotData(string projectid)
         {
           //  return (from data in sqliteconnection.Table<PLOT>().OrderBy(t => t.VSNPLOTNAME).Where(t => t.PROJECTID == projectid) 
@@ -473,7 +477,7 @@ namespace eLiDAR.Helpers
             if (_vegetation.SPECIMENNUMBER == 0) { return true; }
             if (_vegetation.VEGETATIONID != null)
             {
-                qry = "select count(VEGETATIONID) from VEGETATION where PLOTID = '" + _vegetation.PLOTID + "'  and IsDeleted = 'N'  and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER + "' and VEGETATIONID <> '" + _vegetation.VEGETATIONID + "'";
+                qry = "select count(VEGETATIONID) from VEGETATION where PLOTID = '" + _vegetation.PLOTID + "'  and IsDeleted = 'N'  and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER + " and VEGETATIONID <> '" + _vegetation.VEGETATIONID + "'";
             }
             else
             {
@@ -499,7 +503,7 @@ namespace eLiDAR.Helpers
             if (_vegetation.SPECIMENNUMBER == 0 ) { return true; }
             if (_vegetation.VEGETATIONCENSUSID != null)
             {
-                qry = "select count(VEGETATIONCENSUSID) from VEGETATIONCENSUS where PLOTID = '" + _vegetation.PLOTID + "'  and IsDeleted = 'N'  and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER + "' and VEGETATIONCENSUSID <> '" + _vegetation.VEGETATIONCENSUSID + "'";
+                qry = "select count(VEGETATIONCENSUSID) from VEGETATIONCENSUS where PLOTID = '" + _vegetation.PLOTID + "'  and IsDeleted = 'N'  and SPECIMENNUMBER = " + _vegetation.SPECIMENNUMBER + " and VEGETATIONCENSUSID <> '" + _vegetation.VEGETATIONCENSUSID + "'";
             }
             else
             {

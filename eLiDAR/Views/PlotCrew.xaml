@@ -206,7 +206,7 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Stem Map Notes"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding STEMMAPPINNOTE}" />
+                    Text="{Binding STEMMAPPINGNOTE}" />
 
                 </StackLayout>
             <StackLayout Grid.Row="0" Grid.Column="1">
@@ -256,7 +256,7 @@
                 <Entry
                     x:Name="txtUnderstoryNotes"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Small Tree Notes"
+                    Placeholder="Understory Vegeation Notes"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UNDERSTORYVEGETATIONNOTE}" />
                 <Label

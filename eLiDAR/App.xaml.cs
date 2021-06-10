@@ -15,7 +15,14 @@ namespace eLiDAR
             //   MainPage = new eLiDAR.AppShell();
             DependencyService.Register<AppModel>();
 
-            MainPage = new MainShell();
+            try
+            {
+                MainPage = new MainShell();
+            }
+            catch (Exception ex) 
+            {
+                var msg = ex.Message; 
+            }
         }
 
         protected override void OnStart()

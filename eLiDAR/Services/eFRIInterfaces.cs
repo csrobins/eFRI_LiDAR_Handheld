@@ -141,7 +141,8 @@ namespace eLiDAR.Services
         void UpdateEcosite(ECOSITE ecosite);
         String GetTitle(string plotid);
         bool IsEcositeExists(string plotid);
-
+        List<PERSON> GetPersonList(string id = null);
+        
     }
     public interface ISoilRepository
     {
@@ -700,7 +701,10 @@ namespace eLiDAR.Services
         {
             return _databaseHelper.GetAllEcositeData();
         }
-
+        public List<PERSON> GetPersonList(string id = null)
+        {
+            return _databaseHelper.GetFilteredPersonData(id);
+        }
         public List<ECOSITE> GetFilteredData(string fk)
         {
             return _databaseHelper.GetFilteredEcositeData(fk);

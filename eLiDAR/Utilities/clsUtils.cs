@@ -38,11 +38,83 @@ namespace eLiDAR.Utilities
         private string keydefaultdeclination = "DefaultDeclination";
         private string keyusedefaultdeclination = "UseDefaultDeclination";
         private string keyallowvegcalc = "AllowVegCalc";
+        private string keyisloggedin = "IsLoggedIn";
+        private string securityCode = "MSDNEUDN@#";
+        private string keyloggedinas = "loggedinas";
+        private string keygeturi = "geturi";
+        private string keyputuri = "puturi";
+        private string keyposturi = "posturi";
+
+
+        public string MD5Hash(string input)
+        {
+            System.Security.Cryptography.SHA512Managed sha512 = new System.Security.Cryptography.SHA512Managed();
+
+            Byte[] EncryptedSHA512 = sha512.ComputeHash(System.Text.Encoding.UTF8.GetBytes(string.Concat(input, securityCode)));
+
+            sha512.Clear();
+            return Convert.ToBase64String(EncryptedSHA512);
+        }
+        internal string PostURI
+        {
+            get
+            {
+                return Preferences.Get(keyposturi, null);
+            }
+            set
+            {
+                Preferences.Set(keyposturi, value);
+            }
+        }
+        internal string PutURI
+        {
+            get
+            {
+                return Preferences.Get(keyputuri, null);
+            }
+            set
+            {
+                Preferences.Set(keyputuri, value);
+            }
+        }
+        internal string GetURI
+        {
+            get
+            {
+                return Preferences.Get(keygeturi, null);
+            }
+            set
+            {
+                Preferences.Set(keygeturi, value);
+            }
+        }
+        internal string LoggedInAs
+        {
+            get
+            {
+                return Preferences.Get(keyloggedinas, null);
+            }
+            set
+            {
+                Preferences.Set(keyloggedinas, value);
+            }
+        }
+        internal bool IsLoggedIn
+        {
+            get
+            {
+                return Preferences.Get(keyisloggedin, false);
+            }
+            set
+            {
+                Preferences.Set(keyisloggedin, value);
+            }
+        }
         internal bool AllowVegCalc
         {
             get
             {
-                return Preferences.Get(keyallowvegcalc, true);
+                return Preferences.Get(keyallowvegcalc, false);
             }
             set
             {

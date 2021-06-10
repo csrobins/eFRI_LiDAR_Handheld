@@ -13,7 +13,7 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout >
+            <StackLayout Margin="20">
                 <Label
                     HorizontalOptions="Start"
                     Style="{DynamicResource TextTitle}"

@@ -194,6 +194,11 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
+                if (HORIZON == "L" || HORIZON == "F" || HORIZON == "H" || HORIZON == "LM" || HORIZON == "Of" || HORIZON == "Of1" || HORIZON == "Of2" || HORIZON == "Of3" || HORIZON == "Of4" || HORIZON == "Om" || HORIZON == "Om1" || HORIZON == "Om2" || HORIZON == "Oh" || HORIZON == "Oh1" || HORIZON == "Oh2")
+                {
+                    IsOrganic = true;
+                }
+                else { IsOrganic = false; }
                 if (HORIZON == null) { return "Horizon"; }
                 else { return HORIZON; }
             }

@@ -22,6 +22,17 @@ namespace eLiDAR.Models
         public int PLOT_ROWS_PULLED { get; set; }
         public int TREE_ROWS_PULLED { get; set; }
     }
+    [Table("USER")]
+    public class USER
+    {
+        [PrimaryKey]
+        public int USERID { get; set; }
+        public string USERNAME { get; set; }
+        public string PWD { get; set; }
+        public string POST { get; set; }
+        public string PUT { get; set; }
+        public string GET { get; set; }
+    }
 
     [Table("PROJECT")]
     public class PROJECT
@@ -501,7 +512,7 @@ namespace eLiDAR.Models
         public DateTime SUBSTRATEDATE { get; set; }
         public int MODEOFDEPOSITIONRANK1 { get; set; }
         public int MODEOFDEPOSITIONRANK2 { get; set; }
-
+        public string SUBSTRATEPERSON { get; set; }
     }
     [Table("SOIL")]
     public class SOIL
@@ -557,34 +568,34 @@ namespace eLiDAR.Models
         public string PLOTID { get; set; }
         public string VSNSPECIESCODE { get; set; }
         public int SPECIMENNUMBER { get; set; }
-        public int QUAD1 { get; set; }
-        public int QUAD2 { get; set; }
-        public int QUAD3 { get; set; }
-        public int QUAD4 { get; set; }
-        public int ELCLAYER3 { get; set; }
-        public int ELCLAYER4 { get; set; }
-        public int ELCLAYER5 { get; set; }
-        public int ELCLAYER6 { get; set; }
-        public int ELCLAYER7 { get; set; }
+        public double QUAD1 { get; set; }
+        public double QUAD2 { get; set; }
+        public double QUAD3 { get; set; }
+        public double QUAD4 { get; set; }
+        public double ELCLAYER3 { get; set; }
+        public double ELCLAYER4 { get; set; }
+        public double ELCLAYER5 { get; set; }
+        public double ELCLAYER6 { get; set; }
+        public double ELCLAYER7 { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
-        public int QUAD1_ELC4 { get; set; }
-        public int QUAD2_ELC4 { get; set; }
-        public int QUAD3_ELC4 { get; set; }
-        public int QUAD4_ELC4 { get; set; }
-        public int QUAD1_ELC5 { get; set; }
-        public int QUAD2_ELC5 { get; set; }
-        public int QUAD3_ELC5 { get; set; }
-        public int QUAD4_ELC5 { get; set; }
-        public int QUAD1_ELC6 { get; set; }
-        public int QUAD2_ELC6 { get; set; }
-        public int QUAD3_ELC6 { get; set; }
-        public int QUAD4_ELC6 { get; set; }
-        public int QUAD1_ELC7 { get; set; }
-        public int QUAD2_ELC7 { get; set; }
-        public int QUAD3_ELC7 { get; set; }
-        public int QUAD4_ELC7 { get; set; }
+        public double QUAD1_ELC4 { get; set; }
+        public double QUAD2_ELC4 { get; set; }
+        public double QUAD3_ELC4 { get; set; }
+        public double QUAD4_ELC4 { get; set; }
+        public double QUAD1_ELC5 { get; set; }
+        public double QUAD2_ELC5 { get; set; }
+        public double QUAD3_ELC5 { get; set; }
+        public double QUAD4_ELC5 { get; set; }
+        public double QUAD1_ELC6 { get; set; }
+        public double QUAD2_ELC6 { get; set; }
+        public double QUAD3_ELC6 { get; set; }
+        public double QUAD4_ELC6 { get; set; }
+        public double QUAD1_ELC7 { get; set; }
+        public double QUAD2_ELC7 { get; set; }
+        public double QUAD3_ELC7 { get; set; }
+        public double QUAD4_ELC7 { get; set; }
     }
     [Table("VEGETATIONCENSUS")]
     public class VEGETATIONCENSUS
