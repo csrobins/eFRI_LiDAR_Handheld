@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using eLiDAR.Utilities;
+using System;
 
 namespace eLiDAR.ViewModels {
     public class PlotCrewViewModel : INotifyPropertyChanged 
@@ -109,6 +110,34 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedUnderstoryVegPerson, value);
                 _plot.UNDERSTORYVEGETATIONPERSON = _selectedUnderstoryVegPerson.ID;
+            }
+        }
+        private PickerItemsString _selectedAgePerson = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedAgePerson
+        {
+            get
+            {
+                _selectedAgePerson = PickerService.GetItem(ListPerson, _plot.AGEPERSON);
+                return _selectedAgePerson;
+            }
+            set
+            {
+                SetProperty(ref _selectedAgePerson, value);
+                _plot.AGEPERSON = _selectedAgePerson.ID;
+            }
+        }
+        private PickerItemsString _selectedStemMappingPerson = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedStemMappingPerson
+        {
+            get
+            {
+                _selectedStemMappingPerson = PickerService.GetItem(ListPerson, _plot.STEMMAPPINGPERSON);
+                return _selectedStemMappingPerson;
+            }
+            set
+            {
+                SetProperty(ref _selectedStemMappingPerson, value);
+                _plot.STEMMAPPINGPERSON = _selectedStemMappingPerson.ID;
             }
         }
         private PickerItemsString _selectedUnderstoryCensusPerson = new PickerItemsString { ID = "", NAME = "" };
@@ -223,13 +252,13 @@ namespace eLiDAR.ViewModels {
             }
         }
 
-        public string UNDERSTORYVEGEATIONNOTE
+        public string UNDERSTORYVEGETATIONNOTE
         {
             get => _plot.UNDERSTORYVEGETATIONNOTE;
             set
             {
                 _plot.UNDERSTORYVEGETATIONNOTE = value;
-                NotifyPropertyChanged("UNDERSTORYVEGEATIONNOTE");
+                NotifyPropertyChanged("UNDERSTORYVEGETATIONNOTE");
            
             }
         }
@@ -331,6 +360,69 @@ namespace eLiDAR.ViewModels {
                 _plot.DEFORMITYPERSON = value;
                 NotifyPropertyChanged("DEFORMITYPERSON");
            
+            }
+        }
+        public DateTime AGEDATE
+        {
+            get => _plot.AGEDATE;
+            set
+            {
+                _plot.AGEDATE = value;
+                NotifyPropertyChanged("AGEDATE");
+               
+            }
+        }
+        public string AGENOTE
+        {
+            get => _plot.AGENOTE;
+            set
+            {
+                _plot.AGENOTE = value;
+                NotifyPropertyChanged("AGENOTE");
+                
+            }
+        }
+
+        public string AGEPERSON
+        {
+            get => _plot.AGEPERSON;
+            set
+            {
+                _plot.AGEPERSON = value;
+                NotifyPropertyChanged("AGEPERSON");
+                
+            }
+        }
+
+        public DateTime STEMMAPPINGDATE
+        {
+            get => _plot.STEMMAPPINGDATE;
+            set
+            {
+                _plot.STEMMAPPINGDATE = value;
+                NotifyPropertyChanged("STEMMAPPINGDATE");
+              
+            }
+        }
+        public string STEMMAPPINGNOTE
+        {
+            get => _plot.STEMMAPPINGNOTE;
+            set
+            {
+                _plot.STEMMAPPINGNOTE = value;
+                NotifyPropertyChanged("STEMMAPPINGNOTE");
+               
+            }
+        }
+
+        public string STEMMAPPINGPERSON
+        {
+            get => _plot.STEMMAPPINGPERSON;
+            set
+            {
+                _plot.STEMMAPPINGPERSON = value;
+                NotifyPropertyChanged("STEMMAPPINGPERSON");
+               
             }
         }
 

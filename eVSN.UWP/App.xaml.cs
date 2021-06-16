@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -32,6 +33,13 @@ namespace eLiDAR.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            object value = Windows.Storage.ApplicationData.Current.LocalSettings.Values["themeSetting"];
+
+            if (value != null)
+            {
+                // Apply theme choice.
+                App.Current.RequestedTheme = (ApplicationTheme)(int)value;
+            }
         }
 
         /// <summary>
@@ -63,11 +71,10 @@ namespace eLiDAR.UWP
 
                     rootFrame.NavigationFailed += OnNavigationFailed;
                     global::Xamarin.Forms.Forms.SetFlags("Shell_UWP_Experimental");
-                    Xamarin.Forms.Forms.Init(e);
 
-//                    Xamarin.Forms.Forms.Init()
- //                   Rg.Plugins.Popup.Popup.Init();
-  //                  Xamarin.Forms.Forms.Init(e, Popup.GetExtraAssemblies());
+                    Xamarin.Forms.Forms.Init(e);
+                     
+               //     Xamarin.Forms.Forms.Init(e,null);
 
                     if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                     {
@@ -85,7 +92,17 @@ namespace eLiDAR.UWP
                         // When the navigation stack isn't restored navigate to the first page,
                         // configuring the new page by passing required information as a navigation
                         // parameter
-                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                        //       rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                        try
+                        {
+                            rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                        }
+                        catch (Exception ex)
+                        {
+                            var msg = ex.Message; 
+                        }
+             
+
                     }
                     // Ensure the current window is active
                     Window.Current.Activate();

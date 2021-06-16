@@ -507,7 +507,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.DIRECTHEIGHTTOCONTLIVECROWN > 0 || c.OCULARHEIGHTTOCONTLIVECROWN > 0).WithMessage("Ht to LC must not be 0 when tree status = L,V.");
                     RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT > c.DIRECTHEIGHTTOCONTLIVECROWN).WithMessage("Ht must be > ht to live crown when tree status = L,V");
                     RuleFor(c => c.DIRECTTOTALHEIGHT).Must(c => c >= 2 && c <= 50).WithMessage("Ht must be between 0 and 50m when tree status = L,V");
-                    RuleFor(c => c.DIRECTHEIGHTTOCONTLIVECROWN).Must(c => c >= 2 && c <= 50).WithMessage("Ht to live crown must be between 0 and 50m when tree status = L,V");
+                    RuleFor(c => c.DIRECTHEIGHTTOCONTLIVECROWN).Must(c => c > 0 && c <= 50).WithMessage("Ht to live crown must be between 0 and 50m when tree status = L,V");
                     RuleFor(c => c).Must(c => c.FIELDAGE >= 1 && c.FIELDAGE <= 500).When(c => c.CORESTATUSCODE != null).WithMessage("Field age shouldbe between 1 and 500");
                     RuleFor(c => c).Must(c => c.HEIGHTTOCORE > 0 && c.HEIGHTTOCORE <= 2.5).When(c => c.CORESTATUSCODE != null).WithMessage("Ht to core should be between 0 and 2.5m");
                     RuleFor(c => c).Must(c => c.OFFICERINGCOUNT <= 500).When(c => c.CORESTATUSCODE != null).WithMessage("Office ring count should be less than 500");
@@ -610,10 +610,10 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => c.DISTANCE <= 20).WithMessage("Distance should not be empty and less than 20m.");
             if (DofullValidation)
             {
-                RuleFor(c => c.CROWNWIDTH1).NotEmpty().WithMessage("Crown Width 1 should not be empty.");
-                RuleFor(c => c.CROWNWIDTH2).NotEmpty().WithMessage("crown Width 2 should not be empty.");
-                RuleFor(c => c).Must(c => c.CROWNWIDTH1 <= 30).WithMessage("Crown width 1 should be less than 30m.");
-                RuleFor(c => c).Must(c => c.CROWNWIDTH2 <= 30).WithMessage("Crown width 1 should be less than 30m.");
+//                RuleFor(c => c.CROWNWIDTH1).NotEmpty().WithMessage("Crown Width 1 should not be empty.");
+//                RuleFor(c => c.CROWNWIDTH2).NotEmpty().WithMessage("crown Width 2 should not be empty.");
+                RuleFor(c => c).Must(c => c.CROWNWIDTH1 >= 0 && c.CROWNWIDTH1 <= 30).WithMessage("Crown width 1 should be less than 30m.");
+                RuleFor(c => c).Must(c => c.CROWNWIDTH2 >= 0 &&  c.CROWNWIDTH2 <= 30).WithMessage("Crown width 2 should be less than 30m.");
                 RuleFor(c => c).Must(c => c.CROWNOFFSETAZIMUTH <= 360).WithMessage("Crown Offset Azimuth should be less than 360.");
                 RuleFor(c => c).Must(c => c.CROWNOFFSETDISTANCE <= 50).WithMessage("Crown offset distance should be and less than 50m.");
                 RuleFor(c => c).Must(c => c.CROWNOFFSETDISTANCE > 0).When(c => c.CROWNOFFSETAZIMUTH >0).WithMessage("Crown offset distance should be populated when crown offset azimuth >0");
@@ -862,7 +862,7 @@ namespace eLiDAR.Validator
         public VegetationValidator(bool DoFullValidation = false)
         { 
             RuleFor(c => c.VSNSPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
-            RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Vegetation species must be unique within the plot.");
+        //    RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Vegetation species must be unique within the plot.");
             RuleFor(c => c).Must(c => IsValidPlant(c.VSNSPECIESCODE)).WithMessage("Invalid plant");
             RuleFor(c => c).Must(c => IsSpecimenUnique(c)).WithMessage("Vegetation specimen number must be unique within the plot.");
 
@@ -871,6 +871,12 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => c.ELCLAYER5 >= 0 && c.ELCLAYER5 <= 99).WithMessage("% cover for ELC layer 5 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER6 >= 0 && c.ELCLAYER6 <= 99).WithMessage("% cover for ELC layer 6 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER7 >= 0 && c.ELCLAYER7 <= 99).WithMessage("% cover for ELC layer 7 must be <= 99%");
+            RuleFor(c => c.ELCLAYER3).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer3 can have up to 1 decimals");
+            RuleFor(c => c.ELCLAYER4).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer4 can have up to 1 decimals");
+            RuleFor(c => c.ELCLAYER5).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer5 can have up to 1 decimals");
+            RuleFor(c => c.ELCLAYER6).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer6 can have up to 1 decimals");
+            RuleFor(c => c.ELCLAYER7).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer7 can have up to 1 decimals");
+
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -917,7 +923,7 @@ namespace eLiDAR.Validator
         {
             RuleFor(c => c.VSNSPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
             RuleFor(c => c).Must(c => IsValidPlant(c.VSNSPECIESCODE)).WithMessage("Invalid plant");
-            RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Vegetation species must be unique within the plot.");
+      //      RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Vegetation species must be unique within the plot.");
             RuleFor(c => c).Must(c => IsSpecimenUnique(c)).WithMessage("Vegetation specimen number must be unique within the plot.");
         }
         bool ValidateStringEmpty(string stringValue)

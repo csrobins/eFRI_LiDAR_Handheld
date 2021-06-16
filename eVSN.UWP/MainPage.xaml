@@ -8,5 +8,7 @@
     xmlns:forms="using:Xamarin.Forms.Platform.UWP" 
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    </Grid>
 </forms:WindowsPage>

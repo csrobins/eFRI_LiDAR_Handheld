@@ -52,6 +52,11 @@ namespace elidar.iOS
 
             private static void CopyDatabaseIfNotExists(string dbPath)
             {
+                bool debug = false;
+                if (debug)
+                {
+                    File.Delete(dbPath); 
+                }
                 if (!File.Exists(dbPath))
                 {
                     var existingDb = NSBundle.MainBundle.PathForResource("eLiDAR", "sqlite");

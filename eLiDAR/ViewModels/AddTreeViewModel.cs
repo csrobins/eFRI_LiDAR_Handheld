@@ -237,7 +237,7 @@ namespace eLiDAR.ViewModels {
             }
             set
             {
-                SetProperty(ref _selectedCrownClass, value);
+                SetProperty(ref _selectedStemQuality, value);
                 _tree.STEMQUALITYCODE = _selectedStemQuality.ID;
 
             }

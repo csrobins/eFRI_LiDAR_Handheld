@@ -105,7 +105,7 @@ namespace eLiDAR.ViewModels
             }
             
         }
-        public int QUAD1
+        public double QUAD1
         {
             get => _vegetation.QUAD1;
             set
@@ -116,7 +116,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums(); 
             }
         }
-        public int QUAD2
+        public double QUAD2
         {
             get => _vegetation.QUAD2;
             set
@@ -126,7 +126,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD3
+        public double QUAD3
         {
             get => _vegetation.QUAD3;
             set
@@ -136,7 +136,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD4
+        public double QUAD4
         {
             get => _vegetation.QUAD4;
             set
@@ -146,7 +146,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int ELCLAYER3
+        public double ELCLAYER3
         {
             get => _vegetation.ELCLAYER3;
             set
@@ -156,7 +156,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public int ELCLAYER4
+        public double ELCLAYER4
         {
             get => _vegetation.ELCLAYER4;
             set
@@ -166,7 +166,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public int ELCLAYER5
+        public double ELCLAYER5
         {
             get => _vegetation.ELCLAYER5;
             set
@@ -176,7 +176,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public int ELCLAYER6
+        public double ELCLAYER6
         {
             get => _vegetation.ELCLAYER6;
             set
@@ -186,7 +186,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public int ELCLAYER7
+        public double ELCLAYER7
         {
             get => _vegetation.ELCLAYER7;
             set
@@ -206,7 +206,7 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-        public int QUAD1_ELC4
+        public double QUAD1_ELC4
         {
             get => _vegetation.QUAD1_ELC4;
             set
@@ -217,7 +217,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD2_ELC4
+        public double QUAD2_ELC4
         {
             get => _vegetation.QUAD2_ELC4;
             set
@@ -229,7 +229,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public int QUAD3_ELC4
+        public double QUAD3_ELC4
         {
             get => _vegetation.QUAD3_ELC4;
             set
@@ -240,7 +240,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD4_ELC4
+        public double QUAD4_ELC4
         {
             get => _vegetation.QUAD4_ELC4;
             set
@@ -251,7 +251,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD1_ELC5
+        public double QUAD1_ELC5
         {
             get => _vegetation.QUAD1_ELC5;
             set
@@ -262,7 +262,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD2_ELC5
+        public double QUAD2_ELC5
         {
             get => _vegetation.QUAD2_ELC5;
             set
@@ -273,7 +273,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD3_ELC5
+        public double QUAD3_ELC5
         {
             get => _vegetation.QUAD3_ELC5;
             set
@@ -284,7 +284,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD4_ELC5
+        public double QUAD4_ELC5
         {
             get => _vegetation.QUAD4_ELC5;
             set
@@ -295,7 +295,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD1_ELC6
+        public double QUAD1_ELC6
         {
             get => _vegetation.QUAD1_ELC6;
             set
@@ -306,7 +306,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD2_ELC6
+        public double QUAD2_ELC6
         {
             get => _vegetation.QUAD2_ELC6;
             set
@@ -317,7 +317,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD3_ELC6
+        public double QUAD3_ELC6
         {
             get => _vegetation.QUAD3_ELC6;
             set
@@ -328,7 +328,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD4_ELC6
+        public double QUAD4_ELC6
         {
             get => _vegetation.QUAD4_ELC6;
             set
@@ -339,7 +339,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD1_ELC7
+        public double QUAD1_ELC7
         {
             get => _vegetation.QUAD1_ELC7;
             set
@@ -350,7 +350,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD2_ELC7
+        public double QUAD2_ELC7
         {
             get => _vegetation.QUAD2_ELC7;
             set
@@ -361,7 +361,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD3_ELC7
+        public double QUAD3_ELC7
         {
             get => _vegetation.QUAD3_ELC7;
             set
@@ -372,7 +372,7 @@ namespace eLiDAR.ViewModels
                 UpdateSums();
             }
         }
-        public int QUAD4_ELC7
+        public double QUAD4_ELC7
         {
             get => _vegetation.QUAD4_ELC7;
             set

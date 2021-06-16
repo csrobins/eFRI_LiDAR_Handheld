@@ -39,8 +39,10 @@
                                 <RowDefinition Height="65*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20*" />
-                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0" Spacing="1">
                                 <StackLayout Orientation="Horizontal">
@@ -112,6 +114,64 @@
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                             </StackLayout>
+                            <StackLayout Grid.Column="2" Spacing="1">
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Matrix Colour"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding MATRIXCOLOUR}"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Mottle Colour"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding MOTTLECOLOUR}"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Grid.Column="3" Spacing="1">
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Structure"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding STRUCTURE}"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                                    <Label
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Pore Pattrern"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Font="20"
+                                        HorizontalTextAlignment="End"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding POREPATTERNCODE}"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </StackLayout>
+
+                          
 
                             <!--<Button Grid.Column="2" Text="Stem Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>-->
                         </Grid>

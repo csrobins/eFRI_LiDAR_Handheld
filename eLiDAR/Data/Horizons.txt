@@ -1,7 +1,8 @@
 LM
 L
 F
-H 
+H
+LFH
 Hi
 Of
 Of1
@@ -20,6 +21,7 @@ Aeb
 Ahb
 Ahe
 Ap
+Ag
 Bhf
 Bhf2
 Bfb
@@ -82,3 +84,15 @@ IICkgj
 IICkj
 IICkjg
 IICkjgj
+R
+W
+IIBm
+IIBg
+IIBC
+Om3
+Om4
+Oh3
+Oh4
+Ape
+Bm3
+Bm4

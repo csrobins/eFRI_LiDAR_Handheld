@@ -27,6 +27,18 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
+                    Text="Substrate Person" />
+                <Picker
+                    Title="Substrate Person"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPerson}"
+                    SelectedItem="{Binding SelectedSubstratePerson, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
                     Text="Date" />
                 <DatePicker
                     x:Name="txtDate"

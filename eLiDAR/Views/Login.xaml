@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.Login"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Login"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="12">
+            <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextTitle}"
+                Text="Login to continue using eVSN." />
+            <Entry
+                HorizontalOptions="FillAndExpand"
+                IsReadOnly="false"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding Username}"
+                Placeholder="Username"/>
+            <Entry
+                HorizontalOptions="FillAndExpand"
+                IsReadOnly="false"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding Pwd}"
+                IsPassword="True" 
+                Placeholder="Password"/>
+            <Button
+                Style="{StaticResource FormButtonStyle}"
+                Command="{Binding LoginCommand}"
+                Text="Login"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

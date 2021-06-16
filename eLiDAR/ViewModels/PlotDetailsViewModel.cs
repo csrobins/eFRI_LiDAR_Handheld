@@ -97,6 +97,7 @@ namespace eLiDAR.ViewModels {
         }
         async Task DoValidate()
         {
+            _ = UpdatePlot(); 
             FullValidater _validater = new FullValidater(_plot);
             if (_validater.ValidAll())
             {

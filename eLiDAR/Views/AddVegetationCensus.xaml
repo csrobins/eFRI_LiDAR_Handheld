@@ -12,24 +12,11 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="12">
             <local:VegetationCensusView />
-      <!--      <Button
-                x:Name="SubmitButton"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                Command="{Binding AddCommand}"
-                Text="Save Vegetation"
-                TextColor="White" />  -->
-            <!--<Label
-                x:Name="ViewLbl"
-                FontSize="15"
-                HorizontalOptions="EndAndExpand"
-                IsVisible="{Binding IsViewAll}"
-                Text="View All Veg"
-                TextColor="Black">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />
-                </Label.GestureRecognizers>
-            </Label>-->
+     
+            <Button
+                Style ="{StaticResource FormButtonStyle }"
+                Command="{Binding DeleteCommand}"
+                Text="Delete" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

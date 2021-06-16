@@ -47,18 +47,25 @@ namespace eLiDAR.API
         HttpClient _client;
         private bool _isSuccess = true;
         private string _msg;
+       // private Constants cont = new Constants();
+        private Utilities.Utils util = new Utilities.Utils();
+        private string APIGetUrl;
+        private string APIPutUrl;
+        private string APIPostUrl;
 
-      //  public List<PROJECT> Items { get; private set; }
+        //  public List<PROJECT> Items { get; private set; }
 
         public RestService()
         {
             _client = new HttpClient();
+            APIGetUrl = util.GetURI;
+            APIPutUrl = util.PutURI;
+            APIPostUrl = util.PostURI;
         }
         public bool IsSuccess
         {
             get { return _isSuccess; }
             set { _isSuccess = value; }
-
         }
         public string Msg
         {
@@ -70,7 +77,7 @@ namespace eLiDAR.API
         public async Task<List<PROJECT>> GetCurrentProjectListAsync(string table,string filter)
         {
             List<PROJECT> Items = new List<PROJECT>();
-             var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+             var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -105,12 +112,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -153,7 +160,7 @@ namespace eLiDAR.API
         public async Task<List<PLOT>> GetCurrentPlotListAsync(string table, string filter)
         {
             List<PLOT> Items = new List<PLOT>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -190,12 +197,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -220,7 +227,7 @@ namespace eLiDAR.API
         public async Task<List<TREE>> GetCurrentTreeListAsync(string table, string filter)
         {
         List<TREE> Items = new List<TREE>();
-        var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+        var uri = new Uri(string.Format(APIGetUrl, table, filter));
         try
         {
             var response = await _client.GetAsync(uri);
@@ -256,12 +263,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -286,7 +293,7 @@ namespace eLiDAR.API
         public async Task<List<STEMMAP>> GetCurrentSTEMMAPListAsync(string table, string filter)
         {
             List<STEMMAP> Items = new List<STEMMAP>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -321,12 +328,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -350,7 +357,7 @@ namespace eLiDAR.API
         public async Task<List<ECOSITE>> GetCurrentECOSITEListAsync(string table, string filter)
         {
             List<ECOSITE> Items = new List<ECOSITE>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -385,12 +392,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -414,7 +421,7 @@ namespace eLiDAR.API
         public async Task<List<SOIL>> GetCurrentSOILListAsync(string table, string filter)
         {
             List<SOIL> Items = new List<SOIL>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -449,12 +456,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -478,7 +485,7 @@ namespace eLiDAR.API
         public async Task<List<SMALLTREE>> GetCurrentSMALLTREEListAsync(string table, string filter)
         {
             List<SMALLTREE> Items = new List<SMALLTREE>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -513,12 +520,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -542,7 +549,7 @@ namespace eLiDAR.API
         public async Task<List<VEGETATION>> GetCurrentVEGETATIONListAsync(string table, string filter)
         {
             List<VEGETATION> Items = new List<VEGETATION>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -577,12 +584,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -606,7 +613,7 @@ namespace eLiDAR.API
         public async Task<List<DEFORMITY>> GetCurrentDEFORMITYListAsync(string table, string filter)
         {
             List<DEFORMITY> Items = new List<DEFORMITY>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -641,12 +648,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -670,7 +677,7 @@ namespace eLiDAR.API
         public async Task<List<DWD>> GetCurrentDWDListAsync(string table, string filter)
         {
             List<DWD> Items = new List<DWD>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -705,12 +712,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -733,7 +740,7 @@ namespace eLiDAR.API
         public async Task<List<PERSON>> GetCurrentPersonListAsync(string table, string filter)
         {
             List<PERSON> Items = new List<PERSON>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -770,12 +777,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -798,7 +805,7 @@ namespace eLiDAR.API
         public async Task<List<PHOTO>> GetCurrentPhotoListAsync(string table, string filter)
         {
             List<PHOTO> Items = new List<PHOTO>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -833,12 +840,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)
@@ -861,7 +868,7 @@ namespace eLiDAR.API
         public async Task<List<VEGETATIONCENSUS>> GetCurrentVegetationCensusListAsync(string table, string filter)
         {
             List<VEGETATIONCENSUS> Items = new List<VEGETATIONCENSUS>();
-            var uri = new Uri(string.Format(Constants.APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -897,12 +904,12 @@ namespace eLiDAR.API
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
-                    var uri = new Uri(string.Format(Constants.APIPostUrl, table));
+                    var uri = new Uri(string.Format(APIPostUrl, table));
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
-                    var uri = new Uri(string.Format(Constants.APIPutUrl, table));
+                    var uri = new Uri(string.Format(APIPutUrl, table));
                     response = await _client.PutAsync(uri, content);
                 }
                 if (response.IsSuccessStatusCode)

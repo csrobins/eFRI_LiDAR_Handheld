@@ -30,6 +30,8 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListMoistureRegime { get; set; }
         public List<PickerItemsString> ListDepthClass { get; set; }
         public List<PickerItemsString> ListDeposition { get; set; }
+        public List<PickerItemsString> ListPerson { get; set; }
+
 
         public List<PickerItems> ListHumusForm { get; set; }
         private bool _AllowToLeave = false;
@@ -52,6 +54,7 @@ namespace eLiDAR.ViewModels {
             ListHumusForm = PickerService.HumusFormItems().ToList();
             ListDepthClass = PickerService.DepthClassItems().ToList();
             ListDeposition = PickerService.DepositionItems().ToList();
+            ListPerson = PickerService.FillPersonPicker(_ecositeRepository.GetPersonList()).OrderBy(c => c.NAME).ToList();
             ImageCommand = new Command(async () => await ShowImage());
             OnAppearingCommand = new Command(() => OnAppearing());
             OnDisappearingCommand = new Command(() => OnDisappearing());
@@ -122,6 +125,21 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeComments(_ecosite));
+        }
+
+        private PickerItemsString _selectedSubstratePerson = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedSubstratePerson
+        {
+            get
+            {
+                _selectedSubstratePerson = PickerService.GetItem(ListPerson, _ecosite.SUBSTRATEPERSON);
+                return _selectedSubstratePerson;
+            }
+            set
+            {
+                SetProperty(ref _selectedSubstratePerson, value);
+                _ecosite.SUBSTRATEPERSON = _selectedSubstratePerson.ID;
+            }
         }
         private PickerItems _selectedDrainage = new PickerItems { ID = 0, NAME = "" };
         public PickerItems SelectedDrainage

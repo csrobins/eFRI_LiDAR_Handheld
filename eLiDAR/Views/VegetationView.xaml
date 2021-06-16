@@ -53,7 +53,7 @@
                     <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextTitle}"
-                        Text="Quadrants % Cover" />
+                        Text="Quadrants % Cover &#x0a; " />
 
                     <StackLayout Orientation="Horizontal" Spacing="5">
                         <StackLayout >
@@ -314,7 +314,7 @@
                     <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextTitle}"
-                        Text="ELC Layer % Cover (sum across the quadrants)"/>
+                        Text="ELC Layer % Cover&#x0a;(sum across the quadrants)"/>
                     <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextBody}"
@@ -351,7 +351,7 @@
                     <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextBody}"
-                        Text="ELC Layer 6 (herbs, sedges, grasses etc.)" />
+                        Text="ELC Layer 6 (herbs, sedges, grass)" />
                     <Entry
                         x:Name="txtELClayer6"
                         HorizontalOptions="FillAndExpand"

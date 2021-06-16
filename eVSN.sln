@@ -188,10 +188,14 @@ Global
 		{375010A4-6FE3-4AAF-B14D-60786BB4425D}.Release|x86.Build.0 = Release|Any CPU
 		{375010A4-6FE3-4AAF-B14D-60786BB4425D}.Release|x86.Deploy.0 = Release|Any CPU
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|Any CPU.ActiveCfg = Ad-Hoc|iPhone
+		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|Any CPU.Build.0 = Ad-Hoc|iPhone
+		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|Any CPU.Deploy.0 = Ad-Hoc|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|ARM.ActiveCfg = Ad-Hoc|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|ARM64.ActiveCfg = Ad-Hoc|iPhoneSimulator
+		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|ARM64.Build.0 = Ad-Hoc|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhone.Deploy.0 = Ad-Hoc|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Ad-Hoc|iPhoneSimulator.Deploy.0 = Debug|iPhoneSimulator
@@ -208,6 +212,7 @@ Global
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.AppStore|x86.ActiveCfg = AppStore|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{8E2736E4-A040-426B-87BD-464D2D47F034}.Debug|Any CPU.Deploy.0 = Debug|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Debug|ARM64.ActiveCfg = Debug|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Debug|iPhone.ActiveCfg = Debug|iPhone
@@ -222,6 +227,7 @@ Global
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Release|ARM64.ActiveCfg = Release|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Release|iPhone.ActiveCfg = Release|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Release|iPhone.Build.0 = Release|iPhone
+		{8E2736E4-A040-426B-87BD-464D2D47F034}.Release|iPhone.Deploy.0 = Release|iPhone
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{8E2736E4-A040-426B-87BD-464D2D47F034}.Release|x64.ActiveCfg = Release|iPhoneSimulator

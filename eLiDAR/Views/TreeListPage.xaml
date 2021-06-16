@@ -113,7 +113,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding DIRECTTOTALHEIGHT}"
+                                        Text="{Binding HEIGHT}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
