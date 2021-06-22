@@ -74,6 +74,8 @@
                     <x:String>SC</x:String>
                     <x:String>SiC</x:String>
                     <x:String>C</x:String>
+                    <x:String>BR</x:String>
+                    <x:String>CF</x:String>
                 </Picker.Items>
             </Picker>
             <Label

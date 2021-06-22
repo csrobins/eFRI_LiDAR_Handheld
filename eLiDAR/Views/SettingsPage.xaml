@@ -260,8 +260,7 @@
                             Text="Last Synched" />
                         <DatePicker
                         x:Name="txtDate"
-                        Date="{Binding LastSynched}"
-                        Format="MMMM dd, yyyy h:mm:ss tt"
+                        Date="{Binding LastSynched , StringFormat='{0:MMMM dd, yyyy  h:mm:ss tt}'}"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding AllowDateChange}"
                         MinimumDate="01-Jan-2020"

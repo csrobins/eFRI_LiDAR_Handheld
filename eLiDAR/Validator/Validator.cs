@@ -674,8 +674,8 @@ namespace eLiDAR.Validator
                 RuleFor(c => c).Must(c => c.DEPTHTOCARBONATES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to carbonates must be < depth to bedrock.");
                 RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to seepage must be < depth to bedrock.");
                 RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to water table must be < depth to bedrock.");
-                RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Functional rooting must be < depth to bedrock.");
-                RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Max rooting depth must be < depth to bedrock.");
+            //    RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Functional rooting must be < depth to bedrock.");
+             //   RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Max rooting depth must be < depth to bedrock.");
                 RuleFor(c => c).Must(c => c.PITAZIMUTH >= 1 && c.PITAZIMUTH <= 360).WithMessage("Pit azimuth should be between 1 and 360.");
                 RuleFor(c => c).Must(c => c.PITDISTANCE >= 0 && c.PITDISTANCE  <= 20).WithMessage("Pit distance should be <= 20m.");
 
