@@ -17,6 +17,8 @@ namespace eLiDAR.ViewModels {
         public List<PickerItems> ListCanopyOrigin { get; set; }
         public List<PickerItemsString> ListMaturityClass { get; set; }
         public List<PickerItems> ListDisturbanceCode { get; set; }
+        public List<PickerItemsString> ListMaturityClassRationale { get; set; }
+
         public StandInfoViewModel(INavigation navigation, PLOT _thisplot)
         {
             _navigation = navigation;
@@ -31,6 +33,8 @@ namespace eLiDAR.ViewModels {
             ListCanopyStructure = PickerService.CanopyStructureItems().OrderBy(c => c.NAME).ToList();
             ListMaturityClass = PickerService.MaturityClassItems().OrderBy(c => c.NAME).ToList();
             ListDisturbanceCode = PickerService.DisturbanceItems().OrderBy(c => c.NAME).ToList();
+            ListMaturityClassRationale = PickerService.MaturityClassRationaleItems().ToList();
+
         }
         public string Title
         {
@@ -202,6 +206,34 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedMaturityClass2, value);
                 _plot.MATURITYCLASSCODE2 = _selectedMaturityClass2.ID;
+            }
+        }
+        private PickerItemsString _selectedMaturityClassRationale1 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedMaturityClassRationale1
+        {
+            get
+            {
+                _selectedMaturityClassRationale1 = PickerService.GetItem(ListMaturityClassRationale, _plot.MATURITYCLASSRATIONALE1);
+                return _selectedMaturityClassRationale1;
+            }
+            set
+            {
+                SetProperty(ref _selectedMaturityClassRationale1, value);
+                _plot.MATURITYCLASSRATIONALE1 = _selectedMaturityClassRationale1.ID;
+            }
+        }
+        private PickerItemsString _selectedMaturityClassRationale2 = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedMaturityClassRationale2
+        {
+            get
+            {
+                _selectedMaturityClassRationale2 = PickerService.GetItem(ListMaturityClassRationale, _plot.MATURITYCLASSRATIONALE2);
+                return _selectedMaturityClassRationale2;
+            }
+            set
+            {
+                SetProperty(ref _selectedMaturityClassRationale2, value);
+                _plot.MATURITYCLASSRATIONALE2 = _selectedMaturityClassRationale2.ID;
             }
         }
         public int PERCENTAFFECTED

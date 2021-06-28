@@ -100,7 +100,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding DBH}"
+                                        Text="{Binding DBH , StringFormat='{0:F1}'}"
                                         TextColor="{Binding DBHColor}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
@@ -113,7 +113,7 @@
                                     <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HEIGHT}"
+                                        Text="{Binding HEIGHT, StringFormat='{0:F2}'}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -140,7 +140,7 @@
                                     <Label
                                         HorizontalTextAlignment="End"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding DISTANCE}"
+                                        Text="{Binding DISTANCE , StringFormat='{0:F2}'}"
                                         TextColor="{Binding StemMapColor}"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>

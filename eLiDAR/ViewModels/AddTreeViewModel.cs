@@ -151,7 +151,7 @@ namespace eLiDAR.ViewModels {
             if (_issaved)
             {
                 _AllowtoLeave = true;
-                await _navigation.PushAsync(new TreeAge(_tree.TREEID));
+                await _navigation.PushAsync(new TreeAge(_tree));
             }
 
         }

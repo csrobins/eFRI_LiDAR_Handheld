@@ -143,9 +143,13 @@ namespace eLiDAR.ViewModels
             get => _dwd.DOWNWOODYDEBRISLENGTH;
             set
             {
-                _dwd.DOWNWOODYDEBRISLENGTH = value;
-                NotifyPropertyChanged("LENGTH");
-                IsChanged = true;
+                if (Math.Abs(LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _dwd.DOWNWOODYDEBRISLENGTH = value;
+                    NotifyPropertyChanged("LENGTH");
+                    IsChanged = true;
+                }
             }
         }
 
@@ -218,9 +222,13 @@ namespace eLiDAR.ViewModels
             get => _dwd.ACCUMULATIONLENGTH;
             set
             {
-                _dwd.ACCUMULATIONLENGTH = value;
-                NotifyPropertyChanged("ACCUM_LENGTH");
-                IsChanged = true;
+                if (Math.Abs(ACCUM_LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _dwd.ACCUMULATIONLENGTH = value;
+                    NotifyPropertyChanged("ACCUM_LENGTH");
+                    IsChanged = true;
+                }
             }
         }
         public double ACCUM_DEPTH
@@ -228,9 +236,13 @@ namespace eLiDAR.ViewModels
             get => _dwd.ACCUMULATIONDEPTH;
             set
             {
-                _dwd.ACCUMULATIONDEPTH = value;
-                NotifyPropertyChanged("ACCUM_DEPTH");
-                IsChanged = true;
+                if (Math.Abs(ACCUM_DEPTH - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _dwd.ACCUMULATIONDEPTH = value;
+                    NotifyPropertyChanged("ACCUM_DEPTH");
+                    IsChanged = true;
+                }
             }
         }
         public int PERCENT_CONIFER

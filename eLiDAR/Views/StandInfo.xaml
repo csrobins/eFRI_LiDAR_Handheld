@@ -124,12 +124,15 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Maturity Class Rationale 1" />
-                <Entry
-                    x:Name="txtMaturityClassRationale1"
+                <Picker
+                    x:Name="txtmaturityclassRationale1"
+                    Title="Maturity Class Rationale 1"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Maturity Class Rationale"
+                    ItemsSource="{Binding ListMaturityClassRationale}"
+                    SelectedItem="{Binding SelectedMaturityClassRationale1, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding MATURITYCLASSRATIONALE1}" />
+                    TitleColor="{StaticResource AccentColor}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -148,12 +151,15 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Maturity Class Rationale 2" />
-                <Entry
-                    x:Name="txtMaturityClassRationale2"
+                <Picker
+                    x:Name="txtmaturityclassRationale2"
+                    Title="Maturity Class Rationale 2"
                     HorizontalOptions="FillAndExpand"
-                    Placeholder="Maturity Class Rationale 2"
+                    ItemsSource="{Binding ListMaturityClassRationale}"
+                    SelectedItem="{Binding SelectedMaturityClassRationale2, Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
-                    Text="{Binding MATURITYCLASSRATIONALE2}" />
+                    TitleColor="{StaticResource AccentColor}"/>
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"

@@ -78,9 +78,13 @@ namespace eLiDAR.ViewModels
             get => _stemmap.DISTANCE;
             set
             {
-                _stemmap.DISTANCE = value;
-                NotifyPropertyChanged("DISTANCE");
-                IsChanged = true;
+                if (Math.Abs(DISTANCE - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _stemmap.DISTANCE = value;
+                    NotifyPropertyChanged("DISTANCE");
+                    IsChanged = true;
+                }
             }
         }
 
@@ -89,9 +93,13 @@ namespace eLiDAR.ViewModels
             get => _stemmap.CROWNWIDTH1;
             set
             {
-                _stemmap.CROWNWIDTH1 = value;
-                NotifyPropertyChanged("CROWN_AXIS_LONG");
-                IsChanged = true;
+                if (Math.Abs(CROWN_AXIS_LONG - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _stemmap.CROWNWIDTH1 = value;
+                    NotifyPropertyChanged("CROWN_AXIS_LONG");
+                    IsChanged = true;
+                }
             }
         }
         public double CROWN_AXIS_SHORT
@@ -99,9 +107,13 @@ namespace eLiDAR.ViewModels
             get => _stemmap.CROWNWIDTH2;
             set
             {
-                _stemmap.CROWNWIDTH2 = value;
-                NotifyPropertyChanged("CROWN_AXIS_SHORT");
-                IsChanged = true;
+                if (Math.Abs(CROWN_AXIS_SHORT - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _stemmap.CROWNWIDTH2 = value;
+                    NotifyPropertyChanged("CROWN_AXIS_SHORT");
+                    IsChanged = true;
+                }
             }
         }
         public int OFFSET_AZIMUTH
@@ -120,9 +132,12 @@ namespace eLiDAR.ViewModels
             get => _stemmap.CROWNOFFSETDISTANCE;
             set
             {
-                _stemmap.CROWNOFFSETDISTANCE = value;
-                NotifyPropertyChanged("OFFSET_DISTANCE");
-                IsChanged = true;
+                if (Math.Abs(OFFSET_DISTANCE - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+                    _stemmap.CROWNOFFSETDISTANCE = value;
+                    NotifyPropertyChanged("OFFSET_DISTANCE");
+                    IsChanged = true;
+                }
             }
         }
 

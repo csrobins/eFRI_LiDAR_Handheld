@@ -84,6 +84,13 @@ namespace eLiDAR.ViewModels {
                 await _navigation.PopAsync();
             }
         }
+        public bool DoCrownWidth
+        {
+            get =>  _stemMapRepository.IsRequiresCrownWidth(_stemmap.TREEID);
+            set
+            {
+            }
+        }
         public string Title
         {
             get => "Stem Map details for tree " + _stemMapRepository.GetTitle(_fk);

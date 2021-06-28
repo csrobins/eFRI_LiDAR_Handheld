@@ -80,9 +80,13 @@ namespace eLiDAR.ViewModels
             get => _soil.DEPTHFROM;
             set
             {
-                _soil.DEPTHFROM = value;
-                NotifyPropertyChanged("FROM");
-                IsChanged = true;
+                if (Math.Abs(FROM - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _soil.DEPTHFROM = value;
+                    NotifyPropertyChanged("FROM");
+                    IsChanged = true;
+                }
             }
         }
         private bool _isorganic; 
@@ -113,9 +117,13 @@ namespace eLiDAR.ViewModels
             get => _soil.DEPTHTO;
             set
             {
-                _soil.DEPTHTO = value;
-                NotifyPropertyChanged("TO");
-                IsChanged = true;
+                if (Math.Abs(TO - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
+                    _soil.DEPTHTO = value;
+                    NotifyPropertyChanged("TO");
+                    IsChanged = true;
+                }
             }
         }
         public int HORIZONNUMBER

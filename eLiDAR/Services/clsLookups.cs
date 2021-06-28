@@ -631,6 +631,7 @@ namespace eLiDAR.Services
                      new PickerItems() {ID = 1091, NAME = "1091-Sorbus species"},
                      new PickerItems() {ID = 174, NAME = "174-Sour Red Cherry"},
                      new PickerItems() {ID = 1001, NAME = "1001-Striped Maple"},
+                     new PickerItems() {ID = 1001, NAME = "1002-Mountain Maple"},
                      new PickerItems() {ID = 30, NAME = "30-Sugar Maple"},
                      new PickerItems() {ID = 88, NAME = "88-Swamp White Oak"},
                      new PickerItems() {ID = 90, NAME = "90-Sweet Cherry"},
@@ -675,14 +676,14 @@ namespace eLiDAR.Services
                     new PickerItems() { ID = 1234, NAME = "1234" },
                     new PickerItems() { ID = 71, NAME = "71" },
                     new PickerItems() { ID = 19, NAME = "19" },
-                    new PickerItems() { ID = 23, NAME = "23" },
+                 
                     new PickerItems() { ID = 22, NAME = "22" },
                     new PickerItems() { ID = 1, NAME = "1" },
                     new PickerItems() { ID = 168, NAME = "168" },
                     new PickerItems() { ID = 47, NAME = "47" },
                     new PickerItems() { ID = 3, NAME = "3" },
                     new PickerItems() { ID = 70, NAME = "70" },
-                    new PickerItems() { ID = 117, NAME = "117" },
+       
                     new PickerItems() { ID = 1231, NAME = "1231" },
                     new PickerItems() { ID = 15, NAME = "15" },
                     new PickerItems() { ID = 139, NAME = "139" },
@@ -693,9 +694,9 @@ namespace eLiDAR.Services
                     new PickerItems() { ID = 903, NAME = "903" },
                     new PickerItems() { ID = 4, NAME = "4" },
                     new PickerItems() { ID = 124, NAME = "124" },
-                    new PickerItems() { ID = 33, NAME = "33" },
+         
                     new PickerItems() { ID = 1091, NAME = "1091" },
-                    new PickerItems() { ID = 1001, NAME = "1001" },
+                    new PickerItems() { ID = 1002, NAME = "1002" },
                     new PickerItems() { ID = 74, NAME = "74" },
                     new PickerItems() { ID = 990, NAME = "990" },
                     new PickerItems() { ID = 991, NAME = "991" },
@@ -725,14 +726,14 @@ namespace eLiDAR.Services
                     new PickerItems() { ID = 1234, NAME = "Black Willow" },
                     new PickerItems() { ID = 71, NAME = "Eastern Cottonwood" },
                     new PickerItems() { ID = 19, NAME = "Eastern Hemlock" },
-                    new PickerItems() { ID = 23, NAME = "Eastern Red Cedar" },
+        
                     new PickerItems() { ID = 22, NAME = "Eastern White Cedar" },
                     new PickerItems() { ID = 1, NAME = "Eastern White Pine" },
                     new PickerItems() { ID = 168, NAME = "Gray Birch" },
                     new PickerItems() { ID = 47, NAME = "Green/Red Ash" },
                     new PickerItems() { ID = 3, NAME = "Jack Pine" },
                     new PickerItems() { ID = 70, NAME = "Large-tooth Aspen" },
-                    new PickerItems() { ID = 117, NAME = "Manitoba Maple" },
+                  
                     new PickerItems() { ID = 1231, NAME = "Mccall's Willow" },
                     new PickerItems() { ID = 15, NAME = "Norway Spruce" },
                     new PickerItems() { ID = 139, NAME = "Pin Cherry" },
@@ -743,9 +744,11 @@ namespace eLiDAR.Services
                     new PickerItems() { ID = 903, NAME = "Salix tree species" },
                     new PickerItems() { ID = 4, NAME = "Scotch Pine" },
                     new PickerItems() { ID = 124, NAME = "Shagbark Hickory" },
-                    new PickerItems() { ID = 33, NAME = "Silver Maple" },
+                  
                     new PickerItems() { ID = 1091, NAME = "Sorbus species" },
-                    new PickerItems() { ID = 1001, NAME = "Striped Maple" },
+                  
+                    new PickerItems() { ID = 1002, NAME = "Mountain Maple" },
+
                     new PickerItems() { ID = 74, NAME = "Trembling Aspen" },
                     new PickerItems() { ID = 990, NAME = "Unknown Conifer" },
                     new PickerItems() { ID = 991, NAME = "Unknown Hardwood" },
@@ -773,14 +776,14 @@ namespace eLiDAR.Services
                     new PickerItems() { ID = 1234, NAME = "1234-Black Willow" },
                     new PickerItems() { ID = 71, NAME = "71-Eastern Cottonwood" },
                     new PickerItems() { ID = 19, NAME = "19-Eastern Hemlock" },
-                    new PickerItems() { ID = 23, NAME = "23-Eastern Red Cedar" },
+         
                     new PickerItems() { ID = 22, NAME = "22-Eastern White Cedar" },
                     new PickerItems() { ID = 1, NAME = "1-Eastern White Pine" },
                     new PickerItems() { ID = 168, NAME = "168-Gray Birch" },
                     new PickerItems() { ID = 47, NAME = "47-Green/Red Ash" },
                     new PickerItems() { ID = 3, NAME = "3-Jack Pine" },
                     new PickerItems() { ID = 70, NAME = "70-Large-tooth Aspen" },
-                    new PickerItems() { ID = 117, NAME = "117-Manitoba Maple" },
+
                     new PickerItems() { ID = 1231, NAME = "1231-Mccall's Willow" },
                     new PickerItems() { ID = 15, NAME = "15-Norway Spruce" },
                     new PickerItems() { ID = 139, NAME = "139-Pin Cherry" },
@@ -791,9 +794,9 @@ namespace eLiDAR.Services
                     new PickerItems() { ID = 903, NAME = "903-Salix tree species" },
                     new PickerItems() { ID = 4, NAME = "4-Scotch Pine" },
                     new PickerItems() { ID = 124, NAME = "124-Shagbark Hickory" },
-                    new PickerItems() { ID = 33, NAME = "33-Silver Maple" },
+     
                     new PickerItems() { ID = 1091, NAME = "1091-Sorbus species" },
-                    new PickerItems() { ID = 1001, NAME = "1001-Striped Maple" },
+                    new PickerItems() { ID = 1002, NAME = "1002-Mountain Maple" },
                     new PickerItems() { ID = 74, NAME = "74-Trembling Aspen" },
                     new PickerItems() { ID = 990, NAME = "990-Unknown Conifer" },
                     new PickerItems() { ID = 991, NAME = "991-Unknown Hardwood" },
@@ -1794,6 +1797,8 @@ namespace eLiDAR.Services
                 new PickerItemsString() {ID = "F", NAME = "F-Fermented"},
                 new PickerItemsString() {ID = "H", NAME = "H-Humus"},
                 new PickerItemsString() {ID = "L", NAME = "L-Litter"},
+                new PickerItemsString() {ID = "LF", NAME = "LF-Litter/Fermented"},
+                new PickerItemsString() {ID = "FH", NAME = "FH-Fermented/Humus"},
                 new PickerItemsString() {ID = "LFH", NAME = "LFH-Litter/Fermented/Humus"},
                 new PickerItemsString() {ID = "LM", NAME = "LM-Live Moss"},
                 new PickerItemsString() {ID = "R", NAME = "R-Consolidated Bedrock"},
@@ -1827,6 +1832,44 @@ namespace eLiDAR.Services
                 new PickerItemsString() {ID = "2", NAME = "2-Second occurrence of that horizon"},
                 new PickerItemsString() {ID = "3", NAME = "3-Third occurrence of that horizon"},
                 new PickerItemsString() {ID = "4", NAME = "4-Fourth occurrence of that horizon"}
+            };
+            return list;
+        }
+
+        public static List<PickerItemsString> MaturityClassRationaleItems()
+        {
+            var list = new List<PickerItemsString>()
+            {
+                new PickerItemsString() {ID = null , NAME = "null"},
+                new PickerItemsString() {ID = "Site has no capacity for tree growth (i.e., trees of any species cannot reach a minimum height of 5 m at maturity and the site will not achieve a crown closure of at least 10%)" , NAME = "N - Site has no capacity for tree growth (i.e., trees of any species cannot reach a minimum height of 5 m at maturity and the site will not achieve a crown closure of at least 10%)"},
+                new PickerItemsString() {ID = "Site has capacity for tree growth but no trees are present, or they are very young and  not yet well established" , NAME = "R - Site has capacity for tree growth but no trees are present, or they are very young and  not yet well established"},
+                new PickerItemsString() {ID = "Young dominant cohort has not achieved crown closure" , NAME = "G - Young dominant cohort has not achieved crown closure"},
+                new PickerItemsString() {ID = "Recruitment of additional species may be occurring" , NAME = "G - Recruitment of additional species may be occurring"},
+                new PickerItemsString() {ID = "Height and diameter of individual trees are increasing (note: trees in this context can include stems <7.1 cm DBH, as well as larger, tallied stems)" , NAME = "G - Height and diameter of individual trees are increasing (note: trees in this context can include stems <7.1 cm DBH, as well as larger, tallied stems)"},
+                new PickerItemsString() {ID = "Competition‐induced tree mortality is not occurring" , NAME = "G - Competition‐induced tree mortality is not occurring"},
+                new PickerItemsString() {ID = "Plot (and associated stand) basal area is increasing" , NAME = "G - Plot (and associated stand) basal area is increasing"},
+                new PickerItemsString() {ID = "Canopy height differentiation is minimal" , NAME = "G - Canopy height differentiation is minimal"},
+                new PickerItemsString() {ID = "Dominant cohort has achieved crown closure" , NAME = "S - Dominant cohort has achieved crown closure"},
+                new PickerItemsString() {ID = "All available growing space is occupied, so no additional recruitment into main canopy" , NAME = "S - All available growing space is occupied, so no additional recruitment into main canopy"},
+                new PickerItemsString() {ID = "Height and diameter of individual trees is increasing" , NAME = "S - Height and diameter of individual trees is increasing"},
+                new PickerItemsString() {ID = "Competition‐induced mortality is occurring, i.e., of intermediate and suppressed crown classes" , NAME = "S - Competition‐induced mortality is occurring, i.e., of intermediate and suppressed crown classes"},
+                new PickerItemsString() {ID = "Plot (and associated stand) basal area is relatively constant" , NAME = "S - Plot (and associated stand) basal area is relatively constant"},
+                new PickerItemsString() {ID = "Canopy height differentiation is well‐developed (dominant, codominant, and intermediate crown classes are distinct)" , NAME = "S - Canopy height differentiation is well‐developed (dominant, codominant, and intermediate crown classes are distinct)"},
+                new PickerItemsString() {ID = "Height to live foliage is increasing" , NAME = "S - Height to live foliage is increasing"},
+                new PickerItemsString() {ID = "Small gaps are developing in the overstory" , NAME = "O - Small gaps are developing in the overstory"},
+                new PickerItemsString() {ID = "Recruitment is occurring" , NAME = "O - Recruitment is occurring"},
+                new PickerItemsString() {ID = "Height growth is minimal" , NAME = "O - Height growth is minimal"},
+                new PickerItemsString() {ID = "Some mortality is occurring in the dominant and codominant overstory" , NAME = "O - Some mortality is occurring in the dominant and codominant overstory"},
+                new PickerItemsString() {ID = "Decay is evident on living stems" , NAME = "O - Decay is evident on living stems"},
+                new PickerItemsString() {ID = "Plot (and associated stand) basal area is marginally declining" , NAME = "O - Plot (and associated stand) basal area is marginally declining"},
+                new PickerItemsString() {ID = "Crown deformities are evident (e.g., drooping crown, flat‐topping, dieback, dead tops)" , NAME = "D - Crown deformities are evident (e.g., drooping crown, flat‐topping, dieback, dead tops)"},
+                new PickerItemsString() {ID = "Recruitment is considerable" , NAME = "D - Recruitment is considerable"},
+                new PickerItemsString() {ID = "Appreciable mortality in the overstory is causing the formation of large gaps" , NAME = "D - Appreciable mortality in the overstory is causing the formation of large gaps"},
+                new PickerItemsString() {ID = "Down woody debris is accumulating" , NAME = "D - Down woody debris is accumulating"},
+                new PickerItemsString() {ID = "Plot (and associated stand) basal area is declining" , NAME = "D - Plot (and associated stand) basal area is declining"},
+                new PickerItemsString() {ID = "Widespread decay on living stems and wildlife use evident (e.g., cavities)" , NAME = "D - Widespread decay on living stems and wildlife use evident (e.g., cavities)"},
+                new PickerItemsString() {ID = "All‐aged tolerant hardwood plots (and associated stands) not well described by a single maturity class. May apply to other long‐lived species or sites that have not undergone a stand‐replacing disturbance" , NAME = "A- All‐aged tolerant hardwood plots (and associated stands) not well described by a single maturity class. May apply to other long‐lived species or sites that have not undergone a stand‐replacing disturbance"},
+                new PickerItemsString() {ID = "Plots (and associated stands) that have persisted for more than 200 years without a stand‐initiating disturbance and exhibit patches of different maturity classes" , NAME = "A - Plots (and associated stands) that have persisted for more than 200 years without a stand‐initiating disturbance and exhibit patches of different maturity classes"}
             };
             return list;
         }

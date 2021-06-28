@@ -121,7 +121,7 @@ namespace eLiDAR.Services
         void UpdateTree(STEMMAP stemmap);
         String GetTitle(string treeid);
         bool IsStemMapExists(string treeid);
-
+        bool IsRequiresCrownWidth(string treeid);
     }
 
     public interface IEcositeRepository
@@ -676,6 +676,10 @@ namespace eLiDAR.Services
         {
             return _databaseHelper.IsStemMapExists(treeid);
         }
+        public bool IsRequiresCrownWidth(string treeid) {
+            return _databaseHelper.RequiresCrownWidth(treeid);
+        }
+
     }
 
     public class EcositeRepository : IEcositeRepository

@@ -41,6 +41,7 @@
                 x:Name="txtCrownWidth1"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="Numeric"
+                IsEnabled="{Binding DoCrownWidth}"
                 Placeholder="Crown Width 1 (m)"
                 Style="{DynamicResource TextSubhead}"
                 Text="{Binding CROWN_AXIS_LONG}" />
@@ -51,6 +52,7 @@
             <Entry
                 x:Name="txtCrownWidth2"
                 HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding DoCrownWidth}"
                 Keyboard="Numeric"
                 Placeholder="Crown Width 2 (m)"
                 Style="{DynamicResource TextSubhead}"

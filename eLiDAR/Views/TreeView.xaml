@@ -23,17 +23,6 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
                     Text="Tree Attributes" />
-                <!--     <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="Section Number" />
-              <Entry
-                    x:Name="txtSection"
-                    HorizontalOptions="FillAndExpand"
-                    Keyboard="Numeric"
-                    Placeholder="Section number"
-                    Style="{DynamicResource TextSubhead}"
-                    Text="{Binding SECTION}" /> -->
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -275,6 +264,7 @@
                     TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
                         <x:String>Y</x:String>
+                        <x:String>N</x:String>
                     </Picker.Items>
                 </Picker>
                 <Label
@@ -337,7 +327,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Total Height (m)" />
+                    Text="Total Height (m)"/>
                 <Entry
                     x:Name="txtHt"
                     HorizontalOptions="FillAndExpand"

@@ -85,9 +85,22 @@ namespace eLiDAR.Helpers
             return tree.DISTANCE ;
         }
 
+        public bool RequiresCrownWidth(String id)
+        {
+            var tree = sqliteconnection.Query<TREE>("select * from TREE where TREEID = '" + id + "'").FirstOrDefault ();
+            if (tree.TREESTATUSCODE == "D" || tree.TREESTATUSCODE == "DV" || tree.BROKENTOP == "Y"  || tree.DECAYCLASS == 4 || tree.DECAYCLASS == 5)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public bool IsStemMapExists(String id)
         {
-            var stemmap = sqliteconnection.Query<STEMMAP>("select STEMMAPID from StemMap where TREEID = '" + id + "'").Count();
+            var stemmap = sqliteconnection.Query<STEMMAP>("select STEMMAPID from STEMMAP where TREEID = '" + id + "'").Count();
             if (stemmap > 0)
             {
                 return true;

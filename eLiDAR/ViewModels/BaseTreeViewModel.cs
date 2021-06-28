@@ -208,9 +208,12 @@ namespace eLiDAR.ViewModels
             get => _tree.LENGTH;
             set
             {
-                _tree.LENGTH = value;
-                NotifyPropertyChanged("LENGTH");
-                IsChanged = true;
+                if (Math.Abs(LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+                    _tree.LENGTH = value;
+                    NotifyPropertyChanged("LENGTH");
+                    IsChanged = true;
+                }
             }
         }
         public float HT_TO_DBH
@@ -218,9 +221,12 @@ namespace eLiDAR.ViewModels
             get => _tree.HEIGHTTODBH;
             set
             {
-                _tree.HEIGHTTODBH = value;
-                NotifyPropertyChanged("HT_TO_DBH");
-                IsChanged = true;
+                if (Math.Abs(HT_TO_DBH - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+                    _tree.HEIGHTTODBH = value;
+                    NotifyPropertyChanged("HT_TO_DBH");
+                    IsChanged = true;
+                }
             }
         }
 
@@ -240,9 +246,12 @@ namespace eLiDAR.ViewModels
             get => _tree.DIRECTTOTALHEIGHT;
             set
             {
-                _tree.DIRECTTOTALHEIGHT = value;
-                NotifyPropertyChanged("HT");
-                IsChanged = true;
+               if (Math.Abs(HT - value) >= 0.001) // Some threshold value suitable for your scenario
+                 {
+                    _tree.DIRECTTOTALHEIGHT = value;
+                    NotifyPropertyChanged("HT");
+                    IsChanged = true;
+                }
             }
         }
         public float OCUALRTOTALHEIGHT
@@ -250,9 +259,13 @@ namespace eLiDAR.ViewModels
             get => _tree.OCULARTOTALHEIGHT;
             set
             {
+            if (Math.Abs(OCUALRTOTALHEIGHT - value) >= 0.001) // Some threshold value suitable for your scenario
+                     {
+
                 _tree.OCULARTOTALHEIGHT = value;
                 NotifyPropertyChanged("OCUALRTOTALHEIGHT");
                 IsChanged = true;
+                }
             }
         }
         public float HEIGHTTODEADTIP
@@ -260,9 +273,13 @@ namespace eLiDAR.ViewModels
             get => _tree.HEIGHTTODEADTIP;
             set
             {
+                if (Math.Abs(HEIGHTTODEADTIP - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
                 _tree.HEIGHTTODEADTIP = value;
                 NotifyPropertyChanged("HEIGHTTODEADTIP");
                 IsChanged = true;
+                }
             }
         }
         public float DIRECTHEIGHTTOCONTLIVECROWN
@@ -270,9 +287,13 @@ namespace eLiDAR.ViewModels
             get => _tree.DIRECTHEIGHTTOCONTLIVECROWN;
             set
             {
+                if (Math.Abs(DIRECTHEIGHTTOCONTLIVECROWN - value) >= 0.001) // Some threshold value suitable for your scenario
+                {
+
                 _tree.DIRECTHEIGHTTOCONTLIVECROWN = value;
                 NotifyPropertyChanged("DIRECTHEIGHTTOCONTLIVECROWN");
                 IsChanged = true;
+                }
             }
         }
         public float OCULARHEIGHTTOCONTLIVECROWN
@@ -280,9 +301,13 @@ namespace eLiDAR.ViewModels
             get => _tree.OCULARHEIGHTTOCONTLIVECROWN;
             set
             {
-                _tree.OCULARHEIGHTTOCONTLIVECROWN = value;
-                NotifyPropertyChanged("OCULARHEIGHTTOCONTLIVECROWN");
-                IsChanged = true;
+        if (Math.Abs(OCULARHEIGHTTOCONTLIVECROWN - value) >= 0.001) // Some threshold value suitable for your scenario
+        {
+
+            _tree.OCULARHEIGHTTOCONTLIVECROWN = value;
+            NotifyPropertyChanged("OCULARHEIGHTTOCONTLIVECROWN");
+            IsChanged = true;
+        }
             }
         }
         public float DIRECTOFFSETDISTANCE
@@ -290,9 +315,13 @@ namespace eLiDAR.ViewModels
             get => _tree.DIRECTOFFSETDISTANCE;
             set
             {
-                _tree.DIRECTOFFSETDISTANCE = value;
-                NotifyPropertyChanged("DIRECTOFFSETDISTANCE");
-                IsChanged = true;
+        if (Math.Abs(DIRECTOFFSETDISTANCE - value) >= 0.001) // Some threshold value suitable for your scenario
+        {
+
+            _tree.DIRECTOFFSETDISTANCE = value;
+            NotifyPropertyChanged("DIRECTOFFSETDISTANCE");
+            IsChanged = true;
+        }
             }
         }
         public int DEGREEOFLEAN
@@ -310,9 +339,13 @@ namespace eLiDAR.ViewModels
             get => _tree.HEIGHTTOCORE;
             set
             {
-                _tree.HEIGHTTOCORE = value;
-                NotifyPropertyChanged("HEIGHTTOCORE");
-                IsChanged = true;
+        if (Math.Abs(HEIGHTTOCORE - value) >= 0.001) // Some threshold value suitable for your scenario
+        {
+
+            _tree.HEIGHTTOCORE = value;
+            NotifyPropertyChanged("HEIGHTTOCORE");
+            IsChanged = true;
+        }
             }
         }
         public string CORESTATUSCODE
@@ -328,12 +361,16 @@ namespace eLiDAR.ViewModels
         public float SOUNDWOODLENGTH
         {
             get => _tree.SOUNDWOODLENGTH;
-            set
-            {
-                _tree.SOUNDWOODLENGTH = value;
-                NotifyPropertyChanged("SOUNDWOODLENGTH");
-                IsChanged = true;
-            }
+    set
+    {
+        if (Math.Abs(SOUNDWOODLENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
+        {
+
+            _tree.SOUNDWOODLENGTH = value;
+            NotifyPropertyChanged("SOUNDWOODLENGTH");
+            IsChanged = true;
+        }
+    }
         }
         public int FIELDAGE
         {
