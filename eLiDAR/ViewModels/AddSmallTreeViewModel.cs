@@ -19,6 +19,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItems> ListSpecies { get; set; }
         public Command OnAppearingCommand { get; set; }
         public Command OnDisappearingCommand { get; set; }
+        private bool _AllowtoLeave = false;
         public AddSmallTreeViewModel(INavigation navigation, string selectedID) {
             _navigation = navigation;
             _smallTree = new SMALLTREE();
@@ -67,6 +68,7 @@ namespace eLiDAR.ViewModels {
         async Task Delete() {
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Small Tree Details", "Delete Small Tree Details", "OK", "Cancel");
             if (isUserAccept) {
+                _AllowtoLeave = true;
                 _smallTreeRepository.DeleteSmallTree(_smallTree);
                 await _navigation.PopAsync();
             }
@@ -84,14 +86,18 @@ namespace eLiDAR.ViewModels {
         }
         private void OnDisappearing()
         {
+            _AllowtoLeave = false;
             Shell.Current.Navigating -= Current_Navigating;
         }
         private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
         {
             if (e.CanCancel)
             {
-                e.Cancel();
-                await GoBack();
+                if (!_AllowtoLeave)
+                {
+                    e.Cancel();
+                    await GoBack();
+                }
             }
         }
 

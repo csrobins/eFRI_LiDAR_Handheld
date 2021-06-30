@@ -88,7 +88,7 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>eVSN Adhoc Provisioning - June 10 2021 - 10 device</CodesignProvision>
+    <CodesignProvision>eVSN Adhoc provisioning _ June 29, 2021</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <OptimizePNGs>true</OptimizePNGs>
