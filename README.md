@@ -1,5 +1,46 @@
 # eFRI LiDAR Handheld - Ontario Forest Inventory Field Data Collection 
 
+Known and Unresolved Issues (June 28th 2021)
+1. Nulls do not work in numeric fields (we may need to consider a -1 to represent null.
+2. Need an Ocular Distance in Tree Hts area.
+3. Might need an additional field in the DWD screen?
+
+RELEASE NOTES: v black spruce build 12
+
+1. Added several more validations to the plot screen.
+2. Fixed the tree validator from Build 11.
+
+RELEASE NOTES: v black spruce build 11 (DO NOT USE BUILD 11)
+
+1. Added several more layers to the soils horizon list.
+2. Resolved the issue with not using 0 after the decimal on several key fields.
+3. Fixed saving of Tree Ages on initial add tree screen.
+4. Update the boreal species list.
+5. Made the Maturity class rationale a pick-list.
+6. Added checks on Stand Information.
+7. Allow N for Broken top.
+8. Disable Crown Width for Stem Map on Dead trees.
+9. Several other small issues.
+
+RELEASE NOTES: v black spruce build 10
+
+1. Updated vegetation table for synching of all QUAD fields..
+2. Added soil depth and soil chemistry suffixes to the ecosite choices. 
+3. Minor changes in the Soil screen.
+
+RELEASE NOTES: v black spruce build 9
+
+1. Updated validation of stem maps for dead trees.
+2. Fixed coarse Grade in Soil Structure. 
+3. Fixed saving of StemQualityCode on initial tree screen.
+4. Allowed for Ag soil horizon.
+5. Added null values to many of the pickers throughout the app, to allow them to be reset by the user.
+6. Allowed for LFH as a soil horizon.
+7. Showing both Direct and Ocular tree heights in the tree list.
+8. Added more detail to the Soil List.
+9. Fixed layout of the Vegetation screen.
+
+
 Xamarin project for an Ontario eFRI LiDAR plot for field data collection
 
 The Next Generation eFRI Ground Data Collection App is the development of a mobile field application for eFRI Ground Calibration Plots.  The application is being developed in Xamarin.Forms as an open source app that will be widely available for anyone to take the core development and expand upon it, or deploy it for an eFRI field data collection program.  The app is being deployed in Android and iOS and could also be deployed in UWP if the need arises.  The app uses SQlite on device for all data collection disconnected.  When connected, the app pushes and puls data via JSON and a REST API to an Azure SQL database.
