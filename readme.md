@@ -1,6 +1,6 @@
 # eFRI LiDAR Handheld - Ontario Forest Inventory Field Data Collection 
 
-Known and Unresolved Issues (June 28th 2021)
+Known and Unresolved Issues (Jul 13th 2021)
 1. Nulls do not work in numeric fields (we may need to consider a -1 to represent null.
 2. Need an Ocular Distance in Tree Hts area.
 3. Might need an additional field in the DWD screen?
