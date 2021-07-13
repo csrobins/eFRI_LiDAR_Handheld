@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using eLiDAR.Styles;
 using eLiDAR.Domain.Global;
 using eLiDAR.Views;
+using System.Linq;
 
 namespace eLiDAR.ViewModels
 {
@@ -22,19 +23,22 @@ namespace eLiDAR.ViewModels
         private SETTINGS settings;
         private DatabaseHelper databasehelper;
         public ICommand SynchCommand { get; private set; }
+        public ICommand SynchPlotCommand { get; private set; }
         public ICommand DefaultCommand { get; private set; }
         private SynchManager _synchmanager;
         public ICommand ChangeThemeCommand { get; set; }
-
+        public List<PickerItemsString> ListPlots { get; set; }
         public string SelectedTheme { get; set; }
         public SettingsViewModel(INavigation navigation)
         {
             _navigation = navigation;
             util = new Utils();
             SynchCommand = new Command(async () => await Synchrun());
+            SynchPlotCommand = new Command(async () => await SynchPlotrun());
             DefaultCommand = new Command(async () => await DoDefault());
             _synchmanager = new SynchManager();
             databasehelper = new DatabaseHelper();
+            ListPlots = Services.PickerService.FillPlotPicker(databasehelper.GetAllPlotData()).ToList().OrderBy(c => c.NAME).ToList();
             ChangeThemeCommand = new Command((x) =>
             {
                 if (SelectedTheme.ToLower() == "dark")
@@ -49,6 +53,7 @@ namespace eLiDAR.ViewModels
             });
             if (!IsSynchBusy) { IsSynchEnabled = true; }
             FetchSettings();
+           
         }
         async Task DoDefault()
         {
@@ -102,6 +107,23 @@ namespace eLiDAR.ViewModels
             }
             FetchSettings(); 
         }
+        async Task SynchPlotrun()
+        {
+            IsPlotSynchBusy = true;
+            bool success = await _synchmanager.RunSynch(_selectedPlot.ID);
+            IsPlotSynchBusy = false;
+            if (success)
+            {
+                msg = "Plot Synch succeeded for " + _selectedPlot.NAME;
+                await Application.Current.MainPage.DisplayAlert("Synch", msg, "OK");
+            }
+            else
+            {
+                msg = "Not all tables synched!";
+                await Application.Current.MainPage.DisplayAlert("Synch did not finish", msg, "OK");
+            }
+            FetchSettings();
+        }
         void FetchSettings() 
         {
             settings = databasehelper.GetSettingsData();
@@ -148,6 +170,22 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("IsSynchBusy");
             }
         }
+        private bool _isplotsynchbusy;
+        public bool IsPlotSynchBusy
+        {
+            get => _isplotsynchbusy;
+            set
+            {
+                _isplotsynchbusy = value;
+                if (value)
+                {
+                    IsSynchEnabled = false;
+                }
+                else
+                { IsSynchEnabled = true; }
+                NotifyPropertyChanged("IsPlotSynchBusy");
+            }
+        }
         private bool _issynchenabled;
         public bool IsSynchEnabled
         {
@@ -158,6 +196,44 @@ namespace eLiDAR.ViewModels
                 else { _issynchenabled = false; }
                 //_issynchenabled = true;
                 NotifyPropertyChanged("IsSynchEnabled");
+            }
+        }
+        private bool _isplotsynchenabled;
+        public bool IsPlotSynchEnabled
+        {
+            get => _isplotsynchenabled;
+            set
+            {
+                if (_selectedPlot !=null) 
+                {
+                    if (_selectedPlot.ID != "" && IsSynchEnabled) { _isplotsynchenabled = value; }
+                    else { _isplotsynchenabled = false; }
+
+                }
+                else { _isplotsynchenabled = false; }
+                //_issynchenabled = true;
+                NotifyPropertyChanged("IsPlotSynchEnabled");
+            }
+        }
+
+        private PickerItemsString _selectedPlot = new PickerItemsString { ID = "", NAME = "" };
+        public PickerItemsString SelectedPlot
+        {
+            get
+            {
+           //     _selectedPlot = PickerService.GetItem(ListPlots, _smallTree.SPECIESCODE);
+                return _selectedPlot;
+            }
+            set
+            {
+                SetProperty(ref _selectedPlot, value);
+                if (value != null)
+                {
+                    if (value.ID != "") { IsPlotSynchEnabled = true; }
+                    else { IsPlotSynchEnabled = false; }
+                }
+                else { IsPlotSynchEnabled = false; }
+                _selectedPlot = value;
             }
         }
         private bool _allowdatechange = false;

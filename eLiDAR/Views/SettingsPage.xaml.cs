@@ -33,6 +33,7 @@ namespace eLiDAR.Views
             }
             
         }
+        
         void Handle_Clicked_2(object sender, System.EventArgs e)
         {
             Application.Current.Resources["CurrentTheme"] = Application.Current.Resources["BaseStyle"];

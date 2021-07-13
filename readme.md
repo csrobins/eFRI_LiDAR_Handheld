@@ -4,6 +4,11 @@ Known and Unresolved Issues (June 28th 2021)
 1. Nulls do not work in numeric fields (we may need to consider a -1 to represent null.
 2. Need an Ocular Distance in Tree Hts area.
 3. Might need an additional field in the DWD screen?
+4. When re-starting the app from an empty database, then synch will only pull 2048 rows per table.  This is an Azure limitation.  The single plot synch (in Build 13) helps this as a workaround to synch data for a targetted plot.
+
+RELEASE NOTES: v black spruce build 13
+
+1. Added the ability to synch a single plot of data (in the Settings screen) - this is useful when editing plot data long after the plot was collected.
 
 RELEASE NOTES: v black spruce build 12
 
@@ -39,6 +44,7 @@ RELEASE NOTES: v black spruce build 9
 7. Showing both Direct and Ocular tree heights in the tree list.
 8. Added more detail to the Soil List.
 9. Fixed layout of the Vegetation screen.
+
 
 Xamarin project for an Ontario eFRI LiDAR plot for field data collection
 

@@ -270,8 +270,33 @@
                             x:Name="swcDate"
                             HorizontalOptions="EndAndExpand"                      
                             IsToggled="{Binding AllowDateChange}" />
-                    </StackLayout>
-                <StackLayout Orientation="Horizontal">
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            Style="{DynamicResource TextSubhead}"
+                            Text="Pick a plot below to synch a single plot of data at a time." />
+                        <Picker
+                    x:Name="txtPlotSynch"
+                    Title="Synch a Plot"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPlots}"
+                    IsEnabled="{Binding IsSynchEnabled}"
+                    SelectedItem="{Binding SelectedPlot}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                    <Button
+                         Style="{StaticResource FormButtonStyle}"
+                          Command="{Binding SynchPlotCommand}"
+                          IsEnabled="{Binding IsPlotSynchEnabled}"
+                          Text="Synch Plot"       />
+                    <ActivityIndicator IsRunning="{Binding IsPlotSynchBusy}" />
+          
+                </StackLayout> 
+
+                    <StackLayout Orientation="Horizontal">
                     <Label
                         HorizontalOptions="Start"
                         Style="{StaticResource TextBody}"

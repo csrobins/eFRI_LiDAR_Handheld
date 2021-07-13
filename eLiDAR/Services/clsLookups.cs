@@ -109,6 +109,16 @@ namespace eLiDAR.Services
             };
             return list;
         }
+        public static List<PickerItemsString> FillPlotPicker(List<PLOT> plotlist)
+        {
+            var list = new List<PickerItemsString>();
+            foreach (var plot in plotlist)
+            {
+                var newitem = new PickerItemsString() { ID = plot.PLOTID, NAME = plot.VSNPLOTNAME + ", " + plot.MEASURETYPECODE };
+                list.Add(newitem);
+            };
+            return list;
+        }
 
         internal static object GetValue(object speciesItems, int spp)
         {
