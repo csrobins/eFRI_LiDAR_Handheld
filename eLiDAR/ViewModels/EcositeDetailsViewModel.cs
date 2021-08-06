@@ -295,7 +295,46 @@ namespace eLiDAR.ViewModels {
             get
             {
                 if (MINERALTEXTURECODE == null) { return "Mineral Texture"; }
+                //else {
+                //    // update Aug 2
+                //    List<string> list = new List<string>() {"one","two" };
+                //    if (list.Contains(MINERALTEXTURECODE)) { SelectedPorePattern = new PickerItemsString { ID = "", NAME = "" }; }
+
+                //     vcS,cS LvcS,LcS,SivcS,SicS
+
+
+                //    mS,                     LmS SimS
+                //    vcSL
+                //    cSL
+
+
+                //    fS LfS                    SifS mSL
+
+
+
+                //    vfS LvfS SivfS,fSL 
+
+                //    L, vfSL ,                    SiL
+                //    SCL
+
+
+                //    L, 
+                //    SivfS
+                //    fSL
+
+                //    Si
+                //    CL
+                //    SiCL
+                //    SC
+                //    SiC
+                //    C
+                //    BR
+                //    CF
+
+
+
                 else { return MINERALTEXTURECODE; }
+                
             }
             set
             {

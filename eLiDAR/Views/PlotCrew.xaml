@@ -38,6 +38,7 @@
                     ItemsSource="{Binding ListPerson}"
                     SelectedItem="{Binding SelectedSmallTreePerson, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding NAME}"
+                    IsEnabled="{Binding IsPlotTypeB}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}"/>
 
@@ -50,6 +51,7 @@
                     Date="{Binding SMALLTREESHRUBDATE, StringFormat='{0:MMMM dd, yyyy}'}"
                     HorizontalOptions="FillAndExpand"
                     MinimumDate="01-Jan-2020"
+                    IsEnabled="{Binding IsPlotTypeB}"
                     Style="{DynamicResource TextSubhead}" />
                 <Label
                     HorizontalOptions="Start"
@@ -60,6 +62,7 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Smaller Tree Plot Area"
                     Style="{DynamicResource TextSubhead}"
+                    IsEnabled="{Binding IsPlotTypeB}"
                     Text="{Binding SMALLTREESHRUBAREA}" Keyboard="Numeric"  />
                 <Label
                     HorizontalOptions="Start"
@@ -70,6 +73,7 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Smaller Tree Notes"
                     Style="{DynamicResource TextSubhead}"
+                    IsEnabled="{Binding IsPlotTypeB}"
                     Text="{Binding SMALLTREESHRUBNOTE}" />
                 <Label
                     HorizontalOptions="Start"
@@ -87,6 +91,7 @@
                     SelectedItem="{Binding SelectedDeformityPerson, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding NAME}"
                     Style="{DynamicResource TextSubhead}"
+                    IsEnabled="{Binding IsPlotTypeC}"
                     TitleColor="{StaticResource AccentColor}"/>
 
                 <Label
@@ -98,6 +103,7 @@
                     Date="{Binding DEFORMITYDATE, StringFormat='{0:MMMM dd, yyyy}'}"
                     HorizontalOptions="FillAndExpand"
                     MinimumDate="01-Jan-2020"
+                    IsEnabled="{Binding IsPlotTypeC}"
                     Style="{DynamicResource TextSubhead}" />
                 <Label
                     HorizontalOptions="Start"
@@ -107,6 +113,7 @@
                     x:Name="txtDeformityNotes"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Deformity Notes"
+                    IsEnabled="{Binding IsPlotTypeC}"                    
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEFORMITYNOTE}" />
                 <Label
@@ -124,6 +131,8 @@
                     ItemsSource="{Binding ListPerson}"
                     SelectedItem="{Binding SelectedDWDPerson, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding NAME}"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}"/>
 
@@ -136,6 +145,8 @@
                     Date="{Binding DOWNWOODYDEBRISDATE, StringFormat='{0:MMMM dd, yyyy}'}"
                     HorizontalOptions="FillAndExpand"
                     MinimumDate="01-Jan-2020"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     Style="{DynamicResource TextSubhead}" />
                 <Label
                     HorizontalOptions="Start"
@@ -147,6 +158,8 @@
                     Placeholder="Length DWD Line 1(m)"
                     Keyboard="Numeric" 
                     Style="{DynamicResource TextSubhead}"
+                                        IsEnabled="{Binding IsPlotTypeC}"
+
                     Text="{Binding LINELENGTH1}" />
                 <Label
                     HorizontalOptions="Start"
@@ -157,6 +170,8 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Length DWD Line 2(m)"
                     Keyboard="Numeric" 
+                                        IsEnabled="{Binding IsPlotTypeC}"
+
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding LINELENGTH2}" />
                 <Label
@@ -168,17 +183,19 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="DWD Notes"
                     Style="{DynamicResource TextSubhead}"
+                    IsEnabled="{Binding IsPlotTypeC}"
                     Text="{Binding DOWNWOODYDEBRISNOTE}" />
-                    <Label
+                <Label
                     HorizontalOptions="Start"
                     Style="{DynamicResource TextTitle}"
                     Text="Stem Map Attributes" />
-                    <Label
+                <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Stem Map Lead" />
                     <Picker
                     x:Name="txtStemMapLead"
+                    IsEnabled="{Binding IsPlotTypeB}"
                     Title="Stem Map Crew Lead"
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListPerson}"
@@ -195,6 +212,8 @@
                     x:Name="txtStemMapDate"
                     Date="{Binding STEMMAPPINGDATE, StringFormat='{0:MMMM dd, yyyy}'}"
                     HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsPlotTypeB}"
+
                     MinimumDate="01-Jan-2020"
                     Style="{DynamicResource TextSubhead}" />
                     <Label
@@ -203,6 +222,7 @@
                     Text="Stem Map Notes" />
                     <Entry
                     x:Name="txtStemMapNotes"
+                    IsEnabled="{Binding IsPlotTypeB}"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Stem Map Notes"
                     Style="{DynamicResource TextSubhead}"
@@ -221,6 +241,7 @@
                 <Picker
                     x:Name="txtUnderstoryCrewLead"
                     Title="Understory Crew Lead"
+                    IsEnabled="{Binding IsPlotTypeC}"
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListPerson}"
                     SelectedItem="{Binding SelectedUnderstoryVegPerson, Mode=TwoWay}"
@@ -235,6 +256,8 @@
                 <DatePicker
                     x:Name="txtUnderstoryDate"
                     Date="{Binding UNDERSTORYVEGETATIONDATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     HorizontalOptions="FillAndExpand"
                     MinimumDate="01-Jan-2020"
                     Style="{DynamicResource TextSubhead}" />
@@ -245,6 +268,8 @@
                 <Entry
                     x:Name="txtUnderstoryArea"
                     HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     Placeholder="Understory Veg Plot Area"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UNDERSTORYVEGETATIONAREA}" Keyboard="Numeric"  />
@@ -256,6 +281,8 @@
                 <Entry
                     x:Name="txtUnderstoryNotes"
                     HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     Placeholder="Understory Vegeation Notes"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UNDERSTORYVEGETATIONNOTE}" />
@@ -266,6 +293,8 @@
                 <Picker
                     x:Name="txtUndersotroryCensusCrewLead"
                     Title="Understory Census Crew Lead"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding ListPerson}"
                     SelectedItem="{Binding SelectedUnderstoryCensusPerson, Mode=TwoWay}"
@@ -279,6 +308,8 @@
                 <DatePicker
                     x:Name="txtUnderstoryCensusDate"
                     Date="{Binding UNDERSTORYCENSUSDATE, StringFormat='{0:MMMM dd, yyyy}'}"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     HorizontalOptions="FillAndExpand"
                     MinimumDate="01-Jan-2020"
                     Style="{DynamicResource TextSubhead}" />
@@ -289,18 +320,20 @@
                 <Entry
                     x:Name="txtUnderstoryCensusNotes"
                     HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsPlotTypeC}"
+
                     Placeholder="Understory Census Notes"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding UNDERSTORYCENSUSNOTE}" />
-                    <Label
+                <Label
                     HorizontalOptions="Start"
                     Style="{DynamicResource TextTitle}"
                     Text="Tree Age Attributes" />
-                    <Label
+                <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Age Crew Lead" />
-                    <Picker
+                <Picker
                     x:Name="txtAgeCrewLead"
                     Title="Age Crew Lead"
                     HorizontalOptions="FillAndExpand"
@@ -310,11 +343,11 @@
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}"/>
 
-                    <Label
+                <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Age Date" />
-                    <DatePicker
+                <DatePicker
                     x:Name="txtAgeDate"
                     Date="{Binding AGEDATE, StringFormat='{0:MMMM dd, yyyy}'}"
                     HorizontalOptions="FillAndExpand"

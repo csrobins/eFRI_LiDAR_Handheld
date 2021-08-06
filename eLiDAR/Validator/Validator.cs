@@ -432,7 +432,7 @@ namespace eLiDAR.Validator
                 RuleFor(c => c.MAINCANOPYORIGINCODE1).NotEmpty().WithMessage("Main Canopy Origin 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MATURITYCLASSCODE1).NotEmpty().WithMessage("Maturity Class Code 1 should be filled out in the Stand Info Screen");
 
-                When(c => (c.VSNPLOTTYPECODE == "B" || c.VSNPLOTTYPECODE == "C"), () =>
+                When(c => c.VSNPLOTTYPECODE == "C", () =>
                 {
                     RuleFor(c => c.DOWNWOODYDEBRISPERSON ).NotEmpty().WithMessage("You must have a DWD Person in the Plot Crew Screen");
                     RuleFor(c => c.DOWNWOODYDEBRISDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid DWD Date in the Plot Crew screen");
@@ -518,6 +518,8 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.MISSINGRINGS <= 20).When(c => c.CORESTATUSCODE != null).WithMessage("Missing ring count should be less than 20");
                     RuleFor(c => c).Must(c => c.SOUNDWOODLENGTH <= 50).When(c => c.CORESTATUSCODE != null).WithMessage("Sound wood length should be less than 50cm");
                     RuleFor(c => c).Must(c => c.HEIGHTTODEADTIP > c.DIRECTTOTALHEIGHT).When(c => c.HEIGHTTODEADTIP > 0).WithMessage("Ht to dead tip must be > than ht");
+                    RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT == 0).When(c => c.OCULARTOTALHEIGHT > 0).WithMessage("Direct total height must be zero when using Ocular Height");
+                    RuleFor(c => c).Must(c => c.OCULARTOTALHEIGHT == 0).When(c => c.DIRECTTOTALHEIGHT  > 0).WithMessage("Ocular height must be zero when using Direct Height");
 
                 });
                 // Dead  Trees
@@ -580,17 +582,28 @@ namespace eLiDAR.Validator
             if (DoFullValidation)
             {
                 // Organic horizons
-                When(c => c.CORESTATUSCODE != null, () =>
+            When(c => c.CORESTATUSCODE == "C" || c.CORESTATUSCODE == "M" || c.CORESTATUSCODE == "S", () =>
             {
                 RuleFor(c => c).Must(c => c.FIELDAGE > 0 && c.FIELDAGE < 500).WithMessage("Field age should be between 1 and 500");
                 RuleFor(c => c).Must(c => c.HEIGHTTOCORE >=0 && c.HEIGHTTOCORE < 2.5).WithMessage("Height to core should be < 2.5m");
                 RuleFor(c => c).Must(c => c.MISSINGRINGS >= 0 && c.MISSINGRINGS <= 10).WithMessage("Missing rings should be between 0 and 10");
                 RuleFor(c => c).Must(c => c.OFFICERINGCOUNT > 0 && c.OFFICERINGCOUNT < 500).WithMessage("Office ring count should be between 1 and 500");
-                RuleFor(c => c).Must(c => c.SOUNDWOODLENGTH  > 0 && c.SOUNDWOODLENGTH < 50).WithMessage("Sound Wood length be between 0 and 50");
-                RuleFor(c => c).Must(c => c.TREESTATUSCODE == "L" || c.TREESTATUSCODE == "V").WithMessage("Only L, V trees should hve ages");
+          //      RuleFor(c => c).Must(c => c.SOUNDWOODLENGTH  > 0 && c.SOUNDWOODLENGTH < 50).WithMessage("Sound Wood length be between 0 and 50");
+                RuleFor(c => c).Must(c => c.TREESTATUSCODE == "L" || c.TREESTATUSCODE == "V").WithMessage("Only L, V trees should have ages");
 //            ([CoreStatusCode] = 'C' AND[MissingRings] IS NOT NULL AND[MissingRings]>= (0) AND[MissingRings] <= (4) OR[CoreStatusCode] = 'M' AND[MissingRings] IS NOT NULL AND[MissingRings]>= (5) AND[MissingRings] <= (10) OR([CoreStatusCode] = 'R' OR[CoreStatusCode] = 'S') AND[MissingRings] IS NULL)
 
             });
+            When(c => c.CORESTATUSCODE == "R", () =>
+                {
+                    RuleFor(c => c).Must(c => c.FIELDAGE > 0 && c.FIELDAGE < 500).WithMessage("Field age should be between 1 and 500");
+                    RuleFor(c => c).Must(c => c.HEIGHTTOCORE >= 0 && c.HEIGHTTOCORE < 2.5).WithMessage("Height to core should be < 2.5m");
+                    RuleFor(c => c).Must(c => c.MISSINGRINGS >= 0 && c.MISSINGRINGS <= 10).WithMessage("Missing rings should be between 0 and 10");
+                    RuleFor(c => c).Must(c => c.OFFICERINGCOUNT > 0 && c.OFFICERINGCOUNT < 500).WithMessage("Office ring count should be between 1 and 500");
+                    RuleFor(c => c).Must(c => c.SOUNDWOODLENGTH > 0 && c.SOUNDWOODLENGTH < 50).WithMessage("Sound Wood length be between 0 and 50");
+                    RuleFor(c => c).Must(c => c.TREESTATUSCODE == "L" || c.TREESTATUSCODE == "V").WithMessage("Only L, V trees should have ages");
+                    //            ([CoreStatusCode] = 'C' AND[MissingRings] IS NOT NULL AND[MissingRings]>= (0) AND[MissingRings] <= (4) OR[CoreStatusCode] = 'M' AND[MissingRings] IS NOT NULL AND[MissingRings]>= (5) AND[MissingRings] <= (10) OR([CoreStatusCode] = 'R' OR[CoreStatusCode] = 'S') AND[MissingRings] IS NULL)
+
+                });
             }
 
         }
@@ -632,8 +645,6 @@ namespace eLiDAR.Validator
                 RuleFor(c => c).Must(c => c.CROWNOFFSETDISTANCE <= 50).WithMessage("Crown offset distance should be and less than 50m.");
                 RuleFor(c => c).Must(c => c.CROWNOFFSETDISTANCE > 0).When(c => c.CROWNOFFSETAZIMUTH >0).WithMessage("Crown offset distance should be populated when crown offset azimuth >0");
                 RuleFor(c => c).Must(c => c.CROWNOFFSETAZIMUTH > 0).When(c => c.CROWNOFFSETDISTANCE > 0).WithMessage("Crown offset azimuth should be populated when crown offset distance >0");
-
-
             }
         }
 
@@ -769,7 +780,7 @@ namespace eLiDAR.Validator
                      RuleFor(c => c).Must(c => c.POREPATTERNCODE == null).WithMessage("Pore pattern must be empty for organic horizons");
                  });
                 // Mineral horizons
-                When(c => c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
+                When(c => c.HORIZON != "LFH" || c.HORIZON != "LF" || c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
                 {
                     RuleFor(c => c).Must(c => c.DECOMPOSITIONCODE == null).WithMessage("A decoposition code is not required for mineral horizons");
                     RuleFor(c => c).Must(c => c.MATRIXCOLOUR != null).WithMessage("Matrix colour is used for mineral horizons");
@@ -1109,7 +1120,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c.LINENUMBER).NotEmpty().WithMessage("Line Number must be populated");
             if (DoFullValidation)
             {
-                RuleFor(c => c).Must(c => IsUniqueDWDNum(c)).WithMessage("DWD number must be unique within the line.");
+   //             RuleFor(c => c).Must(c => IsUniqueDWDNum(c)).WithMessage("DWD number must be unique within the line.");
                 RuleFor(c => c.DECOMPOSITIONCLASS).NotEmpty().WithMessage("Decomp Class should not be empty.");
                
                 //for accumualtions
@@ -1123,7 +1134,6 @@ namespace eLiDAR.Validator
                 // for regular DWD
                 When(c => c.IS_ACCUM != "Y", () =>
                 {
-                  
                     RuleFor(c => c).Must(c => c.DOWNWOODYDEBRISLENGTH >= 0.01 && c.DOWNWOODYDEBRISLENGTH <= 40).WithMessage("DWD length should be between 0.01 and 40");
                     RuleFor(c => c).Must(c => c.LARGEDIAMETER >= 7.5 && c.LARGEDIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");
                     RuleFor(c => c).Must(c => c.SMALLDIAMETER >= 7.5 && c.SMALLDIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");

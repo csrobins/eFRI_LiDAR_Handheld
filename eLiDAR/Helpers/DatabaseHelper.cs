@@ -88,7 +88,8 @@ namespace eLiDAR.Helpers
         public bool RequiresCrownWidth(String id)
         {
             var tree = sqliteconnection.Query<TREE>("select * from TREE where TREEID = '" + id + "'").FirstOrDefault ();
-            if (tree.TREESTATUSCODE == "D" || tree.TREESTATUSCODE == "DV" || tree.BROKENTOP == "Y"  || tree.DECAYCLASS == 4 || tree.DECAYCLASS == 5)
+ //           if ((tree.TREESTATUSCODE == "D" || tree.TREESTATUSCODE == "DV") || tree.BROKENTOP == "Y"  || tree.DECAYCLASS == 4 || tree.DECAYCLASS == 5)
+            if ((tree.TREESTATUSCODE == "D" || tree.TREESTATUSCODE == "DV") && (tree.DECAYCLASS == 4 || tree.DECAYCLASS == 5))
             {
                 return false;
             }

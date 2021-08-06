@@ -114,7 +114,7 @@ namespace eLiDAR.Services
             var list = new List<PickerItemsString>();
             foreach (var plot in plotlist)
             {
-                var newitem = new PickerItemsString() { ID = plot.PLOTID, NAME = plot.VSNPLOTNAME + ", " + plot.MEASURETYPECODE };
+                var newitem = new PickerItemsString() { ID = plot.PLOTID, NAME = plot.VSNPLOTNAME + ", " + plot.MEASURETYPECODE + ", " + plot.FIELD_CREW1  };
                 list.Add(newitem);
             };
             return list;
@@ -229,6 +229,8 @@ namespace eLiDAR.Services
                      new PickerItems() {ID = 39, NAME = "Shumard's Oak"},
                      new PickerItems() {ID = 33, NAME = "Silver Maple"},
                      new PickerItems() {ID = 169, NAME = "Slippery Elm"},
+                     new PickerItems() {ID = 1004, NAME = "Speckled Alder"},
+                     new PickerItems() {ID = 1003, NAME = "Green Alder"},
                      new PickerItems() {ID = 1091, NAME = "Sorbus species"},
                      new PickerItems() {ID = 174, NAME = "Sour Red Cherry"},
                      new PickerItems() {ID = 1001, NAME = "Striped Maple"},
@@ -342,6 +344,9 @@ namespace eLiDAR.Services
                     new PickerItems() {ID = 117, NAME = "117"},
                     new PickerItems() {ID = 1231, NAME = "1231"},
                     new PickerItems() {ID = 92, NAME = "92"},
+                    new PickerItems() {ID = 1004, NAME = "1004"},
+                    new PickerItems() {ID = 1003, NAME = "1003"},
+
                     new PickerItems() {ID = 77, NAME = "77"},
                     new PickerItems() {ID = 1093, NAME = "1093"},
                     new PickerItems() {ID = 41, NAME = "41"},
@@ -460,6 +465,9 @@ namespace eLiDAR.Services
                      new PickerItems() {ID = 177, NAME = "Freeman's Maple"},
                      new PickerItems() {ID = 173, NAME = "Glossy Buckthorn"},
                      new PickerItems() {ID = 168, NAME = "Gray Birch"},
+                     new PickerItems() {ID = 1004, NAME = "Speckled Alder"},
+                     new PickerItems() {ID = 1003, NAME = "Green Alder"},
+
                      new PickerItems() {ID = 47, NAME = "Green/Red Ash"},
                      new PickerItems() {ID = 128, NAME = "Hawthorn species"},
                      new PickerItems() {ID = 96, NAME = "Honey Locust"},
@@ -595,7 +603,10 @@ namespace eLiDAR.Services
                      new PickerItems() {ID = 173, NAME = "173-Glossy Buckthorn"},
                      new PickerItems() {ID = 168, NAME = "168-Gray Birch"},
                      new PickerItems() {ID = 47, NAME = "47-Green/Red Ash"},
-                     new PickerItems() {ID = 128, NAME = "128-Hawthorn species"},
+                     new PickerItems() {ID = 1004, NAME = "1004-Speckled Alder"},
+                     new PickerItems() {ID = 1003, NAME = "1003-Green Alder"},
+
+                        new PickerItems() {ID = 128, NAME = "128-Hawthorn species"},
                      new PickerItems() {ID = 96, NAME = "96-Honey Locust"},
                      new PickerItems() {ID = 141, NAME = "141-Hop Tree"},
                      new PickerItems() {ID = 69, NAME = "69-Horse Chestnut"},
@@ -1531,7 +1542,7 @@ namespace eLiDAR.Services
             var list = new List<PickerItemsString>()
             {
                                 new PickerItemsString() {ID = null, NAME = "null"},
-                new PickerItemsString() {ID = "Θ" , NAME = "Θ-Dry "},
+                new PickerItemsString() {ID = "D" , NAME = "Θ-Dry "},
                 new PickerItemsString() {ID = "0", NAME = "0-Moderately Dry"},
                 new PickerItemsString() {ID = "1", NAME = "1-Moderately Fresh"},
                 new PickerItemsString() {ID = "2", NAME = "2-Fresh"},

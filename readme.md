@@ -4,7 +4,11 @@ Known and Unresolved Issues (Jul 13th 2021)
 1. Nulls do not work in numeric fields (we may need to consider a -1 to represent null.
 2. Need an Ocular Distance in Tree Hts area.
 3. Might need an additional field in the DWD screen?
-4. When re-starting the app from an empty database, then synch will only pull 2048 rows per table.  This is an Azure limitation.  The single plot synch (in Build 13) helps this as a workaround to synch data for a targetted plot.
+
+RELEASE NOTES: v black spruce build 14
+
+1. Various upates to the validator.
+2. Fix to allow for crown wdiths on some dead trees.
 
 RELEASE NOTES: v black spruce build 13
 

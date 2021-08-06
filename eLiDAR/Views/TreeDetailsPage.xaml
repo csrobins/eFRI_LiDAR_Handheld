@@ -13,13 +13,6 @@
         <StackLayout Padding="10" Spacing="12">
             <local:TreeView />
 
-       <!--     <Button
-                Margin="0,30,0,0"
-                BackgroundColor="{StaticResource cerulean}"
-                BorderRadius="0"
-                Command="{Binding UpdateTreeCommand}"
-                Text="Update"
-                TextColor="White" />  -->
             <Button
                 Style="{StaticResource FormButtonStyle}"
                 Command="{Binding DeleteTreeCommand}"

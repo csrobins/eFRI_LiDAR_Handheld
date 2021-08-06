@@ -9,13 +9,13 @@ using eLiDAR.Utilities;
 using System;
 
 namespace eLiDAR.ViewModels {
-    public class PlotCrewViewModel : INotifyPropertyChanged 
+    public class PlotCrewViewModel : INotifyPropertyChanged
     {
         public INavigation _navigation;
         public PLOT _plot;
         public PlotRepository _plotRepository;
         public List<PickerItemsString> ListPerson { get; set; }
-       
+
         public PlotCrewViewModel(INavigation navigation, PLOT _thisplot)
         {
             try
@@ -31,6 +31,7 @@ namespace eLiDAR.ViewModels {
                 if (_plot.DOWNWOODYDEBRISDATE == System.DateTime.MinValue) { _plot.DOWNWOODYDEBRISDATE = System.DateTime.Now; }
                 if (_plot.UNDERSTORYVEGETATIONDATE == System.DateTime.MinValue) { _plot.UNDERSTORYVEGETATIONDATE = System.DateTime.Now; }
                 if (_plot.UNDERSTORYCENSUSDATE == System.DateTime.MinValue) { _plot.UNDERSTORYCENSUSDATE = System.DateTime.Now; }
+                if (_plot.AGEDATE  == System.DateTime.MinValue) { _plot.AGEDATE = System.DateTime.Now; }
                 if (_plot.UNDERSTORYVEGETATIONAREA == 0) { _plot.UNDERSTORYVEGETATIONAREA = Constants.DefaultUnderstoryVegArea; }
                 if (_plot.SMALLTREESHRUBAREA == 0) { _plot.SMALLTREESHRUBAREA = Constants.DefaultSmallTreeArea; }
                 if (_plot.LINELENGTH1 == 0 && _plot.VSNPLOTTYPECODE.Contains("C")) { _plot.LINELENGTH1 = Constants.DefaultDWDLineLength; }
@@ -38,7 +39,7 @@ namespace eLiDAR.ViewModels {
                 if (util.UseDefaultPerson)
                 {
                     if (_plot.STANDINFOPERSON == null) { _plot.STANDINFOPERSON = util.DefaultPerson; }
-                    if (_plot.SMALLTREEPERSON == null) { _plot.SMALLTREEPERSON  = util.DefaultPerson; }
+                    if (_plot.SMALLTREEPERSON == null) { _plot.SMALLTREEPERSON = util.DefaultPerson; }
                     if (_plot.AGEPERSON == null) { _plot.AGEPERSON = util.DefaultPerson; }
                     if (_plot.FIELD_CREW1 == null) { _plot.FIELD_CREW1 = util.DefaultPerson; }
                     if (_plot.FORESTHEALTHPERSON == null) { _plot.FORESTHEALTHPERSON = util.DefaultPerson; }
@@ -46,12 +47,12 @@ namespace eLiDAR.ViewModels {
                 //   ListPerson = FillPersonPicker().OrderBy(c => c.NAME).ToList();
                 ListPerson = PickerService.FillPersonPicker(_plotRepository.GetPersonList(_plot.PROJECTID)).OrderBy(c => c.NAME).ToList();
             }
-            catch (System.Exception ex) 
+            catch (System.Exception ex)
             {
-                var msg = ex.Message; 
+                var msg = ex.Message;
             }
         }
-     
+
         public string Title
         {
             get => "Notes and personnel for plot " + _plot.VSNPLOTNAME + " elements";
@@ -176,7 +177,7 @@ namespace eLiDAR.ViewModels {
             {
                 _plot.SMALLTREESHRUBAREA = value;
                 NotifyPropertyChanged("SMALLTREESHRUBAREA");
-        
+
             }
         }
 
@@ -187,7 +188,24 @@ namespace eLiDAR.ViewModels {
             {
                 _plot.SMALLTREESHRUBDATE = value;
                 NotifyPropertyChanged("SMALLTREESHRUBDATE");
-           
+
+            }
+        }
+
+        public bool IsPlotTypeB 
+            {
+            get 
+              {
+              if (_plot.VSNPLOTTYPECODE == "B" || _plot.VSNPLOTTYPECODE == "C") {return true;}
+              else { return false; }
+              }
+           }
+        public bool IsPlotTypeC
+        {
+            get
+            {
+                if (_plot.VSNPLOTTYPECODE == "C") { return true; }
+                else { return false; }
             }
         }
 
