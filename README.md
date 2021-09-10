@@ -1,4 +1,4 @@
-# eFRI LiDAR Handheld - Ontario Forest Inventory Field Data Collection 
+# eVSN LiDAR Handheld - Ontario Forest Inventory Field Data Collection 
 
 Known and Unresolved Issues (Jul 13th 2021)
 1. Nulls do not work in numeric fields (we may need to consider a -1 to represent null.
