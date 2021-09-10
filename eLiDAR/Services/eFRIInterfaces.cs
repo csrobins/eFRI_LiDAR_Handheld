@@ -450,7 +450,10 @@ namespace eLiDAR.Services
 
         public void UpdatePlot(PLOT Plot)
         {
-            _databaseHelper.UpdatePlot(Plot);
+            
+                _databaseHelper.UpdatePlot(Plot);
+            
+
         }
         public bool AllowDelete(PLOT _plot)
         {

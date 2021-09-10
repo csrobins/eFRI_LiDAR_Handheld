@@ -5,6 +5,9 @@ using eLiDAR.Services;
 using Xamarin.Forms;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using eLiDAR.Validator;
+using FluentValidation.Results;
+using System.Threading.Tasks;
 
 namespace eLiDAR.ViewModels {
     public class StandInfoViewModel : INotifyPropertyChanged 
@@ -18,7 +21,9 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListMaturityClass { get; set; }
         public List<PickerItems> ListDisturbanceCode { get; set; }
         public List<PickerItemsString> ListMaturityClassRationale { get; set; }
-
+        public Command OnAppearingCommand { get; set; }
+        public Command OnDisappearingCommand { get; set; }
+        private bool _AllowToLeave = false;
         public StandInfoViewModel(INavigation navigation, PLOT _thisplot)
         {
             _navigation = navigation;
@@ -34,7 +39,8 @@ namespace eLiDAR.ViewModels {
             ListMaturityClass = PickerService.MaturityClassItems().OrderBy(c => c.NAME).ToList();
             ListDisturbanceCode = PickerService.DisturbanceItems().OrderBy(c => c.NAME).ToList();
             ListMaturityClassRationale = PickerService.MaturityClassRationaleItems().ToList();
-
+            OnAppearingCommand = new Command(() => OnAppearing());
+            OnDisappearingCommand = new Command(() => OnDisappearing());
         }
         public string Title
         {
@@ -66,6 +72,7 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedStandInfoPerson, value);
                 _plot.STANDINFOPERSON = _selectedStandInfoPerson.ID;
+                IsChanged = true;
             }
         }
         private PickerItems _selectedDisturbance1 = new PickerItems { ID = 0, NAME = "" };
@@ -83,7 +90,8 @@ namespace eLiDAR.ViewModels {
                 if (value == _selectedDisturbance1) { return; }
                 SetProperty(ref _selectedDisturbance1, value);
                 _plot.DISTURBANCECODE1  = (int)_selectedDisturbance1.ID;
-          //      OnPropertyChanged();
+                IsChanged = true;
+                //      OnPropertyChanged();
             }
         }
         private PickerItems _selectedDisturbance2 = new PickerItems { ID = 0, NAME = "" };
@@ -101,6 +109,7 @@ namespace eLiDAR.ViewModels {
                 if (value == _selectedDisturbance2) { return; }
                 SetProperty(ref _selectedDisturbance2, value);
                 _plot.DISTURBANCECODE2 = (int)_selectedDisturbance2.ID;
+                IsChanged = true;
                 //      OnPropertyChanged();
             }
         }
@@ -119,6 +128,7 @@ namespace eLiDAR.ViewModels {
                     if (value == _selectedCanopyOrigin1) { return; }
                     SetProperty(ref _selectedCanopyOrigin1, value);
                     _plot.MAINCANOPYORIGINCODE1 = (int)_selectedCanopyOrigin1.ID;
+                    IsChanged = true;
                 }
                 catch (System.Exception e)
                 {
@@ -163,6 +173,7 @@ namespace eLiDAR.ViewModels {
                 if (value == null) { return; }
                 SetProperty(ref _selectedCanopyStructure1, value);
                 _plot.CANOPYSTRUCTURECODE1 = _selectedCanopyStructure1.ID;
+                IsChanged = true;
             }
         }
         private PickerItemsString _selectedCanopyStructure2 = new PickerItemsString { ID = "", NAME = "" };
@@ -178,6 +189,7 @@ namespace eLiDAR.ViewModels {
                 if (value == null) { return; }
                 SetProperty(ref _selectedCanopyStructure2, value);
                 _plot.CANOPYSTRUCTURECODE2 = _selectedCanopyStructure2.ID;
+                IsChanged = true;
             }
         }
         private PickerItemsString _selectedMaturityClass1 = new PickerItemsString { ID = "", NAME = "" };
@@ -192,6 +204,7 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedMaturityClass1, value);
                 _plot.MATURITYCLASSCODE1 = _selectedMaturityClass1.ID;
+                IsChanged = true;
             }
         }
         private PickerItemsString _selectedMaturityClass2 = new PickerItemsString { ID = "", NAME = "" };
@@ -206,6 +219,7 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedMaturityClass2, value);
                 _plot.MATURITYCLASSCODE2 = _selectedMaturityClass2.ID;
+                IsChanged = true;
             }
         }
         private PickerItemsString _selectedMaturityClassRationale1 = new PickerItemsString { ID = "", NAME = "" };
@@ -220,6 +234,7 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedMaturityClassRationale1, value);
                 _plot.MATURITYCLASSRATIONALE1 = _selectedMaturityClassRationale1.ID;
+                IsChanged = true;
             }
         }
         private PickerItemsString _selectedMaturityClassRationale2 = new PickerItemsString { ID = "", NAME = "" };
@@ -234,6 +249,7 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedMaturityClassRationale2, value);
                 _plot.MATURITYCLASSRATIONALE2 = _selectedMaturityClassRationale2.ID;
+                IsChanged = true;
             }
         }
         public int PERCENTAFFECTED
@@ -243,7 +259,7 @@ namespace eLiDAR.ViewModels {
             {
                 _plot.PERCENTAFFECTED = value;
                 NotifyPropertyChanged("PERCENTAFFECTED");
-                //  IsChanged = true;
+                  IsChanged = true;
             }
         }
         public int PERCENTMORTALITY
@@ -253,7 +269,7 @@ namespace eLiDAR.ViewModels {
             {
                 _plot.PERCENTMORTALITY = value;
                 NotifyPropertyChanged("PERCENTMORTALITY");
-                //   IsChanged = true;
+                   IsChanged = true;
             }
         }
         public System.DateTime STANDINFODATE
@@ -266,7 +282,16 @@ namespace eLiDAR.ViewModels {
               
             }
         }
-
+        private bool _ischanged = false;
+        private bool IsChanged 
+        {
+            get => _ischanged;
+            set
+            {
+                _ischanged = value;
+                NotifyPropertyChanged("IsChanged");
+            }
+        }
         public string STANDINFONOTE
         {
             get => _plot.STANDINFONOTE;
@@ -296,7 +321,60 @@ namespace eLiDAR.ViewModels {
                 NotifyPropertyChanged("MATURITYCLASSRATIONALE2");
             }
         }
+        private void OnAppearing()
+        {
+            _AllowToLeave = false;
+            Shell.Current.Navigating += Current_Navigating;
+        }
+        private void OnDisappearing()
+        {
+            Shell.Current.Navigating -= Current_Navigating;
+        }
+        private async void Current_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.CanCancel)
+            {
+                if (!_AllowToLeave)
+                {
+                    e.Cancel();
+                    await GoBack();
+                }
+            }
+        }
+        private Task UpdatePlot()
+        {
+            _plot.LastModified = System.DateTime.UtcNow;
+            _plotRepository.UpdatePlot(_plot);
+            return Task.CompletedTask;
 
+        }
+        private async Task GoBack()
+        {
+            // display Alert for confirmation
+            if (IsChanged)
+            {
+                PlotValidator _Validator = new PlotValidator();
+                ValidationResult validationResults = _Validator.Validate(_plot);
+                if (validationResults.IsValid)
+                {
+                    _ = UpdatePlot();
+                    Shell.Current.Navigating -= Current_Navigating;
+                    // await Shell.Current.GoToAsync("..", true);
+                    await _navigation.PopAsync(true);
+
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Update Plot", validationResults.Errors[0].ErrorMessage, "Ok");
+                }
+            }
+            else
+            {
+                Shell.Current.Navigating -= Current_Navigating;
+                //   await Shell.Current.GoToAsync("..", true);
+                await _navigation.PopAsync(true);
+            }
+        }
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

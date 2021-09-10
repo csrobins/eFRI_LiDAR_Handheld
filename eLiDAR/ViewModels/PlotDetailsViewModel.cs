@@ -85,15 +85,24 @@ namespace eLiDAR.ViewModels {
         }
         async Task ShowComments()
         {
-            _AllowToLeave = true;
-            // launch the form - filtered to a specific tree
-            await _navigation.PushAsync(new PlotComments(_plot));
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowToLeave = true;
+                // launch the form - filtered to a specific tree
+                await _navigation.PushAsync(new PlotComments(_plot));
+            }
+
         }
         async Task ShowStandInfo()
         {
             // launch the form - filtered to a specific tree
-            _AllowToLeave = true;
-            await _navigation.PushAsync(new StandInfo(_plot));
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowToLeave = true;
+                await _navigation.PushAsync(new StandInfo(_plot));
+            }
         }
         async Task DoValidate()
         {
@@ -115,14 +124,22 @@ namespace eLiDAR.ViewModels {
         async Task ShowForestHealth()
         {
             // launch the form - filtered to a specific tree
-            _AllowToLeave = true;
-            await _navigation.PushAsync(new ForestHealth(_plot));
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowToLeave = true;
+                await _navigation.PushAsync(new ForestHealth(_plot));
+            }
         }
         async Task ShowPlotCrew()
         {
             // launch the form - filtered to a specific tree
-            _AllowToLeave = true;
-            await _navigation.PushAsync(new PlotCrew(_plot));
+            bool _issaved = await TrySave();
+            if (_issaved)
+            {
+                _AllowToLeave = true;
+                await _navigation.PushAsync(new PlotCrew(_plot));
+            }
         }
         async Task ShowPhoto()
         {

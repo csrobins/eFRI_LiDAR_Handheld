@@ -663,7 +663,12 @@ namespace eLiDAR.Helpers
         // Update Tree Data
         public void UpdateTree(TREE tree)
         {
-            sqliteconnection.Update(tree);
+            try
+            {
+                sqliteconnection.Update(tree);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
         }
         public void DeleteStemmap(string id)
         {

@@ -3,6 +3,7 @@ using eLiDAR.Models;
 using eLiDAR.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -211,14 +212,16 @@ namespace eLiDAR.API
             ProjectManager  manager = new ProjectManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetProjectToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<PROJECT>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<PROJECT> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateProject(itm);
-                // projectpulls += projectpulls;
+                if (!updatelist.Any(item => item.PROJECTID == itm.PROJECTID))
+                {
+                    databasehelper.UpdateProject(itm);
+                }
             }
 
             // push new records
@@ -230,7 +233,7 @@ namespace eLiDAR.API
                 projectpushes = projectpushes+1; 
             }
             //push updates
-            var updatelist = databasehelper.GetProjectToUpdate(settings.LastSynched);
+          
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -254,13 +257,19 @@ namespace eLiDAR.API
             PlotManager manager = new PlotManager(service); 
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
+            // get the update list of records
+            var updatelist = databasehelper.GetPlotToUpdate(settings.LastSynched);
 
             // pull updated records
             Task<List<PLOT>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<PLOT> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdatePlot(itm);
+                // only update records not being updated from the app
+                if (!updatelist.Any(item => item.PLOTID == itm.PLOTID))
+                {
+                    databasehelper.UpdatePlot(itm);
+                }
             }
 
             // push new records
@@ -272,7 +281,6 @@ namespace eLiDAR.API
                 plotpushes = plotpushes+1;
             }
             //push updates
-            var updatelist = databasehelper.GetPlotToUpdate(settings.LastSynched);
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -283,17 +291,10 @@ namespace eLiDAR.API
             List<PLOT> newrecords = await gettask;
             foreach (var itm in newrecords)
             {
-                databasehelper.InsertPlot(itm);
-                plotpulls = plotpulls+1;
+                 databasehelper.InsertPlot(itm);
+                 plotpulls = plotpulls + 1;
+                
             }
-
-            //push deletes
-            //var deletelist = databasehelper.GetPlotToDelete(settings.LastSynched);
-            //foreach (var itm in deletelist)
-            //{
-            //    Task deletetask = manager.DeleteTaskAsync(itm);
-            //    await deletetask;
-            //}
 
             return true;
         }
@@ -334,14 +335,17 @@ namespace eLiDAR.API
             TreeManager manager = new TreeManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetTreeToUpdate(settings.LastSynched);
 
             // pull updated records
             Task<List<TREE>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<TREE> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateTree(itm);
+                if (!updatelist.Any(item => item.TREEID == itm.TREEID))
+                {
+                    databasehelper.UpdateTree(itm);
+                }
             }
 
             // push new records
@@ -353,7 +357,7 @@ namespace eLiDAR.API
                 treepushes = treepushes+1;
             }
             //push updates
-            var updatelist = databasehelper.GetTreeToUpdate(settings.LastSynched);
+           
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -452,13 +456,16 @@ namespace eLiDAR.API
             StemmapManager manager = new StemmapManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetStemmapToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<STEMMAP>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<STEMMAP> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateStemmap(itm);
+                if (!updatelist.Any(item => item.STEMMAPID  == itm.STEMMAPID ))
+                {
+                    databasehelper.UpdateStemmap(itm);
+                }
             }
 
             // push new records
@@ -470,7 +477,7 @@ namespace eLiDAR.API
                
             }
             //push updates
-            var updatelist = databasehelper.GetStemmapToUpdate(settings.LastSynched);
+            
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -526,13 +533,16 @@ namespace eLiDAR.API
             EcositeManager manager = new EcositeManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetEcositeToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<ECOSITE>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<ECOSITE> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateEcosite(itm);
+                if (!updatelist.Any(item => item.ECOSITEID == itm.ECOSITEID))
+                {
+                    databasehelper.UpdateEcosite(itm);
+                }
             }
 
             // push new records
@@ -544,7 +554,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetEcositeToUpdate(settings.LastSynched);
+           
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -607,13 +617,16 @@ namespace eLiDAR.API
             SoilManager manager = new SoilManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetSoilToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<SOIL>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<SOIL> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateSoil(itm);
+                if (!updatelist.Any(item => item.SOILID == itm.SOILID))
+                {
+                    databasehelper.UpdateSoil(itm);
+                }
             }
 
             // push new records
@@ -625,7 +638,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetSoilToUpdate(settings.LastSynched);
+           
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -696,13 +709,16 @@ namespace eLiDAR.API
             SmalltreeManager manager = new SmalltreeManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetSmalltreeToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<SMALLTREE>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<SMALLTREE> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateSmallTree(itm);
+                if (!updatelist.Any(item => item.SMALLTREEID  == itm.SMALLTREEID ))
+                {
+                    databasehelper.UpdateSmallTree(itm);
+                }
             }
 
             // push new records
@@ -714,7 +730,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetSmalltreeToUpdate(settings.LastSynched);
+          
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -778,13 +794,16 @@ namespace eLiDAR.API
             VegetationManager manager = new VegetationManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetVegetationToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<VEGETATION>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<VEGETATION> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateVegetation(itm);
+                if (!updatelist.Any(item => item.VEGETATIONID  == itm.VEGETATIONID))
+                {
+                    databasehelper.UpdateVegetation(itm);
+                }
             }
 
             // push new records
@@ -796,7 +815,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetVegetationToUpdate(settings.LastSynched);
+           
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -867,13 +886,16 @@ namespace eLiDAR.API
             DeformityManager manager = new DeformityManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetDeformityToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<DEFORMITY>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<DEFORMITY> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateDeformity(itm);
+                if (!updatelist.Any(item => item.DEFORMITYID  == itm.DEFORMITYID))
+                {
+                    databasehelper.UpdateDeformity(itm);
+                }
             }
 
             // push new records
@@ -885,7 +907,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetDeformityToUpdate(settings.LastSynched);
+           
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -943,13 +965,16 @@ namespace eLiDAR.API
             DWDManager manager = new DWDManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetDWDToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<DWD>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<DWD> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateDWD(itm);
+                if (!updatelist.Any(item => item.DWDID  == itm.DWDID ))
+                {
+                    databasehelper.UpdateDWD(itm);
+                }
             }
 
             // push new records
@@ -961,7 +986,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetDWDToUpdate(settings.LastSynched);
+
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -978,13 +1003,7 @@ namespace eLiDAR.API
                 }
             }
 
-            //push deletes
-            //var deletelist = databasehelper.GetDWDToDelete(settings.LastSynched);
-            //foreach (var itm in deletelist)
-            //{
-            //    Task deletetask = manager.DeleteTaskAsync(itm);
-            //    await deletetask;
-            //}
+
             return true;
         }
         public async Task<bool> DWDSynch(String _plotid, String _origdate)
@@ -1032,13 +1051,16 @@ namespace eLiDAR.API
             PhotoManager manager = new PhotoManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetPhotoToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<PHOTO>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<PHOTO> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdatePhoto(itm);
+                if (!updatelist.Any(item => item.PHOTOID  == itm.PHOTOID ))
+                {
+                    databasehelper.UpdatePhoto(itm);
+                }
             }
 
             // push new records
@@ -1050,7 +1072,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetPhotoToUpdate(settings.LastSynched);
+           
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -1113,13 +1135,16 @@ namespace eLiDAR.API
             PersonManager manager = new PersonManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetPersonToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<PERSON>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<PERSON> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdatePerson(itm);
+                if (!updatelist.Any(item => item.PERSONID  == itm.PERSONID ))
+                {
+                    databasehelper.UpdatePerson(itm);
+                }
             }
 
             // push new records
@@ -1131,21 +1156,20 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetPersonToUpdate(settings.LastSynched);
+         
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
                 await pushupdatetask;
             }
 
-                // pull new records
-                Task<List<PERSON>> gettask = manager.GetTasksAsync(filterNew);
-                List<PERSON> newrecords = await gettask;
-                foreach (var itm in newrecords)
-                {
-                    databasehelper.InsertPerson(itm);
-                }
-
+            // pull new records
+            Task<List<PERSON>> gettask = manager.GetTasksAsync(filterNew);
+            List<PERSON> newrecords = await gettask;
+            foreach (var itm in newrecords)
+            {
+                databasehelper.InsertPerson(itm);
+            }
 
    
             return true;
@@ -1155,13 +1179,16 @@ namespace eLiDAR.API
             VegetationCensusManager manager = new VegetationCensusManager(service);
             string filterNew = "&filter=CreatedAtServer gt '" + prevdate + "'";
             string filterUpdate = "&filter=LastModifiedAtServer gt '" + prevdate + "'";
-
+            var updatelist = databasehelper.GetVegetationCensusToUpdate(settings.LastSynched);
             // pull updated records
             Task<List<VEGETATIONCENSUS>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<VEGETATIONCENSUS> updaterecords = await getupdatetask;
             foreach (var itm in updaterecords)
             {
-                databasehelper.UpdateVegetation(itm);
+                if (!updatelist.Any(item => item.VEGETATIONCENSUSID  == itm.VEGETATIONCENSUSID ))
+                {
+                    databasehelper.UpdateVegetation(itm);
+                }
             }
 
             // push new records
@@ -1173,7 +1200,7 @@ namespace eLiDAR.API
 
             }
             //push updates
-            var updatelist = databasehelper.GetVegetationCensusToUpdate(settings.LastSynched);
+           
             if (updatelist.Count > 0)
             {
                 Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
@@ -1190,13 +1217,6 @@ namespace eLiDAR.API
                 }
             }
 
-            //push deletes
-            //var deletelist = databasehelper.GetVegetationCensusToDelete(settings.LastSynched);
-            //foreach (var itm in deletelist)
-            //{
-            //    Task deletetask = manager.DeleteTaskAsync(itm);
-            //    await deletetask;
-            //}
             return true;
         }
         public async Task<bool> VegetationCensusSynch(String _plotid, String _origdate)
