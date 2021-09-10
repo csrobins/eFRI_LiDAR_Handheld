@@ -12,7 +12,7 @@ RELEASE NOTES: v black spruce build 15
 RELEASE NOTES: v black spruce build 14
 
 1. Various upates to the validator.
-2. Fix to allow for crown wdiths on some dead trees.
+2. Fix to allow for crown widths on some dead trees.
 
 RELEASE NOTES: v black spruce build 13
 
