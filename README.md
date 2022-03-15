@@ -1,18 +1,14 @@
-# eVSN LiDAR Handheld - Ontario Forest Inventory Field Data Collection 
+# eFRI LiDAR Handheld - Ontario Forest Inventory Field Data Collection 
 
 Known and Unresolved Issues (Jul 13th 2021)
 1. Nulls do not work in numeric fields (we may need to consider a -1 to represent null.
 2. Need an Ocular Distance in Tree Hts area.
 3. Might need an additional field in the DWD screen?
 
-RELEASE NOTES: v black spruce build 15
-
-1. Fixes to the synch to prevent overwriting of rows in tables.
-
 RELEASE NOTES: v black spruce build 14
 
 1. Various upates to the validator.
-2. Fix to allow for crown widths on some dead trees.
+2. Fix to allow for crown wdiths on some dead trees.
 
 RELEASE NOTES: v black spruce build 13
 
