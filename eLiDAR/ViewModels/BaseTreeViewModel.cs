@@ -569,6 +569,25 @@ namespace eLiDAR.ViewModels
             }
         }
 
+        public int ERRORCOUNT
+        {
+            get => _tree.ERRORCOUNT;
+            set
+            {
+                _tree.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _tree.ERRORMSG;
+            set
+            {
+                _tree.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+            }
+        }
+
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = ""){

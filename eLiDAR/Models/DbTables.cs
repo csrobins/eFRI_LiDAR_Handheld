@@ -264,6 +264,9 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
+
 
     }
     public class TREELIST : TREE
@@ -368,6 +371,32 @@ namespace eLiDAR.Models
                     {
                         //  return Xamarin.Forms.Color.Accent;
                         return Xamarin.Forms.Color.FromHex("#FF333333");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Xamarin.Forms.Color.Accent;
+                }
+            }
+
+        }
+        public Xamarin.Forms.Color BadgeColor
+        {
+            get
+            {
+                try
+                {
+
+                    if (ERRORCOUNT > 1)
+                    {
+                        //   return Xamarin.Forms.Color.Red;
+                        return Xamarin.Forms.Color.FromHex("#FFE52E15");
+
+                    }
+                    else
+                    {
+                        //  return Xamarin.Forms.Color.Accent;
+                        return Xamarin.Forms.Color.FromHex("#FF993333");
                     }
                 }
                 catch (Exception ex)

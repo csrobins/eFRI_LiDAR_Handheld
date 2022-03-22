@@ -377,8 +377,16 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 TreeValidator _validator = new TreeValidator();
+                TreeValidator _fullvalidator = new TreeValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_tree);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_tree);
+
+                ParseValidater _parser = new ParseValidater();
+                (_tree.ERRORCOUNT, _tree.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
                 if (validationResults.IsValid)
                 {
                     _ = AddTree(_fk);
