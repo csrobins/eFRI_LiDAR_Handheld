@@ -182,6 +182,27 @@ namespace eLiDAR.ViewModels
             }
         }
 
+        public int ERRORCOUNT
+        {
+            get => _smallTree.ERRORCOUNT;
+            set
+            {
+                _smallTree.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _smallTree.ERRORMSG;
+            set
+            {
+                _smallTree.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
+
         List<SMALLTREELIST> _smallTreeList;
         public List<SMALLTREELIST> SmallTreeList
         {

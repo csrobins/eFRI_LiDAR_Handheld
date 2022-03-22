@@ -234,7 +234,10 @@
                     Command="{Binding GleyColourCommand}"
                     Text="{Binding GleyColourButton}"
                     IsEnabled="{Binding IsNotOrganic}"/>
-  
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="{Binding ERRORMSG}"/>
             </StackLayout>
 
            

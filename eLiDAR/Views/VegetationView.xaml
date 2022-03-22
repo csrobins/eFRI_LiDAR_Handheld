@@ -26,6 +26,10 @@
                 x:Name="txtscientific"
                 Style="{StaticResource TextBody}"
                 Text="{Binding GetScientific, Mode=TwoWay}" />
+            <Label
+                        HorizontalOptions="Start"
+                        Style="{StaticResource TextBody}"
+                        Text="{Binding ERRORMSG}"/>
             <Grid Padding="10" ColumnSpacing=" 1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

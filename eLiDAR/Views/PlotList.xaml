@@ -3,6 +3,7 @@
     x:Class="eLiDAR.Views.PlotList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{Binding Title}"
     BackgroundColor="{DynamicResource backgroundColor}"
     Shell.BackgroundColor="{DynamicResource backgroundColor}"
@@ -52,15 +53,26 @@
                                 <ColumnDefinition Width="4*" />
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0">
-                                <Label
+                                <xct:BadgeView
+                                        BackgroundColor="{DynamicResource tomato}"
+                                        AutoHide="True" 
+                                        FontAttributes="Bold"
+                                        FontSize="Small"
+                                        TextColor="White"
+                                        BadgePosition="TopLeft" 
+                                        Text="{Binding ERRORCOUNT}">
+                                    <Label
                                     HorizontalTextAlignment="Start"
                                     Style="{DynamicResource TextSubheadSecondary}"
                                     Text="Plot" />
+                                </xct:BadgeView>
+
                                 <Label
                                     Font="20"
                                     HorizontalTextAlignment="Start"
                                     Style="{DynamicResource TextSubhead}"
                                     Text="{Binding VSNPLOTNAME}" />
+                                 
                                 <Label
                                     HorizontalTextAlignment="Start"
                                     Style="{DynamicResource TextSubhead}"
@@ -89,7 +101,6 @@
                                     Style="{DynamicResource TextSubhead}"
                                     Text="{Binding MEASURETYPECODE}" />
                                 </StackLayout> 
-
                             </StackLayout>
 
                             <FlexLayout
@@ -105,65 +116,70 @@
                                     Command="{Binding ShowFilteredCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"                           
                                     HorizontalOptions="End"
-                                    Text="Trees"
-                                  />
-                                <Button
+                                    Text="Trees"/>
+                           
+                              
+                                    <Button
                                     Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSiteCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
-                                    Text="Site"
-                                     />
-                                <Button
+                                    Text="Site"/>
+                     
+                             
+                                    <Button
                                     Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSoilCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
-                                    Text="Soil"
-                                  />
-                                <Button
+                                    Text="Soil"/>
+                              
+                                    <Button
                                     Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowPhotoCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
-                                    Text="Photo"
-                                  />
-                                <Button
-                                    Style="{StaticResource RectangularButtonStyle }"
+                                    Text="Photo"/>
                               
+                                    <Button
+                                    Style="{StaticResource RectangularButtonStyle}"                            
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowSmallTreeCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
                                     Text="Small" />
-                                <Button
-                                    Style="{StaticResource RectangularButtonStyle }"
+
+                                    <Button
+                                    Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowVegetationCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
                                     Text="Veg"/>
-                                <Button
-                                    Style="{StaticResource RectangularButtonStyle }"
+                              
+                                    <Button
+                                    Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowVegetationCensusCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
                                     Text="Census"/>
-                                <Button
-                                    Style="{StaticResource RectangularButtonStyle }"
+                               
+                                    <Button
+                                    Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowDWDCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
                                     Text="DWD"/>
+           
                             </FlexLayout>
                         </Grid>
                     </ViewCell>

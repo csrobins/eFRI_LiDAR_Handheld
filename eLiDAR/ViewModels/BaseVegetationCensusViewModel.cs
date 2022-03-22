@@ -103,8 +103,27 @@ namespace eLiDAR.ViewModels
             }
             
         }
-    
- 
+        public int ERRORCOUNT
+        {
+            get => _vegetation.ERRORCOUNT;
+            set
+            {
+                _vegetation.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _vegetation.ERRORMSG;
+            set
+            {
+                _vegetation.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
+
 
         List<VEGETATIONCENSUS> _vegetationList;
         public List<VEGETATIONCENSUS> VegetationList

@@ -314,6 +314,7 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Datum" />
+                
                 <Entry
                     x:Name="txtDatum"
                     HorizontalOptions="FillAndExpand"
@@ -321,6 +322,10 @@
                     Placeholder="Datum"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DATUM}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="{Binding ERRORMSG}" />
                 <Button
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding StandInfoCommand}"

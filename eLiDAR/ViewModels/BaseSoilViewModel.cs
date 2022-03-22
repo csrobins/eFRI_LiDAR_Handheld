@@ -259,6 +259,26 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+        public int ERRORCOUNT
+        {
+            get => _soil.ERRORCOUNT;
+            set
+            {
+                _soil.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _soil.ERRORMSG;
+            set
+            {
+                _soil.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
 
         List<SOIL> _soilList;
         public List<SOIL> SoilList

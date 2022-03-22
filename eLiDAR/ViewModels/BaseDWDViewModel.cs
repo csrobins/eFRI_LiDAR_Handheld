@@ -265,7 +265,26 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-     
+        public int ERRORCOUNT
+        {
+            get => _dwd.ERRORCOUNT;
+            set
+            {
+                _dwd.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _dwd.ERRORMSG;
+            set
+            {
+                _dwd.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
 
         List<DWD> _dwdList;
         public List<DWD> DWDList

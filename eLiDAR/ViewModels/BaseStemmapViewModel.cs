@@ -140,6 +140,26 @@ namespace eLiDAR.ViewModels
                 }
             }
         }
+        public int ERRORCOUNT
+        {
+            get => _stemmap.ERRORCOUNT;
+            set
+            {
+                _stemmap.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _stemmap.ERRORMSG;
+            set
+            {
+                _stemmap.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
 
         List<STEMMAP> _stemmapList;
         public List<STEMMAP> StemMapList

@@ -108,6 +108,26 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("DISTANCE");
             }
         }
+        public int ERRORCOUNT
+        {
+            get => _photo.ERRORCOUNT;
+            set
+            {
+                _photo.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _photo.ERRORMSG;
+            set
+            {
+                _photo.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
 
         List<PHOTO> _photoList;
         public List<PHOTO> PhotoList

@@ -385,6 +385,10 @@
                     Placeholder="Maximum Rooting Depth (cm)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding MAXIMUM_ROOTING_DEPTH}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="{Binding ERRORMSG}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 2">

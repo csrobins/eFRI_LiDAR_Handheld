@@ -395,8 +395,19 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 EcositeValidator _validator = new EcositeValidator();
+                EcositeValidator _fullvalidator = new EcositeValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_ecosite);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_ecosite);
+
+                ParseValidater _parser = new ParseValidater();
+                (_ecosite.ERRORCOUNT, _ecosite.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+
+ //               EcositeValidator _validator = new EcositeValidator();
+   //             ValidationResult validationResults = _validator.Validate(_ecosite);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

@@ -93,6 +93,10 @@
                         Keyboard="Numeric" 
                         Style="{DynamicResource TextSubhead}"
                         Text="{Binding DISTANCE}" />
+                    <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="{Binding ERRORMSG}"/>
                 </StackLayout> 
             </Grid>
         </StackLayout>

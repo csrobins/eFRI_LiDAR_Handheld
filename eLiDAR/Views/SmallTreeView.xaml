@@ -36,6 +36,10 @@
                     SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="{Binding ERRORMSG}"/>
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">

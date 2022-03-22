@@ -249,7 +249,13 @@ namespace eLiDAR.ViewModels {
             if (IsChanged)
             {
                 SoilValidator _validator = new SoilValidator();
+                SoilValidator _fullvalidator = new SoilValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_soil);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_soil);
+
+                ParseValidater _parser = new ParseValidater();
+                (_soil.ERRORCOUNT, _soil.ERRORMSG) = _parser.Parse(fullvalidationResults);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

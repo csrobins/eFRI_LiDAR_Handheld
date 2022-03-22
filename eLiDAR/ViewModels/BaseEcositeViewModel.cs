@@ -419,6 +419,27 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
+
+        public int ERRORCOUNT
+        {
+            get => _ecosite.ERRORCOUNT;
+            set
+            {
+                _ecosite.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _ecosite.ERRORMSG;
+            set
+            {
+                _ecosite.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
         List<ECOSITE> _ecositeList;
         public List<ECOSITE> EcositeList
         {

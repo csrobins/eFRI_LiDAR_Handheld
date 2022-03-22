@@ -261,7 +261,26 @@ namespace eLiDAR.ViewModels
                 IsChanged = true;
             }
         }
-
+        public int ERRORCOUNT
+        {
+            get => _deformity.ERRORCOUNT;
+            set
+            {
+                _deformity.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _deformity.ERRORMSG;
+            set
+            {
+                _deformity.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                IsChanged = true;
+            }
+        }
 
 
         List<DEFORMITY> _deformityList;

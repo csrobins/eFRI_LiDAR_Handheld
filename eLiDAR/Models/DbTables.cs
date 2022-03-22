@@ -56,12 +56,6 @@ namespace eLiDAR.Models
         public string VSNPLOTTYPECODE { get; set; }
         public string VSNPLOTNAME { get; set; }
 
-
- //       public int ADMINISTRATIVE { get; set; }
- //       public string FOREST_DISTRICT { get; set; }
-  //      public int FMU { get; set; }
-   //     public int MANAGEMENT_UNIT { get; set; }
-   //     public string IMAGE_ANNOTATION { get; set; }
         public string PLOTKEY { get; set; }
         public DateTime PLOTOVERVIEWDATE { get; set; }
         public string MEASURETYPECODE { get; set; }
@@ -142,10 +136,12 @@ namespace eLiDAR.Models
         public DateTime STEMMAPPINGDATE { get; set; }
         public string STEMMAPPINGNOTE { get; set; }
         public string STEMMAPPINGPERSON { get; set; }
-
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     public class PLOTLIST : PLOT
-    { 
+    {
+        Helpers.DatabaseHelper _databasehelper = new Helpers.DatabaseHelper();
         public bool IsPlotTypeB {
             get
             {
@@ -179,7 +175,78 @@ namespace eLiDAR.Models
             }
             set { }
         }
-
+        public int TreeErrorCount
+        {
+            get
+            {
+            int count = _databasehelper.GetErrorCount("TREE", "PLOTID", PLOTID);
+            if(count >99) { return 99; }
+            else { return count; }
+            }
+        }
+        public int EcositeErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("ECOSITE", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int SoilErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("SOIL", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int PhotoErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("PHOTO", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int SmallTreeErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("SMALLTREE", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int VegetationErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("VEGETATION", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int VegetationCensusErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("VEGETATIONCENSUS", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int DWDErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("DWD", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
     }
     [Table("PHOTO")]
     public class PHOTO
@@ -196,6 +263,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
 
     [Table("PERSON")]
@@ -497,6 +566,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("ECOSITE")]
     public class ECOSITE
@@ -544,6 +615,8 @@ namespace eLiDAR.Models
         public int MODEOFDEPOSITIONRANK1 { get; set; }
         public int MODEOFDEPOSITIONRANK2 { get; set; }
         public string SUBSTRATEPERSON { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("SOIL")]
     public class SOIL
@@ -568,6 +641,8 @@ namespace eLiDAR.Models
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
         public string GLEYCOLOUR { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("SMALLTREE")]
     public class SMALLTREE
@@ -589,7 +664,8 @@ namespace eLiDAR.Models
         public string IsDeleted { get; set; }
         public int COUNT { get; set; }
         public double HEIGHT { get; set; }
-
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("VEGETATION")]
     public class VEGETATION
@@ -627,6 +703,8 @@ namespace eLiDAR.Models
         public double QUAD2_ELC7 { get; set; }
         public double QUAD3_ELC7 { get; set; }
         public double QUAD4_ELC7 { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("VEGETATIONCENSUS")]
     public class VEGETATIONCENSUS
@@ -639,6 +717,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     public class DEFORMITY
     {
@@ -666,6 +746,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
 
     }
     public class DWD
@@ -694,6 +776,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
 
     }
 

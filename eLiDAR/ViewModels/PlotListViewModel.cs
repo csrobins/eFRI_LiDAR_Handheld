@@ -53,7 +53,6 @@ namespace eLiDAR.ViewModels {
                 PlotListFull = _plotRepository.GetFilteredDataFull(_selectedprojectid);
 
         }
-       
     
         async Task ShowAdd(string fk)
         {

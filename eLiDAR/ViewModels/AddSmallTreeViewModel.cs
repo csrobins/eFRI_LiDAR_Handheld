@@ -106,8 +106,19 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 SmallTreeValidator _validator = new SmallTreeValidator();
+                SmallTreeValidator _fullvalidator = new SmallTreeValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_smallTree);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_smallTree);
+
+                ParseValidater _parser = new ParseValidater();
+                (_smallTree.ERRORCOUNT, _smallTree.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+
+//                SmallTreeValidator _validator = new SmallTreeValidator();
+  //              ValidationResult validationResults = _validator.Validate(_smallTree);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

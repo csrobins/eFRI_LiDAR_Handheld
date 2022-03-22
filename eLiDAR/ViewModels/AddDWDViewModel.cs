@@ -215,9 +215,22 @@ namespace eLiDAR.ViewModels {
         {
             // display Alert for confirmation
              if (IsChanged)
-            {
+             {
+
                 DWDValidator _validator = new DWDValidator();
+                DWDValidator _fullvalidator = new DWDValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_dwd);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_dwd);
+
+                ParseValidater _parser = new ParseValidater();
+                (_dwd.ERRORCOUNT, _dwd.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+
+
+
+//                DWDValidator _validator = new DWDValidator();
+  //              ValidationResult validationResults = _validator.Validate(_dwd);
                 if (validationResults.IsValid)
                 {
                     if (_isaccum) { _ = Update(true); }
