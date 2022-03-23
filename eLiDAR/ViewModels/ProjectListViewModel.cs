@@ -14,6 +14,8 @@ using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels {
     public class ProjectListViewModel : BaseProjectViewModel {
+   //   public class ProjectListViewModel : INotifyPropertyChanged 
+      
 
         public ICommand AddCommand { get; private set; }
         public ICommand DeleteAllProjectsCommand { get; private set; }
@@ -22,6 +24,7 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowCrewCommand { get; private set; }
         private Utilities.Utils util = new Utils();
         public ProjectListViewModel(INavigation navigation) {
+            _project = new PROJECT();
             _navigation = navigation;
             _projectRepository = new ProjectRepository();
 

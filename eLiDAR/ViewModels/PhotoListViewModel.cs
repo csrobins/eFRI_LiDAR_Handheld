@@ -15,6 +15,7 @@ namespace eLiDAR.ViewModels {
   
         public PhotoListViewModel(INavigation navigation, string _fk)
         {
+            _photo = new PHOTO();
             _navigation = navigation;
             _photoRepository = new PhotoRepository();
             _selectedplotid = _fk;

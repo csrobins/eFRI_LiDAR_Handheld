@@ -36,9 +36,9 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("PROJECTID");
             }
         }
-        public string PROJECT  
-        {  
-            get => _project.NAME; 
+        public string NAME
+        {
+            get => _project.NAME;
             set{
                 _project.NAME = value;
                 NotifyPropertyChanged("NAME");

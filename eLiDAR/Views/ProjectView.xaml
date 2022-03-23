@@ -13,7 +13,7 @@
             HorizontalOptions="FillAndExpand"
             Placeholder="Project Name"
             Style="{DynamicResource TextSubhead}"
-            Text="{Binding PROJECT}" />
+            Text="{Binding NAME}" />
         <Label
             HorizontalOptions="Start"
             Style="{StaticResource TextBody}"

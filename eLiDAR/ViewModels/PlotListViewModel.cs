@@ -26,6 +26,7 @@ namespace eLiDAR.ViewModels {
 
         public PlotListViewModel(INavigation navigation,string selectedprojectid )
         {
+            _plot = new PLOT();
             _navigation = navigation;
             _plotRepository = new PlotRepository();
             _selectedprojectid = selectedprojectid;
