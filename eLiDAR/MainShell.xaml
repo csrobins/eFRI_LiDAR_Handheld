@@ -16,45 +16,45 @@
     </ShellItem>-->
     <TabBar>
         <Tab Title="Main">
-            <Tab.Icon>
+            <!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.Home}"
                     Size="14"
                     Color="White" />
-            </Tab.Icon>
+            </Tab.Icon>-->
             <ShellContent ContentTemplate="{DataTemplate pages:Views.Main}" />
         </Tab>
         <Tab Title="Data">
             <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
-            <Tab.Icon>
+            <!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.ClipboardList}"
                     Size="14"
                     Color="White" />
-            </Tab.Icon>
+            </Tab.Icon>-->
 
         </Tab>
         <Tab Title="Settings">
-            <Tab.Icon>
+            <!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.Cog}"
                     Size="14"
                     Color="White" />
-            </Tab.Icon>
+            </Tab.Icon>-->
 
             <ShellContent ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
         </Tab>
         <Tab Title="Info">
-            <Tab.Icon>
+            <!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.InfoCircle}"
                     Size="14"
                     Color="White" />
-            </Tab.Icon>
+            </Tab.Icon>-->
             <ShellContent ContentTemplate="{DataTemplate pages:Views.About}" />
         </Tab>
 
