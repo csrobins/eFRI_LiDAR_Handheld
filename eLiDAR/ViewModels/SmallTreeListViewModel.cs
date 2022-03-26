@@ -22,6 +22,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _smallTreeRepository = new SmallTreeRepository();
             _fk = fk;
+            _smallTree = new SMALLTREE();
             AddCommand = new Command(async () => await ShowAdd(_fk));
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<SMALLTREE>(async (x) => await ShowSmallTree(x));

@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:eLiDAR"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:eLiDAR;assembly=eVSN"
-    FlyoutBehavior="Disabled"
     mc:Ignorable="d">
     <!--<ShellItem>
         <ShellContent>
@@ -21,12 +20,11 @@
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.Home}"
                     Size="14"
-                    Color="White" />
+                    Color="White"/>
             </Tab.Icon>-->
             <ShellContent ContentTemplate="{DataTemplate pages:Views.Main}" />
         </Tab>
         <Tab Title="Data">
-            <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
             <!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
@@ -35,6 +33,7 @@
                     Color="White" />
             </Tab.Icon>-->
 
+            <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
         </Tab>
         <Tab Title="Settings">
             <!--<Tab.Icon>

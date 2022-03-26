@@ -245,11 +245,6 @@
     <InterfaceDefinition Include="Assets\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\db\eLiDAR.sqlite">
-      <Link>Assets\eLiDAR.sqlite</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\fa-solid-900.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +255,11 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\eLiDAR.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

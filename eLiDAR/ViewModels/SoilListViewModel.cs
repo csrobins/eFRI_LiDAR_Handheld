@@ -22,6 +22,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _soilRepository = new SoilRepository();
             _fk = fk;
+            _soil = new SOIL();
             AddCommand = new Command(async () => await ShowAdd(_fk));
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<SOIL>(async (x) => await ShowSoil(x));

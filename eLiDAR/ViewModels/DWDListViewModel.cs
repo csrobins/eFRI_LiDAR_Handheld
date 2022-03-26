@@ -23,6 +23,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _dwdRepository = new DWDRepository();
             _fk = fk;
+            _dwd = new DWD();
             AddCommand = new Command(async () => await ShowAdd(_fk));
             AddAccumCommand = new Command(async () => await ShowAddAccum(_fk));
             DeleteAllCommand = new Command(async () => await DeleteAll());

@@ -14,7 +14,8 @@ namespace eLiDAR.Helpers
         private LogWriter logger;
         static SQLiteConnection sqliteconnection;
         public const string DbFileName = "eLiDAR.sqlite";
-    
+        //public const string DbFileName = "eLiDAR.sqlite";
+        
         public DatabaseHelper()
         {
             logger = new LogWriter(); 
