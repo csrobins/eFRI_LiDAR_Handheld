@@ -47,6 +47,12 @@
         <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
         <Setter Property="FontSize" Value="{StaticResource TextSizeBody}" />
     </Style>
+    
+    <Style x:Key="TextError" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextErrorColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeCaption}" />
+    </Style>
+
 
     <Style x:Key="TextBodySecondary" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
