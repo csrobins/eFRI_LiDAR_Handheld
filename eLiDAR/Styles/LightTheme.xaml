@@ -9,4 +9,6 @@
     <Color x:Key="TextPrimaryColor">#B0000000</Color>
     <Color x:Key="TextSecondaryColor">#80000000</Color>
     <Color x:Key="TextTernaryColor">#C8C8C8</Color>
+    <Color x:Key="TextErrorColor">#FF0000</Color>
+
 </ResourceDictionary>

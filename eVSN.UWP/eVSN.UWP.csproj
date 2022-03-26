@@ -213,6 +213,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Nito.AsyncEx">
+      <Version>5.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>2.1.0</Version>
     </PackageReference>
@@ -245,9 +248,9 @@
     <InterfaceDefinition Include="Assets\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\db\eLiDAR.sqlite">
+    <Content Include="..\db\eLiDAR.sqlite">
       <Link>Assets\eLiDAR.sqlite</Link>
-    </BundleResource>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\fa-solid-900.ttf" />

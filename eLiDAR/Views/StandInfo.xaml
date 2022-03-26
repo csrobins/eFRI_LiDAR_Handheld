@@ -227,7 +227,11 @@
                     Placeholder="% Mortality"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENTMORTALITY}" Keyboard="Numeric"  />
-            </StackLayout>
+                 <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}" />
+                </StackLayout>
         </Grid>
         </ScrollView>
     </ContentPage.Content>

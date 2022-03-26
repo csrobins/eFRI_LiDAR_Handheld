@@ -324,7 +324,7 @@
                     Text="{Binding DATUM}" />
                 <Label
                     HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
+                    Style="{StaticResource TextError}"
                     Text="{Binding ERRORMSG}" />
                 <Button
                     Style="{StaticResource FormButtonStyle } "
