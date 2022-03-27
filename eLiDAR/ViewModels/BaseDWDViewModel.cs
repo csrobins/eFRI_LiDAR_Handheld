@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -40,6 +42,10 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                DWDValidator _fullvalidator = new DWDValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_dwd);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
             }
         }
 
@@ -272,7 +278,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.ERRORCOUNT = value;
                 NotifyPropertyChanged("ERRORCOUNT");
-                IsChanged = true;
+           
             }
         }
         public string ERRORMSG
@@ -282,7 +288,7 @@ namespace eLiDAR.ViewModels
             {
                 _dwd.ERRORMSG = value;
                 NotifyPropertyChanged("ERRORMSG");
-                IsChanged = true;
+               
             }
         }
 

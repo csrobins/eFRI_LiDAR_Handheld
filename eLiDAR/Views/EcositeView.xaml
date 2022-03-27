@@ -387,7 +387,7 @@
                     Text="{Binding MAXIMUM_ROOTING_DEPTH}" />
                 <Label
                     HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
+                    Style="{StaticResource TextError}"
                     Text="{Binding ERRORMSG}" />
             </StackLayout>
 

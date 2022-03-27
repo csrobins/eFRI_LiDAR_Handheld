@@ -98,7 +98,7 @@
                     TitleColor="{StaticResource AccentColor}" />
                 <Label
                     HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
+                    Style="{StaticResource TextError}"
                     Text="{Binding ERRORMSG}"/>
             </StackLayout>
 

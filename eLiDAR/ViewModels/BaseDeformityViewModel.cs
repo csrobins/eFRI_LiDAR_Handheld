@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -41,6 +43,11 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                DeformityValidator _fullvalidator = new DeformityValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_deformity);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
+
             }
         }
 
@@ -268,7 +275,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.ERRORCOUNT = value;
                 NotifyPropertyChanged("ERRORCOUNT");
-                IsChanged = true;
+              
             }
         }
         public string ERRORMSG
@@ -278,7 +285,7 @@ namespace eLiDAR.ViewModels
             {
                 _deformity.ERRORMSG = value;
                 NotifyPropertyChanged("ERRORMSG");
-                IsChanged = true;
+              
             }
         }
 

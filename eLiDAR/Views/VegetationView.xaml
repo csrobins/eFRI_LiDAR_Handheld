@@ -378,6 +378,10 @@
             </Grid>
             <Label
                         HorizontalOptions="Start"
+                        Style="{StaticResource TextError}"
+                        Text="{Binding ERRORMSG}"/>
+            <Label
+                        HorizontalOptions="Start"
                         Style="{StaticResource TextBody}"
                         Text="The auto-calculate function can be turned off and on in 'Settings'" />
         </StackLayout>

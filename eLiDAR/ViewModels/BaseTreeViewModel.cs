@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -39,6 +41,10 @@ namespace eLiDAR.ViewModels
             get => _IsChanged;
             set
             {
+                TreeValidator _fullvalidator = new TreeValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_tree);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
                 _IsChanged = value;
             }
         }

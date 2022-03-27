@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -41,6 +43,10 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                EcositeValidator _fullvalidator = new EcositeValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_ecosite);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
             }
         }
         public string ECOSITEID
@@ -427,7 +433,7 @@ namespace eLiDAR.ViewModels
             {
                 _ecosite.ERRORCOUNT = value;
                 NotifyPropertyChanged("ERRORCOUNT");
-                IsChanged = true;
+               
             }
         }
         public string ERRORMSG
@@ -437,7 +443,7 @@ namespace eLiDAR.ViewModels
             {
                 _ecosite.ERRORMSG = value;
                 NotifyPropertyChanged("ERRORMSG");
-                IsChanged = true;
+               
             }
         }
         List<ECOSITE> _ecositeList;

@@ -9,6 +9,8 @@ using eLiDAR.Services;
 using Xamarin.Forms;
 using System.Linq;
 using eLiDAR.Utilities;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -45,6 +47,10 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                VegetationValidator _fullvalidator = new VegetationValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_vegetation);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
             }
         }
         public string VEGETATIONID
@@ -390,7 +396,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.ERRORCOUNT = value;
                 NotifyPropertyChanged("ERRORCOUNT");
-                IsChanged = true;
+               
             }
         }
         public string ERRORMSG
@@ -400,7 +406,7 @@ namespace eLiDAR.ViewModels
             {
                 _vegetation.ERRORMSG = value;
                 NotifyPropertyChanged("ERRORMSG");
-                IsChanged = true;
+            
             }
         }
 

@@ -94,7 +94,7 @@
                                     <Label
                                     HorizontalTextAlignment="End"
                                     Style="{DynamicResource TextSubheadSecondary}"
-                                    Text="Measurement Type" />
+                                    Text="Measmnt Type" />
                                     <Label
                                     Font="20"
                                     HorizontalTextAlignment="End"

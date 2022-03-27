@@ -912,11 +912,17 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => c.ELCLAYER5 >= 0 && c.ELCLAYER5 <= 99).WithMessage("% cover for ELC layer 5 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER6 >= 0 && c.ELCLAYER6 <= 99).WithMessage("% cover for ELC layer 6 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER7 >= 0 && c.ELCLAYER7 <= 99).WithMessage("% cover for ELC layer 7 must be <= 99%");
-    //        RuleFor(c => c.ELCLAYER3).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer3 can have up to 1 decimals");
-     //       RuleFor(c => c.ELCLAYER4).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer4 can have up to 1 decimals");
-     //       RuleFor(c => c.ELCLAYER5).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer5 can have up to 1 decimals");
-     //       RuleFor(c => c.ELCLAYER6).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer6 can have up to 1 decimals");
-      //      RuleFor(c => c.ELCLAYER7).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer7 can have up to 1 decimals");
+
+            //        RuleFor(c => c.ELCLAYER3).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer3 can have up to 1 decimals");
+            //       RuleFor(c => c.ELCLAYER4).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer4 can have up to 1 decimals");
+            //       RuleFor(c => c.ELCLAYER5).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer5 can have up to 1 decimals");
+            //       RuleFor(c => c.ELCLAYER6).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer6 can have up to 1 decimals");
+            //      RuleFor(c => c.ELCLAYER7).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer7 can have up to 1 decimals");
+
+            if (DoFullValidation)
+            {
+                RuleFor(c => c).Must(c => c.ELCLAYER3 + c.ELCLAYER4 + c.ELCLAYER5 + c.ELCLAYER6 + c.ELCLAYER7 > 0).WithMessage("No cover has been selected for this plant");
+            }
 
         }
         bool ValidateStringEmpty(string stringValue)

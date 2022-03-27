@@ -120,8 +120,15 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 StemMapValidator _validator = new StemMapValidator();
+                StemMapValidator _fullvalidator = new StemMapValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_stemmap);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_stemmap);
+
+                ParseValidater _parser = new ParseValidater();
+                (_stemmap.ERRORCOUNT, _stemmap.ERRORMSG) = _parser.Parse(fullvalidationResults);
                 if (validationResults.IsValid)
                 {
                     _ = UpdateTree();

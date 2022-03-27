@@ -88,6 +88,10 @@
                 Style="{StaticResource FormButtonStyle }"
                 Command="{Binding CommentsCommand}"
                 Text="Comments"/>   -->
+        <Label
+                HorizontalOptions="Start"
+                Style="{StaticResource TextError}"
+                Text="{Binding ERRORMSG}"/>
         <Button
                 Style="{StaticResource FormButtonStyle }"
                 Command="{Binding DeleteTreeCommand}"

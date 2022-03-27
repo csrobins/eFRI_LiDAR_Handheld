@@ -182,10 +182,7 @@
                     SelectedItem="{Binding SelectedWoodCondition}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
-                <Label
-                    HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
-                    Text="{Binding ERRORMSG}"/>
+              
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
@@ -417,7 +414,10 @@
                     Placeholder="Degree of Lean"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEGREEOFLEAN}"/>
-
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}"/>
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding CommentsCommand}"
