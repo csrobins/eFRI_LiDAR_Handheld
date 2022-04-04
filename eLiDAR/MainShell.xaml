@@ -22,10 +22,10 @@
                     Size="14"
                     Color="White"/>
             </Tab.Icon>-->
-        <ShellContent Title="Main" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.Main}" />
-        <ShellContent Title="Data" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
-        <ShellContent Title="Settings" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
-        <ShellContent Title="Info" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.About}" />
+        <ShellContent Title="Main" Icon="Assets/home.png" ContentTemplate="{DataTemplate pages:Views.Main}" />
+        <ShellContent Title="Data" Icon="Assets/grid.png" ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
+        <ShellContent Title="Settings" Icon="Assets/gear.png" ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
+        <ShellContent Title="Info" Icon="Assets/icon_feed.png" ContentTemplate="{DataTemplate pages:Views.About}" />
         <!--</Tab>-->
         <!--<Tab Title="Data" Icon="home.png">
             --><!--<Tab.Icon>

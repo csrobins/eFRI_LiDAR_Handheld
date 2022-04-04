@@ -138,24 +138,24 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Assets\3bar.png" />
-    <BundleResource Include="Assets\3bar%402x.png" />
-    <BundleResource Include="Assets\gear.png" />
-    <BundleResource Include="Assets\gear%402x.png" />
-    <BundleResource Include="Assets\grid.png" />
-    <BundleResource Include="Assets\grid%402x.png" />
-    <BundleResource Include="Assets\Heatmap.png" />
-    <BundleResource Include="Assets\home.png" />
-    <BundleResource Include="Assets\home%402x.png" />
-    <BundleResource Include="Assets\homeflyout.png" />
-    <BundleResource Include="Assets\homeflyout%402x.png" />
-    <BundleResource Include="Assets\Icon-60%402x.png" />
-    <BundleResource Include="Assets\Icon-60%403x.png" />
-    <BundleResource Include="Assets\iconXamarin.png" />
-    <BundleResource Include="Assets\iconXamarin%402x.png" />
-    <BundleResource Include="Assets\iconXamarin%403x.png" />
-    <BundleResource Include="Assets\lidar.jpg" />
-    <BundleResource Include="Assets\photo.png" />
+    <Content Include="Assets\3bar.png" />
+    <Content Include="Assets\3bar%402x.png" />
+    <Content Include="Assets\gear.png" />
+    <Content Include="Assets\gear%402x.png" />
+    <Content Include="Assets\grid.png" />
+    <Content Include="Assets\grid%402x.png" />
+    <Content Include="Assets\Heatmap.png" />
+    <Content Include="Assets\home.png" />
+    <Content Include="Assets\home%402x.png" />
+    <Content Include="Assets\homeflyout.png" />
+    <Content Include="Assets\homeflyout%402x.png" />
+    <Content Include="Assets\Icon-60%402x.png" />
+    <Content Include="Assets\Icon-60%403x.png" />
+    <Content Include="Assets\iconXamarin.png" />
+    <Content Include="Assets\iconXamarin%402x.png" />
+    <Content Include="Assets\iconXamarin%403x.png" />
+    <Content Include="Assets\lidar.jpg" />
+    <Content Include="Assets\photo.png" />
     <Content Include="Assets\icon_about.png" />
     <Content Include="Assets\icon_feed.png" />
     <Content Include="icon_about.png" />
@@ -175,7 +175,7 @@
     <BundleResource Include="Resources\grid.png" />
     <BundleResource Include="Resources\grid%402x.png" />
     <BundleResource Include="Resources\Heatmap.png" />
-    <BundleResource Include="home.png" />
+    <Content Include="home.png" />
     <BundleResource Include="Resources\home%402x.png" />
     <BundleResource Include="Resources\homeflyout.png" />
     <BundleResource Include="Resources\homeflyout%402x.png" />

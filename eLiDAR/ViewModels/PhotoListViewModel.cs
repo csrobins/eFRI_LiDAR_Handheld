@@ -39,7 +39,7 @@ namespace eLiDAR.ViewModels {
                     _newphoto.PHOTOTYPE = "Stand Information";
                     _newphoto.PHOTONUMBER = 1;
                     _newphoto.AZIMUTH = 0;
-                    _newphoto.DISTANCE = 0;
+                    _newphoto.DISTANCE = 0; 
                     _newphoto.PLOTID = _selectedplotid;
                     _newphoto.Created = System.DateTime.UtcNow;
                     _newphoto.LastModified = _newphoto.Created;
