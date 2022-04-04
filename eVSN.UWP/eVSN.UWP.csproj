@@ -156,6 +156,10 @@
     <BundleResource Include="Assets\iconXamarin%403x.png" />
     <BundleResource Include="Assets\lidar.jpg" />
     <BundleResource Include="Assets\photo.png" />
+    <Content Include="Assets\icon_about.png" />
+    <Content Include="Assets\icon_feed.png" />
+    <Content Include="icon_about.png" />
+    <Content Include="icon_feed.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -171,7 +175,7 @@
     <BundleResource Include="Resources\grid.png" />
     <BundleResource Include="Resources\grid%402x.png" />
     <BundleResource Include="Resources\Heatmap.png" />
-    <BundleResource Include="Resources\home.png" />
+    <BundleResource Include="home.png" />
     <BundleResource Include="Resources\home%402x.png" />
     <BundleResource Include="Resources\homeflyout.png" />
     <BundleResource Include="Resources\homeflyout%402x.png" />
@@ -268,6 +272,9 @@
     <None Include="Assets\eLiDAR.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="icons\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

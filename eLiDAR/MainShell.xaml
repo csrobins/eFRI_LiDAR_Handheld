@@ -14,7 +14,7 @@
         </ShellContent>
     </ShellItem>-->
     <TabBar>
-        <Tab Title="Main">
+        <!--<Tab Title="Main">-->
             <!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
@@ -22,40 +22,43 @@
                     Size="14"
                     Color="White"/>
             </Tab.Icon>-->
-            <ShellContent ContentTemplate="{DataTemplate pages:Views.Main}" />
-        </Tab>
-        <Tab Title="Data">
-            <!--<Tab.Icon>
+        <ShellContent Title="Main" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.Main}" />
+        <ShellContent Title="Data" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
+        <ShellContent Title="Settings" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
+        <ShellContent Title="Info" Icon="icon_feed.png" ContentTemplate="{DataTemplate pages:Views.About}" />
+        <!--</Tab>-->
+        <!--<Tab Title="Data" Icon="home.png">
+            --><!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.ClipboardList}"
                     Size="14"
                     Color="White" />
-            </Tab.Icon>-->
+            </Tab.Icon>--><!--
 
             <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
         </Tab>
         <Tab Title="Settings">
-            <!--<Tab.Icon>
+            --><!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.Cog}"
                     Size="14"
                     Color="White" />
-            </Tab.Icon>-->
+            </Tab.Icon>--><!--
 
             <ShellContent ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
         </Tab>
         <Tab Title="Info">
-            <!--<Tab.Icon>
+            --><!--<Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.InfoCircle}"
                     Size="14"
                     Color="White" />
-            </Tab.Icon>-->
-            <ShellContent ContentTemplate="{DataTemplate pages:Views.About}" />
-        </Tab>
+            </Tab.Icon>--><!--
+            <ShellContent  Icon="icon_about.png" ContentTemplate="{DataTemplate pages:Views.About}" />
+        </Tab>-->
 
     </TabBar>
 </Shell>
