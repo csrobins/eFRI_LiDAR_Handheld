@@ -29,18 +29,11 @@ namespace eLiDAR.UWP
 
             // Use this if I need to reset the datbase
             bool Isdebug = false;
-            if (Isdebug == true)
+            if (Isdebug)
             {
                 File.Delete(path);
             }
 
-    //        Task<bool> task = CheckFile();
-       //     bool result = task.GetAwaiter().GetResult();
-
-    //        Task<bool> dofile = CheckFile();
-       //     dofile.Start(); 
-   //         bool result = dofile.Result;
-           // return AsyncHelper.RunSync((c) => CheckFile());
             var result = AsyncContext.Run(CheckFile);
             if (result)
             {
