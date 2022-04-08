@@ -30,8 +30,8 @@ namespace eLiDAR
         public static int DefaultPhoto2Distance = 12;
         public static int DefaultDWDLineLength = 30;
         public static string Azuresubscriptionkey = "Ocp-Apim-Subscription-Key";
-        public static string Azuresubscriptionkeyvalue = "970555b59cf24d2aafab1d8a1df8495d";
-        
+        public static string Azuresubscriptionkeyvalue = "Dhin3bswey7Ai9k8S6b3N4g5RJZLdixC1L1DyhzvEQ2P/S1WcE2eLe3//NNPlUNQQWC163X/GLndtq7ZRx7r2g==";
+
 
     }
 }
