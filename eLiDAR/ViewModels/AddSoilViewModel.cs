@@ -153,6 +153,8 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedPorePattern, value);
                 _soil.POREPATTERNCODE = _selectedPorePattern.ID;
+                Utilities.Utils _util = new Utilities.Utils();
+                _soil.POREPATTERNCODE = _util.getPorePattern(_soil);
             }
         }
         void FetchDetails(string fk){
