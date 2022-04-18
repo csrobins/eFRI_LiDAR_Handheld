@@ -58,6 +58,8 @@ namespace eLiDAR.API
         public RestService()
         {
             _client = new HttpClient();
+            //  ADD IN HEADERS TO THE HTTP REQUEST - CONVERT THIS TO A HASH TO PROTECT IT
+            _client.DefaultRequestHeaders.Add(Constants.Azuresubscriptionkey, util.MD5Hash(Constants.Azuresubscriptionkeyvalue));
             APIGetUrl = util.GetURI;
             APIPutUrl = util.PutURI;
             APIPostUrl = util.PostURI;
@@ -77,7 +79,7 @@ namespace eLiDAR.API
         public async Task<List<PROJECT>> GetCurrentProjectListAsync(string table,string filter)
         {
             List<PROJECT> Items = new List<PROJECT>();
-             var uri = new Uri(string.Format(APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);

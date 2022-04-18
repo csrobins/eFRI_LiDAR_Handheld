@@ -1542,7 +1542,7 @@ namespace eLiDAR.Services
             var list = new List<PickerItemsString>()
             {
                                 new PickerItemsString() {ID = null, NAME = "null"},
-                new PickerItemsString() {ID = "D" , NAME = "Θ-Dry "},
+                new PickerItemsString() {ID = "Θ" , NAME = "Θ-Dry "},
                 new PickerItemsString() {ID = "0", NAME = "0-Moderately Dry"},
                 new PickerItemsString() {ID = "1", NAME = "1-Moderately Fresh"},
                 new PickerItemsString() {ID = "2", NAME = "2-Fresh"},
@@ -1624,7 +1624,7 @@ namespace eLiDAR.Services
                 new PickerItems() {ID = 12, NAME = "12-Humic PEATYMOR"},
                 new PickerItems() {ID = 13, NAME = "13-Mesic PEATYMOR"},
                 new PickerItems() {ID = 14, NAME = "14-Fibric PEATYMOR"},
-                new PickerItems() {ID = 15, NAME = "15-ANMOR (muck)"}
+                new PickerItems() {ID = 15, NAME = "15-ANMOOR (muck)"}
             };
             return list;
         }
