@@ -30,7 +30,7 @@ namespace eLiDAR.ViewModels {
         }
 
         public void FetchSmallTree(){
-           SmallTreeList = _smallTreeRepository.GetFilteredDataFull(_fk);
+            SmallTreeList = _smallTreeRepository.GetFilteredDataFull(_fk);
         }
 
         async Task ShowAdd(string _fk) {

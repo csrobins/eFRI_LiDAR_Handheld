@@ -33,6 +33,8 @@ namespace eLiDAR.ViewModels {
             _dwd.DWDID  = selectedID;
             _dwdRepository = new DWDRepository();
             _fk = selectedID;
+            _dwd.BURNED = "N";
+            _dwd.HOLLOW = "N";
             AddCommand = new Command(async () => await Update());
             AddAccumCommand = new Command(async () => await Update(IsAccumulation));
 

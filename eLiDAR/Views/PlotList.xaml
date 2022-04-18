@@ -110,6 +110,7 @@
                                 HorizontalOptions="End"
                                 JustifyContent="End"
                                 Wrap="Wrap">
+
                                 <Button
                                     Style="{StaticResource RectangularButtonStyle }"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
@@ -143,7 +144,15 @@
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     Text="Photo"/>
-                              
+                                
+                                    <Button
+                                    Style="{StaticResource RectangularButtonStyle }"
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding ShowSmallTreeTallyCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"                           
+                                    HorizontalOptions="End"
+                                    Text="Small"/>
+
                                     <Button
                                     Style="{StaticResource RectangularButtonStyle}"                            
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
@@ -151,7 +160,7 @@
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
                                     IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
-                                    Text="Small" />
+                                    Text="Shrub" />
 
                                     <Button
                                     Style="{StaticResource RectangularButtonStyle}"

@@ -75,7 +75,9 @@ namespace eLiDAR.ViewModels {
                 _ecosite.DEPTHTOROOTRESTRICTION  = null;
                 _ecosite.DEPTHTOSEEPAGE = null;
                 _ecosite.DEPTHTOWATERTABLE = null;
-
+                _ecosite.STRATIFIED = "N";
+                _ecosite.PROBLEMATICSITE = "N";
+                _ecosite.PRI_ECO_PCT = 100;
 
             }
             Refresh();

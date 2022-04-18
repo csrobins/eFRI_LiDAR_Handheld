@@ -409,7 +409,7 @@ namespace eLiDAR.Validator
             if (DoFullValidation)
             {
                 RuleFor(c => c).Must(c => c.AZIMUTH <= 360 && c.AZIMUTH >= 0).WithMessage("Azimuth must be between 0 and 360");
-                RuleFor(c => c).Must(c => c.DISTANCE <= 15 && c.DISTANCE >= 0).WithMessage("Distance must be between 0 and 15m");
+                RuleFor(c => c).Must(c => c.DISTANCE <= 13 && c.DISTANCE >= 0).WithMessage("Distance must be between 0 and 15m");
 
             }
         }
@@ -485,16 +485,15 @@ namespace eLiDAR.Validator
             DatabaseHelper _db = new DatabaseHelper();
             return _db.IsPlotNumUnique(_plot);
         }
-
     }
-
+    
     public class TreeValidator : AbstractValidator<TREE>
     {
         public TreeValidator(bool DoFullvalidation = false)
         {
             RuleFor(c => c).Must(c => IsUniqueTreeNum(c)).WithMessage("Tree number must be unique within the plot.");
             RuleFor(c => c.TREENUMBER).NotEmpty().WithMessage("Tree number should not be empty.");
-           // RuleFor(c => c.TREENUMBER).ScalePrecision(0, 5).WithMessage("Tree numbers must be integers");
+            //RuleFor(c => c.TREENUMBER).ScalePrecision(0, 5).WithMessage("Tree numbers must be integers");
             RuleFor(c => c.TREENUMBER).LessThan(2000).WithMessage("Tree numbers must be < 2000");
             RuleFor(c => c.TREENUMBER).GreaterThan(0).WithMessage("Tree numbers must be > 0");
             RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
@@ -898,6 +897,46 @@ namespace eLiDAR.Validator
             return _db.IsSmallTreeUnique(_table);
         }
     }
+
+    public class SmallTreeTallyValidator : AbstractValidator<SMALLTREETALLY>
+    {
+        public SmallTreeTallyValidator(bool DoFullValidation = false)
+        {
+            RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
+            //RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
+            RuleFor(c => c.HEIGHT).Must(c => c > 1.3).WithMessage("Height must be greater than 1.3");
+            // dbh must be between 2.5 and 7
+            //RuleFor(c => c.DBH).Must(c => c > 2.5).WithMessage("Dbh must be greater than 2.5");
+            //RuleFor(c => c.DBH).Must(c => c < 7).WithMessage("Dbh must be less than 7");
+            
+
+        }
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool IsUnique(SMALLTREETALLY _table)
+        {
+            DatabaseHelper _db = new DatabaseHelper();
+            return _db.IsSmallTreeTallyUnique(_table);
+        }
+    }
+
+
     public class VegetationValidator : AbstractValidator<VEGETATION>
     {
         public VegetationValidator(bool DoFullValidation = false)

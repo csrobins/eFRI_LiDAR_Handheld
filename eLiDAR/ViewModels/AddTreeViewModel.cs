@@ -77,6 +77,8 @@ namespace eLiDAR.ViewModels {
             _tree.HEIGHTTODBH = 1.3F;
             _tree.DBHIN  = "Y";
             _tree.CROWNIN = "Y";
+            _tree.BARKRETENTIONCODE = 1;
+            _tree.WOODCONDITIONCODE = 1;
             if (util.UseDefaultOrigin) { _tree.TREEORIGINCODE = util.DefaultOrigin; }
             if (util.UseDefaultStatus) { _tree.TREESTATUSCODE = util.DefaultStatus; }
             if (util.UseDefaultVSNStatus) { _tree.VSNSTATUSCODE = util.DefaultVSNStatus; }

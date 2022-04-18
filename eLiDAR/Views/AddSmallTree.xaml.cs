@@ -7,7 +7,7 @@ namespace eLiDAR.Views
 {
     public partial class AddSmallTree : ContentPage {
         public AddSmallTree(string fk)
-        {
+        { 
             try
             {
                 InitializeComponent();

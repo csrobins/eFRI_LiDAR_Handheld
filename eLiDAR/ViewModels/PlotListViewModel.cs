@@ -20,7 +20,8 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowVegetationCommand { get; private set; }
         public ICommand ShowVegetationCensusCommand { get; private set; }
         public ICommand ShowDWDCommand { get; private set; }
-       // public ICommand SearchCommand { get; private set; }
+        public ICommand ShowSmallTreeTallyCommand { get; private set; }
+        // public ICommand SearchCommand { get; private set; }
 
         //   public bool IsPlotTypeB { get; private set; }
 
@@ -36,6 +37,7 @@ namespace eLiDAR.ViewModels {
             ShowFilteredCommand = new Command<PLOT>(async (x) => await ShowTrees(x));
             ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
             ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
+            ShowSmallTreeTallyCommand = new Command<PLOT>(async (x) => await ShowSmallTreeTally(x));
             ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
             ShowPhotoCommand = new Command<PLOT>(async (x) => await ShowPhoto(x));
             ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
@@ -136,6 +138,10 @@ namespace eLiDAR.ViewModels {
         async Task ShowSmallTree(PLOT _plot)
         {
             await _navigation.PushAsync(new SmallTreeList(_plot.PLOTID));
+        }
+        async Task ShowSmallTreeTally(PLOT _plot)
+        {
+            await _navigation.PushAsync(new SmallTreeTallyList(_plot.PLOTID));
         }
 
         async Task ShowVegetation(PLOT _plot)

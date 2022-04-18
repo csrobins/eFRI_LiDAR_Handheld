@@ -586,6 +586,31 @@ namespace eLiDAR.Helpers
             }
         }
 
+        public bool IsSmallTreeTallyUnique(SMALLTREETALLY _smalltreetally)
+        {
+            // for examinginif a unique veg census species is being saved
+            string qry;
+            if (_smalltreetally.SMALLTREETALLYID != null)
+            {
+                qry = "select count(SMALLTREETALLYID) from SMALLTREETALLY where PLOTID = '" + _smalltreetally.PLOTID + "' and IsDeleted = 'N' and SPECIESCODE = " + _smalltreetally.SPECIESCODE + " and SMALLTREETALLYID <> '" + _smalltreetally.SMALLTREETALLYID + "'";
+            }
+            else
+            {
+                qry = "select count(SMALLTREETALLYID) from SMALLTREETALLY where PLOTID = '" + _smalltreetally.PLOTID + "' and IsDeleted = 'N' and SPECIESCODE = " + _smalltreetally.SPECIESCODE;
+            }
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+
         // Get some record counters
         public int GetErrorCount(string tbl, string key, string id)
         {
@@ -690,6 +715,9 @@ namespace eLiDAR.Helpers
             catch (Exception ex)
             { logger.LogWrite(ex.Message); }
         }
+
+
+
         public void DeleteStemmap(string id)
         {
             sqliteconnection.Delete<STEMMAP>(id);
@@ -812,6 +840,57 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<SOIL>().FirstOrDefault(t => t.SOILID == id);
         }
+
+        // Small Tree Tally Helpers
+        
+        // Small Tree Tally update
+        public void UpdateSmallTreeTally(SMALLTREETALLY smalltreetally)
+        {
+            sqliteconnection.Update(smalltreetally);
+        }
+
+        public void DeleteAllSmallTreeTally()
+        {
+            sqliteconnection.DeleteAll<SMALLTREETALLY>();
+        }
+
+        public List<SMALLTREETALLY> GetAllSmallTreeTallyData()
+        {
+            return (from data in sqliteconnection.Table<SMALLTREETALLY>().OrderBy(t => t.SPECIESCODE)
+                    select data).ToList();
+        }
+
+        public List<SMALLTREETALLYLIST> GetFilteredSmallTreeTallyDataFull(string plotid)
+        {
+            return (from data in sqliteconnection.Query<SMALLTREETALLYLIST>("select * from SMALLTREETALLY where PLOTID = '" + plotid + "' and IsDeleted = 'N' ORDER BY SPECIESCODE")
+                    select data).ToList();
+        }
+
+        public List<SMALLTREETALLY> GetFilteredSmallTreeTallyData(string plotid)
+        {
+            return (from data in sqliteconnection.Query<SMALLTREETALLY>("select SMALLTREETALLY.* from SMALLTREETALLY").OrderBy(t => t.SPECIESCODE).Where(t => t.PLOTID == plotid && t.IsDeleted == "N")
+                    select data).ToList();
+        }
+
+        public SMALLTREETALLY GetSmallTreeTallyData(string id)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().FirstOrDefault(t => t.SMALLTREETALLYID == id);
+        }
+
+        // Insert new to DB 
+        public void InsertSmallTreeTally(SMALLTREETALLY smalltreetally)
+        {
+            try
+            {
+                sqliteconnection.Insert(smalltreetally);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
+        }
+
+
+
+
 
         // Small Tree Helpers
         public void DeleteSmallTree(string id)

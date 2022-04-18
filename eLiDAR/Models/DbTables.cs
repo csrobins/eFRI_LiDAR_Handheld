@@ -551,6 +551,32 @@ namespace eLiDAR.Models
 
     }
 
+    public class SMALLTREETALLYLIST : SMALLTREETALLY
+    {
+        public string SpeciesName
+        {
+            get
+            {
+                try
+                {
+                    Utilities.Utils util = new Utilities.Utils();
+                    if (!util.UseAlphaSpecies)
+                    {
+                        return SPECIESCODE.ToString();
+                    }
+                    else { return Services.PickerService.GetValue(Services.PickerService.SmallSpeciesMaster().ToList(), SPECIESCODE); }
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+
+        }
+
+    }
+
+
     [Table("STEMMAP")]
     public class STEMMAP
     {
@@ -667,6 +693,24 @@ namespace eLiDAR.Models
         public int ERRORCOUNT { get; set; }
         public string ERRORMSG { get; set; }
     }
+
+    [Table("SMALLTREETALLY")]
+    public class SMALLTREETALLY
+    {
+        [PrimaryKey]
+        public string SMALLTREETALLYID { get; set; }
+        public string PLOTID { get; set; }
+        public int SPECIESCODE { get; set; }
+        public int DBH { get; set; }
+        public double HEIGHT { get; set; }
+        public int COUNT { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
+    }
+
     [Table("VEGETATION")]
     public class VEGETATION
     {

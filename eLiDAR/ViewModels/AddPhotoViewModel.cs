@@ -23,6 +23,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _photo = new PHOTO();
             _photo.PLOTID  = selectedID;
+            _photo.PHOTOTYPE = "Stand Information";
             _photoRepository = new PhotoRepository();
             _selectedplotid = selectedID;
             AddCommand = new Command(async () => await Update());
@@ -94,7 +95,6 @@ namespace eLiDAR.ViewModels {
         private Task Update() {
             try
             {
-            
                         _photo.Created = System.DateTime.UtcNow;
                         _photo.LastModified = _photo.Created;
                         _photo.IsDeleted = "N"; 

@@ -179,9 +179,26 @@ namespace eLiDAR.Services
         // Update Data
         void UpdateSmallTree(SMALLTREE smalltree);
         String GetTitle(string plotid);
-    
-
     }
+
+    public interface ISmallTreeTallyRepository
+    {
+        List<SMALLTREETALLY> GetAllData();
+        List<SMALLTREETALLY> GetFilteredData(string fk);
+        List<SMALLTREETALLYLIST> GetFilteredDataFull(string fk); 
+        //Get Specific data
+        SMALLTREETALLY GetSmallTreeTallyData(string SMALLTREETALLYID);
+        // Delete all Data
+        void DeleteAllSmallTreeTally();
+        // Delete Specific
+        void DeleteSmallTreeTally(SMALLTREETALLY table);
+        // Insert new to DB 
+        void InsertSmallTreeTally(SMALLTREETALLY smalltreetally, string fk);
+        // Update Data
+        void UpdateSmallTreeTally(SMALLTREETALLY smalltreetally);
+        String GetTitle(string plotid);
+    }
+
     public interface IVegetationRepository
     {
         List<VEGETATION> GetAllData();
@@ -810,7 +827,6 @@ namespace eLiDAR.Services
                 return _databaseHelper.GetPlotTitle(plotid);
             }
         }
-   
     }
 
     public class SmallTreeRepository : ISmallTreeRepository
@@ -872,8 +888,74 @@ namespace eLiDAR.Services
                 return _databaseHelper.GetPlotTitle(plotid);
             }
         }
-       
     }
+
+    public class SmallTreeTallyRepository : ISmallTreeTallyRepository
+    {
+        DatabaseHelper _databaseHelper;
+        public SmallTreeTallyRepository()
+        {
+            _databaseHelper = new DatabaseHelper();
+        }
+        public void DeleteSmallTreeTally(SMALLTREETALLY _table)
+        {
+
+            _table.LastModified = System.DateTime.UtcNow;
+            _table.IsDeleted = "Y";
+            _databaseHelper.UpdateSmallTreeTally(_table);
+        }
+        public void DeleteAllSmallTreeTally()
+        {
+            _databaseHelper.DeleteAllSmallTreeTally();
+        }
+
+        public List<SMALLTREETALLY> GetAllData()
+        {
+            return _databaseHelper.GetAllSmallTreeTallyData();
+        }
+        public List<SMALLTREETALLYLIST> GetFilteredDataFull(string fk)
+        {
+            return _databaseHelper.GetFilteredSmallTreeTallyDataFull(fk);
+        }
+        public List<SMALLTREETALLY> GetFilteredData(string fk)
+        {
+            return _databaseHelper.GetFilteredSmallTreeTallyData(fk);
+        }
+
+        public SMALLTREETALLY GetSmallTreeTallyData(string SmallTreeTallyID)
+        {
+            return _databaseHelper.GetSmallTreeTallyData(SmallTreeTallyID);
+        }
+
+        public void InsertSmallTreeTally(SMALLTREETALLY smalltreetally, string fk)
+        {
+            smalltreetally.SMALLTREETALLYID = Guid.NewGuid().ToString();
+            smalltreetally.PLOTID = fk;
+            _databaseHelper.InsertSmallTreeTally(smalltreetally);
+        }
+
+        public void UpdateSmallTreeTally(SMALLTREETALLY smalltreetally)
+        {
+            _databaseHelper.UpdateSmallTreeTally(smalltreetally);
+        }
+        public String GetTitle(string plotid)
+        {
+            if (plotid == "")
+            {
+                return "";
+            }
+            else
+            {
+                return _databaseHelper.GetPlotTitle(plotid);
+            }
+        }
+
+    }
+
+
+
+
+
     public class VegetationRepository : IVegetationRepository
     {
         DatabaseHelper _databaseHelper;

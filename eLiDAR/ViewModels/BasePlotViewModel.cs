@@ -48,10 +48,37 @@ namespace eLiDAR.ViewModels
                 ParseValidater _parser = new ParseValidater();
                 (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
 
+                PlotValidator _validator = new PlotValidator();
+                ValidationResult validationResults = _validator.Validate(_plot);
+
+                if (validationResults.IsValid)
+                {
+                    IsValid = true;
+                }
+                else
+                {
+                    IsValid = false;
+                } 
+
                 NotifyPropertyChanged("IsChanged");
             }
         }
-    public string PLOTID
+
+        private bool _IsValid = false;
+        public bool IsValid
+        {
+            get
+            {
+                return _IsValid;
+            }
+            set
+            {
+                _IsValid = value;
+                NotifyPropertyChanged("IsValid");
+            }
+        }
+
+        public string PLOTID
         {
             get => _plot.PLOTID;
             set
