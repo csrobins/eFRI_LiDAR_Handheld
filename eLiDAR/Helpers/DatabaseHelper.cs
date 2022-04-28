@@ -1191,6 +1191,20 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<SMALLTREE>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
         }
+
+        public List<SMALLTREETALLY> GetSmalltreeTallytoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<SMALLTREETALLY> GetSmalltreeTallyToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<SMALLTREETALLY> GetSmalltreeTallyToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+
         public List<VEGETATION> GetVegetationtoInsert(DateTime fromdate)
         {
             return sqliteconnection.Table<VEGETATION>().Where(t => t.Created > fromdate).ToList();

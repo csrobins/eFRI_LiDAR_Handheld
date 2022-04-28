@@ -73,6 +73,9 @@ namespace eLiDAR.API
                 Task<bool> dosmalltree = SmalltreeSynch();
                 bool smalltreedone = await dosmalltree;
 
+                Task<bool> dosmalltreetally = SmalltreeTallySynch();
+                bool smalltreetallydone = await dosmalltreetally;
+
                 Task<bool> dovegetation = VegetationSynch();
                 bool vegetationdone = await dovegetation;
 
@@ -748,6 +751,9 @@ namespace eLiDAR.API
             }
             return true;
         }
+
+
+
         public async Task<bool> SmalltreeSynch(String _plotid, String _origdate)
         {
             SmalltreeManager manager = new SmalltreeManager(service);
@@ -785,6 +791,93 @@ namespace eLiDAR.API
                 {
                     databasehelper.InsertSmallTree(itm);
                 }
+
+            return true;
+        }
+
+
+        public async Task<bool> SmalltreeTallySynch()
+        {
+            SmalltreetallyManager manager = new SmalltreetallyManager(service);
+            string filterNew = "?filter=CreatedAtServer gt '" + prevdate + "'";
+            string filterUpdate = "?filter=LastModifiedAtServer gt '" + prevdate + "'";
+            var updatelist = databasehelper.GetSmalltreeTallyToUpdate(settings.LastSynched);
+            // pull updated records
+            Task<List<SMALLTREETALLY>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+            List<SMALLTREETALLY> updaterecords = await getupdatetask;
+            foreach (var itm in updaterecords)
+            {
+                if (!updatelist.Any(item => item.SMALLTREETALLYID == itm.SMALLTREETALLYID))
+                {
+                    databasehelper.UpdateSmallTreeTally(itm);
+                }
+            }
+
+            // push new records
+            var list = databasehelper.GetSmalltreeTallytoInsert(settings.LastSynched);
+            if (list.Count > 0)
+            {
+                Task inserttask = manager.SaveTasksAsync(list, true);
+                await inserttask;
+
+            }
+            //push updates
+            if (updatelist.Count > 0)
+            {
+                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                await pushupdatetask;
+            }
+            if (!util.DoPartialSynch)
+            {
+                // pull new records
+                Task<List<SMALLTREETALLY>> gettask = manager.GetTasksAsync(filterNew);
+                List<SMALLTREETALLY> newrecords = await gettask;
+                foreach (var itm in newrecords)
+                {
+                    databasehelper.InsertSmallTreeTally(itm);
+                }
+            }
+            return true;
+        }
+
+
+        public async Task<bool> SmalltreeTallySynch(String _plotid, String _origdate)
+        {
+            SmalltreetallyManager manager = new SmalltreetallyManager(service);
+            string filterNew = "?filter=CreatedAtServer gt '" + _origdate + "' AND PLOTID eq '" + _plotid + "'";
+            string filterUpdate = "?filter=LastModifiedAtServer gt '" + prevdate + "' AND PLOTID eq '" + _plotid + "'";
+
+            // pull updated records
+            Task<List<SMALLTREETALLY>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+            List<SMALLTREETALLY> updaterecords = await getupdatetask;
+            foreach (var itm in updaterecords)
+            {
+                databasehelper.UpdateSmallTreeTally(itm);
+            }
+
+            // push new records
+            var list = databasehelper.GetSmalltreeTallytoInsert(settings.LastSynched);
+            if (list.Count > 0)
+            {
+                Task inserttask = manager.SaveTasksAsync(list, true);
+                await inserttask;
+
+            }
+            //push updates
+            var updatelist = databasehelper.GetSmalltreeTallyToUpdate(settings.LastSynched);
+            if (updatelist.Count > 0)
+            {
+                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                await pushupdatetask;
+            }
+
+            // pull new records
+            Task<List<SMALLTREETALLY>> gettask = manager.GetTasksAsync(filterNew);
+            List<SMALLTREETALLY> newrecords = await gettask;
+            foreach (var itm in newrecords)
+            {
+                databasehelper.InsertSmallTreeTally(itm);
+            }
 
             return true;
         }
