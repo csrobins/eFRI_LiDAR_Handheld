@@ -88,6 +88,7 @@ namespace eLiDAR.ViewModels
             {
                 DependencyService.Get<AppModel>().UseDeviceThemeSettings = value;
                 OnPropertyChanged(nameof(UseDeviceThemeSettings));
+        
             }
         }
 

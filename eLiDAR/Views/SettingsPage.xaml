@@ -107,6 +107,8 @@
                         <Switch
                             x:Name="swchPlotDeletion"
                             HorizontalOptions="EndAndExpand"
+                          
+                          
                             IsToggled="{Binding IsAllowPlotDeletion}" />
                     </StackLayout>
                     <StackLayout Margin="10" Orientation="Horizontal" >

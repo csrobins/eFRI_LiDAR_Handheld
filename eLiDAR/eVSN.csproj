@@ -28,6 +28,10 @@
     <EmbeddedResource Remove="FlyoutHeader.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\Images\leaves.jpg" />
+    <None Remove="Assets\Images\leaves.png" />
+    <None Remove="Assets\Images\lidar.jpg" />
+    <None Remove="Assets\Images\lidar.png" />
     <None Remove="Data\colours.txt" />
     <None Remove="Data\Ecosites.txt" />
     <None Remove="Data\Genus.txt" />
@@ -41,6 +45,12 @@
     <None Remove="Images\shell_01.jpg" />
     <None Remove="Images\snail_01.jpg" />
     <None Remove="ViewModels\CameraViewModel.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Images\leaves.jpg" />
+    <EmbeddedResource Include="Assets\Images\leaves.png" />
+    <EmbeddedResource Include="Assets\Images\lidar.jpg" />
+    <EmbeddedResource Include="Assets\Images\lidar.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\colours.txt">

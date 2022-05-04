@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False"
@@ -11,40 +12,43 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <Grid Padding="0">
-            <Image Aspect="AspectFill" Source="lidar.jpg" />
+            <Image Aspect="AspectFill"  Source="{xct:ImageResource Id=eLiDAR.Assets.Images.lidar.png}" Opacity="0.5" />
             <ScrollView>
                 <StackLayout
                     BackgroundColor="Transparent"
-                    MinimumHeightRequest="100"
-                    Orientation="Vertical">
+                    MinimumHeightRequest="50"
+                    Orientation="Vertical" VerticalOptions="Center" Padding="10,10,10,10"   >
                     <Label
                         BackgroundColor="Transparent"
-                        FontAttributes="Bold"
+                        FontFamily="{StaticResource FontAwesome}"
                         FontSize="17"
+                        FontAttributes="Bold" 
                         HorizontalOptions="CenterAndExpand"
-                        IsVisible="False"
-                        Text="This app was developed in Xamarin.Forms for iOS and Android for ground plot data collection in the Ontario Forest Resource Inventory Program. Please download, and continue to enhance and improve this application for field data collection."
-                        TextColor="White"
-                        VerticalOptions="StartAndExpand" />
+                        HorizontalTextAlignment="Center" 
+                        IsVisible="True"
+                        Text="This app was developed in Xamarin.Forms for iOS, Android and UWP for ground plot data collection in the Ontario Forest Resource Inventory Program."
+                        TextColor="Black"
+                        VerticalOptions="Fill"  />
                     <Label
                         BackgroundColor="Transparent"
                         FontAttributes="Bold"
                         FontFamily="{StaticResource FontAwesome}"
                         FontSize="40"
                         HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center" 
                         Text="eVSN for Ontario FRI"
-                        TextColor="White"
-                        VerticalOptions="CenterAndExpand" />
+                        TextColor="White" 
+                        VerticalOptions="Fill"   />
                     <Label
-                        BackgroundColor="LightGray"
-                        FontAttributes="Bold"
+                        BackgroundColor="Transparent" 
                         FontFamily="{StaticResource FontAwesome}"
-                        FontSize="20"
-                        HorizontalOptions="CenterAndExpand"
-                        IsVisible="False"
-                        Opacity="0.7"
-                        Text="Developed in 2020, 2021."
-                        TextColor="Black" />
+                        FontSize="14"
+                        FontAttributes="Bold" 
+                        HorizontalOptions="CenterAndExpand" 
+                        IsVisible="True"
+                        Opacity="1"
+                        Text="Developed in 2020, 2021, 2022"
+                        TextColor="Black"   />
                 </StackLayout>
             </ScrollView>
         </Grid>
