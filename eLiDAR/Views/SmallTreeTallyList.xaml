@@ -68,136 +68,49 @@
                                     VerticalTextAlignment="Center" />
                             </StackLayout>
                             <StackLayout Grid.Column="1" Spacing="1">
-                                <!--<StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 1.3-2.0m"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS1_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 2.01-3.00m"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS2_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 3.01-4.00m"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS3_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>-->
+                             
                             </StackLayout>
                             <StackLayout Grid.Column="2" Spacing="1">
-                                <!--<StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 4.01-5.00m"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS4_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 5.01-6.00m"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS5_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 6.01-7.00m"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS6_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>-->
+                             
                             </StackLayout>
                             <StackLayout Grid.Column="3" Spacing="1">
-                                <!--<StackLayout Orientation="Horizontal">
-                                    <Label
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 7.01-8.00m"
+                                        Text="Height "
                                         VerticalTextAlignment="Center" />
-                                    <Label
+                                        <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
                                         FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS7_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Ht 8.01-9.00m"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        FontAttributes="Bold"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding HT_CLASS8_COUNT}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>-->
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="Height (m) "
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
                                         Text="{Binding HEIGHT}"
                                         VerticalTextAlignment="Center" />
-                                    <Label
+                                        <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
-                                        Text="m "
+                                        Text=" m "
                                         VerticalTextAlignment="Center" />
-                                    <Label
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="DBH "
+                                        VerticalTextAlignment="Center" />
+                                        <Label
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding COUNT}"
+                                        Text="{Binding DBH}"
                                         VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text=" cm "
+                                        VerticalTextAlignment="Center" />
+                                        </StackLayout> 
                                 </StackLayout>
                             </StackLayout>
 

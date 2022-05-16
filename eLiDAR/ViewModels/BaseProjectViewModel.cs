@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace eLiDAR.ViewModels
 {
-    public class BaseProjectViewModel : INotifyPropertyChanged {
+    public abstract class BaseProjectViewModel : INotifyPropertyChanged {
 
         public PROJECT _project;
         public INavigation _navigation;
@@ -40,29 +40,32 @@ namespace eLiDAR.ViewModels
         {
             get => _project.NAME;
             set{
+                if (NAME != value) { IsChanged = true; }
                 _project.NAME = value;
                 NotifyPropertyChanged("NAME");
-                IsChanged = true;
+               
             }
         }  
         public string DESCRIPTION
         {
             get => _project.DESCRIPTION; 
-            set { 
+            set {
+                if (DESCRIPTION != value) { IsChanged = true; }
                 _project.DESCRIPTION = value; 
                 NotifyPropertyChanged("DESCRIPTION");
-                IsChanged = true;
+               
             }
         } 
         public DateTime PROJECT_DATE
         {
-            get => _project.PROJECT_DATE; 
-            set { 
+            get => _project.PROJECT_DATE;
+            set
+            {
+                if (!_project.PROJECT_DATE.Equals(value)) { IsChanged = true; }
                 _project.PROJECT_DATE = value; 
                 NotifyPropertyChanged("PROJECT_DATE");
-                IsChanged = true;
             }
-        } 
+        }
 
         List<PROJECT> _projectList;
         public List<PROJECT> ProjectList
@@ -74,7 +77,21 @@ namespace eLiDAR.ViewModels
                 NotifyPropertyChanged("ProjectList");
             }
         }
+        protected virtual bool SetPropertyValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (value == null ? field != null : !value.Equals(field))
+            {
+                field = value;
 
+                var handler = this.PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(propertyName));
+                }
+                return true;
+            }
+            return false;
+        }
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = ""){

@@ -34,7 +34,6 @@ namespace eLiDAR.ViewModels
             set
             {
                 _person.PROJECTID = value ;
-
                 NotifyPropertyChanged("PROJECTID");
             }
         }
@@ -52,17 +51,19 @@ namespace eLiDAR.ViewModels
         {  
             get => _person.FIRSTNAME; 
             set{
+                if (!_person.FIRSTNAME.Equals(value)) { IsChanged = true; }
                 _person.FIRSTNAME = value;
-                IsChanged = true;
+               
                 NotifyPropertyChanged("FIRSTNAME");
             }
         }  
         public string LASTNAME
         {
             get => _person.LASTNAME; 
-            set { 
+            set {
+                if (!_person.LASTNAME.Equals(value)) { IsChanged = true; }
                 _person.LASTNAME = value;
-                IsChanged = true;
+               
                 NotifyPropertyChanged("LASTNAME");
             }
         } 

@@ -42,7 +42,7 @@ namespace eLiDAR.ViewModels {
         }
 
         async Task DeleteAll(){
-            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Small Tree List", "Delete All Small Tree Details?", "OK", "Cancel");
+            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Shrub List", "Delete All Shrub Details?", "OK", "Cancel");
             if (isUserAccept){
                 _smallTreeRepository.DeleteAllSmallTree();
                 await _navigation.PopAsync();
@@ -81,7 +81,7 @@ namespace eLiDAR.ViewModels {
         }
         public string Title
         {
-            get => "Smaller tree details for plot " + _smallTreeRepository.GetTitle(_fk) + ".  " + SmallTreeList.Count.ToString() + " species.";
+            get => "Shrub details for plot " + _smallTreeRepository.GetTitle(_fk) + ".  " + SmallTreeList.Count.ToString() + " species.";
             set
             {
             }

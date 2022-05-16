@@ -49,7 +49,6 @@ namespace eLiDAR.ViewModels
             set
             {
                 _photo.PHOTOID = value;
-                IsChanged = true;
                 NotifyPropertyChanged("PHOTOID");
             }
         }
@@ -58,8 +57,8 @@ namespace eLiDAR.ViewModels
             get => _photo.PHOTOTYPE;
             set
             {
+                if (!_photo.PHOTOTYPE.Equals(value)) { IsChanged = true; }
                 _photo.PHOTOTYPE = value;
-                IsChanged = true;
                 NotifyPropertyChanged("PHOTOTYPE");
             }
         }
@@ -68,8 +67,9 @@ namespace eLiDAR.ViewModels
             get => _photo.DESCRIPTION;
             set
             {
+                if (!_photo.DESCRIPTION.Equals(value)) { IsChanged = true; }
                 _photo.DESCRIPTION = value;
-                IsChanged = true;
+
                 NotifyPropertyChanged("DESCRIPTION");
             }
         }
@@ -78,8 +78,9 @@ namespace eLiDAR.ViewModels
             get => _photo.PHOTONUMBER;
             set
             {
+                if (!_photo.PHOTONUMBER.Equals(value)) { IsChanged = true; }
                 _photo.PHOTONUMBER = value;
-                IsChanged = true;
+    
                 NotifyPropertyChanged("PHOTONUMBER");
             }
         }
@@ -88,8 +89,9 @@ namespace eLiDAR.ViewModels
             get => _photo.FRAMENUMBER;
             set
             {
+                if (!_photo.FRAMENUMBER.Equals(value)) { IsChanged = true; }
                 _photo.FRAMENUMBER = value;
-                IsChanged = true;
+    
                 NotifyPropertyChanged("FRAMENUMBER");
             }
         }
@@ -98,8 +100,8 @@ namespace eLiDAR.ViewModels
             get => _photo.AZIMUTH;
             set
             {
+                if (!_photo.AZIMUTH.Equals(value)) { IsChanged = true; }
                 _photo.AZIMUTH = value;
-                IsChanged = true;
                 NotifyPropertyChanged("AZIMUTH");
             }
         }
@@ -109,8 +111,8 @@ namespace eLiDAR.ViewModels
             get => _photo.DISTANCE;
             set
             {
+                if (!_photo.DISTANCE.Equals(value)) { IsChanged = true; }
                 _photo.DISTANCE = value;
-                IsChanged = true;
                 NotifyPropertyChanged("DISTANCE");
             }
         }

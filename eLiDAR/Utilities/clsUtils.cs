@@ -44,7 +44,9 @@ namespace eLiDAR.Utilities
         private string keygeturi = "geturi";
         private string keyputuri = "puturi";
         private string keyposturi = "posturi";
-      
+        private string keykey = "key";
+
+
 
         public string MD5Hash(string input)
         {
@@ -55,7 +57,17 @@ namespace eLiDAR.Utilities
             sha512.Clear();
             return Convert.ToBase64String(EncryptedSHA512);
         }
-      
+        internal string KEY
+        {
+            get
+            {
+                return Preferences.Get(keykey, null);
+            }
+            set
+            {
+                Preferences.Set(keykey, value);
+            }
+        }
         internal string PostURI
         {
             get

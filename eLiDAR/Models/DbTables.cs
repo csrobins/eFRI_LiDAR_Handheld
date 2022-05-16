@@ -32,6 +32,8 @@ namespace eLiDAR.Models
         public string POST { get; set; }
         public string PUT { get; set; }
         public string GET { get; set; }
+        public string KEY { get; set; }
+
     }
 
     [Table("PROJECT")]
@@ -701,7 +703,7 @@ namespace eLiDAR.Models
         public string SMALLTREETALLYID { get; set; }
         public string PLOTID { get; set; }
         public int SPECIESCODE { get; set; }
-        public int DBH { get; set; }
+        public double DBH { get; set; }
         public double HEIGHT { get; set; }
         public int COUNT { get; set; }
         public DateTime Created { get; set; }

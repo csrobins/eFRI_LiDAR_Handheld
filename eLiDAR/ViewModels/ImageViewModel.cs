@@ -56,24 +56,24 @@ namespace eLiDAR.ViewModels
                 _imagepick = value;
                 if (value == "Drainage")
                 {
-                    IMAGESOURCE = "drainage.jpg";
+                    IMAGESOURCE = "eLiDAR.Assets.Images.drainage.jpg";
                 }
                 else if (value == "Humus Form")
                 {
-                    IMAGESOURCE = "humusform.jpg";
+                    IMAGESOURCE = "eLiDAR.Assets.Images.humusform.jpg";
                 }
                 else if (value == "Moisture Regime")
                 {
-                    IMAGESOURCE = "moistureregime.jpg";
+                    IMAGESOURCE = "eLiDAR.Assets.Images.moistureregime.jpg";
                 }
                 else if (value == "Stratification")
                 {
-                    IMAGESOURCE = "stratification.jpg";
+                    IMAGESOURCE = "eLiDAR.Assets.Images.stratification.jpg";
                 }
                 NotifyPropertyChanged("IMAGEPICK");
             }
         }
-        private string _imagesource = "drainage.jpg";
+        private string _imagesource = "eLiDAR.Assets.Images.drainage.jpg";
         public string IMAGESOURCE
         {
             get => _imagesource;
@@ -81,9 +81,15 @@ namespace eLiDAR.ViewModels
             {
                 _imagesource = value;
                 NotifyPropertyChanged("IMAGESOURCE");
+                NotifyPropertyChanged("GetImage");
+
             }
         }
-       
+        
+        public Xamarin.Forms.ImageSource GetImage
+        {
+            get => EmbeddedSourceror.SourceFor(IMAGESOURCE);
+        }
 
         #region INotifyPropertyChanged    
         public event PropertyChangedEventHandler PropertyChanged;

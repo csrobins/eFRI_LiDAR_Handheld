@@ -65,6 +65,7 @@ namespace eLiDAR.ViewModels
                     util.PutURI = _user.PUT;
                     util.PostURI = _user.POST;
                     util.GetURI = _user.GET;
+                    util.KEY = _user.KEY;
                     await _navigation.PopAsync(true);
                 }
                 else

@@ -22,7 +22,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
-                    Text="Small Tree Tally Attributes" />
+                    Text="Shrub Tally Attributes" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -38,7 +38,7 @@
                     TitleColor="{StaticResource AccentColor}" />
                 <Label
                     HorizontalOptions="Start"
-                    Style="{StaticResource TextBody}"
+                    Style="{StaticResource TextError}"
                     Text="{Binding ERRORMSG}"/>
             </StackLayout>
 
@@ -112,7 +112,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
-                    Text="Small Trees Continued" />
+                    Text="Shrubs Continued" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"

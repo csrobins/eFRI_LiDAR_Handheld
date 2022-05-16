@@ -32,6 +32,10 @@ namespace eLiDAR.ViewModels
             {
                 return false;
             }
+            else
+            {
+                IsChanged = true;
+            }
             backfield = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -75,9 +79,10 @@ namespace eLiDAR.ViewModels
             get => _smallTreeTally.SPECIESCODE;
             set
             {
+                if (!_smallTreeTally.SPECIESCODE.Equals(value)) { IsChanged = true; }
                 _smallTreeTally.SPECIESCODE = value;
                 NotifyPropertyChanged("SPECIES");
-                IsChanged = true;
+               
             }
         }
 
@@ -87,9 +92,10 @@ namespace eLiDAR.ViewModels
             get => _smallTreeTally.COUNT;
             set
             {
+                if (!_smallTreeTally.COUNT.Equals(value)) { IsChanged = true; }
                 _smallTreeTally.COUNT = value;
                 NotifyPropertyChanged("COUNT");
-                IsChanged = true;
+               
             }
         }
         public double HEIGHT
@@ -97,9 +103,21 @@ namespace eLiDAR.ViewModels
             get => _smallTreeTally.HEIGHT;
             set
             {
+                if (!_smallTreeTally.HEIGHT.Equals(value)) { IsChanged = true; }
                 _smallTreeTally.HEIGHT = value;
                 NotifyPropertyChanged("HEIGHT");
-                IsChanged = true;
+               
+            }
+        }
+        public double DBH
+        {
+            get => _smallTreeTally.DBH;
+            set
+            {
+                if (!_smallTreeTally.DBH.Equals(value)) { IsChanged = true; }
+                _smallTreeTally.DBH = value;
+                NotifyPropertyChanged("DBH");
+              
             }
         }
 

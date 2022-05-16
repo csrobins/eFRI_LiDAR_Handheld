@@ -75,7 +75,7 @@ namespace eLiDAR.ViewModels {
         }
         public string Title
         {
-            get => "Small Trees for plot " + _smallTreeRepository.GetTitle(_fk);
+            get => "Shrubs for plot " + _smallTreeRepository.GetTitle(_fk);
             set
             {
             }

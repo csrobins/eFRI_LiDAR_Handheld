@@ -13,11 +13,11 @@
   <ItemGroup>
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="6.0.4" />
     <PackageReference Include="dotMorten.Xamarin.Forms.AutoSuggestBox" Version="1.1.1" />
-    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="FluentValidation" Version="11.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.1" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
     <PackageReference Include="LiveXAML" Version="2.1.73" />
   </ItemGroup>
@@ -28,6 +28,14 @@
     <EmbeddedResource Remove="FlyoutHeader.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\Images\drainage.jpg" />
+    <None Remove="Assets\Images\humusform.jpg" />
+    <None Remove="Assets\Images\leaves.jpg" />
+    <None Remove="Assets\Images\leaves.png" />
+    <None Remove="Assets\Images\lidar.jpg" />
+    <None Remove="Assets\Images\lidar.png" />
+    <None Remove="Assets\Images\moistureregime.jpg" />
+    <None Remove="Assets\Images\stratification.jpg" />
     <None Remove="Data\colours.txt" />
     <None Remove="Data\Ecosites.txt" />
     <None Remove="Data\Genus.txt" />
@@ -41,6 +49,16 @@
     <None Remove="Images\shell_01.jpg" />
     <None Remove="Images\snail_01.jpg" />
     <None Remove="ViewModels\CameraViewModel.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Images\drainage.jpg" />
+    <EmbeddedResource Include="Assets\Images\humusform.jpg" />
+    <EmbeddedResource Include="Assets\Images\leaves.jpg" />
+    <EmbeddedResource Include="Assets\Images\leaves.png" />
+    <EmbeddedResource Include="Assets\Images\lidar.jpg" />
+    <EmbeddedResource Include="Assets\Images\lidar.png" />
+    <EmbeddedResource Include="Assets\Images\moistureregime.jpg" />
+    <EmbeddedResource Include="Assets\Images\stratification.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\colours.txt">

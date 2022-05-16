@@ -795,7 +795,7 @@ namespace eLiDAR.Validator
                      RuleFor(c => c).Must(c => c.POREPATTERNCODE == null).WithMessage("Pore pattern must be empty for organic horizons");
                  });
                 // Mineral horizons
-                When(c => c.HORIZON != "LFH" || c.HORIZON != "LF" || c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
+                When(c => c.HORIZON != "LFH" && c.HORIZON != "LF" && c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
                 {
                     RuleFor(c => c).Must(c => c.DECOMPOSITIONCODE == null).WithMessage("A decoposition code is not required for mineral horizons");
                     RuleFor(c => c).Must(c => c.MATRIXCOLOUR != null).WithMessage("Matrix colour is used for mineral horizons");
@@ -870,8 +870,12 @@ namespace eLiDAR.Validator
     {
         public SmallTreeValidator(bool DoFullValidation = false)
         {
+            if(DoFullValidation)
+            {
+                RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Shrub species must be unique within the plot.");
+                RuleFor(c => c).Must(c => c.HT_CLASS1_COUNT + c.HT_CLASS2_COUNT + c.HT_CLASS3_COUNT + c.HT_CLASS4_COUNT + c.HT_CLASS5_COUNT + c.HT_CLASS6_COUNT + c.HT_CLASS7_COUNT + c.HT_CLASS8_COUNT + c.COUNT > 0).WithMessage("Shrub Count must be > 0.");
+            }
             RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
-            RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -906,10 +910,9 @@ namespace eLiDAR.Validator
             //RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
             RuleFor(c => c.HEIGHT).Must(c => c > 1.3).WithMessage("Height must be greater than 1.3");
             // dbh must be between 2.5 and 7
-            //RuleFor(c => c.DBH).Must(c => c > 2.5).WithMessage("Dbh must be greater than 2.5");
-            //RuleFor(c => c.DBH).Must(c => c < 7).WithMessage("Dbh must be less than 7");
+            RuleFor(c => c.DBH).Must(c => c > 2.5).WithMessage("Dbh must be greater than 2.5");
+            RuleFor(c => c.DBH).Must(c => c < 7).WithMessage("Dbh must be less than 7");
             
-
         }
         bool ValidateStringEmpty(string stringValue)
         {

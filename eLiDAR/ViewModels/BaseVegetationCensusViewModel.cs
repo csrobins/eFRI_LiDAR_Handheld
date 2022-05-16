@@ -34,6 +34,7 @@ namespace eLiDAR.ViewModels
             {
                 return false;
             }
+            else { IsChanged = true; }
             backfield = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -75,10 +76,10 @@ namespace eLiDAR.ViewModels
             get => _vegetation.VSNSPECIESCODE;
             set
             {
+                if (!_vegetation.VSNSPECIESCODE.Equals(value)) { IsChanged = true; }
                 _vegetation.VSNSPECIESCODE = value;
-               NotifyPropertyChanged("SPECIES");
+                NotifyPropertyChanged("SPECIES");
                 SetScientific();
-                IsChanged = true;
             }
         }
         public int SPECIMENNUMBER
@@ -86,9 +87,9 @@ namespace eLiDAR.ViewModels
             get => _vegetation.SPECIMENNUMBER;
             set
             {
+                if (!_vegetation.SPECIMENNUMBER.Equals(value)) { IsChanged = true; }
                 _vegetation.SPECIMENNUMBER = value;
                 NotifyPropertyChanged("SPECIMENNUMBER");
-                IsChanged = true;
             }
         }
 

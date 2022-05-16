@@ -114,12 +114,14 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeCode(_ecosite));
+            IsChanged = true;
         }
         async Task ShowTexture()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new Texture(_ecosite));
+            IsChanged = true;
         }
 
         async Task ShowComments()
@@ -127,6 +129,7 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeComments(_ecosite));
+            IsChanged=true;
         }
 
         private PickerItemsString _selectedSubstratePerson = new PickerItemsString { ID = "", NAME = "" };

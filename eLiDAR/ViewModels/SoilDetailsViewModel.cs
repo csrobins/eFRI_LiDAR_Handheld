@@ -55,6 +55,7 @@ namespace eLiDAR.ViewModels {
         }
         public void Refresh()
         {
+
             NotifyPropertyChanged("HorizonButton");
             NotifyPropertyChanged("StructureButton");
             NotifyPropertyChanged("ColourButton");
@@ -67,30 +68,35 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new SoilStructure(_soil));
+            IsChanged = true;
         }
         async Task ShowColour()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
-            await _navigation.PushAsync(new SoilColour(_soil));
+            await _navigation.PushAsync(new SoilColour(_soil, IsChanged));
+            IsChanged = true;            
         }
         async Task ShowGleyColour()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new GleyColour(_soil));
+            IsChanged = true;
         }
         async Task ShowMottleColour()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
-            await _navigation.PushAsync(new MottleColour(_soil));
+            await _navigation.PushAsync(new MottleColour(_soil, IsChanged ));
+            IsChanged = true;
         }
         async Task ShowTexture()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new Texture(_soil));
+            IsChanged = true;
         }
         async Task ShowImage()
         {
@@ -107,6 +113,7 @@ namespace eLiDAR.ViewModels {
             }
             set
             {
+
             }
         }
         public string GleyColourButton

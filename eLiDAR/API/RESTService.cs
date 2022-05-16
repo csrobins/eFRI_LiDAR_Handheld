@@ -63,7 +63,7 @@ namespace eLiDAR.API
         {
             _client = new HttpClient();
             //  ADD IN HEADERS TO THE HTTP REQUEST - CONVERT THIS TO A HASH TO PROTECT IT
-            _client.DefaultRequestHeaders.Add(Constants.Azuresubscriptionkey, util.MD5Hash(Constants.Azuresubscriptionkeyvalue));
+            _client.DefaultRequestHeaders.Add(Constants.Azuresubscriptionkey, util.KEY);
             APIGetUrl = util.GetURI;
             APIPutUrl = util.PutURI;
             APIPostUrl = util.PostURI;

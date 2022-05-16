@@ -65,13 +65,13 @@ namespace eLiDAR.ViewModels {
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
-            await _navigation.PushAsync(new SoilColour(_soil));
+            await _navigation.PushAsync(new SoilColour(_soil, IsChanged ));
         }
         async Task ShowMottleColour()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
-            await _navigation.PushAsync(new MottleColour(_soil));
+            await _navigation.PushAsync(new MottleColour(_soil, IsChanged));
         }
         async Task ShowGleyColour()
         {
