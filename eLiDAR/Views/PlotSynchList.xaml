@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.PlotSynchList"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+    <ScrollView >
+    <Grid Padding="10,10,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="250" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <SearchBar
+                x:Name="MainSearch"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                CancelButtonColor="{StaticResource cerulean}"
+                HorizontalTextAlignment="Start"
+                Placeholder="Search plots..."
+                PlaceholderColor="{DynamicResource TextPrimaryColor}"
+                Style="{DynamicResource TextSubhead}"
+                TextChanged="SearchBar_OnTextChanged" />
+
+        </Grid>
+        <StackLayout Grid.Row=" 1">
+        <BoxView Style="{DynamicResource HRule}" />
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    TextColor="{DynamicResource TextPrimaryColor}">
+                        Use the plot list below to synch plots where data has changed on this device, or to retrieve the latest copy.
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        </StackLayout>
+        
+        
+        <ListView
+            x:Name="MyListView"
+            Grid.Row="2"
+            BackgroundColor="{DynamicResource backgroundColor}"
+            HasUnevenRows="true"
+            ItemsSource="{Binding PlotList}"
+            SelectedItem="{Binding SelectedPlotItem, Mode=TwoWay}"
+            SeparatorColor="{DynamicResource AccentColor}" IsEnabled="{Binding IsSynchEnabled}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:Name="Item" Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="95" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label
+                                    HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Plot" />
+                                <Label
+                                    Font="20"
+                                    HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding VSNPLOTNAME}" />
+                                 
+                                <Label
+                                    HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding PLOTOVERVIEWDATE, StringFormat='{0:dd-MMM-yy}'}" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <StackLayout Orientation="Horizontal" >
+                                    <Label
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Plot Type" />
+                                    <Label
+                                    Font="20"
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding VSNPLOTTYPECODE}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" >
+                                    <Label
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Measmnt Type" />
+                                    <Label
+                                    Font="20"
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding MEASURETYPECODE}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" >
+                                    <Label
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Modified " />
+                                    <Label
+                                    HorizontalTextAlignment="End"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding SynchRequired, StringFormat='{0:dd-MMM-yy}'}" />
+                                </StackLayout>
+                            </StackLayout>
+
+                            <FlexLayout
+                                Grid.Column=" 2"
+                                AlignContent="End"
+                                FlowDirection="LeftToRight"
+                                HorizontalOptions="End"
+                                JustifyContent="End"
+                                Wrap="Wrap">
+
+                                <Button
+                                    Style="{StaticResource RectangularButtonStyle }"
+                                    BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                                    Command="{Binding SynchPlotCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"                           
+                                    HorizontalOptions="End"
+                                    Text="Synch"/>
+
+                            </FlexLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Grid.Row="4">
+            <StackLayout Margin="0" Orientation="Horizontal" >
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                    FontAttributes="Bold"
+                                    FontSize="17"
+                                    TextColor="{DynamicResource TextPrimaryColor}">
+                                Use this synch to load projects and plots that have already been created (trees, etc, will not load). Use this to initiate your device with data, ready for data collection.
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" >
+                <Button
+                             Style="{StaticResource FormButtonStyle}"
+                             Command="{Binding SynchCommand}"
+                             IsEnabled="{Binding IsSynchEnabled}"
+                             Text="Pull Plots"/>
+                <ActivityIndicator IsRunning="{Binding IsSynchBusy}" />
+            </StackLayout>
+
+
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Grid.Row=" 3">
+            <Label
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            Style="{DynamicResource TextSubhead}"
+                            Text="OR, pick a plot below to synch a single plot of data." />
+            <Picker
+                    x:Name="txtPlotSynch"
+                    Title="Synch a Single Plot"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListPlots}"
+                    IsEnabled="{Binding IsSynchEnabled}"
+                    SelectedItem="{Binding SelectedPlot}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+            <Button
+                         Style="{StaticResource FormButtonStyle}"
+                          Command="{Binding SinglePlotCommand}"
+                          IsEnabled="{Binding IsPlotSynchEnabled}"
+                          Text="Synch 1 Plot"       />
+            <ActivityIndicator IsRunning="{Binding IsPlotSynchBusy}" />
+
+        </StackLayout>
+    </Grid>
+    </ScrollView>
+</ContentPage>

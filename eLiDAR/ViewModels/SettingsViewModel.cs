@@ -25,7 +25,7 @@ namespace eLiDAR.ViewModels
         public ICommand SynchCommand { get; private set; }
         public ICommand SynchPlotCommand { get; private set; }
         public ICommand DefaultCommand { get; private set; }
-        private SynchManager _synchmanager;
+       // private SynchManager _synchmanager;
         public ICommand ChangeThemeCommand { get; set; }
         public List<PickerItemsString> ListPlots { get; set; }
         public string SelectedTheme { get; set; }
@@ -33,10 +33,10 @@ namespace eLiDAR.ViewModels
         {
             _navigation = navigation;
             util = new Utils();
-            SynchCommand = new Command(async () => await Synchrun());
-            SynchPlotCommand = new Command(async () => await SynchPlotrun());
+    //        SynchCommand = new Command(async () => await Synchrun());
+    //        SynchPlotCommand = new Command(async () => await SynchPlotrun());
             DefaultCommand = new Command(async () => await DoDefault());
-            _synchmanager = new SynchManager();
+            //_synchmanager = new SynchManager();
             databasehelper = new DatabaseHelper();
             ListPlots = Services.PickerService.FillPlotPicker(databasehelper.GetAllPlotData()).ToList().OrderBy(c => c.NAME).ToList();
             ChangeThemeCommand = new Command((x) =>
@@ -92,39 +92,39 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        async Task Synchrun()
-        {
-            IsSynchBusy = true;
-            bool success = await  _synchmanager.RunSynch();
-            IsSynchBusy = false;
-            if (success)
-            {
-                msg = "Synch succeeded";
-                await Application.Current.MainPage.DisplayAlert("Synch", "The synch operation completed successfully.", "OK");
-            }
-            else { 
-                msg = "Not all tables synched!";
-                await Application.Current.MainPage.DisplayAlert("Synch did not finish", "The synch operation was not completed.", "OK");
-            }
-            FetchSettings(); 
-        }
-        async Task SynchPlotrun()
-        {
-            IsPlotSynchBusy = true;
-            bool success = await _synchmanager.RunSynch(_selectedPlot.ID);
-            IsPlotSynchBusy = false;
-            if (success)
-            {
-                msg = "Plot Synch succeeded for " + _selectedPlot.NAME;
-                await Application.Current.MainPage.DisplayAlert("Synch", msg, "OK");
-            }
-            else
-            {
-                msg = "Not all tables synched!";
-                await Application.Current.MainPage.DisplayAlert("Synch did not finish", msg, "OK");
-            }
-            FetchSettings();
-        }
+     //  async Task Synchrun()
+     //  {
+     //      IsSynchBusy = true;
+     //      bool success = await  _synchmanager.RunSynch();
+     //      IsSynchBusy = false;
+     //      if (success)
+     //      {
+     //          msg = "Synch succeeded";
+     //          await Application.Current.MainPage.DisplayAlert("Synch", "The synch operation completed successfully.", "OK");
+     //      }
+     //      else { 
+     //          msg = "Not all tables synched!";
+     //          await Application.Current.MainPage.DisplayAlert("Synch did not finish", "The synch operation was not completed.", "OK");
+     //      }
+     //      FetchSettings(); 
+     //  }
+     //  async Task SynchPlotrun()
+     //  {
+     //      IsPlotSynchBusy = true;
+     //      bool success = await _synchmanager.RunSynch(_selectedPlot.ID);
+     //      IsPlotSynchBusy = false;
+     //      if (success)
+     //      {
+     //          msg = "Plot Synch succeeded for " + _selectedPlot.NAME;
+     //          await Application.Current.MainPage.DisplayAlert("Synch", msg, "OK");
+     //      }
+     //      else
+     //      {
+     //          msg = "Not all tables synched!";
+     //          await Application.Current.MainPage.DisplayAlert("Synch did not finish", msg, "OK");
+     //      }
+     //      FetchSettings();
+     //  }
         void FetchSettings() 
         {
             settings = databasehelper.GetSettingsData();

@@ -68,11 +68,22 @@ namespace eLiDAR.Helpers
             var plot = sqliteconnection.Query<PLOT>("select VSNPLOTTYPECODE from Plot where PLOTID = '" + id + "'").FirstOrDefault();
             return plot.VSNPLOTTYPECODE;
         }
+        public DateTime GetPlotLastSynch(String id)
+        {
+            var plot = sqliteconnection.Query<PLOT>("select LastSynched from Plot where PLOTID = '" + id + "'").FirstOrDefault();
+            return plot.LastSynched;
+        }
 
         public string GetTreeTitle(String id)
         {
             var tree = sqliteconnection.Query<TREE>("select TREENUMBER from Tree where TREEID = '" + id + "'").FirstOrDefault();
             return tree.TREENUMBER.ToString();
+        }
+
+        public string GetPlotfromTree(String id)
+        {
+            var tree = sqliteconnection.Query<TREE>("select TREENUMBER from Tree where TREEID = '" + id + "'").FirstOrDefault();
+            return tree.PLOTID;
         }
 
         public int GetAzimuth(String id)
@@ -235,6 +246,12 @@ namespace eLiDAR.Helpers
             return (from data in sqliteconnection.Query<PLOT>("select * from PLOT where PROJECTID = '" + projectid + "' and IsDeleted = 'N' ORDER BY VSNPLOTNAME")
                     select data).ToList();
         }
+
+        public List<PLOT> GetPlotDataforSynch(DateTime updatedate)
+        {
+           return sqliteconnection.Table<PLOT>().Where(t => t.SynchRequired > updatedate).ToList();
+        }
+
         public List<PLOTLIST> GetFilteredPlotDataFull(string projectid)
         {
         //    return (from data in sqliteconnection.Query<PLOTLIST>("Select * from PLOT").OrderBy(t => t.VSNPLOTNAME).Where(t => t.PROJECTID == projectid)
@@ -343,6 +360,42 @@ namespace eLiDAR.Helpers
                 return null;
             }
         }
+
+        public bool SetPlotSynch(string plotID = null, string treeID = null,bool settonull = false)
+        {
+            try
+            {
+                string thisplot = plotID;
+                SQLite.SQLiteCommand com = new SQLite.SQLiteCommand(sqliteconnection);
+                long ticks = DateTime.UtcNow.Ticks;
+
+                if (!string.IsNullOrEmpty(treeID))
+                {
+                    thisplot = GetPlotfromTree(treeID);
+                    com.CommandText = "UPDATE Plot SET SynchRequired = " + ticks + " WHERE PLOTID = '" + thisplot + "'";
+                }
+
+                if(settonull)
+                {
+                    com.CommandText = "UPDATE Plot SET SynchRequired = " + 0 + ", LastSynched = " + ticks + " WHERE PLOTID = '" + thisplot + "'";
+                }
+                else
+                {
+                    com.CommandText = "UPDATE Plot SET SynchRequired = " + ticks + " WHERE PLOTID = '" + thisplot + "'";
+
+                }
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message;
+                return false;
+            }
+        }
+
+
         public bool IsTreeNumUnique(TREE _tree)
         {
             // for examinginif a unique tree number is being saved
@@ -382,6 +435,23 @@ namespace eLiDAR.Helpers
             {
                 var myerror = e.Message; // erro
                 return false;
+            }
+        }
+
+        public int TreeErrorCount(string _plotid)
+        {
+            // for examingin the count of errors in the tree table
+            string qry;
+            qry = "select sum(ERRORCOUNT) from TREE where PLOTID = '" + _plotid + "'";
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                return num; 
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return 0;
             }
         }
 
@@ -1098,6 +1168,9 @@ namespace eLiDAR.Helpers
         {
             var settings = sqliteconnection.Table<SETTINGS>().FirstOrDefault();
             return settings.LastSynched.ToString() ; 
+
+
+
         }
         public List<PROJECT> GetProjecttoInsert(DateTime fromdate)
         {

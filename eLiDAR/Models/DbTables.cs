@@ -86,6 +86,8 @@ namespace eLiDAR.Models
         public string PLOTOVERVIEWNOTE { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
+        public DateTime SynchRequired { get; set; }
+        public DateTime LastSynched { get; set; }
         public string IsDeleted { get; set; }
         public int NONSTANDARDTYPECODE { get; set; }
         public int ACCESSCONDITIONCODE { get; set; }

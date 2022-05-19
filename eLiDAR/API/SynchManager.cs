@@ -37,6 +37,56 @@ namespace eLiDAR.API
         // all other sych processes start form here
         //  there is one set of procedires for each of the 10 tables
 
+        public async Task<bool> RunLoad()
+        {
+            try
+            {
+                DateTime basedate = new DateTime(2000, 1, 1, 0, 0, 0);
+                //confirm the date used for the last synch
+                if (DateTime.Compare(settings.LastSynched, basedate) < 0)
+                {
+                    prevdate = "01-01-2000";
+                    settings.LastSynched = basedate;
+                }
+                // execute the synch on each tabe here
+                Task<bool> doproject = ProjectSynch(true);
+                bool projectdone = await doproject;
+
+                Task<bool> doperson = PersonSynch(true);
+                bool persondone = await doperson;
+
+                Task<bool> doplot = PlotSynch(true);
+                bool plotdone = await doplot;
+
+
+                // finish up by saving the details
+                if (projectdone && plotdone && persondone  && service.IsSuccess)
+                {
+                    settings.LastSynched = DateTime.UtcNow;
+                    settings.PROJECT_ROWS_SYNCHED = projectpushes;
+                    settings.PLOT_ROWS_SYNCHED = plotpushes;
+                    settings.TREE_ROWS_SYNCHED = treepushes;
+                    settings.PROJECT_ROWS_PULLED = projectpulls;
+                    settings.PLOT_ROWS_PULLED = plotpulls;
+                    settings.TREE_ROWS_PULLED = treepulls;
+
+                    databasehelper.UpdateSettings(settings);
+                    return true;
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Synch did not finish", service.Msg, "Ok");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter logger = new LogWriter();
+                logger.LogWrite(ex.Message);
+                return false;
+            }
+        }
+
         public async Task<bool> RunSynch()
         {
             try
@@ -119,13 +169,16 @@ namespace eLiDAR.API
                 return false;
             }
         }
-        public async Task<bool> RunSynch(String _plotid)
+        public async Task<bool> RunSynch(String _plotid )
         {
+           // DateTime lastsynchdate;
             // this is just a plot level synch process
             try
             {
                 DateTime basedate = new DateTime(2000, 1, 1, 0, 0, 0);
                 string pulldate = "01-01-2000";
+                // Set the last synch date to the plot synch
+                settings.LastSynched =  databasehelper.GetPlotLastSynch(_plotid); 
                 //confirm the date used for the last synch
                 if (DateTime.Compare(settings.LastSynched, basedate) < 0)
                 {
@@ -152,6 +205,8 @@ namespace eLiDAR.API
                 Task<bool> dophoto = PhotoSynch();
                 bool photodone = await dophoto;
                 bool smalltreedone = true;
+                bool smalltreetallydone = true;
+
                 bool vegetationdone = true;
                 bool dwddone = true;
                 bool vegetationcensusdone = true;
@@ -162,15 +217,18 @@ namespace eLiDAR.API
                     Task<bool> dosmalltree = SmalltreeSynch(_plotid, pulldate);
                     smalltreedone = await dosmalltree;
 
-                    Task<bool> dostemmap = StemmapSynch();
-                    stemmapdone = await dostemmap;
+                    Task<bool> dosmalltreetally = SmalltreeTallySynch(_plotid, pulldate);
+                    smalltreetallydone = await dosmalltreetally;
+
+                //    Task<bool> dostemmap = StemmapSynch();
+                //    stemmapdone = await dostemmap;
 
                 }
                 if (plottype == "C")
                 {
 
-                    Task<bool> dodeformity = DeformitySynch();
-                    deformitydone = await dodeformity;
+                //    Task<bool> dodeformity = DeformitySynch();
+                //    deformitydone = await dodeformity;
 
                     Task<bool> dovegetation = VegetationSynch(_plotid, pulldate);
                     vegetationdone = await dovegetation;
@@ -210,37 +268,41 @@ namespace eLiDAR.API
         }
 
         // run the project table synch
-        public async Task<bool> ProjectSynch()
+        public async Task<bool> ProjectSynch(bool pullonly = false)
         {
             ProjectManager  manager = new ProjectManager(service);
-            string filterNew = "?filter=CreatedAtServer gt '" + prevdate + "'";
+            string filterNew = "?filter=CreatedAtServer gt '01-01-2000'";
             string filterUpdate = "?filter=LastModifiedAtServer gt '" + prevdate + "'";
-            var updatelist = databasehelper.GetProjectToUpdate(settings.LastSynched);
-            // pull updated records
-            Task<List<PROJECT>> getupdatetask = manager.GetTasksAsync(filterUpdate);
-            List<PROJECT> updaterecords = await getupdatetask;
-            foreach (var itm in updaterecords)
+            if (!pullonly)
             {
-                if (!updatelist.Any(item => item.PROJECTID == itm.PROJECTID))
-                {
-                    databasehelper.UpdateProject(itm);
-                }
-            }
 
-            // push new records
-            var list = databasehelper.GetProjecttoInsert(settings.LastSynched);
-            if (list.Count > 0)
-            {
-                Task inserttask = manager.SaveTasksAsync(list, true);
-                await inserttask;
-                projectpushes = projectpushes+1; 
-            }
-            //push updates
-          
-            if (updatelist.Count > 0)
-            {
-                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
-                await pushupdatetask;
+                var updatelist = databasehelper.GetProjectToUpdate(settings.LastSynched);
+                // pull updated records
+                Task<List<PROJECT>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+                List<PROJECT> updaterecords = await getupdatetask;
+                foreach (var itm in updaterecords)
+                {
+                    if (!updatelist.Any(item => item.PROJECTID == itm.PROJECTID))
+                    {
+                        databasehelper.UpdateProject(itm);
+                    }
+                }
+
+                // push new records
+                var list = databasehelper.GetProjecttoInsert(settings.LastSynched);
+                if (list.Count > 0)
+                {
+                    Task inserttask = manager.SaveTasksAsync(list, true);
+                    await inserttask;
+                    projectpushes = projectpushes + 1;
+                }
+                //push updates
+
+                if (updatelist.Count > 0)
+                {
+                    Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                    await pushupdatetask;
+                }
             }
             // pull new records
             Task<List<PROJECT>> gettask = manager.GetTasksAsync(filterNew);
@@ -255,39 +317,46 @@ namespace eLiDAR.API
   
             return true;
         }
-        public async Task<bool> PlotSynch()
+        public async Task<bool> PlotSynch(bool pullonly = false)
         {
-            PlotManager manager = new PlotManager(service); 
-            string filterNew = "?filter=CreatedAtServer gt '" + prevdate + "'";
+            PlotManager manager = new PlotManager(service);
+    //        string filterNew = "?filter=CreatedAtServer gt '" + prevdate + "'";
+            // set this to 01-01-2000 - to always pull all records
+            string filterNew = "?filter=CreatedAtServer gt '01-01-2000'";
             string filterUpdate = "?filter=LastModifiedAtServer gt '" + prevdate + "'";
-            // get the update list of records
-            var updatelist = databasehelper.GetPlotToUpdate(settings.LastSynched);
 
-            // pull updated records
-            Task<List<PLOT>> getupdatetask = manager.GetTasksAsync(filterUpdate);
-            List<PLOT> updaterecords = await getupdatetask;
-            foreach (var itm in updaterecords)
+            if (!pullonly)
             {
-                // only update records not being updated from the app
-                if (!updatelist.Any(item => item.PLOTID == itm.PLOTID))
+
+                // get the update list of records
+                var updatelist = databasehelper.GetPlotToUpdate(settings.LastSynched);
+
+                // pull updated records
+                Task<List<PLOT>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+                List<PLOT> updaterecords = await getupdatetask;
+                foreach (var itm in updaterecords)
                 {
-                    databasehelper.UpdatePlot(itm);
+                    // only update records not being updated from the app
+                    if (!updatelist.Any(item => item.PLOTID == itm.PLOTID))
+                    {
+                        databasehelper.UpdatePlot(itm);
+                    }
                 }
-            }
 
-            // push new records
-            var list = databasehelper.GetPlottoInsert(settings.LastSynched);
-            if (list.Count > 0)
-            {
-                Task inserttask = manager.SaveTasksAsync(list, true);
-                await inserttask;
-                plotpushes = plotpushes+1;
-            }
-            //push updates
-            if (updatelist.Count > 0)
-            {
-                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
-                await pushupdatetask;
+                // push new records
+                var list = databasehelper.GetPlottoInsert(settings.LastSynched);
+                if (list.Count > 0)
+                {
+                    Task inserttask = manager.SaveTasksAsync(list, true);
+                    await inserttask;
+                    plotpushes = plotpushes + 1;
+                }
+                //push updates
+                if (updatelist.Count > 0)
+                {
+                    Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                    await pushupdatetask;
+                }
             }
             // pull new records
             Task<List<PLOT>> gettask = manager.GetTasksAsync(filterNew);
@@ -1223,39 +1292,42 @@ namespace eLiDAR.API
 
             return true;
         }
-        public async Task<bool> PersonSynch()
+        public async Task<bool> PersonSynch(bool pullonly = false)
         {
             PersonManager manager = new PersonManager(service);
-            string filterNew = "?filter=CreatedAtServer gt '" + prevdate + "'";
+            string filterNew = "?filter=CreatedAtServer gt '01-01-2020'";
             string filterUpdate = "?filter=LastModifiedAtServer gt '" + prevdate + "'";
-            var updatelist = databasehelper.GetPersonToUpdate(settings.LastSynched);
-            // pull updated records
-            Task<List<PERSON>> getupdatetask = manager.GetTasksAsync(filterUpdate);
-            List<PERSON> updaterecords = await getupdatetask;
-            foreach (var itm in updaterecords)
+            if (!pullonly)
             {
-                if (!updatelist.Any(item => item.PERSONID  == itm.PERSONID ))
+
+                var updatelist = databasehelper.GetPersonToUpdate(settings.LastSynched);
+                // pull updated records
+                Task<List<PERSON>> getupdatetask = manager.GetTasksAsync(filterUpdate);
+                List<PERSON> updaterecords = await getupdatetask;
+                foreach (var itm in updaterecords)
                 {
-                    databasehelper.UpdatePerson(itm);
+                    if (!updatelist.Any(item => item.PERSONID == itm.PERSONID))
+                    {
+                        databasehelper.UpdatePerson(itm);
+                    }
+                }
+
+                // push new records
+                var list = databasehelper.GetPersontoInsert(settings.LastSynched);
+                if (list.Count > 0)
+                {
+                    Task inserttask = manager.SaveTasksAsync(list, true);
+                    await inserttask;
+
+                }
+                //push updates
+
+                if (updatelist.Count > 0)
+                {
+                    Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
+                    await pushupdatetask;
                 }
             }
-
-            // push new records
-            var list = databasehelper.GetPersontoInsert(settings.LastSynched);
-            if (list.Count > 0)
-            {
-                Task inserttask = manager.SaveTasksAsync(list, true);
-                await inserttask;
-
-            }
-            //push updates
-         
-            if (updatelist.Count > 0)
-            {
-                Task pushupdatetask = manager.SaveTasksAsync(updatelist, false);
-                await pushupdatetask;
-            }
-
             // pull new records
             Task<List<PERSON>> gettask = manager.GetTasksAsync(filterNew);
             List<PERSON> newrecords = await gettask;

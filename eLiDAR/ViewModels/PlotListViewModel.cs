@@ -156,7 +156,7 @@ namespace eLiDAR.ViewModels {
         {
             await _navigation.PushAsync(new DWDList(_plot.PLOTID));
         }
-        
+ 
         public string Title
         {
             get => "Plot List for " + _plotRepository.GetProjectTitle(_selectedprojectid) + ".\n  " + PlotListFull.Count.ToString()+ " plots.";

@@ -125,6 +125,7 @@ namespace eLiDAR.ViewModels {
                 }
             }
         }
+
         async Task ShowStemMap(TREE _tree)
         {
             // launch the form - filtered to a specific projectid

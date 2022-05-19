@@ -70,7 +70,7 @@
                     Size="14"
                     Color="White" />
             </Tab.Icon>
-            <ShellContent   ContentTemplate="{DataTemplate pages:Views.About}" />
+            <ShellContent   ContentTemplate="{DataTemplate pages:Views.PlotSynchList}" />
         </Tab>
 
     </TabBar>

@@ -389,7 +389,7 @@ namespace eLiDAR.Validator
         {  
             RuleFor(c => c.NAME).NotEmpty().WithMessage("Project name should not be empty.");
             RuleFor(c => c.DESCRIPTION).NotEmpty().WithMessage("Project description should not be empty.");
-      //      RuleFor(c => c.PROJECT_DATE).NotEmpty().WithMessage("Project date should not be empty.");
+            RuleFor(c => c.PROJECT_DATE).NotEmpty().WithMessage("Project date should not be empty.");
         }  
 
     }
@@ -409,7 +409,7 @@ namespace eLiDAR.Validator
             if (DoFullValidation)
             {
                 RuleFor(c => c).Must(c => c.AZIMUTH <= 360 && c.AZIMUTH >= 0).WithMessage("Azimuth must be between 0 and 360");
-                RuleFor(c => c).Must(c => c.DISTANCE <= 13 && c.DISTANCE >= 0).WithMessage("Distance must be between 0 and 15m");
+                RuleFor(c => c).Must(c => c.DISTANCE <= 15 && c.DISTANCE >= 0).WithMessage("Distance must be between 0 and 15m");
 
             }
         }
@@ -493,7 +493,7 @@ namespace eLiDAR.Validator
         {
             RuleFor(c => c).Must(c => IsUniqueTreeNum(c)).WithMessage("Tree number must be unique within the plot.");
             RuleFor(c => c.TREENUMBER).NotEmpty().WithMessage("Tree number should not be empty.");
-            //RuleFor(c => c.TREENUMBER).ScalePrecision(0, 5).WithMessage("Tree numbers must be integers");
+          //  RuleFor(c => c.TREENUMBER).Length(1, 5).WithMessage("Tree numbers must be integers");
             RuleFor(c => c.TREENUMBER).LessThan(2000).WithMessage("Tree numbers must be < 2000");
             RuleFor(c => c.TREENUMBER).GreaterThan(0).WithMessage("Tree numbers must be > 0");
             RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
@@ -503,9 +503,9 @@ namespace eLiDAR.Validator
 
             RuleFor(c => c.TREEORIGINCODE).NotEmpty().WithMessage("Tree origin should not be empty.");
             RuleFor(c => c.DBH).NotEmpty().WithMessage("Tree DBH should not be empty and be between 0 and 200.");
-            RuleFor(c => c.DBH).GreaterThan(7).WithMessage("Tree DBH should be > 7cm.");
-            RuleFor(c => c.DBH).LessThan(200).WithMessage("Tree DBH should be < 200.");
-          //  RuleFor(c => c.DBH).ScalePrecision(2, 6).WithMessage("DBH can have up to 2 decimals");
+            RuleFor(c => c.DBH).GreaterThanOrEqualTo((float)7.10).WithMessage("Tree DBH should be >= 7.10cm.");
+            RuleFor(c => c.DBH).LessThanOrEqualTo((float)150.00).WithMessage("Tree DBH should be <= 150.00cm");
+            RuleFor(c => (decimal)c.DBH).ScalePrecision(2, 6).WithMessage("DBH can have up to 2 decimals");
             RuleFor(c => c).Must(c => c.SPECIESCODE  == 0).WithMessage("Species code should be empty when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
             RuleFor(c => c).Must(c => c.TREEORIGINCODE == null).WithMessage("Tree Origin Code should be null when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
             RuleFor(c => c).Must(c => c.HEIGHTTODBH == 0).WithMessage("Ht to DBH should be 0 when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
@@ -955,11 +955,11 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => c.ELCLAYER6 >= 0 && c.ELCLAYER6 <= 99).WithMessage("% cover for ELC layer 6 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER7 >= 0 && c.ELCLAYER7 <= 99).WithMessage("% cover for ELC layer 7 must be <= 99%");
 
-            //        RuleFor(c => c.ELCLAYER3).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer3 can have up to 1 decimals");
-            //       RuleFor(c => c.ELCLAYER4).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer4 can have up to 1 decimals");
-            //       RuleFor(c => c.ELCLAYER5).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer5 can have up to 1 decimals");
-            //       RuleFor(c => c.ELCLAYER6).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer6 can have up to 1 decimals");
-            //      RuleFor(c => c.ELCLAYER7).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer7 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER3).ScalePrecision(1, 4).WithMessage("ELClayer3 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER4).ScalePrecision(1, 4).WithMessage("ELClayer4 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER5).ScalePrecision(1, 4).WithMessage("ELClayer5 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER6).ScalePrecision(1, 4).WithMessage("ELClayer6 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER7).ScalePrecision(1, 4).WithMessage("ELClayer7 can have up to 1 decimals");
 
             if (DoFullValidation)
             {

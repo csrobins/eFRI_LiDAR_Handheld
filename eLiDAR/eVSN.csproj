@@ -184,6 +184,9 @@
     <Compile Update="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PlotSynchList.xaml.cs">
+      <DependentUpon>PlotSynchList.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Texture.xaml.cs">
       <DependentUpon>Texture.xaml</DependentUpon>
     </Compile>
