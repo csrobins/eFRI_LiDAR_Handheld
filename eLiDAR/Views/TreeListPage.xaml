@@ -196,7 +196,6 @@
                                         Text="{Binding CORESTATUSCODE}"
                                         TextColor="{Binding AgeColor}"
                                         VerticalTextAlignment="Center" />
-                      
                             </StackLayout>
                             <FlexLayout
                                 Grid.Column="4"
@@ -211,24 +210,22 @@
                                     Command="{Binding ShowAgesCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End" Text="Ages"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.LiveTree}" /> 
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.LiveTree}" />
                                 <Button
                                     Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowFilteredCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HorizontalOptions="End"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
-                                    Text="Stem Map"/>
+                                    HorizontalOptions="End" Text="Stem Map"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"/>
                                 <Button
                                     Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowDeformityCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HorizontalOptions="End"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
-                                    Text="Deformity"/>
-                            </FlexLayout>  
+                                    HorizontalOptions="End" Text="Deform"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"/>
+                            </FlexLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

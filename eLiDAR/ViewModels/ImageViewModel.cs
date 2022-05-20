@@ -19,8 +19,7 @@ namespace eLiDAR.ViewModels
     public class ImageViewModel : INotifyPropertyChanged   {
 
         public INavigation _navigation;
-        private Utils util;
-     //   private DatabaseHelper databasehelper;
+
       
         public ImageViewModel(INavigation navigation)
         {

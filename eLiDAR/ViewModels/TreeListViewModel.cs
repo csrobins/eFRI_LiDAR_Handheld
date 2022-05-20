@@ -100,9 +100,7 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-               
                     return _treeRepository.GetFilteredTreeStemDataFull(_fk, DefaultSort);
-               
             }
             set
             {

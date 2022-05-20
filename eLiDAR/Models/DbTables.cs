@@ -353,7 +353,7 @@ namespace eLiDAR.Models
         {
             get
             {
-                //                if (VSNPLOTTYPECODE == "AB" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "B")
+       
                 try
                 {
                     if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))

@@ -111,7 +111,7 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public bool IsPlotTypeB
+        public bool ThisIsPlotTypeB
         {
             get
             {
@@ -126,7 +126,7 @@ namespace eLiDAR.ViewModels
                 }
             }
         }
-        public bool IsPlotTypeC
+        public bool ThisIsPlotTypeC
         {
             get
             {

@@ -19,7 +19,7 @@ namespace eLiDAR.ViewModels
 
         public INavigation _navigation;
         private Utils util;
-        private SETTINGS settings;
+
         private DatabaseHelper databasehelper;
         public ICommand LoginCommand { get; private set; }
     

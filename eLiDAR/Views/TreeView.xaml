@@ -302,12 +302,12 @@
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding StemMapCommand}"
-                    IsEnabled="{Binding IsPlotTypeB}"
+                    IsEnabled="{Binding ThisIsPlotTypeB}"
                     Text="Stem Map" />
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding DeformityCommand}"
-                    IsEnabled="{Binding IsPlotTypeC}"
+                    IsEnabled="{Binding ThisIsPlotTypeC}"
                     Text="Deformity" />
                 <Button
                     Style="{StaticResource FormButtonStyle }"
