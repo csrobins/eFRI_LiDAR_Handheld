@@ -57,7 +57,7 @@ namespace eLiDAR.ViewModels
             get => _photo.PHOTOTYPE;
             set
             {
-                if (!_photo.PHOTOTYPE.Equals(value)) { IsChanged = true; }
+                if (_photo.PHOTOTYPE != value) { IsChanged = true; }
                 _photo.PHOTOTYPE = value;
                 NotifyPropertyChanged("PHOTOTYPE");
             }
@@ -67,7 +67,7 @@ namespace eLiDAR.ViewModels
             get => _photo.DESCRIPTION;
             set
             {
-                if (!_photo.DESCRIPTION.Equals(value)) { IsChanged = true; }
+                if (_photo.DESCRIPTION != value) { IsChanged = true; }
                 _photo.DESCRIPTION = value;
 
                 NotifyPropertyChanged("DESCRIPTION");
@@ -89,7 +89,7 @@ namespace eLiDAR.ViewModels
             get => _photo.FRAMENUMBER;
             set
             {
-                if (!_photo.FRAMENUMBER.Equals(value)) { IsChanged = true; }
+                if (_photo.FRAMENUMBER != value) { IsChanged = true; }
                 _photo.FRAMENUMBER = value;
     
                 NotifyPropertyChanged("FRAMENUMBER");

@@ -104,7 +104,10 @@ namespace eLiDAR.ViewModels
             get => _plot.VSNPLOTTYPECODE;
             set
             {
-                if (!_plot.VSNPLOTTYPECODE.Equals(value)) { IsChanged = true; }
+                if (_plot.VSNPLOTTYPECODE != value) 
+                {
+                    IsChanged = true; 
+                }
                 _plot.VSNPLOTTYPECODE = value;
                 NotifyPropertyChanged("PLOT_TYPE");
             
@@ -160,7 +163,7 @@ namespace eLiDAR.ViewModels
             get => _plot.EXISTINGPLOTNAME;
             set
             {
-                if (!_plot.EXISTINGPLOTNAME.Equals(value)) { IsChanged = true; }
+                if (_plot.EXISTINGPLOTNAME != value) { IsChanged = true; }
                 _plot.EXISTINGPLOTNAME = value;
                 NotifyPropertyChanged("EXISTINGPLOTNAME");
              
@@ -481,7 +484,10 @@ namespace eLiDAR.ViewModels
             get => _plot.DATUM;
             set
             {
-                if (!_plot.DATUM.Equals(value)) { IsChanged = true; }
+                if (_plot.DATUM != value) 
+                { 
+                    IsChanged = true;
+                }
                 _plot.DATUM = value;
                 NotifyPropertyChanged("DATUM");
     
@@ -493,7 +499,10 @@ namespace eLiDAR.ViewModels
             get => _plot.PLOTOVERVIEWNOTE;
             set
             {
-                if (!_plot.PLOTOVERVIEWNOTE.Equals(value)) { IsChanged = true; }
+                if (_plot.PLOTOVERVIEWNOTE != value) 
+                {
+                    IsChanged = true;
+                }
                 _plot.PLOTOVERVIEWNOTE = value;
                 NotifyPropertyChanged("COMMENTS");
        
@@ -515,7 +524,10 @@ namespace eLiDAR.ViewModels
             get => _plot.FORESTHEALTHNOTE;
             set
             {
-                if (!_plot.FORESTHEALTHNOTE.Equals(value)) { IsChanged = true; }
+                if (_plot.FORESTHEALTHNOTE != value) 
+                {
+                    IsChanged = true;
+                }
                 _plot.FORESTHEALTHNOTE = value;
                 NotifyPropertyChanged("FORESTHEALTHNOTE");
  
@@ -526,7 +538,10 @@ namespace eLiDAR.ViewModels
             get => _plot.FORESTHEALTHPERSON;
             set
             {
-                if (!_plot.FORESTHEALTHPERSON.Equals(value)) { IsChanged = true; }
+                if (_plot.FORESTHEALTHPERSON != value) 
+                {
+                    IsChanged = true;
+                }
                 _plot.FORESTHEALTHPERSON = value;
                 NotifyPropertyChanged("FORESTHEALTHPERSON");
 
@@ -561,7 +576,10 @@ namespace eLiDAR.ViewModels
             get => _plot.SMALLTREESHRUBNOTE;
             set
             {
-                if (_plot.SMALLTREESHRUBNOTE != value) { IsChanged = true; }
+                if (_plot.SMALLTREESHRUBNOTE != value) 
+                { 
+                    IsChanged = true;
+                }
                 _plot.SMALLTREESHRUBNOTE = value;
                 NotifyPropertyChanged("SMALLTREESHRUBNOTE");
 
@@ -850,7 +868,10 @@ namespace eLiDAR.ViewModels
             get => _plot.AGENOTE;
             set
             {
-                if (!_plot.AGENOTE.Equals(value)) { IsChanged = true; }
+                if (_plot.AGENOTE != value) 
+                { 
+                    IsChanged = true;
+                }
                 _plot.AGENOTE = value;
                 NotifyPropertyChanged("AGENOTE");
 
@@ -862,10 +883,12 @@ namespace eLiDAR.ViewModels
             get => _plot.AGEPERSON;
             set
             {
-                if (!_plot.AGEPERSON.Equals(value)) { IsChanged = true; }
+                if (_plot.AGEPERSON != value)
+                {
+                    IsChanged = true;
+                }
                 _plot.AGEPERSON = value;
                 NotifyPropertyChanged("AGEPERSON");
-
             }
         }
 
@@ -885,7 +908,10 @@ namespace eLiDAR.ViewModels
             get => _plot.STEMMAPPINGNOTE;
             set
             {
-                if (!_plot.STEMMAPPINGNOTE.Equals(value)) { IsChanged = true; }
+                if (_plot.STEMMAPPINGNOTE != value) 
+                { 
+                    IsChanged = true;
+                }
                 _plot.STEMMAPPINGNOTE = value;
                 NotifyPropertyChanged("STEMMAPPINGNOTE");
             }
@@ -896,7 +922,10 @@ namespace eLiDAR.ViewModels
             get => _plot.STEMMAPPINGPERSON;
             set
             {
-                if (!_plot.STEMMAPPINGPERSON.Equals(value)) { IsChanged = true; }
+                if (_plot.STEMMAPPINGPERSON != value)
+                {
+                    IsChanged = true;
+                }
                 _plot.STEMMAPPINGPERSON = value;
                 NotifyPropertyChanged("STEMMAPPINGPERSON");
             }

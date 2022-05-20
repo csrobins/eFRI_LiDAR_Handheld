@@ -133,7 +133,7 @@ namespace eLiDAR.ViewModels
             get => _dwd.DOWNWOODYDEBRISORIGINCODE;
             set
             {
-                if (!_dwd.DOWNWOODYDEBRISORIGINCODE.Equals(value)) { IsChanged = true; }
+                if (_dwd.DOWNWOODYDEBRISORIGINCODE !=value) { IsChanged = true; }
                 _dwd.DOWNWOODYDEBRISORIGINCODE = value;
                 NotifyPropertyChanged("ORIGIN");
               
@@ -196,7 +196,7 @@ namespace eLiDAR.ViewModels
             get => _dwd.MOSS;
             set
             {
-                if (!_dwd.MOSS.Equals(value)) { IsChanged = true; }
+                if (_dwd.MOSS != value) { IsChanged = true; }
                 _dwd.MOSS = value;
                 NotifyPropertyChanged("GT_50_MOSS");
                
@@ -208,7 +208,7 @@ namespace eLiDAR.ViewModels
             get => _dwd.BURNED;
             set
             {
-                if (!_dwd.BURNED.Equals(value)) { IsChanged = true; }
+                if (_dwd.BURNED !=value) { IsChanged = true; }
                 _dwd.BURNED = value;
                 NotifyPropertyChanged("BURNED");
                
@@ -220,7 +220,7 @@ namespace eLiDAR.ViewModels
             get => _dwd.HOLLOW;
             set
             {
-                if (!_dwd.HOLLOW.Equals(value)) { IsChanged = true; }
+                if (_dwd.HOLLOW != value) { IsChanged = true; }
                 _dwd.HOLLOW = value;
                 NotifyPropertyChanged("HOLLOW");
                 
@@ -231,7 +231,7 @@ namespace eLiDAR.ViewModels
             get => _dwd.IS_ACCUM;
             set
             {
-                if (!_dwd.IS_ACCUM.Equals(value)) { IsChanged = true; }
+                if (_dwd.IS_ACCUM != value) { IsChanged = true; }
                 _dwd.IS_ACCUM = value;
                 NotifyPropertyChanged("IS_ACCUM");
                

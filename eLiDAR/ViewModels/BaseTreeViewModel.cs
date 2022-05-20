@@ -9,6 +9,7 @@ using eLiDAR.Services;
 using Xamarin.Forms;
 using eLiDAR.Validator;
 using FluentValidation.Results;
+using System.Linq;
 
 namespace eLiDAR.ViewModels
 {
@@ -110,6 +111,36 @@ namespace eLiDAR.ViewModels
             }
         }
 
+        public bool IsPlotTypeB
+        {
+            get
+            {
+                List<string> plots = new List<string> { "B", "C" };
+                if (plots.Any(_treeRepository.GetPlotType(_tree.PLOTID).Contains))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        public bool IsPlotTypeC
+        {
+            get
+            {
+                List<string> plots = new List<string>{"C"};
+                if (plots.Any(_treeRepository.GetPlotType(_tree.PLOTID).Contains))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public int TREENUM
         {
             get => _tree.TREENUMBER;
@@ -161,7 +192,7 @@ namespace eLiDAR.ViewModels
             get => _tree.TAG_TYPE;
             set
             {
-                if (!_tree.TAG_TYPE.Equals(value)) { IsChanged = true; }
+                if (_tree.TAG_TYPE !=value) { IsChanged = true; }
                 _tree.TAG_TYPE = value;
                 NotifyPropertyChanged("TAG_TYPE");
                 
@@ -173,7 +204,7 @@ namespace eLiDAR.ViewModels
             get => _tree.TREEORIGINCODE;
             set
             {
-                if (!_tree.TREEORIGINCODE.Equals(value)) { IsChanged = true; }
+                if (_tree.TREEORIGINCODE !=value) { IsChanged = true; }
                 _tree.TREEORIGINCODE = value;
                 NotifyPropertyChanged("ORIGIN");
             }
@@ -184,7 +215,7 @@ namespace eLiDAR.ViewModels
             get => _tree.TREESTATUSCODE;
             set
             {
-                if (!_tree.TREESTATUSCODE.Equals(value)) { IsChanged = true; }
+                if (_tree.TREESTATUSCODE !=value) { IsChanged = true; }
                 _tree.TREESTATUSCODE = value;
                 if (value == "L" || value == "V" || value == "M" || value == "E")
                 {
@@ -201,7 +232,7 @@ namespace eLiDAR.ViewModels
             get => _tree.VSNSTATUSCODE;
             set
             {
-                if (!_tree.VSNSTATUSCODE.Equals(value)) { IsChanged = true; }
+                if (_tree.VSNSTATUSCODE != value) { IsChanged = true; }
                 _tree.VSNSTATUSCODE = value;
                 NotifyPropertyChanged("VSNSTATUSCODE");
                
@@ -370,7 +401,7 @@ namespace eLiDAR.ViewModels
             get => _tree.CORESTATUSCODE;
             set
             {
-                if (!_tree.CORESTATUSCODE.Equals(value)) { IsChanged = true; }
+                if (_tree.CORESTATUSCODE != value) { IsChanged = true; }
                 _tree.CORESTATUSCODE = value;
                 NotifyPropertyChanged("CORESTATUSCODE");
             }
@@ -425,7 +456,7 @@ namespace eLiDAR.ViewModels
             get => _tree.DBHIN;
             set
             {
-                if (!_tree.DBHIN.Equals(value)) { IsChanged = true; }
+                if (_tree.DBHIN != value) { IsChanged = true; }
 
                 _tree.DBHIN = value;
                 NotifyPropertyChanged("DBH_IN");
@@ -437,7 +468,7 @@ namespace eLiDAR.ViewModels
             get => _tree.CROWNIN;
             set
             {
-                if (!_tree.CROWNIN.Equals(value)) { IsChanged = true; }
+                if (_tree.CROWNIN !=value) { IsChanged = true; }
 
                 _tree.CROWNIN = value;
                 NotifyPropertyChanged("CROWN_IN");
@@ -461,7 +492,7 @@ namespace eLiDAR.ViewModels
             get => _tree.CROWNCLASSCODE;
             set
             {
-                if (!_tree.CROWNCLASSCODE.Equals(value)) { IsChanged = true; }
+                if (_tree.CROWNCLASSCODE != value) { IsChanged = true; }
 
                 _tree.CROWNCLASSCODE = value;
                 NotifyPropertyChanged("CROWN_CLASS");
@@ -508,7 +539,7 @@ namespace eLiDAR.ViewModels
             get => _tree.STEMQUALITYCODE;
             set
             {
-                if (!_tree.STEMQUALITYCODE.Equals(value)) { IsChanged = true; }
+                if (_tree.STEMQUALITYCODE != value) { IsChanged = true; }
 
                 _tree.STEMQUALITYCODE = value;
                 NotifyPropertyChanged("STEM_QUALITY");
@@ -569,7 +600,7 @@ namespace eLiDAR.ViewModels
             get => _tree.BROKENTOP;
             set
             {
-                if (!_tree.BROKENTOP.Equals(value)) { IsChanged = true; }
+                if (_tree.BROKENTOP !=value) { IsChanged = true; }
                 _tree.BROKENTOP = value;
                 NotifyPropertyChanged("BROKEN_TOP");
             }
@@ -581,7 +612,7 @@ namespace eLiDAR.ViewModels
             get => _tree.COMMENTS;
             set
             {
-                if (!_tree.COMMENTS.Equals(value)) { IsChanged = true; }
+                if (_tree.COMMENTS != value) { IsChanged = true; }
                 _tree.COMMENTS  = value;
                 NotifyPropertyChanged("COMMENTS");
             }

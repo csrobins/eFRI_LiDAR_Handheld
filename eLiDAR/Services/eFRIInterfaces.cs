@@ -642,7 +642,7 @@ namespace eLiDAR.Services
             }
             else
             {
-                return _databaseHelper.GetPlotTitle(plotid);
+                return _databaseHelper.GetPlotType(plotid);
             }
         }
 

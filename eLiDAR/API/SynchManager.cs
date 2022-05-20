@@ -204,8 +204,10 @@ namespace eLiDAR.API
 
                 Task<bool> dophoto = PhotoSynch();
                 bool photodone = await dophoto;
+
+                Task<bool> dosmalltreetally = SmalltreeTallySynch(_plotid, pulldate);
+                bool smalltreetallydone = await dosmalltreetally;
                 bool smalltreedone = true;
-                bool smalltreetallydone = true;
 
                 bool vegetationdone = true;
                 bool dwddone = true;
@@ -217,18 +219,16 @@ namespace eLiDAR.API
                     Task<bool> dosmalltree = SmalltreeSynch(_plotid, pulldate);
                     smalltreedone = await dosmalltree;
 
-                    Task<bool> dosmalltreetally = SmalltreeTallySynch(_plotid, pulldate);
-                    smalltreetallydone = await dosmalltreetally;
 
-                //    Task<bool> dostemmap = StemmapSynch();
-                //    stemmapdone = await dostemmap;
+                    Task<bool> dostemmap = StemmapSynch();
+                    stemmapdone = await dostemmap;
 
                 }
                 if (plottype == "C")
                 {
 
-                //    Task<bool> dodeformity = DeformitySynch();
-                //    deformitydone = await dodeformity;
+                    Task<bool> dodeformity = DeformitySynch();
+                    deformitydone = await dodeformity;
 
                     Task<bool> dovegetation = VegetationSynch(_plotid, pulldate);
                     vegetationdone = await dovegetation;
@@ -499,27 +499,27 @@ namespace eLiDAR.API
             }
             // now use the trees to makes a list for synching
 
-            List<TREE> treelist = databasehelper.GetFilteredTreeData(_plotid);
-            int counter = 0;
-            foreach (var tree in treelist)
-            {
-                filterTree = filterTree + " TREEID eq '" + tree.TREEID + "' OR";
-                counter = counter + 1;
-                if (counter % 10 == 0)  // run the filter in 25 items chunks - this is a horrible workaround
-                {
-                    filterTree = filterTree.Substring(0, filterTree.Length - 3);
-                    if (plottype == "B" || plottype == "C") { await StemmapSynch(_origdate, filterTree); }
-                    if (plottype == "C") { await DeformitySynch(_origdate, filterTree); }
-                    filterTree = "";
-                }
-            }
-   
-            if (filterTree.Length >0)  // and then finsih up with whatever data is left over to filter from
-            {
-                filterTree = filterTree.Substring(0, filterTree.Length - 3);
-                if (plottype == "B" || plottype == "C") { await StemmapSynch(_origdate, filterTree); }
-                if (plottype == "C") { await DeformitySynch(_origdate, filterTree); }
-            }
+          //  List<TREE> treelist = databasehelper.GetFilteredTreeData(_plotid);
+          //  int counter = 0;
+          //  foreach (var tree in treelist)
+          //  {
+          //      filterTree = filterTree + " TREEID eq '" + tree.TREEID + "' OR";
+          //      counter = counter + 1;
+          //      if (counter % 10 == 0)  // run the filter in 25 items chunks - this is a horrible workaround
+          //      {
+          //          filterTree = filterTree.Substring(0, filterTree.Length - 3);
+          //          if (plottype == "B" || plottype == "C") { await StemmapSynch(_origdate, filterTree); }
+          //          if (plottype == "C") { await DeformitySynch(_origdate, filterTree); }
+          //          filterTree = "";
+          //      }
+          //  }
+          //
+          //  if (filterTree.Length >0)  // and then finsih up with whatever data is left over to filter from
+          //  {
+          //      filterTree = filterTree.Substring(0, filterTree.Length - 3);
+          //      if (plottype == "B" || plottype == "C") { await StemmapSynch(_origdate, filterTree); }
+          //      if (plottype == "C") { await DeformitySynch(_origdate, filterTree); }
+          //  }
             return true;
         }
 

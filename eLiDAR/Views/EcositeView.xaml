@@ -144,7 +144,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Distinct Mottles" />
+                    Text="Depth to Distinct Mottles (cm) (use 999 as null)" />
                 <Entry
                     x:Name="txtDistintMottle"
                     HorizontalOptions="FillAndExpand"
@@ -155,7 +155,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Prominient Mottles" />
+                    Text="Depth to Prominient Mottles (cm) (use 999 as null)" />
                 <Entry
                     x:Name="txtProminentMottle"
                     HorizontalOptions="FillAndExpand"
@@ -166,7 +166,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Gley" />
+                    Text="Depth to Gley (cm) (use 999 as null)" />
                 <Entry
                     x:Name="txtDeothtoGley"
                     HorizontalOptions="FillAndExpand"
@@ -177,7 +177,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Bedrock" />
+                    Text="Depth to Bedrock (cm) (use 999 as null)" />
                 <Entry
                     x:Name="txtDepthToBedrock"
                     HorizontalOptions="FillAndExpand"
@@ -188,7 +188,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Carbonates" />
+                    Text="Depth to Carbonates (cm) (use 999 as null)" />
                 <Entry
                     x:Name="txtDepthToCarbonates"
                     HorizontalOptions="FillAndExpand"
@@ -199,7 +199,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Water Table (cm)" />
+                    Text="Depth to Water Table (cm) (use 999 as null)" />
                 <Entry
                     x:Name="txtDepthToWater"
                     HorizontalOptions="FillAndExpand"
@@ -210,7 +210,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Depth to Seepage" />
+                    Text="Depth to Seepage (cm) (use 999 as null)" />
                 <Entry
                     x:Name="txtDepthToSeepage"
                     HorizontalOptions="FillAndExpand"

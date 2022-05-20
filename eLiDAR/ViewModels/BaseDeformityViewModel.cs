@@ -129,7 +129,7 @@ namespace eLiDAR.ViewModels
             get => _deformity.QUADRANTCODE;
             set
             {
-                if (!_deformity.QUADRANTCODE.Equals(value)) { IsChanged = true; }
+                if (_deformity.QUADRANTCODE != value) { IsChanged = true; }
                 _deformity.QUADRANTCODE = value;
                 NotifyPropertyChanged("QUAD");
                
@@ -236,7 +236,7 @@ namespace eLiDAR.ViewModels
             get => _deformity.OLD_FEEDING_CAVITY;
             set
             {
-                if (!_deformity.OLD_FEEDING_CAVITY.Equals(value)) { IsChanged = true; }
+                if (_deformity.OLD_FEEDING_CAVITY != value) { IsChanged = true; }
                 _deformity.OLD_FEEDING_CAVITY = value;
                 NotifyPropertyChanged("OLD_FEEDING_CAVITY");
                 
@@ -248,7 +248,7 @@ namespace eLiDAR.ViewModels
             get => _deformity.NEW_FEEDING_CAVITY;
             set
             {
-                if (!_deformity.NEW_FEEDING_CAVITY.Equals(value)) { IsChanged = true; }
+                if (_deformity.NEW_FEEDING_CAVITY != value) { IsChanged = true; }
                 _deformity.NEW_FEEDING_CAVITY = value;
                 NotifyPropertyChanged("NEW_FEEDING_CAVITY");
                 
@@ -260,7 +260,7 @@ namespace eLiDAR.ViewModels
             get => _deformity.OLD_NEST_CAVITY;
             set
             {
-                if (!_deformity.OLD_NEST_CAVITY.Equals(value)) { IsChanged = true; }
+                if (_deformity.OLD_NEST_CAVITY != value) { IsChanged = true; }
                 _deformity.OLD_NEST_CAVITY = value;
                 NotifyPropertyChanged("OLD_NEST_CAVITY");
                 
@@ -272,7 +272,7 @@ namespace eLiDAR.ViewModels
             get => _deformity.NEW_NEST_CAVITY;
             set
             {
-                if (!_deformity.NEW_NEST_CAVITY.Equals(value)) { IsChanged = true; }
+                if (_deformity.NEW_NEST_CAVITY != value) { IsChanged = true; }
                 _deformity.NEW_NEST_CAVITY = value;
                 NotifyPropertyChanged("NEW_NEST_CAVITY");
                 
@@ -284,7 +284,7 @@ namespace eLiDAR.ViewModels
             get => _deformity.STICK_NEST;
             set
             {
-                if (!_deformity.STICK_NEST.Equals(value)) { IsChanged = true; }
+                if (_deformity.STICK_NEST != value) { IsChanged = true; }
                 _deformity.STICK_NEST = value;
                 NotifyPropertyChanged("STICK_NEST");
            

@@ -82,7 +82,7 @@ namespace eLiDAR.ViewModels {
 
             set
             {
-                if (!_thissoil.MATRIXCOLOUR.Equals(value)) { _ischanged = true; }
+                if (_thissoil.MATRIXCOLOUR != value) { _ischanged = true; }
                 _thissoil.MATRIXCOLOUR  = value;
                 NotifyPropertyChanged("COLOUR");
             }

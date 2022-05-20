@@ -152,7 +152,7 @@ namespace eLiDAR.ViewModels
             get => _soil.HORIZON;
             set
             {
-                if (!_soil.HORIZON.Equals(value)) { IsChanged = true; }
+                if ( _soil.HORIZON != value) { IsChanged = true; }
                 _soil.HORIZON  = value;
                 if (value == "Of" || value == "Of1" || value == "Of2" || value == "Of3" || value == "Of4" || value == "Om" || value == "Om1" || value == "Om2" || value == "Oh" || value == "Oh1" || value == "Oh2")
                 {
@@ -169,7 +169,7 @@ namespace eLiDAR.ViewModels
             get => _soil.DECOMPOSITIONCODE;
             set
             {
-                if (!_soil.DECOMPOSITIONCODE.Equals(value)) { IsChanged = true; }
+                if (_soil.DECOMPOSITIONCODE != value) { IsChanged = true; }
                 _soil.DECOMPOSITIONCODE = value;
                 NotifyPropertyChanged("VON_POST");
                 
@@ -181,7 +181,7 @@ namespace eLiDAR.ViewModels
             get => _soil.MINERALTEXTURECODE;
             set
             {
-                if (!_soil.MINERALTEXTURECODE.Equals(value)) { IsChanged = true; }
+                if (_soil.MINERALTEXTURECODE !=value) { IsChanged = true; }
                 _soil.MINERALTEXTURECODE = value;
                 NotifyPropertyChanged("TEXTURE");
          
@@ -193,7 +193,7 @@ namespace eLiDAR.ViewModels
             get => _soil.POREPATTERNCODE;
             set
             {
-                if (!_soil.POREPATTERNCODE.Equals(value)) { IsChanged = true; }
+                if (_soil.POREPATTERNCODE != value) { IsChanged = true; }
                 _soil.POREPATTERNCODE = value;
                 NotifyPropertyChanged("PORE_PATTERN");
        
@@ -205,7 +205,7 @@ namespace eLiDAR.ViewModels
             get => _soil.STRUCTURE;
             set
             {
-                if (!_soil.STRUCTURE.Equals(value)) { IsChanged = true; }
+                if (_soil.STRUCTURE != value) { IsChanged = true; }
                 _soil.STRUCTURE = value;
                 NotifyPropertyChanged("STRUCTURE");
                 
@@ -217,7 +217,7 @@ namespace eLiDAR.ViewModels
             get => _soil.MATRIXCOLOUR;
             set
             {
-                if (!_soil.MATRIXCOLOUR.Equals(value)) { IsChanged = true; }
+                if (_soil.MATRIXCOLOUR !=value) { IsChanged = true; }
                 _soil.MATRIXCOLOUR = value;
                 NotifyPropertyChanged("COLOUR");
              
@@ -228,7 +228,7 @@ namespace eLiDAR.ViewModels
             get => _soil.GLEYCOLOUR;
             set
             {
-                if (!_soil.GLEYCOLOUR.Equals(value)) { IsChanged = true; }
+                if (_soil.GLEYCOLOUR !=value) { IsChanged = true; }
                 _soil.GLEYCOLOUR = value;
                 NotifyPropertyChanged("GLEYCOLOUR");
               
@@ -239,7 +239,7 @@ namespace eLiDAR.ViewModels
             get => _soil.MOTTLECOLOUR;
             set
             {
-                if (!_soil.MOTTLECOLOUR.Equals(value)) { IsChanged = true; }
+                if (_soil.MOTTLECOLOUR !=value) { IsChanged = true; }
                 _soil.MOTTLECOLOUR = value;
                 NotifyPropertyChanged("MOTTLE_COLOUR");
               

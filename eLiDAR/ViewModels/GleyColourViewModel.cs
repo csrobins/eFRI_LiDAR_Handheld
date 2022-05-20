@@ -33,7 +33,7 @@ namespace eLiDAR.ViewModels {
             _thissoil = _soil;
             
             ClearCommand = new Command(() => ClearItems());
-            _tempcolour = _thissoil.MOTTLECOLOUR;
+            _tempcolour = _thissoil.GLEYCOLOUR;
             SetCalc();
     }
         void ClearItems()

@@ -66,15 +66,15 @@ namespace eLiDAR.ViewModels {
             }
             else {
                 _ecosite.SUBSTRATEDATE = System.DateTime.Now;
-                _ecosite.DEPTHTOCARBONATES = null;
-                _ecosite.DEPTHTOBEDROCK = null;
-                _ecosite.DEPTHTODISTINCTMOTTLES = null;
-                _ecosite.DEPTHTOGLEY = null;
-                _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = null;
-                _ecosite.DEPTHTOPROMINENTMOTTLES = null;
-                _ecosite.DEPTHTOROOTRESTRICTION  = null;
-                _ecosite.DEPTHTOSEEPAGE = null;
-                _ecosite.DEPTHTOWATERTABLE = null;
+                _ecosite.DEPTHTOCARBONATES = 999;
+                _ecosite.DEPTHTOBEDROCK = 999;
+                _ecosite.DEPTHTODISTINCTMOTTLES = 999;
+                _ecosite.DEPTHTOGLEY = 999;
+                _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = 999;
+                _ecosite.DEPTHTOPROMINENTMOTTLES = 999;
+                _ecosite.DEPTHTOROOTRESTRICTION  = 999;
+                _ecosite.DEPTHTOSEEPAGE = 999;
+                _ecosite.DEPTHTOWATERTABLE = 999;
                 _ecosite.STRATIFIED = "N";
                 _ecosite.PROBLEMATICSITE = "N";
                 _ecosite.PRI_ECO_PCT = 100;

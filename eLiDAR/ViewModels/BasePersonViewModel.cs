@@ -51,7 +51,10 @@ namespace eLiDAR.ViewModels
         {  
             get => _person.FIRSTNAME; 
             set{
-                if (!_person.FIRSTNAME.Equals(value)) { IsChanged = true; }
+                if (_person.FIRSTNAME != value) 
+                {
+                    IsChanged = true; 
+                }
                 _person.FIRSTNAME = value;
                
                 NotifyPropertyChanged("FIRSTNAME");
@@ -61,7 +64,10 @@ namespace eLiDAR.ViewModels
         {
             get => _person.LASTNAME; 
             set {
-                if (!_person.LASTNAME.Equals(value)) { IsChanged = true; }
+                if (_person.LASTNAME != value)
+                { 
+                    IsChanged = true; 
+                }
                 _person.LASTNAME = value;
                
                 NotifyPropertyChanged("LASTNAME");

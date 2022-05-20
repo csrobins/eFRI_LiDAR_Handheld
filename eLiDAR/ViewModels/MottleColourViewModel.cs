@@ -82,7 +82,7 @@ namespace eLiDAR.ViewModels {
 
             set
             {
-                if (!_thissoil.MOTTLECOLOUR.Equals(value)) { _ischanged = true; }
+                if (_thissoil.MOTTLECOLOUR != value) { _ischanged = true; }
                 _thissoil.MOTTLECOLOUR   = value;
                 NotifyPropertyChanged("MOTTLE_COLOUR");
             }

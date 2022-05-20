@@ -102,7 +102,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.STRATIFIED;
             set
             {
-                if (!_ecosite.STRATIFIED.Equals(value)) { IsChanged = true; }
+                if (_ecosite.STRATIFIED !=value) { IsChanged = true; }
                 _ecosite.STRATIFIED = value;
                 NotifyPropertyChanged("STRATIFIED");
                
@@ -114,7 +114,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.EFFECTIVE_PORE_PATTERN;
             set
             {
-                if (!_ecosite.EFFECTIVE_PORE_PATTERN.Equals(value)) { IsChanged = true; }
+                if (_ecosite.EFFECTIVE_PORE_PATTERN != value) { IsChanged = true; }
                 _ecosite.EFFECTIVE_PORE_PATTERN = value;
                 NotifyPropertyChanged("EFFECTIVE_PORE_PATTERN");
                 
@@ -126,7 +126,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.ELC_SUBSTRATE_TYPE;
             set
             {
-                if (!_ecosite.ELC_SUBSTRATE_TYPE.Equals(value)) { IsChanged = true; }
+                if (_ecosite.ELC_SUBSTRATE_TYPE != value) { IsChanged = true; }
                 _ecosite.ELC_SUBSTRATE_TYPE = value;
                 NotifyPropertyChanged("ELC_SUBSTRATE_TYPE");
                
@@ -208,7 +208,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.MOISTURE_REGIME_DEPTH_CLASS;
             set
             {
-                if (!_ecosite.MOISTURE_REGIME_DEPTH_CLASS.Equals(value)) { IsChanged = true; }
+                if (_ecosite.MOISTURE_REGIME_DEPTH_CLASS != value) { IsChanged = true; }
                 _ecosite.MOISTURE_REGIME_DEPTH_CLASS = value;
                 NotifyPropertyChanged("MOISTURE_REGIME_DEPTH_CLASS");
                
@@ -220,7 +220,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.MOISTUREREGIMECODE;
             set
             {
-                if (!_ecosite.MOISTUREREGIMECODE.Equals(value)) { IsChanged = true; }
+                if (_ecosite.MOISTUREREGIMECODE != value) { IsChanged = true; }
                 _ecosite.MOISTUREREGIMECODE = value;
                 NotifyPropertyChanged("MOISTURE_REGIME");
               
@@ -244,7 +244,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.MINERALTEXTURECODE;
             set
             {
-                if (!_ecosite.MINERALTEXTURECODE.Equals(value)) { IsChanged = true; }
+                if (_ecosite.MINERALTEXTURECODE != value) { IsChanged = true; }
                 _ecosite.MINERALTEXTURECODE = value;
                 NotifyPropertyChanged("MINERALTEXTURECODE");
               
@@ -277,7 +277,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.MODEOFDEPOSITIONCODE2;
             set
             {
-                if (!_ecosite.MODEOFDEPOSITIONCODE2.Equals(value)) { IsChanged = true; }
+                if (_ecosite.MODEOFDEPOSITIONCODE2 != value) { IsChanged = true; }
                 _ecosite.MODEOFDEPOSITIONCODE2 = value;
                 NotifyPropertyChanged("MODE_OF_DEPOSITION2");
                 
@@ -320,14 +320,14 @@ namespace eLiDAR.ViewModels
             }
         }
 
-        public Nullable<int> DEPTH_TO_WATER_TABLE
+        public Nullable<int> DEPTHTOWATERTABLE
         {
             get => _ecosite.DEPTHTOWATERTABLE;
             set
             {
                 if (!_ecosite.DEPTHTOWATERTABLE.Equals(value)) { IsChanged = true; }
                 _ecosite.DEPTHTOWATERTABLE = value;
-                NotifyPropertyChanged("DEPTH_TO_WATER_TABLE");
+                NotifyPropertyChanged("DEPTHTOWATERTABLE");
                 
             }
         }
@@ -349,7 +349,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.PROBLEMATICSITE;
             set
             {
-                if (!_ecosite.PROBLEMATICSITE.Equals(value)) { IsChanged = true; }
+                if (_ecosite.PROBLEMATICSITE !=value) { IsChanged = true; }
                 _ecosite.PROBLEMATICSITE = value;
                 NotifyPropertyChanged("PROBLEMATIC_SITE_PROTOCOL_CLASS");
                 
@@ -373,7 +373,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.SOIL_PIT_PHOTO;
             set
             {
-                if (!_ecosite.SOIL_PIT_PHOTO.Equals(value)) { IsChanged = true; }
+                if (_ecosite.SOIL_PIT_PHOTO !=value) { IsChanged = true; }
                 _ecosite.SOIL_PIT_PHOTO = value;
                 NotifyPropertyChanged("SOIL_PIT_PHOTO");
                 
@@ -385,7 +385,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.PRI_ECO;
             set
             {
-                if (!_ecosite.PRI_ECO.Equals(value)) { IsChanged = true; }
+                if (_ecosite.PRI_ECO !=value) { IsChanged = true; }
                 _ecosite.PRI_ECO = value;
                 NotifyPropertyChanged("PRI_ECO");
                 
@@ -409,7 +409,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.SEC_ECO;
             set
             {
-                if (!_ecosite.SEC_ECO.Equals(value)) { IsChanged = true; }
+                if (_ecosite.SEC_ECO != value) { IsChanged = true; }
                 _ecosite.SEC_ECO = value;
                 NotifyPropertyChanged("SEC_ECO");
                 
@@ -456,7 +456,7 @@ namespace eLiDAR.ViewModels
             get => _ecosite.SUBSTRATENOTE;
             set
             {
-                if (!_ecosite.SUBSTRATENOTE.Equals(value)) { IsChanged = true; }
+                if (_ecosite.SUBSTRATENOTE !=value) { IsChanged = true; }
                 _ecosite.SUBSTRATENOTE = value;
                 NotifyPropertyChanged("COMMENTS");
                

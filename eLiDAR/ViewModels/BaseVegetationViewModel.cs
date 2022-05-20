@@ -80,7 +80,7 @@ namespace eLiDAR.ViewModels
             get => _vegetation.VSNSPECIESCODE;
             set
             {
-                if (!_vegetation.VSNSPECIESCODE.Equals(value)) { IsChanged = true; }
+                if (_vegetation.VSNSPECIESCODE != value) { IsChanged = true; }
                 _vegetation.VSNSPECIESCODE = value;
 
               NotifyPropertyChanged("SPECIES");
