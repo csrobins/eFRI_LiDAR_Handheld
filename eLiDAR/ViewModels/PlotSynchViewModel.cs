@@ -50,8 +50,11 @@ namespace eLiDAR.ViewModels {
         async Task Synchrun()
         {
             IsSynchBusy = true;
+            IsPlotSynchBusy = true;
             bool success = await _synchmanager.RunLoad();
             IsSynchBusy = false;
+            IsPlotSynchBusy = false;
+
             if (success)
             {
                 msg = "Synch succeeded";
@@ -89,7 +92,8 @@ namespace eLiDAR.ViewModels {
                 PlotList.Add(p);
             }
         //    MessagingCenter.Send(this, "Update listview");
-            NotifyPropertyChanged("PlotList"); 
+            NotifyPropertyChanged("PlotList");
+            ListPlots = Services.PickerService.FillPlotPicker(databasehelper.GetAllPlotData()).ToList().OrderBy(c => c.NAME).ToList();
 
         }
         private bool _isplotsynchenabled;
