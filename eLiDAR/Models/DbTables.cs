@@ -33,6 +33,8 @@ namespace eLiDAR.Models
         public string PUT { get; set; }
         public string GET { get; set; }
         public string KEY { get; set; }
+        public string CONNECTION { get; set; }
+
 
     }
 

@@ -66,6 +66,7 @@ namespace eLiDAR.ViewModels
                     util.PostURI = _user.POST;
                     util.GetURI = _user.GET;
                     util.KEY = _user.KEY;
+                    util.CONNECTION = _user.CONNECTION;
                     await _navigation.PopAsync(true);
                 }
                 else
@@ -75,6 +76,8 @@ namespace eLiDAR.ViewModels
                     util.PutURI = null;
                     util.PostURI = null;
                     util.GetURI = null;
+                    util.KEY = null;
+                    util.CONNECTION = null;
                     await Application.Current.MainPage.DisplayAlert("Login failed", "Incorrect username/password", "OK");
                 }
             }
