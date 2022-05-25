@@ -73,9 +73,9 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>Apple Development: Craig Robinson (82V997AAJ4)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Craig Robinson (JT42R4QW8R)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignProvision>eVSNAdHoc Provisioning</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>eVSN</IpaPackageName>
   </PropertyGroup>
@@ -88,8 +88,8 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>eVSN - AdHoc Provisioning - Aug 31 2021</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>Ad Hoc Provisioning - 16 devices - May 24 2022</CodesignProvision>
+    <CodesignKey>Apple Distribution: Craig Robinson (JT42R4QW8R)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <OptimizePNGs>true</OptimizePNGs>
   </PropertyGroup>
@@ -286,7 +286,7 @@
       <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2401</Version>
+      <Version>5.0.0.2125</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
