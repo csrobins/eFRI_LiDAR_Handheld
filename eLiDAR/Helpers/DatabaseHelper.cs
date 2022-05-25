@@ -18,9 +18,8 @@ namespace eLiDAR.Helpers
         
         public DatabaseHelper()
         {
-            logger = new LogWriter(); 
-            sqliteconnection = DependencyService.Get<ISQLite>().GetConnection();
-
+            logger = new LogWriter();
+            if ( sqliteconnection is null ) sqliteconnection = DependencyService.Get<ISQLite>().GetConnection();
         }
         // Get All project data 
         public List<PROJECT> GetAllProjectData()
