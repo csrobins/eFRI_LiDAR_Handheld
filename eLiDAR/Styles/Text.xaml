@@ -35,6 +35,7 @@
 
     <Style x:Key="TextSubhead" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource backgroundColor}" />
         <Setter Property="FontSize" Value="{StaticResource TextSizeSubhead}" />
     </Style>
 
