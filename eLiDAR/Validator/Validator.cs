@@ -419,15 +419,19 @@ namespace eLiDAR.Validator
         public PlotValidator(bool DoFullvalidation = false)
         {
             RuleFor(c => c).Must(c => IsUniquePlotNum(c)).WithMessage("Plot number must be unique within the project.");
-            RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot length must be 9 digits.");
-            RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number should not be empty.");
-            RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type should not be empty.");
+            RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot number length must be 9 digits.");
+            RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number must not be empty.");
+            RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type must not be empty.");
+            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2029")).WithMessage("Plot date should > 01-01-2020.");
             RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Plot date should > 01-01-2020.");
 
             if (DoFullvalidation )
             {
                 RuleFor(c => c.DECLINATION).Must(c => c >= -20 && c <= 20).WithMessage("Declination must be between -20 and 20.");
-                RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone be between 15 and 18.");
+                RuleFor(c => c.DECLINATION).NotEmpty().WithMessage("Declination must not be empty.");
+                RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone must be between 15 and 18.");
+                RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
+                RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 7000000).WithMessage("Northing should be between 4620000 and 7000000 m");
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
                 RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Stand Information date should > 01-01-2020.");
                 RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
