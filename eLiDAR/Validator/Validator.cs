@@ -447,12 +447,10 @@ namespace eLiDAR.Validator
                 RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
                 RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
                 RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
-                RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
                 RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Growth plot number should be populated when Plot type = RME");
                 RuleFor(c => c.EXISTINGPLOTNAME).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot name should be populated when Plot type = RME");
                 RuleFor(c => c.EXISTINGPLOTTYPECODE).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot type code should be populated when Plot type = RME");
                 RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Non Standard Type Code should be 6 when Plot type = RME");
-                RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 7000000).WithMessage("Northing should be between 4620000 and 7000000 m");
                 RuleFor(c => c.CANOPYSTRUCTURECODE1).NotEmpty().WithMessage("Canopy Structure 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MAINCANOPYORIGINCODE1).NotEmpty().WithMessage("Main Canopy Origin 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MATURITYCLASSCODE1).NotEmpty().WithMessage("Maturity Class Code 1 should be filled out in the Stand Info Screen");
