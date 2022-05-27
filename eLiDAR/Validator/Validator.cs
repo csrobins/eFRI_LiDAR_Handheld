@@ -437,6 +437,7 @@ namespace eLiDAR.Validator
                 //RuleFor(c => c.EASTING).NotEmpty().WithMessage("Easting must not be empty.");
                 //RuleFor(c => c.NORTHING).NotEmpty().WithMessage("Northing must not be empty.");
                 // No test for DATUM - remove?
+
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
                 RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Stand Information date should > 01-01-2022.");
                 RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
@@ -446,11 +447,17 @@ namespace eLiDAR.Validator
              //   RuleFor(c => c.SITERANK).Must(c => c >= 1 && c <= 2).WithMessage("Site Rank must be 1 or 2.");
                 RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
                 RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
+
                 RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
-                RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Growth plot number should be populated when Plot type = RME");
-                RuleFor(c => c.EXISTINGPLOTNAME).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot name should be populated when Plot type = RME");
-                RuleFor(c => c.EXISTINGPLOTTYPECODE).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot type code should be populated when Plot type = RME");
-                RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Non Standard Type Code should be 6 when Plot type = RME");
+
+                When(c => c.MEASURETYPECODE == "RME", () =>
+                {
+                    RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).WithMessage("Growth plot number should be populated when Measure type = RME");
+                    RuleFor(c => c.EXISTINGPLOTNAME).NotEmpty().WithMessage("Existing plot name should be populated when Measure type = RME");
+                    RuleFor(c => c.EXISTINGPLOTTYPECODE).NotEmpty().WithMessage("Existing plot type code should be populated when Measure type = RME");
+                    RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).WithMessage("Non Standard Type Code should be 6 when Measure type = RME");
+                });
+
                 RuleFor(c => c.CANOPYSTRUCTURECODE1).NotEmpty().WithMessage("Canopy Structure 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MAINCANOPYORIGINCODE1).NotEmpty().WithMessage("Main Canopy Origin 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MATURITYCLASSCODE1).NotEmpty().WithMessage("Maturity Class Code 1 should be filled out in the Stand Info Screen");
