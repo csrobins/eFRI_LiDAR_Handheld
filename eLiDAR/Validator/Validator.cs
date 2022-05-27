@@ -423,6 +423,8 @@ namespace eLiDAR.Validator
             RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number must not be empty.");
             RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type must not be empty.");
             RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Plot date should > 01-01-2022.");
+            RuleFor(c => c.MEASURETYPECODE).NotEmpty().WithMessage("Measure type must not be empty.");
+            RuleFor(c => c.ACCESSCONDITIONCODE).NotEmpty().WithMessage("ACCESSCONDITIONCODE must not be empty.");
 
             if (DoFullvalidation )
             {
