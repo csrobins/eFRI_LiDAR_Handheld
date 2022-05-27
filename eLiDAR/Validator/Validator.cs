@@ -429,10 +429,14 @@ namespace eLiDAR.Validator
             if (DoFullvalidation )
             {
                 RuleFor(c => c.DECLINATION).Must(c => c >= -20 && c <= 20).WithMessage("Declination must be between -20 and 20.");
-                RuleFor(c => c.DECLINATION).NotEmpty().WithMessage("Declination must not be empty.");
+                //RuleFor(c => c.DECLINATION).NotEmpty().WithMessage("Declination must not be empty.");
                 RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone must be between 15 and 18.");
                 RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
                 RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 7000000).WithMessage("Northing should be between 4620000 and 7000000 m");
+                //RuleFor(c => c.UTMZONE).NotEmpty().WithMessage("UTM Zone must not be empty.");
+                //RuleFor(c => c.EASTING).NotEmpty().WithMessage("Easting must not be empty.");
+                //RuleFor(c => c.NORTHING).NotEmpty().WithMessage("Northing must not be empty.");
+                // No test for DATUM - remove?
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
                 RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Stand Information date should > 01-01-2022.");
                 RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
