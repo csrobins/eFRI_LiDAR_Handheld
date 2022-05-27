@@ -422,8 +422,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot number length must be 9 digits.");
             RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number must not be empty.");
             RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type must not be empty.");
-            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2029")).WithMessage("Plot date should > 01-01-2020.");
-            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Plot date should > 01-01-2020.");
+            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Plot date should > 01-01-2022.");
 
             if (DoFullvalidation )
             {
@@ -433,7 +432,7 @@ namespace eLiDAR.Validator
                 RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
                 RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 7000000).WithMessage("Northing should be between 4620000 and 7000000 m");
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
-                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Stand Information date should > 01-01-2020.");
+                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Stand Information date should > 01-01-2022.");
                 RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
                 RuleFor(c => c.AGEPERSON).NotEmpty().WithMessage("You must have an Age Person in the Plot Crew Screen");
                 RuleFor(c => c.AGEDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Age Date in the Plot Crew screen");
