@@ -448,6 +448,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).WithMessage("Non Standard Type Code should be 6 when Measure type = RME");
                 });
 
+                RuleFor(c => c).Must(c => c.AZIMUTHTARGETMOVED <= 360 && c.AZIMUTHTARGETMOVED >= 0).When(c => c.DISTANCETARGETMOVED > 0).WithMessage("Azimuth target moved must be between 0 and 360");
                 RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
 
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
