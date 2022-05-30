@@ -419,17 +419,27 @@ namespace eLiDAR.Validator
         public PlotValidator(bool DoFullvalidation = false)
         {
             RuleFor(c => c).Must(c => IsUniquePlotNum(c)).WithMessage("Plot number must be unique within the project.");
-            RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot length must be 9 digits.");
-            RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number should not be empty.");
-            RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type should not be empty.");
-            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Plot date should > 01-01-2020.");
+            RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot number length must be 9 digits.");
+            RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number must not be empty.");
+            RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type must not be empty.");
+            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Plot date should > 01-01-2022.");
+            RuleFor(c => c.MEASURETYPECODE).NotEmpty().WithMessage("Measure type must not be empty.");
+            RuleFor(c => c.ACCESSCONDITIONCODE).NotEmpty().WithMessage("ACCESSCONDITIONCODE must not be empty.");
 
             if (DoFullvalidation )
             {
                 RuleFor(c => c.DECLINATION).Must(c => c >= -20 && c <= 20).WithMessage("Declination must be between -20 and 20.");
-                RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone be between 15 and 18.");
+                //RuleFor(c => c.DECLINATION).NotEmpty().WithMessage("Declination must not be empty.");
+                RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone must be between 15 and 18.");
+                RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
+                RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 7000000).WithMessage("Northing should be between 4620000 and 7000000 m");
+                //RuleFor(c => c.UTMZONE).NotEmpty().WithMessage("UTM Zone must not be empty.");
+                //RuleFor(c => c.EASTING).NotEmpty().WithMessage("Easting must not be empty.");
+                //RuleFor(c => c.NORTHING).NotEmpty().WithMessage("Northing must not be empty.");
+                // No test for DATUM - remove?
+
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
-                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Stand Information date should > 01-01-2020.");
+                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Stand Information date should > 01-01-2022.");
                 RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
                 RuleFor(c => c.AGEPERSON).NotEmpty().WithMessage("You must have an Age Person in the Plot Crew Screen");
                 RuleFor(c => c.AGEDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Age Date in the Plot Crew screen");
@@ -437,13 +447,17 @@ namespace eLiDAR.Validator
              //   RuleFor(c => c.SITERANK).Must(c => c >= 1 && c <= 2).WithMessage("Site Rank must be 1 or 2.");
                 RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
                 RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
+
                 RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
-                RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
-                RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Growth plot number should be populated when Plot type = RME");
-                RuleFor(c => c.EXISTINGPLOTNAME).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot name should be populated when Plot type = RME");
-                RuleFor(c => c.EXISTINGPLOTTYPECODE).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot type code should be populated when Plot type = RME");
-                RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Non Standard Type Code should be 6 when Plot type = RME");
-                RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 7000000).WithMessage("Northing should be between 4620000 and 7000000 m");
+
+                When(c => c.MEASURETYPECODE == "RME", () =>
+                {
+                    RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).WithMessage("Growth plot number should be populated when Measure type = RME");
+                    RuleFor(c => c.EXISTINGPLOTNAME).NotEmpty().WithMessage("Existing plot name should be populated when Measure type = RME");
+                    RuleFor(c => c.EXISTINGPLOTTYPECODE).NotEmpty().WithMessage("Existing plot type code should be populated when Measure type = RME");
+                    RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).WithMessage("Non Standard Type Code should be 6 when Measure type = RME");
+                });
+
                 RuleFor(c => c.CANOPYSTRUCTURECODE1).NotEmpty().WithMessage("Canopy Structure 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MAINCANOPYORIGINCODE1).NotEmpty().WithMessage("Main Canopy Origin 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MATURITYCLASSCODE1).NotEmpty().WithMessage("Maturity Class Code 1 should be filled out in the Stand Info Screen");
