@@ -442,7 +442,7 @@ namespace eLiDAR.Validator
                 RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Stand Information date should > 01-01-2022.");
                 RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
                 RuleFor(c => c.AGEPERSON).NotEmpty().WithMessage("You must have an Age Person in the Plot Crew Screen");
-                RuleFor(c => c.AGEDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Age Date in the Plot Crew screen");
+                RuleFor(c => c.AGEDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Age Date in the Plot Crew screen");
 
              //   RuleFor(c => c.SITERANK).Must(c => c >= 1 && c <= 2).WithMessage("Site Rank must be 1 or 2.");
                 RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
@@ -465,24 +465,24 @@ namespace eLiDAR.Validator
                 When(c => c.VSNPLOTTYPECODE == "C", () =>
                 {
                     RuleFor(c => c.DOWNWOODYDEBRISPERSON ).NotEmpty().WithMessage("You must have a DWD Person in the Plot Crew Screen");
-                    RuleFor(c => c.DOWNWOODYDEBRISDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid DWD Date in the Plot Crew screen");
+                    RuleFor(c => c.DOWNWOODYDEBRISDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid DWD Date in the Plot Crew screen");
                     RuleFor(c => c.SMALLTREEPERSON ).NotEmpty().WithMessage("You must have a Small Tree Person in the Plot Crew Screen");
-                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
+                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
                     RuleFor(c => c.STEMMAPPINGPERSON ).NotEmpty().WithMessage("You must have a DWD Person in the Stem Mapping Person in the Plot Screen");
-                    RuleFor(c => c.STEMMAPPINGDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
+                    RuleFor(c => c.STEMMAPPINGDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
                     RuleFor(c => c.UNDERSTORYVEGETATIONPERSON ).NotEmpty().WithMessage("You must have a Understory Veg Person in the Plot Crew Screen");
-                    RuleFor(c => c.UNDERSTORYVEGETATIONDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Understory Veg Date in the Plot Crew screen");
+                    RuleFor(c => c.UNDERSTORYVEGETATIONDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Understory Veg Date in the Plot Crew screen");
                     RuleFor(c => c.UNDERSTORYCENSUSPERSON ).NotEmpty().WithMessage("You must have a Understory Census Person in the Plot Crew Screen");
-                    RuleFor(c => c.UNDERSTORYCENSUSDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Understory Census Date in the Plot Crew screen");
+                    RuleFor(c => c.UNDERSTORYCENSUSDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Understory Census Date in the Plot Crew screen");
 
 
                 });
                 When(c => (c.VSNPLOTTYPECODE == "B"), () =>
                 {
                     RuleFor(c => c.SMALLTREEPERSON).NotEmpty().WithMessage("You must have a Small Tree Person in the Plot Crew Screen");
-                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
+                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
                     RuleFor(c => c.STEMMAPPINGPERSON).NotEmpty().WithMessage("You must have a DWD Person in the Stem Mapping Person in the Plot Screen");
-                    RuleFor(c => c.STEMMAPPINGDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
+                    RuleFor(c => c.STEMMAPPINGDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
                 });
 
             }

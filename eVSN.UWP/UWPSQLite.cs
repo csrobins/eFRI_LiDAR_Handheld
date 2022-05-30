@@ -28,7 +28,7 @@ namespace eLiDAR.UWP
             //path = Path.Combine(documentPath, "test.sqlite");
 
             // Use this if I need to reset the datbase
-            bool Isdebug = true;
+            bool Isdebug = false;
             if (Isdebug)
             {
                 File.Delete(path);

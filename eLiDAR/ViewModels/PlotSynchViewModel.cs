@@ -94,7 +94,7 @@ namespace eLiDAR.ViewModels {
         //    MessagingCenter.Send(this, "Update listview");
             NotifyPropertyChanged("PlotList");
             ListPlots = Services.PickerService.FillPlotPicker(databasehelper.GetAllPlotData()).ToList().OrderBy(c => c.NAME).ToList();
-
+            NotifyPropertyChanged("SelectedPlot");
         }
         private bool _isplotsynchenabled;
         public bool IsPlotSynchEnabled
