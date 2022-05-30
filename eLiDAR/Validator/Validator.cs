@@ -521,6 +521,8 @@ namespace eLiDAR.Validator
                 // Live  Trees
             When(c => (c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V") && c.VSNSTATUSCODE != "i", () =>
                 {
+                    RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT < c.DBH).WithMessage("Tree ht (m) should be less than DBH (cm). Confirm your measurements.");
+
                     RuleFor(c => c).Must(c => c.CROWNCLASSCODE != null).WithMessage("Crown Class Code should not be null when tree status = L,V.");
                     RuleFor(c => c).Must(c => c.STEMQUALITYCODE != null).WithMessage("Stem Quality should not be null when tree status = L,V.");
                     RuleFor(c => c).Must(c => c.DIRECTHEIGHTTOCONTLIVECROWN > 0 || c.OCULARHEIGHTTOCONTLIVECROWN > 0).WithMessage("Ht to LC must not be 0 when tree status = L,V.");
@@ -535,6 +537,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.HEIGHTTODEADTIP > c.DIRECTTOTALHEIGHT).When(c => c.HEIGHTTODEADTIP > 0 && c.HEIGHTTODEADTIP != 999).WithMessage("Ht to dead tip must be > than ht");
                     RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT == 0).When(c => c.OCULARTOTALHEIGHT > 0).WithMessage("Direct total height must be zero when using Ocular Height");
                     RuleFor(c => c).Must(c => c.OCULARTOTALHEIGHT == 0).When(c => c.DIRECTTOTALHEIGHT  > 0).WithMessage("Ocular height must be zero when using Direct Height");
+                    RuleFor(c => c).Must(c => c.CROWNDAMAGECODE > 0).When(c => c.VIGOURCODE != 1).WithMessage("Crown damage cannot be 0 when vigour code not 1");
 
                 });
                 // Dead  Trees
@@ -707,6 +710,8 @@ namespace eLiDAR.Validator
                 RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE  <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to seepage must be < depth to impassable coarse frags.");
                 RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to water table must be < depth to impassable coarse frags.");
                 RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Functional rooting must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.MAXIMUMROOTINGDEPTH).When(c => c.MAXIMUMROOTINGDEPTH > 0).WithMessage("Functional rooting must be <= maximum rooting depth.");
+
                 RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Max rooting depth must be < depth to impassable coarse frags.");
                 RuleFor(c => c).Must(c => c.DEPTHTODISTINCTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to mottles must be < depth to bedrock.");
                 RuleFor(c => c).Must(c => c.DEPTHTOPROMINENTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to mottles must be < depth to bedrock.");
