@@ -84,7 +84,7 @@ namespace eLiDAR.ViewModels {
             if (util.UseDefaultVSNStatus) { _tree.VSNSTATUSCODE = util.DefaultVSNStatus; }
             if (util.UseDefaultSpecies) { _tree.SPECIESCODE = util.DefaultSpecies; }
             _tree.HEIGHTTODEADTIP = 999;
-            _tree.DIRECTHEIGHTTOCONTLIVECROWN = 999;
+            _tree.DIRECTHEIGHTTOCONTLIVECROWN = 0;
             _tree.OCULARHEIGHTTOCONTLIVECROWN = 999;
             if (util.AllowAutoNumber) { _tree.TREENUMBER = _treeRepository.GetNextNumber(fk); }
 

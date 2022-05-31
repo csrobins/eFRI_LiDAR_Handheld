@@ -159,7 +159,6 @@
                                     Command="{Binding ShowSmallTreeCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
                                     Text="Shrub" />
 
                                     <Button

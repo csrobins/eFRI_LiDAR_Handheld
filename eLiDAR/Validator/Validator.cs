@@ -57,7 +57,7 @@ namespace eLiDAR.Validator
 
                 return isvalid;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             }
@@ -446,10 +446,14 @@ namespace eLiDAR.Validator
                     RuleFor(c => c.EXISTINGPLOTNAME).NotEmpty().WithMessage("Existing plot name should be populated when Measure type = RME");
                     RuleFor(c => c.EXISTINGPLOTTYPECODE).NotEmpty().WithMessage("Existing plot type code should be populated when Measure type = RME");
                     RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).WithMessage("Non Standard Type Code should be 6 when Measure type = RME");
+
+                    // AZIMUTHMOVED and DISTANCEMOVED must be filled in for RME?
+                    RuleFor(c => c.DISTANCETARGETMOVED).NotEmpty().WithMessage("Distance Target Moved should be populated when Measure type = RME");
+                    RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
+                    RuleFor(c => c).Must(c => c.AZIMUTHTARGETMOVED <= 360 && c.AZIMUTHTARGETMOVED >= 0).When(c => c.DISTANCETARGETMOVED > 0).WithMessage("Azimuth target moved must be between 0 and 360");
+
                 });
 
-                RuleFor(c => c).Must(c => c.AZIMUTHTARGETMOVED <= 360 && c.AZIMUTHTARGETMOVED >= 0).When(c => c.DISTANCETARGETMOVED > 0).WithMessage("Azimuth target moved must be between 0 and 360");
-                RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
 
                 RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
 
@@ -467,6 +471,7 @@ namespace eLiDAR.Validator
                 RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
                 RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
 
+                // tblAge
                 RuleFor(c => c.AGEPERSON).NotEmpty().WithMessage("You must have an Age Person in the Plot Crew Screen");
                 RuleFor(c => c.AGEDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Age Date in the Plot Crew screen (  > 01-01-2022 )");
 
@@ -491,7 +496,6 @@ namespace eLiDAR.Validator
                     RuleFor(c => c.UNDERSTORYCENSUSPERSON ).NotEmpty().WithMessage("You must have a Understory Census Person in the Plot Crew Screen");
                     RuleFor(c => c.UNDERSTORYCENSUSDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Understory Census Date in the Plot Crew screen");
                 });
-
             }
         }
 
@@ -539,7 +543,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.BARKRETENTIONCODE > 0).WithMessage("Bark retention should not be empty when tree status = L,V,D,DV.");
                     RuleFor(c => c).Must(c => c.WOODCONDITIONCODE > 0).WithMessage("Wood condition should not be empty when tree status = L,V,D,DV.");
                 });
-                // Live  Trees
+            // Live  Trees
             When(c => (c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V") && c.VSNSTATUSCODE != "i", () =>
                 {
                     RuleFor(c => c).Must(c => c.CROWNCLASSCODE != null).WithMessage("Crown Class Code should not be null when tree status = L,V.");
