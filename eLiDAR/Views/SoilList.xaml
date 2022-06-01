@@ -3,6 +3,7 @@
     x:Class="eLiDAR.Views.SoilList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{Binding Title}"
     BackgroundColor="{DynamicResource backgroundColor}"
     Shell.BackgroundColor="{DynamicResource backgroundColor}"
@@ -46,11 +47,21 @@
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0" Spacing="1">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label
+
+                                    <xct:BadgeView
+                                        BackgroundColor="{DynamicResource tomato}"
+                                        AutoHide="True" 
+                                        FontAttributes="Bold"
+                                        FontSize="Small"
+                                        TextColor="White"
+                                        BadgePosition="TopLeft" 
+                                        Text="{Binding ERRORCOUNT}">
+                                        <Label
                                         HorizontalTextAlignment="Start"
                                         Style="{DynamicResource TextSubheadSecondary}"
                                         Text="Layer "
                                         VerticalTextAlignment="Center" />
+                                    </xct:BadgeView>
                                     <Label
                                         Font="20"
                                         HorizontalTextAlignment="Start"

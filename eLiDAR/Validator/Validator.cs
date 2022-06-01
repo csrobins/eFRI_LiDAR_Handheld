@@ -9,6 +9,22 @@ using FluentValidation.Results;
 
 namespace eLiDAR.Validator
 {
+    public class ParseValidater
+    {
+        private string _msg;
+        private int _count;
+        public (int, string) Parse(ValidationResult validationResults)
+        {
+            _count = 0;
+            foreach (var err in validationResults.Errors)
+            {
+                _msg = _msg + err.ErrorMessage + "\n";
+                _count = _count + 1;
+            }
+            return (_count, _msg);
+        }
+    }
+
     public class FullValidater
     {
         private PLOT _plot;
@@ -19,7 +35,7 @@ namespace eLiDAR.Validator
             _plot = plot;
    //         _databasehelper = new DatabaseHelper(); 
         }
-
+            
         public bool ValidAll()
         {
             bool isvalid = false;
@@ -41,7 +57,7 @@ namespace eLiDAR.Validator
 
                 return isvalid;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             }
@@ -373,7 +389,7 @@ namespace eLiDAR.Validator
         {  
             RuleFor(c => c.NAME).NotEmpty().WithMessage("Project name should not be empty.");
             RuleFor(c => c.DESCRIPTION).NotEmpty().WithMessage("Project description should not be empty.");
-      //      RuleFor(c => c.PROJECT_DATE).NotEmpty().WithMessage("Project date should not be empty.");
+            RuleFor(c => c.PROJECT_DATE).NotEmpty().WithMessage("Project date should not be empty.");
         }  
 
     }
@@ -402,59 +418,84 @@ namespace eLiDAR.Validator
     {
         public PlotValidator(bool DoFullvalidation = false)
         {
+            //tblPlot
             RuleFor(c => c).Must(c => IsUniquePlotNum(c)).WithMessage("Plot number must be unique within the project.");
-            RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot length must be 9 digits.");
-            RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number should not be empty.");
-            RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type should not be empty.");
-            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Plot date should > 01-01-2020.");
+            RuleFor(c => c.VSNPLOTNAME).Must(c => c.Length == 9).WithMessage("Plot number length must be 9 digits.");
+            RuleFor(c => c.VSNPLOTNAME).NotEmpty().WithMessage("Plot number must not be empty.");
+            RuleFor(c => c.VSNPLOTTYPECODE).NotEmpty().WithMessage("Plot type must not be empty.");
+            RuleFor(c => c.PLOTOVERVIEWDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Plot date should > 01-01-2022.");
+            RuleFor(c => c.MEASURETYPECODE).NotEmpty().WithMessage("Measure type must not be empty.");
+            RuleFor(c => c.ACCESSCONDITIONCODE).NotEmpty().WithMessage("ACCESSCONDITIONCODE must not be empty.");
 
             if (DoFullvalidation )
             {
+                //tblPlot
                 RuleFor(c => c.DECLINATION).Must(c => c >= -20 && c <= 20).WithMessage("Declination must be between -20 and 20.");
-                RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone be between 15 and 18.");
-                RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew memeber in Field Crew 1 field in the Plot screen");
-                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("Stand Information date should > 01-01-2020.");
-                RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
-                RuleFor(c => c.AGEPERSON).NotEmpty().WithMessage("You must have an Age Person in the Plot Crew Screen");
-                RuleFor(c => c.AGEDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Age Date in the Plot Crew screen");
-
-             //   RuleFor(c => c.SITERANK).Must(c => c >= 1 && c <= 2).WithMessage("Site Rank must be 1 or 2.");
-                RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
-                RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
-                RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
+                //RuleFor(c => c.DECLINATION).NotEmpty().WithMessage("Declination must not be empty.");
+                RuleFor(c => c.UTMZONE).Must(c => c >= 15 && c <= 18).WithMessage("UTM Zone must be between 15 and 18.");
                 RuleFor(c => c.EASTING).Must(c => c >= 250000 && c <= 750000).WithMessage("Easting should be between 250000 and 750000 m");
-                RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Growth plot number should be populated when Plot type = RME");
-                RuleFor(c => c.EXISTINGPLOTNAME).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot name should be populated when Plot type = RME");
-                RuleFor(c => c.EXISTINGPLOTTYPECODE).Must(c => c != null).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Existing plot type code should be populated when Plot type = RME");
-                RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).When(c => c.VSNPLOTTYPECODE == "RME").WithMessage("Non Standard Type Code should be 6 when Plot type = RME");
-                RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 9999999).WithMessage("Easting should be between 4620000 and 9999999 m");
+                RuleFor(c => c.NORTHING).Must(c => c >= 4620000 && c <= 7000000).WithMessage("Northing should be between 4620000 and 7000000 m");
+                //RuleFor(c => c.UTMZONE).NotEmpty().WithMessage("UTM Zone must not be empty.");
+                //RuleFor(c => c.EASTING).NotEmpty().WithMessage("Easting must not be empty.");
+                //RuleFor(c => c.NORTHING).NotEmpty().WithMessage("Northing must not be empty.");
+                // No test for DATUM - remove?
+
+                When(c => c.MEASURETYPECODE == "RME", () =>
+                {
+                    RuleFor(c => c.GROWTHPLOTNUMBER).Must(c => c > 0).WithMessage("Growth plot number should be populated when Measure type = RME");
+                    RuleFor(c => c.EXISTINGPLOTNAME).NotEmpty().WithMessage("Existing plot name should be populated when Measure type = RME");
+                    RuleFor(c => c.EXISTINGPLOTTYPECODE).NotEmpty().WithMessage("Existing plot type code should be populated when Measure type = RME");
+                    RuleFor(c => c.NONSTANDARDTYPECODE).Must(c => c == 6).WithMessage("Non Standard Type Code should be 6 when Measure type = RME");
+
+                    // AZIMUTHMOVED and DISTANCEMOVED must be filled in for RME?
+                    RuleFor(c => c.DISTANCETARGETMOVED).NotEmpty().WithMessage("Distance Target Moved should be populated when Measure type = RME");
+                    RuleFor(c => c.DISTANCETARGETMOVED).Must(c => c <= 50).WithMessage("Distance target moved must be less than 50m");
+                    RuleFor(c => c).Must(c => c.AZIMUTHTARGETMOVED <= 360 && c.AZIMUTHTARGETMOVED >= 0).When(c => c.DISTANCETARGETMOVED > 0).WithMessage("Azimuth target moved must be between 0 and 360");
+
+                });
+
+
+                RuleFor(c => c.FIELD_CREW1).NotEmpty().WithMessage("You must have at least one crew member in Field Crew 1 field in the Plot screen");
+
+                //tblStandInfoHeader & tblStandInfoSite
+                RuleFor(c => c.STANDINFODATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("Stand Information date should > 01-01-2022.");
+                RuleFor(c => c.STANDINFOPERSON).NotEmpty().WithMessage("You must have at Stand information Person in the Stand Info screen");
+
+                // RuleFor(c => c.SITERANK).Must(c => c >= 1 && c <= 2).WithMessage("Site Rank must be 1 or 2.");
+                // Site Rank is ignored - two ranks are collected in a flat table
                 RuleFor(c => c.CANOPYSTRUCTURECODE1).NotEmpty().WithMessage("Canopy Structure 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MAINCANOPYORIGINCODE1).NotEmpty().WithMessage("Main Canopy Origin 1 should be filled out in the Stand Info Screen");
                 RuleFor(c => c.MATURITYCLASSCODE1).NotEmpty().WithMessage("Maturity Class Code 1 should be filled out in the Stand Info Screen");
 
-                When(c => c.VSNPLOTTYPECODE == "C", () =>
-                {
-                    RuleFor(c => c.DOWNWOODYDEBRISPERSON ).NotEmpty().WithMessage("You must have a DWD Person in the Plot Crew Screen");
-                    RuleFor(c => c.DOWNWOODYDEBRISDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid DWD Date in the Plot Crew screen");
-                    RuleFor(c => c.SMALLTREEPERSON ).NotEmpty().WithMessage("You must have a Small Tree Person in the Plot Crew Screen");
-                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
-                    RuleFor(c => c.STEMMAPPINGPERSON ).NotEmpty().WithMessage("You must have a DWD Person in the Stem Mapping Person in the Plot Screen");
-                    RuleFor(c => c.STEMMAPPINGDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
-                    RuleFor(c => c.UNDERSTORYVEGETATIONPERSON ).NotEmpty().WithMessage("You must have a Understory Veg Person in the Plot Crew Screen");
-                    RuleFor(c => c.UNDERSTORYVEGETATIONDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Understory Veg Date in the Plot Crew screen");
-                    RuleFor(c => c.UNDERSTORYCENSUSPERSON ).NotEmpty().WithMessage("You must have a Understory Census Person in the Plot Crew Screen");
-                    RuleFor(c => c.UNDERSTORYCENSUSDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Understory Census Date in the Plot Crew screen");
+                // tblStandInfoDisturbance
+                RuleFor(c => c.PERCENTAFFECTED).Must(c => c >= 20 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent affected must be between 20 and 100 when Disturbance is present.");
+                RuleFor(c => c.PERCENTMORTALITY).Must(c => c >= 0 && c <= 100).When(c => c.DISTURBANCECODE1 != 0).WithMessage("Percent mortality must be between 0 and 100 when Disturbance is present.");
 
+                // tblAge
+                RuleFor(c => c.AGEPERSON).NotEmpty().WithMessage("You must have an Age Person in the Plot Crew Screen");
+                RuleFor(c => c.AGEDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Age Date in the Plot Crew screen (  > 01-01-2022 )");
 
-                });
                 When(c => (c.VSNPLOTTYPECODE == "B"), () =>
                 {
                     RuleFor(c => c.SMALLTREEPERSON).NotEmpty().WithMessage("You must have a Small Tree Person in the Plot Crew Screen");
-                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
+                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
                     RuleFor(c => c.STEMMAPPINGPERSON).NotEmpty().WithMessage("You must have a DWD Person in the Stem Mapping Person in the Plot Screen");
-                    RuleFor(c => c.STEMMAPPINGDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2020")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
+                    RuleFor(c => c.STEMMAPPINGDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
                 });
 
+                When(c => c.VSNPLOTTYPECODE == "C", () =>
+                {
+                    RuleFor(c => c.DOWNWOODYDEBRISPERSON ).NotEmpty().WithMessage("You must have a DWD Person in the Plot Crew Screen");
+                    RuleFor(c => c.DOWNWOODYDEBRISDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid DWD Date in the Plot Crew screen");
+                    RuleFor(c => c.SMALLTREEPERSON ).NotEmpty().WithMessage("You must have a Small Tree Person in the Plot Crew Screen");
+                    RuleFor(c => c.SMALLTREESHRUBDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Small Tree Date in the Plot Crew screen");
+                    RuleFor(c => c.STEMMAPPINGPERSON ).NotEmpty().WithMessage("You must have a DWD Person in the Stem Mapping Person in the Plot Screen");
+                    RuleFor(c => c.STEMMAPPINGDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Stem Mapping Date in the Plot Crew screen");
+                    RuleFor(c => c.UNDERSTORYVEGETATIONPERSON ).NotEmpty().WithMessage("You must have a Understory Veg Person in the Plot Crew Screen");
+                    RuleFor(c => c.UNDERSTORYVEGETATIONDATE ).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Understory Veg Date in the Plot Crew screen");
+                    RuleFor(c => c.UNDERSTORYCENSUSPERSON ).NotEmpty().WithMessage("You must have a Understory Census Person in the Plot Crew Screen");
+                    RuleFor(c => c.UNDERSTORYCENSUSDATE).GreaterThanOrEqualTo(DateTime.Parse("1/1/2022")).WithMessage("You must have a valid Understory Census Date in the Plot Crew screen");
+                });
             }
         }
 
@@ -469,16 +510,15 @@ namespace eLiDAR.Validator
             DatabaseHelper _db = new DatabaseHelper();
             return _db.IsPlotNumUnique(_plot);
         }
-
     }
-
+    
     public class TreeValidator : AbstractValidator<TREE>
     {
         public TreeValidator(bool DoFullvalidation = false)
         {
             RuleFor(c => c).Must(c => IsUniqueTreeNum(c)).WithMessage("Tree number must be unique within the plot.");
             RuleFor(c => c.TREENUMBER).NotEmpty().WithMessage("Tree number should not be empty.");
-            RuleFor(c => c.TREENUMBER).SetValidator(new ScalePrecisionValidator(0, 5) ).WithMessage("Tree numbers must be integers");
+          //  RuleFor(c => c.TREENUMBER).Length(1, 5).WithMessage("Tree numbers must be integers");
             RuleFor(c => c.TREENUMBER).LessThan(2000).WithMessage("Tree numbers must be < 2000");
             RuleFor(c => c.TREENUMBER).GreaterThan(0).WithMessage("Tree numbers must be > 0");
             RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
@@ -488,9 +528,9 @@ namespace eLiDAR.Validator
 
             RuleFor(c => c.TREEORIGINCODE).NotEmpty().WithMessage("Tree origin should not be empty.");
             RuleFor(c => c.DBH).NotEmpty().WithMessage("Tree DBH should not be empty and be between 0 and 200.");
-            RuleFor(c => c.DBH).GreaterThan(7).WithMessage("Tree DBH should be > 7cm.");
-            RuleFor(c => c.DBH).LessThan(200).WithMessage("Tree DBH should be < 200.");
-            RuleFor(c => c.DBH).SetValidator(new ScalePrecisionValidator(2, 6)).WithMessage("DBH can have up to 2 decimals");
+            RuleFor(c => c.DBH).GreaterThanOrEqualTo((float)7.10).WithMessage("Tree DBH should be >= 7.10cm.");
+            RuleFor(c => c.DBH).LessThanOrEqualTo((float)150.00).WithMessage("Tree DBH should be <= 150.00cm");
+            RuleFor(c => (decimal)c.DBH).ScalePrecision(2, 6).WithMessage("DBH can have up to 2 decimals");
             RuleFor(c => c).Must(c => c.SPECIESCODE  == 0).WithMessage("Species code should be empty when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
             RuleFor(c => c).Must(c => c.TREEORIGINCODE == null).WithMessage("Tree Origin Code should be null when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
             RuleFor(c => c).Must(c => c.HEIGHTTODBH == 0).WithMessage("Ht to DBH should be 0 when tree status = C, X.").When(c => c.TREESTATUSCODE.Contains("C") || c.TREESTATUSCODE.Contains("X"));
@@ -503,13 +543,13 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.BARKRETENTIONCODE > 0).WithMessage("Bark retention should not be empty when tree status = L,V,D,DV.");
                     RuleFor(c => c).Must(c => c.WOODCONDITIONCODE > 0).WithMessage("Wood condition should not be empty when tree status = L,V,D,DV.");
                 });
-                // Live  Trees
+            // Live  Trees
             When(c => (c.TREESTATUSCODE.Contains("L") || c.TREESTATUSCODE == "V") && c.VSNSTATUSCODE != "i", () =>
                 {
                     RuleFor(c => c).Must(c => c.CROWNCLASSCODE != null).WithMessage("Crown Class Code should not be null when tree status = L,V.");
                     RuleFor(c => c).Must(c => c.STEMQUALITYCODE != null).WithMessage("Stem Quality should not be null when tree status = L,V.");
                     RuleFor(c => c).Must(c => c.DIRECTHEIGHTTOCONTLIVECROWN > 0 || c.OCULARHEIGHTTOCONTLIVECROWN > 0).WithMessage("Ht to LC must not be 0 when tree status = L,V.");
-                    RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT > c.DIRECTHEIGHTTOCONTLIVECROWN).WithMessage("Ht must be > ht to live crown when tree status = L,V");
+                    RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT > c.DIRECTHEIGHTTOCONTLIVECROWN).When(c => c.DIRECTHEIGHTTOCONTLIVECROWN != 999).WithMessage("Ht must be > ht to live crown when tree status = L,V");
                     RuleFor(c => c.DIRECTTOTALHEIGHT).Must(c => c >= 2 && c <= 50).WithMessage("Ht must be between 0 and 50m when tree status = L,V");
                     RuleFor(c => c.DIRECTHEIGHTTOCONTLIVECROWN).Must(c => c > 0 && c <= 50).WithMessage("Ht to live crown must be between 0 and 50m when tree status = L,V");
                     RuleFor(c => c).Must(c => c.FIELDAGE >= 1 && c.FIELDAGE <= 500).When(c => c.CORESTATUSCODE != null).WithMessage("Field age shouldbe between 1 and 500");
@@ -517,7 +557,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.OFFICERINGCOUNT <= 500).When(c => c.CORESTATUSCODE != null).WithMessage("Office ring count should be less than 500");
                     RuleFor(c => c).Must(c => c.MISSINGRINGS <= 20).When(c => c.CORESTATUSCODE != null).WithMessage("Missing ring count should be less than 20");
                     RuleFor(c => c).Must(c => c.SOUNDWOODLENGTH <= 50).When(c => c.CORESTATUSCODE != null).WithMessage("Sound wood length should be less than 50cm");
-                    RuleFor(c => c).Must(c => c.HEIGHTTODEADTIP > c.DIRECTTOTALHEIGHT).When(c => c.HEIGHTTODEADTIP > 0).WithMessage("Ht to dead tip must be > than ht");
+                    RuleFor(c => c).Must(c => c.HEIGHTTODEADTIP > c.DIRECTTOTALHEIGHT).When(c => c.HEIGHTTODEADTIP > 0 && c.HEIGHTTODEADTIP != 999).WithMessage("Ht to dead tip must be > than ht");
                     RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT == 0).When(c => c.OCULARTOTALHEIGHT > 0).WithMessage("Direct total height must be zero when using Ocular Height");
                     RuleFor(c => c).Must(c => c.OCULARTOTALHEIGHT == 0).When(c => c.DIRECTTOTALHEIGHT  > 0).WithMessage("Ocular height must be zero when using Direct Height");
 
@@ -528,8 +568,8 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.DECAYCLASS > 0).WithMessage("Decay Class should not be 0  when tree status = D,DV.");
                     RuleFor(c => c).Must(c => c.MORTALITYCAUSECODE > 0).WithMessage("Mortality cause should not be 0 when tree status = D,DV.");
                     RuleFor(c => c).Must(c => c.HEIGHTTOCORE == 0).WithMessage("Ht to Core must be 0 when tree status = D,DV.");
-                    RuleFor(c => c).Must(c => c.DIRECTHEIGHTTOCONTLIVECROWN == 0).WithMessage("Ht to LC must be 0 when tree status = D,DV.");
-                    RuleFor(c => c).Must(c => c.OCULARHEIGHTTOCONTLIVECROWN == 0).WithMessage("Ht to LC must be 0 when tree status = D,DV.");
+                    RuleFor(c => c).Must(c => c.DIRECTHEIGHTTOCONTLIVECROWN == 999).WithMessage("Ht to LC must be 999 when tree status = D,DV.");
+                    RuleFor(c => c).Must(c => c.OCULARHEIGHTTOCONTLIVECROWN == 999).WithMessage("Ht to LC must be 999 when tree status = D,DV.");
                     RuleFor(c => c).Must(c => c.HEIGHTTOCORE == 0).WithMessage("Ht to Core must be 0 when tree status = D,DV.");
                     RuleFor(c => c).Must(c => c.OCULARTOTALHEIGHT > 0).WithMessage("Ocular Ht must not be 0 when tree status = D,DV");
                     RuleFor(c => c.CORESTATUSCODE).Must(c => c == null).WithMessage("No ages are done for tree when tree status = D,DV");
@@ -746,7 +786,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => IsValidColour(c.MATRIXCOLOUR)).When(c => c.MATRIXCOLOUR != null).WithMessage("Invalid soil matrix colour.");
             RuleFor(c => c).Must(c => IsValidStructure(c.STRUCTURE)).When(c => c.STRUCTURE != null).WithMessage("Invalid soil structure.");
             RuleFor(c => c).Must(c => IsValidColour(c.GLEYCOLOUR)).When(c => c.GLEYCOLOUR != null).WithMessage("Invalid soil gley colour.");
-            RuleFor(c => c).Must(c => IsValidColour(c.MOTTLECOLOUR)).When(c => c.MOTTLECOLOUR != null).WithMessage("Invalid soil gley colour.");
+            RuleFor(c => c).Must(c => IsValidColour(c.MOTTLECOLOUR)).When(c => c.MOTTLECOLOUR != null).WithMessage("Invalid soil mottle colour.");
             RuleFor(c => c.HORIZONNUMBER).NotEmpty().WithMessage("Soil Layer number is required.");
             RuleFor(c => c.DEPTHTO).NotEqual(c => c.DEPTHFROM).WithMessage("To and From must not be the same value.");
             RuleFor(c => c.DEPTHTO).LessThan(250).WithMessage("To must be be less than 250cm.");
@@ -780,7 +820,7 @@ namespace eLiDAR.Validator
                      RuleFor(c => c).Must(c => c.POREPATTERNCODE == null).WithMessage("Pore pattern must be empty for organic horizons");
                  });
                 // Mineral horizons
-                When(c => c.HORIZON != "LFH" || c.HORIZON != "LF" || c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
+                When(c => c.HORIZON != "LFH" && c.HORIZON != "LF" && c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
                 {
                     RuleFor(c => c).Must(c => c.DECOMPOSITIONCODE == null).WithMessage("A decoposition code is not required for mineral horizons");
                     RuleFor(c => c).Must(c => c.MATRIXCOLOUR != null).WithMessage("Matrix colour is used for mineral horizons");
@@ -855,8 +895,12 @@ namespace eLiDAR.Validator
     {
         public SmallTreeValidator(bool DoFullValidation = false)
         {
+            if(DoFullValidation)
+            {
+                RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Shrub species must be unique within the plot.");
+                RuleFor(c => c).Must(c => c.HT_CLASS1_COUNT + c.HT_CLASS2_COUNT + c.HT_CLASS3_COUNT + c.HT_CLASS4_COUNT + c.HT_CLASS5_COUNT + c.HT_CLASS6_COUNT + c.HT_CLASS7_COUNT + c.HT_CLASS8_COUNT + c.COUNT > 0).WithMessage("Shrub Count must be > 0.");
+            }
             RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
-            RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
         }
         bool ValidateStringEmpty(string stringValue)
         {
@@ -882,6 +926,46 @@ namespace eLiDAR.Validator
             return _db.IsSmallTreeUnique(_table);
         }
     }
+
+    public class SmallTreeTallyValidator : AbstractValidator<SMALLTREETALLY>
+    {
+        public SmallTreeTallyValidator(bool DoFullValidation = false)
+        {
+            RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
+            //RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
+            RuleFor(c => c.HEIGHT).Must(c => c > 1.3).WithMessage("Height must be greater than 1.3");
+            // dbh must be between 2.5 and 7
+            RuleFor(c => c.DBH).Must(c => c >= 2.5).WithMessage("Dbh must be greater than or = 2.5");
+            RuleFor(c => c.DBH).Must(c => c <= 7).WithMessage("Dbh must be less than or = 7");
+            RuleFor(c => c.COUNT).Must(c => c > 0).WithMessage("Count must be greater than 0");
+
+        }
+        bool ValidateStringEmpty(string stringValue)
+        {
+            if (!string.IsNullOrEmpty(stringValue))
+                return true;
+            return false;
+        }
+        bool ValidateIntEmpty(int value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool ValidateDblEmpty(double value)
+        {
+            if (!(value == 0))
+                return true;
+            return false;
+        }
+        bool IsUnique(SMALLTREETALLY _table)
+        {
+            DatabaseHelper _db = new DatabaseHelper();
+            return _db.IsSmallTreeTallyUnique(_table);
+        }
+    }
+
+
     public class VegetationValidator : AbstractValidator<VEGETATION>
     {
         public VegetationValidator(bool DoFullValidation = false)
@@ -896,11 +980,17 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => c.ELCLAYER5 >= 0 && c.ELCLAYER5 <= 99).WithMessage("% cover for ELC layer 5 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER6 >= 0 && c.ELCLAYER6 <= 99).WithMessage("% cover for ELC layer 6 must be <= 99%");
             RuleFor(c => c).Must(c => c.ELCLAYER7 >= 0 && c.ELCLAYER7 <= 99).WithMessage("% cover for ELC layer 7 must be <= 99%");
-            RuleFor(c => c.ELCLAYER3).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer3 can have up to 1 decimals");
-            RuleFor(c => c.ELCLAYER4).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer4 can have up to 1 decimals");
-            RuleFor(c => c.ELCLAYER5).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer5 can have up to 1 decimals");
-            RuleFor(c => c.ELCLAYER6).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer6 can have up to 1 decimals");
-            RuleFor(c => c.ELCLAYER7).SetValidator(new ScalePrecisionValidator(1, 4)).WithMessage("ELClayer7 can have up to 1 decimals");
+
+            RuleFor(c => (decimal)c.ELCLAYER3).ScalePrecision(1, 4).WithMessage("ELClayer3 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER4).ScalePrecision(1, 4).WithMessage("ELClayer4 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER5).ScalePrecision(1, 4).WithMessage("ELClayer5 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER6).ScalePrecision(1, 4).WithMessage("ELClayer6 can have up to 1 decimals");
+            RuleFor(c => (decimal)c.ELCLAYER7).ScalePrecision(1, 4).WithMessage("ELClayer7 can have up to 1 decimals");
+
+            if (DoFullValidation)
+            {
+                RuleFor(c => c).Must(c => c.ELCLAYER3 + c.ELCLAYER4 + c.ELCLAYER5 + c.ELCLAYER6 + c.ELCLAYER7 > 0).WithMessage("No cover has been selected for this plant");
+            }
 
         }
         bool ValidateStringEmpty(string stringValue)
@@ -1135,8 +1225,8 @@ namespace eLiDAR.Validator
                 When(c => c.IS_ACCUM != "Y", () =>
                 {
                     RuleFor(c => c).Must(c => c.DOWNWOODYDEBRISLENGTH >= 0.01 && c.DOWNWOODYDEBRISLENGTH <= 40).WithMessage("DWD length should be between 0.01 and 40");
-                    RuleFor(c => c).Must(c => c.LARGEDIAMETER >= 7.5 && c.LARGEDIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");
-                    RuleFor(c => c).Must(c => c.SMALLDIAMETER >= 7.5 && c.SMALLDIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");
+                    RuleFor(c => c).Must(c => c.LARGEDIAMETER >= 7.5 && c.LARGEDIAMETER <= 60).WithMessage("DWD large diam should be between 7.5 and 60cm");
+                    RuleFor(c => c).Must(c => c.SMALLDIAMETER >= 7.5 && c.SMALLDIAMETER <= 60).WithMessage("DWD snmall diam should be between 7.5 and 60cm");
                     RuleFor(c => c).Must(c => c.DIAMETER >= 7.5 && c.DIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");
                     RuleFor(c => c).Must(c => c.TILTANGLE >= 0 && c.TILTANGLE <= 90).WithMessage("DWD tilt angle should be between 0 and 90");
                 });

@@ -18,10 +18,10 @@ namespace eLiDAR.Views
     {
         private MottleColourViewModel _viewmodel;
   
-        public MottleColour(SOIL _soil)
+        public MottleColour(SOIL _soil, bool ischanged)
         {
             InitializeComponent();
-            _viewmodel = new MottleColourViewModel(Navigation, _soil);
+            _viewmodel = new MottleColourViewModel(Navigation, _soil, ischanged);
             this.BindingContext = _viewmodel;
             
         }

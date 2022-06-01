@@ -21,8 +21,8 @@
             <Setter.Value>
                 <OnPlatform x:TypeArguments="x:String">
                     <On Platform="iOS" Value="Font Awesome 5 Free" />
-                    <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
-                    <On Platform="UWP" Value="Assets/fa-solid-900.ttf#Font Awesome 5 Free" />
+                    <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Regular"/>
+                    <On Platform="UWP" Value="ms-appx:///Assets/fa-solid-900.ttf#Font Awesome 5 Free Solid"/>
                 </OnPlatform>
             </Setter.Value>
         </Setter>
@@ -35,6 +35,7 @@
 
     <Style x:Key="TextSubhead" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource backgroundColor}" />
         <Setter Property="FontSize" Value="{StaticResource TextSizeSubhead}" />
     </Style>
 
@@ -47,6 +48,12 @@
         <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
         <Setter Property="FontSize" Value="{StaticResource TextSizeBody}" />
     </Style>
+    
+    <Style x:Key="TextError" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextErrorColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeCaption}" />
+    </Style>
+
 
     <Style x:Key="TextBodySecondary" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />

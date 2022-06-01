@@ -66,16 +66,18 @@ namespace eLiDAR.ViewModels {
             }
             else {
                 _ecosite.SUBSTRATEDATE = System.DateTime.Now;
-                _ecosite.DEPTHTOCARBONATES = null;
-                _ecosite.DEPTHTOBEDROCK = null;
-                _ecosite.DEPTHTODISTINCTMOTTLES = null;
-                _ecosite.DEPTHTOGLEY = null;
-                _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = null;
-                _ecosite.DEPTHTOPROMINENTMOTTLES = null;
-                _ecosite.DEPTHTOROOTRESTRICTION  = null;
-                _ecosite.DEPTHTOSEEPAGE = null;
-                _ecosite.DEPTHTOWATERTABLE = null;
-
+                _ecosite.DEPTHTOCARBONATES = 999;
+                _ecosite.DEPTHTOBEDROCK = 999;
+                _ecosite.DEPTHTODISTINCTMOTTLES = 999;
+                _ecosite.DEPTHTOGLEY = 999;
+                _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = 999;
+                _ecosite.DEPTHTOPROMINENTMOTTLES = 999;
+                _ecosite.DEPTHTOROOTRESTRICTION  = 999;
+                _ecosite.DEPTHTOSEEPAGE = 999;
+                _ecosite.DEPTHTOWATERTABLE = 999;
+                _ecosite.STRATIFIED = "N";
+                _ecosite.PROBLEMATICSITE = "N";
+                _ecosite.PRI_ECO_PCT = 100;
 
             }
             Refresh();
@@ -112,12 +114,14 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeCode(_ecosite));
+            IsChanged = true;
         }
         async Task ShowTexture()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new Texture(_ecosite));
+            IsChanged = true;
         }
 
         async Task ShowComments()
@@ -125,6 +129,7 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new EcositeComments(_ecosite));
+            IsChanged=true;
         }
 
         private PickerItemsString _selectedSubstratePerson = new PickerItemsString { ID = "", NAME = "" };
@@ -295,44 +300,8 @@ namespace eLiDAR.ViewModels {
             get
             {
                 if (MINERALTEXTURECODE == null) { return "Mineral Texture"; }
-                //else {
-                //    // update Aug 2
-                //    List<string> list = new List<string>() {"one","two" };
-                //    if (list.Contains(MINERALTEXTURECODE)) { SelectedPorePattern = new PickerItemsString { ID = "", NAME = "" }; }
-
-                //     vcS,cS LvcS,LcS,SivcS,SicS
-
-
-                //    mS,                     LmS SimS
-                //    vcSL
-                //    cSL
-
-
-                //    fS LfS                    SifS mSL
-
-
-
-                //    vfS LvfS SivfS,fSL 
-
-                //    L, vfSL ,                    SiL
-                //    SCL
-
-
-                //    L, 
-                //    SivfS
-                //    fSL
-
-                //    Si
-                //    CL
-                //    SiCL
-                //    SC
-                //    SiC
-                //    C
-                //    BR
-                //    CF
-
-
-
+            
+ 
                 else { return MINERALTEXTURECODE; }
                 
             }
@@ -395,8 +364,19 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 EcositeValidator _validator = new EcositeValidator();
+                EcositeValidator _fullvalidator = new EcositeValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_ecosite);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_ecosite);
+
+                ParseValidater _parser = new ParseValidater();
+                (_ecosite.ERRORCOUNT, _ecosite.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+
+ //               EcositeValidator _validator = new EcositeValidator();
+   //             ValidationResult validationResults = _validator.Validate(_ecosite);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

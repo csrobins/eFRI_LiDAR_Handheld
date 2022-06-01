@@ -133,8 +133,18 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 VegetationValidator _validator = new VegetationValidator();
+                VegetationValidator _fullvalidator = new VegetationValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_vegetation);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_vegetation);
+
+                ParseValidater _parser = new ParseValidater();
+                (_vegetation.ERRORCOUNT, _vegetation.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+ //               VegetationValidator _validator = new VegetationValidator();
+   //             ValidationResult validationResults = _validator.Validate(_vegetation);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

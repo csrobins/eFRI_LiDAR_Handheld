@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -29,6 +31,7 @@ namespace eLiDAR.ViewModels
             {
                 return false;
             }
+            else { IsChanged = true; }
             backfield = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -40,6 +43,10 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                DWDValidator _fullvalidator = new DWDValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_dwd);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
             }
         }
 
@@ -68,9 +75,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.LINENUMBER;
             set
             {
+                if (!_dwd.LINENUMBER.Equals(value)) { IsChanged = true; }
                 _dwd.LINENUMBER = value;
                 NotifyPropertyChanged("LINE");
-                IsChanged = true;
+               
             }
         }
 
@@ -79,9 +87,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.DWDNUM;
             set
             {
+                if (!_dwd.DWDNUM.Equals(value)) { IsChanged = true; }
                 _dwd.DWDNUM = value;
                 NotifyPropertyChanged("DWDNUM");
-                IsChanged = true;
+               
             }
         }
 
@@ -90,9 +99,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.SPECIESCODE;
             set
             {
+                if (!_dwd.SPECIESCODE.Equals(value)) { IsChanged = true; }
                 _dwd.SPECIESCODE = value;
                 NotifyPropertyChanged("SPECIES");
-                IsChanged = true;
+                
             }
         }
         public double DIAM
@@ -100,9 +110,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.DIAMETER;
             set
             {
+                if (!_dwd.DIAMETER.Equals(value)) { IsChanged = true; }
                 _dwd.DIAMETER = value;
                 NotifyPropertyChanged("DIAM");
-                IsChanged = true;
+                
             }
         }
         public int DECOMP_CLASS
@@ -110,9 +121,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.DECOMPOSITIONCLASS;
             set
             {
+                if (!_dwd.DECOMPOSITIONCLASS.Equals(value)) { IsChanged = true; }
                 _dwd.DECOMPOSITIONCLASS = value;
                 NotifyPropertyChanged("DECOMP_CLASS");
-                IsChanged = true;
+              
             }
         }
 
@@ -121,9 +133,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.DOWNWOODYDEBRISORIGINCODE;
             set
             {
+                if (_dwd.DOWNWOODYDEBRISORIGINCODE !=value) { IsChanged = true; }
                 _dwd.DOWNWOODYDEBRISORIGINCODE = value;
                 NotifyPropertyChanged("ORIGIN");
-                IsChanged = true;
+              
             }
         }
 
@@ -132,9 +145,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.TILTANGLE;
             set
             {
+                if (!_dwd.TILTANGLE.Equals(value)) { IsChanged = true; }
                 _dwd.TILTANGLE = value;
                 NotifyPropertyChanged("TILT_ANGLE");
-                IsChanged = true;
+               
             }
         }
 
@@ -145,10 +159,10 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-
+                    if (!_dwd.DOWNWOODYDEBRISLENGTH.Equals(value)) { IsChanged = true; }
                     _dwd.DOWNWOODYDEBRISLENGTH = value;
                     NotifyPropertyChanged("LENGTH");
-                    IsChanged = true;
+                    
                 }
             }
         }
@@ -158,9 +172,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.SMALLDIAMETER;
             set
             {
+                if (!_dwd.SMALLDIAMETER.Equals(value)) { IsChanged = true; }
                 _dwd.SMALLDIAMETER = value;
                 NotifyPropertyChanged("SMALL_DIAM");
-                IsChanged = true;
+              
             }
         }
 
@@ -169,9 +184,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.LARGEDIAMETER;
             set
             {
+                if (!_dwd.LARGEDIAMETER.Equals(value)) { IsChanged = true; }
                 _dwd.LARGEDIAMETER = value;
                 NotifyPropertyChanged("LARGE_DIAM");
-                IsChanged = true;
+               
             }
         }
 
@@ -180,9 +196,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.MOSS;
             set
             {
+                if (_dwd.MOSS != value) { IsChanged = true; }
                 _dwd.MOSS = value;
                 NotifyPropertyChanged("GT_50_MOSS");
-                IsChanged = true;
+               
             }
         }
 
@@ -191,9 +208,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.BURNED;
             set
             {
+                if (_dwd.BURNED !=value) { IsChanged = true; }
                 _dwd.BURNED = value;
                 NotifyPropertyChanged("BURNED");
-                IsChanged = true;
+               
             }
         }
 
@@ -202,9 +220,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.HOLLOW;
             set
             {
+                if (_dwd.HOLLOW != value) { IsChanged = true; }
                 _dwd.HOLLOW = value;
                 NotifyPropertyChanged("HOLLOW");
-                IsChanged = true;
+                
             }
         }
         public string IS_ACCUM
@@ -212,9 +231,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.IS_ACCUM;
             set
             {
+                if (_dwd.IS_ACCUM != value) { IsChanged = true; }
                 _dwd.IS_ACCUM = value;
                 NotifyPropertyChanged("IS_ACCUM");
-                IsChanged = true;
+               
             }
         }
         public double ACCUM_LENGTH
@@ -224,10 +244,10 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(ACCUM_LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-
+                    if (!_dwd.ACCUMULATIONLENGTH.Equals(value)) { IsChanged = true; }
                     _dwd.ACCUMULATIONLENGTH = value;
                     NotifyPropertyChanged("ACCUM_LENGTH");
-                    IsChanged = true;
+                   
                 }
             }
         }
@@ -238,10 +258,10 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(ACCUM_DEPTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-
+                    if (!_dwd.ACCUMULATIONDEPTH.Equals(value)) { IsChanged = true; }
                     _dwd.ACCUMULATIONDEPTH = value;
                     NotifyPropertyChanged("ACCUM_DEPTH");
-                    IsChanged = true;
+                   
                 }
             }
         }
@@ -250,9 +270,10 @@ namespace eLiDAR.ViewModels
             get => _dwd.PERCENTCONIFER;
             set
             {
+                if (!_dwd.PERCENTCONIFER.Equals(value)) { IsChanged = true; }
                 _dwd.PERCENTCONIFER = value;
                 NotifyPropertyChanged("PERCENT_CONIFER");
-                IsChanged = true;
+                
             }
         }
         public int PERCENT_DECID
@@ -260,12 +281,32 @@ namespace eLiDAR.ViewModels
             get => _dwd.PERCENTHARDWOOD;
             set
             {
+                if (!_dwd.PERCENTHARDWOOD.Equals(value)) { IsChanged = true; }
                 _dwd.PERCENTHARDWOOD = value;
                 NotifyPropertyChanged("PERCENT_DECID");
-                IsChanged = true;
+                
             }
         }
-     
+        public int ERRORCOUNT
+        {
+            get => _dwd.ERRORCOUNT;
+            set
+            {
+                _dwd.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+           
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _dwd.ERRORMSG;
+            set
+            {
+                _dwd.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+               
+            }
+        }
 
         List<DWD> _dwdList;
         public List<DWD> DWDList

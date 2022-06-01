@@ -15,7 +15,7 @@ namespace eLiDAR.Droid {
 
             // Use this if I need to reset the database
             bool Isdebug = false;
-            if (Isdebug == true)
+            if (Isdebug)
                 {
                 File.Delete(path);
                 }

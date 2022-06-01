@@ -7,9 +7,13 @@
 
     <OnPlatform
         x:Key="FontAwesome"
-        x:TypeArguments="x:String"
-        Android="fa-solid-900.ttf#Font Awesome 5 Free"
-        iOS="Font Awesome 5 Free" />
+        x:TypeArguments="x:String">
+        <On Platform="iOS" Value="Font Awesome 5 Free" />
+        <On Platform="UWP" Value="ms-appx:///Assets/fa-solid-900.ttf#Font Awesome 5 Free Solid"/>
+        <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free" />
+
+    </OnPlatform>
+
 
     <OnPlatform
         x:Key="Fabric"

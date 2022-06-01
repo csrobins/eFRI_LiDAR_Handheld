@@ -33,6 +33,8 @@ namespace eLiDAR.ViewModels {
             _dwd.DWDID  = selectedID;
             _dwdRepository = new DWDRepository();
             _fk = selectedID;
+            _dwd.BURNED = "N";
+            _dwd.HOLLOW = "N";
             AddCommand = new Command(async () => await Update());
             AddAccumCommand = new Command(async () => await Update(IsAccumulation));
 
@@ -215,9 +217,22 @@ namespace eLiDAR.ViewModels {
         {
             // display Alert for confirmation
              if (IsChanged)
-            {
+             {
+
                 DWDValidator _validator = new DWDValidator();
+                DWDValidator _fullvalidator = new DWDValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_dwd);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_dwd);
+
+                ParseValidater _parser = new ParseValidater();
+                (_dwd.ERRORCOUNT, _dwd.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+
+
+
+//                DWDValidator _validator = new DWDValidator();
+  //              ValidationResult validationResults = _validator.Validate(_dwd);
                 if (validationResults.IsValid)
                 {
                     if (_isaccum) { _ = Update(true); }

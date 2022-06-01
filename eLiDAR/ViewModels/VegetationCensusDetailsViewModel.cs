@@ -104,8 +104,15 @@ namespace eLiDAR.ViewModels
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 VegetationCensusValidator _validator = new VegetationCensusValidator();
+                VegetationCensusValidator _fullvalidator = new VegetationCensusValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_vegetation);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_vegetation);
+
+                ParseValidater _parser = new ParseValidater();
+                (_vegetation.ERRORCOUNT, _vegetation.ERRORMSG) = _parser.Parse(fullvalidationResults);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

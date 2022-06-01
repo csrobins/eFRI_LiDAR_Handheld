@@ -22,7 +22,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
-                    Text="Small Tree Attributes" />
+                    Text="Shrub Tally Attributes" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
@@ -36,9 +36,13 @@
                     SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="0" Grid.Column=" 1">
+            <!--<StackLayout Grid.Row="0" Grid.Column=" 1">
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
@@ -103,12 +107,12 @@
                         Maximum="100"
                         Value="{Binding HT_CLASS4_COUNT, Mode=TwoWay}" />
                 </StackLayout>
-            </StackLayout>
+            </StackLayout>-->
             <StackLayout Grid.Row="0" Grid.Column="2">
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextTitle}"
-                    Text="Small Trees Continued" />
+                    Text="Shrubs Continued" />
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"

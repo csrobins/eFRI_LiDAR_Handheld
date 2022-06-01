@@ -14,12 +14,12 @@ namespace eLiDAR.Helpers
         private LogWriter logger;
         static SQLiteConnection sqliteconnection;
         public const string DbFileName = "eLiDAR.sqlite";
-    
+        //public const string DbFileName = "eLiDAR.sqlite";
+        
         public DatabaseHelper()
         {
-            logger = new LogWriter(); 
-            sqliteconnection = DependencyService.Get<ISQLite>().GetConnection();
-
+            logger = new LogWriter();
+            if ( sqliteconnection is null ) sqliteconnection = DependencyService.Get<ISQLite>().GetConnection();
         }
         // Get All project data 
         public List<PROJECT> GetAllProjectData()
@@ -67,11 +67,22 @@ namespace eLiDAR.Helpers
             var plot = sqliteconnection.Query<PLOT>("select VSNPLOTTYPECODE from Plot where PLOTID = '" + id + "'").FirstOrDefault();
             return plot.VSNPLOTTYPECODE;
         }
+        public DateTime GetPlotLastSynch(String id)
+        {
+            var plot = sqliteconnection.Query<PLOT>("select LastSynched from Plot where PLOTID = '" + id + "'").FirstOrDefault();
+            return plot.LastSynched;
+        }
 
         public string GetTreeTitle(String id)
         {
             var tree = sqliteconnection.Query<TREE>("select TREENUMBER from Tree where TREEID = '" + id + "'").FirstOrDefault();
             return tree.TREENUMBER.ToString();
+        }
+
+        public string GetPlotfromTree(String id)
+        {
+            var tree = sqliteconnection.Query<TREE>("select TREENUMBER from Tree where TREEID = '" + id + "'").FirstOrDefault();
+            return tree.PLOTID;
         }
 
         public int GetAzimuth(String id)
@@ -234,6 +245,12 @@ namespace eLiDAR.Helpers
             return (from data in sqliteconnection.Query<PLOT>("select * from PLOT where PROJECTID = '" + projectid + "' and IsDeleted = 'N' ORDER BY VSNPLOTNAME")
                     select data).ToList();
         }
+
+        public List<PLOT> GetPlotDataforSynch(DateTime updatedate)
+        {
+           return sqliteconnection.Table<PLOT>().Where(t => t.SynchRequired > updatedate).ToList();
+        }
+
         public List<PLOTLIST> GetFilteredPlotDataFull(string projectid)
         {
         //    return (from data in sqliteconnection.Query<PLOTLIST>("Select * from PLOT").OrderBy(t => t.VSNPLOTNAME).Where(t => t.PROJECTID == projectid)
@@ -325,11 +342,11 @@ namespace eLiDAR.Helpers
             string qry;
             if (!sort)
             {
-                qry = "select VSNPLOTTYPECODE, TREE.TREEID, TREE.PLOTID, TREENUMBER, SPECIESCODE, TREE.TREEORIGINCODE, TREESTATUSCODE, DBH, CROWNCLASSCODE, OCULARTOTALHEIGHT, DIRECTTOTALHEIGHT,  CASE WHEN OCULARTOTALHEIGHT > 0 THEN OCULARTOTALHEIGHT ELSE DIRECTTOTALHEIGHT END HEIGHT, CORESTATUSCODE, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' and TREE.IsDeleted = 'N' ORDER BY TREENUMBER";
+                qry = "select VSNPLOTTYPECODE, TREE.TREEID, TREE.PLOTID, TREENUMBER, SPECIESCODE, TREE.TREEORIGINCODE, TREESTATUSCODE, DBH, CROWNCLASSCODE, OCULARTOTALHEIGHT, DIRECTTOTALHEIGHT, TREE.ERRORCOUNT, CASE WHEN OCULARTOTALHEIGHT > 0 THEN OCULARTOTALHEIGHT ELSE DIRECTTOTALHEIGHT END HEIGHT, CORESTATUSCODE, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' and TREE.IsDeleted = 'N' ORDER BY TREENUMBER";
             }
             else
             {  
-                qry = "select VSNPLOTTYPECODE, TREE.TREEID, TREE.PLOTID, TREENUMBER, SPECIESCODE, TREE.TREEORIGINCODE, TREESTATUSCODE, DBH, CROWNCLASSCODE,OCULARTOTALHEIGHT, DIRECTTOTALHEIGHT,  CASE WHEN OCULARTOTALHEIGHT > 0 THEN OCULARTOTALHEIGHT ELSE DIRECTTOTALHEIGHT END HEIGHT, CORESTATUSCODE, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' and TREE.IsDeleted = 'N' ORDER BY SPECIESCODE, DBH DESC";
+                qry = "select VSNPLOTTYPECODE, TREE.TREEID, TREE.PLOTID, TREENUMBER, SPECIESCODE, TREE.TREEORIGINCODE, TREESTATUSCODE, DBH, CROWNCLASSCODE,OCULARTOTALHEIGHT, DIRECTTOTALHEIGHT,  TREE.ERRORCOUNT, CASE WHEN OCULARTOTALHEIGHT > 0 THEN OCULARTOTALHEIGHT ELSE DIRECTTOTALHEIGHT END HEIGHT, CORESTATUSCODE, STEMMAP.AZIMUTH, STEMMAP.DISTANCE from TREE INNER JOIN PLOT ON TREE.PLOTID = PLOT.PLOTID LEFT JOIN STEMMAP ON TREE.TREEID = STEMMAP.TREEID where TREE.PLOTID = '" + plotid + "' and TREE.IsDeleted = 'N' ORDER BY SPECIESCODE, DBH DESC";
             }
             try
             {
@@ -342,6 +359,42 @@ namespace eLiDAR.Helpers
                 return null;
             }
         }
+
+        public bool SetPlotSynch(string plotID = null, string treeID = null,bool settonull = false)
+        {
+            try
+            {
+                string thisplot = plotID;
+                SQLite.SQLiteCommand com = new SQLite.SQLiteCommand(sqliteconnection);
+                long ticks = DateTime.UtcNow.Ticks;
+
+                if (!string.IsNullOrEmpty(treeID))
+                {
+                    thisplot = GetPlotfromTree(treeID);
+                    com.CommandText = "UPDATE Plot SET SynchRequired = " + ticks + " WHERE PLOTID = '" + thisplot + "'";
+                }
+
+                if(settonull)
+                {
+                    com.CommandText = "UPDATE Plot SET SynchRequired = " + 0 + ", LastSynched = " + ticks + " WHERE PLOTID = '" + thisplot + "'";
+                }
+                else
+                {
+                    com.CommandText = "UPDATE Plot SET SynchRequired = " + ticks + " WHERE PLOTID = '" + thisplot + "'";
+
+                }
+
+                com.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message;
+                return false;
+            }
+        }
+
+
         public bool IsTreeNumUnique(TREE _tree)
         {
             // for examinginif a unique tree number is being saved
@@ -381,6 +434,23 @@ namespace eLiDAR.Helpers
             {
                 var myerror = e.Message; // erro
                 return false;
+            }
+        }
+
+        public int TreeErrorCount(string _plotid)
+        {
+            // for examingin the count of errors in the tree table
+            string qry;
+            qry = "select sum(ERRORCOUNT) from TREE where PLOTID = '" + _plotid + "'";
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                return num; 
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return 0;
             }
         }
 
@@ -585,6 +655,50 @@ namespace eLiDAR.Helpers
             }
         }
 
+        public bool IsSmallTreeTallyUnique(SMALLTREETALLY _smalltreetally)
+        {
+            // for examinginif a unique veg census species is being saved
+            string qry;
+            if (_smalltreetally.SMALLTREETALLYID != null)
+            {
+                qry = "select count(SMALLTREETALLYID) from SMALLTREETALLY where PLOTID = '" + _smalltreetally.PLOTID + "' and IsDeleted = 'N' and SPECIESCODE = " + _smalltreetally.SPECIESCODE + " and SMALLTREETALLYID <> '" + _smalltreetally.SMALLTREETALLYID + "'";
+            }
+            else
+            {
+                qry = "select count(SMALLTREETALLYID) from SMALLTREETALLY where PLOTID = '" + _smalltreetally.PLOTID + "' and IsDeleted = 'N' and SPECIESCODE = " + _smalltreetally.SPECIESCODE;
+            }
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return false; }
+                else { return true; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return false;
+            }
+        }
+
+        // Get some record counters
+        public int GetErrorCount(string tbl, string key, string id)
+        {
+            string qry;
+            qry = "select sum(ERRORCOUNT) from " + tbl + " where " + key + " = '" + id + "' and IsDeleted = 'N'";
+            try
+            {
+                var num = sqliteconnection.ExecuteScalar<int>(qry);
+                if (num > 0) { return num; }
+                else { return 0; }
+            }
+            catch (Exception e)
+            {
+                var myerror = e.Message; // erro
+                return 0;
+            }
+        }
+
+
         //Get Specific data
         public TREE GetTreeData(string id)
         {
@@ -670,6 +784,9 @@ namespace eLiDAR.Helpers
             catch (Exception ex)
             { logger.LogWrite(ex.Message); }
         }
+
+
+
         public void DeleteStemmap(string id)
         {
             sqliteconnection.Delete<STEMMAP>(id);
@@ -792,6 +909,57 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<SOIL>().FirstOrDefault(t => t.SOILID == id);
         }
+
+        // Small Tree Tally Helpers
+        
+        // Small Tree Tally update
+        public void UpdateSmallTreeTally(SMALLTREETALLY smalltreetally)
+        {
+            sqliteconnection.Update(smalltreetally);
+        }
+
+        public void DeleteAllSmallTreeTally()
+        {
+            sqliteconnection.DeleteAll<SMALLTREETALLY>();
+        }
+
+        public List<SMALLTREETALLY> GetAllSmallTreeTallyData()
+        {
+            return (from data in sqliteconnection.Table<SMALLTREETALLY>().OrderBy(t => t.SPECIESCODE)
+                    select data).ToList();
+        }
+
+        public List<SMALLTREETALLYLIST> GetFilteredSmallTreeTallyDataFull(string plotid)
+        {
+            return (from data in sqliteconnection.Query<SMALLTREETALLYLIST>("select * from SMALLTREETALLY where PLOTID = '" + plotid + "' and IsDeleted = 'N' ORDER BY SPECIESCODE")
+                    select data).ToList();
+        }
+
+        public List<SMALLTREETALLY> GetFilteredSmallTreeTallyData(string plotid)
+        {
+            return (from data in sqliteconnection.Query<SMALLTREETALLY>("select SMALLTREETALLY.* from SMALLTREETALLY").OrderBy(t => t.SPECIESCODE).Where(t => t.PLOTID == plotid && t.IsDeleted == "N")
+                    select data).ToList();
+        }
+
+        public SMALLTREETALLY GetSmallTreeTallyData(string id)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().FirstOrDefault(t => t.SMALLTREETALLYID == id);
+        }
+
+        // Insert new to DB 
+        public void InsertSmallTreeTally(SMALLTREETALLY smalltreetally)
+        {
+            try
+            {
+                sqliteconnection.Insert(smalltreetally);
+            }
+            catch (Exception ex)
+            { logger.LogWrite(ex.Message); }
+        }
+
+
+
+
 
         // Small Tree Helpers
         public void DeleteSmallTree(string id)
@@ -999,6 +1167,9 @@ namespace eLiDAR.Helpers
         {
             var settings = sqliteconnection.Table<SETTINGS>().FirstOrDefault();
             return settings.LastSynched.ToString() ; 
+
+
+
         }
         public List<PROJECT> GetProjecttoInsert(DateTime fromdate)
         {
@@ -1092,6 +1263,20 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<SMALLTREE>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
         }
+
+        public List<SMALLTREETALLY> GetSmalltreeTallytoInsert(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.Created > fromdate).ToList();
+        }
+        public List<SMALLTREETALLY> GetSmalltreeTallyToUpdate(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<SMALLTREETALLY> GetSmalltreeTallyToDelete(DateTime fromdate)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
+        }
+
         public List<VEGETATION> GetVegetationtoInsert(DateTime fromdate)
         {
             return sqliteconnection.Table<VEGETATION>().Where(t => t.Created > fromdate).ToList();

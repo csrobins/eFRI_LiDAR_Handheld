@@ -18,10 +18,10 @@ namespace eLiDAR.Views
     {
         private SoilColourViewModel _viewmodel;
   
-        public SoilColour(SOIL _soil)
+        public SoilColour(SOIL _soil,  bool ischanged)
         {
             InitializeComponent();
-            _viewmodel = new SoilColourViewModel(Navigation, _soil);
+            _viewmodel = new SoilColourViewModel(Navigation, _soil, ischanged);
             this.BindingContext = _viewmodel;
         }
     }

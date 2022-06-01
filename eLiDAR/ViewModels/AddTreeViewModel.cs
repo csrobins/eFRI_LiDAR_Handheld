@@ -77,13 +77,15 @@ namespace eLiDAR.ViewModels {
             _tree.HEIGHTTODBH = 1.3F;
             _tree.DBHIN  = "Y";
             _tree.CROWNIN = "Y";
+            _tree.BARKRETENTIONCODE = 1;
+            _tree.WOODCONDITIONCODE = 1;
             if (util.UseDefaultOrigin) { _tree.TREEORIGINCODE = util.DefaultOrigin; }
             if (util.UseDefaultStatus) { _tree.TREESTATUSCODE = util.DefaultStatus; }
             if (util.UseDefaultVSNStatus) { _tree.VSNSTATUSCODE = util.DefaultVSNStatus; }
             if (util.UseDefaultSpecies) { _tree.SPECIESCODE = util.DefaultSpecies; }
-            //_tree.HEIGHTTODEADTIP = null;
-            //_tree.DIRECTHEIGHTTOCONTLIVECROWN = null;
-            //_tree.OCULARHEIGHTTOCONTLIVECROWN = null;
+            _tree.HEIGHTTODEADTIP = 999;
+            _tree.DIRECTHEIGHTTOCONTLIVECROWN = 0;
+            _tree.OCULARHEIGHTTOCONTLIVECROWN = 999;
             if (util.AllowAutoNumber) { _tree.TREENUMBER = _treeRepository.GetNextNumber(fk); }
 
         }
@@ -377,8 +379,16 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 TreeValidator _validator = new TreeValidator();
+                TreeValidator _fullvalidator = new TreeValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_tree);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_tree);
+
+                ParseValidater _parser = new ParseValidater();
+                (_tree.ERRORCOUNT, _tree.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
                 if (validationResults.IsValid)
                 {
                     _ = AddTree(_fk);

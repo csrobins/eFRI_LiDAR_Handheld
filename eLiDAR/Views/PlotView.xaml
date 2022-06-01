@@ -314,6 +314,7 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
                     Text="Datum" />
+                
                 <Entry
                     x:Name="txtDatum"
                     HorizontalOptions="FillAndExpand"
@@ -321,25 +322,34 @@
                     Placeholder="Datum"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DATUM}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}" />
                 <Button
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding StandInfoCommand}"
+                    IsEnabled="{Binding IsValid}"
                     Text="Stand Info"/>
                 <Button
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding ForestHealthCommand}"
+                    IsEnabled="{Binding IsValid}"
                     Text="Forest Health"/>
                 <Button
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding PlotCrewCommand}"
+                    IsEnabled="{Binding IsValid}"
                     Text="Plot Crew"/>
                 <Button
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding PhotoCommand}"
+                    IsEnabled="{Binding IsValid}"
                     Text="Photos"/>
                 <Button
                     Style="{StaticResource FormButtonStyle } "
                     Command="{Binding CommentsCommand}"
+                    IsEnabled="{Binding IsValid}"
                     Text="Comments"
                     />
               

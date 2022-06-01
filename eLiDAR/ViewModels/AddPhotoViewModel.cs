@@ -23,6 +23,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _photo = new PHOTO();
             _photo.PLOTID  = selectedID;
+            _photo.PHOTOTYPE = "Stand Information";
             _photoRepository = new PhotoRepository();
             _selectedplotid = selectedID;
             AddCommand = new Command(async () => await Update());
@@ -94,7 +95,6 @@ namespace eLiDAR.ViewModels {
         private Task Update() {
             try
             {
-            
                         _photo.Created = System.DateTime.UtcNow;
                         _photo.LastModified = _photo.Created;
                         _photo.IsDeleted = "N"; 
@@ -144,8 +144,18 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 PhotoValidator _validator = new PhotoValidator();
+                PhotoValidator _fullvalidator = new PhotoValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_photo);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_photo);
+
+                ParseValidater _parser = new ParseValidater();
+                (_photo.ERRORCOUNT, _photo.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+//                PhotoValidator _validator = new PhotoValidator();
+  //              ValidationResult validationResults = _validator.Validate(_photo);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

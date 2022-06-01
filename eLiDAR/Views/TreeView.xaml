@@ -182,6 +182,7 @@
                     SelectedItem="{Binding SelectedWoodCondition}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}" />
+              
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">
@@ -301,12 +302,12 @@
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding StemMapCommand}"
-                    IsEnabled="{Binding IsPlotTypeB}"
+                    IsEnabled="{Binding ThisIsPlotTypeB}"
                     Text="Stem Map" />
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding DeformityCommand}"
-                    IsEnabled="{Binding IsPlotTypeC}"
+                    IsEnabled="{Binding ThisIsPlotTypeC}"
                     Text="Deformity" />
                 <Button
                     Style="{StaticResource FormButtonStyle }"
@@ -413,7 +414,10 @@
                     Placeholder="Degree of Lean"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEGREEOFLEAN}"/>
-
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}"/>
                 <Button
                     Style="{StaticResource FormButtonStyle }"
                     Command="{Binding CommentsCommand}"

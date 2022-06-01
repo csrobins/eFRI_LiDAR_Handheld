@@ -74,6 +74,10 @@
                     Placeholder="Comments"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding FORESTHEALTHNOTE}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

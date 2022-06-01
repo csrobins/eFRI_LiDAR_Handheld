@@ -420,8 +420,18 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
-                PlotValidator _Validator = new PlotValidator();
-                ValidationResult validationResults = _Validator.Validate(_plot);
+
+                PlotValidator _validator = new PlotValidator();
+                PlotValidator _fullvalidator = new PlotValidator(true);
+
+                ValidationResult validationResults = _validator.Validate(_plot);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_plot);
+
+                ParseValidater _parser = new ParseValidater();
+                (_plot.ERRORCOUNT, _plot.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+//                PlotValidator _Validator = new PlotValidator();
+  //              ValidationResult validationResults = _Validator.Validate(_plot);
                 if (validationResults.IsValid)
                 {
                     _ = UpdatePlot();

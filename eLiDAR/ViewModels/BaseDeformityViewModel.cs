@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -29,6 +31,10 @@ namespace eLiDAR.ViewModels
             {
                 return false;
             }
+            else 
+            { 
+                IsChanged = true; 
+            }
             backfield = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -41,6 +47,11 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                DeformityValidator _fullvalidator = new DeformityValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_deformity);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
+
             }
         }
 
@@ -51,7 +62,7 @@ namespace eLiDAR.ViewModels
                 set
             {
                     _deformity.DEFORMITYID = value;
-                    NotifyPropertyChanged("DEFmissed a word - i know its my problemORMITYID");
+                    NotifyPropertyChanged("DEFORMITYID");
                 }
             }
 
@@ -70,9 +81,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.DEFORMITYTYPECODE;
             set
             {
+                if (!_deformity.DEFORMITYTYPECODE.Equals(value)) { IsChanged = true; }
                 _deformity.DEFORMITYTYPECODE = value;
                 NotifyPropertyChanged("TYPE");
-                IsChanged = true;
+               
             }
         }
 
@@ -81,9 +93,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.CAUSE;
             set
             {
+                if (!_deformity.CAUSE.Equals(value)) { IsChanged = true; }
                 _deformity.CAUSE = value;
                 NotifyPropertyChanged("CAUSE");
-                IsChanged = true;
+              
             }
         }
 
@@ -92,9 +105,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.HEIGHTFROM;
             set
             {
+                if (!_deformity.HEIGHTFROM.Equals(value)) { IsChanged = true; }
                 _deformity.HEIGHTFROM = value;
                 NotifyPropertyChanged("HT_FROM");
-                IsChanged = true;
+          
             }
         }
 
@@ -103,9 +117,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.HEIGHTTO;
             set
             {
+                if (!_deformity.HEIGHTTO.Equals(value)) { IsChanged = true; }
                 _deformity.HEIGHTTO = value;
                 NotifyPropertyChanged("HT_TO");
-                IsChanged = true;
+               
             }
         }
 
@@ -114,9 +129,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.QUADRANTCODE;
             set
             {
+                if (_deformity.QUADRANTCODE != value) { IsChanged = true; }
                 _deformity.QUADRANTCODE = value;
                 NotifyPropertyChanged("QUAD");
-                IsChanged = true;
+               
             }
         }
 
@@ -125,9 +141,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.EXTENT;
             set
             {
+                if (!_deformity.EXTENT.Equals(value)) { IsChanged = true; }
                 _deformity.EXTENT = value;
                 NotifyPropertyChanged("EXTENT");
-                IsChanged = true;
+                
             }
         }
 
@@ -136,9 +153,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.DEGREELEANARCH;
             set
             {
+                if (!_deformity.DEGREELEANARCH.Equals(value)) { IsChanged = true; }
                 _deformity.DEGREELEANARCH = value;
                 NotifyPropertyChanged("LEAN");
-                IsChanged = true;
+              
             }
         }
 
@@ -147,9 +165,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.AZIMUTH;
             set
             {
+                if (!_deformity.AZIMUTH.Equals(value)) { IsChanged = true; }
                 _deformity.AZIMUTH = value;
                 NotifyPropertyChanged("AZIMUTH");
-                IsChanged = true;
+            
             }
         }
 
@@ -158,9 +177,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.DEFORMITYLENGTH;
             set
             {
+                if (!_deformity.DEFORMITYLENGTH.Equals(value)) { IsChanged = true; }
                 _deformity.DEFORMITYLENGTH = value;
                 NotifyPropertyChanged("LENGTH");
-                IsChanged = true;
+               
             }
         }
 
@@ -169,9 +189,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.DEFORMITYWIDTH;
             set
             {
+                if (!_deformity.DEFORMITYWIDTH.Equals(value)) { IsChanged = true; }
                 _deformity.DEFORMITYWIDTH = value;
                 NotifyPropertyChanged("WIDTH");
-                IsChanged = true;
+                
             }
         }
 
@@ -180,9 +201,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.SCUFF;
             set
             {
+                if (!_deformity.SCUFF.Equals(value)) { IsChanged = true; }
                 _deformity.SCUFF = value;
                 NotifyPropertyChanged("PCT_SCRUFF");
-                IsChanged = true;
+               
             }
         }
         public int PCT_SCRAPE
@@ -190,9 +212,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.SCRAPE;
             set
             {
+                if (!_deformity.SCRAPE.Equals(value)) { IsChanged = true; }
                 _deformity.SCRAPE = value;
                 NotifyPropertyChanged("PCT_SCRAPE");
-                IsChanged = true;
+ 
             }
         }
 
@@ -201,9 +224,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.GOUGE;
             set
             {
+                if (!_deformity.GOUGE.Equals(value)) { IsChanged = true; }
                 _deformity.GOUGE = value;
                 NotifyPropertyChanged("PCT_GOUGE");
-                IsChanged = true;
+            
             }
         }
 
@@ -212,9 +236,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.OLD_FEEDING_CAVITY;
             set
             {
+                if (_deformity.OLD_FEEDING_CAVITY != value) { IsChanged = true; }
                 _deformity.OLD_FEEDING_CAVITY = value;
                 NotifyPropertyChanged("OLD_FEEDING_CAVITY");
-                IsChanged = true;
+                
             }
         }
 
@@ -223,9 +248,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.NEW_FEEDING_CAVITY;
             set
             {
+                if (_deformity.NEW_FEEDING_CAVITY != value) { IsChanged = true; }
                 _deformity.NEW_FEEDING_CAVITY = value;
                 NotifyPropertyChanged("NEW_FEEDING_CAVITY");
-                IsChanged = true;
+                
             }
         }
 
@@ -234,9 +260,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.OLD_NEST_CAVITY;
             set
             {
+                if (_deformity.OLD_NEST_CAVITY != value) { IsChanged = true; }
                 _deformity.OLD_NEST_CAVITY = value;
                 NotifyPropertyChanged("OLD_NEST_CAVITY");
-                IsChanged = true;
+                
             }
         }
 
@@ -245,9 +272,10 @@ namespace eLiDAR.ViewModels
             get => _deformity.NEW_NEST_CAVITY;
             set
             {
+                if (_deformity.NEW_NEST_CAVITY != value) { IsChanged = true; }
                 _deformity.NEW_NEST_CAVITY = value;
                 NotifyPropertyChanged("NEW_NEST_CAVITY");
-                IsChanged = true;
+                
             }
         }
 
@@ -256,12 +284,32 @@ namespace eLiDAR.ViewModels
             get => _deformity.STICK_NEST;
             set
             {
+                if (_deformity.STICK_NEST != value) { IsChanged = true; }
                 _deformity.STICK_NEST = value;
                 NotifyPropertyChanged("STICK_NEST");
-                IsChanged = true;
+           
             }
         }
-
+        public int ERRORCOUNT
+        {
+            get => _deformity.ERRORCOUNT;
+            set
+            {
+                _deformity.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+              
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _deformity.ERRORMSG;
+            set
+            {
+                _deformity.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+              
+            }
+        }
 
 
         List<DEFORMITY> _deformityList;

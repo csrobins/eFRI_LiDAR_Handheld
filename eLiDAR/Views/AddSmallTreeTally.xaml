@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.AddSmallTreeTally"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:eLiDAR.Views"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    BindingContext="AddSmallTreeTallyViewModel"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="12">
+            <local:SmallTreeTallyView />
+            <Button
+                Style="{StaticResource FormButtonStyle}"
+                Command="{Binding DeleteCommand}"
+                Text="Delete"/>
+            <!--     <Button
+                x:Name="SubmitButton"
+                BackgroundColor="{StaticResource cerulean}"
+                BorderRadius="0"
+                Command="{Binding AddCommand}"
+                Text="Save Small Tree"
+                TextColor="White" /> -->
+            <!--<Label Text="View All Small Trees" IsVisible="{Binding IsViewAll}" x:Name="ViewLbl" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15">
+                <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ViewAllCommand}" NumberOfTapsRequired="1" />
+                </Label.GestureRecognizers>
+            </Label>-->
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

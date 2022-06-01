@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="eLiDAR.Views.SmallTreeTallyView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentView.Content>
+        <Grid Padding="10">
+            
+            <StackLayout Grid.Row="0">
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextTitle}"
+                    Text="Small Tree Tally Attributes" />
+
+                <Picker
+                    x:Name="txtSpecies"
+                    Title="Species"
+                    HorizontalOptions="FillAndExpand"
+                    ItemDisplayBinding="{Binding NAME}"
+                    ItemsSource="{Binding ListSpecies}"
+                    SelectedItem="{Binding SelectedSpecies, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Total Height (m)"/>
+                <Entry
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Total Height (m)"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding HEIGHT}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="DBH (cm)"/>
+                <Entry
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="0"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding DBH}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Count"/>
+                <Entry
+                    HorizontalOptions="FillAndExpand"
+                    Keyboard="Numeric"
+                    Placeholder="Count"
+                    Style="{DynamicResource TextSubhead}"
+                    Text="{Binding COUNT}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}"/>
+            </StackLayout>
+
+            
+        </Grid>
+    </ContentView.Content>
+</ContentView>

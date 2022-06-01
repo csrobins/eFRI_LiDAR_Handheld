@@ -31,6 +31,7 @@ namespace eLiDAR.ViewModels {
         public List<PickerItemsString> ListPerson { get; set; }
         public List<PickerItems> ListGrowthPlot { get; set; }
         public List<PickerItemsString> ListGrowthPlotType { get; set; }
+        
 
         public List<PickerItems> ListAccessCondition { get; set; }
         public Command OnAppearingCommand { get; set; }
@@ -49,8 +50,16 @@ namespace eLiDAR.ViewModels {
             _plot.IsDeleted = "N";
             _plot.DATUM = "NAD83";
             _plot.PROJECTID = fk;
+            _plot.ACCESSCONDITIONCODE = 1;
             _plot.PLOTOVERVIEWDATE = System.DateTime.Now;
             _plot.MEASUREYEAR = _plot.PLOTOVERVIEWDATE.Year;
+            _plot.CANOPYSTRUCTURECODE1 = "S";
+            _plot.MATURITYCLASSCODE1 = "S";
+            _plot.MATURITYCLASSRATIONALE1 = "Dominant cohort has achieved crown closure";
+            _plot.FOLLOWUPREQUIRED = "N";
+            
+
+
             if (util.UseDefaultDeclination) { _plot.DECLINATION = util.DefaultDeclination; }
 
             AddCommand = new Command(async () => await AddPlot(_selectedprojectid));
@@ -203,6 +212,10 @@ namespace eLiDAR.ViewModels {
                 _plot.FIELD_CREW1 = _selectedCrew1.ID;
             }
         }
+
+
+
+
         private PickerItemsString _selectedCrew2 = new PickerItemsString { ID = "", NAME = "" };
         public PickerItemsString SelectedCrew2
         {
@@ -380,8 +393,20 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
+
                 PlotValidator _validator = new PlotValidator();
+                PlotValidator _fullvalidator = new PlotValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_plot);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_plot);
+
+                ParseValidater _parser = new ParseValidater();
+                (_plot.ERRORCOUNT, _plot.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+
+//                PlotValidator _validator = new PlotValidator();
+  //              ValidationResult validationResults = _validator.Validate(_plot);
                 if (validationResults.IsValid)
                 {
                     _ = AddPlot(_selectedprojectid);

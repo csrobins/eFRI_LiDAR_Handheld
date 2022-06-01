@@ -341,6 +341,26 @@ namespace eLiDAR.ViewModels {
                 }
             }
         }
+        public int ERRORCOUNT
+        {
+            get => _plot.ERRORCOUNT;
+            set
+            {
+                _plot.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+                //   IsChanged = true;
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _plot.ERRORMSG;
+            set
+            {
+                _plot.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+                //    IsChanged = true;
+            }
+        }
         private Task UpdatePlot()
         {
             _plot.LastModified = System.DateTime.UtcNow;

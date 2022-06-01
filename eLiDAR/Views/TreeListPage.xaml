@@ -2,6 +2,7 @@
 <ContentPage
     x:Class="eLiDAR.Views.TreeListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     Title="{Binding Title}"
     BackgroundColor="{DynamicResource backgroundColor}"
@@ -62,19 +63,30 @@
 
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Column="0" Spacing="1">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextTitle}"
-                                        Text="Tree"
-                                        VerticalTextAlignment="Center" />
-                                    <Label
-                                        Font="20"
-                                        HorizontalTextAlignment="Start"
-                                        Style="{DynamicResource TextSubhead}"
-                                        Text="{Binding TREENUMBER}"
-                                        VerticalTextAlignment="Center" />
-                                </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                    <xct:BadgeView
+                                        BackgroundColor="{Binding BadgeColor}"
+                                        AutoHide="True" 
+                                        FontAttributes="Bold"
+                                        FontSize="Small"
+                                        TextColor="White"
+                                        BadgePosition="TopLeft" 
+                                        Text="{Binding ERRORCOUNT}">
+                                        <Label
+                                            HorizontalTextAlignment="Start"
+                                            Style="{DynamicResource TextTitle}"
+                                            VerticalTextAlignment="Center" >
+                                         <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Tree "/>
+                                                <Span Text="{Binding TREENUMBER}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                        </Label>
+                                    </xct:BadgeView>
+
+                                    </StackLayout>
+
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         HorizontalTextAlignment="Start"
@@ -184,7 +196,6 @@
                                         Text="{Binding CORESTATUSCODE}"
                                         TextColor="{Binding AgeColor}"
                                         VerticalTextAlignment="Center" />
-                      
                             </StackLayout>
                             <FlexLayout
                                 Grid.Column="4"
@@ -199,24 +210,22 @@
                                     Command="{Binding ShowAgesCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                     HorizontalOptions="End" Text="Ages"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.LiveTree}" /> 
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.LiveTree}" />
                                 <Button
                                     Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowFilteredCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HorizontalOptions="End"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"
-                                    Text="Stem Map"/>
+                                    HorizontalOptions="End" Text="Stem Map"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeB}"/>
                                 <Button
                                     Style="{StaticResource RectangularButtonStyle}"
                                     BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
                                     Command="{Binding ShowDeformityCommand}"
                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                    HorizontalOptions="End"
-                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"
-                                    Text="Deformity"/>
-                            </FlexLayout>  
+                                    HorizontalOptions="End" Text="Deform"
+                                    IsEnabled="{Binding Source={x:Reference Item}, Path=BindingContext.IsPlotTypeC}"/>
+                            </FlexLayout>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

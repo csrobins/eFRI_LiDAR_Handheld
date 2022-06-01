@@ -130,8 +130,16 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 DeformityValidator _validator = new DeformityValidator();
+                DeformityValidator _fullvalidator = new DeformityValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_deformity);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_deformity);
+
+                ParseValidater _parser = new ParseValidater();
+                (_deformity.ERRORCOUNT, _deformity.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
                 if (validationResults.IsValid)
                 {
                     _ = Update();

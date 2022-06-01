@@ -25,8 +25,10 @@ namespace eLiDAR.API
         Task<List<SOIL>> GetCurrentSOILListAsync(string table, string filter);
         Task PushSOILAsync(List<SOIL> items, bool isNewItem);
         Task<List<SMALLTREE>> GetCurrentSMALLTREEListAsync(string table, string filter);
+        
         Task PushSMALLTREEAsync(List<SMALLTREE> items, bool isNewItem);
         Task<List<VEGETATION>> GetCurrentVEGETATIONListAsync(string table, string filter);
+        
         Task PushVEGETATIONAsync(List<VEGETATION> items, bool isNewItem);
         Task<List<DEFORMITY>> GetCurrentDEFORMITYListAsync(string table, string filter);
         Task PushDEFORMITYAsync(List<DEFORMITY> items, bool isNewItem);
@@ -38,7 +40,9 @@ namespace eLiDAR.API
         Task PushPersonAsync(List<PERSON> items, bool isNewItem);
         Task<List<VEGETATIONCENSUS>> GetCurrentVegetationCensusListAsync(string table, string filter);
         Task PushVegetationCensusAsync(List<VEGETATIONCENSUS> items, bool isNewItem);
-     
+        
+        Task<List<SMALLTREETALLY>> GetCurrentSMALLTREETALLYListAsync(string table, string filter);
+        Task PushSMALLTREETALLYAsync(List<SMALLTREETALLY> items, bool isNewItem);
 
     }
 
@@ -58,6 +62,10 @@ namespace eLiDAR.API
         public RestService()
         {
             _client = new HttpClient();
+            //  ADD IN HEADERS TO THE HTTP REQUEST - CONVERT THIS TO A HASH TO PROTECT IT
+            _client.DefaultRequestHeaders.Add(Constants.Azuresubscriptionkey, util.KEY);
+            _client.DefaultRequestHeaders.Add(Constants.Connectionkey, util.CONNECTION);
+
             APIGetUrl = util.GetURI;
             APIPutUrl = util.PutURI;
             APIPostUrl = util.PostURI;
@@ -77,7 +85,7 @@ namespace eLiDAR.API
         public async Task<List<PROJECT>> GetCurrentProjectListAsync(string table,string filter)
         {
             List<PROJECT> Items = new List<PROJECT>();
-             var uri = new Uri(string.Format(APIGetUrl, table, filter));
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -545,6 +553,73 @@ namespace eLiDAR.API
                 Msg = ex.Message;
             }
         }
+
+        // create functions for SmallTreeTally based off of the above
+        public async Task<List<SMALLTREETALLY>> GetCurrentSMALLTREETALLYListAsync(string table, string filter)
+        {
+            List<SMALLTREETALLY> Items = new List<SMALLTREETALLY>();
+            var uri = new Uri(string.Format(APIGetUrl, table, filter));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Items = JsonConvert.DeserializeObject<List<SMALLTREETALLY>>(content);
+                }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Small tree tally data did not serialize";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
+            }
+            return Items;
+        }
+
+        public async Task PushSMALLTREETALLYAsync(List<SMALLTREETALLY> items, bool isNewItem)
+        {
+            try
+            {
+                var table = "smalltreetally";
+                var json = JsonConvert.SerializeObject(items);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewItem)
+                {
+                    var uri = new Uri(string.Format(APIPostUrl, table));
+                    response = await _client.PostAsync(uri, content);
+                }
+                else
+                {
+                    var uri = new Uri(string.Format(APIPutUrl, table));
+                    response = await _client.PutAsync(uri, content);
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\Items successfully saved.");
+                }
+                else
+                {
+                    IsSuccess = false;
+                    Msg = "Small tree tally data did not push";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                IsSuccess = false;
+                Msg = ex.Message;
+            }
+        }
+
+
 
         public async Task<List<VEGETATION>> GetCurrentVEGETATIONListAsync(string table, string filter)
         {

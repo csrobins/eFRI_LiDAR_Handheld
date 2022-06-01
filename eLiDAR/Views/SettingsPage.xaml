@@ -107,6 +107,8 @@
                         <Switch
                             x:Name="swchPlotDeletion"
                             HorizontalOptions="EndAndExpand"
+                          
+                          
                             IsToggled="{Binding IsAllowPlotDeletion}" />
                     </StackLayout>
                     <StackLayout Margin="10" Orientation="Horizontal" >
@@ -223,7 +225,7 @@
                             VerticalOptions="Center" />
                    </StackLayout>
                 </StackLayout>
-            <StackLayout Margin="10">
+         <!--   <StackLayout Margin="10">
                 <BoxView Style="{DynamicResource HRule}" />
                 <StackLayout Margin="10" Orientation="Horizontal">
                     <Label>
@@ -330,8 +332,8 @@
                     FontAttributes="Bold"
                     Style="{StaticResource TextBody}"
                     Text="{Binding msg}" />
-            </StackLayout>
-            </StackLayout>
+            </StackLayout>-->
+            </StackLayout> 
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
