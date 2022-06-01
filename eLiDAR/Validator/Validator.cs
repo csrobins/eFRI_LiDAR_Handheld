@@ -935,8 +935,8 @@ namespace eLiDAR.Validator
             //RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
             RuleFor(c => c.HEIGHT).Must(c => c > 1.3).WithMessage("Height must be greater than 1.3");
             // dbh must be between 2.5 and 7
-            RuleFor(c => c.DBH).Must(c => c > 2.5).WithMessage("Dbh must be greater than 2.5");
-            RuleFor(c => c.DBH).Must(c => c < 7).WithMessage("Dbh must be less than 7");
+            RuleFor(c => c.DBH).Must(c => c >= 2.5).WithMessage("Dbh must be greater than or = 2.5");
+            RuleFor(c => c.DBH).Must(c => c <= 7).WithMessage("Dbh must be less than or = 7");
             RuleFor(c => c.COUNT).Must(c => c > 0).WithMessage("Count must be greater than 0");
 
         }
