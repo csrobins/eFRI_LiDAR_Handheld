@@ -29,6 +29,7 @@ namespace eLiDAR.ViewModels {
                 _navigation = navigation;
                 _treeRepository = new TreeRepository();
                 _fk = fk;
+                _tree = new TREE();
                 AddCommand = new Command(async () => await ShowAdd(_fk));
                 DeleteAllCommand = new Command(async () => await DeleteAll());
                 ShowFilteredCommand = new Command<TREE>(async (x) => await ShowStemMap(x));
@@ -99,9 +100,7 @@ namespace eLiDAR.ViewModels {
         {
             get
             {
-               
                     return _treeRepository.GetFilteredTreeStemDataFull(_fk, DefaultSort);
-               
             }
             set
             {
@@ -124,6 +123,7 @@ namespace eLiDAR.ViewModels {
                 }
             }
         }
+
         async Task ShowStemMap(TREE _tree)
         {
             // launch the form - filtered to a specific projectid

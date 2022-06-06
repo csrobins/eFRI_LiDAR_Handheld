@@ -8,6 +8,8 @@ using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
 using System.Linq;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -32,6 +34,7 @@ namespace eLiDAR.ViewModels
             {
                 return false;
             }
+            else { IsChanged = true; }
             backfield = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -44,7 +47,11 @@ namespace eLiDAR.ViewModels
         set
         {
             _IsChanged = value;
-        }
+                VegetationCensusValidator _fullvalidator = new VegetationCensusValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_vegetation);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
+            }
     }
     public string VEGETATIONCENSUSID
         {
@@ -69,10 +76,10 @@ namespace eLiDAR.ViewModels
             get => _vegetation.VSNSPECIESCODE;
             set
             {
+                if (_vegetation.VSNSPECIESCODE != value) { IsChanged = true; }
                 _vegetation.VSNSPECIESCODE = value;
-               NotifyPropertyChanged("SPECIES");
+                NotifyPropertyChanged("SPECIES");
                 SetScientific();
-                IsChanged = true;
             }
         }
         public int SPECIMENNUMBER
@@ -80,9 +87,9 @@ namespace eLiDAR.ViewModels
             get => _vegetation.SPECIMENNUMBER;
             set
             {
+                if (!_vegetation.SPECIMENNUMBER.Equals(value)) { IsChanged = true; }
                 _vegetation.SPECIMENNUMBER = value;
                 NotifyPropertyChanged("SPECIMENNUMBER");
-                IsChanged = true;
             }
         }
 
@@ -103,8 +110,27 @@ namespace eLiDAR.ViewModels
             }
             
         }
-    
- 
+        public int ERRORCOUNT
+        {
+            get => _vegetation.ERRORCOUNT;
+            set
+            {
+                _vegetation.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+           
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _vegetation.ERRORMSG;
+            set
+            {
+                _vegetation.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+            
+            }
+        }
+
 
         List<VEGETATIONCENSUS> _vegetationList;
         public List<VEGETATIONCENSUS> VegetationList

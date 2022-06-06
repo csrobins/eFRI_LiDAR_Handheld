@@ -32,6 +32,10 @@ namespace eLiDAR.Models
         public string POST { get; set; }
         public string PUT { get; set; }
         public string GET { get; set; }
+        public string KEY { get; set; }
+        public string CONNECTION { get; set; }
+
+
     }
 
     [Table("PROJECT")]
@@ -56,12 +60,6 @@ namespace eLiDAR.Models
         public string VSNPLOTTYPECODE { get; set; }
         public string VSNPLOTNAME { get; set; }
 
-
- //       public int ADMINISTRATIVE { get; set; }
- //       public string FOREST_DISTRICT { get; set; }
-  //      public int FMU { get; set; }
-   //     public int MANAGEMENT_UNIT { get; set; }
-   //     public string IMAGE_ANNOTATION { get; set; }
         public string PLOTKEY { get; set; }
         public DateTime PLOTOVERVIEWDATE { get; set; }
         public string MEASURETYPECODE { get; set; }
@@ -90,6 +88,8 @@ namespace eLiDAR.Models
         public string PLOTOVERVIEWNOTE { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
+        public DateTime SynchRequired { get; set; }
+        public DateTime LastSynched { get; set; }
         public string IsDeleted { get; set; }
         public int NONSTANDARDTYPECODE { get; set; }
         public int ACCESSCONDITIONCODE { get; set; }
@@ -142,10 +142,12 @@ namespace eLiDAR.Models
         public DateTime STEMMAPPINGDATE { get; set; }
         public string STEMMAPPINGNOTE { get; set; }
         public string STEMMAPPINGPERSON { get; set; }
-
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     public class PLOTLIST : PLOT
-    { 
+    {
+        Helpers.DatabaseHelper _databasehelper = new Helpers.DatabaseHelper();
         public bool IsPlotTypeB {
             get
             {
@@ -179,7 +181,78 @@ namespace eLiDAR.Models
             }
             set { }
         }
-
+        public int TreeErrorCount
+        {
+            get
+            {
+            int count = _databasehelper.GetErrorCount("TREE", "PLOTID", PLOTID);
+            if(count >99) { return 99; }
+            else { return count; }
+            }
+        }
+        public int EcositeErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("ECOSITE", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int SoilErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("SOIL", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int PhotoErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("PHOTO", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int SmallTreeErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("SMALLTREE", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int VegetationErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("VEGETATION", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int VegetationCensusErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("VEGETATIONCENSUS", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
+        public int DWDErrorCount
+        {
+            get
+            {
+                int count = _databasehelper.GetErrorCount("DWD", "PLOTID", PLOTID);
+                if (count > 99) { return 99; }
+                else { return count; }
+            }
+        }
     }
     [Table("PHOTO")]
     public class PHOTO
@@ -196,6 +269,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
 
     [Table("PERSON")]
@@ -264,6 +339,9 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
+
 
     }
     public class TREELIST : TREE
@@ -277,7 +355,7 @@ namespace eLiDAR.Models
         {
             get
             {
-                //                if (VSNPLOTTYPECODE == "AB" || VSNPLOTTYPECODE == "ABC" || VSNPLOTTYPECODE == "B")
+       
                 try
                 {
                     if (VSNPLOTTYPECODE.Contains("B") || VSNPLOTTYPECODE.Contains("C"))
@@ -377,6 +455,32 @@ namespace eLiDAR.Models
             }
 
         }
+        public Xamarin.Forms.Color BadgeColor
+        {
+            get
+            {
+                try
+                {
+
+                    if (ERRORCOUNT > 1)
+                    {
+                        //   return Xamarin.Forms.Color.Red;
+                        return Xamarin.Forms.Color.FromHex("#FFE52E15");
+
+                    }
+                    else
+                    {
+                        //  return Xamarin.Forms.Color.Accent;
+                        return Xamarin.Forms.Color.FromHex("#FF993333");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Xamarin.Forms.Color.Accent;
+                }
+            }
+
+        }
         public Xamarin.Forms.Color AgeColor
         {
             get
@@ -453,6 +557,32 @@ namespace eLiDAR.Models
 
     }
 
+    public class SMALLTREETALLYLIST : SMALLTREETALLY
+    {
+        public string SpeciesName
+        {
+            get
+            {
+                try
+                {
+                    Utilities.Utils util = new Utilities.Utils();
+                    if (!util.UseAlphaSpecies)
+                    {
+                        return SPECIESCODE.ToString();
+                    }
+                    else { return Services.PickerService.GetValue(Services.PickerService.SmallSpeciesMaster().ToList(), SPECIESCODE); }
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            }
+
+        }
+
+    }
+
+
     [Table("STEMMAP")]
     public class STEMMAP
     {
@@ -468,6 +598,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("ECOSITE")]
     public class ECOSITE
@@ -515,6 +647,8 @@ namespace eLiDAR.Models
         public int MODEOFDEPOSITIONRANK1 { get; set; }
         public int MODEOFDEPOSITIONRANK2 { get; set; }
         public string SUBSTRATEPERSON { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("SOIL")]
     public class SOIL
@@ -539,6 +673,8 @@ namespace eLiDAR.Models
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
         public string GLEYCOLOUR { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("SMALLTREE")]
     public class SMALLTREE
@@ -560,8 +696,27 @@ namespace eLiDAR.Models
         public string IsDeleted { get; set; }
         public int COUNT { get; set; }
         public double HEIGHT { get; set; }
-
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
+
+    [Table("SMALLTREETALLY")]
+    public class SMALLTREETALLY
+    {
+        [PrimaryKey]
+        public string SMALLTREETALLYID { get; set; }
+        public string PLOTID { get; set; }
+        public int SPECIESCODE { get; set; }
+        public double DBH { get; set; }
+        public double HEIGHT { get; set; }
+        public int COUNT { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
+        public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
+    }
+
     [Table("VEGETATION")]
     public class VEGETATION
     {
@@ -598,6 +753,8 @@ namespace eLiDAR.Models
         public double QUAD2_ELC7 { get; set; }
         public double QUAD3_ELC7 { get; set; }
         public double QUAD4_ELC7 { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     [Table("VEGETATIONCENSUS")]
     public class VEGETATIONCENSUS
@@ -610,6 +767,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
     }
     public class DEFORMITY
     {
@@ -637,6 +796,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
 
     }
     public class DWD
@@ -665,6 +826,8 @@ namespace eLiDAR.Models
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
         public string IsDeleted { get; set; }
+        public int ERRORCOUNT { get; set; }
+        public string ERRORMSG { get; set; }
 
     }
 

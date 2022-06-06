@@ -20,6 +20,7 @@ namespace eLiDAR.ViewModels {
         public DeformityListViewModel(INavigation navigation, string fk)
         {
             _navigation = navigation;
+            _deformity = new DEFORMITY();  
             _deformityRepository = new DeformityRepository();
             _fk = fk;
             AddCommand = new Command(async () => await ShowAdd(_fk));

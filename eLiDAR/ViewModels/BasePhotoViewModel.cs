@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -26,6 +28,10 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                PhotoValidator _fullvalidator = new PhotoValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_photo);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
             }
         }
         public string PLOTID
@@ -43,7 +49,6 @@ namespace eLiDAR.ViewModels
             set
             {
                 _photo.PHOTOID = value;
-                IsChanged = true;
                 NotifyPropertyChanged("PHOTOID");
             }
         }
@@ -52,8 +57,8 @@ namespace eLiDAR.ViewModels
             get => _photo.PHOTOTYPE;
             set
             {
+                if (_photo.PHOTOTYPE != value) { IsChanged = true; }
                 _photo.PHOTOTYPE = value;
-                IsChanged = true;
                 NotifyPropertyChanged("PHOTOTYPE");
             }
         }
@@ -62,8 +67,9 @@ namespace eLiDAR.ViewModels
             get => _photo.DESCRIPTION;
             set
             {
+                if (_photo.DESCRIPTION != value) { IsChanged = true; }
                 _photo.DESCRIPTION = value;
-                IsChanged = true;
+
                 NotifyPropertyChanged("DESCRIPTION");
             }
         }
@@ -72,8 +78,9 @@ namespace eLiDAR.ViewModels
             get => _photo.PHOTONUMBER;
             set
             {
+                if (!_photo.PHOTONUMBER.Equals(value)) { IsChanged = true; }
                 _photo.PHOTONUMBER = value;
-                IsChanged = true;
+    
                 NotifyPropertyChanged("PHOTONUMBER");
             }
         }
@@ -82,8 +89,9 @@ namespace eLiDAR.ViewModels
             get => _photo.FRAMENUMBER;
             set
             {
+                if (_photo.FRAMENUMBER != value) { IsChanged = true; }
                 _photo.FRAMENUMBER = value;
-                IsChanged = true;
+    
                 NotifyPropertyChanged("FRAMENUMBER");
             }
         }
@@ -92,8 +100,8 @@ namespace eLiDAR.ViewModels
             get => _photo.AZIMUTH;
             set
             {
+                if (!_photo.AZIMUTH.Equals(value)) { IsChanged = true; }
                 _photo.AZIMUTH = value;
-                IsChanged = true;
                 NotifyPropertyChanged("AZIMUTH");
             }
         }
@@ -103,9 +111,29 @@ namespace eLiDAR.ViewModels
             get => _photo.DISTANCE;
             set
             {
+                if (!_photo.DISTANCE.Equals(value)) { IsChanged = true; }
                 _photo.DISTANCE = value;
-                IsChanged = true;
                 NotifyPropertyChanged("DISTANCE");
+            }
+        }
+        public int ERRORCOUNT
+        {
+            get => _photo.ERRORCOUNT;
+            set
+            {
+                _photo.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+           
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _photo.ERRORMSG;
+            set
+            {
+                _photo.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+              
             }
         }
 

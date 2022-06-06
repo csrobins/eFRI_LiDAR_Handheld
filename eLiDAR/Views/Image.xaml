@@ -3,6 +3,7 @@
     x:Class="eLiDAR.Views.ImagePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:local="clr-namespace:eLiDAR.Views"
     Title="Information Helpers"
     BackgroundColor="{DynamicResource backgroundColor}"
@@ -14,21 +15,21 @@
         <Grid Padding="10">
       <!--      <ScrollView VerticalOptions="FillAndExpand" > -->
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-            <Picker
+                <Picker
                     Title="Select a Helper"
                     HorizontalOptions="StartAndExpand"  
                     SelectedItem="{Binding IMAGEPICK, Mode=TwoWay}"
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}">
                     <Picker.Items>
-                    <x:String>Drainage</x:String>
-                    <x:String>Humus Form</x:String>
-                    <x:String>Moisture Regime</x:String>
-                    <x:String>Stratification</x:String>
+                        <x:String>Drainage</x:String>
+                        <x:String>Humus Form</x:String>
+                        <x:String>Moisture Regime</x:String>
+                        <x:String>Stratification</x:String>
                     </Picker.Items>
-                </Picker> 
-                
-               <Image Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"    Source="{Binding IMAGESOURCE}" />
+                </Picker>
+                <Image Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"    Source="{Binding GetImage}" />
+
             </StackLayout>
 
   <!--          </ScrollView> -->

@@ -65,13 +65,13 @@ namespace eLiDAR.ViewModels {
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
-            await _navigation.PushAsync(new SoilColour(_soil));
+            await _navigation.PushAsync(new SoilColour(_soil, IsChanged ));
         }
         async Task ShowMottleColour()
         {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
-            await _navigation.PushAsync(new MottleColour(_soil));
+            await _navigation.PushAsync(new MottleColour(_soil, IsChanged));
         }
         async Task ShowGleyColour()
         {
@@ -153,6 +153,8 @@ namespace eLiDAR.ViewModels {
             {
                 SetProperty(ref _selectedPorePattern, value);
                 _soil.POREPATTERNCODE = _selectedPorePattern.ID;
+                Utilities.Utils _util = new Utilities.Utils();
+                _soil.POREPATTERNCODE = _util.getPorePattern(_soil);
             }
         }
         void FetchDetails(string fk){
@@ -242,8 +244,19 @@ namespace eLiDAR.ViewModels {
             // display Alert for confirmation
             if (IsChanged)
             {
+
                 SoilValidator _validator = new SoilValidator();
-                ValidationResult validationResults = _validator.Validate(_soil );
+                SoilValidator _fullvalidator = new SoilValidator(true);
+
+                ValidationResult validationResults = _validator.Validate(_soil);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_soil);
+
+                ParseValidater _parser = new ParseValidater();
+                (_soil.ERRORCOUNT, _soil.ERRORMSG) = _parser.Parse(fullvalidationResults);
+
+
+//                SoilValidator _validator = new SoilValidator();
+  //              ValidationResult validationResults = _validator.Validate(_soil );
                 if (validationResults.IsValid)
                 {
                     _ = Update();

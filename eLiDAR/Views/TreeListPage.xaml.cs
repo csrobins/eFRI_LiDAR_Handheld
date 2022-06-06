@@ -5,6 +5,7 @@ using eLiDAR.Models;
 using eLiDAR.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+ 
 
 
 namespace eLiDAR.Views {
@@ -49,14 +50,7 @@ namespace eLiDAR.Views {
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateList(e.NewTextValue);
-            //MyListView.BeginRefresh();
 
-            //if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            //    MyListView.ItemsSource = _viewmodel.TreeStemListFull;
-            //else
-            //    MyListView.ItemsSource = _viewmodel.TreeStemListFull.Where(i => i.TREENUMBER.Equals(Int32.Parse(e.NewTextValue)));
-
-            //MyListView.EndRefresh();
         }
         private void OnToggled(object sender, ToggledEventArgs e)
         {

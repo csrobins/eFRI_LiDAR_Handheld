@@ -20,12 +20,14 @@ namespace eLiDAR.ViewModels {
         public ICommand ShowVegetationCommand { get; private set; }
         public ICommand ShowVegetationCensusCommand { get; private set; }
         public ICommand ShowDWDCommand { get; private set; }
-       // public ICommand SearchCommand { get; private set; }
+        public ICommand ShowSmallTreeTallyCommand { get; private set; }
+        // public ICommand SearchCommand { get; private set; }
 
         //   public bool IsPlotTypeB { get; private set; }
 
         public PlotListViewModel(INavigation navigation,string selectedprojectid )
         {
+            _plot = new PLOT();
             _navigation = navigation;
             _plotRepository = new PlotRepository();
             _selectedprojectid = selectedprojectid;
@@ -35,6 +37,7 @@ namespace eLiDAR.ViewModels {
             ShowFilteredCommand = new Command<PLOT>(async (x) => await ShowTrees(x));
             ShowSiteCommand = new Command<PLOT>(async (x) => await ShowSite(x));
             ShowSmallTreeCommand = new Command<PLOT>(async (x) => await ShowSmallTree(x));
+            ShowSmallTreeTallyCommand = new Command<PLOT>(async (x) => await ShowSmallTreeTally(x));
             ShowSoilCommand = new Command<PLOT>(async (x) => await ShowSoil(x));
             ShowPhotoCommand = new Command<PLOT>(async (x) => await ShowPhoto(x));
             ShowVegetationCommand = new Command<PLOT>(async (x) => await ShowVegetation(x));
@@ -53,7 +56,6 @@ namespace eLiDAR.ViewModels {
                 PlotListFull = _plotRepository.GetFilteredDataFull(_selectedprojectid);
 
         }
-       
     
         async Task ShowAdd(string fk)
         {
@@ -137,6 +139,10 @@ namespace eLiDAR.ViewModels {
         {
             await _navigation.PushAsync(new SmallTreeList(_plot.PLOTID));
         }
+        async Task ShowSmallTreeTally(PLOT _plot)
+        {
+            await _navigation.PushAsync(new SmallTreeTallyList(_plot.PLOTID));
+        }
 
         async Task ShowVegetation(PLOT _plot)
         {
@@ -150,7 +156,7 @@ namespace eLiDAR.ViewModels {
         {
             await _navigation.PushAsync(new DWDList(_plot.PLOTID));
         }
-        
+ 
         public string Title
         {
             get => "Plot List for " + _plotRepository.GetProjectTitle(_selectedprojectid) + ".\n  " + PlotListFull.Count.ToString()+ " plots.";

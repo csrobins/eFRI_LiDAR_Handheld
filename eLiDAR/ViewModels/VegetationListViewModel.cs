@@ -22,6 +22,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _vegetationRepository = new VegetationRepository();
             _fk = fk;
+            _vegetation = new VEGETATION();
             AddCommand = new Command(async () => await ShowAdd(_fk));
             DeleteAllCommand = new Command(async () => await DeleteAll());
             ShowFilteredCommand = new Command<VEGETATION>(async (x) => await ShowVegetation(x));

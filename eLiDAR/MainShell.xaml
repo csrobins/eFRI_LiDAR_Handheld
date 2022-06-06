@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:eLiDAR"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:eLiDAR;assembly=eVSN"
-    FlyoutBehavior="Disabled"
     mc:Ignorable="d">
     <!--<ShellItem>
         <ShellContent>
@@ -21,12 +20,18 @@
                     FontFamily="{StaticResource FontAwesome}"
                     Glyph="{x:Static local:IconFont.Home}"
                     Size="14"
-                    Color="White" />
+                    Color="White"/>
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:Views.Main}" />
         </Tab>
+        <!--ShellContent Title="Main" Icon="Assets/home.png" ContentTemplate="{DataTemplate pages:Views.Main}" />
+        <ShellContent Title="Data" Icon="Assets/grid.png" ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
+        <ShellContent Title="Settings" Icon="Assets/gear.png" ContentTemplate="{DataTemplate pages:Views.SettingsPage}" />
+        <ShellContent Title="Info" Icon="Assets/icon_feed.png" ContentTemplate="{DataTemplate pages:Views.About}" />
+        <ShellContent Title="Synch" Icon="Assets/icon_feed.png" ContentTemplate="{DataTemplate pages:Views.About}" />-->
+
+
         <Tab Title="Data">
-            <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
             <Tab.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontAwesome}"
@@ -34,7 +39,7 @@
                     Size="14"
                     Color="White" />
             </Tab.Icon>
-
+            <ShellContent ContentTemplate="{DataTemplate pages:Views.ProjectList}" />
         </Tab>
         <Tab Title="Settings">
             <Tab.Icon>
@@ -55,7 +60,17 @@
                     Size="14"
                     Color="White" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate pages:Views.About}" />
+            <ShellContent   ContentTemplate="{DataTemplate pages:Views.About}" />
+        </Tab>
+        <Tab Title="Synch">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesome}"
+                    Glyph="{x:Static local:IconFont.Sync}"
+                    Size="14"
+                    Color="White" />
+            </Tab.Icon>
+            <ShellContent   ContentTemplate="{DataTemplate pages:Views.PlotSynchList}" />
         </Tab>
 
     </TabBar>

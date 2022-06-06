@@ -89,7 +89,13 @@ namespace eLiDAR.ViewModels {
             if (IsChanged)
             {
                 PhotoValidator _validator = new PhotoValidator();
+                PhotoValidator _fullvalidator = new PhotoValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_photo);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_photo);
+
+                ParseValidater _parser = new ParseValidater();
+                (_photo.ERRORCOUNT, _photo.ERRORMSG) = _parser.Parse(fullvalidationResults);
                 if (validationResults.IsValid)
                 {
                     _ = Update();

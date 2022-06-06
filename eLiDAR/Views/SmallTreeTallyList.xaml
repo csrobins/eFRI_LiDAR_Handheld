@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="eLiDAR.Views.SmallTreeTallyList"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.BackgroundColor="{DynamicResource backgroundColor}"
+    Shell.ForegroundColor="{StaticResource cerulean}"
+    Shell.TitleColor="{StaticResource cerulean}">
+    <Grid Padding="10,10,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+        </Grid>
+        <ListView
+            x:Name="MyListView"
+            Grid.Row="1"
+            BackgroundColor="{DynamicResource backgroundColor}"
+            HasUnevenRows="true"
+            IsPullToRefreshEnabled="True"
+            ItemsSource="{Binding SmallTreeTallyList}"
+            SelectedItem="{Binding SelectedSmallTreeItemTally, Mode=TwoWay}"
+            SeparatorColor="{StaticResource cerulean}"
+            VerticalScrollBarVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:Name="Item" Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="65*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                <xct:BadgeView
+                                        BackgroundColor="{DynamicResource tomato}"
+                                        AutoHide="True" 
+                                        FontAttributes="Bold"
+                                        FontSize="Small"
+                                        TextColor="White"
+                                        BadgePosition="TopLeft" 
+                                        Text="{Binding ERRORCOUNT}">
+                                    <Label
+                                    HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource TextSubheadSecondary}"
+                                    Text="Species"
+                                    VerticalTextAlignment="Center" />
+                                </xct:BadgeView>
+                                <Label
+                                    Font="20"
+                                    HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource TextSubhead}"
+                                    Text="{Binding SpeciesName}"
+                                    VerticalTextAlignment="Center" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" Spacing="1">
+                             
+                            </StackLayout>
+                            <StackLayout Grid.Column="2" Spacing="1">
+                             
+                            </StackLayout>
+                            <StackLayout Grid.Column="3" Spacing="1">
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="Height "
+                                        VerticalTextAlignment="Center" />
+                                        <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
+                                        FontAttributes="Bold"
+                                        Text="{Binding HEIGHT}"
+                                        VerticalTextAlignment="Center" />
+                                        <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text=" m "
+                                        VerticalTextAlignment="Center" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text="DBH "
+                                        VerticalTextAlignment="Center" />
+                                        <Label
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubhead}"
+                                        Text="{Binding DBH}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        HorizontalTextAlignment="Start"
+                                        Style="{DynamicResource TextSubheadSecondary}"
+                                        Text=" cm "
+                                        VerticalTextAlignment="Center" />
+                                        </StackLayout> 
+                                </StackLayout>
+                            </StackLayout>
+
+                            <!--<Button Grid.Column="2" Text="Stem Map" BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"  Command="{Binding ShowFilteredCommand}"   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" HorizontalOptions="End" ></Button>-->
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Grid.Row="2" HorizontalOptions="End" VerticalOptions="End">
+            <Button
+                Style="{StaticResource RoundButtonStyle }"
+                Grid.Row="0"
+                Grid.Column="1"
+                Command="{Binding AddCommand}"
+                Text="+"/>
+        </StackLayout>
+        <!--   <Button
+            Grid.Row="2"
+            BackgroundColor="{StaticResource cerulean}"
+            BorderRadius="0"
+            Command="{Binding DeleteAllCommand}"
+            Text="Delete All Small Trees"
+            TextColor="White"
+            VerticalOptions="EndAndExpand" /> -->
+    </Grid>
+</ContentPage>

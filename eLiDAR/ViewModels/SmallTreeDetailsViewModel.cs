@@ -67,7 +67,7 @@ namespace eLiDAR.ViewModels {
             };
         }
         async Task Delete() {
-            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Small Tree Details", "Delete Small Tree Details", "OK", "Cancel");
+            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Shrub Details", "Delete Shrub Details", "OK", "Cancel");
             if (isUserAccept) {
                 _smallTreeRepository.DeleteSmallTree(_smallTree);
                 await _navigation.PopAsync();
@@ -75,7 +75,7 @@ namespace eLiDAR.ViewModels {
         }
         public string Title
         {
-            get => "Small Trees for plot " + _smallTreeRepository.GetTitle(_smallTree.PLOTID);
+            get => "Shrubs for plot " + _smallTreeRepository.GetTitle(_smallTree.PLOTID);
             set
             {
             }
@@ -103,7 +103,13 @@ namespace eLiDAR.ViewModels {
             if (IsChanged)
             {
                 SmallTreeValidator _validator = new SmallTreeValidator();
+                SmallTreeValidator _fullvalidator = new SmallTreeValidator(true);
+
                 ValidationResult validationResults = _validator.Validate(_smallTree);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_smallTree);
+
+                ParseValidater _parser = new ParseValidater();
+                (_smallTree.ERRORCOUNT, _smallTree.ERRORMSG) = _parser.Parse(fullvalidationResults);
                 if (validationResults.IsValid)
                 {
                     _ = Update();
@@ -113,7 +119,7 @@ namespace eLiDAR.ViewModels {
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Update Small Tree", validationResults.Errors[0].ErrorMessage, "Ok");
+                    await Application.Current.MainPage.DisplayAlert("Update Shrubs", validationResults.Errors[0].ErrorMessage, "Ok");
                 }
             }
             else

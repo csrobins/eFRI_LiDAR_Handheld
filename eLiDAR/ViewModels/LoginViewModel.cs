@@ -19,7 +19,7 @@ namespace eLiDAR.ViewModels
 
         public INavigation _navigation;
         private Utils util;
-        private SETTINGS settings;
+
         private DatabaseHelper databasehelper;
         public ICommand LoginCommand { get; private set; }
     
@@ -65,6 +65,8 @@ namespace eLiDAR.ViewModels
                     util.PutURI = _user.PUT;
                     util.PostURI = _user.POST;
                     util.GetURI = _user.GET;
+                    util.KEY = _user.KEY;
+                    util.CONNECTION = _user.CONNECTION;
                     await _navigation.PopAsync(true);
                 }
                 else
@@ -74,6 +76,8 @@ namespace eLiDAR.ViewModels
                     util.PutURI = null;
                     util.PostURI = null;
                     util.GetURI = null;
+                    util.KEY = null;
+                    util.CONNECTION = null;
                     await Application.Current.MainPage.DisplayAlert("Login failed", "Incorrect username/password", "OK");
                 }
             }

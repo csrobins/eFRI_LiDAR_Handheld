@@ -181,6 +181,34 @@ namespace eLiDAR.API
 			return restService.DeleteAsync(tablename, item.SMALLTREEID);
 		}
 	}
+
+	public class SmalltreetallyManager
+	{
+		IRestService restService;
+		private static string tablename = "smalltreetally";
+
+		public SmalltreetallyManager(IRestService service)
+		{
+			restService = service;
+		}
+
+		public Task<List<SMALLTREETALLY>> GetTasksAsync(string filter)
+		{
+			return restService.GetCurrentSMALLTREETALLYListAsync(tablename, filter);
+		}
+
+		public Task SaveTasksAsync(List<SMALLTREETALLY> items, bool isNewItem = false)
+		{
+			return restService.PushSMALLTREETALLYAsync(items, isNewItem);
+		}
+
+		public Task DeleteTaskAsync(SMALLTREETALLY item)
+		{
+			return restService.DeleteAsync(tablename, item.SMALLTREETALLYID);
+		}
+	}
+
+
 	public class VegetationManager
 	{
 		IRestService restService;

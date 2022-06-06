@@ -6,6 +6,8 @@
 [Bb]in/
 packages/
 TestResults/
+packages/
+[Aa]pp[Pp]ackages/
 
 # globs
 Makefile.in

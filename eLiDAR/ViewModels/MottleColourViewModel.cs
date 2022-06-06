@@ -26,11 +26,13 @@ namespace eLiDAR.ViewModels {
         private string _suffix1;
         private string _suffix2;
         private string _tempcolour;
+        private bool _ischanged;
 
-        public MottleColourViewModel(INavigation navigation, SOIL _soil)
+        public MottleColourViewModel(INavigation navigation, SOIL _soil, bool ischanged)
         {
             _navigation = navigation;
             _thissoil = _soil;
+            _ischanged = ischanged;
             
             ClearCommand = new Command(() => ClearItems());
             _tempcolour = _thissoil.MOTTLECOLOUR;
@@ -80,6 +82,7 @@ namespace eLiDAR.ViewModels {
 
             set
             {
+                if (_thissoil.MOTTLECOLOUR != value) { _ischanged = true; }
                 _thissoil.MOTTLECOLOUR   = value;
                 NotifyPropertyChanged("MOTTLE_COLOUR");
             }

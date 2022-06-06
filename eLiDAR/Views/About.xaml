@@ -4,16 +4,19 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     BackgroundColor="{DynamicResource backgroundColor}"
+    
     NavigationPage.HasNavigationBar="False"
     Shell.TitleColor="{StaticResource cerulean}"
     Shell.NavBarIsVisible="False"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <Grid Padding="10,10,10,10">
+        <Grid Padding="0,0,0,0"  >
+            <Image Aspect="AspectFill"  Source="{xct:ImageResource Id=eLiDAR.Assets.Images.leaves.png}" Opacity="0.3" />
             <ScrollView>
-                <StackLayout MinimumHeightRequest="100" Orientation="Vertical">
+                <StackLayout MinimumHeightRequest="100" Orientation="Vertical" Padding="10,10,10,10">
                     <Label Text="{Binding GetVersion}"  Style="{DynamicResource TextTitle}" />
                     <Label>
                         <Label.FormattedText>

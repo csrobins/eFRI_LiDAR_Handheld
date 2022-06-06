@@ -7,6 +7,8 @@ using eLiDAR.Helpers;
 using eLiDAR.Models;
 using eLiDAR.Services;
 using Xamarin.Forms;
+using eLiDAR.Validator;
+using FluentValidation.Results;
 
 namespace eLiDAR.ViewModels
 {
@@ -31,6 +33,10 @@ namespace eLiDAR.ViewModels
             {
                 return false;
             }
+            else
+            {
+                IsChanged = true;
+            }
             backfield = value;
             OnPropertyChanged(propertyName);
             return true;
@@ -42,6 +48,10 @@ namespace eLiDAR.ViewModels
             set
             {
                 _IsChanged = value;
+                SoilValidator _fullvalidator = new SoilValidator(true);
+                ValidationResult fullvalidationResults = _fullvalidator.Validate(_soil);
+                ParseValidater _parser = new ParseValidater();
+                (ERRORCOUNT, ERRORMSG) = _parser.Parse(fullvalidationResults);
             }
         }
         public string SOILID
@@ -69,9 +79,9 @@ namespace eLiDAR.ViewModels
             get => _soil.HORIZONNUMBER;
             set
             {
+                if (!_soil.HORIZONNUMBER.Equals(value)) { IsChanged = true; }
                 _soil.HORIZONNUMBER = value;
                 NotifyPropertyChanged("LAYER");
-                IsChanged = true;
             }
         }
 
@@ -82,10 +92,10 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(FROM - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-
+                    if (!_soil.DEPTHFROM.Equals(value)) { IsChanged = true; }
                     _soil.DEPTHFROM = value;
                     NotifyPropertyChanged("FROM");
-                    IsChanged = true;
+                   
                 }
             }
         }
@@ -119,10 +129,10 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(TO - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-
+                    if (!_soil.DEPTHTO.Equals(value)) { IsChanged = true; }
                     _soil.DEPTHTO = value;
                     NotifyPropertyChanged("TO");
-                    IsChanged = true;
+                  
                 }
             }
         }
@@ -131,9 +141,10 @@ namespace eLiDAR.ViewModels
             get => _soil.HORIZONNUMBER;
             set
             {
+                if (!_soil.HORIZONNUMBER.Equals(value)) { IsChanged = true; }
                 _soil.HORIZONNUMBER = value;
                 NotifyPropertyChanged("HORIZONNUMBER");
-                IsChanged = true;
+               
             }
         }
         public string HORIZON
@@ -141,6 +152,7 @@ namespace eLiDAR.ViewModels
             get => _soil.HORIZON;
             set
             {
+                if ( _soil.HORIZON != value) { IsChanged = true; }
                 _soil.HORIZON  = value;
                 if (value == "Of" || value == "Of1" || value == "Of2" || value == "Of3" || value == "Of4" || value == "Om" || value == "Om1" || value == "Om2" || value == "Oh" || value == "Oh1" || value == "Oh2")
                 {
@@ -148,7 +160,7 @@ namespace eLiDAR.ViewModels
                 }
                 else { IsOrganic = false; }
                 NotifyPropertyChanged("HORIZON");
-                IsChanged = true;
+                
             }
         }
 
@@ -157,9 +169,10 @@ namespace eLiDAR.ViewModels
             get => _soil.DECOMPOSITIONCODE;
             set
             {
+                if (_soil.DECOMPOSITIONCODE != value) { IsChanged = true; }
                 _soil.DECOMPOSITIONCODE = value;
                 NotifyPropertyChanged("VON_POST");
-                IsChanged = true;
+                
             }
         }
 
@@ -168,9 +181,10 @@ namespace eLiDAR.ViewModels
             get => _soil.MINERALTEXTURECODE;
             set
             {
+                if (_soil.MINERALTEXTURECODE !=value) { IsChanged = true; }
                 _soil.MINERALTEXTURECODE = value;
                 NotifyPropertyChanged("TEXTURE");
-                IsChanged = true;
+         
             }
         }
 
@@ -179,9 +193,10 @@ namespace eLiDAR.ViewModels
             get => _soil.POREPATTERNCODE;
             set
             {
+                if (_soil.POREPATTERNCODE != value) { IsChanged = true; }
                 _soil.POREPATTERNCODE = value;
                 NotifyPropertyChanged("PORE_PATTERN");
-                IsChanged = true;
+       
             }
         }
 
@@ -190,9 +205,10 @@ namespace eLiDAR.ViewModels
             get => _soil.STRUCTURE;
             set
             {
+                if (_soil.STRUCTURE != value) { IsChanged = true; }
                 _soil.STRUCTURE = value;
                 NotifyPropertyChanged("STRUCTURE");
-                IsChanged = true;
+                
             }
         }
 
@@ -201,9 +217,10 @@ namespace eLiDAR.ViewModels
             get => _soil.MATRIXCOLOUR;
             set
             {
+                if (_soil.MATRIXCOLOUR !=value) { IsChanged = true; }
                 _soil.MATRIXCOLOUR = value;
                 NotifyPropertyChanged("COLOUR");
-                IsChanged = true;
+             
             }
         }
         public string GLEYCOLOUR
@@ -211,9 +228,10 @@ namespace eLiDAR.ViewModels
             get => _soil.GLEYCOLOUR;
             set
             {
+                if (_soil.GLEYCOLOUR !=value) { IsChanged = true; }
                 _soil.GLEYCOLOUR = value;
                 NotifyPropertyChanged("GLEYCOLOUR");
-                IsChanged = true;
+              
             }
         }
         public string MOTTLE_COLOUR
@@ -221,9 +239,10 @@ namespace eLiDAR.ViewModels
             get => _soil.MOTTLECOLOUR;
             set
             {
+                if (_soil.MOTTLECOLOUR !=value) { IsChanged = true; }
                 _soil.MOTTLECOLOUR = value;
                 NotifyPropertyChanged("MOTTLE_COLOUR");
-                IsChanged = true;
+              
             }
         }
 
@@ -232,9 +251,10 @@ namespace eLiDAR.ViewModels
             get => _soil.PERCENTGRAVEL;
             set
             {
+                if (!_soil.PERCENTGRAVEL.Equals(value)) { IsChanged = true; }
                 _soil.PERCENTGRAVEL = value;
                 NotifyPropertyChanged("PERCENT_GRAVEL");
-                IsChanged = true;
+              
             }
         }
 
@@ -243,9 +263,10 @@ namespace eLiDAR.ViewModels
             get => _soil.PERCENTCOBBLE;
             set
             {
+                if (!_soil.PERCENTCOBBLE.Equals(value)) { IsChanged = true; }
                 _soil.PERCENTCOBBLE = value;
                 NotifyPropertyChanged("PERCENT_COBBLE");
-                IsChanged = true;
+             
             }
         }
 
@@ -254,9 +275,31 @@ namespace eLiDAR.ViewModels
             get => _soil.PERCENTSTONE;
             set
             {
+                if (!_soil.PERCENTSTONE.Equals(value)) { IsChanged = true; }
                 _soil.PERCENTSTONE = value;
                 NotifyPropertyChanged("PERCENT_STONE");
-                IsChanged = true;
+           
+            }
+        }
+        public int ERRORCOUNT
+        {
+            get => _soil.ERRORCOUNT;
+            set
+            {
+               
+                _soil.ERRORCOUNT = value;
+                NotifyPropertyChanged("ERRORCOUNT");
+           
+            }
+        }
+        public string ERRORMSG
+        {
+            get => _soil.ERRORMSG;
+            set
+            {
+                _soil.ERRORMSG = value;
+                NotifyPropertyChanged("ERRORMSG");
+           
             }
         }
 

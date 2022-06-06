@@ -28,11 +28,11 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.xamarin.eVSN</string>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>17</string>
 	<key>CFBundleName</key>
 	<string>eLiDAR</string>
 	<key>CFBundleShortVersionString</key>
-	<string>black spruce</string>
+	<string>black walnut</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>fa-solid-900.ttf</string>

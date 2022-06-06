@@ -180,6 +180,10 @@
                     Placeholder="Percent Gouge"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding PCT_GOUGE}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}" />
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column="2">

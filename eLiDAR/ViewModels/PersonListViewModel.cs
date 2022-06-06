@@ -25,7 +25,7 @@ namespace eLiDAR.ViewModels {
             _navigation = navigation;
             _personRepository = new PersonRepository();
             _selectedprojectid = selectedprojectid;
-
+            _person = new PERSON();
             AddCommand = new Command(async () => await ShowAdd(_selectedprojectid));
             DeleteAllCommand = new Command(async () => await DeleteAll());
         //    ShowFilteredCommand = new Command<PLOT>(async (x) => await ShowTrees(x));
