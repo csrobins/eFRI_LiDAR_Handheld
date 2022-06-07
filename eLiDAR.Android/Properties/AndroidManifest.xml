@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="17" package="com.xamarin.eVSN" android:installLocation="auto" android:versionName="black walnut">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="18" package="com.xamarin.eVSN" android:installLocation="auto" android:versionName="black walnut">
 	<uses-sdk android:minSdkVersion="29" android:targetSdkVersion="29" />
 	<application android:label="eVSN.Android" android:allowBackup="false" android:icon="@mipmap/Heatmap"></application>
 </manifest>
