@@ -40,8 +40,8 @@ namespace eLiDAR.ViewModels
         {
             get => _project.NAME;
             set{
-                if (NAME != value) { IsChanged = true; }
-                _project.NAME = value;
+                if (NAME != value) { _project.NAME = value; IsChanged = true; }
+
                 NotifyPropertyChanged("NAME");
                
             }
@@ -50,8 +50,8 @@ namespace eLiDAR.ViewModels
         {
             get => _project.DESCRIPTION; 
             set {
-                if (DESCRIPTION != value) { IsChanged = true; }
-                _project.DESCRIPTION = value; 
+                if (DESCRIPTION != value) { _project.DESCRIPTION = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DESCRIPTION");
                
             }
@@ -61,8 +61,8 @@ namespace eLiDAR.ViewModels
             get => _project.PROJECT_DATE;
             set
             {
-                if (!_project.PROJECT_DATE.Equals(value)) { IsChanged = true; }
-                _project.PROJECT_DATE = value; 
+                if (!_project.PROJECT_DATE.Equals(value)) { _project.PROJECT_DATE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PROJECT_DATE");
             }
         }

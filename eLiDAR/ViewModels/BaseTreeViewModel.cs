@@ -146,8 +146,8 @@ namespace eLiDAR.ViewModels
             get => _tree.TREENUMBER;
             set
             {
-                if (!_tree.TREENUMBER.Equals(value)) { IsChanged = true; }
-                _tree.TREENUMBER = (int)value;
+                if (!_tree.TREENUMBER.Equals(value)) { _tree.TREENUMBER = (int)value; IsChanged = true; }
+
                 NotifyPropertyChanged("TREENUM");
          
             }
@@ -257,8 +257,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_tree.LENGTH.Equals(value)) { IsChanged = true; }
-                    _tree.LENGTH = value;
+                    if (!_tree.LENGTH.Equals(value)) { _tree.LENGTH = value; IsChanged = true; }
+
                     NotifyPropertyChanged("LENGTH");
                    
                 }
@@ -271,8 +271,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(HT_TO_DBH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_tree.HEIGHTTODBH.Equals(value)) { IsChanged = true; }
-                    _tree.HEIGHTTODBH = value;
+                    if (!_tree.HEIGHTTODBH.Equals(value)) { _tree.HEIGHTTODBH = value; IsChanged = true; }
+
                     NotifyPropertyChanged("HT_TO_DBH");
                     
                 }
@@ -284,8 +284,8 @@ namespace eLiDAR.ViewModels
             get => _tree.DBH;
             set
             {
-                if (!_tree.DBH.Equals(value)) { IsChanged = true; }
-                _tree.DBH = value;
+                if (!_tree.DBH.Equals(value)) { _tree.DBH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DBH");
                
             }
@@ -298,8 +298,11 @@ namespace eLiDAR.ViewModels
             {
                if (Math.Abs(HT - value) >= 0.001) // Some threshold value suitable for your scenario
                  {
-                    if (!_tree.DIRECTTOTALHEIGHT.Equals(value)) { IsChanged = true; }
-                    _tree.DIRECTTOTALHEIGHT = value;
+                    if (!_tree.DIRECTTOTALHEIGHT.Equals(value)) 
+                    {
+                        _tree.DIRECTTOTALHEIGHT = value; 
+                        IsChanged = true; }
+
                     NotifyPropertyChanged("HT");
                     
                 }
@@ -312,8 +315,10 @@ namespace eLiDAR.ViewModels
             {
             if (Math.Abs(OCUALRTOTALHEIGHT - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                if (!_tree.OCULARTOTALHEIGHT.Equals(value)) { IsChanged = true; }
-                _tree.OCULARTOTALHEIGHT = value;
+                if (!_tree.OCULARTOTALHEIGHT.Equals(value)) 
+                    {
+                        _tree.OCULARTOTALHEIGHT = value;
+                        IsChanged = true; }
                 NotifyPropertyChanged("OCUALRTOTALHEIGHT");
                 
                 }
@@ -326,9 +331,13 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(HEIGHTTODEADTIP - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                if (!_tree.HEIGHTTODEADTIP.Equals(value)) { IsChanged = true; }
-                _tree.HEIGHTTODEADTIP = value;
-                NotifyPropertyChanged("HEIGHTTODEADTIP");
+                if (!_tree.HEIGHTTODEADTIP.Equals(value)) 
+                    {
+                        _tree.HEIGHTTODEADTIP = value;
+                        IsChanged = true;
+                        NotifyPropertyChanged("HEIGHTTODEADTIP");
+
+                    }
                 }
             }
         }
@@ -339,8 +348,11 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(DIRECTHEIGHTTOCONTLIVECROWN - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                if (!_tree.DIRECTHEIGHTTOCONTLIVECROWN.Equals(value)) { IsChanged = true; }
-                _tree.DIRECTHEIGHTTOCONTLIVECROWN = value;
+                if (!_tree.DIRECTHEIGHTTOCONTLIVECROWN.Equals(value)) 
+                    {
+                        _tree.DIRECTHEIGHTTOCONTLIVECROWN = value; 
+                        IsChanged = true; }
+
                 NotifyPropertyChanged("DIRECTHEIGHTTOCONTLIVECROWN");
                 }
             }
@@ -352,8 +364,10 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(OCULARHEIGHTTOCONTLIVECROWN - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_tree.OCULARHEIGHTTOCONTLIVECROWN.Equals(value)) { IsChanged = true; }
-                    _tree.OCULARHEIGHTTOCONTLIVECROWN = value;
+                    if (!_tree.OCULARHEIGHTTOCONTLIVECROWN.Equals(value)) {
+                        _tree.OCULARHEIGHTTOCONTLIVECROWN = value; 
+                        IsChanged = true; }
+
                     NotifyPropertyChanged("OCULARHEIGHTTOCONTLIVECROWN");       
                 }
             }
@@ -365,8 +379,11 @@ namespace eLiDAR.ViewModels
             {
         if (Math.Abs(DIRECTOFFSETDISTANCE - value) >= 0.001) // Some threshold value suitable for your scenario
         {
-            if (!_tree.DIRECTOFFSETDISTANCE.Equals(value)) { IsChanged = true; }
-            _tree.DIRECTOFFSETDISTANCE = value;
+            if (!_tree.DIRECTOFFSETDISTANCE.Equals(value)) 
+                    {
+                        _tree.DIRECTOFFSETDISTANCE = value;
+                        IsChanged = true; }
+
             NotifyPropertyChanged("DIRECTOFFSETDISTANCE");
             
             }
@@ -377,8 +394,11 @@ namespace eLiDAR.ViewModels
             get => _tree.DEGREEOFLEAN;
             set
             {
-                if (!_tree.DEGREEOFLEAN.Equals(value)) { IsChanged = true; }
-                _tree.DEGREEOFLEAN = value;
+                if (!_tree.DEGREEOFLEAN.Equals(value)) 
+                { 
+                    _tree.DEGREEOFLEAN = value;
+                    IsChanged = true; }
+                
                 NotifyPropertyChanged("DEGREEOFLEAN");
                
             }
@@ -390,8 +410,11 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(HEIGHTTOCORE - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                   if (!_tree.HEIGHTTOCORE.Equals(value)) { IsChanged = true; }
-                    _tree.HEIGHTTOCORE = value;
+                   if (!_tree.HEIGHTTOCORE.Equals(value))
+                    {
+                        _tree.HEIGHTTOCORE = value;
+                        IsChanged = true; 
+                    }
                     NotifyPropertyChanged("HEIGHTTOCORE");
                 }
             }
@@ -413,8 +436,11 @@ namespace eLiDAR.ViewModels
                 {
                 if (Math.Abs(SOUNDWOODLENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_tree.SOUNDWOODLENGTH.Equals(value)) { IsChanged = true; }
-                    _tree.SOUNDWOODLENGTH = value;
+                    if (!_tree.SOUNDWOODLENGTH.Equals(value)) 
+                    {
+                        _tree.SOUNDWOODLENGTH = value;
+                        IsChanged = true;
+                    }
                     NotifyPropertyChanged("SOUNDWOODLENGTH");
                 }
             }
@@ -424,8 +450,10 @@ namespace eLiDAR.ViewModels
             get => _tree.FIELDAGE;
             set
             {
-                if (!_tree.FIELDAGE.Equals(value)) { IsChanged = true; }
-                _tree.FIELDAGE = value;
+                if (!_tree.FIELDAGE.Equals(value)) 
+                {
+                    _tree.FIELDAGE = value;
+                    IsChanged = true; }
                 NotifyPropertyChanged("FIELDAGE");
             }
         }
@@ -434,9 +462,12 @@ namespace eLiDAR.ViewModels
             get => _tree.OFFICERINGCOUNT;
             set
             {
-                if (!_tree.OFFICERINGCOUNT.Equals(value)) { IsChanged = true; }
-                _tree.OFFICERINGCOUNT = value;
-                NotifyPropertyChanged("OFFICERINGCOUNT");
+                if (!_tree.OFFICERINGCOUNT.Equals(value)) 
+                {
+                    _tree.OFFICERINGCOUNT = value;
+                    IsChanged = true;
+                    NotifyPropertyChanged("OFFICERINGCOUNT");
+                }
             }
         }
         public int MISSINGRINGS
@@ -480,10 +511,13 @@ namespace eLiDAR.ViewModels
             get => _tree.LIVE_CROWN_RATIO;
             set
             {
-                if (!_tree.LIVE_CROWN_RATIO.Equals(value)) { IsChanged = true; }
-                _tree.LIVE_CROWN_RATIO = (int)value;
-                NotifyPropertyChanged("LIVE_CROWN_RATIO");
-               
+                if (!_tree.LIVE_CROWN_RATIO.Equals(value)) 
+                {
+                    _tree.LIVE_CROWN_RATIO = (int)value;
+                    IsChanged = true;
+                    NotifyPropertyChanged("LIVE_CROWN_RATIO");
+                }
+
             }
         }
 
@@ -588,10 +622,14 @@ namespace eLiDAR.ViewModels
             get => _tree.MORTALITYCAUSECODE;
             set
             {
-                if (!_tree.MORTALITYCAUSECODE.Equals(value)) { IsChanged = true; }
+                if (!_tree.MORTALITYCAUSECODE.Equals(value))
+                {
+                    _tree.MORTALITYCAUSECODE = value;
+                    IsChanged = true;
+                    NotifyPropertyChanged("MORT_CAUSE");
 
-                _tree.MORTALITYCAUSECODE = value;
-                NotifyPropertyChanged("MORT_CAUSE");
+                }
+
             }
         }
 
@@ -600,9 +638,12 @@ namespace eLiDAR.ViewModels
             get => _tree.BROKENTOP;
             set
             {
-                if (_tree.BROKENTOP !=value) { IsChanged = true; }
-                _tree.BROKENTOP = value;
-                NotifyPropertyChanged("BROKEN_TOP");
+                if (_tree.BROKENTOP !=value) 
+                {
+                    _tree.BROKENTOP = value;
+                    IsChanged = true;
+                    NotifyPropertyChanged("BROKEN_TOP");
+                }
             }
         }
 
@@ -612,8 +653,8 @@ namespace eLiDAR.ViewModels
             get => _tree.COMMENTS;
             set
             {
-                if (_tree.COMMENTS != value) { IsChanged = true; }
-                _tree.COMMENTS  = value;
+                if (_tree.COMMENTS != value) { _tree.COMMENTS = value; IsChanged = true; }
+
                 NotifyPropertyChanged("COMMENTS");
             }
         }

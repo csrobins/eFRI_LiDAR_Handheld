@@ -78,8 +78,8 @@ namespace eLiDAR.ViewModels
             get => _stemmap.AZIMUTH;
             set
             {
-                if (!_stemmap.AZIMUTH.Equals(value)) { IsChanged = true; }
-                _stemmap.AZIMUTH  = value;
+                if (!_stemmap.AZIMUTH.Equals(value)) { _stemmap.AZIMUTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("AZIMUTH");
                
             }
@@ -92,8 +92,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(DISTANCE - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_stemmap.DISTANCE.Equals(value)) { IsChanged = true; }
-                    _stemmap.DISTANCE = value;
+                    if (!_stemmap.DISTANCE.Equals(value)) { _stemmap.DISTANCE = value; IsChanged = true; }
+
                     NotifyPropertyChanged("DISTANCE");
                    
                 }
@@ -107,8 +107,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(CROWN_AXIS_LONG - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_stemmap.CROWNWIDTH1.Equals(value)) { IsChanged = true; }
-                    _stemmap.CROWNWIDTH1 = value;
+                    if (!_stemmap.CROWNWIDTH1.Equals(value)) { _stemmap.CROWNWIDTH1 = value; IsChanged = true; }
+
                     NotifyPropertyChanged("CROWN_AXIS_LONG");
                    
                 }
@@ -121,8 +121,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(CROWN_AXIS_SHORT - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_stemmap.CROWNWIDTH2.Equals(value)) { IsChanged = true; }
-                    _stemmap.CROWNWIDTH2 = value;
+                    if (!_stemmap.CROWNWIDTH2.Equals(value)) { _stemmap.CROWNWIDTH2 = value; IsChanged = true; }
+
                     NotifyPropertyChanged("CROWN_AXIS_SHORT");
                     
                 }
@@ -133,8 +133,8 @@ namespace eLiDAR.ViewModels
             get => _stemmap.CROWNOFFSETAZIMUTH ;
             set
             {
-                if (!_stemmap.CROWNOFFSETAZIMUTH.Equals(value)) { IsChanged = true; }
-                _stemmap.CROWNOFFSETAZIMUTH = value;
+                if (!_stemmap.CROWNOFFSETAZIMUTH.Equals(value)) { _stemmap.CROWNOFFSETAZIMUTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("OFFSET_AZIMUTH");
                
             }
@@ -147,8 +147,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(OFFSET_DISTANCE - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_stemmap.CROWNOFFSETDISTANCE.Equals(value)) { IsChanged = true; }
-                    _stemmap.CROWNOFFSETDISTANCE = value;
+                    if (!_stemmap.CROWNOFFSETDISTANCE.Equals(value)) { _stemmap.CROWNOFFSETDISTANCE = value; IsChanged = true; }
+
                     NotifyPropertyChanged("OFFSET_DISTANCE");
                     
                 }

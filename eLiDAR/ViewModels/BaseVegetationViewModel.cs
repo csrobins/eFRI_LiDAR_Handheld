@@ -18,7 +18,7 @@ namespace eLiDAR.ViewModels
 
         public VEGETATION _vegetation;
         public INavigation _navigation;
-        public IValidator _soilValidator;
+     
         public IVegetationRepository _vegetationRepository;
         public string _fk;
         public List<PickerItemsString> ListVeg  = PickerService.VegItems().ToList();
@@ -120,8 +120,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD1;
             set
             {
-                if (!_vegetation.QUAD1.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD1 = value;
+                if (!_vegetation.QUAD1.Equals(value)) { _vegetation.QUAD1 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD1");
                 
                 UpdateSums(); 
@@ -132,8 +132,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD2;
             set
             {
-                if (!_vegetation.QUAD2.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD2 = value;
+                if (!_vegetation.QUAD2.Equals(value)) { _vegetation.QUAD2 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD2");
                 UpdateSums();
             }
@@ -143,8 +143,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD3;
             set
             {
-                if (!_vegetation.QUAD3.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD3 = value;
+                if (!_vegetation.QUAD3.Equals(value)) { _vegetation.QUAD3 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD3");
                 UpdateSums();
             }
@@ -154,8 +154,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD4;
             set
             {
-                if (!_vegetation.QUAD4.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD4 = value;
+                if (!_vegetation.QUAD4.Equals(value)) { _vegetation.QUAD4 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD4");
                 UpdateSums();
             }
@@ -165,8 +165,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.ELCLAYER3;
             set
             {
-                if (!_vegetation.ELCLAYER3.Equals(value)) { IsChanged = true; }
-                _vegetation.ELCLAYER3 = value;
+                if (!_vegetation.ELCLAYER3.Equals(value)) { _vegetation.ELCLAYER3 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("ELCLAYER3");
                
             }
@@ -176,8 +176,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.ELCLAYER4;
             set
             {
-                if (!_vegetation.ELCLAYER4.Equals(value)) { IsChanged = true; }
-                _vegetation.ELCLAYER4 = value;
+                if (!_vegetation.ELCLAYER4.Equals(value)) { _vegetation.ELCLAYER4 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("ELCLAYER4");
                 
             }
@@ -187,8 +187,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.ELCLAYER5;
             set
             {
-                if (!_vegetation.ELCLAYER5.Equals(value)) { IsChanged = true; }
-                _vegetation.ELCLAYER5 = value;
+                if (!_vegetation.ELCLAYER5.Equals(value)) { _vegetation.ELCLAYER5 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("ELCLAYER5");
               
             }
@@ -198,8 +198,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.ELCLAYER6;
             set
             {
-                if (!_vegetation.ELCLAYER6.Equals(value)) { IsChanged = true; }
-                _vegetation.ELCLAYER6 = value;
+                if (!_vegetation.ELCLAYER6.Equals(value)) { _vegetation.ELCLAYER6 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("ELCLAYER6");
                
             }
@@ -209,8 +209,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.ELCLAYER7;
             set
             {
-                if (!_vegetation.ELCLAYER7.Equals(value)) { IsChanged = true; }
-                _vegetation.ELCLAYER7 = value;
+                if (!_vegetation.ELCLAYER7.Equals(value)) { _vegetation.ELCLAYER7 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("ELCLAYER7");
                
             }
@@ -220,8 +220,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.SPECIMENNUMBER;
             set
             {
-                if (!_vegetation.SPECIMENNUMBER.Equals(value)) { IsChanged = true; }
-                _vegetation.SPECIMENNUMBER = value;
+                if (!_vegetation.SPECIMENNUMBER.Equals(value)) { _vegetation.SPECIMENNUMBER = value; IsChanged = true; }
+
                 NotifyPropertyChanged("SPECIMENNUMBER");
                
             }
@@ -231,8 +231,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD1_ELC4;
             set
             {
-                if (!_vegetation.QUAD1_ELC4.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD1_ELC4 = value;
+                if (!_vegetation.QUAD1_ELC4.Equals(value)) { _vegetation.QUAD1_ELC4 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD1_ELC4");
              
                 UpdateSums();
@@ -243,8 +243,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD2_ELC4;
             set
             {
-                if (!_vegetation.QUAD2_ELC4.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD2_ELC4 = value;
+                if (!_vegetation.QUAD2_ELC4.Equals(value)) { _vegetation.QUAD2_ELC4 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD2_ELC4");
                 UpdateSums();
             }
@@ -255,8 +255,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD3_ELC4;
             set
             {
-                if (!_vegetation.QUAD3_ELC4.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD3_ELC4 = value;
+                if (!_vegetation.QUAD3_ELC4.Equals(value)) { _vegetation.QUAD3_ELC4 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD3_ELC4");
 
                 UpdateSums();
@@ -267,8 +267,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD4_ELC4;
             set
             {
-                if (!_vegetation.QUAD4_ELC4.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD4_ELC4 = value;
+                if (!_vegetation.QUAD4_ELC4.Equals(value)) { _vegetation.QUAD4_ELC4 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD4_ELC4");
                 UpdateSums();
             }
@@ -278,8 +278,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD1_ELC5;
             set
             {
-                if (!_vegetation.QUAD1_ELC5.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD1_ELC5 = value;
+                if (!_vegetation.QUAD1_ELC5.Equals(value)) { _vegetation.QUAD1_ELC5 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD1_ELC5");
                 UpdateSums();
             }
@@ -289,8 +289,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD2_ELC5;
             set
             {
-                if (!_vegetation.QUAD2_ELC5.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD2_ELC5 = value;
+                if (!_vegetation.QUAD2_ELC5.Equals(value)) { _vegetation.QUAD2_ELC5 = value; IsChanged = true; }
+ 
                 NotifyPropertyChanged("QUAD2_ELC5");
                 UpdateSums();
             }
@@ -300,8 +300,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD3_ELC5;
             set
             {
-                if (!_vegetation.QUAD3_ELC5.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD3_ELC5 = value;
+                if (!_vegetation.QUAD3_ELC5.Equals(value)) { _vegetation.QUAD3_ELC5 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD3_ELC5");
                 UpdateSums();
             }
@@ -311,8 +311,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD4_ELC5;
             set
             {
-                if (!_vegetation.QUAD4_ELC5.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD4_ELC5 = value;
+                if (!_vegetation.QUAD4_ELC5.Equals(value)) { _vegetation.QUAD4_ELC5 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD4_ELC5");
                 UpdateSums();
             }
@@ -322,8 +322,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD1_ELC6;
             set
             {
-                if (!_vegetation.QUAD1_ELC6.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD1_ELC6 = value;
+                if (!_vegetation.QUAD1_ELC6.Equals(value)) { _vegetation.QUAD1_ELC6 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD1_ELC6");
                 UpdateSums();
             }
@@ -333,8 +333,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD2_ELC6;
             set
             {
-                if (!_vegetation.QUAD2_ELC6.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD2_ELC6 = value;
+                if (!_vegetation.QUAD2_ELC6.Equals(value)) { _vegetation.QUAD2_ELC6 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD2_ELC6");
                 UpdateSums();
             }
@@ -344,8 +344,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD3_ELC6;
             set
             {
-                if (!_vegetation.QUAD3_ELC6.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD3_ELC6 = value;
+                if (!_vegetation.QUAD3_ELC6.Equals(value)) { _vegetation.QUAD3_ELC6 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD3_ELC6");
                 UpdateSums();
             }
@@ -355,8 +355,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD4_ELC6;
             set
             {
-                if (!_vegetation.QUAD4_ELC6.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD4_ELC6 = value;
+                if (!_vegetation.QUAD4_ELC6.Equals(value)) { _vegetation.QUAD4_ELC6 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD4_ELC6");
                 UpdateSums();
             }
@@ -366,8 +366,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD1_ELC7;
             set
             {
-                if (!_vegetation.QUAD1_ELC7.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD1_ELC7 = value;
+                if (!_vegetation.QUAD1_ELC7.Equals(value)) { _vegetation.QUAD1_ELC7 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD1_ELC7");
                 UpdateSums();
             }
@@ -377,8 +377,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD2_ELC7;
             set
             {
-                if (!_vegetation.QUAD2_ELC7.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD2_ELC7 = value;
+                if (!_vegetation.QUAD2_ELC7.Equals(value)) { _vegetation.QUAD2_ELC7 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD2_ELC7");
                 UpdateSums();
             }
@@ -388,8 +388,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD3_ELC7;
             set
             {
-                if (!_vegetation.QUAD3_ELC7.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD3_ELC7 = value;
+                if (!_vegetation.QUAD3_ELC7.Equals(value)) { _vegetation.QUAD3_ELC7 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD3_ELC7");
                 UpdateSums();
             }
@@ -399,8 +399,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.QUAD4_ELC7;
             set
             {
-                if (!_vegetation.QUAD4_ELC7.Equals(value)) { IsChanged = true; }
-                _vegetation.QUAD4_ELC7 = value;
+                if (!_vegetation.QUAD4_ELC7.Equals(value)) { _vegetation.QUAD4_ELC7 = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD4_ELC7");
                 UpdateSums();
             }

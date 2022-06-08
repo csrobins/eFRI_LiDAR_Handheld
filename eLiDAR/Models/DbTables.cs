@@ -462,7 +462,7 @@ namespace eLiDAR.Models
                 try
                 {
 
-                    if (ERRORCOUNT > 1)
+                    if (ERRORCOUNT >= 1)
                     {
                         //   return Xamarin.Forms.Color.Red;
                         return Xamarin.Forms.Color.FromHex("#FFE52E15");

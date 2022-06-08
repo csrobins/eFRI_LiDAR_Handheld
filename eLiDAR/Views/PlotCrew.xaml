@@ -38,7 +38,7 @@
                     ItemsSource="{Binding ListPerson}"
                     SelectedItem="{Binding SelectedSmallTreePerson, Mode=TwoWay}"
                     ItemDisplayBinding="{Binding NAME}"
-                    IsEnabled="{Binding IsPlotTypeB}"
+                    
                     Style="{DynamicResource TextSubhead}"
                     TitleColor="{StaticResource AccentColor}"/>
 
@@ -51,7 +51,7 @@
                     Date="{Binding SMALLTREESHRUBDATE, StringFormat='{0:MMMM dd, yyyy}'}"
                     HorizontalOptions="FillAndExpand"
                     MinimumDate="01-Jan-2020"
-                    IsEnabled="{Binding IsPlotTypeB}"
+                  
                     Style="{DynamicResource TextSubhead}" />
                 <Label
                     HorizontalOptions="Start"
@@ -62,7 +62,7 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Smaller Tree Plot Area"
                     Style="{DynamicResource TextSubhead}"
-                    IsEnabled="{Binding IsPlotTypeB}"
+                   
                     Text="{Binding SMALLTREESHRUBAREA}" Keyboard="Numeric"  />
                 <Label
                     HorizontalOptions="Start"
@@ -73,7 +73,7 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Smaller Tree Notes"
                     Style="{DynamicResource TextSubhead}"
-                    IsEnabled="{Binding IsPlotTypeB}"
+                   
                     Text="{Binding SMALLTREESHRUBNOTE}" />
                 <Label
                     HorizontalOptions="Start"

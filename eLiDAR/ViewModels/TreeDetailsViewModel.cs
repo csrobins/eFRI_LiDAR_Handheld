@@ -85,11 +85,7 @@ namespace eLiDAR.ViewModels {
                 SelectedCrownDamage = reset;
                 SelectedMortalityCause = reset;
                 SelectedDecayClass = reset;
-        //        NotifyPropertyChanged("SelectedBarkRetention");
-         //       NotifyPropertyChanged("SelectedWoodCondition");
-          //      NotifyPropertyChanged("SelectedCrownDamage");
-           //     NotifyPropertyChanged("SelectedMortalityCause");
-            //    NotifyPropertyChanged("SelectedDecayClass");
+  
 
             }
         }
@@ -98,6 +94,7 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new TreeComments(_tree));
+            IsChanged = true;
         }
         async Task ShowStemMap()
         {

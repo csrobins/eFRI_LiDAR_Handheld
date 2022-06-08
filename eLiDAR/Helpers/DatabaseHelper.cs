@@ -998,6 +998,13 @@ namespace eLiDAR.Helpers
             return (from data in sqliteconnection.Query<SMALLTREE>("select * from SMALLTREE where PLOTID = '" + plotid + "' and IsDeleted = 'N' ORDER BY SPECIESCODE")
                     select data).ToList();
         }
+       // public List<SMALLTREETALLY> GetFilteredSmallTreeTallyData(string plotid)
+      // {
+      //     //            return (from data in sqliteconnection.Table<SMALLTREE>().OrderBy(t => t.SPECIESCODE).Where(t => t.PLOTID == plotid)
+      //     //                   select data).ToList();
+      //     return (from data in sqliteconnection.Query<SMALLTREETALLY>("select * from SMALLTREETALLY where PLOTID = '" + plotid + "' and IsDeleted = 'N' ORDER BY SPECIESCODE")
+      //             select data).ToList();
+      // }
         public SMALLTREE GetSmallTreeData(string id)
         {
             return sqliteconnection.Table<SMALLTREE>().FirstOrDefault(t => t.SMALLTREEID == id);

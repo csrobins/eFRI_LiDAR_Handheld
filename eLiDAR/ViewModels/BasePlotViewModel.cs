@@ -119,8 +119,8 @@ namespace eLiDAR.ViewModels
             get => _plot.VSNPLOTNAME;
             set
             {
-                if (!_plot.VSNPLOTNAME.Equals(value)) { IsChanged = true; }
-                _plot.VSNPLOTNAME = value;
+                if (!_plot.VSNPLOTNAME.Equals(value)) { _plot.VSNPLOTNAME = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PLOTNUM");
                
             }
@@ -130,8 +130,8 @@ namespace eLiDAR.ViewModels
             get => _plot.MEASURETYPECODE;
             set
             {
-                if (!_plot.MEASURETYPECODE.Equals(value)) { IsChanged = true; }
-                _plot.MEASURETYPECODE = value;
+                if (!_plot.MEASURETYPECODE.Equals(value)) { _plot.MEASURETYPECODE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("MEASURETYPECODE");
                
             }
@@ -152,8 +152,8 @@ namespace eLiDAR.ViewModels
             get => _plot.GROWTHPLOTNUMBER;
             set
             {
-                if (!_plot.GROWTHPLOTNUMBER.Equals(value)) { IsChanged = true; }
-                _plot.GROWTHPLOTNUMBER  = value;
+                if (!_plot.GROWTHPLOTNUMBER.Equals(value)) { _plot.GROWTHPLOTNUMBER = value; IsChanged = true; }
+
                 NotifyPropertyChanged("GROWTHPLOTNUMBER");
            
             }
@@ -163,8 +163,8 @@ namespace eLiDAR.ViewModels
             get => _plot.EXISTINGPLOTNAME;
             set
             {
-                if (_plot.EXISTINGPLOTNAME != value) { IsChanged = true; }
-                _plot.EXISTINGPLOTNAME = value;
+                if (_plot.EXISTINGPLOTNAME != value) { _plot.EXISTINGPLOTNAME = value; IsChanged = true; }
+ 
                 NotifyPropertyChanged("EXISTINGPLOTNAME");
              
             }
@@ -185,8 +185,8 @@ namespace eLiDAR.ViewModels
             get => _plot.DISTANCETARGETMOVED;
             set
             {
-                if (!_plot.DISTANCETARGETMOVED.Equals(value)) { IsChanged = true; }
-                _plot.DISTANCETARGETMOVED = value;
+                if (!_plot.DISTANCETARGETMOVED.Equals(value)) { _plot.DISTANCETARGETMOVED = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DISTANCETARGETMOVED");
              
             }
@@ -196,8 +196,8 @@ namespace eLiDAR.ViewModels
             get => _plot.AZIMUTHTARGETMOVED;
             set
             {
-                if (!_plot.AZIMUTHTARGETMOVED.Equals(value)) { IsChanged = true; }
-                _plot.AZIMUTHTARGETMOVED = value;
+                if (!_plot.AZIMUTHTARGETMOVED.Equals(value)) { _plot.AZIMUTHTARGETMOVED = value; IsChanged = true; }
+
                 NotifyPropertyChanged("AZIMUTHTARGETMOVED");
               
             }
@@ -227,8 +227,8 @@ namespace eLiDAR.ViewModels
             }
             set
             {
-                if (!_plot.PLOTOVERVIEWDATE.Equals(value)) { IsChanged = true; }
-                _plot.PLOTOVERVIEWDATE = value;
+                if (!_plot.PLOTOVERVIEWDATE.Equals(value)) { _plot.PLOTOVERVIEWDATE = value; IsChanged = true; }
+
                 _plot.MEASUREYEAR = _plot.PLOTOVERVIEWDATE.Year; 
                 NotifyPropertyChanged("PLOT_DATE");
                
@@ -357,8 +357,8 @@ namespace eLiDAR.ViewModels
             get => _plot.CROWN_CLOSURE;
             set
             {
-                if (!_plot.CROWN_CLOSURE.Equals(value)) { IsChanged = true; }
-                _plot.CROWN_CLOSURE = value;
+                if (!_plot.CROWN_CLOSURE.Equals(value)) { _plot.CROWN_CLOSURE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("CROWN_CLOSURE");
          
             }
@@ -436,8 +436,8 @@ namespace eLiDAR.ViewModels
             get => _plot.DECLINATION;
             set
             {
-                if (!_plot.DECLINATION.Equals(value)) { IsChanged = true; }
-                _plot.DECLINATION = value;
+                if (!_plot.DECLINATION.Equals(value)) { _plot.DECLINATION = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DECLINATION");
           
             }
@@ -448,8 +448,8 @@ namespace eLiDAR.ViewModels
             get => _plot.UTMZONE;
             set
             {
-                if (!_plot.UTMZONE.Equals(value)) { IsChanged = true; }
-                _plot.UTMZONE = value;
+                if (!_plot.UTMZONE.Equals(value)) { _plot.UTMZONE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("UTM_ZONE");
     
             }
@@ -460,8 +460,8 @@ namespace eLiDAR.ViewModels
             get => _plot.EASTING;
             set
             {
-                if (!_plot.EASTING.Equals(value)) { IsChanged = true; }
-                _plot.EASTING = value;
+                if (!_plot.EASTING.Equals(value)) { _plot.EASTING = value; IsChanged = true; }
+
                 NotifyPropertyChanged("UTM_EASTING");
 
             }
@@ -472,8 +472,8 @@ namespace eLiDAR.ViewModels
             get => _plot.NORTHING;
             set
             {
-                if (!_plot.NORTHING.Equals(value)) { IsChanged = true; }
-                _plot.NORTHING = value;
+                if (!_plot.NORTHING.Equals(value)) { _plot.NORTHING = value; IsChanged = true; }
+
                 NotifyPropertyChanged("UTM_NORTHING");
     
             }
@@ -485,10 +485,11 @@ namespace eLiDAR.ViewModels
             set
             {
                 if (_plot.DATUM != value) 
-                { 
+                {
+                    _plot.DATUM = value;
                     IsChanged = true;
                 }
-                _plot.DATUM = value;
+
                 NotifyPropertyChanged("DATUM");
     
             }

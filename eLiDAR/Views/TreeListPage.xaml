@@ -65,7 +65,7 @@
                             <StackLayout Grid.Column="0" Spacing="1">
                                     <StackLayout Orientation="Horizontal">
                                     <xct:BadgeView
-                                        BackgroundColor="{Binding BadgeColor}"
+                                        BackgroundColor="{DynamicResource tomato}"
                                         AutoHide="True" 
                                         FontAttributes="Bold"
                                         FontSize="Small"
