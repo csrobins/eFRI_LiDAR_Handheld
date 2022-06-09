@@ -1,2 +1,2 @@
-MainPackage=C:\Dev\eLiDAR\code\eVSN.UWP\bin\x86\Release\eVSN.UWP_2.0.7.0_x86.appx
-SymbolPackage=C:\Dev\eLiDAR\code\eVSN.UWP\obj\x86\Release\Symbols\eVSN.UWP_2.0.7.0_x86.appxsym
+MainPackage=C:\Dev\eLiDAR\code\eVSN.UWP\bin\x86\Release\eVSN.UWP_2.0.8.0_x86.appx
+SymbolPackage=C:\Dev\eLiDAR\code\eVSN.UWP\obj\x86\Release\Symbols\eVSN.UWP_2.0.8.0_x86.appxsym

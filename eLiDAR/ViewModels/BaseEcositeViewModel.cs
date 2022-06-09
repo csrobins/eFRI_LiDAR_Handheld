@@ -367,6 +367,17 @@ namespace eLiDAR.ViewModels
                 
             }
         }
+        public string DECOMPOSITIONCODE
+        {
+            get => _ecosite.DECOMPOSITIONCODE;
+            set
+            {
+                if (_ecosite.DECOMPOSITIONCODE != value) { _ecosite.DECOMPOSITIONCODE = value; IsChanged = true; }
+
+                NotifyPropertyChanged("DECOMPOSITIONCODE");
+
+            }
+        }
 
         public string SOIL_PIT_PHOTO
         {
