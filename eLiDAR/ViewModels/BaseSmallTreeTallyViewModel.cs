@@ -17,7 +17,6 @@ namespace eLiDAR.ViewModels
 
         public SMALLTREETALLY _smallTreeTally;
         public INavigation _navigation;
-        public IValidator _soilValidator;
         public ISmallTreeTallyRepository _smallTreeTallyRepository;
         public string _fk;
 
@@ -92,8 +91,8 @@ namespace eLiDAR.ViewModels
             get => _smallTreeTally.COUNT;
             set
             {
-                if (!_smallTreeTally.COUNT.Equals(value)) { IsChanged = true; }
-                _smallTreeTally.COUNT = value;
+                if (!_smallTreeTally.COUNT.Equals(value)) { _smallTreeTally.COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("COUNT");
                
             }
@@ -103,8 +102,8 @@ namespace eLiDAR.ViewModels
             get => _smallTreeTally.HEIGHT;
             set
             {
-                if (!_smallTreeTally.HEIGHT.Equals(value)) { IsChanged = true; }
-                _smallTreeTally.HEIGHT = value;
+                if (!_smallTreeTally.HEIGHT.Equals(value)) { _smallTreeTally.HEIGHT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HEIGHT");
                
             }
@@ -114,8 +113,8 @@ namespace eLiDAR.ViewModels
             get => _smallTreeTally.DBH;
             set
             {
-                if (!_smallTreeTally.DBH.Equals(value)) { IsChanged = true; }
-                _smallTreeTally.DBH = value;
+                if (!_smallTreeTally.DBH.Equals(value)) { _smallTreeTally.DBH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DBH");
               
             }

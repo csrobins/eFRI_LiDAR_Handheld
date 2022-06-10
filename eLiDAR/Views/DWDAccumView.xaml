@@ -120,6 +120,10 @@
                     Placeholder="% Decid)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding PERCENT_DECID}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextError}"
+                    Text="{Binding ERRORMSG}"/>
             </StackLayout>
 
         </Grid>

@@ -48,7 +48,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="To (cm)" />
+                    Text="To (cm) (999 can represent the bottom of the pit)" />
                 <Entry
                     x:Name="txtTo"
                     HorizontalOptions="FillAndExpand"

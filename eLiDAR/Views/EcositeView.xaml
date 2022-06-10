@@ -218,6 +218,30 @@
                     Placeholder="Depth to Seepage (cm)"
                     Style="{DynamicResource TextSubhead}"
                     Text="{Binding DEPTHTOSEEPAGE}" />
+                <Label
+                    HorizontalOptions="Start"
+                    Style="{StaticResource TextBody}"
+                    Text="Decompostion Code" />
+                <Picker
+                    x:Name="txtvonpost"
+                    Title="Dominant Decomposition Code"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding DECOMPOSITIONCODE, Mode=TwoWay}"
+                    Style="{DynamicResource TextSubhead}"
+                    TitleColor="{StaticResource AccentColor}">
+                    <Picker.Items>
+                        <x:String>Of1</x:String>
+                        <x:String>Of2</x:String>
+                        <x:String>Of3</x:String>
+                        <x:String>Of4</x:String>
+                        <x:String>Om5</x:String>
+                        <x:String>Om6</x:String>
+                        <x:String>Oh7</x:String>
+                        <x:String>Oh8</x:String>
+                        <x:String>Oh9</x:String>
+                        <x:String>Oh10</x:String>
+                    </Picker.Items>
+                </Picker>
             </StackLayout>
 
             <StackLayout Grid.Row="0" Grid.Column=" 1">

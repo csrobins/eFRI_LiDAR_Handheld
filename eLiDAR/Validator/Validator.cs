@@ -45,6 +45,7 @@ namespace eLiDAR.Validator
                 isvalid = ValidPlot();
                 if (!ValidTree()) { isvalid = false; }
                 if (!ValidSmallTree()) { isvalid = false; }
+                if (!ValidSmallTreeTally()) { isvalid = false; }
                 if (!ValidSoil()) { isvalid = false; }
                 if (!ValidEcosite()) { isvalid = false; }
                 if (!ValidPhoto()) { isvalid = false; }
@@ -175,6 +176,30 @@ namespace eLiDAR.Validator
             List<SMALLTREE> _list = _databasehelper.GetFilteredSmallTreeData(_plot.PLOTID);
             SmallTreeValidator _validator = new SmallTreeValidator(true);
     //        _validator.CascadeMode = CascadeMode.Continue;
+            msg = _list.Count.ToString() + " shrubs in plot " + _plot.VSNPLOTNAME;
+            foreach (var _itm in _list)
+            {
+                msg = "Checked " + _itm.SPECIESCODE.ToString();
+                ValidationResult validationResults = _validator.Validate(_itm);
+                if (!validationResults.IsValid)
+                {
+
+                    foreach (var err in validationResults.Errors)
+                    {
+                        AddMsg(err.ErrorMessage, 1);
+                    }
+
+                    isvalid = false;
+                }
+            }
+            return isvalid;
+        }
+        public bool ValidSmallTreeTally()
+        {
+            bool isvalid = true;
+            List<SMALLTREETALLY> _list = _databasehelper.GetFilteredSmallTreeTallyData(_plot.PLOTID);
+            SmallTreeTallyValidator _validator = new SmallTreeTallyValidator(true);
+            //        _validator.CascadeMode = CascadeMode.Continue;
             msg = _list.Count.ToString() + " small trees in plot " + _plot.VSNPLOTNAME;
             foreach (var _itm in _list)
             {
@@ -525,7 +550,7 @@ namespace eLiDAR.Validator
             
             if (DoFullvalidation)
             {
-
+            RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT < c.DBH).When(c => c.DIRECTTOTALHEIGHT > 0).WithMessage("Height (m) should be less than DBH (cm)");
             RuleFor(c => c.TREEORIGINCODE).NotEmpty().WithMessage("Tree origin should not be empty.");
             RuleFor(c => c.DBH).NotEmpty().WithMessage("Tree DBH should not be empty and be between 0 and 200.");
             RuleFor(c => c.DBH).GreaterThanOrEqualTo((float)7.10).WithMessage("Tree DBH should be >= 7.10cm.");
@@ -551,7 +576,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.DIRECTHEIGHTTOCONTLIVECROWN > 0 || c.OCULARHEIGHTTOCONTLIVECROWN > 0).WithMessage("Ht to LC must not be 0 when tree status = L,V.");
                     RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT > c.DIRECTHEIGHTTOCONTLIVECROWN).When(c => c.DIRECTHEIGHTTOCONTLIVECROWN != 999).WithMessage("Ht must be > ht to live crown when tree status = L,V");
                     RuleFor(c => c.DIRECTTOTALHEIGHT).Must(c => c >= 2 && c <= 50).WithMessage("Ht must be between 0 and 50m when tree status = L,V");
-                    RuleFor(c => c.DIRECTHEIGHTTOCONTLIVECROWN).Must(c => c > 0 && c <= 50).WithMessage("Ht to live crown must be between 0 and 50m when tree status = L,V");
+                    RuleFor(c => c.DIRECTHEIGHTTOCONTLIVECROWN).Must(c => c >= 0 && c <= 50).When(c => c.DIRECTHEIGHTTOCONTLIVECROWN != 999).WithMessage("Ht to live crown must be between 0 and 50m when tree status = L,V");
                     RuleFor(c => c).Must(c => c.FIELDAGE >= 1 && c.FIELDAGE <= 500).When(c => c.CORESTATUSCODE != null).WithMessage("Field age shouldbe between 1 and 500");
                     RuleFor(c => c).Must(c => c.HEIGHTTOCORE > 0 && c.HEIGHTTOCORE <= 2.5).When(c => c.CORESTATUSCODE != null).WithMessage("Ht to core should be between 0 and 2.5m");
                     RuleFor(c => c).Must(c => c.OFFICERINGCOUNT <= 500).When(c => c.CORESTATUSCODE != null).WithMessage("Office ring count should be less than 500");
@@ -789,7 +814,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c).Must(c => IsValidColour(c.MOTTLECOLOUR)).When(c => c.MOTTLECOLOUR != null).WithMessage("Invalid soil mottle colour.");
             RuleFor(c => c.HORIZONNUMBER).NotEmpty().WithMessage("Soil Layer number is required.");
             RuleFor(c => c.DEPTHTO).NotEqual(c => c.DEPTHFROM).WithMessage("To and From must not be the same value.");
-            RuleFor(c => c.DEPTHTO).LessThan(250).WithMessage("To must be be less than 250cm.");
+            RuleFor(c => c.DEPTHTO).LessThan(250).When(c => c.DEPTHTO != 999).WithMessage("To must be be less than 250cm or 999");
             RuleFor(c => c.DEPTHFROM).LessThan(250).WithMessage("From must be be less than 250cm.");
 
             if (DoFullValidation)
@@ -820,7 +845,7 @@ namespace eLiDAR.Validator
                      RuleFor(c => c).Must(c => c.POREPATTERNCODE == null).WithMessage("Pore pattern must be empty for organic horizons");
                  });
                 // Mineral horizons
-                When(c => c.HORIZON != "LFH" && c.HORIZON != "LF" && c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
+                When(c => c.HORIZON != "R" && c.HORIZON != "LFH" && c.HORIZON != "LF" && c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
                 {
                     RuleFor(c => c).Must(c => c.DECOMPOSITIONCODE == null).WithMessage("A decoposition code is not required for mineral horizons");
                     RuleFor(c => c).Must(c => c.MATRIXCOLOUR != null).WithMessage("Matrix colour is used for mineral horizons");
@@ -934,6 +959,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
             //RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
             RuleFor(c => c.HEIGHT).Must(c => c > 1.3).WithMessage("Height must be greater than 1.3");
+            RuleFor(c => c).Must(c => c.HEIGHT < c.DBH).WithMessage("Height (m) should be less than DBH (cm)");
             // dbh must be between 2.5 and 7
             RuleFor(c => c.DBH).Must(c => c >= 2.5).WithMessage("Dbh must be greater than or = 2.5");
             RuleFor(c => c.DBH).Must(c => c <= 7).WithMessage("Dbh must be less than or = 7");
@@ -1219,7 +1245,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.ACCUMULATIONDEPTH >= 0.01 && c.ACCUMULATIONDEPTH <= 9.99).WithMessage("DWD accumulation depth should be between 0.01 and 9.99");
                     RuleFor(c => c).Must(c => c.ACCUMULATIONLENGTH >= 0.01 && c.ACCUMULATIONLENGTH <= 50).WithMessage("DWD accumulation length should be between 0.01 and 50");
                     RuleFor(c => c).Must(c => c.PERCENTCONIFER + c.PERCENTHARDWOOD == 100).WithMessage("DWD accumulation conifer + hardwood must = 100%");
-                    RuleFor(c => c.DWDNUM).NotEmpty().WithMessage("DWD Number must be populated");
+                   
                 });
                 // for regular DWD
                 When(c => c.IS_ACCUM != "Y", () =>
@@ -1229,6 +1255,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.SMALLDIAMETER >= 7.5 && c.SMALLDIAMETER <= 60).WithMessage("DWD snmall diam should be between 7.5 and 60cm");
                     RuleFor(c => c).Must(c => c.DIAMETER >= 7.5 && c.DIAMETER <= 60).WithMessage("DWD diam should be between 7.5 and 60cm");
                     RuleFor(c => c).Must(c => c.TILTANGLE >= 0 && c.TILTANGLE <= 90).WithMessage("DWD tilt angle should be between 0 and 90");
+                    RuleFor(c => c.DWDNUM).NotEmpty().WithMessage("DWD Number must be populated");
                 });
             }
         }

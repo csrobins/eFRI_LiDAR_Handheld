@@ -67,8 +67,8 @@ namespace eLiDAR.ViewModels
             get => _photo.DESCRIPTION;
             set
             {
-                if (_photo.DESCRIPTION != value) { IsChanged = true; }
-                _photo.DESCRIPTION = value;
+                if (_photo.DESCRIPTION != value) { _photo.DESCRIPTION = value; IsChanged = true; }
+ 
 
                 NotifyPropertyChanged("DESCRIPTION");
             }
@@ -78,8 +78,8 @@ namespace eLiDAR.ViewModels
             get => _photo.PHOTONUMBER;
             set
             {
-                if (!_photo.PHOTONUMBER.Equals(value)) { IsChanged = true; }
-                _photo.PHOTONUMBER = value;
+                if (!_photo.PHOTONUMBER.Equals(value)) { _photo.PHOTONUMBER = value; IsChanged = true; }
+
     
                 NotifyPropertyChanged("PHOTONUMBER");
             }
@@ -89,8 +89,8 @@ namespace eLiDAR.ViewModels
             get => _photo.FRAMENUMBER;
             set
             {
-                if (_photo.FRAMENUMBER != value) { IsChanged = true; }
-                _photo.FRAMENUMBER = value;
+                if (_photo.FRAMENUMBER != value) { _photo.FRAMENUMBER = value; IsChanged = true; }
+
     
                 NotifyPropertyChanged("FRAMENUMBER");
             }
@@ -100,8 +100,8 @@ namespace eLiDAR.ViewModels
             get => _photo.AZIMUTH;
             set
             {
-                if (!_photo.AZIMUTH.Equals(value)) { IsChanged = true; }
-                _photo.AZIMUTH = value;
+                if (!_photo.AZIMUTH.Equals(value)) { _photo.AZIMUTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("AZIMUTH");
             }
         }
@@ -111,8 +111,8 @@ namespace eLiDAR.ViewModels
             get => _photo.DISTANCE;
             set
             {
-                if (!_photo.DISTANCE.Equals(value)) { IsChanged = true; }
-                _photo.DISTANCE = value;
+                if (!_photo.DISTANCE.Equals(value)) { _photo.DISTANCE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DISTANCE");
             }
         }

@@ -16,7 +16,6 @@ namespace eLiDAR.ViewModels
 
         public SMALLTREE _smallTree;
         public INavigation _navigation;
-        public IValidator _soilValidator;
         public ISmallTreeRepository _smallTreeRepository;
         public string _fk;
 
@@ -90,8 +89,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS1_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS1_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS1_COUNT = value;
+                if (!_smallTree.HT_CLASS1_COUNT.Equals(value)) { _smallTree.HT_CLASS1_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS1_COUNT");
                 
             }
@@ -102,8 +101,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS2_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS2_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS2_COUNT = value;
+                if (!_smallTree.HT_CLASS2_COUNT.Equals(value)) { _smallTree.HT_CLASS2_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS2_COUNT");
                 
             }
@@ -114,8 +113,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS3_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS3_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS3_COUNT = value;
+                if (!_smallTree.HT_CLASS3_COUNT.Equals(value)) { _smallTree.HT_CLASS3_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS3_COUNT");
                
             }
@@ -126,8 +125,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS4_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS4_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS4_COUNT = value;
+                if (!_smallTree.HT_CLASS4_COUNT.Equals(value)) { _smallTree.HT_CLASS4_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS4_COUNT");
                 
             }
@@ -138,8 +137,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS5_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS5_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS5_COUNT = value;
+                if (!_smallTree.HT_CLASS5_COUNT.Equals(value)) { _smallTree.HT_CLASS5_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS5_COUNT");
                 
             }
@@ -150,8 +149,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS6_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS6_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS6_COUNT = value;
+                if (!_smallTree.HT_CLASS6_COUNT.Equals(value)) { _smallTree.HT_CLASS6_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS6_COUNT");
                 
             }
@@ -162,8 +161,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS7_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS7_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS7_COUNT = value;
+                if (!_smallTree.HT_CLASS7_COUNT.Equals(value)) { _smallTree.HT_CLASS7_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS7_COUNT");
                 
             }
@@ -174,8 +173,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HT_CLASS8_COUNT;
             set
             {
-                if (!_smallTree.HT_CLASS8_COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.HT_CLASS8_COUNT = value;
+                if (!_smallTree.HT_CLASS8_COUNT.Equals(value)) { _smallTree.HT_CLASS8_COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_CLASS8_COUNT");
                 
             }
@@ -185,8 +184,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.COUNT;
             set
             {
-                if (!_smallTree.COUNT.Equals(value)) { IsChanged = true; }
-                _smallTree.COUNT = value;
+                if (!_smallTree.COUNT.Equals(value)) { _smallTree.COUNT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("COUNT");
                 
             }
@@ -196,8 +195,8 @@ namespace eLiDAR.ViewModels
             get => _smallTree.HEIGHT;
             set
             {
-                if (!_smallTree.HEIGHT.Equals(value)) { IsChanged = true; }
-                _smallTree.HEIGHT = value;
+                if (!_smallTree.HEIGHT.Equals(value)) { _smallTree.HEIGHT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HEIGHT");
                 
             }

@@ -17,7 +17,7 @@ namespace eLiDAR.ViewModels
 
         public VEGETATIONCENSUS _vegetation;
         public INavigation _navigation;
-        public IValidator _soilValidator;
+      
         public IVegetationCensusRepository _vegetationCensusRepository;
         public string _fk;
         public List<PickerItemsString> ListVeg  = PickerService.VegItems().ToList();
@@ -87,8 +87,8 @@ namespace eLiDAR.ViewModels
             get => _vegetation.SPECIMENNUMBER;
             set
             {
-                if (!_vegetation.SPECIMENNUMBER.Equals(value)) { IsChanged = true; }
-                _vegetation.SPECIMENNUMBER = value;
+                if (!_vegetation.SPECIMENNUMBER.Equals(value)) { _vegetation.SPECIMENNUMBER = value; IsChanged = true; }
+
                 NotifyPropertyChanged("SPECIMENNUMBER");
             }
         }

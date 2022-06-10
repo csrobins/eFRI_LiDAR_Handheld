@@ -94,6 +94,7 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowtoLeave = true;
             await _navigation.PushAsync(new TreeComments(_tree));
+            IsChanged = true;
         }
         async Task ShowStemMap()
         {

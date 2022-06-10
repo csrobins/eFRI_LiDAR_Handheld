@@ -87,8 +87,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.DWDNUM;
             set
             {
-                if (!_dwd.DWDNUM.Equals(value)) { IsChanged = true; }
-                _dwd.DWDNUM = value;
+                if (!_dwd.DWDNUM.Equals(value)) { _dwd.DWDNUM = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DWDNUM");
                
             }
@@ -110,8 +110,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.DIAMETER;
             set
             {
-                if (!_dwd.DIAMETER.Equals(value)) { IsChanged = true; }
-                _dwd.DIAMETER = value;
+                if (!_dwd.DIAMETER.Equals(value)) { _dwd.DIAMETER = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DIAM");
                 
             }
@@ -145,8 +145,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.TILTANGLE;
             set
             {
-                if (!_dwd.TILTANGLE.Equals(value)) { IsChanged = true; }
-                _dwd.TILTANGLE = value;
+                if (!_dwd.TILTANGLE.Equals(value)) { _dwd.TILTANGLE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("TILT_ANGLE");
                
             }
@@ -159,8 +159,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_dwd.DOWNWOODYDEBRISLENGTH.Equals(value)) { IsChanged = true; }
-                    _dwd.DOWNWOODYDEBRISLENGTH = value;
+                    if (!_dwd.DOWNWOODYDEBRISLENGTH.Equals(value)) { _dwd.DOWNWOODYDEBRISLENGTH = value; IsChanged = true; }
+
                     NotifyPropertyChanged("LENGTH");
                     
                 }
@@ -172,8 +172,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.SMALLDIAMETER;
             set
             {
-                if (!_dwd.SMALLDIAMETER.Equals(value)) { IsChanged = true; }
-                _dwd.SMALLDIAMETER = value;
+                if (!_dwd.SMALLDIAMETER.Equals(value)) { _dwd.SMALLDIAMETER = value; IsChanged = true; }
+    
                 NotifyPropertyChanged("SMALL_DIAM");
               
             }
@@ -184,8 +184,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.LARGEDIAMETER;
             set
             {
-                if (!_dwd.LARGEDIAMETER.Equals(value)) { IsChanged = true; }
-                _dwd.LARGEDIAMETER = value;
+                if (!_dwd.LARGEDIAMETER.Equals(value)) { _dwd.LARGEDIAMETER = value; IsChanged = true; }
+
                 NotifyPropertyChanged("LARGE_DIAM");
                
             }
@@ -196,8 +196,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.MOSS;
             set
             {
-                if (_dwd.MOSS != value) { IsChanged = true; }
-                _dwd.MOSS = value;
+                if (_dwd.MOSS != value) { _dwd.MOSS = value; IsChanged = true; }
+
                 NotifyPropertyChanged("GT_50_MOSS");
                
             }
@@ -208,8 +208,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.BURNED;
             set
             {
-                if (_dwd.BURNED !=value) { IsChanged = true; }
-                _dwd.BURNED = value;
+                if (_dwd.BURNED !=value) { _dwd.BURNED = value; IsChanged = true; }
+
                 NotifyPropertyChanged("BURNED");
                
             }
@@ -220,8 +220,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.HOLLOW;
             set
             {
-                if (_dwd.HOLLOW != value) { IsChanged = true; }
-                _dwd.HOLLOW = value;
+                if (_dwd.HOLLOW != value) { _dwd.HOLLOW = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HOLLOW");
                 
             }
@@ -244,8 +244,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(ACCUM_LENGTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_dwd.ACCUMULATIONLENGTH.Equals(value)) { IsChanged = true; }
-                    _dwd.ACCUMULATIONLENGTH = value;
+                    if (!_dwd.ACCUMULATIONLENGTH.Equals(value)) { _dwd.ACCUMULATIONLENGTH = value; IsChanged = true; }
+
                     NotifyPropertyChanged("ACCUM_LENGTH");
                    
                 }
@@ -258,8 +258,8 @@ namespace eLiDAR.ViewModels
             {
                 if (Math.Abs(ACCUM_DEPTH - value) >= 0.001) // Some threshold value suitable for your scenario
                 {
-                    if (!_dwd.ACCUMULATIONDEPTH.Equals(value)) { IsChanged = true; }
-                    _dwd.ACCUMULATIONDEPTH = value;
+                    if (!_dwd.ACCUMULATIONDEPTH.Equals(value)) { _dwd.ACCUMULATIONDEPTH = value; IsChanged = true; }
+
                     NotifyPropertyChanged("ACCUM_DEPTH");
                    
                 }
@@ -270,8 +270,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.PERCENTCONIFER;
             set
             {
-                if (!_dwd.PERCENTCONIFER.Equals(value)) { IsChanged = true; }
-                _dwd.PERCENTCONIFER = value;
+                if (!_dwd.PERCENTCONIFER.Equals(value)) { _dwd.PERCENTCONIFER = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PERCENT_CONIFER");
                 
             }
@@ -281,8 +281,8 @@ namespace eLiDAR.ViewModels
             get => _dwd.PERCENTHARDWOOD;
             set
             {
-                if (!_dwd.PERCENTHARDWOOD.Equals(value)) { IsChanged = true; }
-                _dwd.PERCENTHARDWOOD = value;
+                if (!_dwd.PERCENTHARDWOOD.Equals(value)) { _dwd.PERCENTHARDWOOD = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PERCENT_DECID");
                 
             }

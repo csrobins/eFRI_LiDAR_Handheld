@@ -105,8 +105,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.HEIGHTFROM;
             set
             {
-                if (!_deformity.HEIGHTFROM.Equals(value)) { IsChanged = true; }
-                _deformity.HEIGHTFROM = value;
+                if (!_deformity.HEIGHTFROM.Equals(value)) { _deformity.HEIGHTFROM = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_FROM");
           
             }
@@ -117,8 +117,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.HEIGHTTO;
             set
             {
-                if (!_deformity.HEIGHTTO.Equals(value)) { IsChanged = true; }
-                _deformity.HEIGHTTO = value;
+                if (!_deformity.HEIGHTTO.Equals(value)) { _deformity.HEIGHTTO = value; IsChanged = true; }
+
                 NotifyPropertyChanged("HT_TO");
                
             }
@@ -129,8 +129,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.QUADRANTCODE;
             set
             {
-                if (_deformity.QUADRANTCODE != value) { IsChanged = true; }
-                _deformity.QUADRANTCODE = value;
+                if (_deformity.QUADRANTCODE != value) { _deformity.QUADRANTCODE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("QUAD");
                
             }
@@ -141,8 +141,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.EXTENT;
             set
             {
-                if (!_deformity.EXTENT.Equals(value)) { IsChanged = true; }
-                _deformity.EXTENT = value;
+                if (!_deformity.EXTENT.Equals(value)) { _deformity.EXTENT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("EXTENT");
                 
             }
@@ -153,8 +153,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.DEGREELEANARCH;
             set
             {
-                if (!_deformity.DEGREELEANARCH.Equals(value)) { IsChanged = true; }
-                _deformity.DEGREELEANARCH = value;
+                if (!_deformity.DEGREELEANARCH.Equals(value)) { _deformity.DEGREELEANARCH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("LEAN");
               
             }
@@ -165,8 +165,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.AZIMUTH;
             set
             {
-                if (!_deformity.AZIMUTH.Equals(value)) { IsChanged = true; }
-                _deformity.AZIMUTH = value;
+                if (!_deformity.AZIMUTH.Equals(value)) { _deformity.AZIMUTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("AZIMUTH");
             
             }
@@ -177,8 +177,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.DEFORMITYLENGTH;
             set
             {
-                if (!_deformity.DEFORMITYLENGTH.Equals(value)) { IsChanged = true; }
-                _deformity.DEFORMITYLENGTH = value;
+                if (!_deformity.DEFORMITYLENGTH.Equals(value)) { _deformity.DEFORMITYLENGTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("LENGTH");
                
             }
@@ -189,8 +189,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.DEFORMITYWIDTH;
             set
             {
-                if (!_deformity.DEFORMITYWIDTH.Equals(value)) { IsChanged = true; }
-                _deformity.DEFORMITYWIDTH = value;
+                if (!_deformity.DEFORMITYWIDTH.Equals(value)) { _deformity.DEFORMITYWIDTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("WIDTH");
                 
             }
@@ -201,8 +201,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.SCUFF;
             set
             {
-                if (!_deformity.SCUFF.Equals(value)) { IsChanged = true; }
-                _deformity.SCUFF = value;
+                if (!_deformity.SCUFF.Equals(value)) { _deformity.SCUFF = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PCT_SCRUFF");
                
             }
@@ -212,8 +212,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.SCRAPE;
             set
             {
-                if (!_deformity.SCRAPE.Equals(value)) { IsChanged = true; }
-                _deformity.SCRAPE = value;
+                if (!_deformity.SCRAPE.Equals(value)) { _deformity.SCRAPE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PCT_SCRAPE");
  
             }
@@ -224,8 +224,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.GOUGE;
             set
             {
-                if (!_deformity.GOUGE.Equals(value)) { IsChanged = true; }
-                _deformity.GOUGE = value;
+                if (!_deformity.GOUGE.Equals(value)) { _deformity.GOUGE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PCT_GOUGE");
             
             }
@@ -236,8 +236,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.OLD_FEEDING_CAVITY;
             set
             {
-                if (_deformity.OLD_FEEDING_CAVITY != value) { IsChanged = true; }
-                _deformity.OLD_FEEDING_CAVITY = value;
+                if (_deformity.OLD_FEEDING_CAVITY != value) { _deformity.OLD_FEEDING_CAVITY = value; IsChanged = true; }
+
                 NotifyPropertyChanged("OLD_FEEDING_CAVITY");
                 
             }
@@ -248,8 +248,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.NEW_FEEDING_CAVITY;
             set
             {
-                if (_deformity.NEW_FEEDING_CAVITY != value) { IsChanged = true; }
-                _deformity.NEW_FEEDING_CAVITY = value;
+                if (_deformity.NEW_FEEDING_CAVITY != value) { _deformity.NEW_FEEDING_CAVITY = value; IsChanged = true; }
+
                 NotifyPropertyChanged("NEW_FEEDING_CAVITY");
                 
             }
@@ -260,8 +260,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.OLD_NEST_CAVITY;
             set
             {
-                if (_deformity.OLD_NEST_CAVITY != value) { IsChanged = true; }
-                _deformity.OLD_NEST_CAVITY = value;
+                if (_deformity.OLD_NEST_CAVITY != value) { _deformity.OLD_NEST_CAVITY = value; IsChanged = true; }
+
                 NotifyPropertyChanged("OLD_NEST_CAVITY");
                 
             }
@@ -272,8 +272,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.NEW_NEST_CAVITY;
             set
             {
-                if (_deformity.NEW_NEST_CAVITY != value) { IsChanged = true; }
-                _deformity.NEW_NEST_CAVITY = value;
+                if (_deformity.NEW_NEST_CAVITY != value) { _deformity.NEW_NEST_CAVITY = value; IsChanged = true; }
+
                 NotifyPropertyChanged("NEW_NEST_CAVITY");
                 
             }
@@ -284,8 +284,8 @@ namespace eLiDAR.ViewModels
             get => _deformity.STICK_NEST;
             set
             {
-                if (_deformity.STICK_NEST != value) { IsChanged = true; }
-                _deformity.STICK_NEST = value;
+                if (_deformity.STICK_NEST != value) { _deformity.STICK_NEST = value; IsChanged = true; }
+
                 NotifyPropertyChanged("STICK_NEST");
            
             }

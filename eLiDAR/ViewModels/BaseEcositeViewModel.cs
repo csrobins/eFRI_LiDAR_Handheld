@@ -102,8 +102,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.STRATIFIED;
             set
             {
-                if (_ecosite.STRATIFIED !=value) { IsChanged = true; }
-                _ecosite.STRATIFIED = value;
+                if (_ecosite.STRATIFIED !=value) { _ecosite.STRATIFIED = value; IsChanged = true; }
+
                 NotifyPropertyChanged("STRATIFIED");
                
             }
@@ -138,8 +138,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTODISTINCTMOTTLES;
             set
             {
-                if (!_ecosite.DEPTHTODISTINCTMOTTLES.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTODISTINCTMOTTLES = value;
+                if (!_ecosite.DEPTHTODISTINCTMOTTLES.Equals(value)) { _ecosite.DEPTHTODISTINCTMOTTLES = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTH_TO_DISTINCT_MOTTLES");
               
             }
@@ -150,8 +150,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOPROMINENTMOTTLES;
             set
             {
-                if (!_ecosite.DEPTHTOPROMINENTMOTTLES.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOPROMINENTMOTTLES = value;
+                if (!_ecosite.DEPTHTOPROMINENTMOTTLES.Equals(value)) { _ecosite.DEPTHTOPROMINENTMOTTLES = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTH_TO_PROMINENT_MOTTLES");
                
             }
@@ -162,8 +162,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOGLEY;
             set
             {
-                if (!_ecosite.DEPTHTOGLEY.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOGLEY = value;
+                if (!_ecosite.DEPTHTOGLEY.Equals(value)) { _ecosite.DEPTHTOGLEY = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTH_TO_GLEY");
               
             }
@@ -174,8 +174,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOBEDROCK;
             set
             {
-                if (!_ecosite.DEPTHTOBEDROCK.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOBEDROCK = value;
+                if (!_ecosite.DEPTHTOBEDROCK.Equals(value)) { _ecosite.DEPTHTOBEDROCK = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTH_TO_BEDROCK");
                
             }
@@ -186,8 +186,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.SUBSTRATEDATE;
             set
             {
-                if (!_ecosite.SUBSTRATEDATE.Equals(value)) { IsChanged = true; }
-                _ecosite.SUBSTRATEDATE = value;
+                if (!_ecosite.SUBSTRATEDATE.Equals(value)) { _ecosite.SUBSTRATEDATE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("SUBSTRATEDATE");
                 
             }
@@ -197,8 +197,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOCARBONATES;
             set
             {
-                if (!_ecosite.DEPTHTOCARBONATES.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOCARBONATES = value;
+                if (!_ecosite.DEPTHTOCARBONATES.Equals(value)) { _ecosite.DEPTHTOCARBONATES = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTH_TO_CARBONATES");
                
             }
@@ -289,8 +289,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.FUNCTIONALROOTINGDEPTH;
             set
             {
-                if (!_ecosite.FUNCTIONALROOTINGDEPTH.Equals(value)) { IsChanged = true; }
-                _ecosite.FUNCTIONALROOTINGDEPTH = value;
+                if (!_ecosite.FUNCTIONALROOTINGDEPTH.Equals(value)) { _ecosite.FUNCTIONALROOTINGDEPTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("FUNCTIONAL_ROOTING_DEPTH");
                 
             }
@@ -301,8 +301,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.MAXIMUMROOTINGDEPTH;
             set
             {
-                if (!_ecosite.MAXIMUMROOTINGDEPTH.Equals(value)) { IsChanged = true; }
-                _ecosite.MAXIMUMROOTINGDEPTH = value;
+                if (!_ecosite.MAXIMUMROOTINGDEPTH.Equals(value)) { _ecosite.MAXIMUMROOTINGDEPTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("MAXIMUM_ROOTING_DEPTH");
                 
             }
@@ -313,8 +313,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOROOTRESTRICTION;
             set
             {
-                if (!_ecosite.DEPTHTOROOTRESTRICTION.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOROOTRESTRICTION = value;
+                if (!_ecosite.DEPTHTOROOTRESTRICTION.Equals(value)) { _ecosite.DEPTHTOROOTRESTRICTION = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTH_TO_ROOT_RESTRICTION");
                
             }
@@ -325,8 +325,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOWATERTABLE;
             set
             {
-                if (!_ecosite.DEPTHTOWATERTABLE.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOWATERTABLE = value;
+                if (!_ecosite.DEPTHTOWATERTABLE.Equals(value)) { _ecosite.DEPTHTOWATERTABLE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTHTOWATERTABLE");
                 
             }
@@ -337,8 +337,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS;
             set
             {
-                if (!_ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = value;
+                if (!_ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS.Equals(value)) { _ecosite.DEPTHTOIMPASSABLECOARSEFRAGMENTS = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTH_TO_COARSE_FRAGS");
                 
             }
@@ -361,10 +361,21 @@ namespace eLiDAR.ViewModels
             get => _ecosite.DEPTHTOSEEPAGE;
             set
             {
-                if (!_ecosite.DEPTHTOSEEPAGE.Equals(value)) { IsChanged = true; }
-                _ecosite.DEPTHTOSEEPAGE = value;
+                if (!_ecosite.DEPTHTOSEEPAGE.Equals(value)) { _ecosite.DEPTHTOSEEPAGE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DEPTHTOSEEPAGE");
                 
+            }
+        }
+        public string DECOMPOSITIONCODE
+        {
+            get => _ecosite.DECOMPOSITIONCODE;
+            set
+            {
+                if (_ecosite.DECOMPOSITIONCODE != value) { _ecosite.DECOMPOSITIONCODE = value; IsChanged = true; }
+
+                NotifyPropertyChanged("DECOMPOSITIONCODE");
+
             }
         }
 
@@ -397,8 +408,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.PRI_ECO_PCT;
             set
             {
-                if (!_ecosite.PRI_ECO_PCT.Equals(value)) { IsChanged = true; }
-                _ecosite.PRI_ECO_PCT = value;
+                if (!_ecosite.PRI_ECO_PCT.Equals(value)) { _ecosite.PRI_ECO_PCT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("PRI_ECO_PCT");
                 
             }
@@ -420,8 +431,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.SEC_ECO_PCT;
             set
             {
-                if (!_ecosite.SEC_ECO_PCT.Equals(value)) { IsChanged = true; }
-                _ecosite.SEC_ECO_PCT = value;
+                if (!_ecosite.SEC_ECO_PCT.Equals(value)) { _ecosite.SEC_ECO_PCT = value; IsChanged = true; }
+
                 NotifyPropertyChanged("SEC_ECO_PCT");
                 
             }
@@ -432,8 +443,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.PITAZIMUTH;
             set
             {
-                if (!_ecosite.PITAZIMUTH.Equals(value)) { IsChanged = true; }
-                _ecosite.PITAZIMUTH = value;
+                if (!_ecosite.PITAZIMUTH.Equals(value)) { _ecosite.PITAZIMUTH = value; IsChanged = true; }
+
                 NotifyPropertyChanged("AZIMUTH");
                 
             }
@@ -444,8 +455,8 @@ namespace eLiDAR.ViewModels
             get => _ecosite.PITDISTANCE;
             set
             {
-                if (!_ecosite.PITDISTANCE.Equals(value)) { IsChanged = true; }
-                _ecosite.PITDISTANCE = value;
+                if (!_ecosite.PITDISTANCE.Equals(value)) { _ecosite.PITDISTANCE = value; IsChanged = true; }
+
                 NotifyPropertyChanged("DISTANCE");
                 
             }

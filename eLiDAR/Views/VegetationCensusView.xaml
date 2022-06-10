@@ -29,7 +29,7 @@
                 Text="{Binding GetScientific, Mode=TwoWay}" />
             <Label
                         HorizontalOptions="Start"
-                        Style="{StaticResource TextBody}"
+                        Style="{StaticResource TextError}"
                         Text="{Binding ERRORMSG}"/>
             <Grid Padding="10" ColumnSpacing=" 1">
                 <Grid.RowDefinitions>
