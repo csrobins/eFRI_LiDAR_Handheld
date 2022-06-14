@@ -88,6 +88,17 @@ namespace eLiDAR.ViewModels
             set
             {
                 _isnotlivetree = value;
+                if (_isnotlivetree)
+                {
+                    if ( DIRECTHEIGHTTOCONTLIVECROWN != 999)
+                    { 
+                        DIRECTHEIGHTTOCONTLIVECROWN = 999;
+                    }
+                    if ( OCULARHEIGHTTOCONTLIVECROWN != 999)
+                    {
+                        OCULARHEIGHTTOCONTLIVECROWN = 999;
+                    }
+                }
                 NotifyPropertyChanged("IsNotLiveTree");
             }
         }

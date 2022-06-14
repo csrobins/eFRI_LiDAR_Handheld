@@ -750,26 +750,23 @@ namespace eLiDAR.Validator
                 RuleFor(c => c).Must(c => c.PRI_ECO_PCT + c.SEC_ECO_PCT == 100).WithMessage("Ecosites must sum to 100.");
                 RuleFor(c => c).Must(c => c.PRI_ECO_PCT >= 20 && +c.PRI_ECO_PCT <= 100).WithMessage("Primary ecosite must be between 20 and 100.");
                 RuleFor(c => c).Must(c => c.SEC_ECO_PCT <= 100).WithMessage("Secondary ecosite must be less than 100.");
-                RuleFor(c => c).Must(c => c.DEPTHTODISTINCTMOTTLES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to mottles must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.DEPTHTOPROMINENTMOTTLES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to mottles must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.DEPTHTOGLEY <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to gley must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.DEPTHTOCARBONATES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to carbonates must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE  <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to seepage must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Depth to water table must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Functional rooting must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0).WithMessage("Max rooting depth must be < depth to impassable coarse frags.");
-                RuleFor(c => c).Must(c => c.DEPTHTODISTINCTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to mottles must be < depth to bedrock.");
-                RuleFor(c => c).Must(c => c.DEPTHTOPROMINENTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to mottles must be < depth to bedrock.");
-                RuleFor(c => c).Must(c => c.DEPTHTOGLEY <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to gley must be < depth to bedrock.");
-                RuleFor(c => c).Must(c => c.DEPTHTOCARBONATES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to carbonates must be < depth to bedrock.");
-                RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to seepage must be < depth to bedrock.");
-                RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Depth to water table must be < depth to bedrock.");
-            //    RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Functional rooting must be < depth to bedrock.");
-             //   RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0).WithMessage("Max rooting depth must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTODISTINCTMOTTLES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.DEPTHTODISTINCTMOTTLES != 999  && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Depth to mottles must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOPROMINENTMOTTLES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.DEPTHTOPROMINENTMOTTLES != 999 && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Depth to mottles must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOGLEY <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.DEPTHTOGLEY != 999 && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Depth to gley must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOCARBONATES <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.DEPTHTOCARBONATES != 999 && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Depth to carbonates must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE  <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.DEPTHTOSEEPAGE != 999 && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Depth to seepage must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.DEPTHTOWATERTABLE != 999 && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Depth to water table must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.FUNCTIONALROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.FUNCTIONALROOTINGDEPTH != 999 && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Functional rooting must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.MAXIMUMROOTINGDEPTH <= c.DEPTHTOIMPASSABLECOARSEFRAGMENTS).When(c => c.DEPTHTOIMPASSABLECOARSEFRAGMENTS > 0 && c.MAXIMUMROOTINGDEPTH != 999 && c.DEPTHTOIMPASSABLECOARSEFRAGMENTS != 999).WithMessage("Max rooting depth must be < depth to impassable coarse frags.");
+                RuleFor(c => c).Must(c => c.DEPTHTODISTINCTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0 && c.DEPTHTODISTINCTMOTTLES != 999 && c.DEPTHTOBEDROCK != 999).WithMessage("Depth to mottles must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOPROMINENTMOTTLES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0 && c.DEPTHTOPROMINENTMOTTLES != 999 && c.DEPTHTOBEDROCK != 999).WithMessage("Depth to mottles must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOGLEY <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0 && c.DEPTHTOGLEY != 999 && c.DEPTHTOBEDROCK != 999).WithMessage("Depth to gley must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOCARBONATES <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0 && c.DEPTHTOCARBONATES != 999 && c.DEPTHTOBEDROCK != 999).WithMessage("Depth to carbonates must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOSEEPAGE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0 && c.DEPTHTOSEEPAGE != 999 && c.DEPTHTOBEDROCK != 999).WithMessage("Depth to seepage must be < depth to bedrock.");
+                RuleFor(c => c).Must(c => c.DEPTHTOWATERTABLE <= c.DEPTHTOBEDROCK).When(c => c.DEPTHTOBEDROCK > 0 && c.DEPTHTOWATERTABLE != 999 && c.DEPTHTOBEDROCK != 999).WithMessage("Depth to water table must be < depth to bedrock.");
                 RuleFor(c => c).Must(c => c.PITAZIMUTH >= 1 && c.PITAZIMUTH <= 360).WithMessage("Pit azimuth should be between 1 and 360.");
                 RuleFor(c => c).Must(c => c.PITDISTANCE >= 0 && c.PITDISTANCE  <= 20).WithMessage("Pit distance should be <= 20m.");
 
-                // RuleFor(c => c).Must(c => c..SEC_ECO)).When(c => c.SEC_ECO != null).WithMessage("Invalid ecosite for SEC_ECO.");
             }
 
         }
@@ -820,7 +817,7 @@ namespace eLiDAR.Validator
             if (DoFullValidation)
             {
 
-                When(c => c.DEPTHTO > c.DEPTHFROM, () =>
+             /*   When(c => c.DEPTHTO > c.DEPTHFROM, () =>
                 {
                     RuleFor(c => c.DEPTHTO).LessThan(c => c.DEPTHFROM).WithMessage("This soil layer is below the soil 0 cm mark.  Confirm that is the case.");
                 });
@@ -828,7 +825,7 @@ namespace eLiDAR.Validator
                 When(c => c.DEPTHTO < c.DEPTHFROM, () =>
                 {
                     RuleFor(c => c.DEPTHTO).LessThan(c => c.DEPTHFROM).WithMessage("This soil layer is above the soil 0 cm mark.  Confirm that is the case.");
-                });
+                });*/
 
                 // Organic horizons
                 When(c => c.HORIZON == "Of" || c.HORIZON == "Of1" || c.HORIZON == "Of2" || c.HORIZON == "Of3" || c.HORIZON == "Of4" || c.HORIZON == "Om" || c.HORIZON == "Om1" || c.HORIZON == "Om2" || c.HORIZON == "Oh" || c.HORIZON == "Oh1" || c.HORIZON == "Oh2", () =>
@@ -845,13 +842,13 @@ namespace eLiDAR.Validator
                      RuleFor(c => c).Must(c => c.POREPATTERNCODE == null).WithMessage("Pore pattern must be empty for organic horizons");
                  });
                 // Mineral horizons
-                When(c => c.HORIZON != "R" && c.HORIZON != "LFH" && c.HORIZON != "LF" && c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
+                When(c => c.HORIZON != "R" && c.HORIZON != "LFH" && c.HORIZON != "LF" && c.HORIZON != "L" && c.HORIZON != "F" && c.HORIZON != "H"  && c.HORIZON != "FH" && c.HORIZON != "Hi" && c.HORIZON != "Of" && c.HORIZON != "Of1" && c.HORIZON != "Of2" && c.HORIZON != "Of3" && c.HORIZON != "Of4" && c.HORIZON != "Om" && c.HORIZON != "Om1" && c.HORIZON != "Om2" && c.HORIZON != "Oh" && c.HORIZON != "Oh1" && c.HORIZON != "Oh2", () =>
                 {
                     RuleFor(c => c).Must(c => c.DECOMPOSITIONCODE == null).WithMessage("A decoposition code is not required for mineral horizons");
                     RuleFor(c => c).Must(c => c.MATRIXCOLOUR != null).WithMessage("Matrix colour is used for mineral horizons");
-                // RuleFor(c => c).Must(c => c.MOTTLECOLOUR != null).WithMessage("Mottle colour is used for mineral horizons");
-                // RuleFor(c => c).Must(c => c.GLEYCOLOUR != null).WithMessage("No gley colour is used for mineral horizons");
-                RuleFor(c => c).Must(c => c.PERCENTGRAVEL <= 100).WithMessage("% gravel must be <100 for mineral horizons");
+                    // RuleFor(c => c).Must(c => c.MOTTLECOLOUR != null).WithMessage("Mottle colour is used for mineral horizons");
+                    // RuleFor(c => c).Must(c => c.GLEYCOLOUR != null).WithMessage("No gley colour is used for mineral horizons");
+                    RuleFor(c => c).Must(c => c.PERCENTGRAVEL <= 100).WithMessage("% gravel must be <100 for mineral horizons");
                     RuleFor(c => c).Must(c => c.PERCENTCOBBLE <= 100).WithMessage("% cobble must be <100 for mineral horizons");
                     RuleFor(c => c).Must(c => c.PERCENTSTONE <= 100).WithMessage("% stone must be <100 for mineral horizons");
                     RuleFor(c => c).Must(c => c.STRUCTURE != null).WithMessage("structure must not be empty for mineral horizons");
