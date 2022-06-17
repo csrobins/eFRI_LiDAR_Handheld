@@ -94,7 +94,7 @@ namespace eLiDAR.ViewModels {
         //    MessagingCenter.Send(this, "Update listview");
             NotifyPropertyChanged("PlotList");
             ListPlots = Services.PickerService.FillPlotPicker(databasehelper.GetAllPlotData()).ToList().OrderBy(c => c.NAME).ToList();
-            NotifyPropertyChanged("SelectedPlot");
+            NotifyPropertyChanged("FullPlotList");
         }
         private bool _isplotsynchenabled;
         public bool IsPlotSynchEnabled
@@ -166,6 +166,14 @@ namespace eLiDAR.ViewModels {
             }
             FetchPlots();
         }
+
+        public List<PickerItemsString> FullPlotList
+        {
+            get => ListPlots;
+            
+        }
+
+
         private PickerItemsString _selectedPlot = new PickerItemsString { ID = "", NAME = "" };
         public PickerItemsString SelectedPlot
         {

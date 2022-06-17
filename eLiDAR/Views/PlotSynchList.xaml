@@ -182,7 +182,7 @@
                     Title="Synch a Single Plot"
                     HorizontalOptions="FillAndExpand"
                     ItemDisplayBinding="{Binding NAME}"
-                    ItemsSource="{Binding ListPlots}"
+                    ItemsSource="{Binding FullPlotList}"
                     IsEnabled="{Binding IsSynchEnabled}"
                     SelectedItem="{Binding SelectedPlot}"
                     Style="{DynamicResource TextSubhead}"
@@ -190,7 +190,7 @@
             <Button
                          Style="{StaticResource FormButtonStyle}"
                           Command="{Binding SinglePlotCommand}"
-                          IsEnabled="{Binding IsPlotSynchEnabled}"
+                          IsEnabled="{Binding IsSynchEnabled}"
                           Text="Synch 1 Plot"       />
             <ActivityIndicator IsRunning="{Binding IsPlotSynchBusy}" />
 

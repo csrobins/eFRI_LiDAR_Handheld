@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using eLiDAR.Models;
 using Xamarin.Essentials;
 using eLiDAR.Services;
+using System.IO;
 
 namespace eLiDAR.Utilities
 {
@@ -46,6 +47,7 @@ namespace eLiDAR.Utilities
         private string keyposturi = "posturi";
         private string keykey = "key";
         private string keyconnection = "connection";
+        private string errorfile = "errors.txt";
 
 
         public string MD5Hash(string input)
@@ -351,11 +353,22 @@ namespace eLiDAR.Utilities
         {
             get
             {
-                return Preferences.Get(keyerrorlist, "");
+                string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), errorfile);
+                if (File.Exists(_fileName))
+                    {
+                        return File.ReadAllText(_fileName);
+                    }
+                else
+                {
+                    return "";
+                }
             }
+//                return Preferences.Get(keyerrorlist, "");
             set
             {
-                Preferences.Set(keyerrorlist, value);
+                string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), errorfile);
+                File.WriteAllText(_fileName, value);
+//            Preferences.Set(keyerrorlist, value);
             }
         }
 

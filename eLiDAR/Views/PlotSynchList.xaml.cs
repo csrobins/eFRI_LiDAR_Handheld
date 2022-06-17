@@ -16,6 +16,7 @@ namespace eLiDAR.Views {
             _viewmodel.FetchPlots();
 
             UpdateList(this.MainSearch.Text); 
+
         }
         private PlotSynchViewModel _viewmodel;
     
