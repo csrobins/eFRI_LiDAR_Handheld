@@ -103,6 +103,7 @@ namespace eLiDAR.ViewModels {
             {
                 _AllowToLeave = true;
                 await _navigation.PushAsync(new StemMapDetailsPage(_tree.TREEID));
+              //  IsChanged = true;
             }
         }
         async Task ShowAge()
@@ -112,6 +113,7 @@ namespace eLiDAR.ViewModels {
             {
                 _AllowToLeave = true;
                 await _navigation.PushAsync(new TreeAge(_tree));
+                IsChanged = true;
             }
 
         }

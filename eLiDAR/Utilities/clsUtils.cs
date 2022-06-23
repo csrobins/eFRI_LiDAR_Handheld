@@ -496,43 +496,55 @@ namespace eLiDAR.Utilities
         public string getPorePattern(SOIL _soil)
         {
             // return a pore pattern based on the mineral texture code
-            List<string> porecode0 = new List<string> { "vcS", "cS", "mS", "LvcS", "LcS", "LmS", "SivcS", "SicS" };
-            List<string> porecode1 = new List<string> { "SimS", "vcSL", "cSL" };
+            List<string> porecode0 = new List<string> { "vcS", "cS",  "LvcS", "LcS",  "SivcS", "SicS" };
+            List<string> porecode1 = new List<string> { "SimS", "vcSL", "cSL", "LmS", "mS" };
             List<string> porecode2 = new List<string> { "fS", "LfS", "SifS", "mSL" };
             List<string> porecode3 = new List<string> { "vfS", "LvfS", "SivfS", "fSL" };
-            List<string> porecode4 = new List<string> { "L", "SiL", "SCL" };
-            List<string> porecode5 = new List<string> { "Si", "CL", "SiCL", "SC", "SiC", "C" };
-            List<string> porecode6 = new List<string> { "SiC", "C" };
+            List<string> porecode4 = new List<string> { "L", "SiL", "SCL","vfSL" };
+            List<string> porecode5 = new List<string> { "Si", "CL", "SiCL", "SC" };
+            List<string> porecode6 = new List<string> { "SiC","C" };
             string porepattern = _soil.POREPATTERNCODE;
 
-            if (porecode0.Contains(_soil.MINERALTEXTURECODE))
+            string soil = _soil.MINERALTEXTURECODE;
+            if (soil == null || soil == "") { return null;}
+            soil = _soil.MINERALTEXTURECODE.Replace("vgr", "");
+
+            soil = soil.Replace("gr", "");
+            soil = soil.Replace("vco", "");
+            soil = soil.Replace("vst", "");
+            soil = soil.Replace("vbo", "");
+            soil = soil.Replace("co", "");
+            soil = soil.Replace("st", "");
+            soil = soil.Replace("bo", "");
+
+            if (porecode0.Contains(soil))
             {
                 porepattern = "0";
             }
-            else if (porecode1.Contains(_soil.MINERALTEXTURECODE))
+            else if (porecode1.Contains(soil))
             {
                 porepattern = "1";
             }
-            else if (porecode2.Contains(_soil.MINERALTEXTURECODE))
+            else if (porecode2.Contains(soil))
             {
                 porepattern = "2";
             }
-            else if (porecode3.Contains(_soil.MINERALTEXTURECODE))
+            else if (porecode3.Contains(soil))
             {
                 porepattern = "3";
             }
-            else if (porecode4.Contains(_soil.MINERALTEXTURECODE))
+            else if (porecode4.Contains(soil))
             {
                 porepattern = "4";
             }
-            else if (porecode5.Contains(_soil.MINERALTEXTURECODE))
+            else if (porecode5.Contains(soil))
             {
                 porepattern = "5";
             }
-        //    else if (porecode6.Contains(_soil.MINERALTEXTURECODE))
-     //      {
-    //            porepattern = "6";
-      //      }
+            else if (porecode6.Contains(soil))
+            {
+                porepattern = "6";
+            }
             return porepattern;
 
         }

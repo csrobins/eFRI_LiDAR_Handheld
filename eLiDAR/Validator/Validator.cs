@@ -550,7 +550,7 @@ namespace eLiDAR.Validator
             
             if (DoFullvalidation)
             {
-            RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT < c.DBH).When(c => c.DIRECTTOTALHEIGHT > 0).WithMessage("Height (m) should be less than DBH (cm)");
+         //   RuleFor(c => c).Must(c => c.DIRECTTOTALHEIGHT < c.DBH).When(c => c.DIRECTTOTALHEIGHT > 0).WithMessage("Height (m) should be less than DBH (cm)");
             RuleFor(c => c.TREEORIGINCODE).NotEmpty().WithMessage("Tree origin should not be empty.");
             RuleFor(c => c.DBH).NotEmpty().WithMessage("Tree DBH should not be empty and be between 0 and 200.");
             RuleFor(c => c.DBH).GreaterThanOrEqualTo((float)7.10).WithMessage("Tree DBH should be >= 7.10cm.");
@@ -956,7 +956,7 @@ namespace eLiDAR.Validator
             RuleFor(c => c.SPECIESCODE).NotEmpty().WithMessage("Species should not be empty.");
             //RuleFor(c => c).Must(c => IsUnique(c)).WithMessage("Small tree species must be unique within the plot.");
             RuleFor(c => c.HEIGHT).Must(c => c > 1.3).WithMessage("Height must be greater than 1.3");
-            RuleFor(c => c).Must(c => c.HEIGHT < c.DBH).WithMessage("Height (m) should be less than DBH (cm)");
+         //   RuleFor(c => c).Must(c => c.HEIGHT < c.DBH).WithMessage("Height (m) should be less than DBH (cm)");
             // dbh must be between 2.5 and 7
             RuleFor(c => c.DBH).Must(c => c >= 2.5).WithMessage("Dbh must be greater than or = 2.5");
             RuleFor(c => c.DBH).Must(c => c <= 7).WithMessage("Dbh must be less than or = 7");

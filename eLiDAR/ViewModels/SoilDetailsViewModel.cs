@@ -193,11 +193,11 @@ namespace eLiDAR.ViewModels {
             }
             set
             {
-                SetProperty(ref _selectedPorePattern, value);
-                _soil.POREPATTERNCODE  = _selectedPorePattern.ID;
-                Utilities.Utils  _util = new Utilities.Utils();
-                _soil.POREPATTERNCODE = _util.getPorePattern(_soil); 
-
+                _soil.POREPATTERNCODE = _selectedPorePattern.ID;
+                Utilities.Utils _util = new Utilities.Utils();
+                _soil.POREPATTERNCODE = _util.getPorePattern(_soil);
+                SetProperty(ref _selectedPorePattern, PickerService.GetItem(ListPorePattern, _soil.POREPATTERNCODE));
+                NotifyPropertyChanged("SelectedPorePattern");
             }
         }
         void FetchDetails(string fk){

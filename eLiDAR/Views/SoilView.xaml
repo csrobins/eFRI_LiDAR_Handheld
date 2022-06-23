@@ -144,7 +144,7 @@
                 <Label
                     HorizontalOptions="Start"
                     Style="{StaticResource TextBody}"
-                    Text="Pore Pattern" />
+                    Text="Pore Pattern (updates based on Mineral Texture)" />
                 <Picker
                     x:Name="txtPorePattern"
                     Title="Pore Pattern"
