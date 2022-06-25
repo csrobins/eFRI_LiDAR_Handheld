@@ -1206,6 +1206,10 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<PLOT>().Where(t => t.LastModified > fromdate).ToList();
         }
+        public List<PLOT> GetPlotToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<PLOT>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid ).ToList();
+        }
         public List<PLOT> GetPlotToDelete(DateTime fromdate)
         {
             return sqliteconnection.Table<PLOT>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
@@ -1217,6 +1221,10 @@ namespace eLiDAR.Helpers
         public List<TREE> GetTreeToUpdate(DateTime fromdate)
         {
             return sqliteconnection.Table<TREE>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<TREE> GetTreeToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<TREE>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
         }
         public List<TREE> GetTreeToDelete(DateTime fromdate)
         {
@@ -1242,6 +1250,10 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<ECOSITE>().Where(t => t.LastModified > fromdate).ToList();
         }
+        public List<ECOSITE> GetEcositeToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<ECOSITE>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
+        }
         public List<ECOSITE> GetEcositeToDelete(DateTime fromdate)
         {
             return sqliteconnection.Table<ECOSITE>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
@@ -1254,6 +1266,10 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<SOIL>().Where(t => t.LastModified > fromdate).ToList();
         }
+        public List<SOIL> GetSoilToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<SOIL>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
+        }
         public List<SOIL> GetSoilToDelete(DateTime fromdate)
         {
             return sqliteconnection.Table<SOIL>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
@@ -1265,6 +1281,10 @@ namespace eLiDAR.Helpers
         public List<SMALLTREE> GetSmalltreeToUpdate(DateTime fromdate)
         {
             return sqliteconnection.Table<SMALLTREE>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<SMALLTREE> GetSmalltreeToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<SMALLTREE>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
         }
         public List<SMALLTREE> GetSmalltreeToDelete(DateTime fromdate)
         {
@@ -1279,6 +1299,10 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.LastModified > fromdate).ToList();
         }
+        public List<SMALLTREETALLY> GetSmalltreeTallyToUpdate(DateTime fromdate,string plotid)
+        {
+            return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID  == plotid).ToList();
+        }
         public List<SMALLTREETALLY> GetSmalltreeTallyToDelete(DateTime fromdate)
         {
             return sqliteconnection.Table<SMALLTREETALLY>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
@@ -1291,6 +1315,10 @@ namespace eLiDAR.Helpers
         public List<VEGETATION> GetVegetationToUpdate(DateTime fromdate)
         {
             return sqliteconnection.Table<VEGETATION>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<VEGETATION> GetVegetationToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<VEGETATION>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
         }
         public List<VEGETATION> GetVegetationToDelete(DateTime fromdate)
         {
@@ -1316,6 +1344,10 @@ namespace eLiDAR.Helpers
         {
             return sqliteconnection.Table<DWD>().Where(t => t.LastModified > fromdate).ToList();
         }
+        public List<DWD> GetDWDToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<DWD>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
+        }
         public List<DWD> GetDWDToDelete(DateTime fromdate)
         {
             return sqliteconnection.Table<DWD>().Where(t => t.LastModified > fromdate).Where(t => t.IsDeleted == "Y").ToList();
@@ -1327,6 +1359,10 @@ namespace eLiDAR.Helpers
         public List<PHOTO> GetPhotoToUpdate(DateTime fromdate)
         {
             return sqliteconnection.Table<PHOTO>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<PHOTO> GetPhotoToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<PHOTO>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
         }
         public List<PHOTO> GetPhotoToDelete(DateTime fromdate)
         {
@@ -1351,6 +1387,10 @@ namespace eLiDAR.Helpers
         public List<VEGETATIONCENSUS> GetVegetationCensusToUpdate(DateTime fromdate)
         {
             return sqliteconnection.Table<VEGETATIONCENSUS>().Where(t => t.LastModified > fromdate).ToList();
+        }
+        public List<VEGETATIONCENSUS> GetVegetationCensusToUpdate(DateTime fromdate, string plotid)
+        {
+            return sqliteconnection.Table<VEGETATIONCENSUS>().Where(t => t.LastModified > fromdate).Where(t => t.PLOTID == plotid).ToList();
         }
         public List<VEGETATIONCENSUS> GetVegetationCensusToDelete(DateTime fromdate)
         {
