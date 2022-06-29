@@ -209,6 +209,9 @@ namespace eLiDAR.API
                 bool smalltreetallydone = await dosmalltreetally;
                 bool smalltreedone = true;
 
+                Task<bool> dosmalltree = SmalltreeSynch(_plotid, pulldate);
+                smalltreedone = await dosmalltree;
+
                 bool vegetationdone = true;
                 bool dwddone = true;
                 bool vegetationcensusdone = true;
@@ -216,10 +219,7 @@ namespace eLiDAR.API
                 bool stemmapdone = true;
                 if (plottype == "B" || plottype == "C")
                 {
-                    Task<bool> dosmalltree = SmalltreeSynch(_plotid, pulldate);
-                    smalltreedone = await dosmalltree;
-
-
+                  
                     Task<bool> dostemmap = StemmapSynch();
                     stemmapdone = await dostemmap;
 

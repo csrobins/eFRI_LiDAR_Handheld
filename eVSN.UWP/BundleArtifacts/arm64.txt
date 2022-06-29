@@ -1,6 +1,6 @@
-MainPackage=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.22.0_ARM64.appx
-SymbolPackage=C:\Dev\eLiDAR\code\eVSN.UWP\obj\ARM64\Release\Symbols\eVSN.UWP_2.0.22.0_ARM64.appxsym
-ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.22.0_scale-100.appx
-ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.22.0_scale-125.appx
-ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.22.0_scale-150.appx
-ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.22.0_scale-400.appx
+MainPackage=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.23.0_ARM64.appx
+SymbolPackage=C:\Dev\eLiDAR\code\eVSN.UWP\obj\ARM64\Release\Symbols\eVSN.UWP_2.0.23.0_ARM64.appxsym
+ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.23.0_scale-100.appx
+ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.23.0_scale-125.appx
+ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.23.0_scale-150.appx
+ResourcePack=C:\Dev\eLiDAR\code\eVSN.UWP\bin\ARM64\Release\eVSN.UWP_2.0.23.0_scale-400.appx
