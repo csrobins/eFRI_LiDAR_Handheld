@@ -380,12 +380,25 @@ namespace eLiDAR.API
             // pull updated records
             Task<List<PLOT>> getupdatetask = manager.GetTasksAsync(filterUpdate);
             List<PLOT> updaterecords = await getupdatetask;
+
             foreach (var itm in updaterecords)
             {
-                if (!updatelist.Any(item => item.PLOTID == itm.PLOTID) || (DateTime.Compare(settings.LastSynched, new DateTime(2001, 1, 1, 0, 0, 0)) < 0) )  // added this logic to allow plots to synch, that werte brought in with the pull only routine
+                bool synchme = false;
+                foreach (var thisplot in updatelist)
                 {
-                    databasehelper.UpdatePlot(itm);
+                    if (thisplot.PLOTID == itm.PLOTID)
+                    {
+                        if (DateTime.Compare(thisplot.LastSynched, new DateTime(2001, 1, 1, 0, 0, 0)) < 0 && DateTime.Compare(thisplot.LastModified, itm.LastModified) <= 0)
+                        {
+                            synchme = true;
+                        }
+                    } 
                 }
+                // update this plot from the database if conditions are true
+                if (!updatelist.Any(item => item.PLOTID == itm.PLOTID) || synchme )  // added this logic to allow plots to synch, that werte brought in with the pull only routine
+                    {
+                        databasehelper.UpdatePlot(itm);
+                    }
             }
 
             // push new records

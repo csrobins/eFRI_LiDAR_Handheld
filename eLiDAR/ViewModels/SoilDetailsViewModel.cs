@@ -182,7 +182,9 @@ namespace eLiDAR.ViewModels {
             // launch the form - filtered to a specific tree
             _AllowToLeave = true;
             await _navigation.PushAsync(new SoilHorizon(_soil));
+            IsChanged = true;
         }
+
         private PickerItemsString _selectedPorePattern = new PickerItemsString { ID = "", NAME = "" };
         public PickerItemsString SelectedPorePattern
         {
@@ -193,11 +195,22 @@ namespace eLiDAR.ViewModels {
             }
             set
             {
-                _soil.POREPATTERNCODE = _selectedPorePattern.ID;
-                Utilities.Utils _util = new Utilities.Utils();
-                _soil.POREPATTERNCODE = _util.getPorePattern(_soil);
-                SetProperty(ref _selectedPorePattern, PickerService.GetItem(ListPorePattern, _soil.POREPATTERNCODE));
-                NotifyPropertyChanged("SelectedPorePattern");
+                try
+                {
+                    if (value.ID != _soil.POREPATTERNCODE)
+                    {
+                       
+//                    _soil.POREPATTERNCODE = _selectedPorePattern.ID;
+                        Utilities.Utils _util = new Utilities.Utils();
+                        _soil.POREPATTERNCODE = _util.getPorePattern(_soil);
+                        SetProperty(ref _selectedPorePattern, PickerService.GetItem(ListPorePattern, _soil.POREPATTERNCODE));
+                        NotifyPropertyChanged("SelectedPorePattern");
+                    }
+                }
+                catch (Exception)
+                {
+//                    consoleex.Message; 
+                }
             }
         }
         void FetchDetails(string fk){
