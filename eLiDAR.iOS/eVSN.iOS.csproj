@@ -88,8 +88,8 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>Ad Hoc Provisioning - 16 devices - May 24 2022</CodesignProvision>
-    <CodesignKey>Apple Distribution: Craig Robinson (JT42R4QW8R)</CodesignKey>
+    <CodesignProvision>Adhoc eVSN 27 devices Aug 4 2022</CodesignProvision>
+    <CodesignKey>iPhone Distribution: Craig Robinson (JT42R4QW8R)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <OptimizePNGs>true</OptimizePNGs>
   </PropertyGroup>

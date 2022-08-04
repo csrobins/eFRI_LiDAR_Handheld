@@ -49,7 +49,6 @@ namespace eLiDAR.Utilities
         private string keyconnection = "connection";
         private string errorfile = "errors.txt";
 
-
         public string MD5Hash(string input)
         {
             System.Security.Cryptography.SHA512Managed sha512 = new System.Security.Cryptography.SHA512Managed();
