@@ -599,7 +599,7 @@ namespace eLiDAR.Validator
                     RuleFor(c => c).Must(c => c.OCULARTOTALHEIGHT > 0).WithMessage("Ocular Ht must not be 0 when tree status = D,DV");
                     RuleFor(c => c.CORESTATUSCODE).Must(c => c == null).WithMessage("No ages are done for tree when tree status = D,DV");
                     RuleFor(c => c.FIELDAGE).Must(c => c == 0).WithMessage("No ages are done for tree when tree status = D,DV");
-
+                    RuleFor(c => c.CROWNIN).Must(c => c.Equals('N')).WithMessage("Dead trees must have Crown In = N");
                 });
 
                 RuleFor(c => c).Must(c => c.DIRECTOFFSETDISTANCE > 0).When(c => c.DEGREEOFLEAN > 0).WithMessage("Offset dist must be > 0 when degree of lean > 0").Unless(c => c.VSNSTATUSCODE == "i");
